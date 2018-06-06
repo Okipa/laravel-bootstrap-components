@@ -1,0 +1,53 @@
+{
+    "name": "okipa/laravel-bootstrap-components",
+    "description": "Laravel bootstrap components generator.",
+    "keywords": [
+        "okipa",
+        "package",
+        "laravel",
+        "bootstrap",
+        "php",
+        "components",
+        "generate",
+        "generator",
+        "generation",
+        "html"
+    ],
+    "homepage": "https://github.com/Okipa/laravel-bootstrap-components",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Arthur LORENT",
+            "email": "arthur.lorent@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "illuminate/support": "~5.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^3.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Okipa\\LaravelBootstrapComponents\\": "src/"
+        },
+        "files": [
+            "app/Helpers/bootstrapComponentsHelper.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Okipa\\LaravelBootstrapComponents\\Test\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Okipa\\LaravelBootstrapComponents\\ComponentServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable"
+}
