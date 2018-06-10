@@ -13,6 +13,7 @@ This package provide components that are (re)used a significant number of times 
 It has been built on the premise that :
  - it is useless to package a component that will not be used a lot of time.
  - it is useless to generate html that we would write faster.
+ 
  Respecting these principles, components will be added step by step in order to provide a usefull ready-to-use component library.
 
 ------------------------------------------------------------------------------------------------------------------------
