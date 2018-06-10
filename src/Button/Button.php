@@ -115,7 +115,7 @@ class Button extends Component
      */
     protected function defaultIcon(): string
     {
-        return config($this->configFile . '.' . $this->configKey . '.icon');
+        return config('components.' . $this->configKey . '.icon');
     }
 
     /**
@@ -125,6 +125,6 @@ class Button extends Component
      */
     public function defaultLabel()
     {
-        return __(config($this->configFile . '.' . $this->configKey . '.label'));
+        return __(config('components.' . $this->configKey . '.label'));
     }
 }

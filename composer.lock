@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5d24bc7aff93eeb1b0423cb8d7b40c66",
+    "content-hash": "87842b06222076d3de2bbe452eff1877",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -634,17 +634,73 @@
             "time": "2018-03-19T15:50:49+00:00"
         },
         {
-            "name": "paragonie/random_compat",
-            "version": "v2.0.14",
+            "name": "okipa/laravel-html-helper",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "f6ce7dd93628088e1017fb5dd73b0b9fec7df9e5"
+                "url": "https://github.com/Okipa/laravel-html-helper.git",
+                "reference": "832bbb1e07e83d2f67646ac0e3f628f0f42fc57e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/f6ce7dd93628088e1017fb5dd73b0b9fec7df9e5",
-                "reference": "f6ce7dd93628088e1017fb5dd73b0b9fec7df9e5",
+                "url": "https://api.github.com/repos/Okipa/laravel-html-helper/zipball/832bbb1e07e83d2f67646ac0e3f628f0f42fc57e",
+                "reference": "832bbb1e07e83d2f67646ac0e3f628f0f42fc57e",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Okipa\\LaravelHtmlHelper\\": "src/"
+                },
+                "files": [
+                    "app/Helpers/HtmlHelper.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Arthur LORENT",
+                    "email": "arthur.lorent@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Some usefull methods to generate clean HTML with Laravel.",
+            "homepage": "https://github.com/Okipa/laravel-html-helper",
+            "keywords": [
+                "generate",
+                "generation",
+                "generator",
+                "helper",
+                "html",
+                "laravel",
+                "okipa",
+                "package",
+                "php"
+            ],
+            "time": "2018-06-09T21:16:32+00:00"
+        },
+        {
+            "name": "paragonie/random_compat",
+            "version": "v2.0.15",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paragonie/random_compat.git",
+                "reference": "10bcb46e8f3d365170f6de9d05245aa066b81f09"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/10bcb46e8f3d365170f6de9d05245aa066b81f09",
+                "reference": "10bcb46e8f3d365170f6de9d05245aa066b81f09",
                 "shasum": ""
             },
             "require": {
@@ -680,7 +736,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2018-06-06T17:40:22+00:00"
+            "time": "2018-06-08T15:26:40+00:00"
         },
         {
             "name": "psr/container",
@@ -2959,16 +3015,16 @@
         },
         {
             "name": "sebastian/diff",
-            "version": "3.0.0",
+            "version": "3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/diff.git",
-                "reference": "e09160918c66281713f1c324c1f4c4c3037ba1e8"
+                "reference": "366541b989927187c4ca70490a35615d3fef2dce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/e09160918c66281713f1c324c1f4c4c3037ba1e8",
-                "reference": "e09160918c66281713f1c324c1f4c4c3037ba1e8",
+                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/366541b989927187c4ca70490a35615d3fef2dce",
+                "reference": "366541b989927187c4ca70490a35615d3fef2dce",
                 "shasum": ""
             },
             "require": {
@@ -3011,7 +3067,7 @@
                 "unidiff",
                 "unified diff"
             ],
-            "time": "2018-02-01T13:45:15+00:00"
+            "time": "2018-06-10T07:54:39+00:00"
         },
         {
             "name": "sebastian/environment",
@@ -3508,7 +3564,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.0"
+        "php": ">=7.1"
     },
     "platform-dev": []
 }

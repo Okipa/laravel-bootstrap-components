@@ -1,13 +1,14 @@
 <?php
 
-$componentsDotPath = 'components.';
 $translationsDotPath = 'components.';
 
 return [
 
     // inputs **********************************************************************************************************
     'input'                 => [
-        'view'       => $componentsDotPath . 'input',
+        'view'       => 'components.input',
+        'icon'       => null,
+        'legend'     => null,
         'class'      => [
             'container' => ['form-group'],
             'component' => [],
@@ -18,7 +19,7 @@ return [
         ],
     ],
     'text'                  => [
-        'view'       => $componentsDotPath . 'input',
+        'view'       => 'components.input',
         'icon'       => '<i class="fas fa-font"></i>',
         'class'      => [
             'container' => ['form-group'],
@@ -28,9 +29,10 @@ return [
             'container' => [],
             'component' => [],
         ],
+        'legend'     => null,
     ],
     'tel'                   => [
-        'view'       => $componentsDotPath . 'input',
+        'view'       => 'components.input',
         'icon'       => '<i class="fas fa-phone"></i>',
         'class'      => [
             'container' => ['form-group'],
@@ -42,7 +44,7 @@ return [
         ],
     ],
     'email'                 => [
-        'view'       => $componentsDotPath . 'input',
+        'view'       => 'components.input',
         'icon'       => '<i class="fas fa-at"></i>',
         'class'      => [
             'container' => ['form-group'],
@@ -54,7 +56,7 @@ return [
         ],
     ],
     'password'              => [
-        'view'       => $componentsDotPath . 'input',
+        'view'       => 'components.input',
         'icon'       => '<i class="fas fa-user-secret"></i>',
         'class'      => [
             'container' => ['form-group'],
@@ -66,7 +68,7 @@ return [
         ],
     ],
     'file'                  => [
-        'view'       => $componentsDotPath . 'file',
+        'view'       => 'components.file',
         'icon'       => '<i class="fas fa-upload"></i>',
         'class'      => [
             'container' => ['form-group'],
@@ -78,7 +80,7 @@ return [
         ],
     ],
     'toggle'                => [
-        'view'       => $componentsDotPath . 'toggle',
+        'view'       => 'components.toggle',
         'icon'       => '<i class="fas fa-power-off"></i>',
         'class'      => [
             'container' => ['form-group'],
@@ -90,7 +92,7 @@ return [
         ],
     ],
     'library-file'          => [
-        'view'       => $componentsDotPath . 'library-file',
+        'view'       => 'components.library-file',
         'icon'       => '<i class="fas fa-upload"></i>',
         'class'      => [
             'container' => ['form-group'],
@@ -104,7 +106,7 @@ return [
 
     // buttons *********************************************************************************************************
     'button'                => [
-        'view'       => $componentsDotPath . 'button',
+        'view'       => 'components.button',
         'class'      => [
             'container' => ['form-group'],
             'component' => ['btn'],
@@ -115,7 +117,7 @@ return [
         ],
     ],
     'validate'              => [
-        'view'       => $componentsDotPath . 'button',
+        'view'       => 'components.button',
         'icon'       => '<i class="fas fa-fw fa-check"></i>',
         'label'      => $translationsDotPath . 'label.validate',
         'class'      => [
@@ -128,7 +130,7 @@ return [
         ],
     ],
     'create'                => [
-        'view'       => $componentsDotPath . 'button',
+        'view'       => 'components.button',
         'icon'       => '<i class="fas fa-fw fa-plus-circle"></i>',
         'label'      => $translationsDotPath . 'label.create',
         'class'      => [
@@ -141,7 +143,7 @@ return [
         ],
     ],
     'update'                => [
-        'view'       => $componentsDotPath . 'button',
+        'view'       => 'components.button',
         'icon'       => '<i class="fas fa-fw fa-save"></i>',
         'label'      => $translationsDotPath . 'label.update',
         'class'      => [
@@ -154,7 +156,7 @@ return [
         ],
     ],
     'back'                  => [
-        'view'       => $componentsDotPath . 'button',
+        'view'       => 'components.button',
         'icon'       => '<i class="fas fa-fw fa-undo"></i>',
         'label'      => $translationsDotPath . 'label.back',
         'class'      => [
@@ -167,7 +169,7 @@ return [
         ],
     ],
     'cancel'                => [
-        'view'       => $componentsDotPath . 'button',
+        'view'       => 'components.button',
         'icon'       => '<i class="fas fa-fw fa-ban"></i>',
         'label'      => $translationsDotPath . 'label.cancel',
         'class'      => [
@@ -182,7 +184,7 @@ return [
 
     // files ***********************************************************************************************************
     'audio'                 => [
-        'view'       => $componentsDotPath . 'video',
+        'view'       => 'components.video',
         'class'      => [
             'container' => [],
             'component' => [],
@@ -193,7 +195,7 @@ return [
         ],
     ],
     'image'                 => [
-        'view'       => $componentsDotPath . 'image',
+        'view'       => 'components.image',
         'class'      => [
             'container' => [],
             'link'      => [],
@@ -206,7 +208,7 @@ return [
         ],
     ],
     'video'                 => [
-        'view'       => $componentsDotPath . 'video',
+        'view'       => 'components.video',
         'poster'     => null,
         'class'      => [
             'container' => [],
@@ -218,7 +220,7 @@ return [
         ],
     ],
     'library-audio'         => [
-        'view'       => $componentsDotPath . 'library-audio',
+        'view'       => 'components.library-audio',
         'class'      => [
             'container' => ['mw-100'],
             'component' => [],
@@ -229,7 +231,7 @@ return [
         ],
     ],
     'library-image'         => [
-        'view'       => $componentsDotPath . 'library-image',
+        'view'       => 'components.library-image',
         'class'      => [
             'container' => ['mw-100'],
             'link'      => [],
@@ -242,7 +244,7 @@ return [
         ],
     ],
     'library-video'         => [
-        'view'       => $componentsDotPath . 'library-video',
+        'view'       => 'components.library-video',
         'poster'     => 'https://truffle-assets.imgix.net/0d26ee59-813-lucyjuicycrunchburger-land1.jpg',
         'class'      => [
             'container' => ['mw-100'],
@@ -254,7 +256,7 @@ return [
         ],
     ],
     'library-document'      => [
-        'view'       => $componentsDotPath . 'library-document',
+        'view'       => 'components.library-document',
         'class'      => [
             'container' => ['mw-100'],
             'link'      => [],
@@ -267,7 +269,7 @@ return [
         ],
     ],
     'library-uploaded-file' => [
-        'view'       => $componentsDotPath . 'library-uploaded-file',
+        'view'       => 'components.library-uploaded-file',
         'class'      => [
             'container' => ['pb-2'],
             'component' => [],

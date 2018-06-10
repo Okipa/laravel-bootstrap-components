@@ -79,6 +79,6 @@ class Toggle extends Input
      */
     protected function defaultIcon(): string
     {
-        return config($this->configFile . '.' . $this->configKey . '.icon');
+        return config('components.' . $this->configKey . '.icon');
     }
 }

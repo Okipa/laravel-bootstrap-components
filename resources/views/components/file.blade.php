@@ -1,5 +1,5 @@
-<div @if(!empty($containerClass))class="{{ renderHtmlClass($containerClass) }}"@endif
-    {{ renderHtmlAttributes($containerHtmlAttributes) }}>
+<div {{ classTag($containerClass) }}
+    {{ htmlAttributes($containerHtmlAttributes) }}>
     @if($showLabel === true)
         <label for="file-{{ $name }}">
             {{ $label }}
@@ -18,9 +18,9 @@
             <input id="file-{{ $name }}"
                    type="file"
                    name="{{ $name }}"
-                   class="{{ renderHtmlClass($componentClass) }} custom-file-input"
+                   {{ classTag('custom-file-input', $componentClass) }}
                    lang="{{ app()->getLocale() }}"
-                   {{ renderHtmlAttributes($componentHtmlAttributes) }}
+                   {{ htmlAttributes($componentHtmlAttributes) }}
                    aria-label="{{ $label }}"
                    aria-describedby="file-{{ $name }}">
             <label class="custom-file-label" for="file-{{ $name }}">

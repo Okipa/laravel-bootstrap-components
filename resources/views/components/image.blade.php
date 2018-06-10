@@ -1,13 +1,13 @@
-<div @if(!empty($containerClass))class="{{ renderHtmlClass($containerClass) }}"@endif
-    {{ renderHtmlAttributes($containerHtmlAttributes) }}>
+<div {{ classTag($containerClass) }}
+    {{ htmlAttributes($containerHtmlAttributes) }}>
     <a href="@isset($linkUrl){{ $linkUrl }}@endisset()"
-       @if(!empty($linkClass))class="{{ renderHtmlClass($linkClass) }}" @endif
-       {{ renderHtmlAttributes($linkHtmlAttributes) }}
+       {{ classTag($linkClass) }}
+       {{ htmlAttributes($linkHtmlAttributes) }}
        title="{{ $alt }}">
         <img width="{{ $width }}"
              height="{{ $height }}"
-             @if(!empty($componentClass))class="{{ renderHtmlClass($componentClass) }}" @endif
-             {{ renderHtmlAttributes($componentHtmlAttributes) }}
+             {{ classTag($componentClass) }}
+             {{ htmlAttributes($componentHtmlAttributes) }}
              src="{{ $src }}"
              alt="{{ $alt }}">
     </a>

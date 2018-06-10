@@ -7,12 +7,6 @@ use Illuminate\Contracts\Support\Htmlable;
 abstract class Component implements Htmlable
 {
     /**
-     * The component config file.
-     *
-     * @property string $view
-     */
-    protected $configFile = 'component';
-    /**
      * The component config key.
      *
      * @property string $view
@@ -54,7 +48,7 @@ abstract class Component implements Htmlable
      *
      * @param array $componentClass
      *
-     * @return $this
+     * @return \Okipa\LaravelBootstrapComponents\Component
      */
     public function componentClass(array $componentClass): Component
     {
@@ -68,7 +62,7 @@ abstract class Component implements Htmlable
      *
      * @param array $containerClass
      *
-     * @return $this
+     * @return \Okipa\LaravelBootstrapComponents\Component
      */
     public function containerClass(array $containerClass): Component
     {
@@ -82,7 +76,7 @@ abstract class Component implements Htmlable
      *
      * @param array $componentHtmlAttributes
      *
-     * @return \App\Components\Component
+     * @return \Okipa\LaravelBootstrapComponents\Component
      */
     public function componentHtmlAttributes(array $componentHtmlAttributes): Component
     {
@@ -96,7 +90,7 @@ abstract class Component implements Htmlable
      *
      * @param array $containerHtmlAttributes
      *
-     * @return \App\Components\Component
+     * @return \Okipa\LaravelBootstrapComponents\Component
      */
     public function containerHtmlAttributes(array $containerHtmlAttributes): Component
     {
@@ -119,13 +113,15 @@ abstract class Component implements Htmlable
     /**
      * Render the component html.
      *
+     * @param array $data
+     *
      * @return string
      * @throws \Throwable
      */
-    public function render()
+    public function render(array $data = [])
     {
         if ($view = $this->view()) {
-            return view($view, $this->values());
+            return view('components::' . $view, $this->values(), $data)->render();
         }
     }
 
@@ -136,7 +132,7 @@ abstract class Component implements Htmlable
      */
     protected function view(): string
     {
-        return config($this->configFile . '.' . $this->configKey . '.view', '');
+        return config('components.' . $this->configKey . '.view', '');
     }
 
     /**
@@ -161,7 +157,7 @@ abstract class Component implements Htmlable
      */
     protected function defaultComponentClass(): array
     {
-        return config($this->configFile . '.' . $this->configKey . '.class.component');
+        return config('components.' . $this->configKey . '.class.component', []);
     }
 
     /**
@@ -171,7 +167,7 @@ abstract class Component implements Htmlable
      */
     protected function defaultContainerClass(): array
     {
-        return config($this->configFile . '.' . $this->configKey . '.class.container');
+        return config('components.' . $this->configKey . '.class.container', []);
     }
 
     /**
@@ -181,7 +177,7 @@ abstract class Component implements Htmlable
      */
     protected function defaultComponentHtmlAttributes(): array
     {
-        return config($this->configFile . '.' . $this->configKey . '.attributes.component');
+        return config('components.' . $this->configKey . '.attributes.component', []);
     }
 
     /**
@@ -191,6 +187,6 @@ abstract class Component implements Htmlable
      */
     protected function defaultContainerHtmlAttributes(): array
     {
-        return config($this->configFile . '.' . $this->configKey . '.attributes.container');
+        return config('components.' . $this->configKey . '.attributes.container', []);
     }
 }

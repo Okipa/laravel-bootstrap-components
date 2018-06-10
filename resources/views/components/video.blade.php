@@ -1,7 +1,7 @@
-<div @if(!empty($containerClass))class="{{ renderHtmlClass($containerClass) }}"@endif
-    {{ renderHtmlAttributes($containerHtmlAttributes) }}>
-    <video @if(!empty($componentClass))class="{{ renderHtmlClass($componentClass) }}" @endif
-    {{ renderHtmlAttributes($componentHtmlAttributes) }}
+<div {{ classTag($containerClass) }}
+    {{ htmlAttributes($containerHtmlAttributes) }}>
+    <video {{ classTag($componentClass) }}
+    {{ htmlAttributes($componentHtmlAttributes) }}
     @isset($poster)poster="{{ $poster }}"@endisset>
         <source src="{{ $src }}">
         @lang('component.warning.video')

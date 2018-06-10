@@ -50,6 +50,6 @@ class Video extends Media
      */
     protected function defaultPoster(): array
     {
-        return config($this->configFile . '.' . $this->configKey . '.poster');
+        return config('components.' . $this->configKey . '.poster');
     }
 }

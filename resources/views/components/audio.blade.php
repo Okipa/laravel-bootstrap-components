@@ -1,7 +1,7 @@
-<div @if(!empty($containerClass))class="{{ renderHtmlClass($containerClass) }}"@endif
-    {{ renderHtmlAttributes($containerHtmlAttributes) }}>
-    <audio @if(!empty($componentClass))class="{{ renderHtmlClass($componentClass) }}" @endif
-    {{ renderHtmlAttributes($componentHtmlAttributes) }}>
+<div {{ classTag($containerClass) }}
+    {{ htmlAttributes($containerHtmlAttributes) }}>
+    <audio {{ classTag($componentClass) }}
+    {{ htmlAttributes($componentHtmlAttributes) }}>
         <source src="{{ $src }}">
         @lang('component.warning.audio')
     </audio>

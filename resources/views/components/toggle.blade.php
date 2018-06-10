@@ -1,4 +1,4 @@
-<div @if(!empty($containerClass))class="{{ renderHtmlClass($containerClass) }}"@endif>
+<div {{ classTag($containerClass) }}>
     {{ toggleSwitchButton()->name($name)->checked(old($name, $checked))->icon($icon)->label($label) }}
     @if ($errors->has($name))
         <span class="invalid-feedback d-flex">

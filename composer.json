@@ -23,8 +23,9 @@
         }
     ],
     "require": {
-        "php": ">=7.0",
-        "illuminate/support": "~5.0"
+        "php": ">=7.1",
+        "illuminate/support": "~5.0",
+        "okipa/laravel-html-helper": "^1.0"
     },
     "require-dev": {
         "orchestra/testbench": "^3.6"

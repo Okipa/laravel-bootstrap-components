@@ -2,8 +2,9 @@
 
 namespace Okipa\LaravelBootstrapComponents\Form;
 
-use App\Components\Component;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
+use Okipa\LaravelBootstrapComponents\Component;
 
 class Input extends Component
 {
@@ -73,7 +74,7 @@ class Input extends Component
      *
      * @param \Illuminate\Database\Eloquent\Model $model
      *
-     * @return \App\Components\Form\Input
+     * @return \Okipa\LaravelBootstrapComponents\Form\Input
      */
     public function model(Model $model): Input
     {
@@ -87,7 +88,7 @@ class Input extends Component
      *
      * @param string $type
      *
-     * @return \App\Components\Form\Input
+     * @return \Okipa\LaravelBootstrapComponents\Form\Input
      */
     public function type(string $type): Input
     {
@@ -101,7 +102,7 @@ class Input extends Component
      *
      * @param string $name
      *
-     * @return \App\Components\Form\Input
+     * @return \Okipa\LaravelBootstrapComponents\Form\Input
      */
     public function name(string $name): Input
     {
@@ -115,7 +116,7 @@ class Input extends Component
      *
      * @param string $icon
      *
-     * @return \App\Components\Form\Input
+     * @return \Okipa\LaravelBootstrapComponents\Form\Input
      */
     public function icon(string $icon): Input
     {
@@ -129,7 +130,7 @@ class Input extends Component
      *
      * @param string $legend
      *
-     * @return \App\Components\Form\Input
+     * @return \Okipa\LaravelBootstrapComponents\Form\Input
      */
     public function legend(string $legend): Input
     {
@@ -143,7 +144,7 @@ class Input extends Component
      *
      * @param string $placeholder
      *
-     * @return \App\Components\Form\Input
+     * @return \Okipa\LaravelBootstrapComponents\Form\Input
      */
     public function placeholder(string $placeholder): Input
     {
@@ -157,7 +158,7 @@ class Input extends Component
      *
      * @param mixed $value
      *
-     * @return \App\Components\Form\Input
+     * @return \Okipa\LaravelBootstrapComponents\Form\Input
      */
     public function value($value): Input
     {
@@ -171,7 +172,7 @@ class Input extends Component
      *
      * @param string $label
      *
-     * @return \App\Components\Form\Input
+     * @return \Okipa\LaravelBootstrapComponents\Form\Input
      */
     public function label(string $label): Input
     {
@@ -183,7 +184,7 @@ class Input extends Component
     /**
      * Hide the input label.
      *
-     * @return \App\Components\Form\Input
+     * @return \Okipa\LaravelBootstrapComponents\Form\Input
      */
     public function hideLabel(): Input
     {
@@ -196,15 +197,23 @@ class Input extends Component
      * Set the input values.
      *
      * @return array
+     * @throws \Exception
      */
     protected function values(): array
     {
+        if (! $this->type) {
+            throw new Exception('Type must be declared for the « ' . $this->configKey . ' » component generation.');
+        }
+        if (! $this->name) {
+            throw new Exception('Name must be declared for the « ' . $this->configKey . ' » component generation.');
+        }
+
         return array_merge(parent::values(), [
             'model'       => $this->model,
             'type'        => $this->type,
             'name'        => $this->name,
             'icon'        => $this->icon ? $this->icon : $this->defaultIcon(),
-            'legend'      => $this->legend,
+            'legend'      => $this->legend ? $this->legend : $this->defaultLegend(),
             'showLabel'   => $this->showLabel,
             'label'       => $this->label ? $this->label : __('validation.attributes.' . $this->name),
             'value'       => $this->value ? $this->value : ($this->model ? $this->model->{$this->name} : null),
@@ -219,6 +228,20 @@ class Input extends Component
      */
     protected function defaultIcon(): string
     {
-        return config($this->configFile . '.' . $this->configKey . '.icon');
+        $icon = config('components.' . $this->configKey . '.icon');
+
+        return $icon ? $icon : '';
+    }
+
+    /**
+     * Set the input default icon
+     *
+     * @return string
+     */
+    protected function defaultLegend(): string
+    {
+        $legend = config('components.' . $this->configKey . '.legend');
+
+        return $legend ? $legend : '';
     }
 }
