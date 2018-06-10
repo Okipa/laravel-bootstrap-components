@@ -8,7 +8,12 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/Okipa/laravel-bootstrap-components/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Okipa/laravel-bootstrap-components/?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Okipa/laravel-bootstrap-components/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Okipa/laravel-bootstrap-components/?branch=master)
 
-Laravel bootstrap components generator.
+Laravel bootstrap components generator.  
+This package provide components that are (re)used a significant number of times in almost every app.  
+It has been built on the premise that :
+ - it is useless to package a component that will not be used a lot of time.
+ - it is useless to generate html that we would write faster.
+ Respecting these principles, components will be added step by step in order to provide a usefull ready-to-use component library.
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -50,6 +55,25 @@ php artisan vendor:publish --tag=components::config
 
 ------------------------------------------------------------------------------------------------------------------------
 
+## Translations
+
+To customize the existing translations, publish the packages translations files to make the wanted changes :
+```
+php artisan vendor:publish --tag=components::translations
+```
+
+------------------------------------------------------------------------------------------------------------------------
+
+## Customization
+
+Customize the used templates to make this package fit to your needs.  
+Publish the views with the command :
+```
+php artisan vendor:publish --tag=components::views
+```
+
+------------------------------------------------------------------------------------------------------------------------
+
 ## API
 
 ##### input()
@@ -68,22 +92,3 @@ Chained methods :
   > if the model is set, the value is automatically shown if exists.
 - `public function legend(string $legend): Input` (optional)
   > by default the config legend is shown if defined.
-
-------------------------------------------------------------------------------------------------------------------------
-
-## Translations
-
-To customize the existing translations, publish the packages translations files to make the wanted changes :
-```
-php artisan vendor:publish --tag=components::translations
-```
-
-------------------------------------------------------------------------------------------------------------------------
-
-## Customization
-
-Customize the used templates to make this package fit to your needs.  
-Publish the views with the command :
-```
-php artisan vendor:publish --tag=components::views
-```
