@@ -77,7 +77,7 @@ php artisan vendor:publish --tag=components::views
 
 ## API
 
-#### input()
+### input()
 Chained methods :
 - `public function type(string $type): Input` (required)
 - `public function name(string $name): Input` (required)
