@@ -22,6 +22,26 @@ It has been built on the premise that :
 
 ------------------------------------------------------------------------------------------------------------------------
 
+## Components
+
+### Form
+- [input()](#form--input)
+- [InputText()](#form--inputtext)
+- [InputEmail()](#form--inputemail)
+- [InputPassword()](#form--inputpassword)
+- [InputPassword()](#form--inputpassword)
+- [InputFile()](#form--inputfile)
+- [InputToggle()](#form--inputtoggle)
+- [InputTextarea()](#form--inputtextarea)
+
+### Buttons
+- WIP
+
+### Media
+- WIP
+
+------------------------------------------------------------------------------------------------------------------------
+
 ## Installation
 
 - Install the package with composer :
@@ -161,7 +181,7 @@ Locked values :
 Note : this component uses the [Laravel Toggle Switch button package](https://github.com/Okipa/laravel-toggle-switch-button) under the hood.  
 Check its install steps to display it correctly.
 
-### Form > InputPassword()
+### Form > InputTextarea()
 
 Extends the [input()](#form--input) component and inherits all its chainable methods.
 
