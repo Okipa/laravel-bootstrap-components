@@ -146,7 +146,7 @@ Chainable methods :
 Locked values :
 - type : `tel`
 
-#### Form > InputEmail()
+### Form > InputEmail()
 
 Chainable methods :
 - `public function name(string $name): Input` (required)
