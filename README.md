@@ -8,17 +8,17 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/Okipa/laravel-bootstrap-components/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Okipa/laravel-bootstrap-components/?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Okipa/laravel-bootstrap-components/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Okipa/laravel-bootstrap-components/?branch=master)
 
-Laravel bootstrap components generator.  
-This package provide components that are (re)used a significant number of times in almost every app.  
+This package provides a ready-to-use and customizable bootstrap components library.  
 It has been built on the premise that :
- - it is useless to package a component that will not be used a lot of time.
- - it is useless to generate html that we would write faster.
- 
- Respecting these principles, components will be added step by step in order to provide a usefull ready-to-use component library.
+ - it is useless to package a component that will not be used a significant number of times.
+ - it is useless to generate html that we would write faster ourself.
+ - it is very useful to package components we use in almost every views in a backoffice for example.
+ - it is even more useful if these components are used in almost every app.
 
 Notes :
 - This version provides a bootstrap 4 components implementation.
 - No implementation of bootstrap 3 has been done. Is someone is up to prepare views version for bootstrap 3, I would merge them in another version number.
+- Components implementation is in progress.
 
 ------------------------------------------------------------------------------------------------------------------------
 
