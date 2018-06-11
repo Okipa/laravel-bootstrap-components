@@ -101,7 +101,7 @@ Available public methods :
 This component extends the `input()` component.
 
 Available public methods :
-- same as [input()](#input())
+- same as [input()](#input)
 
 Locked values :
 - type : `text`
