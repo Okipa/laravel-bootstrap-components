@@ -111,7 +111,7 @@ Default values :
 #### InputTel()
 This component extends the `input()` component.
 
-Available public methods : same as [input()](#input())
+Available public methods : same as [input()](#input)
 
 Locked values :
 - type : `tel`
@@ -122,7 +122,7 @@ Default values :
 #### InputEmail()
 This component extends the `input()` component.
 
-Available public methods : same as [input()](#input())
+Available public methods : same as [input()](#input)
 
 Locked values :
 - type : `email`
@@ -133,7 +133,7 @@ Default values :
 #### InputPassword()
 This component extends the `input()` component.
 
-Available public methods : same as [input()](#input())
+Available public methods : same as [input()](#input)
 
 Locked values :
 - type : `password`
@@ -144,7 +144,7 @@ Default values :
 #### InputFile()
 This component extends the `input()` component.
 
-Available public methods : same as [input()](#input())
+Available public methods : same as [input()](#input)
 
 Locked values :
 - type : `file`
