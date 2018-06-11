@@ -69,7 +69,6 @@ class InputTest extends BootstrapComponentsTestCase
         $configIcon = 'test-config-icon';
         config()->set('bootstrap-components.input.icon', $configIcon);
         $html = input()->type('text')->name('name')->toHtml();
-        $this->assertContains('class="icon input-group-text"', $html);
         $this->assertContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
     }
 
@@ -79,7 +78,6 @@ class InputTest extends BootstrapComponentsTestCase
         $customIcon = 'test-custom-icon';
         config()->set('bootstrap-components.input.icon', $configIcon);
         $html = input()->type('text')->name('name')->icon($customIcon)->toHtml();
-        $this->assertContains('class="icon input-group-text"', $html);
         $this->assertContains('<span class="icon input-group-text">' . $customIcon . '</span>', $html);
         $this->assertNotContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
     }

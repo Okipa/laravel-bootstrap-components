@@ -3,6 +3,8 @@
 namespace Okipa\LaravelBootstrapComponents;
 
 use Illuminate\Support\ServiceProvider;
+use Okipa\LaravelHtmlHelper\HtmlHelperServiceProvider;
+use Okipa\LaravelToggleSwitchButton\ToggleSwitchButtonServiceProvider;
 
 class ComponentServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,12 @@ class ComponentServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../resources/views' => resource_path('views/vendor/components'),
         ], 'bootstrap-components::views');
+        // we load the laravel html helper package
+        // https://github.com/Okipa/laravel-html-helper
+        $this->app->register(HtmlHelperServiceProvider::class);
+        // we load the laravel toggle switch button
+        // https://github.com/Okipa/laravel-toggle-switch-button
+        $this->app->register(ToggleSwitchButtonServiceProvider::class);
     }
 
     public function register()

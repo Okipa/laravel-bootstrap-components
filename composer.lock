@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "87842b06222076d3de2bbe452eff1877",
+    "content-hash": "9d06bdaa4ab0d38bc87e77cdd99b2c87",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -688,6 +688,72 @@
                 "php"
             ],
             "time": "2018-06-09T21:16:32+00:00"
+        },
+        {
+            "name": "okipa/laravel-toggle-switch-button",
+            "version": "2.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Okipa/laravel-toggle-switch-button.git",
+                "reference": "a3cdf4392397c11a1b9cf14302de8ec585cc0d9a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Okipa/laravel-toggle-switch-button/zipball/a3cdf4392397c11a1b9cf14302de8ec585cc0d9a",
+                "reference": "a3cdf4392397c11a1b9cf14302de8ec585cc0d9a",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0",
+                "okipa/laravel-html-helper": "^1.0",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.6"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Okipa\\LaravelToggleSwitchButton\\ToggleSwitchButtonServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Okipa\\LaravelToggleSwitchButton\\": "src/"
+                },
+                "files": [
+                    "src/Helpers/toggleSwitchButtonHelper.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Arthur LORENT",
+                    "email": "arthur.lorent@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A customizable toggle switch button generator for Laravel.",
+            "homepage": "https://github.com/Okipa/laravel-toggle-switch-button",
+            "keywords": [
+                "button",
+                "generate",
+                "generation",
+                "generator",
+                "html",
+                "laravel",
+                "okipa",
+                "package",
+                "php",
+                "switch",
+                "toggle"
+            ],
+            "time": "2018-06-11T14:52:52+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -2636,16 +2702,16 @@
         },
         {
             "name": "phpunit/php-file-iterator",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-file-iterator.git",
-                "reference": "e20525b0c2945c7c317fff95660698cb3d2a53bc"
+                "reference": "cecbc684605bb0cc288828eb5d65d93d5c676d3c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/e20525b0c2945c7c317fff95660698cb3d2a53bc",
-                "reference": "e20525b0c2945c7c317fff95660698cb3d2a53bc",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/cecbc684605bb0cc288828eb5d65d93d5c676d3c",
+                "reference": "cecbc684605bb0cc288828eb5d65d93d5c676d3c",
                 "shasum": ""
             },
             "require": {
@@ -2679,7 +2745,7 @@
                 "filesystem",
                 "iterator"
             ],
-            "time": "2018-05-28T12:13:49+00:00"
+            "time": "2018-06-11T11:44:00+00:00"
         },
         {
             "name": "phpunit/php-text-template",

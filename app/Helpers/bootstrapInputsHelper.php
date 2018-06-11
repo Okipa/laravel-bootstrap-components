@@ -43,9 +43,9 @@ if (! function_exists('inputFile')) {
     }
 }
 
-//if (! function_exists('inputToggle')) {
-//    function inputToggle()
-//    {
-//        return app(\Okipa\LaravelBootstrapComponents\Form\Toggle::class);
-//    }
-//}
+if (! function_exists('inputToggle')) {
+    function inputToggle()
+    {
+        return app(\Okipa\LaravelBootstrapComponents\Form\InputToggle::class);
+    }
+}

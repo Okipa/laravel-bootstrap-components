@@ -1,12 +1,10 @@
 <?php
 
-$translationsDotPath = 'components.';
-
 return [
 
     // form ************************************************************************************************************
     'input'          => [
-        'view'            => 'components.input',
+        'view'            => 'bootstrap-components.input',
         'icon'            => null,
         'legend'          => null,
         'class'           => [
@@ -19,7 +17,7 @@ return [
         ],
     ],
     'input_text'     => [
-        'view'            => 'components.input',
+        'view'            => 'bootstrap-components.input',
         'icon'            => '<i class="fas fa-font"></i>',
         'legend'          => null,
         'class'           => [
@@ -32,7 +30,7 @@ return [
         ],
     ],
     'input_tel'      => [
-        'view'            => 'components.input',
+        'view'            => 'bootstrap-components.input',
         'icon'            => '<i class="fas fa-phone"></i>',
         'legend'          => null,
         'class'           => [
@@ -45,7 +43,7 @@ return [
         ],
     ],
     'input_email'    => [
-        'view'            => 'components.input',
+        'view'            => 'bootstrap-components.input',
         'icon'            => '<i class="fas fa-at"></i>',
         'legend'          => null,
         'class'           => [
@@ -58,7 +56,7 @@ return [
         ],
     ],
     'input_password' => [
-        'view'            => 'components.input',
+        'view'            => 'bootstrap-components.input',
         'icon'            => '<i class="fas fa-user-secret"></i>',
         'legend'          => null,
         'class'           => [
@@ -70,8 +68,8 @@ return [
             'component' => [],
         ],
     ],
-    'input_file'                  => [
-        'view'            => 'components.file',
+    'input_file'     => [
+        'view'            => 'bootstrap-components.input-file',
         'icon'            => '<i class="fas fa-upload"></i>',
         'legend'          => null,
         'class'           => [
@@ -83,20 +81,21 @@ return [
             'component' => [],
         ],
     ],
-    //    'toggle'                => [
-    //        'view'            => 'components.toggle',
-    //        'icon'            => '<i class="fas fa-power-off"></i>',
-    //        'class'           => [
-    //            'container' => ['form-group'],
-    //            'component' => [],
-    //        ],
-    //        'html_attributes' => [
-    //            'container' => [],
-    //            'component' => [],
-    //        ],
-    //    ],
+    'input_toggle'   => [
+        'view'            => 'bootstrap-components.input-toggle',
+        'icon'            => '<i class="fas fa-power-off"></i>',
+        'legend'          => null,
+        'class'           => [
+            'container' => ['form-group'],
+            'component' => [],
+        ],
+        'html_attributes' => [
+            'container' => [],
+            'component' => [],
+        ],
+    ],
     //    'library-file'          => [
-    //        'view'            => 'components.library-file',
+    //        'view'            => 'bootstrap-componentslibrary-file',
     //        'icon'            => '<i class="fas fa-upload"></i>',
     //        'class'           => [
     //            'container' => ['form-group'],
@@ -110,7 +109,7 @@ return [
     //
     //    // buttons *********************************************************************************************************
     //    'button'                => [
-    //        'view'            => 'components.button',
+    //        'view'            => 'bootstrap-componentsbutton',
     //        'class'           => [
     //            'container' => ['form-group'],
     //            'component' => ['btn'],
@@ -121,9 +120,9 @@ return [
     //        ],
     //    ],
     //    'validate'              => [
-    //        'view'            => 'components.button',
+    //        'view'            => 'bootstrap-componentsbutton',
     //        'icon'            => '<i class="fas fa-fw fa-check"></i>',
-    //        'label'           => $translationsDotPath . 'label.validate',
+    //        'label'           => 'bootstrap-components.label.validate',
     //        'class'           => [
     //            'container' => ['form-group'],
     //            'component' => ['btn', 'btn-primary', 'spin-on-click'],
@@ -134,9 +133,9 @@ return [
     //        ],
     //    ],
     //    'create'                => [
-    //        'view'            => 'components.button',
+    //        'view'            => 'bootstrap-componentsbutton',
     //        'icon'            => '<i class="fas fa-fw fa-plus-circle"></i>',
-    //        'label'           => $translationsDotPath . 'label.create',
+    //        'label'           => 'bootstrap-components.label.create',
     //        'class'           => [
     //            'container' => ['form-group'],
     //            'component' => ['btn', 'btn-primary', 'spin-on-click'],
@@ -147,9 +146,9 @@ return [
     //        ],
     //    ],
     //    'update'                => [
-    //        'view'            => 'components.button',
+    //        'view'            => 'bootstrap-componentsbutton',
     //        'icon'            => '<i class="fas fa-fw fa-save"></i>',
-    //        'label'           => $translationsDotPath . 'label.update',
+    //        'label'           => 'bootstrap-components.label.update',
     //        'class'           => [
     //            'container' => ['form-group'],
     //            'component' => ['btn', 'btn-primary', 'spin-on-click'],
@@ -160,9 +159,9 @@ return [
     //        ],
     //    ],
     //    'back'                  => [
-    //        'view'            => 'components.button',
+    //        'view'            => 'bootstrap-componentsbutton',
     //        'icon'            => '<i class="fas fa-fw fa-undo"></i>',
-    //        'label'           => $translationsDotPath . 'label.back',
+    //        'label'           => 'bootstrap-components.label.back',
     //        'class'           => [
     //            'container' => ['form-group'],
     //            'component' => ['btn', 'btn-light', 'spin-on-click'],
@@ -173,9 +172,9 @@ return [
     //        ],
     //    ],
     //    'cancel'                => [
-    //        'view'            => 'components.button',
+    //        'view'            => 'bootstrap-componentsbutton',
     //        'icon'            => '<i class="fas fa-fw fa-ban"></i>',
-    //        'label'           => $translationsDotPath . 'label.cancel',
+    //        'label'           => 'bootstrap-components.label.cancel',
     //        'class'           => [
     //            'container' => ['form-group'],
     //            'component' => ['btn', 'btn-light', 'spin-on-click'],
@@ -188,7 +187,7 @@ return [
     //
     //    // files ***********************************************************************************************************
     //    'audio'                 => [
-    //        'view'            => 'components.video',
+    //        'view'            => 'bootstrap-componentsvideo',
     //        'class'           => [
     //            'container' => [],
     //            'component' => [],
@@ -199,7 +198,7 @@ return [
     //        ],
     //    ],
     //    'image'                 => [
-    //        'view'            => 'components.image',
+    //        'view'            => 'bootstrap-componentsimage',
     //        'class'           => [
     //            'container' => [],
     //            'link'      => [],
@@ -212,7 +211,7 @@ return [
     //        ],
     //    ],
     //    'video'                 => [
-    //        'view'            => 'components.video',
+    //        'view'            => 'bootstrap-componentsvideo',
     //        'poster'          => null,
     //        'class'           => [
     //            'container' => [],
@@ -224,7 +223,7 @@ return [
     //        ],
     //    ],
     //    'library-audio'         => [
-    //        'view'            => 'components.library-audio',
+    //        'view'            => 'bootstrap-componentslibrary-audio',
     //        'class'           => [
     //            'container' => ['mw-100'],
     //            'component' => [],
@@ -235,7 +234,7 @@ return [
     //        ],
     //    ],
     //    'library-image'         => [
-    //        'view'            => 'components.library-image',
+    //        'view'            => 'bootstrap-componentslibrary-image',
     //        'class'           => [
     //            'container' => ['mw-100'],
     //            'link'      => [],
@@ -248,7 +247,7 @@ return [
     //        ],
     //    ],
     //    'library-video'         => [
-    //        'view'            => 'components.library-video',
+    //        'view'            => 'bootstrap-componentslibrary-video',
     //        'poster'          => 'https://truffle-assets.imgix.net/0d26ee59-813-lucyjuicycrunchburger-land1.jpg',
     //        'class'           => [
     //            'container' => ['mw-100'],
@@ -260,7 +259,7 @@ return [
     //        ],
     //    ],
     //    'library-document'      => [
-    //        'view'            => 'components.library-document',
+    //        'view'            => 'bootstrap-componentslibrary-document',
     //        'class'           => [
     //            'container' => ['mw-100'],
     //            'link'      => [],
@@ -273,7 +272,7 @@ return [
     //        ],
     //    ],
     //    'library-uploaded-file' => [
-    //        'view'            => 'components.library-uploaded-file',
+    //        'view'            => 'bootstrap-componentslibrary-uploaded-file',
     //        'class'           => [
     //            'container' => ['pb-2'],
     //            'component' => [],

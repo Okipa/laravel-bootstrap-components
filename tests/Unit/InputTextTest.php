@@ -71,7 +71,6 @@ class InputTextTest extends BootstrapComponentsTestCase
         $configIcon = 'test-config-icon';
         config()->set('bootstrap-components.input_text.icon', $configIcon);
         $html = inputText()->name('name')->toHtml();
-        $this->assertContains('class="icon input-group-text"', $html);
         $this->assertContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
     }
 
@@ -81,11 +80,18 @@ class InputTextTest extends BootstrapComponentsTestCase
         $customIcon = 'test-custom-icon';
         config()->set('bootstrap-components.input_text.icon', $configIcon);
         $html = inputText()->name('name')->icon($customIcon)->toHtml();
-        $this->assertContains('class="icon input-group-text"', $html);
         $this->assertContains('<span class="icon input-group-text">' . $customIcon . '</span>', $html);
         $this->assertNotContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
     }
 
+    public function testHideIcon()
+    {
+        $configIcon = 'test-config-icon';
+        config()->set('bootstrap-components.input_text.icon', $configIcon);
+        $html = inputText()->name('name')->hideIcon()->toHtml();
+        $this->assertNotContains('<span class="icon input-group-text">', $html);
+    }
+    
     public function testNoIcon()
     {
         config()->set('bootstrap-components.input_text.icon', null);
@@ -120,17 +126,25 @@ class InputTextTest extends BootstrapComponentsTestCase
         );
     }
 
+    public function testHideLegend()
+    {
+        $configLegend = 'test-config-legend';
+        config()->set('bootstrap-components.input_text.legend', $configLegend);
+        $html = inputText()->name('name')->hideLegend()->toHtml();
+        $this->assertNotContains('<span class="icon input-group-text">', $html);
+    }
+
     public function testNoLegend()
     {
         config()->set('bootstrap-components.input_text.legend', null);
         $html = inputText()->name('name')->toHtml();
-        $this->assertNotContains('id="input-name-legend"', $html);
+        $this->assertNotContains('<span class="icon input-group-text">', $html);
     }
 
     public function testSetPlaceholder()
     {
         $placeholder = 'test-custom-placeholder';
-        $html = input()->type('text')->name('name')->placeholder($placeholder)->toHtml();
+        $html = input()->name('name')->placeholder($placeholder)->toHtml();
         $this->assertContains('placeholder="' . $placeholder . '"', $html);
         $this->assertNotContains(
             'placeholder="bootstrap-components::bootstrap-components.validation.attributes.name"',
@@ -140,7 +154,7 @@ class InputTextTest extends BootstrapComponentsTestCase
 
     public function testNoPlaceholder()
     {
-        $html = input()->type('text')->name('name')->toHtml();
+        $html = input()->name('name')->toHtml();
         $this->assertContains(
             'placeholder="bootstrap-components::bootstrap-components.validation.attributes.name"',
             $html
@@ -150,7 +164,7 @@ class InputTextTest extends BootstrapComponentsTestCase
     public function testSetValue()
     {
         $customValue = 'test-custom-value';
-        $html = input()->type('text')->name('name')->value($customValue)->toHtml();
+        $html = input()->name('name')->value($customValue)->toHtml();
         $this->assertContains('value="' . $customValue . '"', $html);
     }
 

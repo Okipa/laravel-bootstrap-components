@@ -32,12 +32,24 @@ class Input extends Component
      * @property string $name
      */
     protected $name;
+    /**.
+     * The input icon show status.
+     *
+     * @property bool $showIcon
+     */
+    protected $showIcon = true;
     /**
      * The input icon.
      *
      * @property string $icon
      */
     protected $icon;
+    /**.
+     * The input legend show status.
+     *
+     * @property bool $showLabel
+     */
+    protected $showLegend = true;
     /**
      * The input legend.
      *
@@ -45,7 +57,7 @@ class Input extends Component
      */
     protected $legend;
     /**.
-     * The input show label status
+     * The input label show status.
      *
      * @property bool $showLabel
      */
@@ -126,6 +138,18 @@ class Input extends Component
     }
 
     /**
+     * Hide the input icon.
+     *
+     * @return \Okipa\LaravelBootstrapComponents\Form\Input
+     */
+    public function hideIcon(): Input
+    {
+        $this->showIcon = false;
+
+        return $this;
+    }
+
+    /**
      * Set the input legend.
      *
      * @param string $legend
@@ -135,6 +159,18 @@ class Input extends Component
     public function legend(string $legend): Input
     {
         $this->legend = $legend;
+
+        return $this;
+    }
+
+    /**
+     * Hide the input legend.
+     *
+     * @return \Okipa\LaravelBootstrapComponents\Form\Input
+     */
+    public function hideLegend(): Input
+    {
+        $this->showLegend = false;
 
         return $this;
     }
@@ -207,17 +243,21 @@ class Input extends Component
         if (! $this->name) {
             throw new Exception('Name must be declared for the ' . get_class() . ' component generation.');
         }
-        
+
         return array_merge(parent::values(), [
             'model'       => $this->model,
             'type'        => $this->type,
             'name'        => $this->name,
-            'icon'        => $this->icon ? $this->icon : $this->defaultIcon(),
-            'legend'      => $this->legend ? $this->legend : $this->defaultLegend(),
-            'showLabel'   => $this->showLabel,
-            'label'       => $this->label ? $this->label : trans('bootstrap-components::bootstrap-components.validation.attributes.' . $this->name),
+            'icon'        => $this->showIcon ? ($this->icon ? $this->icon : $this->defaultIcon()) : '',
+            'legend'      => $this->showLegend ? ($this->legend ? $this->legend : $this->defaultLegend()) : '',
+            'label'       => $this->showLabel ? ($this->label
+                ? $this->label
+                : trans('bootstrap-components::bootstrap-components.validation.attributes.' . $this->name)
+            ) : '',
             'value'       => $this->value ? $this->value : ($this->model ? $this->model->{$this->name} : null),
-            'placeholder' => $this->placeholder ? $this->placeholder : trans('bootstrap-components::bootstrap-components.validation.attributes.' . $this->name),
+            'placeholder' => $this->placeholder
+                ? $this->placeholder
+                : trans('bootstrap-components::bootstrap-components.validation.attributes.' . $this->name),
         ]);
     }
 
