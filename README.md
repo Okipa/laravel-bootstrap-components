@@ -102,10 +102,10 @@ This component extends the `input()` component.
 **Available public methods :**
 - same as [input()](#form--input)
 
-Locked values :
+**Locked values :**
 - type : `text`
 
-Default values :
+**Default values :**
 - icon : `config('bootstrap-components.input_text.icon')`
 
 ### Form > InputTel()
@@ -114,10 +114,10 @@ This component extends the `input()` component.
 **Available public methods :**
 - same as [input()](#form--input)
 
-Locked values :
+**Locked values :**
 - type : `tel`
 
-Default values :
+**Default values :**
 - icon : `config('bootstrap-components.input_tel.icon')`
 
 #### Form > InputEmail()
@@ -126,10 +126,10 @@ This component extends the `input()` component.
 **Available public methods :**
 - same as [input()](#form--input)
 
-Locked values :
+**Locked values :**
 - type : `email`
 
-Default values :
+**Default values :**
 - icon : `config('bootstrap-components.input_email.icon')`
 
 ### Form > InputPassword()
@@ -138,10 +138,10 @@ This component extends the `input()` component.
 **Available public methods :**
 - same as [input()](#form--input)
 
-Locked values :
+**Locked values :**
 - type : `password`
 
-Default values :
+**Default values :**
 - icon : `config('bootstrap-components.input_password.icon')`
 
 ### Form > InputFile()
@@ -150,10 +150,10 @@ This component extends the `input()` component.
 **Available public methods :**
 - same as [input()](#form--input)
 
-Locked values :
+**Locked values :**
 - type : `file`
 
-Default values :
+**Default values :**
 - icon : `config('bootstrap-components.input_file.icon')`
   
 ------------------------------------------------------------------------------------------------------------------------
