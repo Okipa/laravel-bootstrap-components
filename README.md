@@ -100,7 +100,7 @@ Available public methods :
 This component extends the `input()` component.
 
 Available public methods :
-- same as [input()](#input)
+- same as [input()](#form--input)
 
 Locked values :
 - type : `text`
@@ -112,7 +112,7 @@ Default values :
 This component extends the `input()` component.
 
 Available public methods :
-- same as [input()](#input)
+- same as [input()](#form--input)
 
 Locked values :
 - type : `tel`
@@ -124,7 +124,7 @@ Default values :
 This component extends the `input()` component.
 
 Available public methods :
-- same as [input()](#input)
+- same as [input()](#form--input)
 
 Locked values :
 - type : `email`
@@ -136,7 +136,7 @@ Default values :
 This component extends the `input()` component.
 
 Available public methods :
-- same as [input()](#input)
+- same as [input()](#form--input)
 
 Locked values :
 - type : `password`
@@ -148,7 +148,7 @@ Default values :
 This component extends the `input()` component.
 
 Available public methods :
-- same as [input()](#input)
+- same as [input()](#form--input)
 
 Locked values :
 - type : `file`
