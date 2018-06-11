@@ -4,14 +4,14 @@ namespace Okipa\LaravelBootstrapComponents\Form;
 
 use Closure;
 
-class File extends Input
+class InputFile extends Input
 {
     /**
      * The component config key.
      *
      * @property string $view
      */
-    protected $configKey = 'file';
+    protected $configKey = 'input_file';
     /**
      * The input type.
      *
@@ -30,9 +30,9 @@ class File extends Input
      *
      * @param \Closure $uploadedFile
      *
-     * @return \App\Components\Form\File
+     * @return \Okipa\LaravelBootstrapComponents\Form\InputFile
      */
-    public function uploadedFile(Closure $uploadedFile): File
+    public function uploadedFile(Closure $uploadedFile): InputFile
     {
         $this->uploadedFile = $uploadedFile;
 
@@ -43,10 +43,16 @@ class File extends Input
      * Set the input values.
      *
      * @return array
+     * @throws \Exception
      */
     protected function values(): array
     {
-        return array_merge(parent::values(), [
+        $parentValues = parent::values();
+
+        return array_merge($parentValues, [
+            'type'         => 'file',
+            'placeholder'  => $parentValues['placeholder'] . ' : '
+                              . trans('bootstrap-components::bootstrap-components.label.file'),
             'uploadedFile' => $this->uploadedFile,
         ]);
     }

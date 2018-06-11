@@ -64,7 +64,7 @@ class Toggle extends Input
                 : '',
             'legend'  => $this->legend,
             'label'   => $this->showLabel === false
-                ? ($this->label ? $this->label : __('validation.attributes.' . $this->name))
+                ? ($this->label ? $this->label : trans('bootstrap-components::bootstrap-components.validation.attributes.' . $this->name))
                 : '',
             'checked' => isset($this->checked)
                 ? $this->checked
@@ -79,6 +79,6 @@ class Toggle extends Input
      */
     protected function defaultIcon(): string
     {
-        return config('components.' . $this->configKey . '.icon');
+        returnconfig('bootstrap-components.' . $this->configKey . '.icon');
     }
 }

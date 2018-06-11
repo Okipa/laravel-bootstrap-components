@@ -8,23 +8,23 @@ class ComponentServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'components');
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'components');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'bootstrap-components');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'bootstrap-components');
         $this->publishes([
-            __DIR__ . '/../config/components.php.php' => config_path('components.php'),
-        ], 'components::config');
+            __DIR__ . '/../config/laravel-bootstrap-components.php.php' => config_path('components.php'),
+        ], 'bootstrap-components::config');
         $this->publishes([
             __DIR__ . '/../resources/lang' => resource_path('lang'),
-        ], 'components::translations');
+        ], 'bootstrap-components::translations');
         $this->publishes([
             __DIR__ . '/../resources/views' => resource_path('views/vendor/components'),
-        ], 'components::views');
+        ], 'bootstrap-components::views');
     }
 
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/components.php', 'components'
+            __DIR__ . '/../config/bootstrap-components.php', 'bootstrap-components'
         );
     }
 }

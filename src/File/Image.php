@@ -155,7 +155,7 @@ class Image extends Media
      */
     protected function defaultLinkClass(): array
     {
-        return config('components.' . $this->configKey . '.class.link');
+        returnconfig('bootstrap-components.' . $this->configKey . '.class.link');
     }
 
     /**
@@ -165,6 +165,6 @@ class Image extends Media
      */
     protected function defaultLinkHtmlAttributes(): array
     {
-        return config('components.' . $this->configKey . '.attributes.link');
+        returnconfig('bootstrap-components.' . $this->configKey . '.attributes.link');
     }
 }

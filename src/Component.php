@@ -121,7 +121,7 @@ abstract class Component implements Htmlable
     public function render(array $data = [])
     {
         if ($view = $this->view()) {
-            return view('components::' . $view, $this->values(), $data)->render();
+            return view('bootstrap-components::' . $view, $this->values(), $data)->render();
         }
     }
 
@@ -132,7 +132,7 @@ abstract class Component implements Htmlable
      */
     protected function view(): string
     {
-        return config('components.' . $this->configKey . '.view', '');
+        return config('bootstrap-components.' . $this->configKey . '.view', '');
     }
 
     /**
@@ -142,10 +142,18 @@ abstract class Component implements Htmlable
      */
     protected function values(): array
     {
-        $componentClass = array_merge($this->defaultComponentClass(), $this->componentClass);
-        $containerClass = array_merge($this->defaultContainerClass(), $this->containerClass);
-        $componentHtmlAttributes = array_merge($this->defaultComponentHtmlAttributes(), $this->componentHtmlAttributes);
-        $containerHtmlAttributes = array_merge($this->defaultContainerHtmlAttributes(), $this->containerHtmlAttributes);
+        $componentClass = $this->componentClass
+            ? $this->componentClass
+            : $this->defaultComponentClass();
+        $containerClass = $this->containerClass
+            ? $this->containerClass
+            : $this->defaultContainerClass();
+        $componentHtmlAttributes = $this->componentHtmlAttributes
+            ? $this->componentHtmlAttributes
+            : $this->defaultComponentHtmlAttributes();
+        $containerHtmlAttributes = $this->containerHtmlAttributes
+            ? $this->containerHtmlAttributes
+            : $this->defaultContainerHtmlAttributes();
 
         return compact('componentClass', 'containerClass', 'componentHtmlAttributes', 'containerHtmlAttributes');
     }
@@ -157,7 +165,7 @@ abstract class Component implements Htmlable
      */
     protected function defaultComponentClass(): array
     {
-        return config('components.' . $this->configKey . '.class.component', []);
+        return config('bootstrap-components.' . $this->configKey . '.class.component', []);
     }
 
     /**
@@ -167,7 +175,7 @@ abstract class Component implements Htmlable
      */
     protected function defaultContainerClass(): array
     {
-        return config('components.' . $this->configKey . '.class.container', []);
+        return config('bootstrap-components.' . $this->configKey . '.class.container', []);
     }
 
     /**
@@ -177,7 +185,7 @@ abstract class Component implements Htmlable
      */
     protected function defaultComponentHtmlAttributes(): array
     {
-        return config('components.' . $this->configKey . '.attributes.component', []);
+        return config('bootstrap-components.' . $this->configKey . '.html_attributes.component', []);
     }
 
     /**
@@ -187,6 +195,6 @@ abstract class Component implements Htmlable
      */
     protected function defaultContainerHtmlAttributes(): array
     {
-        return config('components.' . $this->configKey . '.attributes.container', []);
+        return config('bootstrap-components.' . $this->configKey . '.html_attributes.container', []);
     }
 }

@@ -202,12 +202,12 @@ class Input extends Component
     protected function values(): array
     {
         if (! $this->type) {
-            throw new Exception('Type must be declared for the « ' . $this->configKey . ' » component generation.');
+            throw new Exception('Type must be declared for the ' . get_class() . ' component generation.');
         }
         if (! $this->name) {
-            throw new Exception('Name must be declared for the « ' . $this->configKey . ' » component generation.');
+            throw new Exception('Name must be declared for the ' . get_class() . ' component generation.');
         }
-
+        
         return array_merge(parent::values(), [
             'model'       => $this->model,
             'type'        => $this->type,
@@ -215,9 +215,9 @@ class Input extends Component
             'icon'        => $this->icon ? $this->icon : $this->defaultIcon(),
             'legend'      => $this->legend ? $this->legend : $this->defaultLegend(),
             'showLabel'   => $this->showLabel,
-            'label'       => $this->label ? $this->label : __('validation.attributes.' . $this->name),
+            'label'       => $this->label ? $this->label : trans('bootstrap-components::bootstrap-components.validation.attributes.' . $this->name),
             'value'       => $this->value ? $this->value : ($this->model ? $this->model->{$this->name} : null),
-            'placeholder' => $this->placeholder ? $this->placeholder : __('validation.attributes.' . $this->name),
+            'placeholder' => $this->placeholder ? $this->placeholder : trans('bootstrap-components::bootstrap-components.validation.attributes.' . $this->name),
         ]);
     }
 
@@ -228,7 +228,7 @@ class Input extends Component
      */
     protected function defaultIcon(): string
     {
-        $icon = config('components.' . $this->configKey . '.icon');
+        $icon = config('bootstrap-components.' . $this->configKey . '.icon');
 
         return $icon ? $icon : '';
     }
@@ -240,7 +240,7 @@ class Input extends Component
      */
     protected function defaultLegend(): string
     {
-        $legend = config('components.' . $this->configKey . '.legend');
+        $legend = config('bootstrap-components.' . $this->configKey . '.legend');
 
         return $legend ? $legend : '';
     }

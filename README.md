@@ -51,7 +51,7 @@ Just call the component you need in your view.
 Each component default view and default values, class and attributes can be configured.  
 Publish the package configuration and override the available config values : 
 ```bash
-php artisan vendor:publish --tag=components::config
+php artisan vendor:publish --tag=bootstrap-components::config
 ```
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -60,7 +60,7 @@ php artisan vendor:publish --tag=components::config
 
 To customize the existing translations, publish the packages translations files to make the wanted changes :
 ```
-php artisan vendor:publish --tag=components::translations
+php artisan vendor:publish --tag=bootstrap-components::translations
 ```
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -70,26 +70,90 @@ php artisan vendor:publish --tag=components::translations
 Customize the used templates to make this package fit to your needs.  
 Publish the views with the command :
 ```
-php artisan vendor:publish --tag=components::views
+php artisan vendor:publish --tag=bootstrap-components::views
 ```
 
 ------------------------------------------------------------------------------------------------------------------------
 
 ## API
 
-### input()
-Chained methods :
+### Form components
+
+#### input()
+
+Available public methods :
 - `public function type(string $type): Input` (required)
 - `public function name(string $name): Input` (required)
 - `public function model(Model $model): Input` (optional)
 - `public function icon(string $icon): Input` (optional)
-  > by default the config icon is shown if defined.
+  > default value : `config('bootstrap-components.input.icon')`
 - `public function label(string $label): Input` (optional)
-  > by default, the validation attribute translation is used (`trans('validation.attributes.[name]')`).
+  > default value : `trans('validation.attributes.[name]')`
 - `public function hideLabel(): Input` (optional)
 - `public function placeholder(string $placeholder): Input` (optional)
-  > by default, the label is used as placeholder.
+  > default value : `$label`.
 - `public function value($value): Input` (optional)
-  > if the model is set, the value is automatically shown if exists.
+  > default value : `$model->{$name}`.
 - `public function legend(string $legend): Input` (optional)
-  > by default the config legend is shown if defined.
+  > default value : `config('bootstrap-components.input.legend')`
+  
+#### InputText()
+This component extends the `input()` component.
+
+Available public methods : same as [input()](#input())
+
+Locked values :
+- type : `text`
+
+Default values :
+- icon : `config('bootstrap-components.input_text.icon')`
+
+#### InputTel()
+This component extends the `input()` component.
+
+Available public methods : same as [input()](#input())
+
+Locked values :
+- type : `tel`
+
+Default values :
+- icon : `config('bootstrap-components.input_tel.icon')`
+
+#### InputEmail()
+This component extends the `input()` component.
+
+Available public methods : same as [input()](#input())
+
+Locked values :
+- type : `email`
+
+Default values :
+- icon : `config('bootstrap-components.input_email.icon')`
+
+#### InputPassword()
+This component extends the `input()` component.
+
+Available public methods : same as [input()](#input())
+
+Locked values :
+- type : `password`
+
+Default values :
+- icon : `config('bootstrap-components.input_password.icon')`
+
+#### InputFile()
+This component extends the `input()` component.
+
+Available public methods : same as [input()](#input())
+
+Locked values :
+- type : `file`
+
+Default values :
+- icon : `config('bootstrap-components.input_file.icon')`
+  
+------------------------------------------------------------------------------------------------------------------------
+
+## Contributors
+
+- [ACID-Solutions](https://github.com/ACID-Solutions)

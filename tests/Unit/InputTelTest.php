@@ -3,48 +3,50 @@
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit;
 
 use Illuminate\Support\MessageBag;
+use Okipa\LaravelBootstrapComponents\Form\Input;
 use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
 use Okipa\LaravelBootstrapComponents\Test\Fakers\UsersFaker;
 
-class InputTest extends BootstrapComponentsTestCase
+class inputTelTest extends BootstrapComponentsTestCase
 {
     use UsersFaker;
 
     public function testConfigStructure()
     {
         // components
-        $this->assertTrue(array_key_exists('input', config('bootstrap-components')));
+        $this->assertTrue(array_key_exists('input_tel', config('bootstrap-components')));
         // components.input
-        $this->assertTrue(array_key_exists('view', config('bootstrap-components.input')));
-        $this->assertTrue(array_key_exists('icon', config('bootstrap-components.input')));
-        $this->assertTrue(array_key_exists('legend', config('bootstrap-components.input')));
-        $this->assertTrue(array_key_exists('class', config('bootstrap-components.input')));
-        $this->assertTrue(array_key_exists('html_attributes', config('bootstrap-components.input')));
+        $this->assertTrue(array_key_exists('view', config('bootstrap-components.input_tel')));
+        $this->assertTrue(array_key_exists('icon', config('bootstrap-components.input_tel')));
+        $this->assertTrue(array_key_exists('legend', config('bootstrap-components.input_tel')));
+        $this->assertTrue(array_key_exists('class', config('bootstrap-components.input_tel')));
+        $this->assertTrue(array_key_exists('html_attributes', config('bootstrap-components.input_tel')));
         // components.input.class
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.input.class')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.input.class')));
+        $this->assertTrue(array_key_exists('container', config('bootstrap-components.input_tel.class')));
+        $this->assertTrue(array_key_exists('component', config('bootstrap-components.input_tel.class')));
         // components.input.html_attributes
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.input.html_attributes')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.input.html_attributes')));
+        $this->assertTrue(array_key_exists('container', config('bootstrap-components.input_tel.html_attributes')));
+        $this->assertTrue(array_key_exists('component', config('bootstrap-components.input_tel.html_attributes')));
+    }
+
+    public function testExtendsInput()
+    {
+        $this->assertEquals(Input::class, get_parent_class(inputText()));
     }
 
     public function testSetTypeAndName()
     {
-        $html = input()->type('text')->name('name')->toHtml();
+        $html = inputTel()->type('text')->name('name')->toHtml();
         $this->assertContains('<input id="input-name"', $html);
         $this->assertContains('name="name"', $html);
         $this->assertContains('aria-describedby="input-name"', $html);
-        $this->assertContains('type="text"', $html);
+        $this->assertContains('type="tel"', $html);
     }
 
-    /**
-     * @expectedException \Exception
-     * @expectedExceptionMessage Type must be declared for the Okipa\LaravelBootstrapComponents\Form\Input component
-     *                           generation.
-     */
     public function testInputWithoutType()
     {
-        input()->name('name')->toHtml();
+        $html = inputTel()->name('name')->toHtml();
+        $this->assertContains('type="tel"', $html);
     }
 
     /**
@@ -54,31 +56,31 @@ class InputTest extends BootstrapComponentsTestCase
      */
     public function testInputWithoutName()
     {
-        input()->type('text')->toHtml();
+        inputTel()->toHtml();
     }
 
     public function testSetModel()
     {
         $user = $this->createUniqueUser();
-        $html = input()->model($user)->type('text')->name('name')->toHtml();
+        $html = inputTel()->model($user)->name('name')->toHtml();
         $this->assertContains('value="' . $user->name . '"', $html);
     }
 
     public function testConfigIcon()
     {
         $configIcon = 'test-config-icon';
-        config()->set('bootstrap-components.input.icon', $configIcon);
-        $html = input()->type('text')->name('name')->toHtml();
+        config()->set('bootstrap-components.input_tel.icon', $configIcon);
+        $html = inputTel()->name('name')->toHtml();
         $this->assertContains('class="icon input-group-text"', $html);
         $this->assertContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
     }
-
+    
     public function testSetIcon()
     {
         $configIcon = 'test-config-icon';
         $customIcon = 'test-custom-icon';
-        config()->set('bootstrap-components.input.icon', $configIcon);
-        $html = input()->type('text')->name('name')->icon($customIcon)->toHtml();
+        config()->set('bootstrap-components.input_tel.icon', $configIcon);
+        $html = inputTel()->name('name')->icon($customIcon)->toHtml();
         $this->assertContains('class="icon input-group-text"', $html);
         $this->assertContains('<span class="icon input-group-text">' . $customIcon . '</span>', $html);
         $this->assertNotContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
@@ -86,16 +88,16 @@ class InputTest extends BootstrapComponentsTestCase
 
     public function testNoIcon()
     {
-        config()->set('bootstrap-components.input.icon', null);
-        $html = input()->type('text')->name('name')->toHtml();
+        config()->set('bootstrap-components.input_tel.icon', null);
+        $html = inputTel()->name('name')->toHtml();
         $this->assertNotContains('<span class="icon input-group-text">', $html);
     }
 
     public function testConfigLegend()
     {
         $configLegend = 'test-config-legend';
-        config()->set('bootstrap-components.input.legend', $configLegend);
-        $html = input()->type('text')->name('name')->toHtml();
+        config()->set('bootstrap-components.input_tel.legend', $configLegend);
+        $html = inputTel()->name('name')->toHtml();
         $this->assertContains(
             '<small id="input-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
             $html
@@ -106,8 +108,8 @@ class InputTest extends BootstrapComponentsTestCase
     {
         $configLegend = 'test-config-legend';
         $customLegend = 'test-custom-legend';
-        config()->set('bootstrap-components.input.legend', $configLegend);
-        $html = input()->type('text')->name('name')->legend($customLegend)->toHtml();
+        config()->set('bootstrap-components.input_tel.legend', $configLegend);
+        $html = inputTel()->name('name')->legend($customLegend)->toHtml();
         $this->assertContains(
             '<small id="input-name-legend" class="form-text text-muted">' . $customLegend . '</small>',
             $html
@@ -120,8 +122,8 @@ class InputTest extends BootstrapComponentsTestCase
 
     public function testNoLegend()
     {
-        config()->set('bootstrap-components.input.legend', null);
-        $html = input()->type('text')->name('name')->toHtml();
+        config()->set('bootstrap-components.input_tel.legend', null);
+        $html = inputTel()->name('name')->toHtml();
         $this->assertNotContains('id="input-name-legend"', $html);
     }
 
@@ -171,14 +173,14 @@ class InputTest extends BootstrapComponentsTestCase
     public function testSetLabel()
     {
         $label = 'test-custom-label';
-        $html = input()->type('text')->name('name')->label($label)->toHtml();
+        $html = inputTel()->name('name')->label($label)->toHtml();
         $this->assertContains('<label for="input-name">' . $label . '</label>', $html);
         $this->assertContains('aria-label="' . $label . '"', $html);
     }
 
     public function testNoLabel()
     {
-        $html = input()->type('text')->name('name')->toHtml();
+        $html = inputTel()->name('name')->toHtml();
         $this->assertContains(
             '<label for="input-name">bootstrap-components::bootstrap-components.validation.attributes.name</label>',
             $html
@@ -191,7 +193,7 @@ class InputTest extends BootstrapComponentsTestCase
 
     public function testHideLabel()
     {
-        $html = input()->type('text')->name('name')->hideLabel()->toHtml();
+        $html = inputTel()->name('name')->hideLabel()->toHtml();
         $this->assertNotContains(
             '<label for="input-name">bootstrap-components::bootstrap-components.validation.attributes.name</label>',
             $html
@@ -206,22 +208,22 @@ class InputTest extends BootstrapComponentsTestCase
     {
         $errorMessage = 'This a test error message';
         $messageBag = app(MessageBag::class)->add('name', $errorMessage);
-        $html = input()->type('text')->name('name')->render(['errors' => $messageBag]);
+        $html = inputTel()->name('name')->render(['errors' => $messageBag]);
         $this->assertContains('<span class="invalid-feedback d-flex">', $html);
         $this->assertContains('<strong>' . $errorMessage . '</strong>', $html);
     }
 
     public function testNoError()
     {
-        $html = input()->type('text')->name('name')->render();
+        $html = inputTel()->name('name')->render();
         $this->assertNotContains('<span class="invalid-feedback d-flex">', $html);
     }
 
     public function testConfigContainerClass()
     {
         $configContainerCLass = 'test-config-class-container';
-        config()->set('bootstrap-components.input.class.container', [$configContainerCLass]);
-        $html = input()->type('text')->name('name')->toHtml();
+        config()->set('bootstrap-components.input_tel.class.container', [$configContainerCLass]);
+        $html = inputTel()->name('name')->toHtml();
         $this->assertContains('class="input-name-container ' . $configContainerCLass . '"', $html);
     }
 
@@ -229,8 +231,8 @@ class InputTest extends BootstrapComponentsTestCase
     {
         $configContainerCLass = 'test-config-class-container';
         $customContainerCLass = 'test-custom-class-container';
-        config()->set('bootstrap-components.input.class.container', [$configContainerCLass]);
-        $html = input()->type('text')->name('name')->containerClass([$customContainerCLass])->toHtml();
+        config()->set('bootstrap-components.input_tel.class.container', [$configContainerCLass]);
+        $html = inputTel()->name('name')->containerClass([$customContainerCLass])->toHtml();
         $this->assertContains('class="input-name-container ' . $customContainerCLass . '"', $html);
         $this->assertNotContains('class="input-name-container ' . $configContainerCLass . '"', $html);
     }
@@ -238,8 +240,8 @@ class InputTest extends BootstrapComponentsTestCase
     public function testConfigComponentClass()
     {
         $configComponentCLass = 'test-config-class-component';
-        config()->set('bootstrap-components.input.class.component', [$configComponentCLass]);
-        $html = input()->type('text')->name('name')->toHtml();
+        config()->set('bootstrap-components.input_tel.class.component', [$configComponentCLass]);
+        $html = inputTel()->name('name')->toHtml();
         $this->assertContains('class="form-control input-name-component ' . $configComponentCLass . '"', $html);
     }
 
@@ -247,8 +249,8 @@ class InputTest extends BootstrapComponentsTestCase
     {
         $configComponentCLass = 'test-config-class-component';
         $customComponentCLass = 'test-custom-class-component';
-        config()->set('bootstrap-components.input.class.component', [$customComponentCLass]);
-        $html = input()->type('text')->name('name')->componentClass([$customComponentCLass])->toHtml();
+        config()->set('bootstrap-components.input_tel.class.component', [$customComponentCLass]);
+        $html = inputTel()->name('name')->componentClass([$customComponentCLass])->toHtml();
         $this->assertContains('class="form-control input-name-component ' . $customComponentCLass . '"', $html);
         $this->assertNotContains('class="form-control input-name-component ' . $configComponentCLass . '"', $html);
     }
@@ -256,8 +258,8 @@ class InputTest extends BootstrapComponentsTestCase
     public function testConfigContainerHtmlAttributes()
     {
         $configContainerAttributes = 'test-config-attributes-container';
-        config()->set('bootstrap-components.input.html_attributes.container', [$configContainerAttributes]);
-        $html = input()->type('text')->name('name')->toHtml();
+        config()->set('bootstrap-components.input_tel.html_attributes.container', [$configContainerAttributes]);
+        $html = inputTel()->name('name')->toHtml();
         $this->assertContains($configContainerAttributes, $html);
     }
 
@@ -265,8 +267,8 @@ class InputTest extends BootstrapComponentsTestCase
     {
         $configContainerAttributes = 'test-config-attributes-container';
         $customContainerAttributes = 'test-custom-attributes-container';
-        config()->set('bootstrap-components.input.html_attributes.container', [$configContainerAttributes]);
-        $html = input()->type('text')->name('name')->containerHtmlAttributes([$customContainerAttributes])->toHtml();
+        config()->set('bootstrap-components.input_tel.html_attributes.container', [$configContainerAttributes]);
+        $html = inputTel()->name('name')->containerHtmlAttributes([$customContainerAttributes])->toHtml();
         $this->assertContains($customContainerAttributes, $html);
         $this->assertNotContains($configContainerAttributes, $html);
     }
@@ -274,8 +276,8 @@ class InputTest extends BootstrapComponentsTestCase
     public function testConfigComponentHtmlAttributes()
     {
         $configComponentAttributes = 'test-config-attributes-component';
-        config()->set('bootstrap-components.input.html_attributes.component', [$configComponentAttributes]);
-        $html = input()->type('text')->name('name')->toHtml();
+        config()->set('bootstrap-components.input_tel.html_attributes.component', [$configComponentAttributes]);
+        $html = inputTel()->name('name')->toHtml();
         $this->assertContains($configComponentAttributes, $html);
     }
 
@@ -283,8 +285,8 @@ class InputTest extends BootstrapComponentsTestCase
     {
         $configComponentAttributes = 'test-config-attributes-component';
         $customComponentAttributes = 'test-custom-attributes-component';
-        config()->set('bootstrap-components.input.html_attributes.component', [$configComponentAttributes]);
-        $html = input()->type('text')->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
+        config()->set('bootstrap-components.input_tel.html_attributes.component', [$configComponentAttributes]);
+        $html = inputTel()->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
         $this->assertContains($customComponentAttributes, $html);
         $this->assertNotContains($configComponentAttributes, $html);
     }

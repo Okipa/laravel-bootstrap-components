@@ -1,14 +1,8 @@
 <div {{ classTag('input-' . $name . '-container', $containerClass) }}
     {{ htmlAttributes($containerHtmlAttributes) }}>
-    @if($showLabel === true)
-        <label for="input-{{ $name }}">{{ $label }}</label>
-    @endif
+    @include('bootstrap-components::components.partials.label')
     <div class="input-group">
-        @if(!empty($icon))
-            <div class="input-group-prepend">
-                <span class="icon input-group-text">{!! $icon !!}</span>
-            </div>
-        @endif
+        @include('bootstrap-components::components.partials.icon')
         <input id="input-{{ $name }}"
                {{ classTag('form-control', 'input-' . $name . '-component', $componentClass, isset($errors) && $errors->has($name) ? ' is-invalid' : null) }}
                type="{{ $type }}"
@@ -19,13 +13,7 @@
                aria-label="{{ $label }}"
                aria-describedby="input-{{ $name }}">
     </div>
-    @if(isset($errors) && $errors->has($name))
-        <span class="invalid-feedback d-flex">
-            <strong>{{ $errors->first($name) }}</strong>
-        </span>
-    @endif
-    @if(!empty($legend))
-        <small id="input-{{ $name }}-legend" class="form-text text-muted">{!! $legend !!}</small>
-    @endif
+    @include('bootstrap-components::components.partials.error')
+    @include('bootstrap-components::components.partials.legend')
 </div>
 
