@@ -15,7 +15,7 @@ It has been built on the premise that :
  - it is very useful to package components we use in almost every views in a backoffice for example.
  - it is even more useful if these components are used in almost every app.
 
-Notes :
+**Notes :**
 - This version provides a bootstrap 4 components implementation.
 - No implementation of bootstrap 3 has been done. Is someone is up to prepare views version for bootstrap 3, I would merge them in another version number.
 - Components implementation is in progress.
