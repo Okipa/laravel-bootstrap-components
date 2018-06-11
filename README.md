@@ -77,10 +77,19 @@ php artisan vendor:publish --tag=bootstrap-components::views
 
 ## API
 
+Chainable methods available for all components :
+- `public function containerClass(array $containerClass): Component` (optional)
+  > default value : `config('bootstrap-components.[component_config_key].class.container')`
+- `public function componentClass(array $componentClass): Component` (optional)
+  > default value : `config('bootstrap-components.[component_config_key].class.component')`
+- `public function containerHtmlAttributes(array $containerHtmlAttributes): Component` (optional)
+  > default value : `config('bootstrap-components.[component_config_key].html_attributes.container')`
+- `public function componentHtmlAttributes(array $componentHtmlAttributes): Component` (optional)
+  > default value : `config('bootstrap-components.[component_config_key].html_attributes.component')`
 
 ### Form > input()
 
-**Available public methods :**
+Chainable methods :
 - `public function type(string $type): Input` (required)
 - `public function name(string $name): Input` (required)
 - `public function model(Model $model): Input` (optional)
@@ -97,64 +106,105 @@ php artisan vendor:publish --tag=bootstrap-components::views
   > default value : `config('bootstrap-components.input.legend')`
   
 ### Form > InputText()
-This component extends the `input()` component.
 
-**Available public methods :**
-- same as [input()](#form--input)
+Chainable methods :
+- `public function name(string $name): Input` (required)
+- `public function model(Model $model): Input` (optional)
+- `public function icon(string $icon): Input` (optional)
+  > default value : `config('bootstrap-components.input_text.icon')`
+- `public function label(string $label): Input` (optional)
+  > default value : `trans('validation.attributes.[name]')`
+- `public function hideLabel(): Input` (optional)
+- `public function placeholder(string $placeholder): Input` (optional)
+  > default value : `$label`.
+- `public function value($value): Input` (optional)
+  > default value : `$model->{$name}`.
+- `public function legend(string $legend): Input` (optional)
+  > default value : `config('bootstrap-components.input_text.legend')`
 
-**Locked values :**
+Locked values :
 - type : `text`
 
-**Default values :**
-- icon : `config('bootstrap-components.input_text.icon')`
 
 ### Form > InputTel()
-This component extends the `input()` component.
 
-**Available public methods :**
-- same as [input()](#form--input)
+Chainable methods :
+- `public function name(string $name): Input` (required)
+- `public function model(Model $model): Input` (optional)
+- `public function icon(string $icon): Input` (optional)
+  > default value : `config('bootstrap-components.input_tel.icon')`
+- `public function label(string $label): Input` (optional)
+  > default value : `trans('validation.attributes.[name]')`
+- `public function hideLabel(): Input` (optional)
+- `public function placeholder(string $placeholder): Input` (optional)
+  > default value : `$label`.
+- `public function value($value): Input` (optional)
+  > default value : `$model->{$name}`.
+- `public function legend(string $legend): Input` (optional)
+  > default value : `config('bootstrap-components.input_tel.legend')`
 
-**Locked values :**
+Locked values :
 - type : `tel`
 
-**Default values :**
-- icon : `config('bootstrap-components.input_tel.icon')`
-
 #### Form > InputEmail()
-This component extends the `input()` component.
 
-**Available public methods :**
-- same as [input()](#form--input)
+Chainable methods :
+- `public function name(string $name): Input` (required)
+- `public function model(Model $model): Input` (optional)
+- `public function icon(string $icon): Input` (optional)
+  > default value : `config('bootstrap-components.input_email.icon')`
+- `public function label(string $label): Input` (optional)
+  > default value : `trans('validation.attributes.[name]')`
+- `public function hideLabel(): Input` (optional)
+- `public function placeholder(string $placeholder): Input` (optional)
+  > default value : `$label`.
+- `public function value($value): Input` (optional)
+  > default value : `$model->{$name}`.
+- `public function legend(string $legend): Input` (optional)
+  > default value : `config('bootstrap-components.input_email.legend')`
 
-**Locked values :**
+Locked values :
 - type : `email`
 
-**Default values :**
-- icon : `config('bootstrap-components.input_email.icon')`
-
 ### Form > InputPassword()
-This component extends the `input()` component.
 
-**Available public methods :**
-- same as [input()](#form--input)
+Chainable methods :
+- `public function name(string $name): Input` (required)
+- `public function model(Model $model): Input` (optional)
+- `public function icon(string $icon): Input` (optional)
+  > default value : `config('bootstrap-components.input_password.icon')`
+- `public function label(string $label): Input` (optional)
+  > default value : `trans('validation.attributes.[name]')`
+- `public function hideLabel(): Input` (optional)
+- `public function placeholder(string $placeholder): Input` (optional)
+  > default value : `$label`.
+- `public function value($value): Input` (optional)
+  > default value : `$model->{$name}`.
+- `public function legend(string $legend): Input` (optional)
+  > default value : `config('bootstrap-components.input_password.legend')`
 
-**Locked values :**
+Locked values :
 - type : `password`
 
-**Default values :**
-- icon : `config('bootstrap-components.input_password.icon')`
-
 ### Form > InputFile()
-This component extends the `input()` component.
 
-**Available public methods :**
-- same as [input()](#form--input)
+Chainable methods :
+- `public function name(string $name): Input` (required)
+- `public function model(Model $model): Input` (optional)
+- `public function icon(string $icon): Input` (optional)
+  > default value : `config('bootstrap-components.input_file.icon')`
+- `public function label(string $label): Input` (optional)
+  > default value : `trans('validation.attributes.[name]')`
+- `public function hideLabel(): Input` (optional)
+- `public function placeholder(string $placeholder): Input` (optional)
+  > default value : `$label`.
+- `public function value($value): Input` (optional)
+  > default value : `$model->{$name}`.
+- `public function legend(string $legend): Input` (optional)
+  > default value : `config('bootstrap-components.input_file.legend')`
 
-**Locked values :**
+Locked values :
 - type : `file`
-
-**Default values :**
-- icon : `config('bootstrap-components.input_file.icon')`
   
 ------------------------------------------------------------------------------------------------------------------------
 
