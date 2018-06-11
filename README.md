@@ -80,7 +80,7 @@ php artisan vendor:publish --tag=bootstrap-components::views
 
 ### Form > input()
 
-Available public methods :
+**Available public methods :**
 - `public function type(string $type): Input` (required)
 - `public function name(string $name): Input` (required)
 - `public function model(Model $model): Input` (optional)
@@ -99,7 +99,7 @@ Available public methods :
 ### Form > InputText()
 This component extends the `input()` component.
 
-Available public methods :
+**Available public methods :**
 - same as [input()](#form--input)
 
 Locked values :
@@ -111,7 +111,7 @@ Default values :
 ### Form > InputTel()
 This component extends the `input()` component.
 
-Available public methods :
+**Available public methods :**
 - same as [input()](#form--input)
 
 Locked values :
@@ -123,7 +123,7 @@ Default values :
 #### Form > InputEmail()
 This component extends the `input()` component.
 
-Available public methods :
+**Available public methods :**
 - same as [input()](#form--input)
 
 Locked values :
@@ -135,7 +135,7 @@ Default values :
 ### Form > InputPassword()
 This component extends the `input()` component.
 
-Available public methods :
+**Available public methods :**
 - same as [input()](#form--input)
 
 Locked values :
@@ -147,7 +147,7 @@ Default values :
 ### Form > InputFile()
 This component extends the `input()` component.
 
-Available public methods :
+**Available public methods :**
 - same as [input()](#form--input)
 
 Locked values :
