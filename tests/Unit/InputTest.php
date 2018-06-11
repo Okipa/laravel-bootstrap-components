@@ -117,24 +117,25 @@ class InputTest extends BootstrapComponentsTestCase
         $this->assertNotContains('placeholder="validation.attributes.name"', $html);
     }
 
-    //    public function testOldValue()
-    //    {
-    //        $this->app->make('Illuminate\Contracts\Http\Kernel')->pushMiddleware('Illuminate\Session\Middleware\StartSession');
-    //        $oldValue = 'test-old-value';
-    //        $request = request()->merge(['name' => $oldValue]);
-    //        $request->flashOnly('name');
-    //        $html = input()->type('text')->name('name')->toHtml();
-    //        $this->assertContains('value="' . $oldValue . '"', $html);
-    //    }
-
     public function testSetValue()
     {
-        //        $oldValue = 'test-old-value';
-        //        $request = request()->merge(['name' => $oldValue]);
-        //        $request->flashOnly('name');
-        $value = 'test-custom-value';
-        $html = input()->type('text')->name('name')->value($value)->toHtml();
-        $this->assertContains('value="' . $value . '"', $html);
+        $customValue = 'test-custom-value';
+        $html = input()->type('text')->name('name')->value($customValue)->toHtml();
+        $this->assertContains('value="' . $customValue . '"', $html);
+    }
+    
+    public function testOldValue()
+    {
+        $oldValue = 'test-old-value';
+        $customValue = 'test-custom-value';
+        $this->app['router']->get('test', ['middleware' => 'web', 'uses' => function () use ($oldValue) {
+            $request = request()->merge(['name' => $oldValue]);
+            $request->flash();
+        }]);
+        $this->call('GET', 'test');
+        $html = input()->type('text')->name('name')->value($customValue)->toHtml();
+        $this->assertContains('value="' . $oldValue . '"', $html);
+        $this->assertNotContains('value="' . $customValue . '"', $html);
     }
 
     public function testSetLabel()
