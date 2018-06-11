@@ -77,9 +77,8 @@ php artisan vendor:publish --tag=bootstrap-components::views
 
 ## API
 
-### Form components
 
-#### input()
+### Form > input()
 
 Available public methods :
 - `public function type(string $type): Input` (required)
@@ -97,7 +96,7 @@ Available public methods :
 - `public function legend(string $legend): Input` (optional)
   > default value : `config('bootstrap-components.input.legend')`
   
-#### InputText()
+### Form > InputText()
 This component extends the `input()` component.
 
 Available public methods :
@@ -109,7 +108,7 @@ Locked values :
 Default values :
 - icon : `config('bootstrap-components.input_text.icon')`
 
-#### InputTel()
+### Form > InputTel()
 This component extends the `input()` component.
 
 Available public methods :
@@ -121,7 +120,7 @@ Locked values :
 Default values :
 - icon : `config('bootstrap-components.input_tel.icon')`
 
-#### InputEmail()
+#### Form > InputEmail()
 This component extends the `input()` component.
 
 Available public methods :
@@ -133,7 +132,7 @@ Locked values :
 Default values :
 - icon : `config('bootstrap-components.input_email.icon')`
 
-#### InputPassword()
+### Form > InputPassword()
 This component extends the `input()` component.
 
 Available public methods :
@@ -145,7 +144,7 @@ Locked values :
 Default values :
 - icon : `config('bootstrap-components.input_password.icon')`
 
-#### InputFile()
+### Form > InputFile()
 This component extends the `input()` component.
 
 Available public methods :
