@@ -26,7 +26,7 @@ class InputFile extends Input
     protected $uploadedFile;
 
     /**
-     * Set the input type.
+     * Set the uploaded file closure.
      *
      * @param \Closure $uploadedFile
      *

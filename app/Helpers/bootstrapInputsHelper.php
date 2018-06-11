@@ -49,3 +49,10 @@ if (! function_exists('inputToggle')) {
         return app(\Okipa\LaravelBootstrapComponents\Form\InputToggle::class);
     }
 }
+
+if (! function_exists('inputTextarea')) {
+    function inputTextarea()
+    {
+        return app(\Okipa\LaravelBootstrapComponents\Form\InputTextarea::class);
+    }
+}

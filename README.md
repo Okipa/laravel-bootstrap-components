@@ -1,4 +1,4 @@
-# laravel-bootstrap-backoffice-components
+# laravel-bootstrap-components
 
 [![Source Code](https://img.shields.io/badge/source-okipa/laravel--bootstrap--components-blue.svg)](https://github.com/Okipa/laravel-bootstrap-components)
 [![Latest Version](https://img.shields.io/github/release/okipa/laravel-bootstrap-components.svg?style=flat-square)](https://github.com/Okipa/laravel-bootstrap-components/releases)
@@ -15,6 +15,10 @@ It has been built on the premise that :
  - it is useless to generate html that we would write faster.
  
  Respecting these principles, components will be added step by step in order to provide a usefull ready-to-use component library.
+
+Notes :
+- This version provides a bootstrap 4 components implementation.
+- No implementation of bootstrap 3 has been done. Is someone is up to prepare views version for bootstrap 3, I would merge them in another version number.
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -94,33 +98,22 @@ Chainable methods :
 - `public function name(string $name): Input` (required)
 - `public function model(Model $model): Input` (optional)
 - `public function icon(string $icon): Input` (optional)
-  > default value : `config('bootstrap-components.input.icon')`
+  > default value : `config('bootstrap-components.input.icon')`.
+- `public function hideIcon(): Input` (optional)
 - `public function label(string $label): Input` (optional)
-  > default value : `trans('validation.attributes.[name]')`
+  > default value : `trans('validation.attributes.[name]')`.
 - `public function hideLabel(): Input` (optional)
 - `public function placeholder(string $placeholder): Input` (optional)
   > default value : `$label`.
 - `public function value($value): Input` (optional)
   > default value : `$model->{$name}`.
 - `public function legend(string $legend): Input` (optional)
-  > default value : `config('bootstrap-components.input.legend')`
+  > default value : `config('bootstrap-components.input.legend')`.
+- `public function hideLegend(): Input` (optional)
   
 ### Form > InputText()
 
-Chainable methods :
-- `public function name(string $name): Input` (required)
-- `public function model(Model $model): Input` (optional)
-- `public function icon(string $icon): Input` (optional)
-  > default value : `config('bootstrap-components.input_text.icon')`
-- `public function label(string $label): Input` (optional)
-  > default value : `trans('validation.attributes.[name]')`
-- `public function hideLabel(): Input` (optional)
-- `public function placeholder(string $placeholder): Input` (optional)
-  > default value : `$label`.
-- `public function value($value): Input` (optional)
-  > default value : `$model->{$name}`.
-- `public function legend(string $legend): Input` (optional)
-  > default value : `config('bootstrap-components.input_text.legend')`
+Extends the [input()](#form--input) component and inherits all its chainable methods.
 
 Locked values :
 - type : `text`
@@ -128,84 +121,53 @@ Locked values :
 
 ### Form > InputTel()
 
-Chainable methods :
-- `public function name(string $name): Input` (required)
-- `public function model(Model $model): Input` (optional)
-- `public function icon(string $icon): Input` (optional)
-  > default value : `config('bootstrap-components.input_tel.icon')`
-- `public function label(string $label): Input` (optional)
-  > default value : `trans('validation.attributes.[name]')`
-- `public function hideLabel(): Input` (optional)
-- `public function placeholder(string $placeholder): Input` (optional)
-  > default value : `$label`.
-- `public function value($value): Input` (optional)
-  > default value : `$model->{$name}`.
-- `public function legend(string $legend): Input` (optional)
-  > default value : `config('bootstrap-components.input_tel.legend')`
+Extends the [input()](#form--input) component and inherits all its chainable methods.
 
 Locked values :
 - type : `tel`
 
 ### Form > InputEmail()
 
-Chainable methods :
-- `public function name(string $name): Input` (required)
-- `public function model(Model $model): Input` (optional)
-- `public function icon(string $icon): Input` (optional)
-  > default value : `config('bootstrap-components.input_email.icon')`
-- `public function label(string $label): Input` (optional)
-  > default value : `trans('validation.attributes.[name]')`
-- `public function hideLabel(): Input` (optional)
-- `public function placeholder(string $placeholder): Input` (optional)
-  > default value : `$label`.
-- `public function value($value): Input` (optional)
-  > default value : `$model->{$name}`.
-- `public function legend(string $legend): Input` (optional)
-  > default value : `config('bootstrap-components.input_email.legend')`
+Extends the [input()](#form--input) component and inherits all its chainable methods.
 
 Locked values :
 - type : `email`
 
 ### Form > InputPassword()
 
-Chainable methods :
-- `public function name(string $name): Input` (required)
-- `public function model(Model $model): Input` (optional)
-- `public function icon(string $icon): Input` (optional)
-  > default value : `config('bootstrap-components.input_password.icon')`
-- `public function label(string $label): Input` (optional)
-  > default value : `trans('validation.attributes.[name]')`
-- `public function hideLabel(): Input` (optional)
-- `public function placeholder(string $placeholder): Input` (optional)
-  > default value : `$label`.
-- `public function value($value): Input` (optional)
-  > default value : `$model->{$name}`.
-- `public function legend(string $legend): Input` (optional)
-  > default value : `config('bootstrap-components.input_password.legend')`
+Extends the [input()](#form--input) component and inherits all its chainable methods.
 
 Locked values :
 - type : `password`
 
 ### Form > InputFile()
 
-Chainable methods :
-- `public function name(string $name): Input` (required)
-- `public function model(Model $model): Input` (optional)
-- `public function icon(string $icon): Input` (optional)
-  > default value : `config('bootstrap-components.input_file.icon')`
-- `public function label(string $label): Input` (optional)
-  > default value : `trans('validation.attributes.[name]')`
-- `public function hideLabel(): Input` (optional)
-- `public function placeholder(string $placeholder): Input` (optional)
-  > default value : `$label`.
-- `public function value($value): Input` (optional)
-  > default value : `$model->{$name}`.
-- `public function legend(string $legend): Input` (optional)
-  > default value : `config('bootstrap-components.input_file.legend')`
+Extends the [input()](#form--input) component and inherits all its chainable methods.
 
 Locked values :
 - type : `file`
-  
+
+Extra chainable methods :
+- `public function uploadedFile(Closure $uploadedFile): InputFile` (optional)
+  > allows to set html or another component to render the uploaded file.
+
+### Form > InputToggle()
+
+Extends the [input()](#form--input) component and inherits all its chainable methods.
+
+Locked values :
+- type : `toggle`
+
+Note : this component uses the [Laravel Toggle Switch button package](https://github.com/Okipa/laravel-toggle-switch-button) under the hood.  
+Check its install steps to display it correctly.
+
+### Form > InputPassword()
+
+Extends the [input()](#form--input) component and inherits all its chainable methods.
+
+Locked values :
+- type : `textarea`
+
 ------------------------------------------------------------------------------------------------------------------------
 
 ## Contributors

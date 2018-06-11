@@ -1,4 +1,4 @@
-<div {{ classTag($containerClass) }}
+<div {{ classTag($type . '-' . $name . '-container', $containerClass) }}
     {{ htmlAttributes($containerHtmlAttributes) }}>
     @include('bootstrap-components::bootstrap-components.partials.label')
     <div {{ classTag('form-control', $type . '-' . $name . '-component', $componentClass, isset($errors) && $errors->has($name) ? ' is-invalid' : null) }}

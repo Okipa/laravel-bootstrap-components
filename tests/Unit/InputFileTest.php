@@ -91,13 +91,21 @@ class inputFileTest extends BootstrapComponentsTestCase
         $this->assertNotContains('<span class="icon input-group-text">', $html);
     }
 
+    public function testHideIcon()
+    {
+        $configIcon = 'test-config-icon';
+        config()->set('bootstrap-components.input_file.icon', $configIcon);
+        $html = inputFile()->name('name')->hideIcon()->toHtml();
+        $this->assertNotContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
+    }
+
     public function testConfigLegend()
     {
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.input_file.legend', $configLegend);
         $html = inputFile()->name('name')->toHtml();
         $this->assertContains(
-            '<small id="input-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
+            '<small id="file-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
             $html
         );
     }
@@ -109,11 +117,11 @@ class inputFileTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.input_file.legend', $configLegend);
         $html = inputFile()->name('name')->legend($customLegend)->toHtml();
         $this->assertContains(
-            '<small id="input-name-legend" class="form-text text-muted">' . $customLegend . '</small>',
+            '<small id="file-name-legend" class="form-text text-muted">' . $customLegend . '</small>',
             $html
         );
         $this->assertNotContains(
-            '<small id="input-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
+            '<small id="file-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
             $html
         );
     }
@@ -122,7 +130,18 @@ class inputFileTest extends BootstrapComponentsTestCase
     {
         config()->set('bootstrap-components.input_file.legend', null);
         $html = inputFile()->name('name')->toHtml();
-        $this->assertNotContains('id="input-name-legend"', $html);
+        $this->assertNotContains('id="file-name-legend"', $html);
+    }
+
+    public function testHideLegend()
+    {
+        $configLegend = 'test-config-legend';
+        config()->set('bootstrap-components.input_file.legend', $configLegend);
+        $html = inputFile()->name('name')->hideLegend()->toHtml();
+        $this->assertNotContains(
+            '<small id="file-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
+            $html
+        );
     }
 
     public function testSetPlaceholder()
@@ -187,7 +206,7 @@ class inputFileTest extends BootstrapComponentsTestCase
     {
         $label = 'test-custom-label';
         $html = inputFile()->name('name')->label($label)->toHtml();
-        $this->assertContains('<label for="input-name">' . $label . '</label>', $html);
+        $this->assertContains('<label for="file-name">' . $label . '</label>', $html);
         $this->assertContains('aria-label="' . $label . '"', $html);
     }
 
@@ -195,7 +214,7 @@ class inputFileTest extends BootstrapComponentsTestCase
     {
         $html = inputFile()->name('name')->toHtml();
         $this->assertContains(
-            '<label for="input-name">bootstrap-components::bootstrap-components.validation.attributes.name</label>',
+            '<label for="file-name">bootstrap-components::bootstrap-components.validation.attributes.name</label>',
             $html
         );
         $this->assertContains(
@@ -208,10 +227,10 @@ class inputFileTest extends BootstrapComponentsTestCase
     {
         $html = inputFile()->name('name')->hideLabel()->toHtml();
         $this->assertNotContains(
-            '<label for="input-name">bootstrap-components::bootstrap-components.validation.attributes.name</label>',
+            '<label for="file-name">bootstrap-components::bootstrap-components.validation.attributes.name</label>',
             $html
         );
-        $this->assertContains(
+        $this->assertNotContains(
             'aria-label="bootstrap-components::bootstrap-components.validation.attributes.name"',
             $html
         );
@@ -310,5 +329,13 @@ class inputFileTest extends BootstrapComponentsTestCase
         $html = inputFile()->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
         $this->assertContains($customComponentAttributes, $html);
         $this->assertNotContains($configComponentAttributes, $html);
+    }
+    
+    public function testUploadedFile()
+    {
+        $html = inputFile()->name('name')->uploadedFile(function(){
+            return 'Uploaded file !';
+        })->toHtml();
+        $this->assertContains('Uploaded file !', $html);
     }
 }

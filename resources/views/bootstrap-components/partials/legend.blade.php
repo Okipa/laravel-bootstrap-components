@@ -1,3 +1,3 @@
 @if(!empty($legend))
-    <small id="input-{{ $name }}-legend" class="form-text text-muted">{!! $legend !!}</small>
+    <small id="{{ $type }}-{{ $name }}-legend" class="form-text text-muted">{!! $legend !!}</small>
 @endif

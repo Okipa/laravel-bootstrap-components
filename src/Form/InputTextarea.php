@@ -2,20 +2,20 @@
 
 namespace Okipa\LaravelBootstrapComponents\Form;
 
-class InputToggle extends Input
+class InputTextarea extends Input
 {
     /**
      * The component config key.
      *
      * @property string $view
      */
-    protected $configKey = 'input_toggle';
+    protected $configKey = 'input_textarea';
     /**
      * The input type.
      *
      * @property string $type
      */
-    protected $type = 'toggle';
+    protected $type = 'textarea';
 
     /**
      * Set the input values.
@@ -25,11 +25,8 @@ class InputToggle extends Input
      */
     protected function values(): array
     {
-        $parentValues = parent::values();
-
-        return array_merge($parentValues, [
-            'type'    => 'toggle',
-            'checked' => $parentValues['value'] ? true : false,
+        return array_merge(parent::values(), [
+            'type'    => 'textarea',
         ]);
     }
 }

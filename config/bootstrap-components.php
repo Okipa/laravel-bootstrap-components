@@ -94,6 +94,19 @@ return [
             'component' => [],
         ],
     ],
+    'input_textarea'   => [
+        'view'            => 'bootstrap-components.input-textarea',
+        'icon'            => '<i class="fas fa-power-off"></i>',
+        'legend'          => null,
+        'class'           => [
+            'container' => ['form-group'],
+            'component' => [],
+        ],
+        'html_attributes' => [
+            'container' => [],
+            'component' => [],
+        ],
+    ],
     //    'library-file'          => [
     //        'view'            => 'bootstrap-componentslibrary-file',
     //        'icon'            => '<i class="fas fa-upload"></i>',
