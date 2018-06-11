@@ -50,7 +50,7 @@ class InputTextareaTest extends BootstrapComponentsTestCase
 
     /**
      * @expectedException \Exception
-     * @expectedExceptionMessage Name must be declared for the Okipa\LaravelBootstrapComponents\Form\Input component
+     * @expectedExceptionMessage Name must be declared for the Okipa\LaravelBootstrapComponents\Form\InputTextarea component
      *                           generation.
      */
     public function testInputWithoutName()
