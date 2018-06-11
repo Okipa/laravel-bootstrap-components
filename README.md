@@ -27,8 +27,8 @@ It has been built on the premise that :
 ### Form
 - [input()](#form--input)
 - [InputText()](#form--inputtext)
+- [InputTel()](#form--inputtel)
 - [InputEmail()](#form--inputemail)
-- [InputPassword()](#form--inputpassword)
 - [InputPassword()](#form--inputpassword)
 - [InputFile()](#form--inputfile)
 - [InputToggle()](#form--inputtoggle)
