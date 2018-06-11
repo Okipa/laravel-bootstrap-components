@@ -2,14 +2,14 @@
 
 namespace Okipa\LaravelBootstrapComponents\Button;
 
-class Create extends Button
+class ButtonUpdate extends Button
 {
     /**
      * The component config key.
      *
      * @property string $view
      */
-    protected $configKey = 'cancel';
+    protected $configKey = 'button_update';
     /**
      * The input type.
      *

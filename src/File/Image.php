@@ -9,7 +9,7 @@ class Image extends Media
      *
      * @property string $view
      */
-    protected $configKey = 'image';
+    protected $configKey = 'media_image';
     /**
      * The image link url.
      *
@@ -52,7 +52,7 @@ class Image extends Media
      *
      * @param string $linkUrl
      *
-     * @return \App\Components\File\Image
+     * @return \Okipa\LaravelBootstrapComponents\File\Image
      */
     public function linkUrl(string $linkUrl): Image
     {
@@ -66,7 +66,7 @@ class Image extends Media
      *
      * @param string $alt
      *
-     * @return \App\Components\File\Image
+     * @return \Okipa\LaravelBootstrapComponents\File\Image
      */
     public function alt(string $alt): Image
     {
@@ -80,7 +80,7 @@ class Image extends Media
      *
      * @param int $width
      *
-     * @return \App\Components\File\Image
+     * @return \Okipa\LaravelBootstrapComponents\File\Image
      */
     public function width(int $width): Image
     {
@@ -94,7 +94,7 @@ class Image extends Media
      *
      * @param int $height
      *
-     * @return \App\Components\File\Image
+     * @return \Okipa\LaravelBootstrapComponents\File\Image
      */
     public function height(int $height): Image
     {
@@ -122,7 +122,7 @@ class Image extends Media
      *
      * @param array $linkHtmlAttributes
      *
-     * @return \App\Components\File\Image
+     * @return \Okipa\LaravelBootstrapComponents\File\Image
      */
     public function linkHtmlAttributes(array $linkHtmlAttributes): Image
     {
@@ -155,7 +155,7 @@ class Image extends Media
      */
     protected function defaultLinkClass(): array
     {
-        returnconfig('bootstrap-components.' . $this->configKey . '.class.link');
+        return config('bootstrap-components.' . $this->configKey . '.class.link');
     }
 
     /**
@@ -165,6 +165,6 @@ class Image extends Media
      */
     protected function defaultLinkHtmlAttributes(): array
     {
-        returnconfig('bootstrap-components.' . $this->configKey . '.attributes.link');
+        return config('bootstrap-components.' . $this->configKey . '.attributes.link');
     }
 }

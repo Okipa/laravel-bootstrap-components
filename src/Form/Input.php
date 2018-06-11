@@ -238,10 +238,10 @@ class Input extends Component
     protected function values(): array
     {
         if (! $this->type) {
-            throw new Exception('Type must be declared for the ' . get_class() . ' component generation.');
+            throw new Exception('Type must be declared for the ' . get_class($this) . ' component generation.');
         }
         if (! $this->name) {
-            throw new Exception('Name must be declared for the ' . get_class() . ' component generation.');
+            throw new Exception('Name must be declared for the ' . get_class($this) . ' component generation.');
         }
 
         return array_merge(parent::values(), [

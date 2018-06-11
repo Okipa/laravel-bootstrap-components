@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\File;
 
-use App\Components\Component;
+use Okipa\LaravelBootstrapComponents\Component;
 
 abstract class Media extends Component
 {
@@ -18,7 +18,7 @@ abstract class Media extends Component
      *
      * @param string $src
      *
-     * @return \App\Components\File\Media
+     * @return \Okipa\LaravelBootstrapComponents\File\Media
      */
     public function src(string $src): Media
     {

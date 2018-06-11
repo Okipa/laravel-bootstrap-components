@@ -2,14 +2,14 @@
 
 namespace Okipa\LaravelBootstrapComponents\Button;
 
-class Cancel extends Button
+class ButtonBack extends Button
 {
     /**
      * The component config key.
      *
      * @property string $view
      */
-    protected $configKey = 'cancel';
+    protected $configKey = 'button_back';
     /**
      * The input type.
      *

@@ -9,7 +9,7 @@ class Video extends Media
      *
      * @property string $view
      */
-    protected $configKey = 'video';
+    protected $configKey = 'media_video';
     /**
      * The video poster.
      *
@@ -22,7 +22,7 @@ class Video extends Media
      *
      * @param string $poster
      *
-     * @return \App\Components\File\Video
+     * @return \Okipa\LaravelBootstrapComponents\File\Video
      */
     public function poster(string $poster): Video
     {
@@ -50,6 +50,6 @@ class Video extends Media
      */
     protected function defaultPoster(): array
     {
-        returnconfig('bootstrap-components.' . $this->configKey . '.poster');
+        return config('bootstrap-components.' . $this->configKey . '.poster');
     }
 }

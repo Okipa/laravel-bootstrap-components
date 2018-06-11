@@ -2,7 +2,8 @@
 
 namespace Okipa\LaravelBootstrapComponents\Button;
 
-use App\Components\Component;
+use Exception;
+use Okipa\LaravelBootstrapComponents\Component;
 
 class Button extends Component
 {
@@ -24,12 +25,24 @@ class Button extends Component
      * @property string $url
      */
     protected $url;
+    /**.
+     * The button icon show status.
+     *
+     * @property bool $showIcon
+     */
+    protected $showIcon = true;
     /**
      * The button icon.
      *
      * @property string $icon
      */
     protected $icon;
+    /**.
+     * The button label show status.
+     *
+     * @property bool $showLabel
+     */
+    protected $showLabel = true;
     /**
      * The button label.
      *
@@ -42,7 +55,7 @@ class Button extends Component
      *
      * @param string $type
      *
-     * @return \App\Components\Button\Button
+     * @return \Okipa\LaravelBootstrapComponents\Button\Button
      */
     public function type(string $type): Button
     {
@@ -56,7 +69,7 @@ class Button extends Component
      *
      * @param string $url
      *
-     * @return \App\Components\Button\Button
+     * @return \Okipa\LaravelBootstrapComponents\Button\Button
      */
     public function url(string $url): Button
     {
@@ -66,11 +79,25 @@ class Button extends Component
     }
 
     /**
+     * Set the button route (only used for « button » type).
+     *
+     * @param string $route
+     *
+     * @return \Okipa\LaravelBootstrapComponents\Button\Button
+     */
+    public function route(string $route): Button
+    {
+        $this->url = route($route);
+
+        return $this;
+    }
+
+    /**
      * Set the button icon.
      *
      * @param string $icon
      *
-     * @return \App\Components\Button\Button
+     * @return \Okipa\LaravelBootstrapComponents\Button\Button
      */
     public function icon(string $icon): Button
     {
@@ -80,11 +107,23 @@ class Button extends Component
     }
 
     /**
+     * Hide the button icon.
+     *
+     * @return \Okipa\LaravelBootstrapComponents\Button\Button
+     */
+    public function hideIcon(): Button
+    {
+        $this->showIcon = false;
+
+        return $this;
+    }
+
+    /**
      * Set the button label.
      *
      * @param string $label
      *
-     * @return \App\Components\Button\Button
+     * @return \Okipa\LaravelBootstrapComponents\Button\Button
      */
     public function label(string $label): Button
     {
@@ -94,17 +133,37 @@ class Button extends Component
     }
 
     /**
+     * Hide the button label.
+     *
+     * @return \Okipa\LaravelBootstrapComponents\Button\Button
+     */
+    public function hideLabel(): Button
+    {
+        $this->showLabel = false;
+
+        return $this;
+    }
+
+    /**
      * Set the button values.
      *
      * @return array
+     * @throws \Exception
      */
     protected function values(): array
     {
+        if (! $this->type) {
+            throw new Exception('Type must be declared for the ' . get_class($this) . ' component generation.');
+        }
+        
         return array_merge(parent::values(), [
             'type'  => $this->type,
             'url'   => $this->url,
-            'icon'  => $this->icon ? $this->icon : $this->defaultIcon(),
-            'label' => $this->label ? $this->label : $this->defaultLabel(),
+            'icon'  => $this->showIcon ? ($this->icon ? $this->icon : $this->defaultIcon()) : '',
+            'label' => $this->showLabel ? ($this->label
+                ? $this->label
+                : $this->defaultLabel()
+            ) : '',
         ]);
     }
 
@@ -115,7 +174,7 @@ class Button extends Component
      */
     protected function defaultIcon(): string
     {
-        returnconfig('bootstrap-components.' . $this->configKey . '.icon');
+        return config('bootstrap-components.' . $this->configKey . '.icon');
     }
 
     /**

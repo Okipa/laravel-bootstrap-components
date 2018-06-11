@@ -2,14 +2,14 @@
 
 namespace Okipa\LaravelBootstrapComponents\Button;
 
-class Validate extends Button
+class ButtonValidate extends Button
 {
     /**
      * The component config key.
      *
      * @property string $view
      */
-    protected $configKey = 'validate';
+    protected $configKey = 'button_validate';
     /**
      * The input type.
      *
