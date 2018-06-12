@@ -30,7 +30,7 @@ This package provides a ready-to-use and customizable bootstrap components libra
 - [InputTextarea()](#form--inputtextarea)
 
 ### Clickable
-- [input()](#clickable--button)
+- [button()](#clickable--button)
 
 ### Media
 - WIP
