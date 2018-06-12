@@ -1,6 +1,6 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Tests\Unit;
+namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
 use Illuminate\Support\MessageBag;
 use Okipa\LaravelBootstrapComponents\Form\Input;
@@ -42,7 +42,7 @@ class InputToggleTest extends BootstrapComponentsTestCase
         $this->assertContains('type="checkbox"', $html);
     }
 
-    public function testInputWithoutType()
+    public function testNoType()
     {
         $html = inputToggle()->name('name')->toHtml();
         $this->assertContains('type="checkbox"', $html);

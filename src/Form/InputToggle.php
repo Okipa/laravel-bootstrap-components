@@ -2,6 +2,8 @@
 
 namespace Okipa\LaravelBootstrapComponents\Form;
 
+use Exception;
+
 class InputToggle extends Input
 {
     /**
@@ -10,12 +12,6 @@ class InputToggle extends Input
      * @property string $view
      */
     protected $configKey = 'input_toggle';
-    /**
-     * The input type.
-     *
-     * @property string $type
-     */
-    protected $type = 'toggle';
 
     /**
      * Set the input values.
@@ -31,5 +27,17 @@ class InputToggle extends Input
             'type'    => 'toggle',
             'checked' => $parentValues['value'] ? true : false,
         ]);
+    }
+
+    /**
+     * Check the component values validity
+     *
+     * @throws \Exception
+     */
+    protected function checkValuesValidity(): void
+    {
+        if (! $this->name) {
+            throw new Exception('Name must be declared for the ' . get_class($this) . ' component generation.');
+        }
     }
 }

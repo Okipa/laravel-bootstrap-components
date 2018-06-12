@@ -120,6 +120,7 @@ abstract class Component implements Htmlable
      */
     public function render(array $data = [])
     {
+        $this->checkValuesValidity();
         if ($view = $this->view()) {
             return view('bootstrap-components::' . $view, $this->values(), $data)->render();
         }
@@ -197,4 +198,9 @@ abstract class Component implements Htmlable
     {
         return config('bootstrap-components.' . $this->configKey . '.html_attributes.container', []);
     }
+
+    /**
+     * Check the component values validity
+     */
+    protected abstract function checkValuesValidity(): void;
 }

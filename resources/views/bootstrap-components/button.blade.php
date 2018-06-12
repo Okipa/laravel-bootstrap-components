@@ -1,17 +1,10 @@
-<div {{ classTag($containerClass) }}>
-    @if($type === 'button')
-        <a href="{{ $url or url()->previous() }}"
-           {{ classTag($componentClass) }}
-           title="@isset($label){{ $label }}@endisset">
-            @isset($icon){!! $icon !!}@endisset
-            @isset($label){{ $label }}@endisset
-        </a>
-    @elseif($type === 'submit')
-        <button type="{{ $type }}"
-                {{ classTag($componentClass) }}
-                title="@isset($label){{ $label }}@endisset">
-            @isset($icon){!! $icon !!}@endisset
-            @isset($label){{ $label }}@endisset
-        </button>
-    @endisset
+<div {{ classTag($type . '-container', $containerClass) }}>
+    {{ htmlAttributes($containerHtmlAttributes) }}
+    {{ htmlAttributes($type === 'button' ? '<a' : '<button') }} {{ htmlAttributes($type === 'button' ? 'href="' . $url . '"' : 'type="' . $type . '"') }}
+        {{ classTag($type . '-component', $componentClass) }}
+        {{ htmlAttributes($componentHtmlAttributes) }}
+        {{ htmlAttributes($label ? 'title="' . $label .'"' : null) }}>
+        @if($icon)<span class="icon">{!! $icon !!}</span>@endif
+        @if($label)<span class="label">{{ $label }}</span>@endif
+    {{ htmlAttributes($type === 'button' ? '</a>' : '</button>') }}
 </div>

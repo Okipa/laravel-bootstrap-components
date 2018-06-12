@@ -1,6 +1,6 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Tests\Unit;
+namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
 use Illuminate\Support\MessageBag;
 use Okipa\LaravelBootstrapComponents\Form\Input;
@@ -43,7 +43,7 @@ class inputFileTest extends BootstrapComponentsTestCase
         $this->assertContains('type="file"', $html);
     }
 
-    public function testInputWithoutType()
+    public function testNoType()
     {
         $html = inputFile()->name('name')->toHtml();
         $this->assertContains('type="file"', $html);

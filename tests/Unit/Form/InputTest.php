@@ -1,6 +1,6 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Tests\Unit;
+namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
 use Illuminate\Support\MessageBag;
 use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
@@ -42,9 +42,19 @@ class InputTest extends BootstrapComponentsTestCase
      * @expectedExceptionMessage Type must be declared for the Okipa\LaravelBootstrapComponents\Form\Input component
      *                           generation.
      */
-    public function testInputWithoutType()
+    public function testNoType()
     {
         input()->name('name')->toHtml();
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Input : the given « wrong » type is invalid and
+     *                           should be one of the following : text, tel, email, password, file.
+     */
+    public function testSetWrongType()
+    {
+        input()->type('wrong')->name('name')->toHtml();
     }
 
     /**
@@ -134,7 +144,7 @@ class InputTest extends BootstrapComponentsTestCase
     public function testHideLegend()
     {
         $configLegend = 'test-config-legend';
-        config()->set('bootstrap-components.input_text.legend', $configLegend);
+        config()->set('bootstrap-components.input.legend', $configLegend);
         $html = input()->type('text')->name('name')->hideLegend()->toHtml();
         $this->assertNotContains(
             '<small id="text-name-legend" class="form-text text-muted">' . $configLegend . '</small>',

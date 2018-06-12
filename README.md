@@ -29,6 +29,9 @@ This package provides a ready-to-use and customizable bootstrap components libra
 - [InputToggle()](#form--inputtoggle)
 - [InputTextarea()](#form--inputtextarea)
 
+### Clickable
+- [input()](#clickable--button)
+
 ### Buttons
 - WIP
 
@@ -173,7 +176,7 @@ Extends the [input()](#form--input) component and inherits all its chainable met
 Locked values :
 - type : `toggle`
 
-Note : this component uses the [Laravel Toggle Switch button package](https://github.com/Okipa/laravel-toggle-switch-button) under the hood.  
+**Note :** this component uses the [Laravel Toggle Switch button package](https://github.com/Okipa/laravel-toggle-switch-button) under the hood.  
 Check its install steps to display it correctly.
 
 ### Form > InputTextarea()
@@ -182,6 +185,17 @@ Extends the [input()](#form--input) component and inherits all its chainable met
 
 Locked values :
 - type : `textarea`
+
+### Clickable > button()
+
+Chainable methods :
+- `public function type(string $type): Input` (required)
+- `public function icon(string $icon): Input` (optional)
+  > default value : `config('bootstrap-components.input.icon')`.
+- `public function hideIcon(): Input` (optional)
+- `public function label(string $label): Input` (optional)
+  > default value : `trans('validation.attributes.[name]')`.
+- `public function hideLabel(): Input` (optional)
 
 ------------------------------------------------------------------------------------------------------------------------
 

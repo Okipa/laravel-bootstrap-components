@@ -1,19 +1,19 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Button;
+namespace Okipa\LaravelBootstrapComponents\Clickable;
 
-class ButtonValidate extends Button
+class ButtonBack extends Button
 {
     /**
      * The component config key.
      *
      * @property string $view
      */
-    protected $configKey = 'button_validate';
+    protected $configKey = 'button_back';
     /**
      * The input type.
      *
      * @property string $type
      */
-    protected $type = 'submit';
+    protected $type = 'button';
 }

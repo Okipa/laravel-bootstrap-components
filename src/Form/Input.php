@@ -4,6 +4,7 @@ namespace Okipa\LaravelBootstrapComponents\Form;
 
 use Exception;
 use Illuminate\Database\Eloquent\Model;
+use InvalidArgumentException;
 use Okipa\LaravelBootstrapComponents\Component;
 
 class Input extends Component
@@ -11,9 +12,15 @@ class Input extends Component
     /**
      * The component config key.
      *
-     * @property string $view
+     * @property string $configKey
      */
     protected $configKey = 'input';
+    /**
+     * The input accepted types.
+     *
+     * @property array $acceptedTypes
+     */
+    protected $acceptedTypes = ['text', 'tel', 'email', 'password', 'file'];
     /**
      * The input associated model.
      *
@@ -233,17 +240,9 @@ class Input extends Component
      * Set the input values.
      *
      * @return array
-     * @throws \Exception
      */
     protected function values(): array
     {
-        if (! $this->type) {
-            throw new Exception('Type must be declared for the ' . get_class($this) . ' component generation.');
-        }
-        if (! $this->name) {
-            throw new Exception('Name must be declared for the ' . get_class($this) . ' component generation.');
-        }
-
         return array_merge(parent::values(), [
             'model'       => $this->model,
             'type'        => $this->type,
@@ -283,5 +282,27 @@ class Input extends Component
         $legend = config('bootstrap-components.' . $this->configKey . '.legend');
 
         return $legend ? $legend : '';
+    }
+
+    /**
+     * Check the component values validity
+     *
+     * @throws \Exception
+     */
+    protected function checkValuesValidity(): void
+    {
+        if (! $this->type) {
+            throw new Exception('Type must be declared for the ' . get_class($this) . ' component generation.');
+        }
+        if (! $this->name) {
+            throw new Exception('Name must be declared for the ' . get_class($this) . ' component generation.');
+        }
+        if (! in_array($this->type, $this->acceptedTypes)) {
+            throw new InvalidArgumentException(
+                get_class($this) . ' : the given « ' . $this->type
+                . ' » type is invalid and should be one of the following : ' 
+                . implode(', ', $this->acceptedTypes)
+            );
+        }
     }
 }

@@ -111,6 +111,8 @@ return [
     // buttons *********************************************************************************************************
     'button'          => [
         'view'            => 'bootstrap-components.button',
+        'icon'            => null,
+        'label'           => null,
         'class'           => [
             'container' => ['form-group'],
             'component' => ['btn'],

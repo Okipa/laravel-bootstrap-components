@@ -1,15 +1,15 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Button;
+namespace Okipa\LaravelBootstrapComponents\Clickable;
 
-class ButtonCreate extends Button
+class ButtonValidate extends Button
 {
     /**
      * The component config key.
      *
      * @property string $view
      */
-    protected $configKey = 'button_cancel';
+    protected $configKey = 'button_validate';
     /**
      * The input type.
      *

@@ -1,6 +1,6 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Tests\Unit;
+namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
 use Illuminate\Support\MessageBag;
 use Okipa\LaravelBootstrapComponents\Form\Input;
@@ -42,7 +42,7 @@ class InputTextareaTest extends BootstrapComponentsTestCase
         $this->assertContains('aria-describedby="textarea-name"', $html);
     }
 
-    public function testInputWithoutType()
+    public function testNoType()
     {
         $html = inputTextarea()->name('name')->toHtml();
         $this->assertContains('<textarea id="textarea-name"', $html);

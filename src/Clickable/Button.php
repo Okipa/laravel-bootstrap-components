@@ -1,8 +1,9 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Button;
+namespace Okipa\LaravelBootstrapComponents\Clickable;
 
 use Exception;
+use InvalidArgumentException;
 use Okipa\LaravelBootstrapComponents\Component;
 
 class Button extends Component
@@ -13,6 +14,12 @@ class Button extends Component
      * @property string $view
      */
     protected $configKey = 'button';
+    /**
+     * The button accepted types.
+     *
+     * @property array $acceptedTypes
+     */
+    protected $acceptedTypes = ['button', 'submit'];
     /**
      * The button type.
      *
@@ -55,7 +62,7 @@ class Button extends Component
      *
      * @param string $type
      *
-     * @return \Okipa\LaravelBootstrapComponents\Button\Button
+     * @return \Okipa\LaravelBootstrapComponents\Clickable\Button
      */
     public function type(string $type): Button
     {
@@ -69,7 +76,7 @@ class Button extends Component
      *
      * @param string $url
      *
-     * @return \Okipa\LaravelBootstrapComponents\Button\Button
+     * @return \Okipa\LaravelBootstrapComponents\Clickable\Button
      */
     public function url(string $url): Button
     {
@@ -83,7 +90,7 @@ class Button extends Component
      *
      * @param string $route
      *
-     * @return \Okipa\LaravelBootstrapComponents\Button\Button
+     * @return \Okipa\LaravelBootstrapComponents\Clickable\Button
      */
     public function route(string $route): Button
     {
@@ -97,7 +104,7 @@ class Button extends Component
      *
      * @param string $icon
      *
-     * @return \Okipa\LaravelBootstrapComponents\Button\Button
+     * @return \Okipa\LaravelBootstrapComponents\Clickable\Button
      */
     public function icon(string $icon): Button
     {
@@ -109,7 +116,7 @@ class Button extends Component
     /**
      * Hide the button icon.
      *
-     * @return \Okipa\LaravelBootstrapComponents\Button\Button
+     * @return \Okipa\LaravelBootstrapComponents\Clickable\Button
      */
     public function hideIcon(): Button
     {
@@ -123,7 +130,7 @@ class Button extends Component
      *
      * @param string $label
      *
-     * @return \Okipa\LaravelBootstrapComponents\Button\Button
+     * @return \Okipa\LaravelBootstrapComponents\Clickable\Button
      */
     public function label(string $label): Button
     {
@@ -135,7 +142,7 @@ class Button extends Component
     /**
      * Hide the button label.
      *
-     * @return \Okipa\LaravelBootstrapComponents\Button\Button
+     * @return \Okipa\LaravelBootstrapComponents\Clickable\Button
      */
     public function hideLabel(): Button
     {
@@ -148,17 +155,12 @@ class Button extends Component
      * Set the button values.
      *
      * @return array
-     * @throws \Exception
      */
     protected function values(): array
     {
-        if (! $this->type) {
-            throw new Exception('Type must be declared for the ' . get_class($this) . ' component generation.');
-        }
-        
         return array_merge(parent::values(), [
             'type'  => $this->type,
-            'url'   => $this->url,
+            'url'   => $this->url ? $this->url : url()->previous(),
             'icon'  => $this->showIcon ? ($this->icon ? $this->icon : $this->defaultIcon()) : '',
             'label' => $this->showLabel ? ($this->label
                 ? $this->label
@@ -174,7 +176,9 @@ class Button extends Component
      */
     protected function defaultIcon(): string
     {
-        return config('bootstrap-components.' . $this->configKey . '.icon');
+        $icon = config('bootstrap-components.' . $this->configKey . '.icon');
+
+        return $icon ? $icon : '';
     }
 
     /**
@@ -184,6 +188,27 @@ class Button extends Component
      */
     public function defaultLabel()
     {
-        return trans('bootstrap-components::' . config('bootstrap-components.' . $this->configKey . '.label'));
+        $label = config('bootstrap-components.' . $this->configKey . '.label');
+
+        return $label ? trans('bootstrap-components::' . $label) : null;
+    }
+
+    /**
+     * Check the component values validity
+     *
+     * @throws \Exception
+     */
+    protected function checkValuesValidity(): void
+    {
+        if (! $this->type) {
+            throw new Exception('Type must be declared for the ' . get_class($this) . ' component generation.');
+        }
+        if (! in_array($this->type, $this->acceptedTypes)) {
+            throw new InvalidArgumentException(
+                get_class($this) . ' : the given « ' . $this->type
+                . ' » type is invalid and should be one of the following : '
+                . implode(', ', $this->acceptedTypes)
+            );
+        }
     }
 }

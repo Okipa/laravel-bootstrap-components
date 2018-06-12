@@ -2,6 +2,8 @@
 
 namespace Okipa\LaravelBootstrapComponents\Form;
 
+use Exception;
+
 class InputTextarea extends Input
 {
     /**
@@ -10,12 +12,6 @@ class InputTextarea extends Input
      * @property string $view
      */
     protected $configKey = 'input_textarea';
-    /**
-     * The input type.
-     *
-     * @property string $type
-     */
-    protected $type = 'textarea';
 
     /**
      * Set the input values.
@@ -28,5 +24,17 @@ class InputTextarea extends Input
         return array_merge(parent::values(), [
             'type'    => 'textarea',
         ]);
+    }
+
+    /**
+     * Check the component values validity
+     *
+     * @throws \Exception
+     */
+    protected function checkValuesValidity(): void
+    {
+        if (! $this->name) {
+            throw new Exception('Name must be declared for the ' . get_class($this) . ' component generation.');
+        }
     }
 }
