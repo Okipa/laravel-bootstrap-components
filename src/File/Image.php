@@ -167,4 +167,12 @@ class Image extends Media
     {
         return config('bootstrap-components.' . $this->configKey . '.attributes.link');
     }
+
+    /**
+     * Check the component values validity
+     */
+    protected function checkValuesValidity(): void
+    {
+        // TODO: Implement checkValuesValidity() method.
+    }
 }

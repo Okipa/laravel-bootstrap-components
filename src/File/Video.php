@@ -52,4 +52,12 @@ class Video extends Media
     {
         return config('bootstrap-components.' . $this->configKey . '.poster');
     }
+
+    /**
+     * Check the component values validity
+     */
+    protected function checkValuesValidity(): void
+    {
+        // TODO: Implement checkValuesValidity() method.
+    }
 }
