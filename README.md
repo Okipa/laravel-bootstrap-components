@@ -31,6 +31,8 @@ This package provides a ready-to-use and customizable bootstrap components libra
 
 ### [Clickable](#clickable-components)
 - [button()](#button)
+- [buttonCancel()](#buttoncancel)
+- [buttonBack()](#buttonback)
 
 ### Media
 - WIP
