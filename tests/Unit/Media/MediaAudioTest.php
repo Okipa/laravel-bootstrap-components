@@ -38,7 +38,7 @@ class MediaAudioTest extends BootstrapComponentsTestCase
     public function testNoSrc()
     {
         $html = audio()->toHtml();
-        $this->assertNotContains('<source', $html);
+        $this->assertNotContains('<source src="', $html);
     }
 
     public function testConfigContainerClass()
