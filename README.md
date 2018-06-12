@@ -181,7 +181,7 @@ Check its install steps to display it correctly.
 
 #### inputTextarea()
 
-Extends the [input()](#form--input) component and inherits all its chainable methods.
+Extends the [input()](#input) component and inherits all its chainable methods.
 
 Locked values :
 - type : `textarea`
@@ -193,12 +193,32 @@ Locked values :
 Chainable methods :
 - `public function type(string $type): Input` (required)
   > possible types : `button` / `submit`.
+- `public function url(string $url): Button` (optional)
+  > only used for a `type="button"` button component.
+  > default value : `url()->back()`.
+- `public function route(string $route): Button` (optional)
+  > only used for a `type="button"` button component.
+  > set the url value from a route key.
 - `public function icon(string $icon): Input` (optional)
   > default value : `config('bootstrap-components.button.icon')`.
 - `public function hideIcon(): Input` (optional)
 - `public function label(string $label): Input` (optional)
   > default value : `config('bootstrap-components.button.label')`.
 - `public function hideLabel(): Input` (optional)
+
+#### buttonCancel()
+
+Extends the [button()](#button) component and inherits all its chainable methods.
+
+Locked values :
+- type : `button`
+
+#### buttonBack()
+
+Extends the [button()](#button) component and inherits all its chainable methods.
+
+Locked values :
+- type : `button`
 
 ------------------------------------------------------------------------------------------------------------------------
 

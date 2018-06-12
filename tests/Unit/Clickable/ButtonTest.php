@@ -1,30 +1,36 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Button;
+namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Clickable;
 
+use Okipa\LaravelBootstrapComponents\Component;
 use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
-use Okipa\LaravelBootstrapComponents\Test\Fakers\UsersFaker;
+use Okipa\LaravelBootstrapComponents\Test\Fakers\RoutesFaker;
 
 class ButtonTest extends BootstrapComponentsTestCase
 {
-    use UsersFaker;
+    use RoutesFaker;
 
     public function testConfigStructure()
     {
         // components
         $this->assertTrue(array_key_exists('button', config('bootstrap-components')));
-        // components.input
+        // components.button
         $this->assertTrue(array_key_exists('view', config('bootstrap-components.button')));
         $this->assertTrue(array_key_exists('icon', config('bootstrap-components.button')));
         $this->assertTrue(array_key_exists('label', config('bootstrap-components.button')));
         $this->assertTrue(array_key_exists('class', config('bootstrap-components.button')));
         $this->assertTrue(array_key_exists('html_attributes', config('bootstrap-components.button')));
-        // components.input.class
+        // components.button.class
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.button.class')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.button.class')));
-        // components.input.html_attributes
+        // components.button.html_attributes
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.button.html_attributes')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.button.html_attributes')));
+    }
+
+    public function testExtendsInput()
+    {
+        $this->assertEquals(Component::class, get_parent_class(button()));
     }
 
     public function testSetButtonType()
@@ -45,8 +51,8 @@ class ButtonTest extends BootstrapComponentsTestCase
 
     /**
      * @expectedException \Exception
-     * @expectedExceptionMessage Type must be declared for the Okipa\LaravelBootstrapComponents\Clickable\Button component
-     *                           generation.
+     * @expectedExceptionMessage Type must be declared for the Okipa\LaravelBootstrapComponents\Clickable\Button
+     *                           component generation.
      */
     public function testNoType()
     {
@@ -61,6 +67,21 @@ class ButtonTest extends BootstrapComponentsTestCase
     public function testSetWrongType()
     {
         button()->type('wrong')->toHtml();
+    }
+
+    public function testSetUrl()
+    {
+        $customUrl = 'test-custom-url';
+        $html = button()->type('button')->url($customUrl)->toHtml();
+        $this->assertContains('<a href="' . $customUrl . '"', $html);
+    }
+
+    public function testSetRoute()
+    {
+        $this->setRoutes();
+        $customRoute = 'users.index';
+        $html = button()->type('button')->route($customRoute)->toHtml();
+        $this->assertContains('<a href="' . route($customRoute) . '"', $html);
     }
 
     public function testConfigIcon()
@@ -147,7 +168,7 @@ class ButtonTest extends BootstrapComponentsTestCase
         $this->assertContains('<div class="submit-container ' . $customContainerCLass . '">', $html);
         $this->assertNotContains('<div class="submit-container ' . $configContainerCLass . '">', $html);
     }
-    
+
     public function testConfigComponentClass()
     {
         $configComponentCLass = 'test-config-class-component';
@@ -165,7 +186,7 @@ class ButtonTest extends BootstrapComponentsTestCase
         $this->assertContains('class="submit-component ' . $customComponentCLass . '"', $html);
         $this->assertNotContains('class="submit-component ' . $configComponentCLass . '"', $html);
     }
-    
+
     public function testConfigContainerHtmlAttributes()
     {
         $configContainerAttributes = 'test-config-attributes-container';

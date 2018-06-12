@@ -10,10 +10,26 @@ class ButtonCancel extends Button
      * @property string $view
      */
     protected $configKey = 'button_cancel';
+
     /**
-     * The input type.
+     * Set the button values.
      *
-     * @property string $type
+     * @return array
      */
-    protected $type = 'button';
+    protected function values(): array
+    {
+        return array_merge(parent::values(), [
+            'type'  => 'button',
+        ]);
+    }
+
+    /**
+     * Check the component values validity
+     *
+     * @throws \Exception
+     */
+    protected function checkValuesValidity(): void
+    {
+        //
+    }
 }

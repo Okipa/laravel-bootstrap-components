@@ -3,6 +3,7 @@
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
 use Illuminate\Support\MessageBag;
+use Okipa\LaravelBootstrapComponents\Component;
 use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
 use Okipa\LaravelBootstrapComponents\Test\Fakers\UsersFaker;
 
@@ -26,6 +27,11 @@ class InputTest extends BootstrapComponentsTestCase
         // components.input.html_attributes
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.input.html_attributes')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.input.html_attributes')));
+    }
+
+    public function testExtendsInput()
+    {
+        $this->assertEquals(Component::class, get_parent_class(inputText()));
     }
 
     public function testSetTypeAndName()

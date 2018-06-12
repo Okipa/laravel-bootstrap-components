@@ -161,7 +161,7 @@ return [
             'component' => [],
         ],
     ],
-    'back'            => [
+    'button_back'            => [
         'view'            => 'bootstrap-components.button',
         'icon'            => '<i class="fas fa-fw fa-undo"></i>',
         'label'           => 'bootstrap-components.label.back',
@@ -174,7 +174,7 @@ return [
             'component' => [],
         ],
     ],
-    'cancel'          => [
+    'button_cancel'          => [
         'view'            => 'bootstrap-components.button',
         'icon'            => '<i class="fas fa-fw fa-ban"></i>',
         'label'           => 'bootstrap-components.label.cancel',
