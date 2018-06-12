@@ -15,16 +15,16 @@ class InputTextTest extends BootstrapComponentsTestCase
     {
         // components
         $this->assertTrue(array_key_exists('input_text', config('bootstrap-components')));
-        // components.input
+        // components.input_text
         $this->assertTrue(array_key_exists('view', config('bootstrap-components.input_text')));
         $this->assertTrue(array_key_exists('icon', config('bootstrap-components.input_text')));
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.input_text')));
         $this->assertTrue(array_key_exists('class', config('bootstrap-components.input_text')));
         $this->assertTrue(array_key_exists('html_attributes', config('bootstrap-components.input_text')));
-        // components.input.class
+        // components.input_text.class
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.input_text.class')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.input_text.class')));
-        // components.input.html_attributes
+        // components.input_text.html_attributes
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.input_text.html_attributes')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.input_text.html_attributes')));
     }

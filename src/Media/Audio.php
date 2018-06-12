@@ -1,6 +1,6 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\File;
+namespace Okipa\LaravelBootstrapComponents\Media;
 
 class Audio extends Media
 {
@@ -16,6 +16,6 @@ class Audio extends Media
      */
     protected function checkValuesValidity(): void
     {
-        // TODO: Implement checkValuesValidity() method.
+        //
     }
 }

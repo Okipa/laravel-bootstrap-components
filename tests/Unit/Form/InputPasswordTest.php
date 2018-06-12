@@ -15,16 +15,16 @@ class InputPasswordTest extends BootstrapComponentsTestCase
     {
         // components
         $this->assertTrue(array_key_exists('input_password', config('bootstrap-components')));
-        // components.input
+        // components.input_password
         $this->assertTrue(array_key_exists('view', config('bootstrap-components.input_password')));
         $this->assertTrue(array_key_exists('icon', config('bootstrap-components.input_password')));
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.input_password')));
         $this->assertTrue(array_key_exists('class', config('bootstrap-components.input_password')));
         $this->assertTrue(array_key_exists('html_attributes', config('bootstrap-components.input_password')));
-        // components.input.class
+        // components.input_password.class
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.input_password.class')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.input_password.class')));
-        // components.input.html_attributes
+        // components.input_password.html_attributes
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.input_password.html_attributes')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.input_password.html_attributes')));
     }

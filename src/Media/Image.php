@@ -1,6 +1,6 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\File;
+namespace Okipa\LaravelBootstrapComponents\Media;
 
 class Image extends Media
 {
@@ -48,11 +48,11 @@ class Image extends Media
     protected $linkHtmlAttributes = [];
 
     /**
-     * Set the image link url.
+     * Wrap the image in a link and set its url.
      *
      * @param string $linkUrl
      *
-     * @return \Okipa\LaravelBootstrapComponents\File\Image
+     * @return \Okipa\LaravelBootstrapComponents\Media\Image
      */
     public function linkUrl(string $linkUrl): Image
     {
@@ -66,7 +66,7 @@ class Image extends Media
      *
      * @param string $alt
      *
-     * @return \Okipa\LaravelBootstrapComponents\File\Image
+     * @return \Okipa\LaravelBootstrapComponents\Media\Image
      */
     public function alt(string $alt): Image
     {
@@ -80,7 +80,7 @@ class Image extends Media
      *
      * @param int $width
      *
-     * @return \Okipa\LaravelBootstrapComponents\File\Image
+     * @return \Okipa\LaravelBootstrapComponents\Media\Image
      */
     public function width(int $width): Image
     {
@@ -94,7 +94,7 @@ class Image extends Media
      *
      * @param int $height
      *
-     * @return \Okipa\LaravelBootstrapComponents\File\Image
+     * @return \Okipa\LaravelBootstrapComponents\Media\Image
      */
     public function height(int $height): Image
     {
@@ -122,7 +122,7 @@ class Image extends Media
      *
      * @param array $linkHtmlAttributes
      *
-     * @return \Okipa\LaravelBootstrapComponents\File\Image
+     * @return \Okipa\LaravelBootstrapComponents\Media\Image
      */
     public function linkHtmlAttributes(array $linkHtmlAttributes): Image
     {
@@ -143,8 +143,8 @@ class Image extends Media
             'alt'                => $this->alt,
             'width'              => $this->width,
             'height'             => $this->height,
-            'linkClass'          => array_merge($this->defaultLinkClass(), $this->linkClass),
-            'linkHtmlAttributes' => array_merge($this->defaultLinkHtmlAttributes(), $this->linkHtmlAttributes),
+            'linkClass'          => $this->linkClass ? $this->linkClass : $this->defaultLinkClass(),
+            'linkHtmlAttributes' => $this->linkHtmlAttributes ? $this->linkHtmlAttributes : $this->defaultLinkHtmlAttributes(),
         ]);
     }
 
@@ -155,7 +155,9 @@ class Image extends Media
      */
     protected function defaultLinkClass(): array
     {
-        return config('bootstrap-components.' . $this->configKey . '.class.link');
+        $linkClass = config('bootstrap-components.' . $this->configKey . '.class.link');
+
+        return $linkClass ? $linkClass : [];
     }
 
     /**
@@ -165,7 +167,9 @@ class Image extends Media
      */
     protected function defaultLinkHtmlAttributes(): array
     {
-        return config('bootstrap-components.' . $this->configKey . '.attributes.link');
+        $linkHtmlAttributes = config('bootstrap-components.' . $this->configKey . '.html_attributes.link');
+
+        return $linkHtmlAttributes ? $linkHtmlAttributes : [];
     }
 
     /**
@@ -173,6 +177,6 @@ class Image extends Media
      */
     protected function checkValuesValidity(): void
     {
-        // TODO: Implement checkValuesValidity() method.
+        //
     }
 }

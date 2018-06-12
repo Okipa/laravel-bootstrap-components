@@ -107,10 +107,9 @@ return [
             'component' => [],
         ],
     ],
-
     // buttons *********************************************************************************************************
     'button'          => [
-        'view'            => 'bootstrap-components.button',
+        'view'            => 'bootstrap-components.clickable-button',
         'icon'            => null,
         'label'           => null,
         'class'           => [
@@ -123,7 +122,7 @@ return [
         ],
     ],
     'button_validate' => [
-        'view'            => 'bootstrap-components.button',
+        'view'            => 'bootstrap-components.clickable-button',
         'icon'            => '<i class="fas fa-fw fa-check"></i>',
         'label'           => 'bootstrap-components.label.validate',
         'class'           => [
@@ -136,7 +135,7 @@ return [
         ],
     ],
     'button_create'   => [
-        'view'            => 'bootstrap-components.button',
+        'view'            => 'bootstrap-components.clickable-button',
         'icon'            => '<i class="fas fa-fw fa-plus-circle"></i>',
         'label'           => 'bootstrap-components.label.create',
         'class'           => [
@@ -149,7 +148,7 @@ return [
         ],
     ],
     'button_update'   => [
-        'view'            => 'bootstrap-components.button',
+        'view'            => 'bootstrap-components.clickable-button',
         'icon'            => '<i class="fas fa-fw fa-save"></i>',
         'label'           => 'bootstrap-components.label.update',
         'class'           => [
@@ -162,7 +161,7 @@ return [
         ],
     ],
     'button_back'            => [
-        'view'            => 'bootstrap-components.button',
+        'view'            => 'bootstrap-components.clickable-button',
         'icon'            => '<i class="fas fa-fw fa-undo"></i>',
         'label'           => 'bootstrap-components.label.back',
         'class'           => [
@@ -175,7 +174,7 @@ return [
         ],
     ],
     'button_cancel'          => [
-        'view'            => 'bootstrap-components.button',
+        'view'            => 'bootstrap-components.clickable-button',
         'icon'            => '<i class="fas fa-fw fa-ban"></i>',
         'label'           => 'bootstrap-components.label.cancel',
         'class'           => [
@@ -187,10 +186,9 @@ return [
             'component' => [],
         ],
     ],
-
     // files ***********************************************************************************************************
     'media_audio'     => [
-        'view'            => 'bootstrap-components.video',
+        'view'            => 'bootstrap-components.media-audio',
         'class'           => [
             'container' => [],
             'component' => [],
@@ -201,7 +199,7 @@ return [
         ],
     ],
     'media_image'     => [
-        'view'            => 'bootstrap-components.image',
+        'view'            => 'bootstrap-components.media-image',
         'class'           => [
             'container' => [],
             'link'      => [],
@@ -214,7 +212,7 @@ return [
         ],
     ],
     'media_video'     => [
-        'view'            => 'bootstrap-components.video',
+        'view'            => 'bootstrap-components.media-video',
         'poster'          => null,
         'class'           => [
             'container' => [],

@@ -15,16 +15,16 @@ class inputEmailTest extends BootstrapComponentsTestCase
     {
         // components
         $this->assertTrue(array_key_exists('input_email', config('bootstrap-components')));
-        // components.input
+        // components.input_email
         $this->assertTrue(array_key_exists('view', config('bootstrap-components.input_email')));
         $this->assertTrue(array_key_exists('icon', config('bootstrap-components.input_email')));
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.input_email')));
         $this->assertTrue(array_key_exists('class', config('bootstrap-components.input_email')));
         $this->assertTrue(array_key_exists('html_attributes', config('bootstrap-components.input_email')));
-        // components.input.class
+        // components.input_email.class
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.input_email.class')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.input_email.class')));
-        // components.input.html_attributes
+        // components.input_email.html_attributes
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.input_email.html_attributes')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.input_email.html_attributes')));
     }

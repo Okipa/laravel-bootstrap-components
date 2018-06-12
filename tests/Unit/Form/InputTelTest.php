@@ -15,16 +15,16 @@ class inputTelTest extends BootstrapComponentsTestCase
     {
         // components
         $this->assertTrue(array_key_exists('input_tel', config('bootstrap-components')));
-        // components.input
+        // components.input_tel
         $this->assertTrue(array_key_exists('view', config('bootstrap-components.input_tel')));
         $this->assertTrue(array_key_exists('icon', config('bootstrap-components.input_tel')));
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.input_tel')));
         $this->assertTrue(array_key_exists('class', config('bootstrap-components.input_tel')));
         $this->assertTrue(array_key_exists('html_attributes', config('bootstrap-components.input_tel')));
-        // components.input.class
+        // components.input_tel.class
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.input_tel.class')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.input_tel.class')));
-        // components.input.html_attributes
+        // components.input_tel.html_attributes
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.input_tel.html_attributes')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.input_tel.html_attributes')));
     }

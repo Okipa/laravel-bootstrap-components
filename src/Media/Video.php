@@ -1,6 +1,6 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\File;
+namespace Okipa\LaravelBootstrapComponents\Media;
 
 class Video extends Media
 {
@@ -22,7 +22,7 @@ class Video extends Media
      *
      * @param string $poster
      *
-     * @return \Okipa\LaravelBootstrapComponents\File\Video
+     * @return \Okipa\LaravelBootstrapComponents\Media\Video
      */
     public function poster(string $poster): Video
     {
@@ -39,18 +39,20 @@ class Video extends Media
     protected function values(): array
     {
         return array_merge(parent::values(), [
-            'poster' => array_merge($this->defaultPoster(), $this->poster)
+            'poster' => $this->poster ? $this->poster : $this->defaultPoster(),
         ]);
     }
 
     /**
      * Set the default video poster.
      *
-     * @return array
+     * @return string
      */
-    protected function defaultPoster(): array
+    protected function defaultPoster(): string
     {
-        return config('bootstrap-components.' . $this->configKey . '.poster');
+        $poster = config('bootstrap-components.' . $this->configKey . '.poster');
+
+        return $poster ? $poster : '';
     }
 
     /**
@@ -58,6 +60,6 @@ class Video extends Media
      */
     protected function checkValuesValidity(): void
     {
-        // TODO: Implement checkValuesValidity() method.
+        //
     }
 }

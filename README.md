@@ -37,8 +37,10 @@ This package provides a ready-to-use and customizable bootstrap components libra
 - [buttonCancel()](#buttoncancel)
 - [buttonBack()](#buttonback)
 
-### Media
-- WIP
+### [Media](#media-components)
+- [image()](#image)
+- [audio()](#audio)
+- [video()](#video)
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -245,6 +247,32 @@ Extends the [button()](#button) component and inherits all its chainable methods
 
 Locked values :
 - type : `button`
+
+### Media components
+Chainable methods available for all media components :
+- `public function src(string $src): Media` (optional)
+
+#### image()
+Other specific chainable methods :
+- `public function linkUrl(string $linkUrl): Image` (optional)
+  > Wrap the image in a link and set its url.
+- `public function alt(string $alt): Image` (optional)
+- `public function width(int $width): Image` (optional)
+- `public function height(int $height): Image` (optional)
+- `public function linkClass(array $linkClass): Image` (optional)
+  > gives the opportunity to set the image link wrapper class.
+  > default value : `config('bootstrap-components.media_image.class.link')`.
+- `public function linkHtmlAttributes(array $linkHtmlAttributes): Image` (optional)
+  > gives the opportunity to set the image link wrapper html attributes.
+  > default value : `config('bootstrap-components.media_image.html_attributes.link')`.
+
+#### audio()
+No other specific chainable methods.
+
+#### video()
+Chainable methods :
+- `public function poster(string $poster): Video` (optional)
+  > default value : `config('bootstrap-components.media_video.poster')`.
 
 ------------------------------------------------------------------------------------------------------------------------
 
