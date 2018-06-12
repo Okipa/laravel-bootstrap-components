@@ -32,9 +32,6 @@ This package provides a ready-to-use and customizable bootstrap components libra
 ### Clickable
 - [input()](#clickable--button)
 
-### Buttons
-- WIP
-
 ### Media
 - WIP
 
