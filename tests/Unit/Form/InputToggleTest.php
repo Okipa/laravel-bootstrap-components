@@ -146,7 +146,7 @@ class InputToggleTest extends BootstrapComponentsTestCase
         $html = inputToggle()->type('text')->name('name')->placeholder($placeholder)->toHtml();
         $this->assertContains('<span class="switch-label end">' . $placeholder . '</span>', $html);
         $this->assertNotContains(
-            '<span class="switch-label end">bootstrap-components::bootstrap-components.validation.attributes.name</span>',
+            '<span class="switch-label end">validation.attributes.name</span>',
             $html
         );
     }
@@ -155,7 +155,7 @@ class InputToggleTest extends BootstrapComponentsTestCase
     {
         $html = inputToggle()->name('name')->toHtml();
         $this->assertContains(
-            '<span class="switch-label end">bootstrap-components::bootstrap-components.validation.attributes.name</span>',
+            '<span class="switch-label end">validation.attributes.name</span>',
             $html
         );
     }
@@ -199,7 +199,7 @@ class InputToggleTest extends BootstrapComponentsTestCase
     {
         $html = inputToggle()->name('name')->toHtml();
         $this->assertContains(
-            '<label for="toggle-name">bootstrap-components::bootstrap-components.validation.attributes.name</label>',
+            '<label for="toggle-name">validation.attributes.name</label>',
             $html
         );
     }
@@ -208,7 +208,7 @@ class InputToggleTest extends BootstrapComponentsTestCase
     {
         $html = inputToggle()->name('name')->hideLabel()->toHtml();
         $this->assertNotContains(
-            '<label for="toggle-name">bootstrap-components::bootstrap-components.validation.attributes.name</label>',
+            '<label for="toggle-name">validation.attributes.name</label>',
             $html
         );
     }

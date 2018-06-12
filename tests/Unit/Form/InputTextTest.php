@@ -150,7 +150,7 @@ class InputTextTest extends BootstrapComponentsTestCase
         $html = inputText()->name('name')->placeholder($placeholder)->toHtml();
         $this->assertContains('placeholder="' . $placeholder . '"', $html);
         $this->assertNotContains(
-            'placeholder="bootstrap-components::bootstrap-components.validation.attributes.name"',
+            'placeholder="validation.attributes.name"',
             $html
         );
     }
@@ -159,7 +159,7 @@ class InputTextTest extends BootstrapComponentsTestCase
     {
         $html = inputText()->name('name')->toHtml();
         $this->assertContains(
-            'placeholder="bootstrap-components::bootstrap-components.validation.attributes.name"',
+            'placeholder="validation.attributes.name"',
             $html
         );
     }
@@ -199,11 +199,11 @@ class InputTextTest extends BootstrapComponentsTestCase
     {
         $html = inputText()->name('name')->toHtml();
         $this->assertContains(
-            '<label for="text-name">bootstrap-components::bootstrap-components.validation.attributes.name</label>',
+            '<label for="text-name">validation.attributes.name</label>',
             $html
         );
         $this->assertContains(
-            'aria-label="bootstrap-components::bootstrap-components.validation.attributes.name"',
+            'aria-label="validation.attributes.name"',
             $html
         );
     }
@@ -212,11 +212,11 @@ class InputTextTest extends BootstrapComponentsTestCase
     {
         $html = inputText()->name('name')->hideLabel()->toHtml();
         $this->assertNotContains(
-            '<label for="text-name">bootstrap-components::bootstrap-components.validation.attributes.name</label>',
+            '<label for="text-name">validation.attributes.name</label>',
             $html
         );
         $this->assertNotContains(
-            'aria-label="bootstrap-components::bootstrap-components.validation.attributes.name"',
+            'aria-label="validation.attributes.name"',
             $html
         );
     }
