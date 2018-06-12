@@ -110,7 +110,7 @@ Chainable methods available for all components :
 
 Chainable methods :
 - `public function type(string $type): Input` (required)
-  > possible types : `text`, `tel`, `email`, `password`, `file`.
+  > possible types : `text` / `tel` / `email` / `password` / `file`.
 - `public function name(string $name): Input` (required)
 - `public function model(Model $model): Input` (optional)
 - `public function icon(string $icon): Input` (optional)
@@ -188,7 +188,7 @@ Locked values :
 
 Chainable methods :
 - `public function type(string $type): Input` (required)
-  > possible types : `button`, `submit`.
+  > possible types : `button` / `submit`.
 - `public function icon(string $icon): Input` (optional)
   > default value : `config('bootstrap-components.button.icon')`.
 - `public function hideIcon(): Input` (optional)
