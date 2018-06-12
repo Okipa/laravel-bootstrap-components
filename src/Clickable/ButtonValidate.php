@@ -11,9 +11,24 @@ class ButtonValidate extends Button
      */
     protected $configKey = 'button_validate';
     /**
-     * The input type.
+     * Set the button values.
      *
-     * @property string $type
+     * @return array
      */
-    protected $type = 'submit';
+    protected function values(): array
+    {
+        return array_merge(parent::values(), [
+            'type'  => 'submit',
+        ]);
+    }
+
+    /**
+     * Check the component values validity
+     *
+     * @throws \Exception
+     */
+    protected function checkValuesValidity(): void
+    {
+        //
+    }
 }

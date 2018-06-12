@@ -52,7 +52,7 @@ class ButtonBackTest extends BootstrapComponentsTestCase
     public function testSetUrl()
     {
         $customUrl = 'test-custom-url';
-        $html = button()->type('button')->url($customUrl)->toHtml();
+        $html = buttonBack()->url($customUrl)->toHtml();
         $this->assertContains('<a href="' . $customUrl . '"', $html);
     }
 
@@ -60,7 +60,7 @@ class ButtonBackTest extends BootstrapComponentsTestCase
     {
         $this->setRoutes();
         $customRoute = 'users.index';
-        $html = button()->type('button')->route($customRoute)->toHtml();
+        $html = buttonBack()->route($customRoute)->toHtml();
         $this->assertContains('<a href="' . route($customRoute) . '"', $html);
     }
 

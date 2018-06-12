@@ -31,6 +31,9 @@ This package provides a ready-to-use and customizable bootstrap components libra
 
 ### [Clickable](#clickable-components)
 - [button()](#button)
+- [buttonValidate()](#buttonvalidate)
+- [buttonCreate()](#buttoncreate)
+- [buttonUpdate()](#buttonupdate)
 - [buttonCancel()](#buttoncancel)
 - [buttonBack()](#buttonback)
 
@@ -207,6 +210,27 @@ Chainable methods :
 - `public function label(string $label): Input` (optional)
   > default value : `config('bootstrap-components.button.label')`.
 - `public function hideLabel(): Input` (optional)
+
+#### buttonValidate()
+
+Extends the [button()](#button) component and inherits all its chainable methods.
+
+Locked values :
+- type : `submit`
+
+#### buttonCreate()
+
+Extends the [button()](#button) component and inherits all its chainable methods.
+
+Locked values :
+- type : `submit`
+
+#### buttonUpdate()
+
+Extends the [button()](#button) component and inherits all its chainable methods.
+
+Locked values :
+- type : `submit`
 
 #### buttonCancel()
 

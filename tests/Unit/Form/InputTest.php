@@ -31,7 +31,7 @@ class InputTest extends BootstrapComponentsTestCase
 
     public function testExtendsInput()
     {
-        $this->assertEquals(Component::class, get_parent_class(inputText()));
+        $this->assertEquals(Component::class, get_parent_class(input()));
     }
 
     public function testSetTypeAndName()

@@ -128,7 +128,7 @@ return [
         'label'           => 'bootstrap-components.label.validate',
         'class'           => [
             'container' => ['form-group'],
-            'component' => ['btn', 'btn-primary', 'spin-on-click'],
+            'component' => ['btn', 'btn-primary'],
         ],
         'html_attributes' => [
             'container' => [],
@@ -141,7 +141,7 @@ return [
         'label'           => 'bootstrap-components.label.create',
         'class'           => [
             'container' => ['form-group'],
-            'component' => ['btn', 'btn-primary', 'spin-on-click'],
+            'component' => ['btn', 'btn-primary'],
         ],
         'html_attributes' => [
             'container' => [],
@@ -154,7 +154,7 @@ return [
         'label'           => 'bootstrap-components.label.update',
         'class'           => [
             'container' => ['form-group'],
-            'component' => ['btn', 'btn-primary', 'spin-on-click'],
+            'component' => ['btn', 'btn-primary'],
         ],
         'html_attributes' => [
             'container' => [],
@@ -167,7 +167,7 @@ return [
         'label'           => 'bootstrap-components.label.back',
         'class'           => [
             'container' => ['form-group'],
-            'component' => ['btn', 'btn-light', 'spin-on-click'],
+            'component' => ['btn', 'btn-light'],
         ],
         'html_attributes' => [
             'container' => [],
@@ -180,7 +180,7 @@ return [
         'label'           => 'bootstrap-components.label.cancel',
         'class'           => [
             'container' => ['form-group'],
-            'component' => ['btn', 'btn-light', 'spin-on-click'],
+            'component' => ['btn', 'btn-danger'],
         ],
         'html_attributes' => [
             'container' => [],

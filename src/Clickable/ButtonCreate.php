@@ -9,11 +9,27 @@ class ButtonCreate extends Button
      *
      * @property string $view
      */
-    protected $configKey = 'button_cancel';
+    protected $configKey = 'button_create';
+
     /**
-     * The input type.
+     * Set the button values.
      *
-     * @property string $type
+     * @return array
      */
-    protected $type = 'submit';
+    protected function values(): array
+    {
+        return array_merge(parent::values(), [
+            'type' => 'submit',
+        ]);
+    }
+
+    /**
+     * Check the component values validity
+     *
+     * @throws \Exception
+     */
+    protected function checkValuesValidity(): void
+    {
+        //
+    }
 }
