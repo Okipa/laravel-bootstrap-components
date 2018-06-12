@@ -19,18 +19,18 @@ This package provides a ready-to-use and customizable bootstrap components libra
 
 ## Components
 
-### Form
-- [input()](#form--input)
-- [InputText()](#form--inputtext)
-- [InputTel()](#form--inputtel)
-- [InputEmail()](#form--inputemail)
-- [InputPassword()](#form--inputpassword)
-- [InputFile()](#form--inputfile)
-- [InputToggle()](#form--inputtoggle)
-- [InputTextarea()](#form--inputtextarea)
+### [Form](#form-components)
+- [input()](#input)
+- [InputText()](#inputtext)
+- [InputTel()](#inputtel)
+- [InputEmail()](#inputemail)
+- [InputPassword()](#inputpassword)
+- [InputFile()](#inputfile)
+- [InputToggle()](#inputtoggle)
+- [InputTextarea()](#inputtextarea)
 
-### Clickable
-- [button()](#clickable--button)
+### [Clickable](clickable-components)
+- [button()](#button)
 
 ### Media
 - WIP
@@ -106,7 +106,9 @@ Chainable methods available for all components :
 - `public function componentHtmlAttributes(array $componentHtmlAttributes): Component` (optional)
   > default value : `config('bootstrap-components.[component_config_key].html_attributes.component')`
 
-### Form > input()
+### Form components
+
+#### input()
 
 Chainable methods :
 - `public function type(string $type): Input` (required)
@@ -127,38 +129,38 @@ Chainable methods :
   > default value : `config('bootstrap-components.input.legend')`.
 - `public function hideLegend(): Input` (optional)
   
-### Form > InputText()
+#### inputText()
 
-Extends the [input()](#form--input) component and inherits all its chainable methods.
+Extends the [input()](#input) component and inherits all its chainable methods.
 
 Locked values :
 - type : `text`
 
 
-### Form > InputTel()
+#### inputTel()
 
-Extends the [input()](#form--input) component and inherits all its chainable methods.
+Extends the [input()](#input) component and inherits all its chainable methods.
 
 Locked values :
 - type : `tel`
 
-### Form > InputEmail()
+#### inputEmail()
 
-Extends the [input()](#form--input) component and inherits all its chainable methods.
+Extends the [input()](#input) component and inherits all its chainable methods.
 
 Locked values :
 - type : `email`
 
-### Form > InputPassword()
+#### inputPassword()
 
-Extends the [input()](#form--input) component and inherits all its chainable methods.
+Extends the [input()](#input) component and inherits all its chainable methods.
 
 Locked values :
 - type : `password`
 
-### Form > InputFile()
+#### inputFile()
 
-Extends the [input()](#form--input) component and inherits all its chainable methods.
+Extends the [input()](#input) component and inherits all its chainable methods.
 
 Locked values :
 - type : `file`
@@ -167,9 +169,9 @@ Extra chainable methods :
 - `public function uploadedFile(Closure $uploadedFile): InputFile` (optional)
   > allows to set html or another component to render the uploaded file.
 
-### Form > InputToggle()
+#### inputToggle()
 
-Extends the [input()](#form--input) component and inherits all its chainable methods.
+Extends the [input()](#input) component and inherits all its chainable methods.
 
 Locked values :
 - type : `toggle`
@@ -177,14 +179,16 @@ Locked values :
 **Note :** this component uses the [Laravel Toggle Switch button package](https://github.com/Okipa/laravel-toggle-switch-button) under the hood.  
 Check its install steps to display it correctly.
 
-### Form > InputTextarea()
+#### inputTextarea()
 
 Extends the [input()](#form--input) component and inherits all its chainable methods.
 
 Locked values :
 - type : `textarea`
 
-### Clickable > button()
+### Clickable components
+
+#### button()
 
 Chainable methods :
 - `public function type(string $type): Input` (required)
