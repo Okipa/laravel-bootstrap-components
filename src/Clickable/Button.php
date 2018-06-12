@@ -190,7 +190,7 @@ class Button extends Component
     {
         $label = config('bootstrap-components.' . $this->configKey . '.label');
 
-        return $label ? trans('bootstrap-components::' . $label) : null;
+        return $label ? trans('bootstrap-components::' . $label) : '';
     }
 
     /**
