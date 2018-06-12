@@ -29,7 +29,7 @@ This package provides a ready-to-use and customizable bootstrap components libra
 - [InputToggle()](#inputtoggle)
 - [InputTextarea()](#inputtextarea)
 
-### [Clickable](clickable-components)
+### [Clickable](#clickable-components)
 - [button()](#button)
 
 ### Media
