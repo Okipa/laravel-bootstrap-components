@@ -194,7 +194,7 @@ Chainable methods :
 - Extra chainable methods :
   - `public function checked(bool $checked = true): Input` (optional)
 
-__Note :__ this component is an extra component not included in bootstrap and using it demands to [load the package styles](#styles).
+_Note :_ this component is an extra component not included in bootstrap and using it demands to [load the package styles](#styles).
 
 ### Buttons components
 
