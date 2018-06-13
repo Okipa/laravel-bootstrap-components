@@ -81,6 +81,18 @@ return [
                 'component' => [],
             ],
         ],
+        'checkbox'   => [
+            'view'            => 'bootstrap-components.form.checkbox',
+            'legend'          => null,
+            'class'           => [
+                'container' => ['form-group'],
+                'component' => [],
+            ],
+            'html_attributes' => [
+                'container' => [],
+                'component' => [],
+            ],
+        ],
         'toggle'   => [
             'view'            => 'bootstrap-components.form.toggle',
             'legend'          => null,

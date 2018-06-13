@@ -2,9 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Form;
 
-use Exception;
-
-class Checkbox extends Input
+class Checkbox extends Checkable
 {
     /**
      * The component config key.
@@ -18,19 +16,4 @@ class Checkbox extends Input
      * @property string $type
      */
     protected $type = 'checkbox';
-
-    /**
-     * Set the input values.
-     *
-     * @return array
-     * @throws \Exception
-     */
-    protected function values(): array
-    {
-        $parentValues = parent::values();
-
-        return array_merge($parentValues, [
-            'checked' => $parentValues['value'] ? true : false,
-        ]);
-    }
 }

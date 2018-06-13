@@ -144,31 +144,31 @@ Chainable methods :
 #### text()
 
 - Specific values :
-  - type : `text`
+  - type : `text`.
 - No specific chainable methods.
 
 #### tel()
 
 - Specific values :
-  - type : `tel`
+  - type : `tel`.
 - No specific chainable methods.
 
 #### email()
 
 - Specific values :
-  - type : `email`
+  - type : `email`.
 - No specific chainable methods.
 
 #### password()
 
 - Specific values :
-  - type : `password`
+  - type : `password`.
 - No specific chainable methods.
 
 #### fileUpload()
 
 - Specific values :
-  - type : `file`
+  - type : `file`.
 - Extra chainable methods :
   - `public function uploadedFile(Closure $uploadedFile): InputFile` (optional)
   > allows to set html or another component to render the uploaded file.
@@ -176,14 +176,22 @@ Chainable methods :
 #### textarea()
 
 - Specific values :
-  - type : `textarea`
+  - type : `textarea`.
 - No specific chainable methods.
+
+#### checkbox()
+
+- Specific values :
+  - type : `toggle`.
+- Extra chainable methods :
+  - `public function checked(bool $checked = true): Input` (optional)
 
 #### toggle()
 
 - Specific values :
-  - type : `toggle`
-- No specific chainable methods.
+  - type : `toggle`.
+- Extra chainable methods :
+  - `public function checked(bool $checked = true): Input` (optional)
 
 **Note :** 
 - this component is an extra component not included in bootstrap and using it demands to [load the package styles](#styles).
@@ -209,31 +217,31 @@ Chainable methods :
 #### buttonValidate()
 
 - Specific values :
-  - type : `submit`
+  - type : `submit`.
 - No specific chainable methods.
 
 #### buttonCreate()
 
 - Specific values :
-  - type : `submit`
+  - type : `submit`.
 - No specific chainable methods.
 
 #### buttonUpdate()
 
 - Specific values :
-  - type : `submit`
+  - type : `submit`.
 - No specific chainable methods.
 
 #### buttonCancel()
 
 - Specific values :
-  - type : `button`
+  - type : `button`.
 - No specific chainable methods.
 
 #### buttonBack()
 
 - Specific values :
-  - type : `button`
+  - type : `button`.
 - No specific chainable methods.
 
 ### Media components

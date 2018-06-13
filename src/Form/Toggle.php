@@ -16,19 +16,4 @@ class Toggle extends Checkable
      * @property string $type
      */
     protected $type = 'toggle';
-
-    /**
-     * Set the input values.
-     *
-     * @return array
-     * @throws \Exception
-     */
-    protected function values(): array
-    {
-        $parentValues = parent::values();
-
-        return array_merge($parentValues, [
-            'checked' => $parentValues['value'] ? true : false,
-        ]);
-    }
 }

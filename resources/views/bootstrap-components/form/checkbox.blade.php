@@ -4,6 +4,7 @@
         <input id="{{ $type }}-{{ $name }}"
                {{ classTag($type . '-' . $name . '-component', 'custom-control-input', $componentClass, validationStatus($name)) }}
                type="checkbox"
+               name="{{ $name }}"
                {{ htmlAttributes($componentHtmlAttributes) }}>
         <label class="custom-control-label"
                for="{{ $type }}-{{ $name }}">{{ $label }}</label>
