@@ -21,13 +21,13 @@ This package provides a ready-to-use and customizable bootstrap components libra
 
 ### [Form](#form-components)
 - [input()](#input)
-- [InputText()](#inputtext)
-- [InputTel()](#inputtel)
-- [InputEmail()](#inputemail)
-- [InputPassword()](#inputpassword)
-- [InputFile()](#inputfile)
-- [InputToggle()](#inputtoggle)
-- [InputTextarea()](#inputtextarea)
+- [text()](#text)
+- [tel()](#tel)
+- [email()](#email)
+- [password()](#password)
+- [fileUpload()](#fileupload)
+- [textarea()](#textarea)
+- [toggle()](#toggle)
 
 ### [Clickable](#clickable-components)
 - [button()](#button)
@@ -67,8 +67,15 @@ Just call the component you need in your view.
 
 ```
 // example
-{{ input()->type('text')->name('username') }}
+{{ text()->name('username') }}
 ```
+
+------------------------------------------------------------------------------------------------------------------------
+
+## Styles
+
+If you use some extra components ([see API](#api)), you will have to load the package styles.
+For this, load the package `css` or `scss` file from the `[path/to/composer/vendor]/okipa/laravel-bootstrap-components/styles` directory to your project.
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -136,143 +143,126 @@ Chainable methods :
   > default value : `config('bootstrap-components.input.legend')`.
 - `public function hideLegend(): Input` (optional)
   
-#### inputText()
+#### text()
 
-Extends the [input()](#input) component and inherits all its chainable methods.
+- Specific values :
+  - type : `text`
+- No specific chainable methods.
 
-Locked values :
-- type : `text`
+#### tel()
 
+- Specific values :
+  - type : `tel`
+- No specific chainable methods.
 
-#### inputTel()
+#### email()
 
-Extends the [input()](#input) component and inherits all its chainable methods.
+- Specific values :
+  - type : `email`
+- No specific chainable methods.
 
-Locked values :
-- type : `tel`
+#### password()
 
-#### inputEmail()
+- Specific values :
+  - type : `password`
+- No specific chainable methods.
 
-Extends the [input()](#input) component and inherits all its chainable methods.
+#### fileUpload()
 
-Locked values :
-- type : `email`
-
-#### inputPassword()
-
-Extends the [input()](#input) component and inherits all its chainable methods.
-
-Locked values :
-- type : `password`
-
-#### inputFile()
-
-Extends the [input()](#input) component and inherits all its chainable methods.
-
-Locked values :
-- type : `file`
-
-Extra chainable methods :
-- `public function uploadedFile(Closure $uploadedFile): InputFile` (optional)
+- Specific values :
+  - type : `file`
+- Extra chainable methods :
+  - `public function uploadedFile(Closure $uploadedFile): InputFile` (optional)
   > allows to set html or another component to render the uploaded file.
 
-#### inputToggle()
+#### textarea()
 
-Extends the [input()](#input) component and inherits all its chainable methods.
+- Specific values :
+  - type : `textarea`
+- No specific chainable methods.
 
-Locked values :
-- type : `toggle`
+#### toggle()
 
-**Note :** this component uses the [Laravel Toggle Switch button package](https://github.com/Okipa/laravel-toggle-switch-button) under the hood.  
-Check its install steps to display it correctly.
+- Specific values :
+  - type : `toggle`
+- No specific chainable methods.
 
-#### inputTextarea()
+**Note :** 
+- this component is an extra component not included in bootstrap and using it demands to [load the package styles](#styles).
 
-Extends the [input()](#input) component and inherits all its chainable methods.
+### Buttons components
 
-Locked values :
-- type : `textarea`
-
-### Clickable components
-
-#### button()
-
-Chainable methods :
-- `public function type(string $type): Input` (required)
+- Chainable methods available for all button components :
+  - `public function type(string $type): Input` (required)
   > possible types : `button` / `submit`.
-- `public function url(string $url): Button` (optional)
+  - `public function url(string $url): Button` (optional)
   > only used for a `type="button"` button component.
   > default value : `url()->back()`.
-- `public function route(string $route): Button` (optional)
+  - `public function route(string $route): Button` (optional)
   > only used for a `type="button"` button component.
   > set the url value from a route key.
-- `public function icon(string $icon): Input` (optional)
+  - `public function icon(string $icon): Input` (optional)
   > default value : `config('bootstrap-components.button.icon')`.
-- `public function hideIcon(): Input` (optional)
-- `public function label(string $label): Input` (optional)
+  - `public function hideIcon(): Input` (optional)
+  - `public function label(string $label): Input` (optional)
   > default value : `config('bootstrap-components.button.label')`.
-- `public function hideLabel(): Input` (optional)
+  - `public function hideLabel(): Input` (optional)
 
 #### buttonValidate()
 
-Extends the [button()](#button) component and inherits all its chainable methods.
-
-Locked values :
-- type : `submit`
+- Specific values :
+  - type : `submit`
+- No specific chainable methods.
 
 #### buttonCreate()
 
-Extends the [button()](#button) component and inherits all its chainable methods.
-
-Locked values :
-- type : `submit`
+- Specific values :
+  - type : `submit`
+- No specific chainable methods.
 
 #### buttonUpdate()
 
-Extends the [button()](#button) component and inherits all its chainable methods.
-
-Locked values :
-- type : `submit`
+- Specific values :
+  - type : `submit`
+- No specific chainable methods.
 
 #### buttonCancel()
 
-Extends the [button()](#button) component and inherits all its chainable methods.
-
-Locked values :
-- type : `button`
+- Specific values :
+  - type : `button`
+- No specific chainable methods.
 
 #### buttonBack()
 
-Extends the [button()](#button) component and inherits all its chainable methods.
-
-Locked values :
-- type : `button`
+- Specific values :
+  - type : `button`
+- No specific chainable methods.
 
 ### Media components
-Chainable methods available for all media components :
-- `public function src(string $src): Media` (optional)
+- Chainable methods available for all media components :
+  - `public function src(string $src): Media` (optional)
 
 #### image()
-Other specific chainable methods :
-- `public function linkUrl(string $linkUrl): Image` (optional)
+- Specific chainable methods :
+  - `public function linkUrl(string $linkUrl): Image` (optional)
   > Wrap the image in a link and set its url.
-- `public function alt(string $alt): Image` (optional)
-- `public function width(int $width): Image` (optional)
-- `public function height(int $height): Image` (optional)
-- `public function linkClass(array $linkClass): Image` (optional)
+  - `public function alt(string $alt): Image` (optional)
+  - `public function width(int $width): Image` (optional)
+  - `public function height(int $height): Image` (optional)
+  - `public function linkClass(array $linkClass): Image` (optional)
   > gives the opportunity to set the image link wrapper class.
-  > default value : `config('bootstrap-components.media_image.class.link')`.
-- `public function linkHtmlAttributes(array $linkHtmlAttributes): Image` (optional)
+  > default value : `config('bootstrap-components.media.image.class.link')`.
+  - `public function linkHtmlAttributes(array $linkHtmlAttributes): Image` (optional)
   > gives the opportunity to set the image link wrapper html attributes.
-  > default value : `config('bootstrap-components.media_image.html_attributes.link')`.
+  > default value : `config('bootstrap-components.media.image.html_attributes.link')`.
 
 #### audio()
-No other specific chainable methods.
+No specific chainable methods.
 
 #### video()
-Chainable methods :
-- `public function poster(string $poster): Video` (optional)
-  > default value : `config('bootstrap-components.media_video.poster')`.
+- Specific chainable methods :
+  - `public function poster(string $poster): Video` (optional)
+  > default value : `config('bootstrap-components.media.video.poster')`.
 
 ------------------------------------------------------------------------------------------------------------------------
 

@@ -12,9 +12,12 @@ return [
         'download' => 'Télécharger',
     ],
 
-    'warning' => [
-        'audio' => 'Votre navigateur ne supporte pas le tag HTML5 « audio ».',
-        'video' => 'Votre navigateur ne supporte pas le tag HTML5 « video ».',
+    'notification' => [
+        'audio'      => 'Votre navigateur ne supporte pas le tag HTML5 « audio ».',
+        'video'      => 'Votre navigateur ne supporte pas le tag HTML5 « video ».',
+        'validation' => [
+            'success' => 'Champ correctement renseigné.',
+        ],
     ],
 
     'legend' => [

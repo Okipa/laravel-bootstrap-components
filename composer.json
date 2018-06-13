@@ -36,7 +36,7 @@
             "Okipa\\LaravelBootstrapComponents\\": "src/"
         },
         "files": [
-            "app/Helpers/bootstrapComponentsHelper.php"
+            "app/Helpers/componentsHelper.php"
         ]
     },
     "autoload-dev": {

@@ -9,13 +9,5 @@ class Audio extends Media
      *
      * @property string $view
      */
-    protected $configKey = 'media_audio';
-
-    /**
-     * Check the component values validity
-     */
-    protected function checkValuesValidity(): void
-    {
-        //
-    }
+    protected $configKey = 'media.audio';
 }

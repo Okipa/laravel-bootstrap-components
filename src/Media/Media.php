@@ -38,4 +38,12 @@ abstract class Media extends Component
             'src' => $this->src,
         ]);
     }
+
+    /**
+     * Check the component values validity
+     */
+    protected function checkValuesValidity(): void
+    {
+        //
+    }
 }

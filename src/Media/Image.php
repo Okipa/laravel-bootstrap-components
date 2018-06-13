@@ -9,7 +9,7 @@ class Image extends Media
      *
      * @property string $view
      */
-    protected $configKey = 'media_image';
+    protected $configKey = 'media.image';
     /**
      * The image link url.
      *
@@ -170,13 +170,5 @@ class Image extends Media
         $linkHtmlAttributes = config('bootstrap-components.' . $this->configKey . '.html_attributes.link');
 
         return $linkHtmlAttributes ? $linkHtmlAttributes : [];
-    }
-
-    /**
-     * Check the component values validity
-     */
-    protected function checkValuesValidity(): void
-    {
-        //
     }
 }

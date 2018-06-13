@@ -7,20 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use InvalidArgumentException;
 use Okipa\LaravelBootstrapComponents\Component;
 
-class Input extends Component
+abstract class Input extends Component
 {
     /**
      * The component config key.
      *
      * @property string $configKey
      */
-    protected $configKey = 'input';
-    /**
-     * The input accepted types.
-     *
-     * @property array $acceptedTypes
-     */
-    protected $acceptedTypes = ['text', 'tel', 'email', 'password', 'file'];
+    protected $configKey;
     /**
      * The input associated model.
      *
@@ -95,23 +89,9 @@ class Input extends Component
      *
      * @return \Okipa\LaravelBootstrapComponents\Form\Input
      */
-    public function model(Model $model): Input
+    public function model(Model $model = null): Input
     {
         $this->model = $model;
-
-        return $this;
-    }
-
-    /**
-     * Set the input type.
-     *
-     * @param string $type
-     *
-     * @return \Okipa\LaravelBootstrapComponents\Form\Input
-     */
-    public function type(string $type): Input
-    {
-        $this->type = $type;
 
         return $this;
     }
@@ -291,18 +271,8 @@ class Input extends Component
      */
     protected function checkValuesValidity(): void
     {
-        if (! $this->type) {
-            throw new Exception('Type must be declared for the ' . get_class($this) . ' component generation.');
-        }
         if (! $this->name) {
             throw new Exception('Name must be declared for the ' . get_class($this) . ' component generation.');
-        }
-        if (! in_array($this->type, $this->acceptedTypes)) {
-            throw new InvalidArgumentException(
-                get_class($this) . ' : the given « ' . $this->type
-                . ' » type is invalid and should be one of the following : ' 
-                . implode(', ', $this->acceptedTypes)
-            );
         }
     }
 }

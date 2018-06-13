@@ -9,7 +9,7 @@ class Video extends Media
      *
      * @property string $view
      */
-    protected $configKey = 'media_video';
+    protected $configKey = 'media.video';
     /**
      * The video poster.
      *
@@ -53,13 +53,5 @@ class Video extends Media
         $poster = config('bootstrap-components.' . $this->configKey . '.poster');
 
         return $poster ? $poster : '';
-    }
-
-    /**
-     * Check the component values validity
-     */
-    protected function checkValuesValidity(): void
-    {
-        //
     }
 }

@@ -12,9 +12,12 @@ return [
         'download' => 'Download',
     ],
 
-    'warning' => [
+    'notification' => [
         'audio' => 'Your browser does not support the « audio » HTML5 tag.',
         'video' => 'Your browser does not support the « video » HTML5 tag.',
+        'validation' => [
+            'success' => 'Champ correctement renseigné.',
+        ],
     ],
 
     'legend' => [
