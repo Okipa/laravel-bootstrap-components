@@ -117,6 +117,19 @@ return [
                 'component' => [],
             ],
         ],
+        'select'   => [
+            'view'            => 'bootstrap-components.form.select',
+            'icon'            => '<i class="fas fa-hand-pointer"></i>',
+            'legend'          => null,
+            'class'           => [
+                'container' => ['form-group'],
+                'component' => [],
+            ],
+            'html_attributes' => [
+                'container' => [],
+                'component' => [],
+            ],
+        ],
     ],
     // buttons components **********************************************************************************************
     'button' => [
