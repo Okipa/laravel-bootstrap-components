@@ -20,7 +20,6 @@ This package provides a ready-to-use and customizable bootstrap components libra
 ## Components
 
 ### [Form](#form-components)
-- [input()](#input)
 - [text()](#text)
 - [tel()](#tel)
 - [email()](#email)
@@ -30,7 +29,6 @@ This package provides a ready-to-use and customizable bootstrap components libra
 - [toggle()](#toggle)
 
 ### [Clickable](#clickable-components)
-- [button()](#button)
 - [buttonValidate()](#buttonvalidate)
 - [buttonCreate()](#buttoncreate)
 - [buttonUpdate()](#buttonupdate)
