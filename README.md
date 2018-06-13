@@ -26,6 +26,7 @@ This package provides a ready-to-use and customizable bootstrap components libra
 - [password()](#password)
 - [fileUpload()](#fileupload)
 - [textarea()](#textarea)
+- [checkbox()](#checkbox)
 - [toggle()](#toggle)
 
 ### [Clickable](#clickable-components)
