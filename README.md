@@ -183,7 +183,7 @@ Chainable methods :
 #### checkbox()
 
 - Specific values :
-  - type : `toggle`.
+  - type : `checkbox`.
 - Extra chainable methods :
   - `public function checked(bool $checked = true): Input` (optional)
 
@@ -194,8 +194,7 @@ Chainable methods :
 - Extra chainable methods :
   - `public function checked(bool $checked = true): Input` (optional)
 
-**Note :** 
-- this component is an extra component not included in bootstrap and using it demands to [load the package styles](#styles).
+__Note :__ this component is an extra component not included in bootstrap and using it demands to [load the package styles](#styles).
 
 ### Buttons components
 
