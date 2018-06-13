@@ -73,7 +73,7 @@ Just call the component you need in your view.
 
 ## Styles
 
-If you use some extra components ([see API](#api)), you will have to load the package styles.
+If you use some extra components ([see API](#api)), you will have to load the package styles.  
 For this, load the package `css` or `scss` file from the `[path/to/composer/vendor]/okipa/laravel-bootstrap-components/styles` directory to your project.
 
 ------------------------------------------------------------------------------------------------------------------------
