@@ -145,7 +145,7 @@ class FileTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertNotContains(
-            '<label class="custom-file-label" for="file-name">bootstrap-components::bootstrap-components.validation.attributes.name : '
+            '<label class="custom-file-label" for="file-name">validation.attributes.name : '
             . trans('bootstrap-components::bootstrap-components.label.file') . '</label>',
             $html
         );
@@ -155,7 +155,7 @@ class FileTest extends BootstrapComponentsTestCase
     {
         $html = fileUpload()->name('name')->toHtml();
         $this->assertContains(
-            '<label class="custom-file-label" for="file-name">bootstrap-components::bootstrap-components.validation.attributes.name : '
+            '<label class="custom-file-label" for="file-name">validation.attributes.name : '
             . trans('bootstrap-components::bootstrap-components.label.file') . '</label>',
             $html
         );
@@ -205,11 +205,11 @@ class FileTest extends BootstrapComponentsTestCase
     {
         $html = fileUpload()->name('name')->toHtml();
         $this->assertContains(
-            '<label for="file-name">bootstrap-components::bootstrap-components.validation.attributes.name</label>',
+            '<label for="file-name">validation.attributes.name</label>',
             $html
         );
         $this->assertContains(
-            'aria-label="bootstrap-components::bootstrap-components.validation.attributes.name"',
+            'aria-label="validation.attributes.name"',
             $html
         );
     }
@@ -218,11 +218,11 @@ class FileTest extends BootstrapComponentsTestCase
     {
         $html = fileUpload()->name('name')->hideLabel()->toHtml();
         $this->assertNotContains(
-            '<label for="file-name">bootstrap-components::bootstrap-components.validation.attributes.name</label>',
+            '<label for="file-name">validation.attributes.name</label>',
             $html
         );
         $this->assertNotContains(
-            'aria-label="bootstrap-components::bootstrap-components.validation.attributes.name"',
+            'aria-label="validation.attributes.name"',
             $html
         );
     }

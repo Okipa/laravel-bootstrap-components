@@ -173,7 +173,7 @@ class ToggleTest extends BootstrapComponentsTestCase
     {
         $html = toggle()->name('name')->toHtml();
         $this->assertContains(
-            'for="toggle-name">bootstrap-components::bootstrap-components.validation.attributes.name</label>',
+            'for="toggle-name">validation.attributes.name</label>',
             $html
         );
     }
@@ -182,7 +182,7 @@ class ToggleTest extends BootstrapComponentsTestCase
     {
         $html = toggle()->name('name')->hideLabel()->toHtml();
         $this->assertNotContains(
-            'for="toggle-name">bootstrap-components::bootstrap-components.validation.attributes.name</label>',
+            'for="toggle-name">validation.attributes.name</label>',
             $html
         );
     }

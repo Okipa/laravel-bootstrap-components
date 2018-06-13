@@ -147,7 +147,7 @@ class TelTest extends BootstrapComponentsTestCase
         $html = tel()->name('name')->placeholder($placeholder)->toHtml();
         $this->assertContains('placeholder="' . $placeholder . '"', $html);
         $this->assertNotContains(
-            'placeholder="bootstrap-components::bootstrap-components.validation.attributes.name"',
+            'placeholder="validation.attributes.name"',
             $html
         );
     }
@@ -156,7 +156,7 @@ class TelTest extends BootstrapComponentsTestCase
     {
         $html = tel()->name('name')->toHtml();
         $this->assertContains(
-            'placeholder="bootstrap-components::bootstrap-components.validation.attributes.name"',
+            'placeholder="validation.attributes.name"',
             $html
         );
     }
@@ -196,11 +196,11 @@ class TelTest extends BootstrapComponentsTestCase
     {
         $html = tel()->name('name')->toHtml();
         $this->assertContains(
-            '<label for="tel-name">bootstrap-components::bootstrap-components.validation.attributes.name</label>',
+            '<label for="tel-name">validation.attributes.name</label>',
             $html
         );
         $this->assertContains(
-            'aria-label="bootstrap-components::bootstrap-components.validation.attributes.name"',
+            'aria-label="validation.attributes.name"',
             $html
         );
     }
@@ -209,11 +209,11 @@ class TelTest extends BootstrapComponentsTestCase
     {
         $html = tel()->name('name')->hideLabel()->toHtml();
         $this->assertNotContains(
-            '<label for="tel-name">bootstrap-components::bootstrap-components.validation.attributes.name</label>',
+            '<label for="tel-name">validation.attributes.name</label>',
             $html
         );
         $this->assertNotContains(
-            'aria-label="bootstrap-components::bootstrap-components.validation.attributes.name"',
+            'aria-label="validation.attributes.name"',
             $html
         );
     }

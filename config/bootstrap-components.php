@@ -2,8 +2,8 @@
 
 return [
     // form components *************************************************************************************************
-    'form' => [
-        'text'      => [
+    'form'   => [
+        'text'     => [
             'view'            => 'bootstrap-components.form.input',
             'icon'            => '<i class="fas fa-font"></i>',
             'legend'          => null,
@@ -16,7 +16,7 @@ return [
                 'component' => [],
             ],
         ],
-        'tel'       => [
+        'tel'      => [
             'view'            => 'bootstrap-components.form.input',
             'icon'            => '<i class="fas fa-phone"></i>',
             'legend'          => null,
@@ -29,7 +29,7 @@ return [
                 'component' => [],
             ],
         ],
-        'email'     => [
+        'email'    => [
             'view'            => 'bootstrap-components.form.input',
             'icon'            => '<i class="fas fa-at"></i>',
             'legend'          => null,
@@ -42,7 +42,7 @@ return [
                 'component' => [],
             ],
         ],
-        'password'  => [
+        'password' => [
             'view'            => 'bootstrap-components.form.input',
             'icon'            => '<i class="fas fa-user-secret"></i>',
             'legend'          => null,
@@ -55,7 +55,7 @@ return [
                 'component' => [],
             ],
         ],
-        'file'      => [
+        'file'     => [
             'view'            => 'bootstrap-components.form.file',
             'icon'            => '<i class="fas fa-upload"></i>',
             'legend'          => null,
@@ -68,7 +68,7 @@ return [
                 'component' => [],
             ],
         ],
-        'textarea'  => [
+        'textarea' => [
             'view'            => 'bootstrap-components.form.textarea',
             'icon'            => '<i class="fas fa-comment"></i>',
             'legend'          => null,
@@ -81,7 +81,7 @@ return [
                 'component' => [],
             ],
         ],
-        'toggle'    => [
+        'toggle'   => [
             'view'            => 'bootstrap-components.form.toggle',
             'legend'          => null,
             'class'           => [
@@ -135,7 +135,7 @@ return [
                 'component' => [],
             ],
         ],
-        'back'            => [
+        'back'     => [
             'view'            => 'bootstrap-components.buttons.button',
             'icon'            => '<i class="fas fa-fw fa-undo"></i>',
             'label'           => 'bootstrap-components.label.back',
@@ -148,7 +148,7 @@ return [
                 'component' => [],
             ],
         ],
-        'cancel'          => [
+        'cancel'   => [
             'view'            => 'bootstrap-components.buttons.button',
             'icon'            => '<i class="fas fa-fw fa-ban"></i>',
             'label'           => 'bootstrap-components.label.cancel',
@@ -163,9 +163,9 @@ return [
         ],
     ],
     // media components ************************************************************************************************
-    'media' => [
-        
-        'audio'     => [
+    'media'  => [
+
+        'audio' => [
             'view'            => 'bootstrap-components.media.audio',
             'class'           => [
                 'container' => [],
@@ -176,7 +176,7 @@ return [
                 'component' => ['controls', 'preload' => true],
             ],
         ],
-        'image'     => [
+        'image' => [
             'view'            => 'bootstrap-components.media.image',
             'class'           => [
                 'container' => [],
@@ -189,7 +189,7 @@ return [
                 'component' => [],
             ],
         ],
-        'video'     => [
+        'video' => [
             'view'            => 'bootstrap-components.media.video',
             'poster'          => null,
             'class'           => [
@@ -201,5 +201,5 @@ return [
                 'component' => ['controls', 'preload' => true],
             ],
         ],
-    ]
+    ],
 ];

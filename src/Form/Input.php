@@ -231,12 +231,12 @@ abstract class Input extends Component
             'legend'      => $this->showLegend ? ($this->legend ? $this->legend : $this->defaultLegend()) : '',
             'label'       => $this->showLabel ? ($this->label
                 ? $this->label
-                : trans('bootstrap-components::bootstrap-components.validation.attributes.' . $this->name)
+                : trans('validation.attributes.' . $this->name)
             ) : '',
             'value'       => $this->value ? $this->value : ($this->model ? $this->model->{$this->name} : null),
             'placeholder' => $this->placeholder
                 ? $this->placeholder
-                : trans('bootstrap-components::bootstrap-components.validation.attributes.' . $this->name),
+                : trans('validation.attributes.' . $this->name),
         ]);
     }
 

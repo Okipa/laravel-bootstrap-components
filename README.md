@@ -48,7 +48,7 @@ This package provides a ready-to-use and customizable bootstrap components libra
 
 - Install the package with composer :
 ```bash
-composer require okipa/laravel-bootstrap-component
+composer require okipa/laravel-bootstrap-components
 ```
 
 - Laravel 5.5+ uses Package Auto-Discovery, so doesn't require you to manually add the ServiceProvider.
