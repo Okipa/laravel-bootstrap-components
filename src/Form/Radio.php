@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Form;
 
-class Radio extends Input
+class Radio extends Checkable
 {
     /**
      * The component config key.
@@ -16,19 +16,4 @@ class Radio extends Input
      * @property string $type
      */
     protected $type = 'radio';
-
-    /**
-     * Set the input values.
-     *
-     * @return array
-     * @throws \Exception
-     */
-    protected function values(): array
-    {
-        $parentValues = parent::values();
-
-        return array_merge($parentValues, [
-            'checked' => $parentValues['value'] ? true : false,
-        ]);
-    }
 }

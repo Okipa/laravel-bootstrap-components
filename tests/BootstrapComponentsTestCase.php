@@ -4,7 +4,6 @@ namespace Okipa\LaravelBootstrapComponents\Test;
 
 use Faker\Factory;
 use Okipa\LaravelBootstrapComponents\ComponentServiceProvider;
-use Okipa\LaravelToggleSwitchButton\ToggleSwitchButtonServiceProvider;
 use Orchestra\Testbench\TestCase;
 
 abstract class BootstrapComponentsTestCase extends TestCase
@@ -40,7 +39,6 @@ abstract class BootstrapComponentsTestCase extends TestCase
     {
         return [
             ComponentServiceProvider::class,
-            ToggleSwitchButtonServiceProvider::class,
         ];
     }
 

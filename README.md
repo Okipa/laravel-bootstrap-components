@@ -28,6 +28,7 @@ This package provides a ready-to-use and customizable bootstrap components libra
 - [textarea()](#textarea)
 - [checkbox()](#checkbox)
 - [toggle()](#toggle)
+- [radio()](#radio)
 
 ### [Clickable](#clickable-components)
 - [buttonValidate()](#buttonvalidate)
@@ -193,8 +194,15 @@ Chainable methods :
   - type : `toggle`.
 - Extra chainable methods :
   - `public function checked(bool $checked = true): Input` (optional)
+  
+*_Note :_* this component is an extra component not included in bootstrap and using it demands to [load the package styles](#styles).
 
-_Note :_ this component is an extra component not included in bootstrap and using it demands to [load the package styles](#styles).
+#### radio()
+
+- Specific values :
+  - type : `radio`.
+- Extra chainable methods :
+  - `public function checked(bool $checked = true): Input` (optional)
 
 ### Buttons components
 

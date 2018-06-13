@@ -221,7 +221,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $configContainerCLass = 'test-config-class-container';
         config()->set('bootstrap-components.form.checkbox.class.container', [$configContainerCLass]);
         $html = checkbox()->name('name')->toHtml();
-        $this->assertContains('class="checkbox-name-container ' . $configContainerCLass . '"', $html);
+        $this->assertContains('class="checkbox-name-container custom-control custom-checkbox ' . $configContainerCLass . '"', $html);
     }
 
     public function testSetContainerClass()
@@ -230,8 +230,8 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $customContainerCLass = 'test-custom-class-container';
         config()->set('bootstrap-components.form.checkbox.class.container', [$configContainerCLass]);
         $html = checkbox()->name('name')->containerClass([$customContainerCLass])->toHtml();
-        $this->assertContains('class="checkbox-name-container ' . $customContainerCLass . '"', $html);
-        $this->assertNotContains('class="checkbox-name-container ' . $configContainerCLass . '"', $html);
+        $this->assertContains('class="checkbox-name-container custom-control custom-checkbox ' . $customContainerCLass . '"', $html);
+        $this->assertNotContains('class="checkbox-name-container custom-control custom-checkbox ' . $configContainerCLass . '"', $html);
     }
 
     public function testConfigComponentClass()

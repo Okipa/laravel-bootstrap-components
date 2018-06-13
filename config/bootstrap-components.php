@@ -105,6 +105,18 @@ return [
                 'component' => [],
             ],
         ],
+        'radio'   => [
+            'view'            => 'bootstrap-components.form.radio',
+            'legend'          => null,
+            'class'           => [
+                'container' => ['form-group'],
+                'component' => [],
+            ],
+            'html_attributes' => [
+                'container' => [],
+                'component' => [],
+            ],
+        ],
     ],
     // buttons components **********************************************************************************************
     'button' => [

@@ -1,4 +1,4 @@
-<div {{ classTag($type . '-' . $name . '-container', 'custom-control', 'custom-checkbox', $containerClass) }}
+<div {{ classTag($type . '-' . $name . '-container', 'custom-control', 'custom-radio', $containerClass) }}
     {{ htmlAttributes($containerHtmlAttributes) }}>
     <input id="{{ $type }}-{{ $name }}"
            {{ classTag($type . '-' . $name . '-component', 'custom-control-input', $componentClass, validationStatus($name)) }}
