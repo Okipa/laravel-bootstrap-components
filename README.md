@@ -139,8 +139,6 @@ php artisan vendor:publish --tag=bootstrap-components::views
   
 #### text()
 
-**Usage example**
-
 ```php
 text()->name('name')
     ->model($user) // value is automatically detected from the field name
@@ -159,8 +157,6 @@ text()->name('name')
 ```
 
 #### tel()
-
-**Usage example**
 
 ```php
 tel()->name('phone_number')
@@ -181,8 +177,6 @@ tel()->name('phone_number')
 
 #### email()
 
-**Usage example**
-
 ```php
 email()->name('email')
     ->model($user) // value is automatically detected from the field name
@@ -202,8 +196,6 @@ email()->name('email')
 
 #### password()
 
-**Usage example**
-
 ```php
 email()->name('password')
     ->model($user) // value is automatically detected from the field name
@@ -222,8 +214,6 @@ email()->name('password')
 ```
 
 #### fileUpload()
-
-**Usage example**
 
 ```php
 fileUpload()->name('avatar')
@@ -253,8 +243,6 @@ fileUpload()->name('avatar')
 
 #### textarea()
 
-**Usage example**
-
 ```php
 textarea()->name('message')
     ->model($user) // value is automatically detected from the field name
@@ -273,8 +261,6 @@ textarea()->name('message')
 ```
 
 #### checkbox()
-
-**Usage example**
 
 ```php
 textarea()->name('active')
@@ -315,8 +301,6 @@ textarea()->name('active')
   
 #### select()
 
-**Usage example**
-
 ```php
 select()->name('selected')
     ->model($user) // selected option is automatically detected
@@ -355,8 +339,6 @@ select()->name('selected')
 
 #### buttonValidate()
 
-**Usage example**
-
 ```php
 buttonValidate()->label('Select a user') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
@@ -369,8 +351,6 @@ buttonValidate()->label('Select a user') // override the default trans('validati
 ```
 
 #### buttonCreate()
-
-**Usage example**
 
 ```php
 buttonCreate()->label('Select a user') // override the default trans('validation.attributes.[name]') label
@@ -385,8 +365,6 @@ buttonCreate()->label('Select a user') // override the default trans('validation
 
 #### buttonUpdate()
 
-**Usage example**
-
 ```php
 buttonUpdate()->label('Select a user') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
@@ -399,8 +377,6 @@ buttonUpdate()->label('Select a user') // override the default trans('validation
 ```
 
 #### buttonCancel()
-
-**Usage example**
 
 ```php
 buttonCancel()->url('https://www.google.com')
@@ -424,8 +400,6 @@ buttonCancel()->url('https://www.google.com')
 
 #### buttonBack()
 
-**Usage example**
-
 ```php
 buttonBack()->url('https://www.google.com')
     ->route('users.index')
@@ -447,30 +421,57 @@ buttonBack()->url('https://www.google.com')
 | route(string $route): Button  | No | set the url value from a route key. |
 
 ### Media components
-- Chainable methods available for all media components :
-  - `public function src(string $src): Media` (optional)
+  
+**Methods available for all form components**
+
+| Signature | Required | Description |
+|---|---|---|
+| src(string $src): Media  | No |  |
 
 #### image()
-- Specific chainable methods :
-  - `public function linkUrl(string $linkUrl): Image` (optional)
-  > Wrap the image in a link and set its url.
-  - `public function alt(string $alt): Image` (optional)
-  - `public function width(int $width): Image` (optional)
-  - `public function height(int $height): Image` (optional)
-  - `public function linkClass(array $linkClass): Image` (optional)
-  > gives the opportunity to set the image link wrapper class.
-  > default value : `config('bootstrap-components.media.image.class.link')`.
-  - `public function linkHtmlAttributes(array $linkHtmlAttributes): Image` (optional)
-  > gives the opportunity to set the image link wrapper html attributes.
-  > default value : `config('bootstrap-components.media.image.html_attributes.link')`.
+
+```php
+image()->src(https://yourapp.fr/public/media/image.jpg)
+    ->alt('Image)
+    ->width(250)
+    ->height(150)
+    ->containerClass(['container', 'class]) // override the default config container class list
+    ->linkComponentClass(['link', 'component', 'class']) // override the default config link class list
+    ->componentClass(['component', 'class']) // override the default config component class list
+    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
+    ->linkHtmlAttributes(['link', 'component', 'class']) // override the default config link html attributes list
+    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
+```
+
+**Component additional methods**
+
+| Signature | Required | Description |
+|---|---|---|
+| linkUrl(string $linkUrl): Image  | No | Wrap the image in a link and set its url. |
+| alt(string $alt): Image  | No |  |
+| width(int $width): Image  | No |  |
+| height(int $height): Image  | No |  |
+| linkClass(array $linkClass): Image  | No | Default value : `config('bootstrap-components.media.image.class.link')`. |
+| linkHtmlAttributes(array $linkHtmlAttributes): Image  | No | Default value : `config('bootstrap-components.media.image.html_attributes.link')`. |
 
 #### audio()
-No specific chainable methods.
+
+```php
+audio()->src(https://yourapp.fr/public/media/audio.mp3)
+```
 
 #### video()
-- Specific chainable methods :
-  - `public function poster(string $poster): Video` (optional)
-  > default value : `config('bootstrap-components.media.video.poster')`.
+
+```php
+audio()->src(https://yourapp.fr/public/media/video.avi)
+    ->poster(https://yourapp.fr/public/media/poster.jpg)
+```
+
+**Component additional methods**
+
+| Signature | Required | Description |
+|---|---|---|
+| poster(string $poster): Video | No | Default value : `config('bootstrap-components.media.video.poster')`. |
 
 ------------------------------------------------------------------------------------------------------------------------
 
