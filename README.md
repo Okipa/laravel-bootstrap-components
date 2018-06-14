@@ -115,33 +115,26 @@ php artisan vendor:publish --tag=bootstrap-components::views
   
 | Signature | Required | Description |
 |---|---|---|
-| containerClass(array $containerClass): Component  | No | default value : config('bootstrap-components.[component_config_key].class.container') |
-| public function componentClass(array $componentClass): Component  | No | default value : config('bootstrap-components.[component_config_key].class.component') |
-| containerHtmlAttributes(array $containerHtmlAttributes): Component  | No | default value : config('bootstrap-components.[component_config_key].html_attributes.container') |
-| componentHtmlAttributes(array $componentHtmlAttributes): Component  | No | default value : config('bootstrap-components.[component_config_key].html_attributes.component') |
+| containerClass(array $containerClass): Component  | No | default value : `config('bootstrap-components.[component_config_key].class.container')` |
+| public function componentClass(array $componentClass): Component  | No | default value : `config('bootstrap-components.[component_config_key].class.component')` |
+| containerHtmlAttributes(array $containerHtmlAttributes): Component  | No | default value : `config('bootstrap-components.[component_config_key].html_attributes.container')` |
+| componentHtmlAttributes(array $componentHtmlAttributes): Component  | No | default value : `config('bootstrap-components.[component_config_key].html_attributes.component')` |
 
 ### Form components
 
 **Methods available for all form components**
-
-- Chainable methods available for all form components :
-- `public function type(string $type): Input` (required)
-  > possible types : `text` / `tel` / `email` / `password` / `file`.
-- `public function name(string $name): Input` (required)
-- `public function model(Model $model): Input` (optional)
-- `public function icon(string $icon): Input` (optional)
-  > default value : `config('bootstrap-components.input.icon')`.
-- `public function hideIcon(): Input` (optional)
-- `public function label(string $label): Input` (optional)
-  > default value : `trans('validation.attributes.[name]')`.
-- `public function hideLabel(): Input` (optional)
-- `public function placeholder(string $placeholder): Input` (optional)
-  > default value : `$label`.
-- `public function value($value): Input` (optional)
-  > default value : `$model->{$name}`.
-- `public function legend(string $legend): Input` (optional)
-  > default value : `config('bootstrap-components.input.legend')`.
-- `public function hideLegend(): Input` (optional)
+| Signature | Required | Description |
+|---|---|---|
+| public function name(string $name): Input  | Yes |  |
+| public function model(Model $model): Input  | No |  |
+| public function icon(string $icon): Input  | No | default value : `config('bootstrap-components.input.icon')` |
+| public function hideIcon(): Input  | No |  |
+| public function label(string $label): Input  | No | default value : `trans('validation.attributes.[name]')` |
+| public function hideLabel(): Input  | No |  |
+| public function placeholder(string $placeholder): Input  | No | default value : `$label` |
+| public function value($value): Input  | No | default value : `$model->{$name}` |
+| public function legend(string $legend): Input  | No | default value : `config('bootstrap-components.input.legend')` |
+| public function hideLegend(): Input  | No |  |
   
 #### text()
 
