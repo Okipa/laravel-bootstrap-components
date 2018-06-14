@@ -29,6 +29,7 @@ This package provides a ready-to-use and customizable bootstrap components libra
 - [checkbox()](#checkbox)
 - [toggle()](#toggle)
 - [radio()](#radio)
+- [select()](#select)
 
 ### [Clickable](#clickable-components)
 - [buttonValidate()](#buttonvalidate)
