@@ -268,6 +268,7 @@ abstract class Input extends Component
      * Check the component values validity
      *
      * @throws \Exception
+     * @return void
      */
     protected function checkValuesValidity(): void
     {

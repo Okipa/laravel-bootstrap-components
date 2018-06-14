@@ -68,161 +68,237 @@ class SelectTest extends BootstrapComponentsTestCase
         ];
         $html = select()->name('name')->options($optionsList, 'id', 'name')->toHtml();
         $this->assertContains('<option value="">validation.attributes.name</option>', $html);
-        $this->assertContains('<option value="' . $optionsList[0]['id'] . '">' . $optionsList[0]['name'] . '</option>',
-            $html);
-        $this->assertContains('<option value="' . $optionsList[1]['id'] . '">' . $optionsList[1]['name'] . '</option>',
-            $html);
+        $this->assertContains(
+            '<option value="' . $optionsList[0]['id'] . '" >' . $optionsList[0]['name'] . '</option>',
+            $html
+        );
+        $this->assertContains(
+            '<option value="' . $optionsList[1]['id'] . '" >' . $optionsList[1]['name'] . '</option>',
+            $html
+        );
     }
 
-    public function testSetOptionsFromObject()
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Select : Invalid options() second
+     *                           $optionValueField argument. « wrong »  does not exist the given first $optionsList
+     *                           argument.
+     */
+    public function testSetOptionsFromArrayWithWrongOptionValueField()
+    {
+        $optionsList = [
+            ['id' => 1, 'name' => $this->faker->word],
+            ['id' => 2, 'name' => $this->faker->word],
+        ];
+        select()->name('name')->options($optionsList, 'wrong', 'name')->toHtml();
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Select : Invalid options() third
+     *                           $optionLabelField argument. « wrong »  does not exist the given first $optionsList
+     *                           argument.
+     */
+    public function testSetOptionsFromArrayWithWrongOptionLabelField()
+    {
+        $optionsList = [
+            ['id' => 1, 'name' => $this->faker->word],
+            ['id' => 2, 'name' => $this->faker->word],
+        ];
+        select()->name('name')->options($optionsList, 'id', 'wrong')->toHtml();
+    }
+
+    public function testSetOptionsFromModelsCollection()
     {
         $users = $this->createMultipleUsers(2);
         $html = select()->name('name')->options($users, 'id', 'name')->toHtml();
         $users = $users->toArray();
         $this->assertContains('<option value="">validation.attributes.name</option>', $html);
-        $this->assertContains('<option value="' . $users[0]['id'] . '">' . $users[0]['name'] . '</option>', $html);
-        $this->assertContains('<option value="' . $users[1]['id'] . '">' . $users[1]['name'] . '</option>', $html);
+        $this->assertContains('<option value="' . $users[0]['id'] . '" >' . $users[0]['name'] . '</option>', $html);
+        $this->assertContains('<option value="' . $users[1]['id'] . '" >' . $users[1]['name'] . '</option>', $html);
     }
 
-    public function testModelValue()
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Select : Invalid options() second
+     *                           $optionValueField argument. « wrong »  does not exist the given first $optionsList
+     *                           argument.
+     */
+    public function testSetOptionsFromModelsCollectionWithWrongOptionValueField()
     {
         $users = $this->createMultipleUsers(2);
-        $html = select()->model($users->first())->name('name')->options($users, 'id', 'name')->toHtml();
-        dd($html);
+        select()->name('name')->options($users, 'wrong', 'name')->toHtml();
     }
 
-//    public function testConfigIcon()
-//    {
-//        $configIcon = 'test-config-icon';
-//        config()->set('bootstrap-components.form.tel.icon', $configIcon);
-//        $html = tel()->name('name')->toHtml();
-//        $this->assertContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
-//    }
-//
-//    public function testSetIcon()
-//    {
-//        $configIcon = 'test-config-icon';
-//        $customIcon = 'test-custom-icon';
-//        config()->set('bootstrap-components.form.tel.icon', $configIcon);
-//        $html = tel()->name('name')->icon($customIcon)->toHtml();
-//        $this->assertContains('<span class="icon input-group-text">' . $customIcon . '</span>', $html);
-//        $this->assertNotContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
-//    }
-//
-//    public function testNoIcon()
-//    {
-//        config()->set('bootstrap-components.form.tel.icon', null);
-//        $html = tel()->name('name')->toHtml();
-//        $this->assertNotContains('<span class="icon input-group-text">', $html);
-//    }
-//
-//    public function testHideIcon()
-//    {
-//        $configIcon = 'test-config-icon';
-//        config()->set('bootstrap-components.form.tel.icon', $configIcon);
-//        $html = tel()->name('name')->hideIcon()->toHtml();
-//        $this->assertNotContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
-//    }
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Select : Invalid options() third
+     *                           $optionLabelField argument. « wrong »  does not exist the given first $optionsList
+     *                           argument.
+     */
+    public function testSetOptionsFromModelsCollectionWithWrongOptionLabelField()
+    {
+        $users = $this->createMultipleUsers(2);
+        select()->name('name')->options($users, 'id', 'wrong')->toHtml();
+    }
 
-    //    public function testChecked()
-    //    {
-    //        $user = null;
-    //        $html = select()->model($user)->name('name')->checked(true)->toHtml();
-    //        $this->assertContains('checked="checked"', $html);
-    //    }
-    //
-    //    public function testNotChecked()
-    //    {
-    //        $user = $this->createUniqueUser();
-    //        $html = select()->model($user)->name('name')->checked(false)->toHtml();
-    //        $this->assertNotContains('checked="checked"', $html);
-    //    }
-    //
-    //    public function testConfigLegend()
-    //    {
-    //        $configLegend = 'test-config-legend';
-    //        config()->set('bootstrap-components.form.select.legend', $configLegend);
-    //        $html = select()->name('name')->toHtml();
-    //        $this->assertContains(
-    //            '<small id="select-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
-    //            $html
-    //        );
-    //    }
-    //
-    //    public function testSetLegend()
-    //    {
-    //        $configLegend = 'test-config-legend';
-    //        $customLegend = 'test-custom-legend';
-    //        config()->set('bootstrap-components.form.select.legend', $configLegend);
-    //        $html = select()->name('name')->legend($customLegend)->toHtml();
-    //        $this->assertContains(
-    //            '<small id="select-name-legend" class="form-text text-muted">' . $customLegend . '</small>',
-    //            $html
-    //        );
-    //        $this->assertNotContains(
-    //            '<small id="select-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
-    //            $html
-    //        );
-    //    }
-    //
-    //    public function testNoLegend()
-    //    {
-    //        config()->set('bootstrap-components.form.select.legend', null);
-    //        $html = select()->name('name')->toHtml();
-    //        $this->assertNotContains('<span class="icon input-group-text">', $html);
-    //    }
-    //
-    //    public function testHideLegend()
-    //    {
-    //        $configLegend = 'test-config-legend';
-    //        config()->set('bootstrap-components.form.select.legend', $configLegend);
-    //        $html = select()->name('name')->hideLegend()->toHtml();
-    //        $this->assertNotContains('<span class="icon input-group-text">', $html);
-    //    }
-    //
-    //    public function testSetValueDefaultCheckStatus()
-    //    {
-    //        $html = select()->name('name')->toHtml();
-    //        $this->assertNotContains('checked="checked', $html);
-    //    }
-    //
-    //    public function testSetValueChecked()
-    //    {
-    //        $customValue = true;
-    //        $html = select()->name('name')->value($customValue)->toHtml();
-    //        $this->assertContains('checked="checked', $html);
-    //    }
-    //
-    //    public function testOldValueChecked()
-    //    {
-    //        $oldValue = true;
-    //        $customValue = false;
-    //        $this->app['router']->get('test', [
-    //            'middleware' => 'web', 'uses' => function() use ($oldValue) {
-    //                $request = request()->merge(['name' => $oldValue]);
-    //                $request->flash();
-    //            },
-    //        ]);
-    //        $this->call('GET', 'test');
-    //        $html = select()->name('name')->value($customValue)->toHtml();
-    //        $this->assertContains('checked="checked', $html);
-    //    }
-    //
-    //    public function testOldValueNotChecked()
-    //    {
-    //        $oldValue = false;
-    //        $customValue = true;
-    //        $this->app['router']->get('test', [
-    //            'middleware' => 'web', 'uses' => function() use ($oldValue) {
-    //                $request = request()->merge(['name' => $oldValue]);
-    //                $request->flash();
-    //            },
-    //        ]);
-    //        $this->call('GET', 'test');
-    //        $html = select()->name('name')->value($customValue)->toHtml();
-    //        $this->assertNotContains('checked="checked', $html);
-    //    }
-    //
+    public function testSelectedFromModelValue()
+    {
+        $users = $this->createMultipleUsers(2);
+        $user = $users->first();
+        $html = select()->model($user)->name('name')->options($users, 'id', 'name')->toHtml();
+        $users = $users->toArray();
+        $this->assertContains('<option value="">validation.attributes.name</option>', $html);
+        $this->assertContains(
+            '<option value="' . $users[0]['id'] . '" selected="selected">' . $users[0]['name'] . '</option>',
+            $html);
+        $this->assertContains('<option value="' . $users[1]['id'] . '" >' . $users[1]['name'] . '</option>', $html);
+    }
+
+    public function testSetSelectedOptionWithoutDeclaredOptions()
+    {
+        $html = select()->name('name')->selected('id', 1)->toHtml();
+        $this->assertContains('<select', $html);
+    }
+
+    public function testSetSelectedOptionFromValue()
+    {
+        $users = $this->createMultipleUsers(2);
+        $user = null;
+        $html = select()
+            ->model($user)
+            ->name('name')
+            ->options($users, 'id', 'name')
+            ->selected('id', $users->get(1)->id)
+            ->toHtml();
+        $this->assertContains('<option value="">validation.attributes.name</option>', $html);
+        $this->assertContains(
+            '<option value="' . $users[0]['id'] . '" >' . $users[0]['name'] . '</option>',
+            $html
+        );
+        $this->assertContains(
+            '<option value="' . $users[1]['id'] . '" selected="selected">' . $users[1]['name'] . '</option>',
+            $html
+        );
+    }
+
+    public function testSetSelectedOptionFromLabel()
+    {
+        $users = $this->createMultipleUsers(2);
+        $user = null;
+        $html = select()
+            ->model($user)
+            ->name('name')
+            ->options($users, 'id', 'name')
+            ->selected('name', $users->get(1)->name)
+            ->toHtml();
+        $this->assertContains('<option value="">validation.attributes.name</option>', $html);
+        $this->assertContains(
+            '<option value="' . $users[0]['id'] . '" >' . $users[0]['name'] . '</option>',
+            $html
+        );
+        $this->assertContains(
+            '<option value="' . $users[1]['id'] . '" selected="selected">' . $users[1]['name'] . '</option>',
+            $html
+        );
+    }
+
+    public function testNotSelected()
+    {
+        $users = $this->createMultipleUsers(2);
+        $html = select()
+            ->name('name')
+            ->options($users, 'id', 'name')
+            ->toHtml();
+        $this->assertContains('<option value="">validation.attributes.name</option>', $html);
+        $this->assertContains(
+            '<option value="' . $users[0]['id'] . '" >' . $users[0]['name'] . '</option>',
+            $html
+        );
+        $this->assertContains(
+            '<option value="' . $users[1]['id'] . '" >' . $users[1]['name'] . '</option>',
+            $html
+        );
+    }
+
+    public function testConfigIcon()
+    {
+        $configIcon = 'test-config-icon';
+        config()->set('bootstrap-components.form.select.icon', $configIcon);
+        $html = select()->name('name')->toHtml();
+        $this->assertContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
+    }
+
+    public function testSetIcon()
+    {
+        $configIcon = 'test-config-icon';
+        $customIcon = 'test-custom-icon';
+        config()->set('bootstrap-components.form.select.icon', $configIcon);
+        $html = select()->name('name')->icon($customIcon)->toHtml();
+        $this->assertContains('<span class="icon input-group-text">' . $customIcon . '</span>', $html);
+        $this->assertNotContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
+    }
+
+    public function testNoIcon()
+    {
+        config()->set('bootstrap-components.form.select.icon', null);
+        $html = select()->name('name')->toHtml();
+        $this->assertNotContains('<span class="icon input-group-text">', $html);
+    }
+
+    public function testHideIcon()
+    {
+        $configIcon = 'test-config-icon';
+        config()->set('bootstrap-components.form.select.icon', $configIcon);
+        $html = select()->name('name')->hideIcon()->toHtml();
+        $this->assertNotContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
+    }
+
+    public function testConfigLegend()
+    {
+        $configLegend = 'test-config-legend';
+        config()->set('bootstrap-components.form.select.legend', $configLegend);
+        $html = select()->name('name')->toHtml();
+        $this->assertContains(
+            '<small id="select-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
+            $html
+        );
+    }
+
+    public function testSetLegend()
+    {
+        $configLegend = 'test-config-legend';
+        $customLegend = 'test-custom-legend';
+        config()->set('bootstrap-components.form.select.legend', $configLegend);
+        $html = select()->name('name')->legend($customLegend)->toHtml();
+        $this->assertContains(
+            '<small id="select-name-legend" class="form-text text-muted">' . $customLegend . '</small>',
+            $html
+        );
+        $this->assertNotContains(
+            '<small id="select-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
+            $html
+        );
+    }
+
+    public function testNoLegend()
+    {
+        config()->set('bootstrap-components.form.select.legend', null);
+        $html = select()->name('name')->toHtml();
+        $this->assertNotContains('id="select-name-legend"', $html);
+    }
+
+    public function testHideLegend()
+    {
+        $configLegend = 'test-config-legend';
+        config()->set('bootstrap-components.form.select.legend', $configLegend);
+        $html = select()->name('name')->hideLegend()->toHtml();
+        $this->assertNotContains(
+            '<small id="select-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
+            $html
+        );
+    }
+    
     //    public function testSetLabel()
     //    {
     //        $label = 'test-custom-label';
