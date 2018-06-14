@@ -115,10 +115,10 @@ php artisan vendor:publish --tag=bootstrap-components::views
   
 | Signature | Required | Description |
 |---|---|---|
-| `containerClass(array $containerClass): Component`  | No | default value : `config('bootstrap-components.[component_config_key].class.container')` |
-| `public function componentClass(array $componentClass): Component`  | No | default value : `config('bootstrap-components.[component_config_key].class.component')` |
-| `containerHtmlAttributes(array $containerHtmlAttributes): Component`  | No | default value : `config('bootstrap-components.[component_config_key].html_attributes.container')` |
-| `componentHtmlAttributes(array $componentHtmlAttributes): Component`  | No | default value : `config('bootstrap-components.[component_config_key].html_attributes.component')` |
+| containerClass(array $containerClass): Component  | No | default value : config('bootstrap-components.[component_config_key].class.container') |
+| public function componentClass(array $componentClass): Component  | No | default value : config('bootstrap-components.[component_config_key].class.component') |
+| containerHtmlAttributes(array $containerHtmlAttributes): Component  | No | default value : config('bootstrap-components.[component_config_key].html_attributes.container') |
+| componentHtmlAttributes(array $componentHtmlAttributes): Component  | No | default value : config('bootstrap-components.[component_config_key].html_attributes.component') |
 
 ### Form components
 
