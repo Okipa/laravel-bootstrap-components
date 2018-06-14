@@ -235,7 +235,7 @@ fileUpload()->name('avatar')
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
 ```
 
-**Component additional methods**
+__Component additional methods__
 
 | Signature | Required | Description |
 |---|---|---|
