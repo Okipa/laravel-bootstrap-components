@@ -144,9 +144,10 @@ php artisan vendor:publish --tag=bootstrap-components::views
 ```php
 text()->name('name')
     ->model($user) // value is automatically detected from the field name
-    ->value() // or manually set the value 
+    ->value() // or manually set the value
     ->label('Name') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
+    ->placeholder() // override the default placeholder (label)
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
@@ -167,6 +168,7 @@ tel()->name('phone_number')
     ->value() // or manually set the value
     ->label('Name') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
+    ->placeholder() // override the default placeholder (label)
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
@@ -187,6 +189,7 @@ email()->name('email')
     ->value() // or manually set the value
     ->label('Name') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
+    ->placeholder() // override the default placeholder (label)
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
@@ -207,6 +210,7 @@ email()->name('password')
     ->value() // or manually set the value
     ->label('Name') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
+    ->placeholder() // override the default placeholder (label)
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
@@ -227,6 +231,7 @@ fileUpload()->name('avatar')
     ->value() // or manually set the value
     ->label('Name') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
+    ->placeholder() // override the default placeholder (label)
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
@@ -256,6 +261,7 @@ textarea()->name('message')
     ->value() // or manually set the value
     ->label('Name') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
+    ->placeholder() // override the default placeholder (label)
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
@@ -268,10 +274,30 @@ textarea()->name('message')
 
 #### checkbox()
 
-- Specific values :
-  - type : `checkbox`.
-- Extra chainable methods :
-  - `public function checked(bool $checked = true): Input` (optional)
+**Usage example**
+
+```php
+textarea()->name('active')
+    ->model($user) // checked status is automatically detected from the field name
+    ->value(true) // or manually set the value
+    ->checked(true) // or use the alias for value
+    ->label('Name') // override the default trans('validation.attributes.[name]') label
+    ->hideLabel() // or hide the label
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->hideIcon() // or hide the icon
+    ->legend('Select a user.') // override the default config legend
+    ->hideLegend() // or hide the legend
+    ->containerClass(['container', 'class]) // override the default config container class list
+    ->componentClass(['component', 'class']) // override the default config component class list
+    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
+    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
+```
+
+**Component additional methods**
+
+| Signature | Required | Description |
+|---|---|---|
+| checked(bool $checked = true): Input  | No |  |
 
 #### toggle()
 
@@ -298,6 +324,7 @@ select()->name('selected')
     ->options($usersList, 'id', 'name') // work with a models collection or an array
     ->label('Select a user') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
+    ->placeholder() // override the default placeholder (label)
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
@@ -317,51 +344,107 @@ select()->name('selected')
 
 ### Buttons components
 
-- Chainable methods available for all button components :
-  - `public function type(string $type): Input` (required)
-  > possible types : `button` / `submit`.
-  - `public function url(string $url): Button` (optional)
-  > only used for a `type="button"` button component.
-  > default value : `url()->back()`.
-  - `public function route(string $route): Button` (optional)
-  > only used for a `type="button"` button component.
-  > set the url value from a route key.
-  - `public function icon(string $icon): Input` (optional)
-  > default value : `config('bootstrap-components.button.icon')`.
-  - `public function hideIcon(): Input` (optional)
-  - `public function label(string $label): Input` (optional)
-  > default value : `config('bootstrap-components.button.label')`.
-  - `public function hideLabel(): Input` (optional)
+**Methods available for all buttons components**
+
+| Signature | Required | Description |
+|---|---|---|
+| icon(string $icon): Input  | No | default value : `config('bootstrap-components.button.icon')`. |
+| public function hideIcon(): Input  | No |  |
+| public function label(string $label): Input  | No | default value : `config('bootstrap-components.button.label')` |
+| public function hideLabel(): Input  | No |  |
 
 #### buttonValidate()
 
-- Specific values :
-  - type : `submit`.
-- No specific chainable methods.
+**Usage example**
+
+```php
+buttonValidate()->label('Select a user') // override the default trans('validation.attributes.[name]') label
+    ->hideLabel() // or hide the label
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->hideIcon() // or hide the icon
+    ->containerClass(['container', 'class]) // override the default config container class list
+    ->componentClass(['component', 'class']) // override the default config component class list
+    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
+    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
+```
 
 #### buttonCreate()
 
-- Specific values :
-  - type : `submit`.
-- No specific chainable methods.
+**Usage example**
+
+```php
+buttonCreate()->label('Select a user') // override the default trans('validation.attributes.[name]') label
+    ->hideLabel() // or hide the label
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->hideIcon() // or hide the icon
+    ->containerClass(['container', 'class]) // override the default config container class list
+    ->componentClass(['component', 'class']) // override the default config component class list
+    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
+    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
+```
 
 #### buttonUpdate()
 
-- Specific values :
-  - type : `submit`.
-- No specific chainable methods.
+**Usage example**
+
+```php
+buttonUpdate()->label('Select a user') // override the default trans('validation.attributes.[name]') label
+    ->hideLabel() // or hide the label
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->hideIcon() // or hide the icon
+    ->containerClass(['container', 'class]) // override the default config container class list
+    ->componentClass(['component', 'class']) // override the default config component class list
+    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
+    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
+```
 
 #### buttonCancel()
 
-- Specific values :
-  - type : `button`.
-- No specific chainable methods.
+**Usage example**
+
+```php
+buttonCancel()->url('https://www.google.com')
+    ->route('users.index')
+    ->label('Select a user') // override the default trans('validation.attributes.[name]') label
+    ->hideLabel() // or hide the label
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->hideIcon() // or hide the icon
+    ->containerClass(['container', 'class]) // override the default config container class list
+    ->componentClass(['component', 'class']) // override the default config component class list
+    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
+    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
+```
+
+**Component additional methods**
+
+| Signature | Required | Description |
+|---|---|---|
+| url(string $url): Button  | No | default value : `url()->back()`. |
+| route(string $route): Button  | No | set the url value from a route key. |
 
 #### buttonBack()
 
-- Specific values :
-  - type : `button`.
-- No specific chainable methods.
+**Usage example**
+
+```php
+buttonBack()->url('https://www.google.com')
+    ->route('users.index')
+    ->label('Select a user') // override the default trans('validation.attributes.[name]') label
+    ->hideLabel() // or hide the label
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->hideIcon() // or hide the icon
+    ->containerClass(['container', 'class]) // override the default config container class list
+    ->componentClass(['component', 'class']) // override the default config component class list
+    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
+    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
+```
+
+**Component additional methods**
+
+| Signature | Required | Description |
+|---|---|---|
+| url(string $url): Button  | No | default value : `url()->back()`. |
+| route(string $route): Button  | No | set the url value from a route key. |
 
 ### Media components
 - Chainable methods available for all media components :
