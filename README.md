@@ -205,20 +205,20 @@ Chainable methods available for all components :
 
 ```php
 // usage example
-{{ select()->name('selected') }}
-    // ->model($user) // selected option is automatically detected
-    // ->selected('id', 1) // or manually set the selected option
-    // ->options($usersList, 'id', 'name') // work with a models collection or an array
-    // ->label('Select a user') // override the default trans('validation.attributes.[name]') label
-    // ->hideLabel()
-    // ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
-    // ->hideIcon()
-    // ->legend('Select a user.')
-    // ->hideLegend()
-    // ->containerClass(['container', 'class]) // override the default config
-    // ->componentClass(['component', 'class']) // override the default config
-    // ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config
-    // ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config
+select()->name('selected')
+    ->model($user) // selected option is automatically detected
+    ->selected('id', 1) // or manually set the selected option
+    ->options($usersList, 'id', 'name') // work with a models collection or an array
+    ->label('Select a user') // override the default trans('validation.attributes.[name]') label
+    ->hideLabel() // or hide the label
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->hideIcon() // or hide the icon
+    ->legend('Select a user.') // override the default config legend
+    ->hideLegend() // or hide the legend
+    ->containerClass(['container', 'class]) // override the default config container class list
+    ->componentClass(['component', 'class']) // override the default config component class list
+    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
+    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
 ```
 
 - Specific chainable methods :
