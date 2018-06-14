@@ -209,7 +209,7 @@ Chainable methods available for all components :
     // ->model($user) // selected option is automatically detected
     // ->selected('id', 1) // or manually set the selected option
     // ->options($usersList, 'id', 'name') // work with a models collection or an array
-    // ->label('Select a user') // override the default `trans('validation.attributes.[name]')` label
+    // ->label('Select a user') // override the default trans('validation.attributes.[name]') label
     // ->hideLabel()
     // ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
     // ->hideIcon()
