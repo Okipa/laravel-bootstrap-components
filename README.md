@@ -235,7 +235,7 @@ fileUpload()->name('avatar')
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
 ```
 
-_Component additional methods_
+_Component additional methods :_
 
 | Signature | Required | Description |
 |---|---|---|
@@ -279,7 +279,7 @@ textarea()->name('active')
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
 ```
 
-_Component additional methods_
+_Component additional methods :_
 
 | Signature | Required | Description |
 |---|---|---|
@@ -319,7 +319,7 @@ select()->name('selected')
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
 ```
 
-_Component additional methods_
+_Component additional methods :_
 
 | Signature | Required | Description |
 |---|---|---|
@@ -391,7 +391,7 @@ buttonCancel()->url('https://www.google.com')
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
 ```
 
-_Component additional methods_
+_Component additional methods :_
 
 | Signature | Required | Description |
 |---|---|---|
@@ -413,7 +413,7 @@ buttonBack()->url('https://www.google.com')
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
 ```
 
-_Component additional methods_
+_Component additional methods :_
 
 | Signature | Required | Description |
 |---|---|---|
@@ -443,7 +443,7 @@ image()->src(https://yourapp.fr/public/media/image.jpg)
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
 ```
 
-_Component additional methods_
+_Component additional methods :_
 
 | Signature | Required | Description |
 |---|---|---|
@@ -467,7 +467,7 @@ audio()->src(https://yourapp.fr/public/media/video.avi)
     ->poster(https://yourapp.fr/public/media/poster.jpg)
 ```
 
-_Component additional methods_
+_Component additional methods :_
 
 | Signature | Required | Description |
 |---|---|---|
