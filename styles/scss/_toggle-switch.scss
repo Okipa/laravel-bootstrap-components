@@ -25,6 +25,7 @@
             user-select: none;
             vertical-align: middle;
             text-indent: calc(calc(#{$switch-height} * 2) + .5rem);
+            margin: 0;
         }
 
         + label::before,

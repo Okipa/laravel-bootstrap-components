@@ -263,7 +263,7 @@ textarea()->name('message')
 #### checkbox()
 
 ```php
-textarea()->name('active')
+checkbox()->name('active')
     ->model($user) // checked status is automatically detected from the field name
     ->value(true) // or manually set the value
     ->checked(true) // or use the alias for value
@@ -287,17 +287,55 @@ _Component additional methods :_
 
 #### toggle()
 
-- Specific values :
-  - type : `toggle`.
-- Extra chainable methods :
-  - `public function checked(bool $checked = true): Input` (optional)
+```php
+toggle()->name('active')
+    ->model($user) // checked status is automatically detected from the field name
+    ->value(true) // or manually set the value
+    ->checked(true) // or use the alias for value
+    ->label('Name') // override the default trans('validation.attributes.[name]') label
+    ->hideLabel() // or hide the label
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->hideIcon() // or hide the icon
+    ->legend('Select a user.') // override the default config legend
+    ->hideLegend() // or hide the legend
+    ->containerClass(['container', 'class]) // override the default config container class list
+    ->componentClass(['component', 'class']) // override the default config component class list
+    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
+    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
+```
+
+_Component additional methods :_
+
+| Signature | Required | Description |
+|---|---|---|
+| checked(bool $checked = true): Input  | No |  |
   
-*_Note :_* this component is an extra component not included in bootstrap and using it demands to [load the package styles](#styles).
+_Note :_ This component is an extra component not included in bootstrap and using it demands to [load the package styles](#styles).
 
 #### radio()
 
-- Specific chainable methods :
-  - `public function checked(bool $checked = true): Input` (optional)
+```php
+radio()->name('active')
+    ->model($user) // checked status is automatically detected from the field name
+    ->value(true) // or manually set the value
+    ->checked(true) // or use the alias for value
+    ->label('Name') // override the default trans('validation.attributes.[name]') label
+    ->hideLabel() // or hide the label
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->hideIcon() // or hide the icon
+    ->legend('Select a user.') // override the default config legend
+    ->hideLegend() // or hide the legend
+    ->containerClass(['container', 'class]) // override the default config container class list
+    ->componentClass(['component', 'class']) // override the default config component class list
+    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
+    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
+```
+
+_Component additional methods :_
+
+| Signature | Required | Description |
+|---|---|---|
+| checked(bool $checked = true): Input  | No |  |
   
 #### select()
 
