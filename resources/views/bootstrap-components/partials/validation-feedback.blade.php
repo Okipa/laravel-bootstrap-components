@@ -1,4 +1,4 @@
-@if(! $errors->isEmpty())
+@if(isset($errors) && ! $errors->isEmpty())
     @if($errors->has($name))
         <div class="invalid-feedback d-block">
             {{ $errors->first($name) }}
