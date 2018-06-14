@@ -221,6 +221,7 @@ select()->name('selected')
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
 ```
 Public chainable methods :
+
 | Signature | Required | Description |
 |---|---|
 | options(iterable $optionsList, string $optionValueField, string $optionLabelField): Select  | No | Set the options list (array or models collection) and declare which fields should be used for the options values and labels. |
