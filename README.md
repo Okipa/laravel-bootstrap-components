@@ -115,10 +115,10 @@ php artisan vendor:publish --tag=bootstrap-components::views
   
 | Signature | Required | Description |
 |---|---|---|
-| containerClass(array $containerClass): Component  | No | default value : `config('bootstrap-components.[component_config_key].class.container')` |
-| public function componentClass(array $componentClass): Component  | No | default value : `config('bootstrap-components.[component_config_key].class.component')` |
-| containerHtmlAttributes(array $containerHtmlAttributes): Component  | No | default value : `config('bootstrap-components.[component_config_key].html_attributes.container')` |
-| componentHtmlAttributes(array $componentHtmlAttributes): Component  | No | default value : `config('bootstrap-components.[component_config_key].html_attributes.component')` |
+| containerClass(array $containerClass): Component  | No | default value : `config('bootstrap-components.[component_config_key].class.container')`. |
+| componentClass(array $componentClass): Component  | No | default value : `config('bootstrap-components.[component_config_key].class.component')`. |
+| containerHtmlAttributes(array $containerHtmlAttributes): Component  | No | default value : `config('bootstrap-components.[component_config_key].html_attributes.container')`. |
+| componentHtmlAttributes(array $componentHtmlAttributes): Component  | No | default value : `config('bootstrap-components.[component_config_key].html_attributes.component')`. |
 
 ### Form components
 
@@ -126,16 +126,16 @@ php artisan vendor:publish --tag=bootstrap-components::views
 
 | Signature | Required | Description |
 |---|---|---|
-| public function name(string $name): Input  | Yes |  |
-| public function model(Model $model): Input  | No |  |
-| public function icon(string $icon): Input  | No | default value : `config('bootstrap-components.input.icon')` |
-| public function hideIcon(): Input  | No |  |
-| public function label(string $label): Input  | No | default value : `trans('validation.attributes.[name]')` |
-| public function hideLabel(): Input  | No |  |
-| public function placeholder(string $placeholder): Input  | No | default value : `$label` |
-| public function value($value): Input  | No | default value : `$model->{$name}` |
-| public function legend(string $legend): Input  | No | default value : `config('bootstrap-components.input.legend')` |
-| public function hideLegend(): Input  | No |  |
+|  name(string $name): Input  | Yes |  |
+| model(Model $model): Input  | No |  |
+| icon(string $icon): Input  | No | default value : `config('bootstrap-components.input.icon')`. |
+| hideIcon(): Input  | No |  |
+| label(string $label): Input  | No | default value : `trans('validation.attributes.[name]')`. |
+| hideLabel(): Input  | No |  |
+| placeholder(string $placeholder): Input  | No | default value : `$label`. |
+| value($value): Input  | No | default value : `$model->{$name}`. |
+| legend(string $legend): Input  | No | default value : `config('bootstrap-components.input.legend')`. |
+| hideLegend(): Input  | No |  |
   
 #### text()
 
@@ -239,7 +239,7 @@ _Component additional methods :_
 
 | Signature | Required | Description |
 |---|---|---|
-| public function uploadedFile(Closure $uploadedFile): InputFile  | No | Allows to set html or another component to render the uploaded file |
+| public function uploadedFile(Closure $uploadedFile): InputFile  | No | Allows to set html or another component to render the uploaded file. |
 
 #### textarea()
 
@@ -371,9 +371,9 @@ _Component additional methods :_
 | Signature | Required | Description |
 |---|---|---|
 | icon(string $icon): Input  | No | default value : `config('bootstrap-components.button.icon')`. |
-| public function hideIcon(): Input  | No |  |
-| public function label(string $label): Input  | No | default value : `config('bootstrap-components.button.label')` |
-| public function hideLabel(): Input  | No |  |
+| hideIcon(): Input  | No |  |
+| label(string $label): Input  | No | default value : `config('bootstrap-components.button.label')`. |
+| hideLabel(): Input  | No |  |
 
 #### buttonValidate()
 
