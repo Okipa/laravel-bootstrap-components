@@ -139,41 +139,132 @@ php artisan vendor:publish --tag=bootstrap-components::views
   
 #### text()
 
-- Specific values :
-  - type : `text`.
-- No specific chainable methods.
+**Usage example**
+
+```php
+text()->name('name')
+    ->model($user) // value is automatically detected from the field name
+    ->value() // or manually set the value 
+    ->label('Name') // override the default trans('validation.attributes.[name]') label
+    ->hideLabel() // or hide the label
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->hideIcon() // or hide the icon
+    ->legend('Select a user.') // override the default config legend
+    ->hideLegend() // or hide the legend
+    ->containerClass(['container', 'class]) // override the default config container class list
+    ->componentClass(['component', 'class']) // override the default config component class list
+    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
+    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
+```
 
 #### tel()
 
-- Specific values :
-  - type : `tel`.
-- No specific chainable methods.
+**Usage example**
+
+```php
+tel()->name('phone_number')
+    ->model($user) // value is automatically detected from the field name
+    ->value() // or manually set the value
+    ->label('Name') // override the default trans('validation.attributes.[name]') label
+    ->hideLabel() // or hide the label
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->hideIcon() // or hide the icon
+    ->legend('Select a user.') // override the default config legend
+    ->hideLegend() // or hide the legend
+    ->containerClass(['container', 'class]) // override the default config container class list
+    ->componentClass(['component', 'class']) // override the default config component class list
+    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
+    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
+```
 
 #### email()
 
-- Specific values :
-  - type : `email`.
-- No specific chainable methods.
+**Usage example**
+
+```php
+email()->name('email')
+    ->model($user) // value is automatically detected from the field name
+    ->value() // or manually set the value
+    ->label('Name') // override the default trans('validation.attributes.[name]') label
+    ->hideLabel() // or hide the label
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->hideIcon() // or hide the icon
+    ->legend('Select a user.') // override the default config legend
+    ->hideLegend() // or hide the legend
+    ->containerClass(['container', 'class]) // override the default config container class list
+    ->componentClass(['component', 'class']) // override the default config component class list
+    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
+    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
+```
 
 #### password()
 
-- Specific values :
-  - type : `password`.
-- No specific chainable methods.
+**Usage example**
+
+```php
+email()->name('password')
+    ->model($user) // value is automatically detected from the field name
+    ->value() // or manually set the value
+    ->label('Name') // override the default trans('validation.attributes.[name]') label
+    ->hideLabel() // or hide the label
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->hideIcon() // or hide the icon
+    ->legend('Select a user.') // override the default config legend
+    ->hideLegend() // or hide the legend
+    ->containerClass(['container', 'class]) // override the default config container class list
+    ->componentClass(['component', 'class']) // override the default config component class list
+    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
+    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
+```
 
 #### fileUpload()
 
-- Specific values :
-  - type : `file`.
-- Extra chainable methods :
-  - `public function uploadedFile(Closure $uploadedFile): InputFile` (optional)
-  > allows to set html or another component to render the uploaded file.
+**Usage example**
+
+```php
+fileUpload()->name('avatar')
+    ->model($user) // value is automatically detected from the field name
+    ->value() // or manually set the value
+    ->label('Name') // override the default trans('validation.attributes.[name]') label
+    ->hideLabel() // or hide the label
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->hideIcon() // or hide the icon
+    ->legend('Select a user.') // override the default config legend
+    ->hideLegend() // or hide the legend
+    ->uploadedFile(function(){
+        return '<div>Some HTML</div>'
+    })
+    ->containerClass(['container', 'class]) // override the default config container class list
+    ->componentClass(['component', 'class']) // override the default config component class list
+    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
+    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
+```
+
+**Component additional methods**
+
+| Signature | Required | Description |
+|---|---|---|
+| public function uploadedFile(Closure $uploadedFile): InputFile  | No | Allows to set html or another component to render the uploaded file |
 
 #### textarea()
 
-- Specific values :
-  - type : `textarea`.
-- No specific chainable methods.
+**Usage example**
+
+```php
+textarea()->name('message')
+    ->model($user) // value is automatically detected from the field name
+    ->value() // or manually set the value
+    ->label('Name') // override the default trans('validation.attributes.[name]') label
+    ->hideLabel() // or hide the label
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->hideIcon() // or hide the icon
+    ->legend('Select a user.') // override the default config legend
+    ->hideLegend() // or hide the legend
+    ->containerClass(['container', 'class]) // override the default config container class list
+    ->componentClass(['component', 'class']) // override the default config component class list
+    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
+    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
+```
 
 #### checkbox()
 
