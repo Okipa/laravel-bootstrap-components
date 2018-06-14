@@ -220,12 +220,11 @@ select()->name('selected')
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
 ```
-
-- Specific chainable methods :
-  - `public function options(iterable $optionsList, string $optionValueField, string $optionLabelField): Select` (optional)
-  > Set the options list (array or models collection) and declare which fields should be used for the options values and labels.
-  - `public function selected(string $fieldToCompare, $valueToCompare): Select` (optional)
-  > Choose which option should be selected, declaring the field and the value to compare with the declared options list.
+Public chainable methods :
+| Signature | Required | Description |
+|---|---|
+| options(iterable $optionsList, string $optionValueField, string $optionLabelField): Select  | No | Set the options list (array or models collection) and declare which fields should be used for the options values and labels. |
+| selected(string $fieldToCompare, $valueToCompare): Select  | No | Choose which option should be selected, declaring the field and the value to compare with the declared options list. |
 
 ### Buttons components
 
