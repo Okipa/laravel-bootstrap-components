@@ -97,7 +97,7 @@ return [
             'view'            => 'bootstrap-components.form.toggle',
             'legend'          => null,
             'class'           => [
-                'container' => ['form-group'],
+                'container' => ['form-group', 'p-0'],
                 'component' => [],
             ],
             'html_attributes' => [
