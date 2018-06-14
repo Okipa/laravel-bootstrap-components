@@ -111,17 +111,18 @@ php artisan vendor:publish --tag=bootstrap-components::views
 
 ## API
 
-Chainable methods available for all components :
-- `public function containerClass(array $containerClass): Component` (optional)
-  > default value : `config('bootstrap-components.[component_config_key].class.container')`
-- `public function componentClass(array $componentClass): Component` (optional)
-  > default value : `config('bootstrap-components.[component_config_key].class.component')`
-- `public function containerHtmlAttributes(array $containerHtmlAttributes): Component` (optional)
-  > default value : `config('bootstrap-components.[component_config_key].html_attributes.container')`
-- `public function componentHtmlAttributes(array $componentHtmlAttributes): Component` (optional)
-  > default value : `config('bootstrap-components.[component_config_key].html_attributes.component')`
+**Methods available for all components**
+  
+| Signature | Required | Description |
+|---|---|---|
+| `containerClass(array $containerClass): Component`  | No | default value : `config('bootstrap-components.[component_config_key].class.container')` |
+| `public function componentClass(array $componentClass): Component`  | No | default value : `config('bootstrap-components.[component_config_key].class.component')` |
+| `containerHtmlAttributes(array $containerHtmlAttributes): Component`  | No | default value : `config('bootstrap-components.[component_config_key].html_attributes.container')` |
+| `componentHtmlAttributes(array $componentHtmlAttributes): Component`  | No | default value : `config('bootstrap-components.[component_config_key].html_attributes.component')` |
 
 ### Form components
+
+**Methods available for all form components**
 
 - Chainable methods available for all form components :
 - `public function type(string $type): Input` (required)
@@ -203,8 +204,9 @@ Chainable methods available for all components :
   
 #### select()
 
+**Usage example**
+
 ```php
-// usage example
 select()->name('selected')
     ->model($user) // selected option is automatically detected
     ->selected('id', 1) // or manually set the selected option
@@ -220,7 +222,8 @@ select()->name('selected')
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
 ```
-Public chainable methods :
+
+**Component additional methods**
 
 | Signature | Required | Description |
 |---|---|---|
