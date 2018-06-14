@@ -44,6 +44,7 @@
             background-color: $switch-bg;
             border-radius: $switch-border-radius;
             transition: $switch-transition;
+            height: 100%;
         }
 
         + label::after {
