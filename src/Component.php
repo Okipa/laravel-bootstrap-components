@@ -2,9 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents;
 
-use Illuminate\Contracts\Support\Htmlable;
-
-abstract class Component implements Htmlable
+abstract class Component implements ComponentInterface
 {
     /**
      * The component config key.
