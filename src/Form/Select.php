@@ -65,7 +65,15 @@ class Select extends Input
         return $this;
     }
 
-    public function selected(string $fieldToCompare, $valueToCompare)
+    /**
+     * Set the selected option.
+     * 
+     * @param string $fieldToCompare
+     * @param        $valueToCompare
+     *
+     * @return \Okipa\LaravelBootstrapComponents\Form\Select
+     */
+    public function selected(string $fieldToCompare, $valueToCompare): Select
     {
         $this->selectedFieldToCompare = $fieldToCompare;
         $this->selectedValueToCompare = $valueToCompare;
@@ -141,7 +149,8 @@ class Select extends Input
                 if ($this->selectedFieldToCompare && empty($option[$this->selectedFieldToCompare])) {
                     throw new InvalidArgumentException(
                         get_class($this) . ' : Invalid selected() first $fieldToCompare argument. « '
-                        . $this->selectedFieldToCompare . ' »  does not exist the given first options() $optionsList argument.'
+                        . $this->selectedFieldToCompare
+                        . ' »  does not exist the given first options() $optionsList argument.'
                     );
                 }
             }

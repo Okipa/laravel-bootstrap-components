@@ -122,9 +122,7 @@ Chainable methods available for all components :
 
 ### Form components
 
-#### input()
-
-Chainable methods :
+- Chainable methods available for all form components :
 - `public function type(string $type): Input` (required)
   > possible types : `text` / `tel` / `email` / `password` / `file`.
 - `public function name(string $name): Input` (required)
@@ -199,10 +197,33 @@ Chainable methods :
 
 #### radio()
 
-- Specific values :
-  - type : `radio`.
-- Extra chainable methods :
+- Specific chainable methods :
   - `public function checked(bool $checked = true): Input` (optional)
+  
+#### select()
+
+```php
+{{ select()->name('selected') }}
+    // ->model($user) // selected option is automatically detected
+    // ->selected('id', 1) // manually set the selected option
+    // ->options($usersList, 'id', 'name') // work with models collection or array
+    // ->label('Select a user') // override the default translation
+    // ->hideLabel()
+    // ->icon('<i class="fas fa-hand-pointer"></i>') // override the config
+    // ->hideIcon()
+    // ->legend('Select a user.')
+    // ->hideLegend()
+    // ->containerClass(['container', 'class]) // override the config class
+    // ->componentClass(['component', 'class']) // override the config
+    // ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the config
+    // ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the config
+```
+
+- Specific chainable methods :
+  - `public function options(iterable $optionsList, string $optionValueField, string $optionLabelField): Select` (optional)
+  > Set the options list (array or models collection) and declare which fields should be used for the options values and labels.
+  - `public function selected(string $fieldToCompare, $valueToCompare): Select` (optional)
+  > Choose which option should be selected, declaring the field and the value to compare with the declared options list.
 
 ### Buttons components
 

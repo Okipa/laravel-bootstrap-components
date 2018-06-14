@@ -2,6 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
+use Illuminate\Support\MessageBag;
 use Okipa\LaravelBootstrapComponents\Form\Input;
 use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
 use Okipa\LaravelBootstrapComponents\Test\Fakers\UsersFaker;
@@ -298,134 +299,140 @@ class SelectTest extends BootstrapComponentsTestCase
             $html
         );
     }
+
+    public function testSetLabel()
+    {
+        $label = 'test-custom-label';
+        $html = select()->name('name')->label($label)->toHtml();
+        $this->assertContains('for="select-name">' . $label . '</label>', $html);
+    }
+
+    public function testNoLabel()
+    {
+        $html = select()->name('name')->toHtml();
+        $this->assertContains(
+            'for="select-name">validation.attributes.name</label>',
+            $html
+        );
+    }
+
+    public function testHideLabel()
+    {
+        $html = select()->name('name')->hideLabel()->toHtml();
+        $this->assertNotContains(
+            'for="select-name">validation.attributes.name</label>',
+            $html
+        );
+    }
+
+    public function testSuccess()
+    {
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        $html = select()->name('name')->render(['errors' => $messageBag]);
+        $this->assertContains('<div class="valid-feedback">', $html);
+        $this->assertContains(trans('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html);
+    }
+
+    public function testNoSuccess()
+    {
+        $html = select()->name('name')->toHtml();
+        $this->assertNotContains('<div class="valid-feedback">', $html);
+    }
+
+    public function testError()
+    {
+        $errorMessage = 'This a test error message';
+        $messageBag = app(MessageBag::class)->add('name', $errorMessage);
+        $html = select()->name('name')->render(['errors' => $messageBag]);
+        $this->assertContains('<div class="invalid-feedback">', $html);
+        $this->assertContains($errorMessage, $html);
+    }
+
+    public function testNoError()
+    {
+        $html = select()->name('name')->toHtml();
+        $this->assertNotContains('<div class="invalid-feedback">', $html);
+    }
+
+    public function testConfigContainerClass()
+    {
+        $configContainerCLass = 'test-config-class-container';
+        config()->set('bootstrap-components.form.select.class.container', [$configContainerCLass]);
+        $html = select()->name('name')->toHtml();
+        $this->assertContains(
+            'class="select-name-container ' . $configContainerCLass . '"',
+            $html
+        );
+    }
+
+    public function testSetContainerClass()
+    {
+        $configContainerCLass = 'test-config-class-container';
+        $customContainerCLass = 'test-custom-class-container';
+        config()->set('bootstrap-components.form.select.class.container', [$configContainerCLass]);
+        $html = select()->name('name')->containerClass([$customContainerCLass])->toHtml();
+        $this->assertContains(
+            'class="select-name-container ' . $customContainerCLass . '"',
+            $html
+        );
+        $this->assertNotContains(
+            'class="select-name-container ' . $configContainerCLass . '"',
+            $html
+        );
+    }
+
+        public function testConfigComponentClass()
+        {
+            $configComponentCLass = 'test-config-class-component';
+            config()->set('bootstrap-components.form.select.class.component', [$configComponentCLass]);
+            $html = select()->name('name')->toHtml();
+            $this->assertContains('class="select-name-component custom-select ' . $configComponentCLass . '"', $html);
+        }
     
-    //    public function testSetLabel()
-    //    {
-    //        $label = 'test-custom-label';
-    //        $html = select()->name('name')->label($label)->toHtml();
-    //        $this->assertContains('for="select-name">' . $label . '</label>', $html);
-    //    }
-    //
-    //    public function testNoLabel()
-    //    {
-    //        $html = select()->name('name')->toHtml();
-    //        $this->assertContains(
-    //            'for="select-name">validation.attributes.name</label>',
-    //            $html
-    //        );
-    //    }
-    //
-    //    public function testHideLabel()
-    //    {
-    //        $html = select()->name('name')->hideLabel()->toHtml();
-    //        $this->assertNotContains(
-    //            'for="select-name">validation.attributes.name</label>',
-    //            $html
-    //        );
-    //    }
-    //
-    //    public function testSuccess()
-    //    {
-    //        $messageBag = app(MessageBag::class)->add('other_name', null);
-    //        $html = select()->name('name')->render(['errors' => $messageBag]);
-    //        $this->assertContains('<div class="valid-feedback">', $html);
-    //        $this->assertContains(trans('bootstrap-components::bootstrap-components.notification.validation.success'),
-    //            $html);
-    //    }
-    //
-    //    public function testNoSuccess()
-    //    {
-    //        $html = select()->name('name')->toHtml();
-    //        $this->assertNotContains('<div class="valid-feedback">', $html);
-    //    }
-    //
-    //    public function testError()
-    //    {
-    //        $errorMessage = 'This a test error message';
-    //        $messageBag = app(MessageBag::class)->add('name', $errorMessage);
-    //        $html = select()->name('name')->render(['errors' => $messageBag]);
-    //        $this->assertContains('<div class="invalid-feedback">', $html);
-    //        $this->assertContains($errorMessage, $html);
-    //    }
-    //
-    //    public function testNoError()
-    //    {
-    //        $html = select()->name('name')->toHtml();
-    //        $this->assertNotContains('<div class="invalid-feedback">', $html);
-    //    }
-    //
-    //    public function testConfigContainerClass()
-    //    {
-    //        $configContainerCLass = 'test-config-class-container';
-    //        config()->set('bootstrap-components.form.select.class.container', [$configContainerCLass]);
-    //        $html = select()->name('name')->toHtml();
-    //        $this->assertContains('class="select-name-container custom-control custom-select ' . $configContainerCLass . '"',
-    //            $html);
-    //    }
-    //
-    //    public function testSetContainerClass()
-    //    {
-    //        $configContainerCLass = 'test-config-class-container';
-    //        $customContainerCLass = 'test-custom-class-container';
-    //        config()->set('bootstrap-components.form.select.class.container', [$configContainerCLass]);
-    //        $html = select()->name('name')->containerClass([$customContainerCLass])->toHtml();
-    //        $this->assertContains('class="select-name-container custom-control custom-select ' . $customContainerCLass . '"',
-    //            $html);
-    //        $this->assertNotContains('class="select-name-container custom-control custom-select ' . $configContainerCLass
-    //                                 . '"', $html);
-    //    }
-    //
-    //    public function testConfigComponentClass()
-    //    {
-    //        $configComponentCLass = 'test-config-class-component';
-    //        config()->set('bootstrap-components.form.select.class.component', [$configComponentCLass]);
-    //        $html = select()->name('name')->toHtml();
-    //        $this->assertContains('class="select-name-component custom-control-input ' . $configComponentCLass . '"', $html);
-    //    }
-    //
-    //    public function testSetComponentClass()
-    //    {
-    //        $configComponentCLass = 'test-config-class-component';
-    //        $customComponentCLass = 'test-custom-class-component';
-    //        config()->set('bootstrap-components.form.select.class.component', [$customComponentCLass]);
-    //        $html = select()->name('name')->componentClass([$customComponentCLass])->toHtml();
-    //        $this->assertContains('class="select-name-component custom-control-input ' . $customComponentCLass . '"', $html);
-    //        $this->assertNotContains('class="form-control select-name-component ' . $configComponentCLass . '"', $html);
-    //    }
-    //
-    //    public function testConfigContainerHtmlAttributes()
-    //    {
-    //        $configContainerAttributes = 'test-config-attributes-container';
-    //        config()->set('bootstrap-components.form.select.html_attributes.container', [$configContainerAttributes]);
-    //        $html = select()->name('name')->toHtml();
-    //        $this->assertContains($configContainerAttributes, $html);
-    //    }
-    //
-    //    public function testSetContainerHtmlAttributes()
-    //    {
-    //        $configContainerAttributes = 'test-config-attributes-container';
-    //        $customContainerAttributes = 'test-custom-attributes-container';
-    //        config()->set('bootstrap-components.form.select.html_attributes.container', [$configContainerAttributes]);
-    //        $html = select()->name('name')->containerHtmlAttributes([$customContainerAttributes])->toHtml();
-    //        $this->assertContains($customContainerAttributes, $html);
-    //        $this->assertNotContains($configContainerAttributes, $html);
-    //    }
-    //
-    //    public function testConfigComponentHtmlAttributes()
-    //    {
-    //        $configComponentAttributes = 'test-config-attributes-component';
-    //        config()->set('bootstrap-components.form.select.html_attributes.component', [$configComponentAttributes]);
-    //        $html = select()->name('name')->toHtml();
-    //        $this->assertContains($configComponentAttributes, $html);
-    //    }
-    //
-    //    public function testSetComponentHtmlAttributes()
-    //    {
-    //        $configComponentAttributes = 'test-config-attributes-component';
-    //        $customComponentAttributes = 'test-custom-attributes-component';
-    //        config()->set('bootstrap-components.form.select.html_attributes.component', [$configComponentAttributes]);
-    //        $html = select()->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
-    //        $this->assertContains($customComponentAttributes, $html);
-    //        $this->assertNotContains($configComponentAttributes, $html);
-    //    }
+        public function testSetComponentClass()
+        {
+            $configComponentCLass = 'test-config-class-component';
+            $customComponentCLass = 'test-custom-class-component';
+            config()->set('bootstrap-components.form.select.class.component', [$customComponentCLass]);
+            $html = select()->name('name')->componentClass([$customComponentCLass])->toHtml();
+            $this->assertContains('class="select-name-component custom-select ' . $customComponentCLass . '"', $html);
+            $this->assertNotContains('class="form-control select-name-component ' . $configComponentCLass . '"', $html);
+        }
+    
+        public function testConfigContainerHtmlAttributes()
+        {
+            $configContainerAttributes = 'test-config-attributes-container';
+            config()->set('bootstrap-components.form.select.html_attributes.container', [$configContainerAttributes]);
+            $html = select()->name('name')->toHtml();
+            $this->assertContains($configContainerAttributes, $html);
+        }
+    
+        public function testSetContainerHtmlAttributes()
+        {
+            $configContainerAttributes = 'test-config-attributes-container';
+            $customContainerAttributes = 'test-custom-attributes-container';
+            config()->set('bootstrap-components.form.select.html_attributes.container', [$configContainerAttributes]);
+            $html = select()->name('name')->containerHtmlAttributes([$customContainerAttributes])->toHtml();
+            $this->assertContains($customContainerAttributes, $html);
+            $this->assertNotContains($configContainerAttributes, $html);
+        }
+    
+        public function testConfigComponentHtmlAttributes()
+        {
+            $configComponentAttributes = 'test-config-attributes-component';
+            config()->set('bootstrap-components.form.select.html_attributes.component', [$configComponentAttributes]);
+            $html = select()->name('name')->toHtml();
+            $this->assertContains($configComponentAttributes, $html);
+        }
+    
+        public function testSetComponentHtmlAttributes()
+        {
+            $configComponentAttributes = 'test-config-attributes-component';
+            $customComponentAttributes = 'test-custom-attributes-component';
+            config()->set('bootstrap-components.form.select.html_attributes.component', [$configComponentAttributes]);
+            $html = select()->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
+            $this->assertContains($customComponentAttributes, $html);
+            $this->assertNotContains($configComponentAttributes, $html);
+        }
 }
