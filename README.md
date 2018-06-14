@@ -123,6 +123,7 @@ php artisan vendor:publish --tag=bootstrap-components::views
 ### Form components
 
 **Methods available for all form components**
+
 | Signature | Required | Description |
 |---|---|---|
 | public function name(string $name): Input  | Yes |  |
