@@ -191,14 +191,14 @@ class RadioTest extends BootstrapComponentsTestCase
     {
         $messageBag = app(MessageBag::class)->add('other_name', null);
         $html = radio()->name('name')->render(['errors' => $messageBag]);
-        $this->assertContains('<div class="valid-feedback">', $html);
+        $this->assertContains('<span class="valid-feedback">', $html);
         $this->assertContains(trans('bootstrap-components::bootstrap-components.notification.validation.success'), $html);
     }
 
     public function testNoSuccess()
     {
         $html = radio()->name('name')->toHtml();
-        $this->assertNotContains('<div class="valid-feedback">', $html);
+        $this->assertNotContains('<span class="valid-feedback">', $html);
     }
 
     public function testError()
@@ -206,14 +206,14 @@ class RadioTest extends BootstrapComponentsTestCase
         $errorMessage = 'This a test error message';
         $messageBag = app(MessageBag::class)->add('name', $errorMessage);
         $html = radio()->name('name')->render(['errors' => $messageBag]);
-        $this->assertContains('<div class="invalid-feedback">', $html);
+        $this->assertContains('<span class="invalid-feedback">', $html);
         $this->assertContains($errorMessage, $html);
     }
 
     public function testNoError()
     {
         $html = radio()->name('name')->toHtml();
-        $this->assertNotContains('<div class="invalid-feedback">', $html);
+        $this->assertNotContains('<span class="invalid-feedback">', $html);
     }
 
     public function testConfigContainerClass()

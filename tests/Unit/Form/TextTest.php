@@ -222,14 +222,14 @@ class InputTextTest extends BootstrapComponentsTestCase
     {
         $messageBag = app(MessageBag::class)->add('other_name', null);
         $html = text()->name('name')->render(['errors' => $messageBag]);
-        $this->assertContains('<div class="valid-feedback">', $html);
+        $this->assertContains('<span class="valid-feedback">', $html);
         $this->assertContains(trans('bootstrap-components::bootstrap-components.notification.validation.success'), $html);
     }
 
     public function testNoSuccess()
     {
         $html = text()->name('name')->toHtml();
-        $this->assertNotContains('<div class="valid-feedback">', $html);
+        $this->assertNotContains('<span class="valid-feedback">', $html);
     }
 
     public function testError()
@@ -237,14 +237,14 @@ class InputTextTest extends BootstrapComponentsTestCase
         $errorMessage = 'This a test error message';
         $messageBag = app(MessageBag::class)->add('name', $errorMessage);
         $html = text()->name('name')->render(['errors' => $messageBag]);
-        $this->assertContains('<div class="invalid-feedback">', $html);
+        $this->assertContains('<span class="invalid-feedback">', $html);
         $this->assertContains($errorMessage, $html);
     }
 
     public function testNoError()
     {
         $html = text()->name('name')->toHtml();
-        $this->assertNotContains('<div class="invalid-feedback">', $html);
+        $this->assertNotContains('<span class="invalid-feedback">', $html);
     }
 
     public function testConfigContainerClass()

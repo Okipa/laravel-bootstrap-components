@@ -1,11 +1,11 @@
 @isset($errors)
     @if($errors->has($name))
-        <div class="invalid-feedback">
+        <span class="invalid-feedback">
             {{ $errors->first($name) }}
-        </div>
+        </span>
     @else
-        <div class="valid-feedback">
+        <span class="valid-feedback">
             {{ trans('bootstrap-components::bootstrap-components.notification.validation.success') }}
-        </div>
+        </span>
     @endif
 @endisset
