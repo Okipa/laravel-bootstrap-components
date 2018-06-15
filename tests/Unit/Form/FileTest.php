@@ -136,11 +136,37 @@ class FileTest extends BootstrapComponentsTestCase
         );
     }
 
-    public function testSetPlaceholder()
+    public function testNoPlaceholderWithDefaultLabel()
+    {
+        $html = fileUpload()->name('name')->toHtml();
+        $this->assertContains(
+            '<label class="custom-file-label" for="file-name">'
+            . trans('bootstrap-components::bootstrap-components.label.file') . '</label>',
+            $html
+        );
+    }
+
+    public function testNoPlaceholderWithNoLabel()
+    {
+        $html = fileUpload()->name('name')->hideLabel()->toHtml();
+        $this->assertContains(
+            '<label class="custom-file-label" for="file-name">validation.attributes.name : '
+            . trans('bootstrap-components::bootstrap-components.label.file') . '</label>',
+            $html
+        );
+    }
+
+    public function testSetPlaceholderWithDefaultLabel()
     {
         $placeholder = 'test-custom-placeholder';
-        $html = fileUpload()->name('name')->placeholder($placeholder)->toHtml();
+        $label= 'test-custom-label';
+        $html = fileUpload()->name('name')->placeholder($placeholder)->label($label)->toHtml();
         $this->assertContains(
+            '<label class="custom-file-label" for="file-name">'
+            . trans('bootstrap-components::bootstrap-components.label.file') . '</label>',
+            $html
+        );
+        $this->assertNotContains(
             '<label class="custom-file-label" for="file-name">' . $placeholder . ' : '
             . trans('bootstrap-components::bootstrap-components.label.file') . '</label>',
             $html
@@ -152,10 +178,16 @@ class FileTest extends BootstrapComponentsTestCase
         );
     }
 
-    public function testNoPlaceholder()
+    public function testSetPlaceholderWithNoLabel()
     {
-        $html = fileUpload()->name('name')->toHtml();
+        $placeholder = 'test-custom-placeholder';
+        $html = fileUpload()->name('name')->placeholder($placeholder)->hideLabel()->toHtml();
         $this->assertContains(
+            '<label class="custom-file-label" for="file-name">' . $placeholder . ' : '
+            . trans('bootstrap-components::bootstrap-components.label.file') . '</label>',
+            $html
+        );
+        $this->assertNotContains(
             '<label class="custom-file-label" for="file-name">validation.attributes.name : '
             . trans('bootstrap-components::bootstrap-components.label.file') . '</label>',
             $html

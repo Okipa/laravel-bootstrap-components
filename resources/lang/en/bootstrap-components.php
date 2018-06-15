@@ -16,7 +16,7 @@ return [
         'audio' => 'Your browser does not support the « audio » HTML5 tag.',
         'video' => 'Your browser does not support the « video » HTML5 tag.',
         'validation' => [
-            'success' => 'Champ correctement renseigné.',
+            'success' => 'Field correctly filled.',
         ],
     ],
 
