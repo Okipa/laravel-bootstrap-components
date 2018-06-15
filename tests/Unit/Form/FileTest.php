@@ -357,7 +357,7 @@ class FileTest extends BootstrapComponentsTestCase
         $this->assertContains('name="remove_name"', $html);
     }
 
-    public function testConfigShowRemoveCheckboxWithoutEmptyUploadedFile()
+    public function testConfigShowRemoveCheckboxWithEmptyUploadedFile()
     {
         config()->set('bootstrap-components.form.file.show_remove_checkbox', true);
         $html = fileUpload()->name('name')->uploadedFile(function() {

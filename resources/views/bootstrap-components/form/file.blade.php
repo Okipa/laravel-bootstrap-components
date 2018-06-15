@@ -1,8 +1,8 @@
 <div {{ classTag($type . '-' . $name . '-container', $containerClass) }}
     {{ htmlAttributes($containerHtmlAttributes) }}>
     @include('bootstrap-components::bootstrap-components.partials.label')
-    @if($uploadedFile && $uploadedFile())
-        {{ $uploadedFile() }}
+    @if($uploadedFileHtml)
+        {{ $uploadedFileHtml }}
         @if($showRemoveCheckbox){{ checkbox()->name('remove_' . $name )->containerClass(['mb-1']) }}@endif
     @endif
     <div class="input-group">

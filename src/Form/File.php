@@ -3,6 +3,7 @@
 namespace Okipa\LaravelBootstrapComponents\Form;
 
 use Closure;
+use Okipa\LaravelBootstrapComponents\Component;
 
 class File extends Input
 {
@@ -68,12 +69,16 @@ class File extends Input
     protected function values(): array
     {
         $parentValues = parent::values();
-        
+        $uploadedFile = $this->uploadedFile;
+
         return array_merge($parentValues, [
             'placeholder'        => $parentValues['placeholder'] . ' : '
                                     . trans('bootstrap-components::bootstrap-components.label.file'),
-            'uploadedFile'       => $this->uploadedFile,
-            'showRemoveCheckbox' => isset($this->showRemoveCheckbox) ? $this->showRemoveCheckbox : $this->defaultRemoveCheckboxShowStatus(),
+            'uploadedFileHtml'   => $uploadedFile && $uploadedFile() instanceof Component 
+                ? $uploadedFile()->toHtml()
+                : ($uploadedFile ? $uploadedFile() : ''),
+            'showRemoveCheckbox' => isset($this->showRemoveCheckbox) ? $this->showRemoveCheckbox
+                : $this->defaultRemoveCheckboxShowStatus(),
         ]);
     }
 
