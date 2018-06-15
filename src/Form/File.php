@@ -68,7 +68,7 @@ class File extends Input
     protected function values(): array
     {
         $parentValues = parent::values();
-
+        
         return array_merge($parentValues, [
             'placeholder'        => $parentValues['placeholder'] . ' : '
                                     . trans('bootstrap-components::bootstrap-components.label.file'),
