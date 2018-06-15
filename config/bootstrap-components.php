@@ -56,14 +56,15 @@ return [
             ],
         ],
         'file'     => [
-            'view'            => 'bootstrap-components.form.file',
-            'icon'            => '<i class="fas fa-upload"></i>',
-            'legend'          => null,
-            'class'           => [
+            'view'                 => 'bootstrap-components.form.file',
+            'icon'                 => '<i class="fas fa-upload"></i>',
+            'legend'               => null,
+            'show_remove_checkbox' => true,
+            'class'                => [
                 'container' => ['form-group'],
                 'component' => [],
             ],
-            'html_attributes' => [
+            'html_attributes'      => [
                 'container' => [],
                 'component' => [],
             ],
@@ -81,7 +82,7 @@ return [
                 'component' => [],
             ],
         ],
-        'checkbox'   => [
+        'checkbox' => [
             'view'            => 'bootstrap-components.form.checkbox',
             'legend'          => null,
             'class'           => [
@@ -97,7 +98,7 @@ return [
             'view'            => 'bootstrap-components.form.toggle',
             'legend'          => null,
             'class'           => [
-                'container' => ['form-group', 'p-0'],
+                'container' => ['form-group'],
                 'component' => [],
             ],
             'html_attributes' => [
@@ -105,7 +106,7 @@ return [
                 'component' => [],
             ],
         ],
-        'radio'   => [
+        'radio'    => [
             'view'            => 'bootstrap-components.form.radio',
             'legend'          => null,
             'class'           => [

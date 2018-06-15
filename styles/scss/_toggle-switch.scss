@@ -1,6 +1,7 @@
 .switch {
     font-size: $font-size-base;
     position: relative;
+    padding: 0;
 
     input {
         position: absolute;
@@ -44,7 +45,7 @@
             background-color: $switch-bg;
             border-radius: $switch-border-radius;
             transition: $switch-transition;
-            height: 100%;
+            height: $switch-height;
         }
 
         + label::after {
@@ -94,6 +95,7 @@
 
             + label::before {
                 width: calc(#{$switch-height-sm} * 2);
+                height: $switch-height-sm;
             }
 
             + label::after {
@@ -121,6 +123,7 @@
 
             + label::before {
                 width: calc(#{$switch-height-lg} * 2);
+                height: $switch-height-lg;
             }
 
             + label::after {

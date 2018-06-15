@@ -24,6 +24,12 @@ class File extends Input
      * @property \Closure $uploadedFile
      */
     protected $uploadedFile;
+    /**
+     * The show remove file checkbox status.
+     *
+     * @property \Closure $uploadedFile
+     */
+    protected $showRemoveCheckbox;
 
     /**
      * Set the uploaded file closure.
@@ -40,6 +46,20 @@ class File extends Input
     }
 
     /**
+     * Show the remove checkbox.
+     *
+     * @param bool $showed
+     *
+     * @return \Okipa\LaravelBootstrapComponents\Form\File
+     */
+    public function showRemoveCheckbox(bool $showed = true): File
+    {
+        $this->showRemoveCheckbox = $showed;
+
+        return $this;
+    }
+
+    /**
      * Set the input values.
      *
      * @return array
@@ -50,9 +70,22 @@ class File extends Input
         $parentValues = parent::values();
 
         return array_merge($parentValues, [
-            'placeholder'  => $parentValues['placeholder'] . ' : '
-                              . trans('bootstrap-components::bootstrap-components.label.file'),
-            'uploadedFile' => $this->uploadedFile,
+            'placeholder'        => $parentValues['placeholder'] . ' : '
+                                    . trans('bootstrap-components::bootstrap-components.label.file'),
+            'uploadedFile'       => $this->uploadedFile,
+            'showRemoveCheckbox' => isset($this->showRemoveCheckbox) ? $this->showRemoveCheckbox : $this->defaultRemoveCheckboxShowStatus(),
         ]);
+    }
+
+    /**
+     * Set the file default checkbox show status
+     *
+     * @return string
+     */
+    protected function defaultRemoveCheckboxShowStatus(): string
+    {
+        $showRemoveCheckbox = config('bootstrap-components.' . $this->configKey . '.show_remove_checkbox');
+
+        return $showRemoveCheckbox ? true : false;
     }
 }

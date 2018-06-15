@@ -222,13 +222,14 @@ fileUpload()->name('avatar')
     ->label('Name') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder() // override the default placeholder (label)
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->uploadedFile(function(){
         return '<div>Some HTML</div>'
     })
+    -showRemoveCheckbox() // override the default config show remove checkbox status
     ->containerClass(['container', 'class]) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
@@ -239,7 +240,8 @@ _Component additional methods :_
 
 | Signature | Required | Description |
 |---|---|---|
-| public function uploadedFile(Closure $uploadedFile): InputFile  | No | Allows to set html or another component to render the uploaded file. |
+| uploadedFile(Closure $uploadedFile): InputFile  | No | Allows to set html or another component to render the uploaded file. |
+| showRemoveCheckbox(bool $showed = true): File  | No | Show the file remove checkbox (will appear only if an uploaded file is detected). Will send a `remove_[name]` value with the form data. Default value : `config('bootstrap-components.file.show_remove_checkbox')`. |
 
 #### textarea()
 
@@ -312,7 +314,7 @@ _Component additional methods :_
   
 _Notes :_
 - This component is an extra component not included in bootstrap and using it demands to [load the package styles](#styles).
-- The following class are applyable in the `componentClass()` method in order to manage the toggle size : `switch-sm` , `switch-lg`.
+- The following class are applyable in the `containerClass()` method in order to manage the toggle size : `switch-sm` , `switch-lg`.
 
 #### radio()
 
