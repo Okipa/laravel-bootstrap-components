@@ -8,7 +8,7 @@ return [
         'update'   => 'Mettre à jour',
         'back'     => 'Retour',
         'cancel'   => 'Annuler',
-        'file'     => 'aucun fichier choisi.',
+        'file'     => 'Aucun fichier choisi.',
         'download' => 'Télécharger',
     ],
 

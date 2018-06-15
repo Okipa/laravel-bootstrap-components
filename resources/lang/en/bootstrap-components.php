@@ -8,7 +8,7 @@ return [
         'update'   => 'Update',
         'back'     => 'Back',
         'cancel'   => 'Cancel',
-        'file'     => 'no file selected.',
+        'file'     => 'No file selected.',
         'download' => 'Download',
     ],
 

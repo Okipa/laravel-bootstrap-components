@@ -72,7 +72,7 @@ class File extends Input
         $parentValues = parent::values();
 
         return array_merge($parentValues, [
-            'placeholder'        => ($this->showLabel ? $parentValues['placeholder'] . ' : ' : '')
+            'placeholder'        => ($this->showLabel ? '' : $parentValues['placeholder'] . ' : ')
                                     . trans('bootstrap-components::bootstrap-components.label.file'),
             'uploadedFileHtml'   => $this->getUploadedFileHtml(),
             'showRemoveCheckbox' => isset($this->showRemoveCheckbox)
