@@ -4,7 +4,6 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
 use Illuminate\Support\MessageBag;
 use Okipa\LaravelBootstrapComponents\Form\Checkable;
-use Okipa\LaravelBootstrapComponents\Form\Input;
 use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
 use Okipa\LaravelBootstrapComponents\Test\Fakers\UsersFaker;
 
@@ -48,8 +47,8 @@ class CheckboxTest extends BootstrapComponentsTestCase
 
     /**
      * @expectedException \Exception
-     * @expectedExceptionMessage Name must be declared for the Okipa\LaravelBootstrapComponents\Form\Checkbox component
-     *                           generation.
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Checkbox : Missing $name property. Please use
+     *                           the name() method to set a name.
      */
     public function testInputWithoutName()
     {
@@ -62,7 +61,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $html = checkbox()->model($user)->name('name')->toHtml();
         $this->assertContains('checked="checked"', $html);
     }
-    
+
     public function testChecked()
     {
         $user = null;
@@ -110,7 +109,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $html = checkbox()->name('name')->toHtml();
         $this->assertNotContains('<span class="icon input-group-text">', $html);
     }
-    
+
     public function testHideLegend()
     {
         $configLegend = 'test-config-legend';
@@ -124,7 +123,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $html = checkbox()->name('name')->toHtml();
         $this->assertNotContains('checked="checked', $html);
     }
-    
+
     public function testSetValueChecked()
     {
         $customValue = true;
@@ -192,7 +191,8 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $messageBag = app(MessageBag::class)->add('other_name', null);
         $html = checkbox()->name('name')->render(['errors' => $messageBag]);
         $this->assertContains('<div class="valid-feedback d-block">', $html);
-        $this->assertContains(trans('bootstrap-components::bootstrap-components.notification.validation.success'), $html);
+        $this->assertContains(trans('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html);
     }
 
     public function testNoSuccess()
@@ -221,7 +221,8 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $configContainerCLass = 'test-config-class-container';
         config()->set('bootstrap-components.form.checkbox.class.container', [$configContainerCLass]);
         $html = checkbox()->name('name')->toHtml();
-        $this->assertContains('class="checkbox-name-container custom-control custom-checkbox ' . $configContainerCLass . '"', $html);
+        $this->assertContains('class="checkbox-name-container custom-control custom-checkbox ' . $configContainerCLass
+                              . '"', $html);
     }
 
     public function testSetContainerClass()
@@ -230,8 +231,10 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $customContainerCLass = 'test-custom-class-container';
         config()->set('bootstrap-components.form.checkbox.class.container', [$configContainerCLass]);
         $html = checkbox()->name('name')->containerClass([$customContainerCLass])->toHtml();
-        $this->assertContains('class="checkbox-name-container custom-control custom-checkbox ' . $customContainerCLass . '"', $html);
-        $this->assertNotContains('class="checkbox-name-container custom-control custom-checkbox ' . $configContainerCLass . '"', $html);
+        $this->assertContains('class="checkbox-name-container custom-control custom-checkbox ' . $customContainerCLass
+                              . '"', $html);
+        $this->assertNotContains('class="checkbox-name-container custom-control custom-checkbox '
+                                 . $configContainerCLass . '"', $html);
     }
 
     public function testConfigComponentClass()
@@ -239,7 +242,8 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $configComponentCLass = 'test-config-class-component';
         config()->set('bootstrap-components.form.checkbox.class.component', [$configComponentCLass]);
         $html = checkbox()->name('name')->toHtml();
-        $this->assertContains('class="checkbox-name-component custom-control-input ' . $configComponentCLass . '"', $html);
+        $this->assertContains('class="checkbox-name-component custom-control-input ' . $configComponentCLass . '"',
+            $html);
     }
 
     public function testSetComponentClass()
@@ -248,7 +252,8 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $customComponentCLass = 'test-custom-class-component';
         config()->set('bootstrap-components.form.checkbox.class.component', [$customComponentCLass]);
         $html = checkbox()->name('name')->componentClass([$customComponentCLass])->toHtml();
-        $this->assertContains('class="checkbox-name-component custom-control-input ' . $customComponentCLass . '"', $html);
+        $this->assertContains('class="checkbox-name-component custom-control-input ' . $customComponentCLass . '"',
+            $html);
         $this->assertNotContains('class="form-control checkbox-name-component ' . $configComponentCLass . '"', $html);
     }
 

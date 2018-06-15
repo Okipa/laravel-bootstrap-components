@@ -273,7 +273,9 @@ abstract class Input extends Component
     protected function checkValuesValidity(): void
     {
         if (! $this->name) {
-            throw new Exception('Name must be declared for the ' . get_class($this) . ' component generation.');
+            throw new Exception(
+                get_class($this) . ' : Missing $name property. Please use the name() method to set a name.'
+            );
         }
     }
 }

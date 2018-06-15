@@ -3,6 +3,7 @@
 namespace Okipa\LaravelBootstrapComponents\Form;
 
 use Closure;
+use Illuminate\Support\HtmlString;
 use Okipa\LaravelBootstrapComponents\Component;
 
 class File extends Input
@@ -69,17 +70,34 @@ class File extends Input
     protected function values(): array
     {
         $parentValues = parent::values();
-        $uploadedFile = $this->uploadedFile;
 
         return array_merge($parentValues, [
-            'placeholder'        => $parentValues['placeholder'] . ' : '
+            'placeholder'        => ($this->showLabel ? $parentValues['placeholder'] . ' : ' : '')
                                     . trans('bootstrap-components::bootstrap-components.label.file'),
-            'uploadedFileHtml'   => $uploadedFile && $uploadedFile() instanceof Component 
-                ? $uploadedFile()->toHtml()
-                : ($uploadedFile ? $uploadedFile() : ''),
-            'showRemoveCheckbox' => isset($this->showRemoveCheckbox) ? $this->showRemoveCheckbox
+            'uploadedFileHtml'   => $this->getUploadedFileHtml(),
+            'showRemoveCheckbox' => isset($this->showRemoveCheckbox)
+                ? $this->showRemoveCheckbox
                 : $this->defaultRemoveCheckboxShowStatus(),
         ]);
+    }
+
+    /**
+     * Get the uploadedFile HTML.
+     *
+     * @return \Illuminate\Support\HtmlString
+     */
+    protected function getUploadedFileHtml(): HtmlString
+    {
+        $uploadedFileHtml = '';
+        if ($uploadedFile = $this->uploadedFile) {
+            if ($uploadedFile() instanceof Component) {
+                $uploadedFileHtml = $uploadedFile()->toHtml();
+            } else {
+                $uploadedFileHtml = $uploadedFile();
+            }
+        }
+
+        return new HtmlString($uploadedFileHtml);
     }
 
     /**

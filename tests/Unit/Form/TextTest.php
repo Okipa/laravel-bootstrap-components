@@ -48,8 +48,8 @@ class InputTextTest extends BootstrapComponentsTestCase
 
     /**
      * @expectedException \Exception
-     * @expectedExceptionMessage Name must be declared for the Okipa\LaravelBootstrapComponents\Form\Text component
-     *                           generation.
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Text : Missing $name property. Please use the
+     *                           name() method to set a name.
      */
     public function testInputWithoutName()
     {
@@ -80,7 +80,7 @@ class InputTextTest extends BootstrapComponentsTestCase
         $this->assertContains('<span class="icon input-group-text">' . $customIcon . '</span>', $html);
         $this->assertNotContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
     }
-    
+
     public function testNoIcon()
     {
         config()->set('bootstrap-components.form.text.icon', null);
@@ -106,7 +106,7 @@ class InputTextTest extends BootstrapComponentsTestCase
             $html
         );
     }
-    
+
     public function testSetLegend()
     {
         $configLegend = 'test-config-legend';
@@ -223,7 +223,8 @@ class InputTextTest extends BootstrapComponentsTestCase
         $messageBag = app(MessageBag::class)->add('other_name', null);
         $html = text()->name('name')->render(['errors' => $messageBag]);
         $this->assertContains('<div class="valid-feedback d-block">', $html);
-        $this->assertContains(trans('bootstrap-components::bootstrap-components.notification.validation.success'), $html);
+        $this->assertContains(trans('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html);
     }
 
     public function testNoSuccess()

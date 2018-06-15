@@ -4,7 +4,6 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
 use Illuminate\Support\MessageBag;
 use Okipa\LaravelBootstrapComponents\Form\Checkable;
-use Okipa\LaravelBootstrapComponents\Form\Input;
 use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
 use Okipa\LaravelBootstrapComponents\Test\Fakers\UsersFaker;
 
@@ -48,8 +47,8 @@ class RadioTest extends BootstrapComponentsTestCase
 
     /**
      * @expectedException \Exception
-     * @expectedExceptionMessage Name must be declared for the Okipa\LaravelBootstrapComponents\Form\Radio component
-     *                           generation.
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Radio : Missing $name property. Please use the
+     *                           name() method to set a name.
      */
     public function testInputWithoutName()
     {
@@ -62,7 +61,7 @@ class RadioTest extends BootstrapComponentsTestCase
         $html = radio()->model($user)->name('name')->toHtml();
         $this->assertContains('checked="checked"', $html);
     }
-    
+
     public function testChecked()
     {
         $user = null;
@@ -110,7 +109,7 @@ class RadioTest extends BootstrapComponentsTestCase
         $html = radio()->name('name')->toHtml();
         $this->assertNotContains('<span class="icon input-group-text">', $html);
     }
-    
+
     public function testHideLegend()
     {
         $configLegend = 'test-config-legend';
@@ -124,7 +123,7 @@ class RadioTest extends BootstrapComponentsTestCase
         $html = radio()->name('name')->toHtml();
         $this->assertNotContains('checked="checked', $html);
     }
-    
+
     public function testSetValueChecked()
     {
         $customValue = true;
@@ -192,7 +191,8 @@ class RadioTest extends BootstrapComponentsTestCase
         $messageBag = app(MessageBag::class)->add('other_name', null);
         $html = radio()->name('name')->render(['errors' => $messageBag]);
         $this->assertContains('<div class="valid-feedback d-block">', $html);
-        $this->assertContains(trans('bootstrap-components::bootstrap-components.notification.validation.success'), $html);
+        $this->assertContains(trans('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html);
     }
 
     public function testNoSuccess()
@@ -221,7 +221,8 @@ class RadioTest extends BootstrapComponentsTestCase
         $configContainerCLass = 'test-config-class-container';
         config()->set('bootstrap-components.form.radio.class.container', [$configContainerCLass]);
         $html = radio()->name('name')->toHtml();
-        $this->assertContains('class="radio-name-container custom-control custom-radio ' . $configContainerCLass . '"', $html);
+        $this->assertContains('class="radio-name-container custom-control custom-radio ' . $configContainerCLass . '"',
+            $html);
     }
 
     public function testSetContainerClass()
@@ -230,8 +231,10 @@ class RadioTest extends BootstrapComponentsTestCase
         $customContainerCLass = 'test-custom-class-container';
         config()->set('bootstrap-components.form.radio.class.container', [$configContainerCLass]);
         $html = radio()->name('name')->containerClass([$customContainerCLass])->toHtml();
-        $this->assertContains('class="radio-name-container custom-control custom-radio ' . $customContainerCLass . '"', $html);
-        $this->assertNotContains('class="radio-name-container custom-control custom-radio ' . $configContainerCLass . '"', $html);
+        $this->assertContains('class="radio-name-container custom-control custom-radio ' . $customContainerCLass . '"',
+            $html);
+        $this->assertNotContains('class="radio-name-container custom-control custom-radio ' . $configContainerCLass
+                                 . '"', $html);
     }
 
     public function testConfigComponentClass()

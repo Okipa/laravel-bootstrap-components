@@ -48,8 +48,8 @@ class TelTest extends BootstrapComponentsTestCase
 
     /**
      * @expectedException \Exception
-     * @expectedExceptionMessage Name must be declared for the Okipa\LaravelBootstrapComponents\Form\Tel component
-     *                           generation.
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Tel : Missing $name property. Please use the
+     *                           name() method to set a name.
      */
     public function testInputWithoutName()
     {
@@ -70,7 +70,7 @@ class TelTest extends BootstrapComponentsTestCase
         $html = tel()->name('name')->toHtml();
         $this->assertContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
     }
-    
+
     public function testSetIcon()
     {
         $configIcon = 'test-config-icon';
@@ -223,7 +223,8 @@ class TelTest extends BootstrapComponentsTestCase
         $messageBag = app(MessageBag::class)->add('other_name', null);
         $html = tel()->name('name')->render(['errors' => $messageBag]);
         $this->assertContains('<div class="valid-feedback d-block">', $html);
-        $this->assertContains(trans('bootstrap-components::bootstrap-components.notification.validation.success'), $html);
+        $this->assertContains(trans('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html);
     }
 
     public function testNoSuccess()

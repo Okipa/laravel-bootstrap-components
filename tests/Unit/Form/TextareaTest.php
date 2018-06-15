@@ -48,8 +48,8 @@ class TextareaTest extends BootstrapComponentsTestCase
 
     /**
      * @expectedException \Exception
-     * @expectedExceptionMessage Name must be declared for the Okipa\LaravelBootstrapComponents\Form\Textarea component
-     *                           generation.
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Textarea : Missing $name property. Please use
+     *                           the name() method to set a name.
      */
     public function testInputWithoutName()
     {
@@ -223,7 +223,8 @@ class TextareaTest extends BootstrapComponentsTestCase
         $messageBag = app(MessageBag::class)->add('other_name', null);
         $html = textarea()->name('name')->render(['errors' => $messageBag]);
         $this->assertContains('<div class="valid-feedback d-block">', $html);
-        $this->assertContains(trans('bootstrap-components::bootstrap-components.notification.validation.success'), $html);
+        $this->assertContains(trans('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html);
     }
 
     public function testNoSuccess()

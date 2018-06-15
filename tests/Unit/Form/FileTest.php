@@ -43,8 +43,8 @@ class FileTest extends BootstrapComponentsTestCase
 
     /**
      * @expectedException \Exception
-     * @expectedExceptionMessage Name must be declared for the Okipa\LaravelBootstrapComponents\Form\File component
-     *                           generation.
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\File : Missing $name property. Please use the
+     *                           name() method to set a name.
      */
     public function testInputWithoutName()
     {
@@ -346,7 +346,7 @@ class FileTest extends BootstrapComponentsTestCase
         })->toHtml();
         $this->assertContains('Uploaded file !', $html);
     }
-    
+
     public function testConfigShowRemoveCheckboxWithUploadedFile()
     {
         config()->set('bootstrap-components.form.file.show_remove_checkbox', true);
@@ -366,7 +366,7 @@ class FileTest extends BootstrapComponentsTestCase
         $this->assertNotContains('<input id="checkbox-remove_name"', $html);
         $this->assertNotContains('name="remove_name"', $html);
     }
-    
+
     public function testConfigShowRemoveCheckboxWithoutUploadedFile()
     {
         config()->set('bootstrap-components.form.file.show_remove_checkbox', true);
@@ -384,7 +384,7 @@ class FileTest extends BootstrapComponentsTestCase
         $this->assertNotContains('<input id="checkbox-remove_name"', $html);
         $this->assertNotContains('name="remove_name"', $html);
     }
-    
+
     public function testShowRemoveCheckboxWithUploadedFile()
     {
         config()->set('bootstrap-components.form.file.show_remove_checkbox', false);

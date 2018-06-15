@@ -47,8 +47,8 @@ class SelectTest extends BootstrapComponentsTestCase
 
     /**
      * @expectedException \Exception
-     * @expectedExceptionMessage Name must be declared for the Okipa\LaravelBootstrapComponents\Form\Select component
-     *                           generation.
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Select : Missing $name property. Please use the
+     *                           name() method to set a name.
      */
     public function testInputWithoutName()
     {
@@ -382,57 +382,57 @@ class SelectTest extends BootstrapComponentsTestCase
         );
     }
 
-        public function testConfigComponentClass()
-        {
-            $configComponentCLass = 'test-config-class-component';
-            config()->set('bootstrap-components.form.select.class.component', [$configComponentCLass]);
-            $html = select()->name('name')->toHtml();
-            $this->assertContains('class="select-name-component custom-select ' . $configComponentCLass . '"', $html);
-        }
-    
-        public function testSetComponentClass()
-        {
-            $configComponentCLass = 'test-config-class-component';
-            $customComponentCLass = 'test-custom-class-component';
-            config()->set('bootstrap-components.form.select.class.component', [$customComponentCLass]);
-            $html = select()->name('name')->componentClass([$customComponentCLass])->toHtml();
-            $this->assertContains('class="select-name-component custom-select ' . $customComponentCLass . '"', $html);
-            $this->assertNotContains('class="form-control select-name-component ' . $configComponentCLass . '"', $html);
-        }
-    
-        public function testConfigContainerHtmlAttributes()
-        {
-            $configContainerAttributes = 'test-config-attributes-container';
-            config()->set('bootstrap-components.form.select.html_attributes.container', [$configContainerAttributes]);
-            $html = select()->name('name')->toHtml();
-            $this->assertContains($configContainerAttributes, $html);
-        }
-    
-        public function testSetContainerHtmlAttributes()
-        {
-            $configContainerAttributes = 'test-config-attributes-container';
-            $customContainerAttributes = 'test-custom-attributes-container';
-            config()->set('bootstrap-components.form.select.html_attributes.container', [$configContainerAttributes]);
-            $html = select()->name('name')->containerHtmlAttributes([$customContainerAttributes])->toHtml();
-            $this->assertContains($customContainerAttributes, $html);
-            $this->assertNotContains($configContainerAttributes, $html);
-        }
-    
-        public function testConfigComponentHtmlAttributes()
-        {
-            $configComponentAttributes = 'test-config-attributes-component';
-            config()->set('bootstrap-components.form.select.html_attributes.component', [$configComponentAttributes]);
-            $html = select()->name('name')->toHtml();
-            $this->assertContains($configComponentAttributes, $html);
-        }
-    
-        public function testSetComponentHtmlAttributes()
-        {
-            $configComponentAttributes = 'test-config-attributes-component';
-            $customComponentAttributes = 'test-custom-attributes-component';
-            config()->set('bootstrap-components.form.select.html_attributes.component', [$configComponentAttributes]);
-            $html = select()->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
-            $this->assertContains($customComponentAttributes, $html);
-            $this->assertNotContains($configComponentAttributes, $html);
-        }
+    public function testConfigComponentClass()
+    {
+        $configComponentCLass = 'test-config-class-component';
+        config()->set('bootstrap-components.form.select.class.component', [$configComponentCLass]);
+        $html = select()->name('name')->toHtml();
+        $this->assertContains('class="select-name-component custom-select ' . $configComponentCLass . '"', $html);
+    }
+
+    public function testSetComponentClass()
+    {
+        $configComponentCLass = 'test-config-class-component';
+        $customComponentCLass = 'test-custom-class-component';
+        config()->set('bootstrap-components.form.select.class.component', [$customComponentCLass]);
+        $html = select()->name('name')->componentClass([$customComponentCLass])->toHtml();
+        $this->assertContains('class="select-name-component custom-select ' . $customComponentCLass . '"', $html);
+        $this->assertNotContains('class="form-control select-name-component ' . $configComponentCLass . '"', $html);
+    }
+
+    public function testConfigContainerHtmlAttributes()
+    {
+        $configContainerAttributes = 'test-config-attributes-container';
+        config()->set('bootstrap-components.form.select.html_attributes.container', [$configContainerAttributes]);
+        $html = select()->name('name')->toHtml();
+        $this->assertContains($configContainerAttributes, $html);
+    }
+
+    public function testSetContainerHtmlAttributes()
+    {
+        $configContainerAttributes = 'test-config-attributes-container';
+        $customContainerAttributes = 'test-custom-attributes-container';
+        config()->set('bootstrap-components.form.select.html_attributes.container', [$configContainerAttributes]);
+        $html = select()->name('name')->containerHtmlAttributes([$customContainerAttributes])->toHtml();
+        $this->assertContains($customContainerAttributes, $html);
+        $this->assertNotContains($configContainerAttributes, $html);
+    }
+
+    public function testConfigComponentHtmlAttributes()
+    {
+        $configComponentAttributes = 'test-config-attributes-component';
+        config()->set('bootstrap-components.form.select.html_attributes.component', [$configComponentAttributes]);
+        $html = select()->name('name')->toHtml();
+        $this->assertContains($configComponentAttributes, $html);
+    }
+
+    public function testSetComponentHtmlAttributes()
+    {
+        $configComponentAttributes = 'test-config-attributes-component';
+        $customComponentAttributes = 'test-custom-attributes-component';
+        config()->set('bootstrap-components.form.select.html_attributes.component', [$configComponentAttributes]);
+        $html = select()->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
+        $this->assertContains($customComponentAttributes, $html);
+        $this->assertNotContains($configComponentAttributes, $html);
+    }
 }

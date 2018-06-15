@@ -48,8 +48,8 @@ class PasswordTest extends BootstrapComponentsTestCase
 
     /**
      * @expectedException \Exception
-     * @expectedExceptionMessage Name must be declared for the Okipa\LaravelBootstrapComponents\Form\Password component
-     *                           generation.
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Password : Missing $name property. Please use
+     *                           the name() method to set a name.
      */
     public function testInputWithoutName()
     {
@@ -106,7 +106,7 @@ class PasswordTest extends BootstrapComponentsTestCase
             $html
         );
     }
-    
+
     public function testSetLegend()
     {
         $configLegend = 'test-config-legend';
@@ -223,7 +223,8 @@ class PasswordTest extends BootstrapComponentsTestCase
         $messageBag = app(MessageBag::class)->add('other_name', null);
         $html = password()->name('name')->render(['errors' => $messageBag]);
         $this->assertContains('<div class="valid-feedback d-block">', $html);
-        $this->assertContains(trans('bootstrap-components::bootstrap-components.notification.validation.success'), $html);
+        $this->assertContains(trans('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html);
     }
 
     public function testNoSuccess()

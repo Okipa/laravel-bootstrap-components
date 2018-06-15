@@ -1,7 +1,7 @@
 <div {{ classTag($type . '-' . $name . '-container', $containerClass) }}
     {{ htmlAttributes($containerHtmlAttributes) }}>
     @include('bootstrap-components::bootstrap-components.partials.label')
-    @if($uploadedFileHtml)
+    @if($uploadedFileHtml->toHtml())
         {{ $uploadedFileHtml }}
         @if($showRemoveCheckbox){{ checkbox()->name('remove_' . $name )->containerClass(['mb-1']) }}@endif
     @endif
