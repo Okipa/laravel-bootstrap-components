@@ -310,7 +310,9 @@ _Component additional methods :_
 |---|---|---|
 | checked(bool $checked = true): Input  | No |  |
   
-_Note :_ This component is an extra component not included in bootstrap and using it demands to [load the package styles](#styles).
+_Notes :_
+- This component is an extra component not included in bootstrap and using it demands to [load the package styles](#styles).
+- The following class are applyable in the componentClass() method to manage the toggle size : `switch-sm` , `switch-lg`.
 
 #### radio()
 
