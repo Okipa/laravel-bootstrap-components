@@ -4,7 +4,6 @@ namespace Okipa\LaravelBootstrapComponents;
 
 use Illuminate\Support\ServiceProvider;
 use Okipa\LaravelHtmlHelper\HtmlHelperServiceProvider;
-use Okipa\LaravelToggleSwitchButton\ToggleSwitchButtonServiceProvider;
 
 class ComponentServiceProvider extends ServiceProvider
 {
