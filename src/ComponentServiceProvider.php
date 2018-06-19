@@ -13,7 +13,7 @@ class ComponentServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'bootstrap-components');
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'bootstrap-components');
         $this->publishes([
-            __DIR__ . '/../config/laravel-bootstrap-components.php.php' => config_path('components.php'),
+            __DIR__ . '/../config/bootstrap-components.php.php' => config_path('components.php'),
         ], 'bootstrap-components::config');
         $this->publishes([
             __DIR__ . '/../resources/lang' => resource_path('lang'),
