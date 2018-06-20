@@ -473,8 +473,9 @@ _Component additional methods :_
 #### image()
 
 ```php
-image()->src(https://yourapp.fr/public/media/image.jpg)
-    ->alt('Image)
+image()->src(https://yourapp.fr/public/media/image-thumb.jpg)
+    ->linkUrl(https://yourapp.fr/public/media/image-zoom.jpg)
+    ->alt('Image')
     ->width(250)
     ->height(150)
     ->containerClass(['container', 'class]) // override the default config container class list
