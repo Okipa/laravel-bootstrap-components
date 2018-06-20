@@ -3,7 +3,7 @@
     @include('bootstrap-components::bootstrap-components.partials.label')
     @if($uploadedFileHtml->toHtml())
         {{ $uploadedFileHtml }}
-        @if($showRemoveCheckbox){{ checkbox()->name('remove_' . $name )->containerClass(['mb-1']) }}@endif
+        @if($showRemoveCheckbox){{ bsCheckbox()->name('remove_' . $name )->containerClass(['mb-1']) }}@endif
     @endif
     <div class="input-group">
         @include('bootstrap-components::bootstrap-components.partials.icon')

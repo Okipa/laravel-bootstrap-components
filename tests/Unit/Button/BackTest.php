@@ -30,12 +30,12 @@ class BackTest extends BootstrapComponentsTestCase
 
     public function testExtendsInput()
     {
-        $this->assertEquals(Button::class, get_parent_class(buttonBack()));
+        $this->assertEquals(Button::class, get_parent_class(bsBack()));
     }
 
     public function testType()
     {
-        $html = buttonBack()->toHtml();
+        $html = bsBack()->toHtml();
         $this->assertContains('<div class="button-container', $html);
         $this->assertContains('<a href="http://localhost"', $html);
         $this->assertContains('class="button-component', $html);
@@ -44,7 +44,7 @@ class BackTest extends BootstrapComponentsTestCase
     public function testSetUrl()
     {
         $customUrl = 'test-custom-url';
-        $html = buttonBack()->url($customUrl)->toHtml();
+        $html = bsBack()->url($customUrl)->toHtml();
         $this->assertContains('<a href="' . $customUrl . '"', $html);
     }
 
@@ -52,7 +52,7 @@ class BackTest extends BootstrapComponentsTestCase
     {
         $this->setRoutes();
         $customRoute = 'users.index';
-        $html = buttonBack()->route($customRoute)->toHtml();
+        $html = bsBack()->route($customRoute)->toHtml();
         $this->assertContains('<a href="' . route($customRoute) . '"', $html);
     }
 
@@ -60,7 +60,7 @@ class BackTest extends BootstrapComponentsTestCase
     {
         $configIcon = 'test-config-icon';
         config()->set('bootstrap-components.button.back.icon', $configIcon);
-        $html = buttonBack()->toHtml();
+        $html = bsBack()->toHtml();
         $this->assertContains($configIcon, $html);
     }
 
@@ -69,7 +69,7 @@ class BackTest extends BootstrapComponentsTestCase
         $configIcon = 'test-config-icon';
         $customIcon = 'test-custom-icon';
         config()->set('bootstrap-components.button.back.icon', $configIcon);
-        $html = buttonBack()->icon($customIcon)->toHtml();
+        $html = bsBack()->icon($customIcon)->toHtml();
         $this->assertContains('<span class="icon">' . $customIcon . '</span>', $html);
         $this->assertNotContains('<span class="icon">' . $configIcon . '</span>', $html);
     }
@@ -77,7 +77,7 @@ class BackTest extends BootstrapComponentsTestCase
     public function testNoIcon()
     {
         config()->set('bootstrap-components.button.back.icon', null);
-        $html = buttonBack()->toHtml();
+        $html = bsBack()->toHtml();
         $this->assertNotContains('<span class="icon">', $html);
     }
 
@@ -85,7 +85,7 @@ class BackTest extends BootstrapComponentsTestCase
     {
         $configIcon = 'test-config-icon';
         config()->set('bootstrap-components.button.back.icon', $configIcon);
-        $html = buttonBack()->hideIcon()->toHtml();
+        $html = bsBack()->hideIcon()->toHtml();
         $this->assertNotContains('<span class="icon">' . $configIcon . '</span>', $html);
     }
 
@@ -93,7 +93,7 @@ class BackTest extends BootstrapComponentsTestCase
     {
         $configLabel = 'test-config-label';
         config()->set('bootstrap-components.button.back.label', $configLabel);
-        $html = buttonBack()->toHtml();
+        $html = bsBack()->toHtml();
         $this->assertContains('title="bootstrap-components::' . $configLabel . '">', $html);
         $this->assertContains('<span class="label">bootstrap-components::' . $configLabel . '</span>', $html);
     }
@@ -101,14 +101,14 @@ class BackTest extends BootstrapComponentsTestCase
     public function testSetLabel()
     {
         $label = 'test-custom-label';
-        $html = buttonBack()->label($label)->toHtml();
+        $html = bsBack()->label($label)->toHtml();
         $this->assertContains('<span class="label">' . $label . '</span>', $html);
     }
 
     public function testNoLabel()
     {
         config()->set('bootstrap-components.button.back.label', null);
-        $html = buttonBack()->toHtml();
+        $html = bsBack()->toHtml();
         $this->assertNotContains('<span class="label">', $html);
         $this->assertNotContains('title="', $html);
         $this->assertNotContains('<span class="label">', $html);
@@ -118,7 +118,7 @@ class BackTest extends BootstrapComponentsTestCase
     {
         $configLabel = 'test-config-label';
         config()->set('bootstrap-components.button.back.label', $configLabel);
-        $html = buttonBack()->hideLabel()->toHtml();
+        $html = bsBack()->hideLabel()->toHtml();
         $this->assertNotContains('title="bootstrap-components::' . $configLabel . '">', $html);
         $this->assertNotContains('<span class="label">bootstrap-components::' . $configLabel . '</span>', $html);
     }
@@ -127,7 +127,7 @@ class BackTest extends BootstrapComponentsTestCase
     {
         $configContainerCLass = 'test-config-class-container';
         config()->set('bootstrap-components.button.back.class.container', [$configContainerCLass]);
-        $html = buttonBack()->toHtml();
+        $html = bsBack()->toHtml();
         $this->assertContains('<div class="button-container ' . $configContainerCLass . '">', $html);
     }
 
@@ -136,7 +136,7 @@ class BackTest extends BootstrapComponentsTestCase
         $configContainerCLass = 'test-config-class-container';
         $customContainerCLass = 'test-custom-class-container';
         config()->set('bootstrap-components.input.class.container', [$configContainerCLass]);
-        $html = buttonBack()->containerClass([$customContainerCLass])->toHtml();
+        $html = bsBack()->containerClass([$customContainerCLass])->toHtml();
         $this->assertContains('<div class="button-container ' . $customContainerCLass . '">', $html);
         $this->assertNotContains('<div class="button-container ' . $configContainerCLass . '">', $html);
     }
@@ -145,7 +145,7 @@ class BackTest extends BootstrapComponentsTestCase
     {
         $configComponentCLass = 'test-config-class-component';
         config()->set('bootstrap-components.button.back.class.component', [$configComponentCLass]);
-        $html = buttonBack()->toHtml();
+        $html = bsBack()->toHtml();
         $this->assertContains('class="button-component ' . $configComponentCLass . '"', $html);
     }
 
@@ -154,7 +154,7 @@ class BackTest extends BootstrapComponentsTestCase
         $configComponentCLass = 'test-config-class-component';
         $customComponentCLass = 'test-custom-class-component';
         config()->set('bootstrap-components.button.back.class.component', [$customComponentCLass]);
-        $html = buttonBack()->componentClass([$customComponentCLass])->toHtml();
+        $html = bsBack()->componentClass([$customComponentCLass])->toHtml();
         $this->assertContains('class="button-component ' . $customComponentCLass . '"', $html);
         $this->assertNotContains('class="button-component ' . $configComponentCLass . '"', $html);
     }
@@ -163,7 +163,7 @@ class BackTest extends BootstrapComponentsTestCase
     {
         $configContainerAttributes = 'test-config-attributes-container';
         config()->set('bootstrap-components.button.back.html_attributes.container', [$configContainerAttributes]);
-        $html = buttonBack()->toHtml();
+        $html = bsBack()->toHtml();
         $this->assertContains($configContainerAttributes, $html);
     }
 
@@ -172,7 +172,7 @@ class BackTest extends BootstrapComponentsTestCase
         $configContainerAttributes = 'test-config-attributes-container';
         $customContainerAttributes = 'test-custom-attributes-container';
         config()->set('bootstrap-components.button.back.html_attributes.container', [$configContainerAttributes]);
-        $html = buttonBack()->containerHtmlAttributes([$customContainerAttributes])->toHtml();
+        $html = bsBack()->containerHtmlAttributes([$customContainerAttributes])->toHtml();
         $this->assertContains($customContainerAttributes, $html);
         $this->assertNotContains($configContainerAttributes, $html);
     }
@@ -181,7 +181,7 @@ class BackTest extends BootstrapComponentsTestCase
     {
         $configComponentAttributes = 'test-config-attributes-component';
         config()->set('bootstrap-components.button.back.html_attributes.component', [$configComponentAttributes]);
-        $html = buttonBack()->toHtml();
+        $html = bsBack()->toHtml();
         $this->assertContains($configComponentAttributes, $html);
     }
 
@@ -190,7 +190,7 @@ class BackTest extends BootstrapComponentsTestCase
         $configComponentAttributes = 'test-config-attributes-component';
         $customComponentAttributes = 'test-custom-attributes-component';
         config()->set('bootstrap-components.button.back.html_attributes.component', [$configComponentAttributes]);
-        $html = buttonBack()->componentHtmlAttributes([$customComponentAttributes])->toHtml();
+        $html = bsBack()->componentHtmlAttributes([$customComponentAttributes])->toHtml();
         $this->assertContains($customComponentAttributes, $html);
         $this->assertNotContains($configComponentAttributes, $html);
     }

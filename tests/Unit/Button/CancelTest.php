@@ -30,12 +30,12 @@ class CancelTest extends BootstrapComponentsTestCase
 
     public function testExtendsInput()
     {
-        $this->assertEquals(Button::class, get_parent_class(buttonCancel()));
+        $this->assertEquals(Button::class, get_parent_class(bsCancel()));
     }
 
     public function testType()
     {
-        $html = buttonCancel()->toHtml();
+        $html = bsCancel()->toHtml();
         $this->assertContains('<div class="button-container', $html);
         $this->assertContains('<a href="http://localhost"', $html);
         $this->assertContains('class="button-component', $html);
@@ -44,7 +44,7 @@ class CancelTest extends BootstrapComponentsTestCase
     public function testSetUrl()
     {
         $customUrl = 'test-custom-url';
-        $html = buttonCancel()->url($customUrl)->toHtml();
+        $html = bsCancel()->url($customUrl)->toHtml();
         $this->assertContains('<a href="' . $customUrl . '"', $html);
     }
 
@@ -52,7 +52,7 @@ class CancelTest extends BootstrapComponentsTestCase
     {
         $this->setRoutes();
         $customRoute = 'users.index';
-        $html = buttonCancel()->route($customRoute)->toHtml();
+        $html = bsCancel()->route($customRoute)->toHtml();
         $this->assertContains('<a href="' . route($customRoute) . '"', $html);
     }
 
@@ -60,7 +60,7 @@ class CancelTest extends BootstrapComponentsTestCase
     {
         $configIcon = 'test-config-icon';
         config()->set('bootstrap-components.button.cancel.icon', $configIcon);
-        $html = buttonCancel()->toHtml();
+        $html = bsCancel()->toHtml();
         $this->assertContains($configIcon, $html);
     }
 
@@ -69,7 +69,7 @@ class CancelTest extends BootstrapComponentsTestCase
         $configIcon = 'test-config-icon';
         $customIcon = 'test-custom-icon';
         config()->set('bootstrap-components.button.cancel.icon', $configIcon);
-        $html = buttonCancel()->icon($customIcon)->toHtml();
+        $html = bsCancel()->icon($customIcon)->toHtml();
         $this->assertContains('<span class="icon">' . $customIcon . '</span>', $html);
         $this->assertNotContains('<span class="icon">' . $configIcon . '</span>', $html);
     }
@@ -77,7 +77,7 @@ class CancelTest extends BootstrapComponentsTestCase
     public function testNoIcon()
     {
         config()->set('bootstrap-components.button.cancel.icon', null);
-        $html = buttonCancel()->toHtml();
+        $html = bsCancel()->toHtml();
         $this->assertNotContains('<span class="icon">', $html);
     }
 
@@ -85,7 +85,7 @@ class CancelTest extends BootstrapComponentsTestCase
     {
         $configIcon = 'test-config-icon';
         config()->set('bootstrap-components.button.cancel.icon', $configIcon);
-        $html = buttonCancel()->hideIcon()->toHtml();
+        $html = bsCancel()->hideIcon()->toHtml();
         $this->assertNotContains('<span class="icon">' . $configIcon . '</span>', $html);
     }
 
@@ -93,7 +93,7 @@ class CancelTest extends BootstrapComponentsTestCase
     {
         $configLabel = 'test-config-label';
         config()->set('bootstrap-components.button.cancel.label', $configLabel);
-        $html = buttonCancel()->toHtml();
+        $html = bsCancel()->toHtml();
         $this->assertContains('title="bootstrap-components::' . $configLabel . '">', $html);
         $this->assertContains('<span class="label">bootstrap-components::' . $configLabel . '</span>', $html);
     }
@@ -101,14 +101,14 @@ class CancelTest extends BootstrapComponentsTestCase
     public function testSetLabel()
     {
         $label = 'test-custom-label';
-        $html = buttonCancel()->label($label)->toHtml();
+        $html = bsCancel()->label($label)->toHtml();
         $this->assertContains('<span class="label">' . $label . '</span>', $html);
     }
 
     public function testNoLabel()
     {
         config()->set('bootstrap-components.button.cancel.label', null);
-        $html = buttonCancel()->toHtml();
+        $html = bsCancel()->toHtml();
         $this->assertNotContains('<span class="label">', $html);
         $this->assertNotContains('title="', $html);
         $this->assertNotContains('<span class="label">', $html);
@@ -118,7 +118,7 @@ class CancelTest extends BootstrapComponentsTestCase
     {
         $configLabel = 'test-config-label';
         config()->set('bootstrap-components.button.cancel.label', $configLabel);
-        $html = buttonCancel()->hideLabel()->toHtml();
+        $html = bsCancel()->hideLabel()->toHtml();
         $this->assertNotContains('title="bootstrap-components::' . $configLabel . '">', $html);
         $this->assertNotContains('<span class="label">bootstrap-components::' . $configLabel . '</span>', $html);
     }
@@ -127,7 +127,7 @@ class CancelTest extends BootstrapComponentsTestCase
     {
         $configContainerCLass = 'test-config-class-container';
         config()->set('bootstrap-components.button.cancel.class.container', [$configContainerCLass]);
-        $html = buttonCancel()->toHtml();
+        $html = bsCancel()->toHtml();
         $this->assertContains('<div class="button-container ' . $configContainerCLass . '">', $html);
     }
 
@@ -136,7 +136,7 @@ class CancelTest extends BootstrapComponentsTestCase
         $configContainerCLass = 'test-config-class-container';
         $customContainerCLass = 'test-custom-class-container';
         config()->set('bootstrap-components.input.class.container', [$configContainerCLass]);
-        $html = buttonCancel()->containerClass([$customContainerCLass])->toHtml();
+        $html = bsCancel()->containerClass([$customContainerCLass])->toHtml();
         $this->assertContains('<div class="button-container ' . $customContainerCLass . '">', $html);
         $this->assertNotContains('<div class="button-container ' . $configContainerCLass . '">', $html);
     }
@@ -145,7 +145,7 @@ class CancelTest extends BootstrapComponentsTestCase
     {
         $configComponentCLass = 'test-config-class-component';
         config()->set('bootstrap-components.button.cancel.class.component', [$configComponentCLass]);
-        $html = buttonCancel()->toHtml();
+        $html = bsCancel()->toHtml();
         $this->assertContains('class="button-component ' . $configComponentCLass . '"', $html);
     }
 
@@ -154,7 +154,7 @@ class CancelTest extends BootstrapComponentsTestCase
         $configComponentCLass = 'test-config-class-component';
         $customComponentCLass = 'test-custom-class-component';
         config()->set('bootstrap-components.button.cancel.class.component', [$customComponentCLass]);
-        $html = buttonCancel()->componentClass([$customComponentCLass])->toHtml();
+        $html = bsCancel()->componentClass([$customComponentCLass])->toHtml();
         $this->assertContains('class="button-component ' . $customComponentCLass . '"', $html);
         $this->assertNotContains('class="button-component ' . $configComponentCLass . '"', $html);
     }
@@ -163,7 +163,7 @@ class CancelTest extends BootstrapComponentsTestCase
     {
         $configContainerAttributes = 'test-config-attributes-container';
         config()->set('bootstrap-components.button.cancel.html_attributes.container', [$configContainerAttributes]);
-        $html = buttonCancel()->toHtml();
+        $html = bsCancel()->toHtml();
         $this->assertContains($configContainerAttributes, $html);
     }
 
@@ -172,7 +172,7 @@ class CancelTest extends BootstrapComponentsTestCase
         $configContainerAttributes = 'test-config-attributes-container';
         $customContainerAttributes = 'test-custom-attributes-container';
         config()->set('bootstrap-components.button.cancel.html_attributes.container', [$configContainerAttributes]);
-        $html = buttonCancel()->containerHtmlAttributes([$customContainerAttributes])->toHtml();
+        $html = bsCancel()->containerHtmlAttributes([$customContainerAttributes])->toHtml();
         $this->assertContains($customContainerAttributes, $html);
         $this->assertNotContains($configContainerAttributes, $html);
     }
@@ -181,7 +181,7 @@ class CancelTest extends BootstrapComponentsTestCase
     {
         $configComponentAttributes = 'test-config-attributes-component';
         config()->set('bootstrap-components.button.cancel.html_attributes.component', [$configComponentAttributes]);
-        $html = buttonCancel()->toHtml();
+        $html = bsCancel()->toHtml();
         $this->assertContains($configComponentAttributes, $html);
     }
 
@@ -190,7 +190,7 @@ class CancelTest extends BootstrapComponentsTestCase
         $configComponentAttributes = 'test-config-attributes-component';
         $customComponentAttributes = 'test-custom-attributes-component';
         config()->set('bootstrap-components.button.cancel.html_attributes.component', [$configComponentAttributes]);
-        $html = buttonCancel()->componentHtmlAttributes([$customComponentAttributes])->toHtml();
+        $html = bsCancel()->componentHtmlAttributes([$customComponentAttributes])->toHtml();
         $this->assertContains($customComponentAttributes, $html);
         $this->assertNotContains($configComponentAttributes, $html);
     }

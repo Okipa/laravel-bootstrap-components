@@ -29,6 +29,19 @@ return [
                 'component' => [],
             ],
         ],
+        'url'      => [
+            'view'            => 'bootstrap-components.form.input',
+            'icon'            => '<i class="fas fa-link"></i>',
+            'legend'          => null,
+            'class'           => [
+                'container' => ['form-group'],
+                'component' => [],
+            ],
+            'html_attributes' => [
+                'container' => [],
+                'component' => [],
+            ],
+        ],
         'email'    => [
             'view'            => 'bootstrap-components.form.input',
             'icon'            => '<i class="fas fa-at"></i>',

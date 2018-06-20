@@ -30,12 +30,12 @@ class CreateTest extends BootstrapComponentsTestCase
 
     public function testExtendsInput()
     {
-        $this->assertEquals(Button::class, get_parent_class(buttonCreate()));
+        $this->assertEquals(Button::class, get_parent_class(bsCreate()));
     }
 
     public function testType()
     {
-        $html = buttonCreate()->toHtml();
+        $html = bsCreate()->toHtml();
         $this->assertContains('<div class="submit-container', $html);
         $this->assertNotContains('<a href="http://localhost"', $html);
         $this->assertContains('class="submit-component', $html);
@@ -44,7 +44,7 @@ class CreateTest extends BootstrapComponentsTestCase
     public function testSetUrl()
     {
         $customUrl = 'test-custom-url';
-        $html = buttonCreate()->url($customUrl)->toHtml();
+        $html = bsCreate()->url($customUrl)->toHtml();
         $this->assertNotContains('<a href="' . $customUrl . '"', $html);
     }
 
@@ -52,7 +52,7 @@ class CreateTest extends BootstrapComponentsTestCase
     {
         $this->setRoutes();
         $customRoute = 'users.index';
-        $html = buttonCreate()->route($customRoute)->toHtml();
+        $html = bsCreate()->route($customRoute)->toHtml();
         $this->assertNotContains('<a href="' . route($customRoute) . '"', $html);
     }
 
@@ -60,7 +60,7 @@ class CreateTest extends BootstrapComponentsTestCase
     {
         $configIcon = 'test-config-icon';
         config()->set('bootstrap-components.button.create.icon', $configIcon);
-        $html = buttonCreate()->toHtml();
+        $html = bsCreate()->toHtml();
         $this->assertContains($configIcon, $html);
     }
 
@@ -69,7 +69,7 @@ class CreateTest extends BootstrapComponentsTestCase
         $configIcon = 'test-config-icon';
         $customIcon = 'test-custom-icon';
         config()->set('bootstrap-components.button.create.icon', $configIcon);
-        $html = buttonCreate()->icon($customIcon)->toHtml();
+        $html = bsCreate()->icon($customIcon)->toHtml();
         $this->assertContains('<span class="icon">' . $customIcon . '</span>', $html);
         $this->assertNotContains('<span class="icon">' . $configIcon . '</span>', $html);
     }
@@ -77,7 +77,7 @@ class CreateTest extends BootstrapComponentsTestCase
     public function testNoIcon()
     {
         config()->set('bootstrap-components.button.create.icon', null);
-        $html = buttonCreate()->toHtml();
+        $html = bsCreate()->toHtml();
         $this->assertNotContains('<span class="icon">', $html);
     }
 
@@ -85,7 +85,7 @@ class CreateTest extends BootstrapComponentsTestCase
     {
         $configIcon = 'test-config-icon';
         config()->set('bootstrap-components.button.create.icon', $configIcon);
-        $html = buttonCreate()->hideIcon()->toHtml();
+        $html = bsCreate()->hideIcon()->toHtml();
         $this->assertNotContains('<span class="icon">' . $configIcon . '</span>', $html);
     }
 
@@ -93,7 +93,7 @@ class CreateTest extends BootstrapComponentsTestCase
     {
         $configLabel = 'test-config-label';
         config()->set('bootstrap-components.button.create.label', $configLabel);
-        $html = buttonCreate()->toHtml();
+        $html = bsCreate()->toHtml();
         $this->assertContains('title="bootstrap-components::' . $configLabel . '">', $html);
         $this->assertContains('<span class="label">bootstrap-components::' . $configLabel . '</span>', $html);
     }
@@ -101,14 +101,14 @@ class CreateTest extends BootstrapComponentsTestCase
     public function testSetLabel()
     {
         $label = 'test-custom-label';
-        $html = buttonCreate()->label($label)->toHtml();
+        $html = bsCreate()->label($label)->toHtml();
         $this->assertContains('<span class="label">' . $label . '</span>', $html);
     }
 
     public function testNoLabel()
     {
         config()->set('bootstrap-components.button.create.label', null);
-        $html = buttonCreate()->toHtml();
+        $html = bsCreate()->toHtml();
         $this->assertNotContains('<span class="label">', $html);
         $this->assertNotContains('title="', $html);
         $this->assertNotContains('<span class="label">', $html);
@@ -118,7 +118,7 @@ class CreateTest extends BootstrapComponentsTestCase
     {
         $configLabel = 'test-config-label';
         config()->set('bootstrap-components.button.create.label', $configLabel);
-        $html = buttonCreate()->hideLabel()->toHtml();
+        $html = bsCreate()->hideLabel()->toHtml();
         $this->assertNotContains('title="bootstrap-components::' . $configLabel . '">', $html);
         $this->assertNotContains('<span class="label">bootstrap-components::' . $configLabel . '</span>', $html);
     }
@@ -127,7 +127,7 @@ class CreateTest extends BootstrapComponentsTestCase
     {
         $configContainerCLass = 'test-config-class-container';
         config()->set('bootstrap-components.button.create.class.container', [$configContainerCLass]);
-        $html = buttonCreate()->toHtml();
+        $html = bsCreate()->toHtml();
         $this->assertContains('<div class="submit-container ' . $configContainerCLass . '">', $html);
     }
 
@@ -136,7 +136,7 @@ class CreateTest extends BootstrapComponentsTestCase
         $configContainerCLass = 'test-config-class-container';
         $customContainerCLass = 'test-custom-class-container';
         config()->set('bootstrap-components.input.class.container', [$configContainerCLass]);
-        $html = buttonCreate()->containerClass([$customContainerCLass])->toHtml();
+        $html = bsCreate()->containerClass([$customContainerCLass])->toHtml();
         $this->assertContains('<div class="submit-container ' . $customContainerCLass . '">', $html);
         $this->assertNotContains('<div class="submit-container ' . $configContainerCLass . '">', $html);
     }
@@ -145,7 +145,7 @@ class CreateTest extends BootstrapComponentsTestCase
     {
         $configComponentCLass = 'test-config-class-component';
         config()->set('bootstrap-components.button.create.class.component', [$configComponentCLass]);
-        $html = buttonCreate()->toHtml();
+        $html = bsCreate()->toHtml();
         $this->assertContains('class="submit-component ' . $configComponentCLass . '"', $html);
     }
 
@@ -154,7 +154,7 @@ class CreateTest extends BootstrapComponentsTestCase
         $configComponentCLass = 'test-config-class-component';
         $customComponentCLass = 'test-custom-class-component';
         config()->set('bootstrap-components.button.create.class.component', [$customComponentCLass]);
-        $html = buttonCreate()->componentClass([$customComponentCLass])->toHtml();
+        $html = bsCreate()->componentClass([$customComponentCLass])->toHtml();
         $this->assertContains('class="submit-component ' . $customComponentCLass . '"', $html);
         $this->assertNotContains('class="submit-component ' . $configComponentCLass . '"', $html);
     }
@@ -163,7 +163,7 @@ class CreateTest extends BootstrapComponentsTestCase
     {
         $configContainerAttributes = 'test-config-attributes-container';
         config()->set('bootstrap-components.button.create.html_attributes.container', [$configContainerAttributes]);
-        $html = buttonCreate()->toHtml();
+        $html = bsCreate()->toHtml();
         $this->assertContains($configContainerAttributes, $html);
     }
 
@@ -172,7 +172,7 @@ class CreateTest extends BootstrapComponentsTestCase
         $configContainerAttributes = 'test-config-attributes-container';
         $customContainerAttributes = 'test-custom-attributes-container';
         config()->set('bootstrap-components.button.create.html_attributes.container', [$configContainerAttributes]);
-        $html = buttonCreate()->containerHtmlAttributes([$customContainerAttributes])->toHtml();
+        $html = bsCreate()->containerHtmlAttributes([$customContainerAttributes])->toHtml();
         $this->assertContains($customContainerAttributes, $html);
         $this->assertNotContains($configContainerAttributes, $html);
     }
@@ -181,7 +181,7 @@ class CreateTest extends BootstrapComponentsTestCase
     {
         $configComponentAttributes = 'test-config-attributes-component';
         config()->set('bootstrap-components.button.create.html_attributes.component', [$configComponentAttributes]);
-        $html = buttonCreate()->toHtml();
+        $html = bsCreate()->toHtml();
         $this->assertContains($configComponentAttributes, $html);
     }
 
@@ -190,7 +190,7 @@ class CreateTest extends BootstrapComponentsTestCase
         $configComponentAttributes = 'test-config-attributes-component';
         $customComponentAttributes = 'test-custom-attributes-component';
         config()->set('bootstrap-components.button.create.html_attributes.component', [$configComponentAttributes]);
-        $html = buttonCreate()->componentHtmlAttributes([$customComponentAttributes])->toHtml();
+        $html = bsCreate()->componentHtmlAttributes([$customComponentAttributes])->toHtml();
         $this->assertContains($customComponentAttributes, $html);
         $this->assertNotContains($configComponentAttributes, $html);
     }

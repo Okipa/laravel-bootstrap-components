@@ -1,71 +1,78 @@
 <?php
 
-if (! function_exists('text')) {
-    function text()
+if (! function_exists('bsText')) {
+    function bsText()
     {
         return app(\Okipa\LaravelBootstrapComponents\Form\Text::class);
     }
 }
 
-if (! function_exists('tel')) {
-    function tel()
+if (! function_exists('bsTel')) {
+    function bsTel()
     {
         return app(\Okipa\LaravelBootstrapComponents\Form\Tel::class);
     }
 }
 
-if (! function_exists('email')) {
-    function email()
+if (! function_exists('bsUrl')) {
+    function bsUrl()
+    {
+        return app(\Okipa\LaravelBootstrapComponents\Form\Url::class);
+    }
+}
+
+if (! function_exists('bsEmail')) {
+    function bsEmail()
     {
         return app(\Okipa\LaravelBootstrapComponents\Form\Email::class);
     }
 }
 
 
-if (! function_exists('password')) {
-    function password()
+if (! function_exists('bsPassword')) {
+    function bsPassword()
     {
         return app(\Okipa\LaravelBootstrapComponents\Form\Password::class);
     }
 }
 
-if (! function_exists('fileUpload')) {
-    function fileUpload()
+if (! function_exists('bsFile')) {
+    function bsFile()
     {
         return app(\Okipa\LaravelBootstrapComponents\Form\File::class);
     }
 }
 
-if (! function_exists('textarea')) {
-    function textarea()
+if (! function_exists('bsTextarea')) {
+    function bsTextarea()
     {
         return app(\Okipa\LaravelBootstrapComponents\Form\Textarea::class);
     }
 }
 
-if (! function_exists('checkbox')) {
-    function checkbox()
+if (! function_exists('bsCheckbox')) {
+    function bsCheckbox()
     {
         return app(\Okipa\LaravelBootstrapComponents\Form\Checkbox::class);
     }
 }
 
-if (! function_exists('toggle')) {
-    function toggle()
+if (! function_exists('bsToggle')) {
+    function bsToggle()
     {
         return app(\Okipa\LaravelBootstrapComponents\Form\Toggle::class);
     }
 }
 
-if (! function_exists('radio')) {
-    function radio()
+if (! function_exists('bsRadio')) {
+    function bsRadio()
     {
         return app(\Okipa\LaravelBootstrapComponents\Form\Radio::class);
     }
 }
 
-if (! function_exists('select')) {
-    function select()
+if (! function_exists('bsSelect')) {
+    function bsSelect()
     {
         return app(\Okipa\LaravelBootstrapComponents\Form\Select::class);
     }

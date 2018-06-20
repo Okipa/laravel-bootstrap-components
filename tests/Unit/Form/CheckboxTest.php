@@ -30,18 +30,18 @@ class CheckboxTest extends BootstrapComponentsTestCase
 
     public function testExtendsInput()
     {
-        $this->assertEquals(Checkable::class, get_parent_class(checkbox()));
+        $this->assertEquals(Checkable::class, get_parent_class(bsCheckbox()));
     }
 
     public function testName()
     {
-        $html = checkbox()->name('name')->toHtml();
+        $html = bsCheckbox()->name('name')->toHtml();
         $this->assertContains('name="name"', $html);
     }
 
     public function testType()
     {
-        $html = checkbox()->name('name')->toHtml();
+        $html = bsCheckbox()->name('name')->toHtml();
         $this->assertContains('type="checkbox"', $html);
     }
 
@@ -52,27 +52,27 @@ class CheckboxTest extends BootstrapComponentsTestCase
      */
     public function testInputWithoutName()
     {
-        checkbox()->toHtml();
+        bsCheckbox()->toHtml();
     }
 
     public function testModelValue()
     {
         $user = $this->createUniqueUser();
-        $html = checkbox()->model($user)->name('name')->toHtml();
+        $html = bsCheckbox()->model($user)->name('name')->toHtml();
         $this->assertContains('checked="checked"', $html);
     }
 
     public function testChecked()
     {
         $user = null;
-        $html = checkbox()->model($user)->name('name')->checked(true)->toHtml();
+        $html = bsCheckbox()->model($user)->name('name')->checked(true)->toHtml();
         $this->assertContains('checked="checked"', $html);
     }
 
     public function testNotChecked()
     {
         $user = $this->createUniqueUser();
-        $html = checkbox()->model($user)->name('name')->checked(false)->toHtml();
+        $html = bsCheckbox()->model($user)->name('name')->checked(false)->toHtml();
         $this->assertNotContains('checked="checked"', $html);
     }
 
@@ -80,7 +80,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
     {
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.checkbox.legend', $configLegend);
-        $html = checkbox()->name('name')->toHtml();
+        $html = bsCheckbox()->name('name')->toHtml();
         $this->assertContains(
             '<small id="checkbox-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
             $html
@@ -92,7 +92,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $configLegend = 'test-config-legend';
         $customLegend = 'test-custom-legend';
         config()->set('bootstrap-components.form.checkbox.legend', $configLegend);
-        $html = checkbox()->name('name')->legend($customLegend)->toHtml();
+        $html = bsCheckbox()->name('name')->legend($customLegend)->toHtml();
         $this->assertContains(
             '<small id="checkbox-name-legend" class="form-text text-muted">' . $customLegend . '</small>',
             $html
@@ -106,7 +106,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
     public function testNoLegend()
     {
         config()->set('bootstrap-components.form.checkbox.legend', null);
-        $html = checkbox()->name('name')->toHtml();
+        $html = bsCheckbox()->name('name')->toHtml();
         $this->assertNotContains('<span class="icon input-group-text">', $html);
     }
 
@@ -114,20 +114,20 @@ class CheckboxTest extends BootstrapComponentsTestCase
     {
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.checkbox.legend', $configLegend);
-        $html = checkbox()->name('name')->hideLegend()->toHtml();
+        $html = bsCheckbox()->name('name')->hideLegend()->toHtml();
         $this->assertNotContains('<span class="icon input-group-text">', $html);
     }
 
     public function testSetValueDefaultCheckStatus()
     {
-        $html = checkbox()->name('name')->toHtml();
+        $html = bsCheckbox()->name('name')->toHtml();
         $this->assertNotContains('checked="checked', $html);
     }
 
     public function testSetValueChecked()
     {
         $customValue = true;
-        $html = checkbox()->name('name')->value($customValue)->toHtml();
+        $html = bsCheckbox()->name('name')->value($customValue)->toHtml();
         $this->assertContains('checked="checked', $html);
     }
 
@@ -142,7 +142,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
             },
         ]);
         $this->call('GET', 'test');
-        $html = checkbox()->name('name')->value($customValue)->toHtml();
+        $html = bsCheckbox()->name('name')->value($customValue)->toHtml();
         $this->assertContains('checked="checked', $html);
     }
 
@@ -157,20 +157,20 @@ class CheckboxTest extends BootstrapComponentsTestCase
             },
         ]);
         $this->call('GET', 'test');
-        $html = checkbox()->name('name')->value($customValue)->toHtml();
+        $html = bsCheckbox()->name('name')->value($customValue)->toHtml();
         $this->assertNotContains('checked="checked', $html);
     }
 
     public function testSetLabel()
     {
         $label = 'test-custom-label';
-        $html = checkbox()->name('name')->label($label)->toHtml();
+        $html = bsCheckbox()->name('name')->label($label)->toHtml();
         $this->assertContains('for="checkbox-name">' . $label . '</label>', $html);
     }
 
     public function testNoLabel()
     {
-        $html = checkbox()->name('name')->toHtml();
+        $html = bsCheckbox()->name('name')->toHtml();
         $this->assertContains(
             'for="checkbox-name">validation.attributes.name</label>',
             $html
@@ -179,7 +179,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
 
     public function testHideLabel()
     {
-        $html = checkbox()->name('name')->hideLabel()->toHtml();
+        $html = bsCheckbox()->name('name')->hideLabel()->toHtml();
         $this->assertNotContains(
             'for="checkbox-name">validation.attributes.name</label>',
             $html
@@ -189,7 +189,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
     public function testSuccess()
     {
         $messageBag = app(MessageBag::class)->add('other_name', null);
-        $html = checkbox()->name('name')->render(['errors' => $messageBag]);
+        $html = bsCheckbox()->name('name')->render(['errors' => $messageBag]);
         $this->assertContains('<div class="valid-feedback d-block">', $html);
         $this->assertContains(trans('bootstrap-components::bootstrap-components.notification.validation.success'),
             $html);
@@ -197,7 +197,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
 
     public function testNoSuccess()
     {
-        $html = checkbox()->name('name')->toHtml();
+        $html = bsCheckbox()->name('name')->toHtml();
         $this->assertNotContains('<div class="valid-feedback d-block">', $html);
     }
 
@@ -205,14 +205,14 @@ class CheckboxTest extends BootstrapComponentsTestCase
     {
         $errorMessage = 'This a test error message';
         $messageBag = app(MessageBag::class)->add('name', $errorMessage);
-        $html = checkbox()->name('name')->render(['errors' => $messageBag]);
+        $html = bsCheckbox()->name('name')->render(['errors' => $messageBag]);
         $this->assertContains('<div class="invalid-feedback d-block">', $html);
         $this->assertContains($errorMessage, $html);
     }
 
     public function testNoError()
     {
-        $html = checkbox()->name('name')->toHtml();
+        $html = bsCheckbox()->name('name')->toHtml();
         $this->assertNotContains('<div class="invalid-feedback d-block">', $html);
     }
 
@@ -220,7 +220,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
     {
         $configContainerCLass = 'test-config-class-container';
         config()->set('bootstrap-components.form.checkbox.class.container', [$configContainerCLass]);
-        $html = checkbox()->name('name')->toHtml();
+        $html = bsCheckbox()->name('name')->toHtml();
         $this->assertContains('class="checkbox-name-container custom-control custom-checkbox ' . $configContainerCLass
                               . '"', $html);
     }
@@ -230,7 +230,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $configContainerCLass = 'test-config-class-container';
         $customContainerCLass = 'test-custom-class-container';
         config()->set('bootstrap-components.form.checkbox.class.container', [$configContainerCLass]);
-        $html = checkbox()->name('name')->containerClass([$customContainerCLass])->toHtml();
+        $html = bsCheckbox()->name('name')->containerClass([$customContainerCLass])->toHtml();
         $this->assertContains('class="checkbox-name-container custom-control custom-checkbox ' . $customContainerCLass
                               . '"', $html);
         $this->assertNotContains('class="checkbox-name-container custom-control custom-checkbox '
@@ -241,7 +241,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
     {
         $configComponentCLass = 'test-config-class-component';
         config()->set('bootstrap-components.form.checkbox.class.component', [$configComponentCLass]);
-        $html = checkbox()->name('name')->toHtml();
+        $html = bsCheckbox()->name('name')->toHtml();
         $this->assertContains('class="checkbox-name-component custom-control-input ' . $configComponentCLass . '"',
             $html);
     }
@@ -251,7 +251,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $configComponentCLass = 'test-config-class-component';
         $customComponentCLass = 'test-custom-class-component';
         config()->set('bootstrap-components.form.checkbox.class.component', [$customComponentCLass]);
-        $html = checkbox()->name('name')->componentClass([$customComponentCLass])->toHtml();
+        $html = bsCheckbox()->name('name')->componentClass([$customComponentCLass])->toHtml();
         $this->assertContains('class="checkbox-name-component custom-control-input ' . $customComponentCLass . '"',
             $html);
         $this->assertNotContains('class="form-control checkbox-name-component ' . $configComponentCLass . '"', $html);
@@ -261,7 +261,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
     {
         $configContainerAttributes = 'test-config-attributes-container';
         config()->set('bootstrap-components.form.checkbox.html_attributes.container', [$configContainerAttributes]);
-        $html = checkbox()->name('name')->toHtml();
+        $html = bsCheckbox()->name('name')->toHtml();
         $this->assertContains($configContainerAttributes, $html);
     }
 
@@ -270,7 +270,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $configContainerAttributes = 'test-config-attributes-container';
         $customContainerAttributes = 'test-custom-attributes-container';
         config()->set('bootstrap-components.form.checkbox.html_attributes.container', [$configContainerAttributes]);
-        $html = checkbox()->name('name')->containerHtmlAttributes([$customContainerAttributes])->toHtml();
+        $html = bsCheckbox()->name('name')->containerHtmlAttributes([$customContainerAttributes])->toHtml();
         $this->assertContains($customContainerAttributes, $html);
         $this->assertNotContains($configContainerAttributes, $html);
     }
@@ -279,7 +279,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
     {
         $configComponentAttributes = 'test-config-attributes-component';
         config()->set('bootstrap-components.form.checkbox.html_attributes.component', [$configComponentAttributes]);
-        $html = checkbox()->name('name')->toHtml();
+        $html = bsCheckbox()->name('name')->toHtml();
         $this->assertContains($configComponentAttributes, $html);
     }
 
@@ -288,7 +288,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $configComponentAttributes = 'test-config-attributes-component';
         $customComponentAttributes = 'test-custom-attributes-component';
         config()->set('bootstrap-components.form.checkbox.html_attributes.component', [$configComponentAttributes]);
-        $html = checkbox()->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
+        $html = bsCheckbox()->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
         $this->assertContains($customComponentAttributes, $html);
         $this->assertNotContains($configComponentAttributes, $html);
     }

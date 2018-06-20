@@ -20,23 +20,24 @@ This package provides a ready-to-use and customizable bootstrap components libra
 ## Components
 
 ### [Form](#form-components)
-- [text()](#text)
-- [tel()](#tel)
-- [email()](#email)
-- [password()](#password)
-- [fileUpload()](#fileupload)
-- [textarea()](#textarea)
-- [checkbox()](#checkbox)
-- [toggle()](#toggle)
-- [radio()](#radio)
-- [select()](#select)
+- [bsText()](#bstext)
+- [bsTel()](#bstel)
+- [bsUrl()](#bsurl)
+- [bsEmail()](#bsemail)
+- [bsPassword()](#bspassword)
+- [bsFile()](#bsfileupload)
+- [bsTextarea()](#bstextarea)
+- [bsCheckbox()](#bscheckbox)
+- [bsToggle()](#bstoggle)
+- [bsRadio()](#bsradio)
+- [bsSelect()](#bsselect)
 
 ### [Buttons](#buttons-components)
-- [buttonValidate()](#buttonvalidate)
-- [buttonCreate()](#buttoncreate)
-- [buttonUpdate()](#buttonupdate)
-- [buttonCancel()](#buttoncancel)
-- [buttonBack()](#buttonback)
+- [bsValidate()](#bsValidate)
+- [bsCreate()](#bsCreate)
+- [bsUpdate()](#bsUpdate)
+- [bsCancel()](#bsCancel)
+- [bsBack()](#bsBack)
 
 ### [Media](#media-components)
 - [image()](#image)
@@ -68,7 +69,7 @@ Just call the component you need in your view.
 
 ```
 // example
-{{ text()->name('username') }}
+{{ bsText()->name('username') }}
 ```
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -137,10 +138,10 @@ php artisan vendor:publish --tag=bootstrap-components::views
 | legend(string $legend): Input  | No | default value : `config('bootstrap-components.input.legend')`. |
 | hideLegend(): Input  | No |  |
   
-#### text()
+#### bsText()
 
 ```php
-text()->name('name')
+bsText()->name('name')
     ->model($user) // value is automatically detected from the field name
     ->value() // or manually set the value
     ->label('Name') // override the default trans('validation.attributes.[name]') label
@@ -156,10 +157,10 @@ text()->name('name')
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
 ```
 
-#### tel()
+#### bsTel()
 
 ```php
-tel()->name('phone_number')
+bsTel()->name('phone_number')
     ->model($user) // value is automatically detected from the field name
     ->value() // or manually set the value
     ->label('Name') // override the default trans('validation.attributes.[name]') label
@@ -175,10 +176,10 @@ tel()->name('phone_number')
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
 ```
 
-#### email()
+#### bsUrl()
 
 ```php
-email()->name('email')
+bsUrl()->name('phone_number')
     ->model($user) // value is automatically detected from the field name
     ->value() // or manually set the value
     ->label('Name') // override the default trans('validation.attributes.[name]') label
@@ -194,10 +195,10 @@ email()->name('email')
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
 ```
 
-#### password()
+#### bsEmail()
 
 ```php
-email()->name('password')
+bsEmail()->name('email')
     ->model($user) // value is automatically detected from the field name
     ->value() // or manually set the value
     ->label('Name') // override the default trans('validation.attributes.[name]') label
@@ -213,10 +214,29 @@ email()->name('password')
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
 ```
 
-#### fileUpload()
+#### bsPassword()
 
 ```php
-fileUpload()->name('avatar')
+bsEmail()->name('password')
+    ->model($user) // value is automatically detected from the field name
+    ->value() // or manually set the value
+    ->label('Name') // override the default trans('validation.attributes.[name]') label
+    ->hideLabel() // or hide the label
+    ->placeholder() // override the default placeholder (label)
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->hideIcon() // or hide the icon
+    ->legend('Select a user.') // override the default config legend
+    ->hideLegend() // or hide the legend
+    ->containerClass(['container', 'class]) // override the default config container class list
+    ->componentClass(['component', 'class']) // override the default config component class list
+    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
+    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
+```
+
+#### bsFile()
+
+```php
+bsFile()->name('avatar')
     ->model($user) // value is automatically detected from the field name
     ->value() // or manually set the value
     ->label('Name') // override the default trans('validation.attributes.[name]') label
@@ -243,10 +263,10 @@ _Component additional methods :_
 | uploadedFile(Closure $uploadedFile): InputFile  | No | Allows to set html or another component to render the uploaded file. |
 | showRemoveCheckbox(bool $showed = true): File  | No | Show the file remove checkbox (will appear only if an uploaded file is detected). Will send a `remove_[name]` value with the form data. Default value : `config('bootstrap-components.file.show_remove_checkbox')`. |
 
-#### textarea()
+#### bsTextarea()
 
 ```php
-textarea()->name('message')
+bsTextarea()->name('message')
     ->model($user) // value is automatically detected from the field name
     ->value() // or manually set the value
     ->label('Name') // override the default trans('validation.attributes.[name]') label
@@ -262,10 +282,10 @@ textarea()->name('message')
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
 ```
 
-#### checkbox()
+#### bsCheckbox()
 
 ```php
-checkbox()->name('active')
+bsCheckbox()->name('active')
     ->model($user) // checked status is automatically detected from the field name
     ->value(true) // or manually set the value
     ->checked(true) // or use the alias for value
@@ -287,10 +307,10 @@ _Component additional methods :_
 |---|---|---|
 | checked(bool $checked = true): Input  | No |  |
 
-#### toggle()
+#### bsToggle()
 
 ```php
-toggle()->name('active')
+bsToggle()->name('active')
     ->model($user) // checked status is automatically detected from the field name
     ->value(true) // or manually set the value
     ->checked(true) // or use the alias for value
@@ -316,10 +336,10 @@ _Notes :_
 - This component is an extra component not included in bootstrap and using it demands to [load the package styles](#styles).
 - The following class are applyable in the `containerClass()` method in order to manage the toggle size : `switch-sm` , `switch-lg`.
 
-#### radio()
+#### bsRadio()
 
 ```php
-radio()->name('active')
+bsRadio()->name('active')
     ->model($user) // checked status is automatically detected from the field name
     ->value(true) // or manually set the value
     ->checked(true) // or use the alias for value
@@ -341,10 +361,10 @@ _Component additional methods :_
 |---|---|---|
 | checked(bool $checked = true): Input  | No |  |
   
-#### select()
+#### bsSelect()
 
 ```php
-select()->name('selected')
+bsSelect()->name('selected')
     ->model($user) // selected option is automatically detected
     ->selected('id', 1) // or manually set the selected option
     ->options($usersList, 'id', 'name') // work with a models collection or an array
@@ -379,10 +399,10 @@ _Component additional methods :_
 | label(string $label): Input  | No | default value : `config('bootstrap-components.button.label')`. |
 | hideLabel(): Input  | No |  |
 
-#### buttonValidate()
+#### bsValidate()
 
 ```php
-buttonValidate()->label('Select a user') // override the default trans('validation.attributes.[name]') label
+bsValidate()->label('Select a user') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
     ->hideIcon() // or hide the icon
@@ -392,10 +412,10 @@ buttonValidate()->label('Select a user') // override the default trans('validati
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
 ```
 
-#### buttonCreate()
+#### bsCreate()
 
 ```php
-buttonCreate()->label('Select a user') // override the default trans('validation.attributes.[name]') label
+bsCreate()->label('Select a user') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
     ->hideIcon() // or hide the icon
@@ -405,10 +425,10 @@ buttonCreate()->label('Select a user') // override the default trans('validation
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
 ```
 
-#### buttonUpdate()
+#### bsUpdate()
 
 ```php
-buttonUpdate()->label('Select a user') // override the default trans('validation.attributes.[name]') label
+bsUpdate()->label('Select a user') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
     ->hideIcon() // or hide the icon
@@ -418,10 +438,10 @@ buttonUpdate()->label('Select a user') // override the default trans('validation
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
 ```
 
-#### buttonCancel()
+#### bsCancel()
 
 ```php
-buttonCancel()->url('https://www.google.com')
+bsCancel()->url('https://www.google.com')
     ->route('users.index')
     ->label('Select a user') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
@@ -440,10 +460,10 @@ _Component additional methods :_
 | url(string $url): Button  | No | default value : `url()->back()`. |
 | route(string $route): Button  | No | set the url value from a route key. |
 
-#### buttonBack()
+#### bsBack()
 
 ```php
-buttonBack()->url('https://www.google.com')
+bsBack()->url('https://www.google.com')
     ->route('users.index')
     ->label('Select a user') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label

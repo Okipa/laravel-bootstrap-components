@@ -32,12 +32,12 @@ class FileTest extends BootstrapComponentsTestCase
 
     public function testExtendsInput()
     {
-        $this->assertEquals(Input::class, get_parent_class(fileUpload()));
+        $this->assertEquals(Input::class, get_parent_class(bsFile()));
     }
 
     public function testSetName()
     {
-        $html = fileUpload()->name('name')->toHtml();
+        $html = bsFile()->name('name')->toHtml();
         $this->assertContains('name="name"', $html);
     }
 
@@ -48,13 +48,13 @@ class FileTest extends BootstrapComponentsTestCase
      */
     public function testInputWithoutName()
     {
-        fileUpload()->toHtml();
+        bsFile()->toHtml();
     }
 
     public function testModelValue()
     {
         $user = $this->createUniqueUser();
-        $html = fileUpload()->model($user)->name('name')->toHtml();
+        $html = bsFile()->model($user)->name('name')->toHtml();
         $this->assertContains('<label class="custom-file-label" for="file-name">' . $user->name . '</label>', $html);
     }
 
@@ -62,7 +62,7 @@ class FileTest extends BootstrapComponentsTestCase
     {
         $configIcon = 'test-config-icon';
         config()->set('bootstrap-components.form.file.icon', $configIcon);
-        $html = fileUpload()->name('name')->toHtml();
+        $html = bsFile()->name('name')->toHtml();
         $this->assertContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
     }
 
@@ -71,7 +71,7 @@ class FileTest extends BootstrapComponentsTestCase
         $configIcon = 'test-config-icon';
         $customIcon = 'test-custom-icon';
         config()->set('bootstrap-components.form.file.icon', $configIcon);
-        $html = fileUpload()->name('name')->icon($customIcon)->toHtml();
+        $html = bsFile()->name('name')->icon($customIcon)->toHtml();
         $this->assertContains('<span class="icon input-group-text">' . $customIcon . '</span>', $html);
         $this->assertNotContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
     }
@@ -79,7 +79,7 @@ class FileTest extends BootstrapComponentsTestCase
     public function testNoIcon()
     {
         config()->set('bootstrap-components.form.file.icon', null);
-        $html = fileUpload()->name('name')->toHtml();
+        $html = bsFile()->name('name')->toHtml();
         $this->assertNotContains('<span class="icon input-group-text">', $html);
     }
 
@@ -87,7 +87,7 @@ class FileTest extends BootstrapComponentsTestCase
     {
         $configIcon = 'test-config-icon';
         config()->set('bootstrap-components.form.file.icon', $configIcon);
-        $html = fileUpload()->name('name')->hideIcon()->toHtml();
+        $html = bsFile()->name('name')->hideIcon()->toHtml();
         $this->assertNotContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
     }
 
@@ -95,7 +95,7 @@ class FileTest extends BootstrapComponentsTestCase
     {
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.file.legend', $configLegend);
-        $html = fileUpload()->name('name')->toHtml();
+        $html = bsFile()->name('name')->toHtml();
         $this->assertContains(
             '<small id="file-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
             $html
@@ -107,7 +107,7 @@ class FileTest extends BootstrapComponentsTestCase
         $configLegend = 'test-config-legend';
         $customLegend = 'test-custom-legend';
         config()->set('bootstrap-components.form.file.legend', $configLegend);
-        $html = fileUpload()->name('name')->legend($customLegend)->toHtml();
+        $html = bsFile()->name('name')->legend($customLegend)->toHtml();
         $this->assertContains(
             '<small id="file-name-legend" class="form-text text-muted">' . $customLegend . '</small>',
             $html
@@ -121,7 +121,7 @@ class FileTest extends BootstrapComponentsTestCase
     public function testNoLegend()
     {
         config()->set('bootstrap-components.form.file.legend', null);
-        $html = fileUpload()->name('name')->toHtml();
+        $html = bsFile()->name('name')->toHtml();
         $this->assertNotContains('id="file-name-legend"', $html);
     }
 
@@ -129,7 +129,7 @@ class FileTest extends BootstrapComponentsTestCase
     {
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.file.legend', $configLegend);
-        $html = fileUpload()->name('name')->hideLegend()->toHtml();
+        $html = bsFile()->name('name')->hideLegend()->toHtml();
         $this->assertNotContains(
             '<small id="file-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
             $html
@@ -138,7 +138,7 @@ class FileTest extends BootstrapComponentsTestCase
 
     public function testNoPlaceholderWithDefaultLabel()
     {
-        $html = fileUpload()->name('name')->toHtml();
+        $html = bsFile()->name('name')->toHtml();
         $this->assertContains(
             '<label class="custom-file-label" for="file-name">'
             . trans('bootstrap-components::bootstrap-components.label.file') . '</label>',
@@ -148,7 +148,7 @@ class FileTest extends BootstrapComponentsTestCase
 
     public function testNoPlaceholderWithNoLabel()
     {
-        $html = fileUpload()->name('name')->hideLabel()->toHtml();
+        $html = bsFile()->name('name')->hideLabel()->toHtml();
         $this->assertContains(
             '<label class="custom-file-label" for="file-name">validation.attributes.name : '
             . trans('bootstrap-components::bootstrap-components.label.file') . '</label>',
@@ -160,7 +160,7 @@ class FileTest extends BootstrapComponentsTestCase
     {
         $placeholder = 'test-custom-placeholder';
         $label= 'test-custom-label';
-        $html = fileUpload()->name('name')->placeholder($placeholder)->label($label)->toHtml();
+        $html = bsFile()->name('name')->placeholder($placeholder)->label($label)->toHtml();
         $this->assertContains(
             '<label class="custom-file-label" for="file-name">'
             . trans('bootstrap-components::bootstrap-components.label.file') . '</label>',
@@ -181,7 +181,7 @@ class FileTest extends BootstrapComponentsTestCase
     public function testSetPlaceholderWithNoLabel()
     {
         $placeholder = 'test-custom-placeholder';
-        $html = fileUpload()->name('name')->placeholder($placeholder)->hideLabel()->toHtml();
+        $html = bsFile()->name('name')->placeholder($placeholder)->hideLabel()->toHtml();
         $this->assertContains(
             '<label class="custom-file-label" for="file-name">' . $placeholder . ' : '
             . trans('bootstrap-components::bootstrap-components.label.file') . '</label>',
@@ -197,7 +197,7 @@ class FileTest extends BootstrapComponentsTestCase
     public function testSetValue()
     {
         $customValue = 'test-custom-value';
-        $html = fileUpload()->name('name')->value($customValue)->toHtml();
+        $html = bsFile()->name('name')->value($customValue)->toHtml();
         $this->assertContains(
             '<label class="custom-file-label" for="file-name">' . $customValue . '</label>',
             $html
@@ -215,7 +215,7 @@ class FileTest extends BootstrapComponentsTestCase
             },
         ]);
         $this->call('GET', 'test');
-        $html = fileUpload()->name('name')->value($customValue)->toHtml();
+        $html = bsFile()->name('name')->value($customValue)->toHtml();
         $this->assertContains(
             '<label class="custom-file-label" for="file-name">' . $oldValue . '</label>',
             $html
@@ -229,14 +229,14 @@ class FileTest extends BootstrapComponentsTestCase
     public function testSetLabel()
     {
         $label = 'test-custom-label';
-        $html = fileUpload()->name('name')->label($label)->toHtml();
+        $html = bsFile()->name('name')->label($label)->toHtml();
         $this->assertContains('<label for="file-name">' . $label . '</label>', $html);
         $this->assertContains('aria-label="' . $label . '"', $html);
     }
 
     public function testNoLabel()
     {
-        $html = fileUpload()->name('name')->toHtml();
+        $html = bsFile()->name('name')->toHtml();
         $this->assertContains(
             '<label for="file-name">validation.attributes.name</label>',
             $html
@@ -249,7 +249,7 @@ class FileTest extends BootstrapComponentsTestCase
 
     public function testHideLabel()
     {
-        $html = fileUpload()->name('name')->hideLabel()->toHtml();
+        $html = bsFile()->name('name')->hideLabel()->toHtml();
         $this->assertNotContains(
             '<label for="file-name">validation.attributes.name</label>',
             $html
@@ -263,7 +263,7 @@ class FileTest extends BootstrapComponentsTestCase
     public function testSuccess()
     {
         $messageBag = app(MessageBag::class)->add('other_name', null);
-        $html = fileUpload()->name('name')->render(['errors' => $messageBag]);
+        $html = bsFile()->name('name')->render(['errors' => $messageBag]);
         $this->assertContains('<div class="valid-feedback d-block">', $html);
         $this->assertContains(trans('bootstrap-components::bootstrap-components.notification.validation.success'),
             $html);
@@ -271,7 +271,7 @@ class FileTest extends BootstrapComponentsTestCase
 
     public function testNoSuccess()
     {
-        $html = fileUpload()->name('name')->toHtml();
+        $html = bsFile()->name('name')->toHtml();
         $this->assertNotContains('<div class="valid-feedback d-block">', $html);
     }
 
@@ -279,14 +279,14 @@ class FileTest extends BootstrapComponentsTestCase
     {
         $errorMessage = 'This a test error message';
         $messageBag = app(MessageBag::class)->add('name', $errorMessage);
-        $html = fileUpload()->name('name')->render(['errors' => $messageBag]);
+        $html = bsFile()->name('name')->render(['errors' => $messageBag]);
         $this->assertContains('<div class="invalid-feedback d-block">', $html);
         $this->assertContains($errorMessage, $html);
     }
 
     public function testNoError()
     {
-        $html = fileUpload()->name('name')->toHtml();
+        $html = bsFile()->name('name')->toHtml();
         $this->assertNotContains('<div class="invalid-feedback d-block">', $html);
     }
 
@@ -294,7 +294,7 @@ class FileTest extends BootstrapComponentsTestCase
     {
         $configContainerCLass = 'test-config-class-container';
         config()->set('bootstrap-components.form.file.class.container', [$configContainerCLass]);
-        $html = fileUpload()->name('name')->toHtml();
+        $html = bsFile()->name('name')->toHtml();
         $this->assertContains('class="file-name-container ' . $configContainerCLass . '"', $html);
     }
 
@@ -303,7 +303,7 @@ class FileTest extends BootstrapComponentsTestCase
         $configContainerCLass = 'test-config-class-container';
         $customContainerCLass = 'test-custom-class-container';
         config()->set('bootstrap-components.form.file.class.container', [$configContainerCLass]);
-        $html = fileUpload()->name('name')->containerClass([$customContainerCLass])->toHtml();
+        $html = bsFile()->name('name')->containerClass([$customContainerCLass])->toHtml();
         $this->assertContains('class="file-name-container ' . $customContainerCLass . '"', $html);
         $this->assertNotContains('class="file-name-container ' . $configContainerCLass . '"', $html);
     }
@@ -312,7 +312,7 @@ class FileTest extends BootstrapComponentsTestCase
     {
         $configComponentCLass = 'test-config-class-component';
         config()->set('bootstrap-components.form.file.class.component', [$configComponentCLass]);
-        $html = fileUpload()->name('name')->toHtml();
+        $html = bsFile()->name('name')->toHtml();
         $this->assertContains(
             'class="custom-file-input form-control file-name-component ' . $configComponentCLass . '"',
             $html
@@ -324,7 +324,7 @@ class FileTest extends BootstrapComponentsTestCase
         $configComponentCLass = 'test-config-class-component';
         $customComponentCLass = 'test-custom-class-component';
         config()->set('bootstrap-components.form.file.class.component', [$customComponentCLass]);
-        $html = fileUpload()->name('name')->componentClass([$customComponentCLass])->toHtml();
+        $html = bsFile()->name('name')->componentClass([$customComponentCLass])->toHtml();
         $this->assertContains(
             'class="custom-file-input form-control file-name-component ' . $customComponentCLass . '"',
             $html
@@ -339,7 +339,7 @@ class FileTest extends BootstrapComponentsTestCase
     {
         $configContainerAttributes = 'test-config-attributes-container';
         config()->set('bootstrap-components.form.file.html_attributes.container', [$configContainerAttributes]);
-        $html = fileUpload()->name('name')->toHtml();
+        $html = bsFile()->name('name')->toHtml();
         $this->assertContains($configContainerAttributes, $html);
     }
 
@@ -348,7 +348,7 @@ class FileTest extends BootstrapComponentsTestCase
         $configContainerAttributes = 'test-config-attributes-container';
         $customContainerAttributes = 'test-custom-attributes-container';
         config()->set('bootstrap-components.form.file.html_attributes.container', [$configContainerAttributes]);
-        $html = fileUpload()->name('name')->containerHtmlAttributes([$customContainerAttributes])->toHtml();
+        $html = bsFile()->name('name')->containerHtmlAttributes([$customContainerAttributes])->toHtml();
         $this->assertContains($customContainerAttributes, $html);
         $this->assertNotContains($configContainerAttributes, $html);
     }
@@ -357,7 +357,7 @@ class FileTest extends BootstrapComponentsTestCase
     {
         $configComponentAttributes = 'test-config-attributes-component';
         config()->set('bootstrap-components.form.file.html_attributes.component', [$configComponentAttributes]);
-        $html = fileUpload()->name('name')->toHtml();
+        $html = bsFile()->name('name')->toHtml();
         $this->assertContains($configComponentAttributes, $html);
     }
 
@@ -366,14 +366,14 @@ class FileTest extends BootstrapComponentsTestCase
         $configComponentAttributes = 'test-config-attributes-component';
         $customComponentAttributes = 'test-custom-attributes-component';
         config()->set('bootstrap-components.form.file.html_attributes.component', [$configComponentAttributes]);
-        $html = fileUpload()->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
+        $html = bsFile()->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
         $this->assertContains($customComponentAttributes, $html);
         $this->assertNotContains($configComponentAttributes, $html);
     }
 
     public function testUploadedfileUpload()
     {
-        $html = fileUpload()->name('name')->uploadedFile(function() {
+        $html = bsFile()->name('name')->uploadedFile(function() {
             return 'Uploaded file !';
         })->toHtml();
         $this->assertContains('Uploaded file !', $html);
@@ -382,7 +382,7 @@ class FileTest extends BootstrapComponentsTestCase
     public function testConfigShowRemoveCheckboxWithUploadedFile()
     {
         config()->set('bootstrap-components.form.file.show_remove_checkbox', true);
-        $html = fileUpload()->name('name')->uploadedFile(function() {
+        $html = bsFile()->name('name')->uploadedFile(function() {
             return 'html';
         })->toHtml();
         $this->assertContains('<input id="checkbox-remove_name"', $html);
@@ -392,7 +392,7 @@ class FileTest extends BootstrapComponentsTestCase
     public function testConfigShowRemoveCheckboxWithEmptyUploadedFile()
     {
         config()->set('bootstrap-components.form.file.show_remove_checkbox', true);
-        $html = fileUpload()->name('name')->uploadedFile(function() {
+        $html = bsFile()->name('name')->uploadedFile(function() {
             return null;
         })->toHtml();
         $this->assertNotContains('<input id="checkbox-remove_name"', $html);
@@ -402,7 +402,7 @@ class FileTest extends BootstrapComponentsTestCase
     public function testConfigShowRemoveCheckboxWithoutUploadedFile()
     {
         config()->set('bootstrap-components.form.file.show_remove_checkbox', true);
-        $html = fileUpload()->name('name')->toHtml();
+        $html = bsFile()->name('name')->toHtml();
         $this->assertNotContains('<input id="checkbox-remove_name"', $html);
         $this->assertNotContains('name="remove_name"', $html);
     }
@@ -410,7 +410,7 @@ class FileTest extends BootstrapComponentsTestCase
     public function testConfigHideRemoveCheckboxWithUploadedFile()
     {
         config()->set('bootstrap-components.form.file.show_remove_checkbox', false);
-        $html = fileUpload()->name('name')->uploadedFile(function() {
+        $html = bsFile()->name('name')->uploadedFile(function() {
             return 'html';
         })->toHtml();
         $this->assertNotContains('<input id="checkbox-remove_name"', $html);
@@ -420,7 +420,7 @@ class FileTest extends BootstrapComponentsTestCase
     public function testShowRemoveCheckboxWithUploadedFile()
     {
         config()->set('bootstrap-components.form.file.show_remove_checkbox', false);
-        $html = fileUpload()->name('name')->uploadedFile(function() {
+        $html = bsFile()->name('name')->uploadedFile(function() {
             return 'html';
         })->showRemoveCheckbox(true)->toHtml();
         $this->assertContains('<input id="checkbox-remove_name"', $html);
@@ -430,7 +430,7 @@ class FileTest extends BootstrapComponentsTestCase
     public function testHideRemoveCheckbox()
     {
         config()->set('bootstrap-components.form.file.show_remove_checkbox', true);
-        $html = fileUpload()->name('name')->uploadedFile(function() {
+        $html = bsFile()->name('name')->uploadedFile(function() {
             return 'html';
         })->showRemoveCheckbox(false)->toHtml();
         $this->assertNotContains('<input id="checkbox-remove_name"', $html);
