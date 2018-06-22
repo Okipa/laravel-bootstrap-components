@@ -22,6 +22,8 @@ This package provides a ready-to-use and customizable bootstrap components libra
 ### [Form](#form-components)
 - [bsText()](#bstext)
 - [bsTel()](#bstel)
+- [bsDate()](#bsdate)
+- [bsTDatetime()](#bsdatetime)
 - [bsUrl()](#bsurl)
 - [bsEmail()](#bsemail)
 - [bsPassword()](#bspassword)
@@ -33,11 +35,11 @@ This package provides a ready-to-use and customizable bootstrap components libra
 - [bsSelect()](#bsselect)
 
 ### [Buttons](#buttons-components)
-- [bsValidate()](#bsValidate)
-- [bsCreate()](#bsCreate)
-- [bsUpdate()](#bsUpdate)
-- [bsCancel()](#bsCancel)
-- [bsBack()](#bsBack)
+- [bsValidate()](#bsvalidate)
+- [bsCreate()](#bscreate)
+- [bsUpdate()](#bsupdate)
+- [bsCancel()](#bscancel)
+- [bsBack()](#bsback)
 
 ### [Media](#media-components)
 - [image()](#image)
@@ -176,10 +178,48 @@ bsTel()->name('phone_number')
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
 ```
 
+#### bsDate()
+
+```php
+bsDate()->name('published_at')
+    ->model($user) // value is automatically detected from the field name
+    ->value() // or manually set the value
+    ->label('Name') // override the default trans('validation.attributes.[name]') label
+    ->hideLabel() // or hide the label
+    ->placeholder() // override the default placeholder (label)
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->hideIcon() // or hide the icon
+    ->legend('Select a user.') // override the default config legend
+    ->hideLegend() // or hide the legend
+    ->containerClass(['container', 'class]) // override the default config container class list
+    ->componentClass(['component', 'class']) // override the default config component class list
+    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
+    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
+```
+
+#### bsDatetime()
+
+```php
+bsDatetime()->name('published_at')
+    ->model($user) // value is automatically detected from the field name
+    ->value() // or manually set the value
+    ->label('Name') // override the default trans('validation.attributes.[name]') label
+    ->hideLabel() // or hide the label
+    ->placeholder() // override the default placeholder (label)
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->hideIcon() // or hide the icon
+    ->legend('Select a user.') // override the default config legend
+    ->hideLegend() // or hide the legend
+    ->containerClass(['container', 'class]) // override the default config container class list
+    ->componentClass(['component', 'class']) // override the default config component class list
+    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
+    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
+```
+
 #### bsUrl()
 
 ```php
-bsUrl()->name('phone_number')
+bsUrl()->name('facebook_page')
     ->model($user) // value is automatically detected from the field name
     ->value() // or manually set the value
     ->label('Name') // override the default trans('validation.attributes.[name]') label
@@ -217,7 +257,7 @@ bsEmail()->name('email')
 #### bsPassword()
 
 ```php
-bsEmail()->name('password')
+bsPassword()->name('password')
     ->model($user) // value is automatically detected from the field name
     ->value() // or manually set the value
     ->label('Name') // override the default trans('validation.attributes.[name]') label
@@ -339,7 +379,7 @@ _Notes :_
 #### bsRadio()
 
 ```php
-bsRadio()->name('active')
+bsRadio()->name('gender')
     ->model($user) // checked status is automatically detected from the field name
     ->value(true) // or manually set the value
     ->checked(true) // or use the alias for value

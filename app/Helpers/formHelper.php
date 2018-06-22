@@ -14,6 +14,20 @@ if (! function_exists('bsTel')) {
     }
 }
 
+if (! function_exists('bsDate')) {
+    function bsDate()
+    {
+        return app(\Okipa\LaravelBootstrapComponents\Form\Date::class);
+    }
+}
+
+if (! function_exists('bsDatetime')) {
+    function bsDatetime()
+    {
+        return app(\Okipa\LaravelBootstrapComponents\Form\Datetime::class);
+    }
+}
+
 if (! function_exists('bsUrl')) {
     function bsUrl()
     {
