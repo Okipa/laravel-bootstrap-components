@@ -29,9 +29,10 @@ return [
                 'component' => [],
             ],
         ],
-        'date'      => [
+        'date'     => [
             'view'            => 'bootstrap-components.form.input',
             'icon'            => '<i class="fas fa-calendar-alt"></i>',
+            'format'          => 'Y-m-d',
             'legend'          => null,
             'class'           => [
                 'container' => ['form-group'],
@@ -42,9 +43,10 @@ return [
                 'component' => [],
             ],
         ],
-        'datetime'      => [
+        'datetime' => [
             'view'            => 'bootstrap-components.form.input',
             'icon'            => '<i class="fas fa-calendar-alt"></i>',
+            'format'          => 'Y-m-d\TH:i',
             'legend'          => null,
             'class'           => [
                 'container' => ['form-group'],

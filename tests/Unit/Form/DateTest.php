@@ -18,6 +18,7 @@ class DateTest extends BootstrapComponentsTestCase
         // components.form.date
         $this->assertTrue(array_key_exists('view', config('bootstrap-components.form.date')));
         $this->assertTrue(array_key_exists('icon', config('bootstrap-components.form.date')));
+        $this->assertTrue(array_key_exists('format', config('bootstrap-components.form.date')));
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.date')));
         $this->assertTrue(array_key_exists('class', config('bootstrap-components.form.date')));
         $this->assertTrue(array_key_exists('html_attributes', config('bootstrap-components.form.date')));
@@ -58,8 +59,8 @@ class DateTest extends BootstrapComponentsTestCase
 
     /**
      * @expectedException \Exception
-     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Date : the value must be a valid date
-     *                           with date format (Y-m-dTH:i:s), « test-custom-name » given.
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Date : the value must have a valid date
+     *                           format (Y-m-d\TH:i), « test-custom-name » given.
      */
     public function testWrongModelValue()
     {
@@ -73,15 +74,51 @@ class DateTest extends BootstrapComponentsTestCase
         $user = $this->createUniqueUser();
         $user->published_at = $this->faker->dateTime;
         $html = bsDate()->model($user)->name('published_at')->toHtml();
-        $this->assertContains('value="' . $user->published_at->format('Y-m-d') . '"', $html);
+        $this->assertContains(
+            'value="' . $user->published_at->format(config('bootstrap-components.form.date.format')) . '"',
+            $html
+        );
     }
 
     public function testModelDateTimeStringValue()
     {
         $user = $this->createUniqueUser();
-        $user->published_at = $this->faker->dateTime->format('Y-m-d');
+        $user->published_at = $this->faker->dateTime->format(config('bootstrap-components.form.date.format'));
         $html = bsDate()->model($user)->name('published_at')->toHtml();
         $this->assertContains('value="' . $user->published_at . '"', $html);
+    }
+
+    public function testSetConfigFormat()
+    {
+        $configFormat = 'Y-m-d H:i:s';
+        config()->set('bootstrap-components.form.date.format', $configFormat);
+        $user = $this->createUniqueUser();
+        $user->published_at = $this->faker->dateTime;
+        $html = bsDate()->model($user)->name('published_at')->toHtml();
+        $this->assertContains($user->published_at->format($configFormat), $html);
+    }
+
+    public function testSetFormat()
+    {
+        $configFormat = 'Y-m-d H:i:s';
+        $customFormat = 'Y-m-d H:i';
+        config()->set('bootstrap-components.form.date.format', $configFormat);
+        $user = $this->createUniqueUser();
+        $user->published_at = $this->faker->dateTime;
+        $html = bsDate()->model($user)->name('published_at')->format($customFormat)->toHtml();
+        $this->assertContains($user->published_at->format($customFormat), $html);
+    }
+
+    /**
+     * @expectedException \Exception
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Date : No config or custom format is given for the bsDate() component.
+     */
+    public function testNoFormat()
+    {
+        config()->set('bootstrap-components.form.date.format', null);
+        $user = $this->createUniqueUser();
+        $user->published_at = $this->faker->dateTime;
+        bsDate()->model($user)->name('published_at')->toHtml();
     }
 
     public function testConfigIcon()
@@ -184,8 +221,8 @@ class DateTest extends BootstrapComponentsTestCase
 
     /**
      * @expectedException \Exception
-     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Date : the value must be a valid date
-     *                           with date format (Y-m-dTH:i:s), « test-custom-value » given.
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Date : the value must have a valid date
+     *                           format (Y-m-d\TH:i), « test-custom-value » given.
      */
     public function testSetWrongValue()
     {
@@ -198,13 +235,16 @@ class DateTest extends BootstrapComponentsTestCase
     {
         $customValue = $this->faker->dateTime;
         $html = bsDate()->name('name')->value($customValue)->toHtml();
-        $this->assertContains('value="' . $customValue->format('Y-m-d') . '"', $html);
+        $this->assertContains(
+            'value="' . $customValue->format(config('bootstrap-components.form.date.format')) . '"',
+            $html
+        );
     }
 
     public function testOldValue()
     {
-        $oldValue = $this->faker->dateTime->format('Y-m-d');
-        $customValue = $this->faker->dateTime->format('Y-m-d');
+        $oldValue = $this->faker->dateTime->format(config('bootstrap-components.form.date.format'));
+        $customValue = $this->faker->dateTime->format(config('bootstrap-components.form.date.format'));
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function() use ($oldValue) {
                 $request = request()->merge(['name' => $oldValue]);
