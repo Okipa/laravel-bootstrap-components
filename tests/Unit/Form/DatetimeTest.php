@@ -56,11 +56,32 @@ class DatetimeTest extends BootstrapComponentsTestCase
         bsDatetime()->toHtml();
     }
 
-    public function testModelValue()
+    /**
+     * @expectedException \Exception
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Datetime : the value must be a valid datetime
+     *                           with datetime-local format (Y-m-dTH:i:s), « test-custom-name » given.
+     */
+    public function testWrongModelValue()
     {
         $user = $this->createUniqueUser();
-        $html = bsDatetime()->model($user)->name('name')->toHtml();
-        $this->assertContains('value="' . $user->name . '"', $html);
+        $user->name = 'test-custom-name';
+        bsDatetime()->model($user)->name('name')->toHtml();
+    }
+
+    public function testModelDateTimeObjectValue()
+    {
+        $user = $this->createUniqueUser();
+        $user->published_at = $this->faker->dateTime;
+        $html = bsDatetime()->model($user)->name('published_at')->toHtml();
+        $this->assertContains('value="' . $user->published_at->format('Y-m-d\TH:i:s') . '"', $html);
+    }
+
+    public function testModelDateTimeStringValue()
+    {
+        $user = $this->createUniqueUser();
+        $user->published_at = $this->faker->dateTime->format('Y-m-d\TH:i:s');
+        $html = bsDatetime()->model($user)->name('published_at')->toHtml();
+        $this->assertContains('value="' . $user->published_at . '"', $html);
     }
 
     public function testConfigIcon()
@@ -161,17 +182,29 @@ class DatetimeTest extends BootstrapComponentsTestCase
         );
     }
 
-    public function testSetValue()
+    /**
+     * @expectedException \Exception
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Datetime : the value must be a valid datetime
+     *                           with datetime-local format (Y-m-dTH:i:s), « test-custom-value » given.
+     */
+    public function testSetWrongValue()
     {
         $customValue = 'test-custom-value';
         $html = bsDatetime()->name('name')->value($customValue)->toHtml();
         $this->assertContains('value="' . $customValue . '"', $html);
     }
 
+    public function testSetValue()
+    {
+        $customValue = $this->faker->dateTime;
+        $html = bsDatetime()->name('name')->value($customValue)->toHtml();
+        $this->assertContains('value="' . $customValue->format('Y-m-d\TH:i:s') . '"', $html);
+    }
+
     public function testOldValue()
     {
-        $oldValue = 'test-old-value';
-        $customValue = 'test-custom-value';
+        $oldValue = $this->faker->dateTime->format('Y-m-d\TH:i:s');
+        $customValue = $this->faker->dateTime->format('Y-m-d\TH:i:s');
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function() use ($oldValue) {
                 $request = request()->merge(['name' => $oldValue]);
@@ -271,7 +304,8 @@ class DatetimeTest extends BootstrapComponentsTestCase
         $configComponentCLass = 'test-config-class-component';
         config()->set('bootstrap-components.form.datetime.class.component', [$configComponentCLass]);
         $html = bsDatetime()->name('name')->toHtml();
-        $this->assertContains('class="form-control datetime-local-name-component ' . $configComponentCLass . '"', $html);
+        $this->assertContains('class="form-control datetime-local-name-component ' . $configComponentCLass . '"',
+            $html);
     }
 
     public function testSetComponentClass()
@@ -280,8 +314,10 @@ class DatetimeTest extends BootstrapComponentsTestCase
         $customComponentCLass = 'test-custom-class-component';
         config()->set('bootstrap-components.form.datetime.class.component', [$customComponentCLass]);
         $html = bsDatetime()->name('name')->componentClass([$customComponentCLass])->toHtml();
-        $this->assertContains('class="form-control datetime-local-name-component ' . $customComponentCLass . '"', $html);
-        $this->assertNotContains('class="form-control datetime-local-name-component ' . $configComponentCLass . '"', $html);
+        $this->assertContains('class="form-control datetime-local-name-component ' . $customComponentCLass . '"',
+            $html);
+        $this->assertNotContains('class="form-control datetime-local-name-component ' . $configComponentCLass . '"',
+            $html);
     }
 
     public function testConfigContainerHtmlAttributes()
