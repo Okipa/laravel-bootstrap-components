@@ -168,7 +168,7 @@ bsTel()->name('phone_number')
     ->label('Name') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder() // override the default placeholder (label)
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
     ->hideLegend() // or hide the legend
@@ -184,10 +184,11 @@ bsTel()->name('phone_number')
 bsDate()->name('published_at')
     ->model($user) // value is automatically detected from the field name
     ->value() // or manually set the value
+    ->format('Y-m-d') // override the default config format
     ->label('Name') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder() // override the default placeholder (label)
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
     ->hideLegend() // or hide the legend
@@ -203,10 +204,11 @@ bsDate()->name('published_at')
 bsDatetime()->name('published_at')
     ->model($user) // value is automatically detected from the field name
     ->value() // or manually set the value
+    ->format('Y-m-d') // override the default config format
     ->label('Name') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder() // override the default placeholder (label)
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
     ->hideLegend() // or hide the legend
@@ -225,7 +227,7 @@ bsUrl()->name('facebook_page')
     ->label('Name') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder() // override the default placeholder (label)
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
     ->hideLegend() // or hide the legend
@@ -244,7 +246,7 @@ bsEmail()->name('email')
     ->label('Name') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder() // override the default placeholder (label)
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
     ->hideLegend() // or hide the legend
@@ -263,7 +265,7 @@ bsPassword()->name('password')
     ->label('Name') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder() // override the default placeholder (label)
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
     ->hideLegend() // or hide the legend
@@ -312,7 +314,7 @@ bsTextarea()->name('message')
     ->label('Name') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder() // override the default placeholder (label)
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
     ->hideLegend() // or hide the legend
@@ -331,7 +333,7 @@ bsCheckbox()->name('active')
     ->checked(true) // or use the alias for value
     ->label('Name') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
     ->hideLegend() // or hide the legend
@@ -356,7 +358,7 @@ bsToggle()->name('active')
     ->checked(true) // or use the alias for value
     ->label('Name') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
     ->hideLegend() // or hide the legend
@@ -385,7 +387,7 @@ bsRadio()->name('gender')
     ->checked(true) // or use the alias for value
     ->label('Name') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
     ->hideLegend() // or hide the legend
@@ -411,7 +413,7 @@ bsSelect()->name('selected')
     ->label('Select a user') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder() // override the default placeholder (label)
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
     ->hideLegend() // or hide the legend
@@ -444,7 +446,7 @@ _Component additional methods :_
 ```php
 bsValidate()->label('Select a user') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
     ->containerClass(['container', 'class]) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
@@ -457,7 +459,7 @@ bsValidate()->label('Select a user') // override the default trans('validation.a
 ```php
 bsCreate()->label('Select a user') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
     ->containerClass(['container', 'class]) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
@@ -470,7 +472,7 @@ bsCreate()->label('Select a user') // override the default trans('validation.att
 ```php
 bsUpdate()->label('Select a user') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
     ->containerClass(['container', 'class]) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
@@ -485,7 +487,7 @@ bsCancel()->url('https://www.google.com')
     ->route('users.index')
     ->label('Select a user') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
     ->containerClass(['container', 'class]) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
@@ -507,7 +509,7 @@ bsBack()->url('https://www.google.com')
     ->route('users.index')
     ->label('Select a user') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
     ->containerClass(['container', 'class]) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
