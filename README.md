@@ -23,7 +23,7 @@ This package provides a ready-to-use and customizable bootstrap components libra
 - [bsText()](#bstext)
 - [bsTel()](#bstel)
 - [bsDate()](#bsdate)
-- [bsTDatetime()](#bsdatetime)
+- [bsDatetime()](#bsdatetime)
 - [bsUrl()](#bsurl)
 - [bsEmail()](#bsemail)
 - [bsPassword()](#bspassword)
