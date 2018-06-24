@@ -52,8 +52,8 @@ class BackTest extends BootstrapComponentsTestCase
     {
         $this->setRoutes();
         $customRoute = 'users.index';
-        $html = bsBack()->route($customRoute)->toHtml();
-        $this->assertContains('<a href="' . route($customRoute) . '"', $html);
+        $html = bsBack()->route($customRoute, ['id' => 1])->toHtml();
+        $this->assertContains('<a href="' . route($customRoute) . '?id=1"', $html);
     }
 
     public function testConfigIcon()

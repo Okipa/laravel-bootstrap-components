@@ -81,12 +81,13 @@ abstract class Button extends Component
      * Set the button route (only used for « button » type).
      *
      * @param string $route
+     * @param array  $params
      *
      * @return \Okipa\LaravelBootstrapComponents\Button\Button
      */
-    public function route(string $route): Button
+    public function route(string $route, array $params = []): Button
     {
-        $this->url = route($route);
+        $this->url = route($route, $params);
 
         return $this;
     }
