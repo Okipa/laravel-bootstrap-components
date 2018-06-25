@@ -19,7 +19,7 @@ return [
         'tel'      => [
             'view'            => 'bootstrap-components.form.input',
             'icon'            => '<i class="fas fa-phone"></i>',
-            'legend'          => null,
+            'legend'          => 'bootstrap-components.legend.tel',
             'class'           => [
                 'container' => ['form-group'],
                 'component' => [],
@@ -32,8 +32,8 @@ return [
         'date'     => [
             'view'            => 'bootstrap-components.form.input',
             'icon'            => '<i class="fas fa-calendar-alt"></i>',
-            'format'          => 'Y-m-d',
-            'legend'          => null,
+            'format'          => 'd/m/Y',
+            'legend'          => 'bootstrap-components.legend.date',
             'class'           => [
                 'container' => ['form-group'],
                 'component' => [],
@@ -46,8 +46,8 @@ return [
         'datetime' => [
             'view'            => 'bootstrap-components.form.input',
             'icon'            => '<i class="fas fa-calendar-alt"></i>',
-            'format'          => 'Y-m-d\TH:i',
-            'legend'          => null,
+            'format'          => 'd/m/Y H:i',
+            'legend'          => 'bootstrap-components.legend.datetime',
             'class'           => [
                 'container' => ['form-group'],
                 'component' => [],
