@@ -22,7 +22,7 @@ return [
 
     'legend' => [
         'tel'      => 'Veuillez saisir le numéro de téléphone avec son indicatif pays (exemple : +33 pour la France).',
-        'date'     => 'Format attendu : ' . config('bootstrap-components.form.date.format'),
-        'datetime' => 'Format attendu : ' . config('bootstrap-components.form.datetime.format'),
+        'date'     => 'Format attendu : d/m/Y',
+        'datetime' => 'Format attendu : d/m/Y H:i',
     ],
 ];

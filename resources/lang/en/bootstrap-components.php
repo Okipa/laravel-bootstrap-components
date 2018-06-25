@@ -22,7 +22,7 @@ return [
 
     'legend' => [
         'tel'      => 'Please fill in the telephone number with its country code (e.g. +44 for UK).',
-        'date'     => 'Awaited format : ' . config('bootstrap-components.form.date.format'),
-        'datetime' => 'Awaited format : ' . config('bootstrap-components.form.datetime.format'),
+        'date'     => 'Awaited format : d/m/Y',
+        'datetime' => 'Awaited format : d/m/Y H:i',
     ],
 ];
