@@ -82,7 +82,7 @@ class RadioTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.radio.legend', $configLegend);
         $html = bsRadio()->name('name')->toHtml();
         $this->assertContains(
-            '<small id="radio-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
+            '<small id="radio-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend . '</small>',
             $html
         );
     }
@@ -94,11 +94,11 @@ class RadioTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.radio.legend', $configLegend);
         $html = bsRadio()->name('name')->legend($customLegend)->toHtml();
         $this->assertContains(
-            '<small id="radio-name-legend" class="form-text text-muted">' . $customLegend . '</small>',
+            '<small id="radio-name-legend" class="form-text text-muted">bootstrap-components::' . $customLegend . '</small>',
             $html
         );
         $this->assertNotContains(
-            '<small id="radio-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
+            '<small id="radio-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend . '</small>',
             $html
         );
     }
@@ -107,7 +107,7 @@ class RadioTest extends BootstrapComponentsTestCase
     {
         config()->set('bootstrap-components.form.radio.legend', null);
         $html = bsRadio()->name('name')->toHtml();
-        $this->assertNotContains('<span class="icon input-group-text">', $html);
+        $this->assertNotContains('<small id="radio-name-legend" class="form-text text-muted">', $html);
     }
 
     public function testHideLegend()
@@ -115,7 +115,7 @@ class RadioTest extends BootstrapComponentsTestCase
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.radio.legend', $configLegend);
         $html = bsRadio()->name('name')->hideLegend()->toHtml();
-        $this->assertNotContains('<span class="icon input-group-text">', $html);
+        $this->assertNotContains('<small id="radio-name-legend" class="form-text text-muted">', $html);
     }
 
     public function testSetValueDefaultCheckStatus()

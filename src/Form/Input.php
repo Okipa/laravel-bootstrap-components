@@ -4,7 +4,6 @@ namespace Okipa\LaravelBootstrapComponents\Form;
 
 use Exception;
 use Illuminate\Database\Eloquent\Model;
-use InvalidArgumentException;
 use Okipa\LaravelBootstrapComponents\Component;
 
 abstract class Input extends Component
@@ -228,7 +227,9 @@ abstract class Input extends Component
             'type'        => $this->type,
             'name'        => $this->name,
             'icon'        => $this->showIcon ? ($this->icon ? $this->icon : $this->defaultIcon()) : '',
-            'legend'      => $this->showLegend ? ($this->legend ? $this->legend : $this->defaultLegend()) : '',
+            'legend'      => $this->showLegend
+                ? ($this->legend ? trans('bootstrap-components::' . $this->legend) : $this->defaultLegend())
+                : '',
             'label'       => $this->showLabel ? ($this->label
                 ? $this->label
                 : trans('validation.attributes.' . $this->name)
@@ -261,7 +262,7 @@ abstract class Input extends Component
     {
         $legend = config('bootstrap-components.' . $this->configKey . '.legend');
 
-        return $legend ? $legend : '';
+        return $legend ? trans('bootstrap-components::' . $legend) : '';
     }
 
     /**

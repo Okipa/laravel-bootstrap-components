@@ -97,7 +97,7 @@ class FileTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.file.legend', $configLegend);
         $html = bsFile()->name('name')->toHtml();
         $this->assertContains(
-            '<small id="file-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
+            '<small id="file-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend . '</small>',
             $html
         );
     }
@@ -109,11 +109,11 @@ class FileTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.file.legend', $configLegend);
         $html = bsFile()->name('name')->legend($customLegend)->toHtml();
         $this->assertContains(
-            '<small id="file-name-legend" class="form-text text-muted">' . $customLegend . '</small>',
+            '<small id="file-name-legend" class="form-text text-muted">bootstrap-components::' . $customLegend . '</small>',
             $html
         );
         $this->assertNotContains(
-            '<small id="file-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
+            '<small id="file-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend . '</small>',
             $html
         );
     }
@@ -122,7 +122,7 @@ class FileTest extends BootstrapComponentsTestCase
     {
         config()->set('bootstrap-components.form.file.legend', null);
         $html = bsFile()->name('name')->toHtml();
-        $this->assertNotContains('id="file-name-legend"', $html);
+        $this->assertNotContains('<small id="file-name-legend" class="form-text text-muted">', $html);
     }
 
     public function testHideLegend()
@@ -130,10 +130,7 @@ class FileTest extends BootstrapComponentsTestCase
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.file.legend', $configLegend);
         $html = bsFile()->name('name')->hideLegend()->toHtml();
-        $this->assertNotContains(
-            '<small id="file-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
-            $html
-        );
+        $this->assertNotContains('<small id="file-name-legend" class="form-text text-muted">', $html);
     }
 
     public function testNoPlaceholderWithDefaultLabel()

@@ -102,7 +102,7 @@ class InputTextTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.text.legend', $configLegend);
         $html = bsText()->name('name')->toHtml();
         $this->assertContains(
-            '<small id="text-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
+            '<small id="text-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend . '</small>',
             $html
         );
     }
@@ -114,11 +114,11 @@ class InputTextTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.text.legend', $configLegend);
         $html = bsText()->name('name')->legend($customLegend)->toHtml();
         $this->assertContains(
-            '<small id="text-name-legend" class="form-text text-muted">' . $customLegend . '</small>',
+            '<small id="text-name-legend" class="form-text text-muted">bootstrap-components::' . $customLegend . '</small>',
             $html
         );
         $this->assertNotContains(
-            '<small id="text-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
+            '<small id="text-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend . '</small>',
             $html
         );
     }
@@ -135,10 +135,7 @@ class InputTextTest extends BootstrapComponentsTestCase
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.text.legend', $configLegend);
         $html = bsText()->name('name')->hideLegend()->toHtml();
-        $this->assertNotContains(
-            '<small id="text-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
-            $html
-        );
+        $this->assertNotContains('<small id="text-name-legend" class="form-text text-muted">', $html);
     }
 
     public function testSetPlaceholder()

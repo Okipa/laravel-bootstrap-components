@@ -76,11 +76,11 @@ class Date extends Input
         }
         if ($this->value && is_string($this->value) && ! is_a($this->value, 'DateTime')) {
             try {
-                Carbon::createFromFormat($this->format, $this->value);
+                Carbon::parse($this->value);
             } catch (Exception $e) {
                 throw new Exception(
-                    get_class($this) . ' : the value must have a valid date format (' . $this->format
-                    . '), « ' . $this->value . ' » given.'
+                    get_class($this) . ' : the value must be a valid date object or string, « ' 
+                    . $this->value . ' » given.'
                 );
             }
         }

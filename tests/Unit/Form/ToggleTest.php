@@ -82,7 +82,7 @@ class ToggleTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.toggle.legend', $configLegend);
         $html = bsToggle()->name('name')->toHtml();
         $this->assertContains(
-            '<small id="toggle-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
+            '<small id="toggle-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend . '</small>',
             $html
         );
     }
@@ -94,11 +94,11 @@ class ToggleTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.toggle.legend', $configLegend);
         $html = bsToggle()->name('name')->legend($customLegend)->toHtml();
         $this->assertContains(
-            '<small id="toggle-name-legend" class="form-text text-muted">' . $customLegend . '</small>',
+            '<small id="toggle-name-legend" class="form-text text-muted">bootstrap-components::' . $customLegend . '</small>',
             $html
         );
         $this->assertNotContains(
-            '<small id="toggle-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
+            '<small id="toggle-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend . '</small>',
             $html
         );
     }
@@ -107,7 +107,7 @@ class ToggleTest extends BootstrapComponentsTestCase
     {
         config()->set('bootstrap-components.form.toggle.legend', null);
         $html = bsToggle()->name('name')->toHtml();
-        $this->assertNotContains('<span class="icon input-group-text">', $html);
+        $this->assertNotContains('<small id="toggle-name-legend" class="form-text text-muted">', $html);
     }
 
     public function testHideLegend()
@@ -115,7 +115,7 @@ class ToggleTest extends BootstrapComponentsTestCase
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.toggle.legend', $configLegend);
         $html = bsToggle()->name('name')->hideLegend()->toHtml();
-        $this->assertNotContains('<span class="icon input-group-text">', $html);
+        $this->assertNotContains('<small id="toggle-name-legend" class="form-text text-muted">', $html);
     }
 
     public function testSetValueDefaultCheckStatus()

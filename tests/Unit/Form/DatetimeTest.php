@@ -2,6 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Support\MessageBag;
 use Okipa\LaravelBootstrapComponents\Form\Input;
 use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
@@ -59,8 +60,8 @@ class DatetimeTest extends BootstrapComponentsTestCase
 
     /**
      * @expectedException \Exception
-     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Datetime : the value must have a valid datetime
-     *                           format (Y-m-d\TH:i), « test-custom-name » given.
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Datetime : the value must be a valid datetime
+     *                           object or string, « test-custom-value » given.
      */
     public function testWrongModelValue()
     {
@@ -83,11 +84,15 @@ class DatetimeTest extends BootstrapComponentsTestCase
     public function testModelDateTimeStringValue()
     {
         $user = $this->createUniqueUser();
-        $user->published_at = $this->faker->dateTime->format(config('bootstrap-components.form.datetime.format'));
+        $user->published_at = $this->faker->dateTime->format('Y-m-d H:i:s');
         $html = bsDatetime()->model($user)->name('published_at')->toHtml();
-        $this->assertContains('value="' . $user->published_at . '"', $html);
+        $this->assertContains(
+            'value="' . Carbon::parse($user->published_at)->format(config('bootstrap-components.form.datetime.format'))
+            . '"',
+            $html
+        );
     }
-    
+
     public function testSetConfigFormat()
     {
         $configFormat = 'Y-m-d H:i:s';
@@ -111,7 +116,8 @@ class DatetimeTest extends BootstrapComponentsTestCase
 
     /**
      * @expectedException \Exception
-     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Datetime : No config or custom format is given for the bsDatetime() component.
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Datetime : No config or custom format is given
+     *                           for the bsDatetime() component.
      */
     public function testNoFormat()
     {
@@ -160,7 +166,8 @@ class DatetimeTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.datetime.legend', $configLegend);
         $html = bsDatetime()->name('name')->toHtml();
         $this->assertContains(
-            '<small id="datetime-local-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
+            '<small id="datetime-local-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend
+            . '</small>',
             $html
         );
     }
@@ -172,11 +179,13 @@ class DatetimeTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.datetime.legend', $configLegend);
         $html = bsDatetime()->name('name')->legend($customLegend)->toHtml();
         $this->assertContains(
-            '<small id="datetime-local-name-legend" class="form-text text-muted">' . $customLegend . '</small>',
+            '<small id="datetime-local-name-legend" class="form-text text-muted">bootstrap-components::' . $customLegend
+            . '</small>',
             $html
         );
         $this->assertNotContains(
-            '<small id="datetime-local-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
+            '<small id="datetime-local-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend
+            . '</small>',
             $html
         );
     }
@@ -193,10 +202,7 @@ class DatetimeTest extends BootstrapComponentsTestCase
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.datetime.legend', $configLegend);
         $html = bsDatetime()->name('name')->hideLegend()->toHtml();
-        $this->assertNotContains(
-            '<small id="datetime-local-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
-            $html
-        );
+        $this->assertNotContains('<small id="datetime-local-name-legend" class="form-text text-muted">', $html);
     }
 
     public function testSetPlaceholder()
@@ -221,8 +227,8 @@ class DatetimeTest extends BootstrapComponentsTestCase
 
     /**
      * @expectedException \Exception
-     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Datetime : the value must have a valid datetime
-     *                           format (Y-m-d\TH:i), « test-custom-value » given.
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Datetime : the value must be a valid datetime
+     *                           object or string, « test-custom-name » given.
      */
     public function testSetWrongValue()
     {
@@ -243,8 +249,8 @@ class DatetimeTest extends BootstrapComponentsTestCase
 
     public function testOldValue()
     {
-        $oldValue = $this->faker->dateTime->format(config('bootstrap-components.form.datetime.format'));
-        $customValue = $this->faker->dateTime->format(config('bootstrap-components.form.datetime.format'));
+        $oldValue = $this->faker->dateTime->format('Y-m-d H:i:s');
+        $customValue = $this->faker->dateTime->format('Y-m-d H:i:s');
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function() use ($oldValue) {
                 $request = request()->merge(['name' => $oldValue]);

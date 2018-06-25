@@ -82,7 +82,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.checkbox.legend', $configLegend);
         $html = bsCheckbox()->name('name')->toHtml();
         $this->assertContains(
-            '<small id="checkbox-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
+            '<small id="checkbox-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend . '</small>',
             $html
         );
     }
@@ -94,11 +94,11 @@ class CheckboxTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.checkbox.legend', $configLegend);
         $html = bsCheckbox()->name('name')->legend($customLegend)->toHtml();
         $this->assertContains(
-            '<small id="checkbox-name-legend" class="form-text text-muted">' . $customLegend . '</small>',
+            '<small id="checkbox-name-legend" class="form-text text-muted">bootstrap-components::' . $customLegend . '</small>',
             $html
         );
         $this->assertNotContains(
-            '<small id="checkbox-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
+            '<small id="checkbox-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend . '</small>',
             $html
         );
     }
@@ -107,7 +107,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
     {
         config()->set('bootstrap-components.form.checkbox.legend', null);
         $html = bsCheckbox()->name('name')->toHtml();
-        $this->assertNotContains('<span class="icon input-group-text">', $html);
+        $this->assertNotContains('<small id="checkbox-name-legend" class="form-text text-muted">', $html);
     }
 
     public function testHideLegend()
@@ -115,7 +115,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.checkbox.legend', $configLegend);
         $html = bsCheckbox()->name('name')->hideLegend()->toHtml();
-        $this->assertNotContains('<span class="icon input-group-text">', $html);
+        $this->assertNotContains('<small id="checkbox-name-legend" class="form-text text-muted">', $html);
     }
 
     public function testSetValueDefaultCheckStatus()

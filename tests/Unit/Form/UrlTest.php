@@ -102,7 +102,7 @@ class UrlTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.url.legend', $configLegend);
         $html = bsUrl()->name('name')->toHtml();
         $this->assertContains(
-            '<small id="url-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
+            '<small id="url-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend . '</small>',
             $html
         );
     }
@@ -114,11 +114,11 @@ class UrlTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.url.legend', $configLegend);
         $html = bsUrl()->name('name')->legend($customLegend)->toHtml();
         $this->assertContains(
-            '<small id="url-name-legend" class="form-text text-muted">' . $customLegend . '</small>',
+            '<small id="url-name-legend" class="form-text text-muted">bootstrap-components::' . $customLegend . '</small>',
             $html
         );
         $this->assertNotContains(
-            '<small id="url-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
+            '<small id="url-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend . '</small>',
             $html
         );
     }
@@ -135,10 +135,7 @@ class UrlTest extends BootstrapComponentsTestCase
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.url.legend', $configLegend);
         $html = bsUrl()->name('name')->hideLegend()->toHtml();
-        $this->assertNotContains(
-            '<small id="url-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
-            $html
-        );
+        $this->assertNotContains('<small id="url-name-legend" class="form-text text-muted">', $html);
     }
 
     public function testSetPlaceholder()

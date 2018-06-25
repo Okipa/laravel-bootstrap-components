@@ -102,7 +102,7 @@ class PasswordTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.password.legend', $configLegend);
         $html = bsPassword()->name('name')->toHtml();
         $this->assertContains(
-            '<small id="password-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
+            '<small id="password-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend . '</small>',
             $html
         );
     }
@@ -114,11 +114,11 @@ class PasswordTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.password.legend', $configLegend);
         $html = bsPassword()->name('name')->legend($customLegend)->toHtml();
         $this->assertContains(
-            '<small id="password-name-legend" class="form-text text-muted">' . $customLegend . '</small>',
+            '<small id="password-name-legend" class="form-text text-muted">bootstrap-components::' . $customLegend . '</small>',
             $html
         );
         $this->assertNotContains(
-            '<small id="password-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
+            '<small id="password-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend . '</small>',
             $html
         );
     }
@@ -135,10 +135,7 @@ class PasswordTest extends BootstrapComponentsTestCase
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.password.legend', $configLegend);
         $html = bsPassword()->name('name')->hideLegend()->toHtml();
-        $this->assertNotContains(
-            '<small id="password-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
-            $html
-        );
+        $this->assertNotContains('<small id="password-name-legend" class="form-text text-muted">', $html);
     }
 
     public function testSetPlaceholder()

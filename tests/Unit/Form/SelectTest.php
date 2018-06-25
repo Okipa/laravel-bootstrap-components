@@ -261,7 +261,7 @@ class SelectTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.select.legend', $configLegend);
         $html = bsSelect()->name('name')->toHtml();
         $this->assertContains(
-            '<small id="select-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
+            '<small id="select-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend . '</small>',
             $html
         );
     }
@@ -273,11 +273,11 @@ class SelectTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.select.legend', $configLegend);
         $html = bsSelect()->name('name')->legend($customLegend)->toHtml();
         $this->assertContains(
-            '<small id="select-name-legend" class="form-text text-muted">' . $customLegend . '</small>',
+            '<small id="select-name-legend" class="form-text text-muted">bootstrap-components::' . $customLegend . '</small>',
             $html
         );
         $this->assertNotContains(
-            '<small id="select-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
+            '<small id="select-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend . '</small>',
             $html
         );
     }
@@ -286,7 +286,7 @@ class SelectTest extends BootstrapComponentsTestCase
     {
         config()->set('bootstrap-components.form.select.legend', null);
         $html = bsSelect()->name('name')->toHtml();
-        $this->assertNotContains('id="select-name-legend"', $html);
+        $this->assertNotContains('<small id="select-name-legend" class="form-text text-muted">', $html);
     }
 
     public function testHideLegend()
@@ -294,10 +294,7 @@ class SelectTest extends BootstrapComponentsTestCase
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.select.legend', $configLegend);
         $html = bsSelect()->name('name')->hideLegend()->toHtml();
-        $this->assertNotContains(
-            '<small id="select-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
-            $html
-        );
+        $this->assertNotContains('<small id="select-name-legend" class="form-text text-muted">', $html);
     }
 
     public function testSetLabel()
