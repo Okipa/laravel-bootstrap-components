@@ -179,7 +179,7 @@ class DatetimeTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.datetime.legend', $configLegend);
         $html = bsDatetime()->name('name')->legend($customLegend)->toHtml();
         $this->assertContains(
-            '<small id="datetime-local-name-legend" class="form-text text-muted">bootstrap-components::' . $customLegend
+            '<small id="datetime-local-name-legend" class="form-text text-muted">' . $customLegend
             . '</small>',
             $html
         );

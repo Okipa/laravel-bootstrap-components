@@ -114,7 +114,7 @@ class EmailTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.email.legend', $configLegend);
         $html = bsEmail()->name('name')->legend($customLegend)->toHtml();
         $this->assertContains(
-            '<small id="email-name-legend" class="form-text text-muted">bootstrap-components::' . $customLegend . '</small>',
+            '<small id="email-name-legend" class="form-text text-muted">' . $customLegend . '</small>',
             $html
         );
         $this->assertNotContains(

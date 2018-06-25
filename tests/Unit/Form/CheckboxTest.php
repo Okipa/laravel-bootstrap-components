@@ -94,7 +94,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.checkbox.legend', $configLegend);
         $html = bsCheckbox()->name('name')->legend($customLegend)->toHtml();
         $this->assertContains(
-            '<small id="checkbox-name-legend" class="form-text text-muted">bootstrap-components::' . $customLegend . '</small>',
+            '<small id="checkbox-name-legend" class="form-text text-muted">' . $customLegend . '</small>',
             $html
         );
         $this->assertNotContains(

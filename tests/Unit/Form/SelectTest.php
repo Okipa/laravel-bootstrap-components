@@ -273,7 +273,7 @@ class SelectTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.select.legend', $configLegend);
         $html = bsSelect()->name('name')->legend($customLegend)->toHtml();
         $this->assertContains(
-            '<small id="select-name-legend" class="form-text text-muted">bootstrap-components::' . $customLegend . '</small>',
+            '<small id="select-name-legend" class="form-text text-muted">' . $customLegend . '</small>',
             $html
         );
         $this->assertNotContains(

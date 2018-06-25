@@ -94,7 +94,7 @@ class ToggleTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.toggle.legend', $configLegend);
         $html = bsToggle()->name('name')->legend($customLegend)->toHtml();
         $this->assertContains(
-            '<small id="toggle-name-legend" class="form-text text-muted">bootstrap-components::' . $customLegend . '</small>',
+            '<small id="toggle-name-legend" class="form-text text-muted">' . $customLegend . '</small>',
             $html
         );
         $this->assertNotContains(

@@ -109,7 +109,7 @@ class FileTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.file.legend', $configLegend);
         $html = bsFile()->name('name')->legend($customLegend)->toHtml();
         $this->assertContains(
-            '<small id="file-name-legend" class="form-text text-muted">bootstrap-components::' . $customLegend . '</small>',
+            '<small id="file-name-legend" class="form-text text-muted">' . $customLegend . '</small>',
             $html
         );
         $this->assertNotContains(

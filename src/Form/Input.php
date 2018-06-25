@@ -228,7 +228,7 @@ abstract class Input extends Component
             'name'        => $this->name,
             'icon'        => $this->showIcon ? ($this->icon ? $this->icon : $this->defaultIcon()) : '',
             'legend'      => $this->showLegend
-                ? ($this->legend ? trans('bootstrap-components::' . $this->legend) : $this->defaultLegend())
+                ? ($this->legend ? trans($this->legend) : $this->defaultLegend())
                 : '',
             'label'       => $this->showLabel ? ($this->label
                 ? $this->label
