@@ -108,7 +108,7 @@ class Select extends Input
             array_walk($this->options, function(&$option) {
                 if (
                     isset($this->selectedFieldToCompare) && isset($this->selectedValueToCompare)
-                    && $option[$this->selectedFieldToCompare] === $this->selectedValueToCompare
+                    && $option[$this->selectedFieldToCompare] == $this->selectedValueToCompare
                 ) {
                     $option['selected'] = true;
                 } elseif (
