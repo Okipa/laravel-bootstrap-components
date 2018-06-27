@@ -48,6 +48,12 @@ class Select extends Input
      * @property string $optionSelectedValueField
      */
     protected $selectedValueToCompare;
+    /**
+     * The selected options value field.
+     *
+     * @property string $optionSelectedValueField
+     */
+    protected $multiple = false;
 
     /**
      * @param iterable $optionsList
@@ -105,30 +111,89 @@ class Select extends Input
     protected function setOptionsSelectedStatus(): void
     {
         if ($this->options) {
-            
-            $selected = false;
-            dd($this->options);
-            while($selected === false) {
+            $selectedOption = $this->getSelectedOption();
+            if ($selectedOption) {
+                $selectedKey = head(array_keys($selectedOption));
+                $this->options[$selectedKey]['selected'] = true;
             }
-            
-            array_walk($this->options, function(&$option) {
-                $old = old($this->optionValueField) == $option[$this->optionValueField];
-                $selected = isset($this->selectedFieldToCompare) && isset($this->selectedValueToCompare)
-                            && $option[$this->selectedFieldToCompare] == $this->selectedValueToCompare;
-                $modelSelected = $this->model
-                                 && $option[$this->optionValueField] == $this->model->{$this->optionValueField};
-                dd($old, $selected, $modelSelected);
-                if ($old) {
-                    $option['selected'] = true;
-                } elseif (! $old && $selected) {
-                    $option['selected'] = true;
-                } elseif (! $old && ! $selected && $modelSelected) {
-                    $option['selected'] = true;
-                } else {
-                    $option['selected'] = false;
-                }
-            });
         }
+    }
+
+    /**
+     * Get the selected option.
+     *
+     * @return array|null
+     */
+    protected function getSelectedOption()
+    {
+        if ($oldValueSelectedOption = $this->searchSelectedOptionFromOldValue()) {
+            return $oldValueSelectedOption;
+        }
+        if ($manuallySelectedOption = $this->searchSelectedOptionFromSelectedMethod()) {
+            return $manuallySelectedOption;
+        }
+        if ($modelSelectedOption = $this->searchSelectedOptionFromModel()) {
+            return $modelSelectedOption;
+        }
+
+        return null;
+    }
+
+    /**
+     * Search the selected option from the old() request value.
+     *
+     * @return array|null
+     */
+    protected function searchSelectedOptionFromOldValue()
+    {
+        if ($oldValue = old($this->optionValueField)) {
+            $selectedOption = array_where($this->options, function($option) use ($oldValue) {
+                return $option[$this->optionValueField] == $oldValue;
+            });
+            if (! empty($selectedOption)) {
+                return $selectedOption;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Search the selected option from the selected() method.
+     *
+     * @return array|null
+     */
+    protected function searchSelectedOptionFromSelectedMethod()
+    {
+        if (isset($this->selectedFieldToCompare) && isset($this->selectedValueToCompare)) {
+            $selectedOption = array_where($this->options, function($option) {
+                return $option[$this->selectedFieldToCompare] == $this->selectedValueToCompare;
+            });
+            if (! empty($selectedOption)) {
+                return $selectedOption;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Search the selected option from the model values.
+     *
+     * @return array|null
+     */
+    protected function searchSelectedOptionFromModel()
+    {
+        if ($this->model) {
+            $selectedOption = array_where($this->options, function($option) {
+                return $option[$this->optionValueField] == $this->model->{$this->optionValueField};
+            });
+            if (! empty($selectedOption)) {
+                return $selectedOption;
+            }
+        }
+
+        return null;
     }
 
     /**

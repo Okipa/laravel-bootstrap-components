@@ -423,6 +423,8 @@ bsSelect()->name('selected')
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
 ```
 
+**Note : ** `bsSelect()` component has been created to select single values. To select multiple values, using a library like [Select2](https://select2.org) to empower the component could be a good option.
+
 _Component additional methods :_
 
 | Signature | Required | Description |

@@ -224,35 +224,31 @@ class SelectTest extends BootstrapComponentsTestCase
 
     public function testOldValue()
     {
-        $users = $this->createMultipleUsers(2);
-        $customValue = $users->first()->id;
-        $oldValue = $users->get(1)->id;
+        $users = $this->createMultipleUsers(3);
+        $custom = $users->get(0);
+        $model = $users->get(1);
+        $old = $users->get(2);
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function() use ($oldValue) {
-                $request = request()->merge(['id' => $oldValue]);
+            'middleware' => 'web', 'uses' => function() use ($old) {
+                $request = request()->merge(['id' => $old->id]);
                 $request->flash();
             },
         ]);
         $this->call('GET', 'test');
-        $html = bsSelect()->name('name')->selected('id', $customValue)->options($users, 'id', 'name')->toHtml();
-        dd($html);
-//        $this->assertContains($needle, $haystack)
+        $html = bsSelect()->model($model)->name('name')->selected('id', $custom->id)->options($users, 'id', 'name')->toHtml();
+        $this->assertContains(
+            '<option value="' . $custom->id . '" >' . $custom->name . '</option>',
+            $html
+        );
+        $this->assertContains(
+            '<option value="' . $model->id . '" >' . $model->name . '</option>',
+            $html
+        );
+        $this->assertContains(
+            '<option value="' . $old->id . '" selected="selected">' . $old->name . '</option>',
+            $html
+        );
     }
-
-//    public function testOldValueNotChecked()
-//    {
-//        $oldValue = false;
-//        $customValue = true;
-//        $this->app['router']->get('test', [
-//            'middleware' => 'web', 'uses' => function() use ($oldValue) {
-//                $request = request()->merge(['name' => $oldValue]);
-//                $request->flash();
-//            },
-//        ]);
-//        $this->call('GET', 'test');
-//        $html = bsRadio()->name('name')->value($customValue)->toHtml();
-//        $this->assertNotContains('checked="checked', $html);
-//    }
 
     public function testConfigIcon()
     {

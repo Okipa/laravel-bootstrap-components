@@ -9,7 +9,9 @@
                 {{ htmlAttributes($componentHtmlAttributes) }}>
             <option value="">{{ $placeholder }}</option>
             @foreach($options as $option)
-                <option value="{{ $option[$optionValueField] }}" {{ htmlAttributes($option['selected'] ? ['selected' => 'selected'] : null) }}>{{ $option[$optionLabelField] }}</option>
+                <option value="{{ $option[$optionValueField] }}" {{ htmlAttributes(!empty($option['selected']) && $option['selected'] === true 
+                        ? ['selected' => 'selected'] 
+                        : null) }}>{{ $option[$optionLabelField] }}</option>
             @endforeach
         </select>
     </div>
