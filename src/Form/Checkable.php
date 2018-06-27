@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Form;
 
-class Checkable extends Input
+abstract class Checkable extends Input
 {
     /**
      * The input checked status.
@@ -36,7 +36,7 @@ class Checkable extends Input
         $parentValues = parent::values();
         $old = old($this->name);
         if (isset($old)) {
-            $this->checked = old($this->name);
+            $this->checked = $old;
         } elseif (isset($this->checked)) {
             // do nothing
         } elseif ($parentValues['value']) {

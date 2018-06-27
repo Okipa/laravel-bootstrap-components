@@ -127,7 +127,7 @@ class RadioTest extends BootstrapComponentsTestCase
     public function testSetValueChecked()
     {
         $customValue = true;
-        $html = bsRadio()->name('name')->value($customValue)->toHtml();
+        $html = bsRadio()->name('name')->checked($customValue)->toHtml();
         $this->assertContains('checked="checked', $html);
     }
 
@@ -142,7 +142,7 @@ class RadioTest extends BootstrapComponentsTestCase
             },
         ]);
         $this->call('GET', 'test');
-        $html = bsRadio()->name('name')->value($customValue)->toHtml();
+        $html = bsRadio()->name('name')->checked($customValue)->toHtml();
         $this->assertContains('checked="checked', $html);
     }
 
@@ -157,7 +157,7 @@ class RadioTest extends BootstrapComponentsTestCase
             },
         ]);
         $this->call('GET', 'test');
-        $html = bsRadio()->name('name')->value($customValue)->toHtml();
+        $html = bsRadio()->name('name')->checked($customValue)->toHtml();
         $this->assertNotContains('checked="checked', $html);
     }
 

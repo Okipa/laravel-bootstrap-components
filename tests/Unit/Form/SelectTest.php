@@ -222,6 +222,38 @@ class SelectTest extends BootstrapComponentsTestCase
         );
     }
 
+    public function testOldValue()
+    {
+        $users = $this->createMultipleUsers(2);
+        $customValue = $users->first()->id;
+        $oldValue = $users->get(1)->id;
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => function() use ($oldValue) {
+                $request = request()->merge(['id' => $oldValue]);
+                $request->flash();
+            },
+        ]);
+        $this->call('GET', 'test');
+        $html = bsSelect()->name('name')->selected('id', $customValue)->options($users, 'id', 'name')->toHtml();
+        dd($html);
+//        $this->assertContains($needle, $haystack)
+    }
+
+//    public function testOldValueNotChecked()
+//    {
+//        $oldValue = false;
+//        $customValue = true;
+//        $this->app['router']->get('test', [
+//            'middleware' => 'web', 'uses' => function() use ($oldValue) {
+//                $request = request()->merge(['name' => $oldValue]);
+//                $request->flash();
+//            },
+//        ]);
+//        $this->call('GET', 'test');
+//        $html = bsRadio()->name('name')->value($customValue)->toHtml();
+//        $this->assertNotContains('checked="checked', $html);
+//    }
+
     public function testConfigIcon()
     {
         $configIcon = 'test-config-icon';

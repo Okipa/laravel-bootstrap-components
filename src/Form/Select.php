@@ -67,7 +67,7 @@ class Select extends Input
 
     /**
      * Set the selected option.
-     * 
+     *
      * @param string $fieldToCompare
      * @param        $valueToCompare
      *
@@ -105,16 +105,24 @@ class Select extends Input
     protected function setOptionsSelectedStatus(): void
     {
         if ($this->options) {
+            
+            $selected = false;
+            dd($this->options);
+            while($selected === false) {
+            }
+            
             array_walk($this->options, function(&$option) {
-                if (
-                    isset($this->selectedFieldToCompare) && isset($this->selectedValueToCompare)
-                    && $option[$this->selectedFieldToCompare] == $this->selectedValueToCompare
-                ) {
+                $old = old($this->optionValueField) == $option[$this->optionValueField];
+                $selected = isset($this->selectedFieldToCompare) && isset($this->selectedValueToCompare)
+                            && $option[$this->selectedFieldToCompare] == $this->selectedValueToCompare;
+                $modelSelected = $this->model
+                                 && $option[$this->optionValueField] == $this->model->{$this->optionValueField};
+                dd($old, $selected, $modelSelected);
+                if ($old) {
                     $option['selected'] = true;
-                } elseif (
-                    $this->model
-                    && $option[$this->optionValueField] === $this->model->{$this->optionValueField}
-                ) {
+                } elseif (! $old && $selected) {
+                    $option['selected'] = true;
+                } elseif (! $old && ! $selected && $modelSelected) {
                     $option['selected'] = true;
                 } else {
                     $option['selected'] = false;
