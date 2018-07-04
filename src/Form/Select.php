@@ -208,7 +208,7 @@ class Select extends Input
      */
     protected function searchMultipleSelectedOptionsFromModel()
     {
-        if ($this->model) {
+        if ($this->model && $this->model->{$this->name}) {
             $multipleSelectedOptions = array_where($this->options, function($option) {
                 return in_array(
                     $option[$this->optionValueField],
@@ -333,13 +333,7 @@ class Select extends Input
             }
             if ($this->multiple) {
                 if ($this->model) {
-                    if (! isset($this->model->{$this->name})) {
-                        throw new InvalidArgumentException(
-                            get_class($this) . ' : The given model « ' . $this->model->getMorphClass()
-                            . ' »  has no « ' . $this->name . ' » attribute.'
-                        );
-                    }
-                    if (! is_array($this->model->{$this->name})) {
+                    if (isset($this->model->{$this->name}) && ! is_array($this->model->{$this->name})) {
                         throw new InvalidArgumentException(
                             get_class($this) . ' : The « ' . $this->name . ' » attribute from the given « '
                             . $this->model->getMorphClass()

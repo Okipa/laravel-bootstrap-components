@@ -283,18 +283,23 @@ class SelectTest extends BootstrapComponentsTestCase
         $this->assertContains('companies[]', $html);
         $this->assertContains('multiple>', $html);
     }
-
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Select : The given model «
-     *                           Okipa\LaravelBootstrapComponents\Test\Models\User »  has no « wrong » attribute.
-     */
+    
     public function testSelectMultipleWithModelAndNonExistentAttribute()
     {
         $user = $this->createUniqueUser();
         $companies = $this->createMultipleCompanies(5);
         $user->companies = $companies->take(2)->pluck('id')->toArray();
-        bsSelect()->name('wrong')->model($user)->options($companies, 'id', 'name')->multiple()->toHtml();
+        $html = bsSelect()->name('wrong')->model($user)->options($companies, 'id', 'name')->multiple()->toHtml();
+        $this->assertContains(
+            '<option value="" disabled="disabled" selected="selected">validation.attributes.wrong</option>',
+            $html
+        );
+        foreach ($companies as $company) {
+            $this->assertContains(
+                '<option value="' . $company->id . '" >' . $company->name . '</option>',
+                $html
+            );
+        }
     }
 
     /**
