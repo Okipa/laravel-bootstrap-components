@@ -329,8 +329,7 @@ bsTextarea()->name('message')
 ```php
 bsCheckbox()->name('active')
     ->model($user) // checked status is automatically detected from the field name
-    ->value(true) // or manually set the value
-    ->checked(true) // or use the alias for value
+    ->checked(true) // or manually set the value
     ->label('Name') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
@@ -354,8 +353,7 @@ _Component additional methods :_
 ```php
 bsToggle()->name('active')
     ->model($user) // checked status is automatically detected from the field name
-    ->value(true) // or manually set the value
-    ->checked(true) // or use the alias for value
+    ->checked(true) // or manually set the value
     ->label('Name') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
@@ -383,8 +381,7 @@ _Notes :_
 ```php
 bsRadio()->name('gender')
     ->model($user) // checked status is automatically detected from the field name
-    ->value(true) // or manually set the value
-    ->checked(true) // or use the alias for value
+    ->checked(true) // or manually set the value
     ->label('Name') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
@@ -410,6 +407,7 @@ bsSelect()->name('selected')
     ->model($user) // selected option is automatically detected
     ->selected('id', 1) // or manually set the selected option
     ->options($usersList, 'id', 'name') // work with a models collection or an array
+    ->multiple(false) // activate the multiple mode, default value = true
     ->label('Select a user') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder() // override the default placeholder (label)
@@ -423,7 +421,9 @@ bsSelect()->name('selected')
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
 ```
 
-**Note : ** `bsSelect()` component has been created to select single values. To select multiple values, using a library like [Select2](https://select2.org) to empower the component could be a good option.
+**Notes : ** 
+- in `single` mode, the selected() method second attribute only accept a string or an integer.
+- in `multiple` mode, the selected() method second attribute only accept an array.
 
 _Component additional methods :_
 
@@ -431,6 +431,7 @@ _Component additional methods :_
 |---|---|---|
 | options(iterable $optionsList, string $optionValueField, string $optionLabelField): Select  | No | Set the options list (array or models collection) and declare which fields should be used for the options values and labels. |
 | selected(string $fieldToCompare, $valueToCompare): Select  | No | Choose which option should be selected, declaring the field and the value to compare with the declared options list. |
+| multiple(bool $multiple = true): Select  | No | Set the select multiple mode. |
 
 ### Buttons components
 
@@ -485,8 +486,8 @@ bsUpdate()->label('Select a user') // override the default trans('validation.att
 #### bsCancel()
 
 ```php
-bsCancel()->url('https://www.google.com')
-    ->route('users.index')
+bsCancel()->url('https://www.google.com') // set the button url
+    ->route('users.index') // or set the route name
     ->label('Select a user') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
@@ -507,8 +508,8 @@ _Component additional methods :_
 #### bsBack()
 
 ```php
-bsBack()->url('https://www.google.com')
-    ->route('users.index')
+bsBack()->url('https://www.google.com') // set the button url
+    ->route('users.index') // or set the route name
     ->label('Select a user') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon

@@ -5,11 +5,13 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 use Illuminate\Support\MessageBag;
 use Okipa\LaravelBootstrapComponents\Form\Input;
 use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
+use Okipa\LaravelBootstrapComponents\Test\Fakers\CompaniesFaker;
 use Okipa\LaravelBootstrapComponents\Test\Fakers\UsersFaker;
 
 class SelectTest extends BootstrapComponentsTestCase
 {
     use UsersFaker;
+    use CompaniesFaker;
 
     public function testConfigStructure()
     {
@@ -58,7 +60,8 @@ class SelectTest extends BootstrapComponentsTestCase
     public function testSetNoOptions()
     {
         $html = bsSelect()->name('name')->toHtml();
-        $this->assertContains('<option value="">validation.attributes.name</option>', $html);
+        $this->assertContains('<option value="" disabled="disabled" selected="selected">validation.attributes.name</option>',
+            $html);
     }
 
     public function testSetOptionsFromArray()
@@ -68,7 +71,8 @@ class SelectTest extends BootstrapComponentsTestCase
             ['id' => 2, 'name' => $this->faker->word],
         ];
         $html = bsSelect()->name('name')->options($optionsList, 'id', 'name')->toHtml();
-        $this->assertContains('<option value="">validation.attributes.name</option>', $html);
+        $this->assertContains('<option value="" disabled="disabled" selected="selected">validation.attributes.name</option>',
+            $html);
         $this->assertContains(
             '<option value="' . $optionsList[0]['id'] . '" >' . $optionsList[0]['name'] . '</option>',
             $html
@@ -114,7 +118,8 @@ class SelectTest extends BootstrapComponentsTestCase
         $users = $this->createMultipleUsers(2);
         $html = bsSelect()->name('name')->options($users, 'id', 'name')->toHtml();
         $users = $users->toArray();
-        $this->assertContains('<option value="">validation.attributes.name</option>', $html);
+        $this->assertContains('<option value="" disabled="disabled" selected="selected">validation.attributes.name</option>',
+            $html);
         $this->assertContains('<option value="' . $users[0]['id'] . '" >' . $users[0]['name'] . '</option>', $html);
         $this->assertContains('<option value="' . $users[1]['id'] . '" >' . $users[1]['name'] . '</option>', $html);
     }
@@ -149,7 +154,7 @@ class SelectTest extends BootstrapComponentsTestCase
         $user = $users->first();
         $html = bsSelect()->model($user)->name('name')->options($users, 'id', 'name')->toHtml();
         $users = $users->toArray();
-        $this->assertContains('<option value="">validation.attributes.name</option>', $html);
+        $this->assertContains('<option value="" disabled="disabled" >validation.attributes.name</option>', $html);
         $this->assertContains(
             '<option value="' . $users[0]['id'] . '" selected="selected">' . $users[0]['name'] . '</option>',
             $html);
@@ -162,6 +167,21 @@ class SelectTest extends BootstrapComponentsTestCase
         $this->assertContains('<select', $html);
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Select : Invalid selected() second
+     *                           $valueToCompare argument. This argument has to be an array when the bsSelect()
+     *                           component is not in multiple mode : « array » type given.
+     */
+    public function testSetSelectedOptionFromWrongTypeValue()
+    {
+        $users = $this->createMultipleUsers(2);
+        bsSelect()->name('name')
+            ->options($users, 'id', 'name')
+            ->selected('id', ['test'])
+            ->toHtml();
+    }
+
     public function testSetSelectedOptionFromValue()
     {
         $users = $this->createMultipleUsers(2);
@@ -172,7 +192,7 @@ class SelectTest extends BootstrapComponentsTestCase
             ->options($users, 'id', 'name')
             ->selected('id', $users->get(1)->id)
             ->toHtml();
-        $this->assertContains('<option value="">validation.attributes.name</option>', $html);
+        $this->assertContains('<option value="" disabled="disabled" >validation.attributes.name</option>', $html);
         $this->assertContains(
             '<option value="' . $users[0]['id'] . '" >' . $users[0]['name'] . '</option>',
             $html
@@ -193,7 +213,7 @@ class SelectTest extends BootstrapComponentsTestCase
             ->options($users, 'id', 'name')
             ->selected('name', $users->get(1)->name)
             ->toHtml();
-        $this->assertContains('<option value="">validation.attributes.name</option>', $html);
+        $this->assertContains('<option value="" disabled="disabled" >validation.attributes.name</option>', $html);
         $this->assertContains(
             '<option value="' . $users[0]['id'] . '" >' . $users[0]['name'] . '</option>',
             $html
@@ -211,7 +231,8 @@ class SelectTest extends BootstrapComponentsTestCase
             ->name('name')
             ->options($users, 'id', 'name')
             ->toHtml();
-        $this->assertContains('<option value="">validation.attributes.name</option>', $html);
+        $this->assertContains('<option value="" disabled="disabled" selected="selected">validation.attributes.name</option>',
+            $html);
         $this->assertContains(
             '<option value="' . $users[0]['id'] . '" >' . $users[0]['name'] . '</option>',
             $html
@@ -230,12 +251,17 @@ class SelectTest extends BootstrapComponentsTestCase
         $old = $users->get(2);
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function() use ($old) {
-                $request = request()->merge(['id' => $old->id]);
+                $request = request()->merge(['name' => $old->id]);
                 $request->flash();
             },
         ]);
         $this->call('GET', 'test');
-        $html = bsSelect()->model($model)->name('name')->selected('id', $custom->id)->options($users, 'id', 'name')->toHtml();
+        $html = bsSelect()
+            ->model($model)
+            ->name('name')
+            ->selected('id', $custom->id)
+            ->options($users, 'id', 'name')
+            ->toHtml();
         $this->assertContains(
             '<option value="' . $custom->id . '" >' . $custom->name . '</option>',
             $html
@@ -248,6 +274,187 @@ class SelectTest extends BootstrapComponentsTestCase
             '<option value="' . $old->id . '" selected="selected">' . $old->name . '</option>',
             $html
         );
+    }
+
+    public function testSetMultiple()
+    {
+        $companies = $this->createMultipleCompanies(5);
+        $html = bsSelect()->name('companies')->options($companies, 'id', 'name')->multiple()->toHtml();
+        $this->assertContains('companies[]', $html);
+        $this->assertContains('multiple>', $html);
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Select : The given model «
+     *                           Okipa\LaravelBootstrapComponents\Test\Models\User »  has no « wrong » attribute.
+     */
+    public function testSelectMultipleWithModelAndNonExistentAttribute()
+    {
+        $user = $this->createUniqueUser();
+        $companies = $this->createMultipleCompanies(5);
+        $user->companies = $companies->take(2)->pluck('id')->toArray();
+        bsSelect()->name('wrong')->model($user)->options($companies, 'id', 'name')->multiple()->toHtml();
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Select : The « companies » attribute from the
+     *                           given « Okipa\LaravelBootstrapComponents\Test\Models\User » model has to be an array
+     *                           when the select is in multiple mode : « object » type given.
+     */
+    public function testSelectMultipleWithModelAndWrongAttributeType()
+    {
+        $user = $this->createUniqueUser();
+        $companies = $this->createMultipleCompanies(5);
+        $user->companies = $companies->take(2)->pluck('id');
+        bsSelect()->name('companies')->model($user)->options($companies, 'id', 'name')->multiple()->toHtml();
+    }
+
+    public function testSelectedMultipleFromModelEmptyValue()
+    {
+        $user = $this->createUniqueUser();
+        $companies = $this->createMultipleCompanies(5);
+        $user->companies = [];
+        $html = bsSelect()->model($user)->name('companies')->options($companies, 'id', 'name')->multiple()->toHtml();
+        $this->assertContains('<option value="" disabled="disabled" selected="selected">validation.attributes.companies</option>',
+            $html);
+        foreach ($companies as $company) {
+            $this->assertContains(
+                '<option value="' . $company->id . '" >' . $company->name . '</option>',
+                $html);
+        }
+    }
+
+    public function testSelectedMultipleFromModelValue()
+    {
+        $user = $this->createUniqueUser();
+        $companies = $this->createMultipleCompanies(5);
+        $user->companies = $companies->take(2)->pluck('id')->toArray();
+        $html = bsSelect()->model($user)->name('companies')->options($companies, 'id', 'name')->multiple()->toHtml();
+        $this->assertContains(
+            '<option value="" disabled="disabled" >validation.attributes.companies</option>',
+            $html
+        );
+        foreach ($companies as $company) {
+            $this->assertContains(
+                '<option value="' . $company->id . '" ' . (in_array($company->id, $user->companies)
+                    ? 'selected="selected"'
+                    : '') . '>' . $company->name . '</option>',
+                $html
+            );
+        }
+    }
+
+    public function testSetSelectedMultipleOptionsFromEmptyValue()
+    {
+        $companies = $this->createMultipleCompanies(5);
+        $html = bsSelect()->name('companies')
+            ->options($companies, 'id', 'name')
+            ->multiple()
+            ->selected('id', [])
+            ->toHtml();
+        $this->assertContains('<option value="" disabled="disabled" selected="selected">validation.attributes.companies</option>',
+            $html);
+        foreach ($companies as $company) {
+            $this->assertContains(
+                '<option value="' . $company->id . '" >' . $company->name . '</option>',
+                $html);
+        }
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Select : Invalid selected() second
+     *                           $valueToCompare argument. This argument has to be an array when the bsSelect()
+     *                           component is in multiple mode : « string » type given.
+     */
+    public function testSetSelectedMultipleOptionsFromWrongTypeValue()
+    {
+        $companies = $this->createMultipleCompanies(5);
+        bsSelect()->name('companies')
+            ->options($companies, 'id', 'name')
+            ->multiple()
+            ->selected('id', 'test')
+            ->toHtml();
+    }
+
+    public function testSetSelectedMultipleOptionsFromValue()
+    {
+        $user = $this->createUniqueUser();
+        $companies = $this->createMultipleCompanies(5);
+        $user->companies = $companies->take(2)->pluck('id')->toArray();
+        $selectedCompanies = $companies->sortByDesc('id')->take(2)->pluck('id')->toArray();
+        $html = bsSelect()->name('companies')
+            ->model($user)
+            ->options($companies, 'id', 'name')
+            ->multiple()
+            ->selected('id', $selectedCompanies)
+            ->toHtml();
+        $this->assertContains('<option value="" disabled="disabled" >validation.attributes.companies</option>', $html);
+        foreach ($companies as $company) {
+            $this->assertContains(
+                '<option value="' . $company->id . '" ' . (in_array($company->id, $selectedCompanies)
+                    ? 'selected="selected"'
+                    : '') . '>' . $company->name . '</option>',
+                $html
+            );
+        }
+    }
+
+    public function testSetSelectedMultipleOptionsFromLabel()
+    {
+        $user = $this->createUniqueUser();
+        $companies = $this->createMultipleCompanies(5);
+        $user->companies = $companies->take(2)->pluck('id')->toArray();
+        $selectedCompanies = $companies->sortByDesc('id')->take(2)->pluck('name')->toArray();
+        $html = bsSelect()->name('companies')
+            ->model($user)
+            ->options($companies, 'id', 'name')
+            ->multiple()
+            ->selected('name', $selectedCompanies)
+            ->toHtml();
+        $this->assertContains('<option value="" disabled="disabled" >validation.attributes.companies</option>', $html);
+        foreach ($companies as $company) {
+            $this->assertContains(
+                '<option value="' . $company->id . '" ' . (in_array($company->name, $selectedCompanies)
+                    ? 'selected="selected"'
+                    : '') . '>' . $company->name . '</option>',
+                $html
+            );
+        }
+    }
+
+    public function testOldMultipleValue()
+    {
+        $user = $this->createUniqueUser();
+        $companies = $this->createMultipleCompanies(6);
+        $chunk = $companies->pluck('id')->chunk(2)->toArray();
+        $user->companies = $chunk[0];
+        $selectedCompanies = $chunk[1];
+        $oldCompanies = $chunk[2];
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => function() use ($oldCompanies) {
+                $request = request()->merge(['companies[]' => $oldCompanies]);
+                $request->flash();
+            },
+        ]);
+        $this->call('GET', 'test');
+        $html = bsSelect()->name('companies')
+            ->model($user)
+            ->options($companies, 'id', 'name')
+            ->multiple()
+            ->selected('id', $selectedCompanies)
+            ->toHtml();
+        $this->assertContains('<option value="" disabled="disabled" >validation.attributes.companies</option>', $html);
+        foreach ($companies as $company) {
+            $this->assertContains(
+                '<option value="' . $company->id . '" ' . (in_array($company->id, $oldCompanies)
+                    ? 'selected="selected"'
+                    : '') . '>' . $company->name . '</option>',
+                $html
+            );
+        }
     }
 
     public function testConfigIcon()
@@ -289,7 +496,8 @@ class SelectTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.select.legend', $configLegend);
         $html = bsSelect()->name('name')->toHtml();
         $this->assertContains(
-            '<small id="select-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend . '</small>',
+            '<small id="select-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend
+            . '</small>',
             $html
         );
     }
@@ -305,7 +513,8 @@ class SelectTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertNotContains(
-            '<small id="select-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend . '</small>',
+            '<small id="select-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend
+            . '</small>',
             $html
         );
     }

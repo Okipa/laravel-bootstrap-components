@@ -74,8 +74,8 @@ class Select extends Input
     /**
      * Set the selected option.
      *
-     * @param string $fieldToCompare
-     * @param        $valueToCompare
+     * @param string           $fieldToCompare
+     * @param int|string|array $valueToCompare
      *
      * @return \Okipa\LaravelBootstrapComponents\Form\Select
      */
@@ -83,6 +83,20 @@ class Select extends Input
     {
         $this->selectedFieldToCompare = $fieldToCompare;
         $this->selectedValueToCompare = $valueToCompare;
+
+        return $this;
+    }
+
+    /**
+     * Set the select multiple mode.
+     *
+     * @param bool $multiple
+     *
+     * @return \Okipa\LaravelBootstrapComponents\Form\Select
+     */
+    public function multiple(bool $multiple = true): Select
+    {
+        $this->multiple = $multiple;
 
         return $this;
     }
@@ -100,6 +114,7 @@ class Select extends Input
             'options'          => $this->options ? $this->options : [],
             'optionValueField' => $this->optionValueField,
             'optionLabelField' => $this->optionLabelField,
+            'multiple'         => $this->multiple,
         ]);
     }
 
@@ -111,12 +126,101 @@ class Select extends Input
     protected function setOptionsSelectedStatus(): void
     {
         if ($this->options) {
-            $selectedOption = $this->getSelectedOption();
-            if ($selectedOption) {
-                $selectedKey = head(array_keys($selectedOption));
-                $this->options[$selectedKey]['selected'] = true;
+            if ($this->multiple) {
+                $selectedOptions = $this->getMultipleSelectedOptions();
+                if ($selectedOptions) {
+                    foreach ($selectedOptions as $key => $selectedOption) {
+                        $this->options[$key]['selected'] = true;
+                    }
+                }
+            } else {
+                $selectedOption = $this->getSelectedOption();
+                if ($selectedOption) {
+                    $selectedKey = head(array_keys($selectedOption));
+                    $this->options[$selectedKey]['selected'] = true;
+                }
             }
         }
+    }
+
+    /**
+     * Get the multiple selected options.
+     *
+     * @return array|null
+     */
+    protected function getMultipleSelectedOptions()
+    {
+        if ($oldValueMultipleSelectedOptions = $this->searchMultipleSelectedOptionFromOldValue()) {
+            return $oldValueMultipleSelectedOptions;
+        }
+        if ($manuallyMultipleSelectedOptions = $this->searchMultipleSelectedOptionsFromSelectedMethod()) {
+            return $manuallyMultipleSelectedOptions;
+        }
+        if ($modelMultipleSelectedOptions = $this->searchMultipleSelectedOptionsFromModel()) {
+            return $modelMultipleSelectedOptions;
+        }
+
+        return null;
+    }
+
+    /**
+     * Search the selected multiple options from the old() request value.
+     *
+     * @return array|null
+     */
+    protected function searchMultipleSelectedOptionFromOldValue()
+    {
+        if ($oldValue = old($this->name . '[]')) {
+            $selectedMultipleOptions = array_where($this->options, function($option) use ($oldValue) {
+                return in_array($option[$this->optionValueField], $oldValue);
+            });
+            if (! empty($selectedMultipleOptions)) {
+                return $selectedMultipleOptions;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Search the selected multiple options from the selected() method.
+     *
+     * @return array|null
+     */
+    protected function searchMultipleSelectedOptionsFromSelectedMethod()
+    {
+        if (isset($this->selectedFieldToCompare) && isset($this->selectedValueToCompare)) {
+            $selectedMultipleOptions = array_where($this->options, function($option) {
+                return in_array($option[$this->selectedFieldToCompare], $this->selectedValueToCompare);
+            });
+            if (! empty($selectedMultipleOptions)) {
+                return $selectedMultipleOptions;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Search the selected multiple options from the model values.
+     *
+     * @return array|null
+     */
+    protected function searchMultipleSelectedOptionsFromModel()
+    {
+        if ($this->model) {
+            $multipleSelectedOptions = array_where($this->options, function($option) {
+                return in_array(
+                    $option[$this->optionValueField],
+                    $this->model->{$this->name}
+                );
+            });
+            if (! empty($multipleSelectedOptions)) {
+                return $multipleSelectedOptions;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -146,7 +250,7 @@ class Select extends Input
      */
     protected function searchSelectedOptionFromOldValue()
     {
-        if ($oldValue = old($this->optionValueField)) {
+        if ($oldValue = old($this->name)) {
             $selectedOption = array_where($this->options, function($option) use ($oldValue) {
                 return $option[$this->optionValueField] == $oldValue;
             });
@@ -222,8 +326,43 @@ class Select extends Input
                 if ($this->selectedFieldToCompare && empty($option[$this->selectedFieldToCompare])) {
                     throw new InvalidArgumentException(
                         get_class($this) . ' : Invalid selected() first $fieldToCompare argument. « '
-                        . $this->selectedFieldToCompare
-                        . ' »  does not exist the given first options() $optionsList argument.'
+                        . $this->selectedFieldToCompare . ' »  does not exist the given first options() '
+                        . '$optionsList argument.'
+                    );
+                }
+            }
+            if ($this->multiple) {
+                if ($this->model) {
+                    if (! isset($this->model->{$this->name})) {
+                        throw new InvalidArgumentException(
+                            get_class($this) . ' : The given model « ' . $this->model->getMorphClass()
+                            . ' »  has no « ' . $this->name . ' » attribute.'
+                        );
+                    }
+                    if (! is_array($this->model->{$this->name})) {
+                        throw new InvalidArgumentException(
+                            get_class($this) . ' : The « ' . $this->name . ' » attribute from the given « '
+                            . $this->model->getMorphClass()
+                            . ' » model has to be an array when the bsSelect() component is in multiple mode : « '
+                            . gettype($this->model->{$this->name}) . ' » type given.'
+                        );
+                    }
+                }
+                if ($this->selectedValueToCompare && ! is_array($this->selectedValueToCompare)) {
+                    throw new InvalidArgumentException(
+                        get_class($this) . ' : Invalid selected() second $valueToCompare argument. '
+                        . 'This argument has to be an array when the bsSelect() component is in multiple mode : « '
+                        . gettype($this->selectedValueToCompare) . ' » type given.'
+                    );
+                }
+            } else {
+                if ($this->selectedValueToCompare
+                    && ! is_string($this->selectedValueToCompare)
+                    && ! is_integer($this->selectedValueToCompare)) {
+                    throw new InvalidArgumentException(
+                        get_class($this) . ' : Invalid selected() second $valueToCompare argument. '
+                        . 'This argument has to be a string or an integer when the bsSelect() component is not '
+                        . 'in multiple mode : « ' . gettype($this->selectedValueToCompare) . ' » type given.'
                     );
                 }
             }
