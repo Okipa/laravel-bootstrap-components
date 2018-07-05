@@ -440,7 +440,7 @@ class SelectTest extends BootstrapComponentsTestCase
         $oldCompanies = $chunk[2];
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function() use ($oldCompanies) {
-                $request = request()->merge(['companies[]' => $oldCompanies]);
+                $request = request()->merge(['companies' => $oldCompanies]);
                 $request->flash();
             },
         ]);

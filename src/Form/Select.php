@@ -170,7 +170,7 @@ class Select extends Input
      */
     protected function searchMultipleSelectedOptionFromOldValue()
     {
-        if ($oldValue = old($this->name . '[]')) {
+        if ($oldValue = old($this->name)) {
             $selectedMultipleOptions = array_where($this->options, function($option) use ($oldValue) {
                 return in_array($option[$this->optionValueField], $oldValue);
             });
