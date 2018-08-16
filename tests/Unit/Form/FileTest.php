@@ -382,7 +382,7 @@ class FileTest extends BootstrapComponentsTestCase
         $html = bsFile()->name('name')->uploadedFile(function() {
             return 'html';
         })->toHtml();
-        $this->assertContains('<input id="checkbox-remove_name"', $html);
+        $this->assertContains('<input id="checkbox-remove-name"', $html);
         $this->assertContains('name="remove_name"', $html);
     }
 
@@ -392,7 +392,7 @@ class FileTest extends BootstrapComponentsTestCase
         $html = bsFile()->name('name')->uploadedFile(function() {
             return null;
         })->toHtml();
-        $this->assertNotContains('<input id="checkbox-remove_name"', $html);
+        $this->assertNotContains('<input id="checkbox-remove-name"', $html);
         $this->assertNotContains('name="remove_name"', $html);
     }
 
@@ -400,7 +400,7 @@ class FileTest extends BootstrapComponentsTestCase
     {
         config()->set('bootstrap-components.form.file.show_remove_checkbox', true);
         $html = bsFile()->name('name')->toHtml();
-        $this->assertNotContains('<input id="checkbox-remove_name"', $html);
+        $this->assertNotContains('<input id="checkbox-remove-name"', $html);
         $this->assertNotContains('name="remove_name"', $html);
     }
 
@@ -410,7 +410,7 @@ class FileTest extends BootstrapComponentsTestCase
         $html = bsFile()->name('name')->uploadedFile(function() {
             return 'html';
         })->toHtml();
-        $this->assertNotContains('<input id="checkbox-remove_name"', $html);
+        $this->assertNotContains('<input id="checkbox-remove-name"', $html);
         $this->assertNotContains('name="remove_name"', $html);
     }
 
@@ -420,7 +420,7 @@ class FileTest extends BootstrapComponentsTestCase
         $html = bsFile()->name('name')->uploadedFile(function() {
             return 'html';
         })->showRemoveCheckbox(true)->toHtml();
-        $this->assertContains('<input id="checkbox-remove_name"', $html);
+        $this->assertContains('<input id="checkbox-remove-name"', $html);
         $this->assertContains('name="remove_name"', $html);
     }
 
@@ -430,7 +430,7 @@ class FileTest extends BootstrapComponentsTestCase
         $html = bsFile()->name('name')->uploadedFile(function() {
             return 'html';
         })->showRemoveCheckbox(false)->toHtml();
-        $this->assertNotContains('<input id="checkbox-remove_name"', $html);
+        $this->assertNotContains('<input id="checkbox-remove-name"', $html);
         $this->assertNotContains('name="remove_name"', $html);
     }
 }
