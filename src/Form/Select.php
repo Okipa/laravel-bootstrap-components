@@ -56,6 +56,8 @@ class Select extends Input
     protected $multiple = false;
 
     /**
+     * Set the select options and the fields that will be use for the selection comparison and for the label displaying.
+     * 
      * @param iterable $optionsList
      * @param string   $optionValueField
      * @param string   $optionLabelField
