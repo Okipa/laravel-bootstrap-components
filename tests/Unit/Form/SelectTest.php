@@ -37,13 +37,13 @@ class SelectTest extends BootstrapComponentsTestCase
 
     public function testName()
     {
-        $html = bsSelect()->name('name')->toHtml();
-        $this->assertContains('name="name"', $html);
+        $html = bsSelect()->name('id')->toHtml();
+        $this->assertContains('name="id"', $html);
     }
 
     public function testType()
     {
-        $html = bsSelect()->name('name')->toHtml();
+        $html = bsSelect()->name('id')->toHtml();
         $this->assertContains('<select', $html);
     }
 
@@ -59,9 +59,11 @@ class SelectTest extends BootstrapComponentsTestCase
 
     public function testSetNoOptions()
     {
-        $html = bsSelect()->name('name')->toHtml();
-        $this->assertContains('<option value="" disabled="disabled" selected="selected">validation.attributes.name</option>',
-            $html);
+        $html = bsSelect()->name('id')->toHtml();
+        $this->assertContains(
+            '<option value="" disabled="disabled" selected="selected">validation.attributes.id</option>',
+            $html
+        );
     }
 
     public function testSetOptionsFromArray()
@@ -70,8 +72,8 @@ class SelectTest extends BootstrapComponentsTestCase
             ['id' => 1, 'name' => $this->faker->word],
             ['id' => 2, 'name' => $this->faker->word],
         ];
-        $html = bsSelect()->name('name')->options($optionsList, 'id', 'name')->toHtml();
-        $this->assertContains('<option value="" disabled="disabled" selected="selected">validation.attributes.name</option>',
+        $html = bsSelect()->name('id')->options($optionsList, 'id', 'name')->toHtml();
+        $this->assertContains('<option value="" disabled="disabled" selected="selected">validation.attributes.id</option>',
             $html);
         $this->assertContains(
             '<option value="' . $optionsList[0]['id'] . '" >' . $optionsList[0]['name'] . '</option>',
@@ -95,7 +97,7 @@ class SelectTest extends BootstrapComponentsTestCase
             ['id' => 1, 'name' => $this->faker->word],
             ['id' => 2, 'name' => $this->faker->word],
         ];
-        bsSelect()->name('name')->options($optionsList, 'wrong', 'name')->toHtml();
+        bsSelect()->name('id')->options($optionsList, 'wrong', 'name')->toHtml();
     }
 
     /**
@@ -110,15 +112,15 @@ class SelectTest extends BootstrapComponentsTestCase
             ['id' => 1, 'name' => $this->faker->word],
             ['id' => 2, 'name' => $this->faker->word],
         ];
-        bsSelect()->name('name')->options($optionsList, 'id', 'wrong')->toHtml();
+        bsSelect()->name('id')->options($optionsList, 'id', 'wrong')->toHtml();
     }
 
     public function testSetOptionsFromModelsCollection()
     {
         $users = $this->createMultipleUsers(2);
-        $html = bsSelect()->name('name')->options($users, 'id', 'name')->toHtml();
+        $html = bsSelect()->name('id')->options($users, 'id', 'name')->toHtml();
         $users = $users->toArray();
-        $this->assertContains('<option value="" disabled="disabled" selected="selected">validation.attributes.name</option>',
+        $this->assertContains('<option value="" disabled="disabled" selected="selected">validation.attributes.id</option>',
             $html);
         $this->assertContains('<option value="' . $users[0]['id'] . '" >' . $users[0]['name'] . '</option>', $html);
         $this->assertContains('<option value="' . $users[1]['id'] . '" >' . $users[1]['name'] . '</option>', $html);
@@ -133,7 +135,7 @@ class SelectTest extends BootstrapComponentsTestCase
     public function testSetOptionsFromModelsCollectionWithWrongOptionValueField()
     {
         $users = $this->createMultipleUsers(2);
-        bsSelect()->name('name')->options($users, 'wrong', 'name')->toHtml();
+        bsSelect()->name('id')->options($users, 'wrong', 'name')->toHtml();
     }
 
     /**
@@ -152,9 +154,9 @@ class SelectTest extends BootstrapComponentsTestCase
     {
         $users = $this->createMultipleUsers(2);
         $user = $users->first();
-        $html = bsSelect()->model($user)->name('name')->options($users, 'id', 'name')->toHtml();
+        $html = bsSelect()->model($user)->name('id')->options($users, 'id', 'name')->toHtml();
         $users = $users->toArray();
-        $this->assertContains('<option value="" disabled="disabled" >validation.attributes.name</option>', $html);
+        $this->assertContains('<option value="" disabled="disabled" >validation.attributes.id</option>', $html);
         $this->assertContains(
             '<option value="' . $users[0]['id'] . '" selected="selected">' . $users[0]['name'] . '</option>',
             $html);
@@ -163,7 +165,7 @@ class SelectTest extends BootstrapComponentsTestCase
 
     public function testSetSelectedOptionWithoutDeclaredOptions()
     {
-        $html = bsSelect()->name('name')->selected('id', 1)->toHtml();
+        $html = bsSelect()->name('id')->selected('id', 1)->toHtml();
         $this->assertContains('<select', $html);
     }
 
@@ -176,7 +178,7 @@ class SelectTest extends BootstrapComponentsTestCase
     public function testSetSelectedOptionFromWrongTypeValue()
     {
         $users = $this->createMultipleUsers(2);
-        bsSelect()->name('name')
+        bsSelect()->name('id')
             ->options($users, 'id', 'name')
             ->selected('id', ['test'])
             ->toHtml();
@@ -188,11 +190,11 @@ class SelectTest extends BootstrapComponentsTestCase
         $user = null;
         $html = bsSelect()
             ->model($user)
-            ->name('name')
+            ->name('id')
             ->options($users, 'id', 'name')
             ->selected('id', $users->get(1)->id)
             ->toHtml();
-        $this->assertContains('<option value="" disabled="disabled" >validation.attributes.name</option>', $html);
+        $this->assertContains('<option value="" disabled="disabled" >validation.attributes.id</option>', $html);
         $this->assertContains(
             '<option value="' . $users[0]['id'] . '" >' . $users[0]['name'] . '</option>',
             $html
@@ -210,16 +212,16 @@ class SelectTest extends BootstrapComponentsTestCase
         $html = bsSelect()
             ->model($user)
             ->name('name')
-            ->options($users, 'id', 'name')
+            ->options($users, 'name', 'name')
             ->selected('name', $users->get(1)->name)
             ->toHtml();
         $this->assertContains('<option value="" disabled="disabled" >validation.attributes.name</option>', $html);
         $this->assertContains(
-            '<option value="' . $users[0]['id'] . '" >' . $users[0]['name'] . '</option>',
+            '<option value="' . $users[0]['name'] . '" >' . $users[0]['name'] . '</option>',
             $html
         );
         $this->assertContains(
-            '<option value="' . $users[1]['id'] . '" selected="selected">' . $users[1]['name'] . '</option>',
+            '<option value="' . $users[1]['name'] . '" selected="selected">' . $users[1]['name'] . '</option>',
             $html
         );
     }
@@ -228,10 +230,10 @@ class SelectTest extends BootstrapComponentsTestCase
     {
         $users = $this->createMultipleUsers(2);
         $html = bsSelect()
-            ->name('name')
+            ->name('id')
             ->options($users, 'id', 'name')
             ->toHtml();
-        $this->assertContains('<option value="" disabled="disabled" selected="selected">validation.attributes.name</option>',
+        $this->assertContains('<option value="" disabled="disabled" selected="selected">validation.attributes.id</option>',
             $html);
         $this->assertContains(
             '<option value="' . $users[0]['id'] . '" >' . $users[0]['name'] . '</option>',

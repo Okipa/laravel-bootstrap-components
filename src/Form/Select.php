@@ -290,7 +290,7 @@ class Select extends Input
     {
         if ($this->model) {
             $selectedOption = array_where($this->options, function($option) {
-                return $option[$this->optionValueField] == $this->model->{$this->optionValueField};
+                return $option[$this->optionValueField] == $this->model->{$this->name};
             });
             if (! empty($selectedOption)) {
                 return $selectedOption;
