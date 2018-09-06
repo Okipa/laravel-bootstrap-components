@@ -1,4 +1,4 @@
-<div {{ classTag($type . '-' . str_slug($name) . '-container', $containerClass) }}
+<div {{ classTag($id . '-container', $containerClass) }}
     {{ htmlAttributes($containerHtmlAttributes) }}>
     @include('bootstrap-components::bootstrap-components.partials.label')
     @if($uploadedFileHtml->toHtml())
@@ -11,7 +11,7 @@
             <input id="file-{{ str_slug($name) }}"
                    type="file"
                    name="{{ $name }}"
-                   {{ classTag('custom-file-input', 'form-control', $type . '-' . str_slug($name) . '-component', $componentClass, validationStatus($name)) }}
+                   {{ classTag('custom-file-input', 'form-control', $id . '-component', $componentClass, validationStatus($name)) }}
                    lang="{{ app()->getLocale() }}"
                    {{ htmlAttributes($componentHtmlAttributes) }}
                    aria-label="{{ $label }}"
