@@ -32,6 +32,12 @@ abstract class Input extends Component
      * @property string $name
      */
     protected $name;
+    /**
+     * The input id.
+     *
+     * @property string $id
+     */
+    protected $id;
     /**.
      * The input icon show status.
      *
@@ -105,6 +111,20 @@ abstract class Input extends Component
     public function name(string $name): Input
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Set the input id.
+     *
+     * @param string $id
+     *
+     * @return \Okipa\LaravelBootstrapComponents\Form\Input
+     */
+    public function id(string $id): Input
+    {
+        $this->id = $id;
 
         return $this;
     }
@@ -226,6 +246,7 @@ abstract class Input extends Component
             'model'       => $this->model,
             'type'        => $this->type,
             'name'        => $this->name,
+            'id'          => $this->id ? $this->id : ($this->type . '-' . str_slug($this->name)),
             'icon'        => $this->showIcon ? ($this->icon ? $this->icon : $this->defaultIcon()) : '',
             'legend'      => $this->showLegend
                 ? ($this->legend ? trans($this->legend) : $this->defaultLegend())
