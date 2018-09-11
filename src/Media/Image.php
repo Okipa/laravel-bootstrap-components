@@ -35,17 +35,37 @@ class Image extends Media
      */
     protected $height;
     /**
+     * The image link id.
+     *
+     * @property string $linkId
+     */
+    protected $linkId;
+    /**
      * The image link class.
      *
      * @property array $linkClass
      */
-    protected $linkClass = [];
+    protected $linkClass;
     /**
      * The image link html attributes.
      *
      * @property array $containerHtmlAttributes
      */
-    protected $linkHtmlAttributes = [];
+    protected $linkHtmlAttributes;
+
+    /**
+     * Set the image link id.
+     *
+     * @param string $linkId
+     *
+     * @return \Okipa\LaravelBootstrapComponents\Media\Image
+     */
+    public function linkId(string $linkId): Image
+    {
+        $this->linkId = $linkId;
+
+        return $this;
+    }
 
     /**
      * Wrap the image in a link and set its url.
@@ -143,6 +163,7 @@ class Image extends Media
             'alt'                => $this->alt,
             'width'              => $this->width,
             'height'             => $this->height,
+            'linkId'             => $this->linkId ? $this->linkId : $this->defaultLinkId(),
             'linkClass'          => $this->linkClass ? $this->linkClass : $this->defaultLinkClass(),
             'linkHtmlAttributes' => $this->linkHtmlAttributes ? $this->linkHtmlAttributes : $this->defaultLinkHtmlAttributes(),
         ]);
@@ -170,5 +191,15 @@ class Image extends Media
         $linkHtmlAttributes = config('bootstrap-components.' . $this->configKey . '.html_attributes.link');
 
         return $linkHtmlAttributes ? $linkHtmlAttributes : [];
+    }
+
+    /**
+     * Set the default component id.
+     *
+     * @return string
+     */
+    protected function defaultLinkId(): string
+    {
+        return '';
     }
 }

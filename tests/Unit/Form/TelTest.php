@@ -245,6 +245,32 @@ class TelTest extends BootstrapComponentsTestCase
         $this->assertNotContains('<div class="invalid-feedback d-block">', $html);
     }
 
+    public function testSetNoContainerId()
+    {
+        $html = bsTel()->name('name')->toHtml();
+        $this->assertNotContains('<div id="', $html);
+    }
+
+    public function testSetContainerId()
+    {
+        $customContainerId = 'test-custom-container-id';
+        $html = bsTel()->name('name')->containerId($customContainerId)->toHtml();
+        $this->assertContains('<div id="' . $customContainerId, $html);
+    }
+
+    public function testSetNoComponentId()
+    {
+        $html = bsTel()->name('name')->toHtml();
+        $this->assertContains('<input id="tel-name"', $html);
+    }
+
+    public function testSetComponentId()
+    {
+        $customComponentId = 'test-custom-component-id';
+        $html = bsTel()->name('name')->componentId($customComponentId)->toHtml();
+        $this->assertContains('<input id="' . $customComponentId . '"', $html);
+    }
+
     public function testConfigContainerClass()
     {
         $configContainerCLass = 'test-config-class-container';

@@ -305,6 +305,32 @@ class FileTest extends BootstrapComponentsTestCase
         $this->assertNotContains('class="file-name-container ' . $configContainerCLass . '"', $html);
     }
 
+    public function testSetNoContainerId()
+    {
+        $html = bsFile()->name('name')->toHtml();
+        $this->assertNotContains('<div id="', $html);
+    }
+
+    public function testSetContainerId()
+    {
+        $customContainerId = 'test-custom-container-id';
+        $html = bsFile()->name('name')->containerId($customContainerId)->toHtml();
+        $this->assertContains('<div id="' . $customContainerId, $html);
+    }
+
+    public function testSetNoComponentId()
+    {
+        $html = bsFile()->name('name')->toHtml();
+        $this->assertContains('<input id="file-name"', $html);
+    }
+
+    public function testSetComponentId()
+    {
+        $customComponentId = 'test-custom-component-id';
+        $html = bsFile()->name('name')->componentId($customComponentId)->toHtml();
+        $this->assertContains('<input id="' . $customComponentId . '"', $html);
+    }
+    
     public function testConfigComponentClass()
     {
         $configComponentCLass = 'test-config-class-component';

@@ -118,6 +118,8 @@ php artisan vendor:publish --tag=bootstrap-components::views
   
 | Signature | Required | Description |
 |---|---|---|
+| containerId(string $containerId): Component  | No |  |
+| componentId(string $componentId): Component  | No |  |
 | containerClass(array $containerClass): Component  | No | default value : `config('bootstrap-components.[component_config_key].class.container')`. |
 | componentClass(array $componentClass): Component  | No | default value : `config('bootstrap-components.[component_config_key].class.component')`. |
 | containerHtmlAttributes(array $containerHtmlAttributes): Component  | No | default value : `config('bootstrap-components.[component_config_key].html_attributes.container')`. |
@@ -153,6 +155,8 @@ bsText()->name('name')
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
     ->hideLegend() // or hide the legend
+    ->containerId('container-id') // set the container id
+    ->componentId('component-id') // override the default component id (text-[name])
     ->containerClass(['container', 'class]) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
@@ -172,6 +176,8 @@ bsTel()->name('phone_number')
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
     ->hideLegend() // or hide the legend
+    ->containerId('container-id') // set the container id
+    ->componentId('component-id') // override the default component id (tel-[name])
     ->containerClass(['container', 'class]) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
@@ -192,6 +198,8 @@ bsDate()->name('published_at')
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
     ->hideLegend() // or hide the legend
+    ->containerId('container-id') // set the container id
+    ->componentId('component-id') // override the default component id (date-[name])
     ->containerClass(['container', 'class]) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
@@ -212,6 +220,8 @@ bsDatetime()->name('published_at')
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
     ->hideLegend() // or hide the legend
+    ->containerId('container-id') // set the container id
+    ->componentId('component-id') // override the default component id (datetime-local-[name])
     ->containerClass(['container', 'class]) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
@@ -231,6 +241,8 @@ bsUrl()->name('facebook_page')
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
     ->hideLegend() // or hide the legend
+    ->containerId('container-id') // set the container id
+    ->componentId('component-id') // override the default component id (url-[name])
     ->containerClass(['container', 'class]) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
@@ -250,6 +262,8 @@ bsEmail()->name('email')
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
     ->hideLegend() // or hide the legend
+    ->containerId('container-id') // set the container id
+    ->componentId('component-id') // override the default component id (email-[name])
     ->containerClass(['container', 'class]) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
@@ -269,6 +283,8 @@ bsPassword()->name('password')
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
     ->hideLegend() // or hide the legend
+    ->containerId('container-id') // set the container id
+    ->componentId('component-id') // override the default component id (password-[name])
     ->containerClass(['container', 'class]) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
@@ -292,6 +308,8 @@ bsFile()->name('avatar')
         return '<div>Some HTML</div>'
     })
     -showRemoveCheckbox() // override the default config show remove checkbox status
+    ->containerId('container-id') // set the container id
+    ->componentId('component-id') // override the default component id (file-[name])
     ->containerClass(['container', 'class]) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
@@ -318,6 +336,8 @@ bsTextarea()->name('message')
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
     ->hideLegend() // or hide the legend
+    ->containerId('container-id') // set the container id
+    ->componentId('component-id') // override the default component id (textarea-[name])
     ->containerClass(['container', 'class]) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
@@ -336,6 +356,8 @@ bsCheckbox()->name('active')
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
     ->hideLegend() // or hide the legend
+    ->containerId('container-id') // set the container id
+    ->componentId('component-id') // override the default component id (checkbox-[name])
     ->containerClass(['container', 'class]) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
@@ -360,6 +382,8 @@ bsToggle()->name('active')
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
     ->hideLegend() // or hide the legend
+    ->containerId('container-id') // set the container id
+    ->componentId('component-id') // override the default component id (toggle-[name])
     ->containerClass(['container', 'class]) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
@@ -388,6 +412,8 @@ bsRadio()->name('gender')
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
     ->hideLegend() // or hide the legend
+    ->containerId('container-id') // set the container id
+    ->componentId('component-id') // override the default component id (radio-[name])
     ->containerClass(['container', 'class]) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
@@ -415,6 +441,8 @@ bsSelect()->name('selected')
     ->hideIcon() // or hide the icon
     ->legend('Select a user.') // override the default config legend
     ->hideLegend() // or hide the legend
+    ->containerId('container-id') // set the container id
+    ->componentId('component-id') // override the default component id (select-[name])
     ->containerClass(['container', 'class]) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
@@ -451,6 +479,8 @@ bsValidate()->label('Select a user') // override the default trans('validation.a
     ->hideLabel() // or hide the label
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
+    ->containerId('container-id') // set the container id
+    ->componentId('component-id') // set the component id
     ->containerClass(['container', 'class]) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
@@ -464,6 +494,8 @@ bsCreate()->label('Select a user') // override the default trans('validation.att
     ->hideLabel() // or hide the label
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
+    ->containerId('container-id') // set the container id
+    ->componentId('component-id') // set the component id
     ->containerClass(['container', 'class]) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
@@ -477,6 +509,8 @@ bsUpdate()->label('Select a user') // override the default trans('validation.att
     ->hideLabel() // or hide the label
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
+    ->containerId('container-id') // set the container id
+    ->componentId('component-id') // set the component id
     ->containerClass(['container', 'class]) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
@@ -492,6 +526,8 @@ bsCancel()->url('https://www.google.com') // set the button url
     ->hideLabel() // or hide the label
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
+    ->containerId('container-id') // set the container id
+    ->componentId('component-id') // set the component id
     ->containerClass(['container', 'class]) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
@@ -514,6 +550,8 @@ bsBack()->url('https://www.google.com') // set the button url
     ->hideLabel() // or hide the label
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
+    ->containerId('container-id') // set the container id
+    ->componentId('component-id') // set the component id
     ->containerClass(['container', 'class]) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
@@ -543,6 +581,9 @@ image()->src(https://yourapp.fr/public/media/image-thumb.jpg)
     ->alt('Image')
     ->width(250)
     ->height(150)
+    ->containerId('container-id') // set the container id
+    ->linkId('link-id') // set the link id
+    ->componentId('component-id') // set the component id
     ->containerClass(['container', 'class]) // override the default config container class list
     ->linkComponentClass(['link', 'component', 'class']) // override the default config link class list
     ->componentClass(['component', 'class']) // override the default config component class list
@@ -556,9 +597,10 @@ _Component additional methods :_
 | Signature | Required | Description |
 |---|---|---|
 | linkUrl(string $linkUrl): Image  | No | Wrap the image in a link and set its url. |
-| alt(string $alt): Image  | No |  |
+| alt(string $alt): Image  | No |   |
 | width(int $width): Image  | No |  |
-| height(int $height): Image  | No |  |
+| height(int $height): Image  | No |   |
+| linkId(string $linkId): Image  | No |  |
 | linkClass(array $linkClass): Image  | No | Default value : `config('bootstrap-components.media.image.class.link')`. |
 | linkHtmlAttributes(array $linkHtmlAttributes): Image  | No | Default value : `config('bootstrap-components.media.image.html_attributes.link')`. |
 
@@ -566,6 +608,8 @@ _Component additional methods :_
 
 ```php
 audio()->src(https://yourapp.fr/public/media/audio.mp3)
+    ->containerId('container-id') // set the container id
+    ->componentId('component-id') // set the component id
     ->containerClass(['container', 'class]) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
@@ -577,6 +621,8 @@ audio()->src(https://yourapp.fr/public/media/audio.mp3)
 ```php
 audio()->src(https://yourapp.fr/public/media/video.avi)
     ->poster(https://yourapp.fr/public/media/poster.jpg)
+    ->containerId('container-id') // set the container id
+    ->componentId('component-id') // set the component id
     ->containerClass(['container', 'class]) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
@@ -591,6 +637,28 @@ _Component additional methods :_
 
 ------------------------------------------------------------------------------------------------------------------------
 
+## Testing
+
+```bash
+composer test
+```
+
+------------------------------------------------------------------------------------------------------------------------
+
+## Changelog
+
+Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+
+------------------------------------------------------------------------------------------------------------------------
+
 ## Contributors
 
+- [Okipa](https://github.com/Okipa)
 - [ACID-Solutions](https://github.com/ACID-Solutions)
+- [yepzy](https://github.com/yepzy)
+
+------------------------------------------------------------------------------------------------------------------------
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.

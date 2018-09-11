@@ -327,6 +327,32 @@ class DatetimeTest extends BootstrapComponentsTestCase
         $this->assertNotContains('<div class="invalid-feedback d-block">', $html);
     }
 
+    public function testSetNoContainerId()
+    {
+        $html = bsDatetime()->name('name')->toHtml();
+        $this->assertNotContains('<div id="', $html);
+    }
+
+    public function testSetContainerId()
+    {
+        $customContainerId = 'test-custom-container-id';
+        $html = bsDatetime()->name('name')->containerId($customContainerId)->toHtml();
+        $this->assertContains('<div id="' . $customContainerId . '"', $html);
+    }
+
+    public function testSetNoComponentId()
+    {
+        $html = bsDatetime()->name('name')->toHtml();
+        $this->assertContains('<input id="datetime-local-name"', $html);
+    }
+
+    public function testSetComponentId()
+    {
+        $customComponentId = 'test-custom-component-id';
+        $html = bsDatetime()->name('name')->componentId($customComponentId)->toHtml();
+        $this->assertContains('<input id="' . $customComponentId . '"', $html);
+    }
+
     public function testConfigContainerClass()
     {
         $configContainerCLass = 'test-config-class-container';

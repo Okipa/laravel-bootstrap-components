@@ -266,6 +266,16 @@ abstract class Input extends Component
     }
 
     /**
+     * Set the default component id.
+     *
+     * @return string
+     */
+    protected function defaultComponentId(): string
+    {
+        return $this->type . '-' . str_slug($this->name);
+    }
+
+    /**
      * Check the component values validity
      *
      * @throws \Exception

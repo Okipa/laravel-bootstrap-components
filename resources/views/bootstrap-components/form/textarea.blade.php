@@ -1,9 +1,10 @@
-<div {{ classTag($type . '-' . str_slug($name) . '-container', $containerClass) }}
+<div {{ htmlAttributes($containerId ? ['id' => $containerId] : null) }}
+    {{ classTag($type . '-' . str_slug($name) . '-container', $containerClass) }}
     {{ htmlAttributes($containerHtmlAttributes) }}>
     @include('bootstrap-components::bootstrap-components.partials.label')
     <div class="input-group">
         @include('bootstrap-components::bootstrap-components.partials.icon')
-        <textarea id="{{ $type }}-{{ str_slug($name) }}"
+        <textarea id="{{ $componentId }}"
                name="{{ $name }}"
                {{ classTag('form-control', $type . '-' . str_slug($name) . '-component', $componentClass, validationStatus($name)) }}
                placeholder="{{ $placeholder }}"

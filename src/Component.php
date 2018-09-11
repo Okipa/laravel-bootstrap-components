@@ -19,32 +19,58 @@ abstract class Component implements Htmlable
      */
     protected $view;
     /**
+     * The component id.
+     *
+     * @property string $componentId
+     */
+    protected $componentId;
+    /**
+     * The component container id.
+     *
+     * @property array $containerId
+     */
+    protected $containerId;
+    /**
      * The component class.
      *
      * @property array $componentClass
      */
-    protected $componentClass = [];
+    protected $componentClass;
     /**
      * The component container class.
      *
      * @property array $containerClass
      */
-    protected $containerClass = [];
+    protected $containerClass;
     /**
      * The component html attributes.
      *
      * @property array $componentHtmlAttributes
      */
-    protected $componentHtmlAttributes = [];
+    protected $componentHtmlAttributes;
     /**
      * The component container html attributes.
      *
      * @property array $containerHtmlAttributes
      */
-    protected $containerHtmlAttributes = [];
+    protected $containerHtmlAttributes;
 
     /**
-     * Set the component class tag.
+     * Set the component id.
+     *
+     * @param string $componentId
+     *
+     * @return \Okipa\LaravelBootstrapComponents\Component
+     */
+    public function componentId(string $componentId): Component
+    {
+        $this->componentId = $componentId;
+
+        return $this;
+    }
+
+    /**
+     * Set the component class.
      *
      * @param array $componentClass
      *
@@ -58,7 +84,21 @@ abstract class Component implements Htmlable
     }
 
     /**
-     * Set the component container class tag.
+     * Set the container id.
+     *
+     * @param string $containerId
+     *
+     * @return \Okipa\LaravelBootstrapComponents\Component
+     */
+    public function containerId(string $containerId): Component
+    {
+        $this->containerId = $containerId;
+
+        return $this;
+    }
+
+    /**
+     * Set the component container class.
      *
      * @param array $containerClass
      *
@@ -127,6 +167,11 @@ abstract class Component implements Htmlable
     }
 
     /**
+     * Check the component values validity
+     */
+    protected abstract function checkValuesValidity(): void;
+
+    /**
      * Set the component view.
      *
      * @return string
@@ -143,6 +188,12 @@ abstract class Component implements Htmlable
      */
     protected function values(): array
     {
+        $componentId = $this->componentId
+            ? $this->componentId
+            : $this->defaultComponentId();
+        $containerId = $this->containerId
+            ? $this->containerId
+            : $this->defaultContainerId();
         $componentClass = $this->componentClass
             ? $this->componentClass
             : $this->defaultComponentClass();
@@ -156,7 +207,32 @@ abstract class Component implements Htmlable
             ? $this->containerHtmlAttributes
             : $this->defaultContainerHtmlAttributes();
 
-        return compact('componentClass', 'containerClass', 'componentHtmlAttributes', 'containerHtmlAttributes');
+        return compact('componentId',
+            'containerId',
+            'componentClass',
+            'containerClass',
+            'componentHtmlAttributes',
+            'containerHtmlAttributes');
+    }
+
+    /**
+     * Set the default component id.
+     *
+     * @return string
+     */
+    protected function defaultComponentId(): string
+    {
+        return '';
+    }
+
+    /**
+     * Set the default container id.
+     *
+     * @return string
+     */
+    protected function defaultContainerId(): string
+    {
+        return '';
     }
 
     /**
@@ -167,6 +243,7 @@ abstract class Component implements Htmlable
     protected function defaultComponentClass(): array
     {
         $componentClass = config('bootstrap-components.' . $this->configKey . '.class.component');
+
         return $componentClass ? $componentClass : [];
     }
 
@@ -178,6 +255,7 @@ abstract class Component implements Htmlable
     protected function defaultContainerClass(): array
     {
         $containerClass = config('bootstrap-components.' . $this->configKey . '.class.container');
+
         return $containerClass ? $containerClass : [];
     }
 
@@ -189,6 +267,7 @@ abstract class Component implements Htmlable
     protected function defaultComponentHtmlAttributes(): array
     {
         $componentHtmlAttributes = config('bootstrap-components.' . $this->configKey . '.html_attributes.component');
+
         return $componentHtmlAttributes ? $componentHtmlAttributes : [];
     }
 
@@ -200,11 +279,7 @@ abstract class Component implements Htmlable
     protected function defaultContainerHtmlAttributes(): array
     {
         $containerHtmlAttributes = config('bootstrap-components.' . $this->configKey . '.html_attributes.container');
+
         return $containerHtmlAttributes ? $containerHtmlAttributes : [];
     }
-
-    /**
-     * Check the component values validity
-     */
-    protected abstract function checkValuesValidity(): void;
 }

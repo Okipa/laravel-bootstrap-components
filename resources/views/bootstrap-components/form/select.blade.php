@@ -1,9 +1,10 @@
-<div {{ classTag($type . '-' . str_slug($name) . '-container', $containerClass) }}
+<div {{ htmlAttributes($containerId ? ['id' => $containerId] : null) }}
+    {{ classTag($type . '-' . str_slug($name) . '-container', $containerClass) }}
     {{ htmlAttributes($containerHtmlAttributes) }}>
     @include('bootstrap-components::bootstrap-components.partials.label')
     <div class="input-group">
         @include('bootstrap-components::bootstrap-components.partials.icon')
-        <select id="{{ $type }}-{{ str_slug($name) }}"
+        <select id="{{ $componentId }}"
                 {{ classTag($type . '-' . str_slug($name) . '-component', 'custom-select', $componentClass, validationStatus($name)) }}
                 name="{{ $name . ($multiple ? '[]' : '') }}"
                 {{ htmlAttributes($multiple ? 'multiple' : null, $componentHtmlAttributes) }}>

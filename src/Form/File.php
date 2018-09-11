@@ -70,7 +70,6 @@ class File extends Input
     protected function values(): array
     {
         $parentValues = parent::values();
-
         return array_merge($parentValues, [
             'placeholder'        => ($this->showLabel ? '' : $parentValues['placeholder'] . ' : ')
                                     . trans('bootstrap-components::bootstrap-components.label.file'),

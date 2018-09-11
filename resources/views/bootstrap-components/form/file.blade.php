@@ -1,4 +1,5 @@
-<div {{ classTag($type . '-' . str_slug($name) . '-container', $containerClass) }}
+<div {{ htmlAttributes($containerId ? ['id' => $containerId] : null) }}
+    {{ classTag($type . '-' . str_slug($name) . '-container', $containerClass) }}
     {{ htmlAttributes($containerHtmlAttributes) }}>
     @include('bootstrap-components::bootstrap-components.partials.label')
     @if($uploadedFileHtml->toHtml())
@@ -8,7 +9,7 @@
     <div class="input-group">
         @include('bootstrap-components::bootstrap-components.partials.icon')
         <div class="custom-file">
-            <input id="file-{{ str_slug($name) }}"
+            <input id="{{ $componentId }}"
                    type="file"
                    name="{{ $name }}"
                    {{ classTag('custom-file-input', 'form-control', $type . '-' . str_slug($name) . '-component', $componentClass, validationStatus($name)) }}

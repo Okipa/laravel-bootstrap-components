@@ -41,12 +41,38 @@ class AudioTest extends BootstrapComponentsTestCase
         $this->assertNotContains('<source src="', $html);
     }
 
+    public function testSetNoContainerId()
+    {
+        $html = audio()->toHtml();
+        $this->assertNotContains('<div id="', $html);
+    }
+
+    public function testSetContainerId()
+    {
+        $customContainerId = 'test-custom-container-id';
+        $html = audio()->containerId($customContainerId)->toHtml();
+        $this->assertContains('<div id="' . $customContainerId, $html);
+    }
+
+    public function testSetNoComponentId()
+    {
+        $html = audio()->toHtml();
+        $this->assertNotContains('<audio id="', $html);
+    }
+
+    public function testSetComponentId()
+    {
+        $customComponentId = 'test-custom-component-id';
+        $html = audio()->componentId($customComponentId)->toHtml();
+        $this->assertContains('<audio id="' . $customComponentId . '"', $html);
+    }
+
     public function testConfigContainerClass()
     {
         $configContainerCLass = 'test-config-class-container';
         config()->set('bootstrap-components.media.audio.class.container', [$configContainerCLass]);
         $html = audio()->toHtml();
-        $this->assertContains('<div class="audio-container ' . $configContainerCLass . '"', $html);
+        $this->assertContains('class="audio-container ' . $configContainerCLass . '"', $html);
     }
 
     public function testSetContainerClass()
@@ -55,8 +81,8 @@ class AudioTest extends BootstrapComponentsTestCase
         $customContainerCLass = 'test-custom-class-container';
         config()->set('bootstrap-components.media.audio.class.container', [$configContainerCLass]);
         $html = audio()->containerClass([$customContainerCLass])->toHtml();
-        $this->assertContains('<div class="audio-container ' . $customContainerCLass . '"', $html);
-        $this->assertNotContains('<div class="audio-container ' . $configContainerCLass . '"', $html);
+        $this->assertContains('class="audio-container ' . $customContainerCLass . '"', $html);
+        $this->assertNotContains('class="audio-container ' . $configContainerCLass . '"', $html);
     }
 
     public function testConfigComponentClass()

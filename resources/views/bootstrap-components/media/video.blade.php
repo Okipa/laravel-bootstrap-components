@@ -1,6 +1,8 @@
-<div {{ classTag('video-container', $containerClass) }}
+<div {{ htmlAttributes($containerId ? ['id' => $containerId] : null) }}
+    {{ classTag('video-container', $containerClass) }}
     {{ htmlAttributes($containerHtmlAttributes) }}>
-    <video {{ classTag('video-component', $componentClass) }}
+    <video {{ htmlAttributes($componentId ? ['id' => $componentId] : null) }}
+        {{ classTag('video-component', $componentClass) }}
         {{ htmlAttributes($componentHtmlAttributes) }}
         {{ htmlAttributes($poster ? 'poster="'.$poster.'"' : null) }}>
         <source {{ htmlAttributes($src ? 'src="'.$src.'"' : null) }}>

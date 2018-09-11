@@ -1,6 +1,7 @@
-<div {{ classTag($type . '-' . str_slug($name) . '-container', 'switch', 'custom-control', $containerClass) }}
+<div {{ htmlAttributes($containerId ? ['id' => $containerId] : null) }}
+    {{ classTag($type . '-' . str_slug($name) . '-container', 'switch', 'custom-control', $containerClass) }}
     {{ htmlAttributes($containerHtmlAttributes) }}>
-    <input id="{{ $type }}-{{ str_slug($name) }}"
+    <input id="{{ $componentId }}"
            {{ classTag($type . '-' . str_slug($name) . '-component', 'custom-control-input', $componentClass, validationStatus($name)) }}
            type="checkbox"
            name="{{ $name }}"

@@ -43,6 +43,9 @@
             "Okipa\\LaravelBootstrapComponents\\Test\\": "tests"
         }
     },
+    "scripts": {
+        "test": "phpunit"
+    },
     "extra": {
         "laravel": {
             "providers": [

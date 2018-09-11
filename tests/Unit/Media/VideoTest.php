@@ -66,12 +66,38 @@ class VideoTest extends BootstrapComponentsTestCase
         $this->assertNotContains('poster="', $html);
     }
 
+    public function testSetNoContainerId()
+    {
+        $html = video()->toHtml();
+        $this->assertNotContains('<div id="', $html);
+    }
+
+    public function testSetContainerId()
+    {
+        $customContainerId = 'test-custom-container-id';
+        $html = video()->containerId($customContainerId)->toHtml();
+        $this->assertContains('<div id="' . $customContainerId, $html);
+    }
+
+    public function testSetNoComponentId()
+    {
+        $html = video()->toHtml();
+        $this->assertNotContains('<video id="', $html);
+    }
+
+    public function testSetComponentId()
+    {
+        $customComponentId = 'test-custom-component-id';
+        $html = video()->componentId($customComponentId)->toHtml();
+        $this->assertContains('<video id="' . $customComponentId . '"', $html);
+    }
+
     public function testConfigContainerClass()
     {
         $configContainerCLass = 'test-config-class-container';
         config()->set('bootstrap-components.media.video.class.container', [$configContainerCLass]);
         $html = video()->toHtml();
-        $this->assertContains('<div class="video-container ' . $configContainerCLass . '"', $html);
+        $this->assertContains('class="video-container ' . $configContainerCLass . '"', $html);
     }
 
     public function testSetContainerClass()
@@ -80,8 +106,8 @@ class VideoTest extends BootstrapComponentsTestCase
         $customContainerCLass = 'test-custom-class-container';
         config()->set('bootstrap-components.input.class.container', [$configContainerCLass]);
         $html = video()->containerClass([$customContainerCLass])->toHtml();
-        $this->assertContains('<div class="video-container ' . $customContainerCLass . '"', $html);
-        $this->assertNotContains('<div class="video-container ' . $configContainerCLass . '"', $html);
+        $this->assertContains('class="video-container ' . $customContainerCLass . '"', $html);
+        $this->assertNotContains('class="video-container ' . $configContainerCLass . '"', $html);
     }
 
     public function testConfigComponentClass()
