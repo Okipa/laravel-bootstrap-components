@@ -171,19 +171,13 @@ class ToggleTest extends BootstrapComponentsTestCase
     public function testNoLabel()
     {
         $html = bsToggle()->name('name')->toHtml();
-        $this->assertContains(
-            'for="toggle-name">validation.attributes.name</label>',
-            $html
-        );
+        $this->assertContains('for="toggle-name">validation.attributes.name</label>', $html);
     }
 
     public function testHideLabel()
     {
         $html = bsToggle()->name('name')->hideLabel()->toHtml();
-        $this->assertNotContains(
-            'for="toggle-name">validation.attributes.name</label>',
-            $html
-        );
+        $this->assertNotContains('for="toggle-name">validation.attributes.name</label>', $html);
     }
 
     public function testSuccess()

@@ -545,25 +545,41 @@ class SelectTest extends BootstrapComponentsTestCase
     {
         $label = 'test-custom-label';
         $html = bsSelect()->name('name')->label($label)->toHtml();
-        $this->assertContains('for="select-name">' . $label . '</label>', $html);
+        $this->assertContains('<label for="select-name">' . $label . '</label>', $html);
+        $this->assertContains('<option value="" disabled="disabled" selected="selected">' . $label . '</option>', $html);
     }
 
     public function testNoLabel()
     {
         $html = bsSelect()->name('name')->toHtml();
-        $this->assertContains(
-            'for="select-name">validation.attributes.name</label>',
-            $html
-        );
+        $this->assertContains('<label for="select-name">validation.attributes.name</label>', $html);
     }
 
     public function testHideLabel()
     {
         $html = bsSelect()->name('name')->hideLabel()->toHtml();
-        $this->assertNotContains(
-            'for="select-name">validation.attributes.name</label>',
-            $html
-        );
+        $this->assertNotContains('<label for="select-name">validation.attributes.name</label>', $html);
+    }
+
+    public function testSetPlaceholder()
+    {
+        $placeholder = 'test-custom-placeholder';
+        $html = bsSelect()->name('name')->placeholder($placeholder)->toHtml();
+        $this->assertContains('<option value="" disabled="disabled" selected="selected">' . $placeholder . '</option>', $html);
+    }
+
+    public function testSetPlaceholderWithLabel()
+    {
+        $label = 'test-custom-label';
+        $placeholder = 'test-custom-placeholder';
+        $html = bsSelect()->name('name')->label($label)->placeholder($placeholder)->toHtml();
+        $this->assertContains('<option value="" disabled="disabled" selected="selected">' . $placeholder . '</option>', $html);
+    }
+
+    public function testNoPlaceholder()
+    {
+        $html = bsSelect()->name('name')->toHtml();
+        $this->assertContains('<option value="" disabled="disabled" selected="selected">validation.attributes.name</option>', $html);
     }
 
     public function testSuccess()

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.9
+2018-09-12
+- Setting a custom label has does now also replace the default placeholder. If a custom placeholder is also set, this custom placeholder will be shown instead of the custom label.
+
 ## 0.4.8
 2018-09-11
 - Added possibility to set an id with the method `->id()` for all components :

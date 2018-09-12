@@ -138,26 +138,6 @@ class EmailTest extends BootstrapComponentsTestCase
         $this->assertNotContains('<small id="email-name-legend" class="form-text text-muted">', $html);
     }
 
-    public function testSetPlaceholder()
-    {
-        $placeholder = 'test-custom-placeholder';
-        $html = bsEmail()->name('name')->placeholder($placeholder)->toHtml();
-        $this->assertContains('placeholder="' . $placeholder . '"', $html);
-        $this->assertNotContains(
-            'placeholder="validation.attributes.name"',
-            $html
-        );
-    }
-
-    public function testNoPlaceholder()
-    {
-        $html = bsEmail()->name('name')->toHtml();
-        $this->assertContains(
-            'placeholder="validation.attributes.name"',
-            $html
-        );
-    }
-
     public function testSetValue()
     {
         $customValue = 'test-custom-value';
@@ -186,33 +166,43 @@ class EmailTest extends BootstrapComponentsTestCase
         $label = 'test-custom-label';
         $html = bsEmail()->name('name')->label($label)->toHtml();
         $this->assertContains('<label for="email-name">' . $label . '</label>', $html);
+        $this->assertContains('placeholder="' . $label . '"', $html);
         $this->assertContains('aria-label="' . $label . '"', $html);
     }
 
     public function testNoLabel()
     {
         $html = bsEmail()->name('name')->toHtml();
-        $this->assertContains(
-            '<label for="email-name">validation.attributes.name</label>',
-            $html
-        );
-        $this->assertContains(
-            'aria-label="validation.attributes.name"',
-            $html
-        );
+        $this->assertContains('<label for="email-name">validation.attributes.name</label>', $html);
+        $this->assertContains('aria-label="validation.attributes.name"', $html);
     }
 
     public function testHideLabel()
     {
         $html = bsEmail()->name('name')->hideLabel()->toHtml();
-        $this->assertNotContains(
-            '<label for="email-name">validation.attributes.name</label>',
-            $html
-        );
-        $this->assertNotContains(
-            'aria-label="validation.attributes.name"',
-            $html
-        );
+        $this->assertNotContains('<label for="email-name">validation.attributes.name</label>', $html);
+        $this->assertNotContains('aria-label="validation.attributes.name"', $html);
+    }
+
+    public function testSetPlaceholder()
+    {
+        $placeholder = 'test-custom-placeholder';
+        $html = bsEmail()->name('name')->placeholder($placeholder)->toHtml();
+        $this->assertContains('placeholder="' . $placeholder . '"', $html);
+    }
+
+    public function testSetPlaceholderWithLabel()
+    {
+        $label = 'test-custom-label';
+        $placeholder = 'test-custom-placeholder';
+        $html = bsEmail()->name('name')->label($label)->placeholder($placeholder)->toHtml();
+        $this->assertContains('placeholder="' . $placeholder . '"', $html);
+    }
+
+    public function testNoPlaceholder()
+    {
+        $html = bsEmail()->name('name')->toHtml();
+        $this->assertContains('placeholder="validation.attributes.name"', $html);
     }
 
     public function testSuccess()

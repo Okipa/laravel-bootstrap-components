@@ -230,14 +230,17 @@ abstract class Input extends Component
             'legend'      => $this->showLegend
                 ? ($this->legend ? trans($this->legend) : $this->defaultLegend())
                 : '',
-            'label'       => $this->showLabel ? ($this->label
-                ? $this->label
-                : trans('validation.attributes.' . str_slug($this->name, '_'))
-            ) : '',
+            'label'       => $this->showLabel 
+                ? ($this->label 
+                    ? $this->label 
+                    : trans('validation.attributes.' . str_slug($this->name, '_'))) 
+                : '',
             'value'       => $this->value ? $this->value : ($this->model ? $this->model->{$this->name} : null),
             'placeholder' => $this->placeholder
                 ? $this->placeholder
-                : trans('validation.attributes.' . str_slug($this->name, '_')),
+                : ($this->label 
+                    ? $this->label 
+                    : trans('validation.attributes.' . str_slug($this->name, '_'))),
         ]);
     }
 

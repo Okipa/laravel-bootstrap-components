@@ -133,12 +133,67 @@ class FileTest extends BootstrapComponentsTestCase
         $this->assertNotContains('<small id="file-name-legend" class="form-text text-muted">', $html);
     }
 
+    public function testSetValue()
+    {
+        $customValue = 'test-custom-value';
+        $html = bsFile()->name('name')->value($customValue)->toHtml();
+        $this->assertContains(
+            '<label class="custom-file-label" for="file-name">' . $customValue . '</label>',
+            $html
+        );
+    }
+
+    public function testOldValue()
+    {
+        $oldValue = 'test-old-value';
+        $customValue = 'test-custom-value';
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => function() use ($oldValue) {
+                $request = request()->merge(['name' => $oldValue]);
+                $request->flash();
+            },
+        ]);
+        $this->call('GET', 'test');
+        $html = bsFile()->name('name')->value($customValue)->toHtml();
+        $this->assertContains(
+            '<label class="custom-file-label" for="file-name">' . $oldValue . '</label>',
+            $html
+        );
+        $this->assertNotContains(
+            '<label class="custom-file-label" for="file-name">' . $customValue . '</label>',
+            $html
+        );
+    }
+    
+    public function testSetLabel()
+    {
+        $label = 'test-custom-label';
+        $html = bsFile()->name('name')->label($label)->toHtml();
+        $this->assertContains('<label for="file-name">' . $label . '</label>', $html);
+        $this->assertContains('aria-label="' . $label . '"', $html);
+    }
+
+    public function testNoLabel()
+    {
+        $html = bsFile()->name('name')->toHtml();
+        $this->assertContains('<label for="file-name">validation.attributes.name</label>', $html);
+        $this->assertContains('aria-label="validation.attributes.name"', $html);
+    }
+
+    public function testHideLabel()
+    {
+        $html = bsFile()->name('name')->hideLabel()->toHtml();
+        $this->assertNotContains('<label for="file-name">validation.attributes.name</label>', $html);
+        $this->assertNotContains('aria-label="validation.attributes.name"', $html);
+    }
+
     public function testNoPlaceholderWithDefaultLabel()
     {
         $html = bsFile()->name('name')->toHtml();
         $this->assertContains(
             '<label class="custom-file-label" for="file-name">'
-            . trans('bootstrap-components::bootstrap-components.label.file') . '</label>',
+            . trans('bootstrap-components::bootstrap-components.label.file')
+            . '</label>',
             $html
         );
     }
@@ -190,72 +245,20 @@ class FileTest extends BootstrapComponentsTestCase
             $html
         );
     }
-
-    public function testSetValue()
-    {
-        $customValue = 'test-custom-value';
-        $html = bsFile()->name('name')->value($customValue)->toHtml();
-        $this->assertContains(
-            '<label class="custom-file-label" for="file-name">' . $customValue . '</label>',
-            $html
-        );
-    }
-
-    public function testOldValue()
-    {
-        $oldValue = 'test-old-value';
-        $customValue = 'test-custom-value';
-        $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function() use ($oldValue) {
-                $request = request()->merge(['name' => $oldValue]);
-                $request->flash();
-            },
-        ]);
-        $this->call('GET', 'test');
-        $html = bsFile()->name('name')->value($customValue)->toHtml();
-        $this->assertContains(
-            '<label class="custom-file-label" for="file-name">' . $oldValue . '</label>',
-            $html
-        );
-        $this->assertNotContains(
-            '<label class="custom-file-label" for="file-name">' . $customValue . '</label>',
-            $html
-        );
-    }
-
-    public function testSetLabel()
-    {
-        $label = 'test-custom-label';
-        $html = bsFile()->name('name')->label($label)->toHtml();
-        $this->assertContains('<label for="file-name">' . $label . '</label>', $html);
-        $this->assertContains('aria-label="' . $label . '"', $html);
-    }
-
-    public function testNoLabel()
-    {
-        $html = bsFile()->name('name')->toHtml();
-        $this->assertContains(
-            '<label for="file-name">validation.attributes.name</label>',
-            $html
-        );
-        $this->assertContains(
-            'aria-label="validation.attributes.name"',
-            $html
-        );
-    }
-
-    public function testHideLabel()
-    {
-        $html = bsFile()->name('name')->hideLabel()->toHtml();
-        $this->assertNotContains(
-            '<label for="file-name">validation.attributes.name</label>',
-            $html
-        );
-        $this->assertNotContains(
-            'aria-label="validation.attributes.name"',
-            $html
-        );
-    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     public function testSuccess()
     {

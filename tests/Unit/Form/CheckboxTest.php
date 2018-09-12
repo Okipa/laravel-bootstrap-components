@@ -160,7 +160,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $html = bsCheckbox()->name('name')->value($customValue)->toHtml();
         $this->assertNotContains('checked="checked', $html);
     }
-
+    
     public function testSetLabel()
     {
         $label = 'test-custom-label';

@@ -82,7 +82,8 @@ class RadioTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.radio.legend', $configLegend);
         $html = bsRadio()->name('name')->toHtml();
         $this->assertContains(
-            '<small id="radio-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend . '</small>',
+            '<small id="radio-name-legend" class="form-text text-muted">bootstrap-components::' 
+            . $configLegend . '</small>',
             $html
         );
     }
@@ -136,7 +137,7 @@ class RadioTest extends BootstrapComponentsTestCase
         $oldValue = true;
         $customValue = false;
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function() use ($oldValue) {
+            'middleware' => 'web', 'uses' => function () use ($oldValue) {
                 $request = request()->merge(['name' => $oldValue]);
                 $request->flash();
             },
@@ -151,7 +152,7 @@ class RadioTest extends BootstrapComponentsTestCase
         $oldValue = false;
         $customValue = true;
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function() use ($oldValue) {
+            'middleware' => 'web', 'uses' => function () use ($oldValue) {
                 $request = request()->merge(['name' => $oldValue]);
                 $request->flash();
             },
@@ -171,19 +172,13 @@ class RadioTest extends BootstrapComponentsTestCase
     public function testNoLabel()
     {
         $html = bsRadio()->name('name')->toHtml();
-        $this->assertContains(
-            'for="radio-name">validation.attributes.name</label>',
-            $html
-        );
+        $this->assertContains('for="radio-name">validation.attributes.name</label>', $html);
     }
 
     public function testHideLabel()
     {
         $html = bsRadio()->name('name')->hideLabel()->toHtml();
-        $this->assertNotContains(
-            'for="radio-name">validation.attributes.name</label>',
-            $html
-        );
+        $this->assertNotContains('for="radio-name">validation.attributes.name</label>', $html);
     }
 
     public function testSuccess()
@@ -191,8 +186,10 @@ class RadioTest extends BootstrapComponentsTestCase
         $messageBag = app(MessageBag::class)->add('other_name', null);
         $html = bsRadio()->name('name')->render(['errors' => $messageBag]);
         $this->assertContains('<div class="valid-feedback d-block">', $html);
-        $this->assertContains(trans('bootstrap-components::bootstrap-components.notification.validation.success'),
-            $html);
+        $this->assertContains(
+            trans('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html
+        );
     }
 
     public function testNoSuccess()
@@ -241,7 +238,7 @@ class RadioTest extends BootstrapComponentsTestCase
         $html = bsRadio()->name('name')->componentId($customComponentId)->toHtml();
         $this->assertContains('<input id="' . $customComponentId . '"', $html);
     }
-    
+
     public function testConfigContainerClass()
     {
         $configContainerCLass = 'test-config-class-container';
