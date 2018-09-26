@@ -251,6 +251,7 @@ class TelTest extends BootstrapComponentsTestCase
     public function testSetNoComponentId()
     {
         $html = bsTel()->name('name')->toHtml();
+        $this->assertContains('for="tel-name"', $html);
         $this->assertContains('<input id="tel-name"', $html);
     }
 
@@ -258,6 +259,7 @@ class TelTest extends BootstrapComponentsTestCase
     {
         $customComponentId = 'test-custom-component-id';
         $html = bsTel()->name('name')->componentId($customComponentId)->toHtml();
+        $this->assertContains('for="' . $customComponentId . '"', $html);
         $this->assertContains('<input id="' . $customComponentId . '"', $html);
     }
 

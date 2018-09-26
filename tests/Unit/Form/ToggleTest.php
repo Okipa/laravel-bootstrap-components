@@ -226,6 +226,7 @@ class ToggleTest extends BootstrapComponentsTestCase
     public function testSetNoComponentId()
     {
         $html = bsToggle()->name('name')->toHtml();
+        $this->assertContains('for="toggle-name"', $html);
         $this->assertContains('<input id="toggle-name"', $html);
     }
 
@@ -233,6 +234,7 @@ class ToggleTest extends BootstrapComponentsTestCase
     {
         $customComponentId = 'test-custom-component-id';
         $html = bsToggle()->name('name')->componentId($customComponentId)->toHtml();
+        $this->assertContains('for="' . $customComponentId . '"', $html);
         $this->assertContains('<input id="' . $customComponentId . '"', $html);
     }
 

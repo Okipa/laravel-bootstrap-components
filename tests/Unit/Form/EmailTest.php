@@ -251,6 +251,7 @@ class EmailTest extends BootstrapComponentsTestCase
     public function testSetNoComponentId()
     {
         $html = bsEmail()->name('name')->toHtml();
+        $this->assertContains('for="email-name"', $html);
         $this->assertContains('<input id="email-name', $html);
     }
 
@@ -258,6 +259,7 @@ class EmailTest extends BootstrapComponentsTestCase
     {
         $customComponentId = 'test-custom-component-id';
         $html = bsEmail()->name('name')->componentId($customComponentId)->toHtml();
+        $this->assertContains('for="' . $customComponentId . '"', $html);
         $this->assertContains('<input id="' . $customComponentId . '"', $html);
     }
 

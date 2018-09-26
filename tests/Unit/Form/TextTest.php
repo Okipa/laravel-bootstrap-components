@@ -251,6 +251,7 @@ class InputTextTest extends BootstrapComponentsTestCase
     public function testSetNoComponentId()
     {
         $html = bsText()->name('name')->toHtml();
+        $this->assertContains('for="text-name"', $html);
         $this->assertContains('<input id="text-name"', $html);
     }
 
@@ -258,6 +259,7 @@ class InputTextTest extends BootstrapComponentsTestCase
     {
         $customComponentId = 'test-custom-component-id';
         $html = bsText()->name('name')->componentId($customComponentId)->toHtml();
+        $this->assertContains('for="' . $customComponentId . '"', $html);
         $this->assertContains('<input id="' . $customComponentId . '"', $html);
     }
 

@@ -229,6 +229,7 @@ class RadioTest extends BootstrapComponentsTestCase
     public function testSetNoComponentId()
     {
         $html = bsRadio()->name('name')->toHtml();
+        $this->assertContains('for="radio-name"', $html);
         $this->assertContains('<input id="radio-name"', $html);
     }
 
@@ -236,6 +237,7 @@ class RadioTest extends BootstrapComponentsTestCase
     {
         $customComponentId = 'test-custom-component-id';
         $html = bsRadio()->name('name')->componentId($customComponentId)->toHtml();
+        $this->assertContains('for="' . $customComponentId . '"', $html);
         $this->assertContains('<input id="' . $customComponentId . '"', $html);
     }
 

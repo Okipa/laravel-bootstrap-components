@@ -82,7 +82,8 @@ class CheckboxTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.checkbox.legend', $configLegend);
         $html = bsCheckbox()->name('name')->toHtml();
         $this->assertContains(
-            '<small id="checkbox-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend . '</small>',
+            '<small id="checkbox-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend
+            . '</small>',
             $html
         );
     }
@@ -98,7 +99,8 @@ class CheckboxTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertNotContains(
-            '<small id="checkbox-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend . '</small>',
+            '<small id="checkbox-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend
+            . '</small>',
             $html
         );
     }
@@ -136,7 +138,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $oldValue = true;
         $customValue = false;
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function() use ($oldValue) {
+            'middleware' => 'web', 'uses' => function () use ($oldValue) {
                 $request = request()->merge(['name' => $oldValue]);
                 $request->flash();
             },
@@ -151,7 +153,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $oldValue = false;
         $customValue = true;
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function() use ($oldValue) {
+            'middleware' => 'web', 'uses' => function () use ($oldValue) {
                 $request = request()->merge(['name' => $oldValue]);
                 $request->flash();
             },
@@ -160,7 +162,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $html = bsCheckbox()->name('name')->value($customValue)->toHtml();
         $this->assertNotContains('checked="checked', $html);
     }
-    
+
     public function testSetLabel()
     {
         $label = 'test-custom-label';
@@ -232,6 +234,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
     public function testSetNoComponentId()
     {
         $html = bsCheckbox()->name('name')->toHtml();
+        $this->assertContains('for="checkbox-name"', $html);
         $this->assertContains('<input id="checkbox-name"', $html);
     }
 
@@ -239,6 +242,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
     {
         $customComponentId = 'test-custom-component-id';
         $html = bsCheckbox()->name('name')->componentId($customComponentId)->toHtml();
+        $this->assertContains('for="' . $customComponentId . '"', $html);
         $this->assertContains('<input id="' . $customComponentId . '"', $html);
     }
 

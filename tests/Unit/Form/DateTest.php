@@ -333,6 +333,7 @@ class DateTest extends BootstrapComponentsTestCase
     public function testSetNoComponentId()
     {
         $html = bsDate()->name('name')->toHtml();
+        $this->assertContains('for="date-name"', $html);
         $this->assertContains('<input id="date-name"', $html);
     }
 
@@ -340,6 +341,7 @@ class DateTest extends BootstrapComponentsTestCase
     {
         $customComponentId = 'test-custom-component-id';
         $html = bsDate()->name('name')->componentId($customComponentId)->toHtml();
+        $this->assertContains('for="' . $customComponentId . '"', $html);
         $this->assertContains('<input id="' . $customComponentId . '"', $html);
     }
     

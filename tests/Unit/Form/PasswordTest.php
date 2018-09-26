@@ -253,6 +253,7 @@ class PasswordTest extends BootstrapComponentsTestCase
     public function testSetNoComponentId()
     {
         $html = bsPassword()->name('name')->toHtml();
+        $this->assertContains('for="password-name"', $html);
         $this->assertContains('<input id="password-name"', $html);
     }
 
@@ -260,6 +261,7 @@ class PasswordTest extends BootstrapComponentsTestCase
     {
         $customComponentId = 'test-custom-component-id';
         $html = bsPassword()->name('name')->componentId($customComponentId)->toHtml();
+        $this->assertContains('for="' . $customComponentId . '"', $html);
         $this->assertContains('<input id="' . $customComponentId . '"', $html);
     }
 

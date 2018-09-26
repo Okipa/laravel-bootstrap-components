@@ -324,6 +324,7 @@ class FileTest extends BootstrapComponentsTestCase
     public function testSetNoComponentId()
     {
         $html = bsFile()->name('name')->toHtml();
+        $this->assertContains('for="file-name"', $html);
         $this->assertContains('<input id="file-name"', $html);
     }
 
@@ -331,6 +332,7 @@ class FileTest extends BootstrapComponentsTestCase
     {
         $customComponentId = 'test-custom-component-id';
         $html = bsFile()->name('name')->componentId($customComponentId)->toHtml();
+        $this->assertContains('for="' . $customComponentId . '"', $html);
         $this->assertContains('<input id="' . $customComponentId . '"', $html);
     }
     

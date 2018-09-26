@@ -251,6 +251,7 @@ class TextareaTest extends BootstrapComponentsTestCase
     public function testSetNoComponentId()
     {
         $html = bsTextarea()->name('name')->toHtml();
+        $this->assertContains('for="textarea-name"', $html);
         $this->assertContains('<textarea id="textarea-name"', $html);
     }
 
@@ -258,6 +259,7 @@ class TextareaTest extends BootstrapComponentsTestCase
     {
         $customComponentId = 'test-custom-component-id';
         $html = bsTextarea()->name('name')->componentId($customComponentId)->toHtml();
+        $this->assertContains('for="' . $customComponentId . '"', $html);
         $this->assertContains('<textarea id="' . $customComponentId . '"', $html);
     }
 

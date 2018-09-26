@@ -17,7 +17,7 @@
                    {{ htmlAttributes($componentHtmlAttributes) }}
                    aria-label="{{ $label }}"
                    aria-describedby="file-{{ str_slug($name) }}">
-            <label class="custom-file-label" for="file-{{ str_slug($name) }}">@empty($value = old($name, $value)){{ $placeholder }}@else{{ $value }}@endempty</label>
+            <label class="custom-file-label" for="{{ $componentId }}">@empty($value = old($name, $value)){{ $placeholder }}@else{{ $value }}@endempty</label>
         </div>
     </div>
     @include('bootstrap-components::bootstrap-components.partials.validation-feedback')

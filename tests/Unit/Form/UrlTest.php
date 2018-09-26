@@ -251,6 +251,7 @@ class UrlTest extends BootstrapComponentsTestCase
     public function testSetNoComponentId()
     {
         $html = bsUrl()->name('name')->toHtml();
+        $this->assertContains('for="url-name"', $html);
         $this->assertContains('<input id="url-name"', $html);
     }
 
@@ -258,6 +259,7 @@ class UrlTest extends BootstrapComponentsTestCase
     {
         $customComponentId = 'test-custom-component-id';
         $html = bsUrl()->name('name')->componentId($customComponentId)->toHtml();
+        $this->assertContains('for="' . $customComponentId . '"', $html);
         $this->assertContains('<input id="' . $customComponentId . '"', $html);
     }
 

@@ -628,6 +628,7 @@ class SelectTest extends BootstrapComponentsTestCase
     public function testSetNoComponentId()
     {
         $html = bsSelect()->name('name')->toHtml();
+        $this->assertContains('for="select-name"', $html);
         $this->assertContains('<select id="select-name"', $html);
     }
 
@@ -635,6 +636,7 @@ class SelectTest extends BootstrapComponentsTestCase
     {
         $customComponentId = 'test-custom-component-id';
         $html = bsSelect()->name('name')->componentId($customComponentId)->toHtml();
+        $this->assertContains('for="' . $customComponentId . '"', $html);
         $this->assertContains('<select id="' . $customComponentId . '"', $html);
     }
     
