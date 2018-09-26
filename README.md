@@ -645,6 +645,17 @@ composer test
 
 ------------------------------------------------------------------------------------------------------------------------
 
+## Code style (PSR2)
+
+```bash
+composer codestyleCheck
+composer codestyleFix
+```
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
