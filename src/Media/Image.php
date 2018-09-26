@@ -165,8 +165,20 @@ class Image extends Media
             'height'             => $this->height,
             'linkId'             => $this->linkId ? $this->linkId : $this->defaultLinkId(),
             'linkClass'          => $this->linkClass ? $this->linkClass : $this->defaultLinkClass(),
-            'linkHtmlAttributes' => $this->linkHtmlAttributes ? $this->linkHtmlAttributes : $this->defaultLinkHtmlAttributes(),
+            'linkHtmlAttributes' => $this->linkHtmlAttributes
+                ? $this->linkHtmlAttributes
+                : $this->defaultLinkHtmlAttributes(),
         ]);
+    }
+
+    /**
+     * Set the default component id.
+     *
+     * @return string
+     */
+    protected function defaultLinkId(): string
+    {
+        return '';
     }
 
     /**
@@ -191,15 +203,5 @@ class Image extends Media
         $linkHtmlAttributes = config('bootstrap-components.' . $this->configKey . '.html_attributes.link');
 
         return $linkHtmlAttributes ? $linkHtmlAttributes : [];
-    }
-
-    /**
-     * Set the default component id.
-     *
-     * @return string
-     */
-    protected function defaultLinkId(): string
-    {
-        return '';
     }
 }

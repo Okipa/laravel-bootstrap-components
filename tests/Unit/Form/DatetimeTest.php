@@ -232,7 +232,7 @@ class DatetimeTest extends BootstrapComponentsTestCase
         $oldValue = $this->faker->dateTime->format('Y-m-d H:i:s');
         $customValue = $this->faker->dateTime->format('Y-m-d H:i:s');
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function() use ($oldValue) {
+            'middleware' => 'web', 'uses' => function () use ($oldValue) {
                 $request = request()->merge(['name' => $oldValue]);
                 $request->flash();
             },
@@ -292,8 +292,10 @@ class DatetimeTest extends BootstrapComponentsTestCase
         $messageBag = app(MessageBag::class)->add('other_name', null);
         $html = bsDatetime()->name('name')->render(['errors' => $messageBag]);
         $this->assertContains('<div class="valid-feedback d-block">', $html);
-        $this->assertContains(trans('bootstrap-components::bootstrap-components.notification.validation.success'),
-            $html);
+        $this->assertContains(
+            trans('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html
+        );
     }
 
     public function testNoSuccess()
@@ -368,8 +370,10 @@ class DatetimeTest extends BootstrapComponentsTestCase
         $configComponentCLass = 'test-config-class-component';
         config()->set('bootstrap-components.form.datetime.class.component', [$configComponentCLass]);
         $html = bsDatetime()->name('name')->toHtml();
-        $this->assertContains('class="form-control datetime-local-name-component ' . $configComponentCLass . '"',
-            $html);
+        $this->assertContains(
+            'class="form-control datetime-local-name-component ' . $configComponentCLass . '"',
+            $html
+        );
     }
 
     public function testSetComponentClass()
@@ -378,10 +382,14 @@ class DatetimeTest extends BootstrapComponentsTestCase
         $customComponentCLass = 'test-custom-class-component';
         config()->set('bootstrap-components.form.datetime.class.component', [$customComponentCLass]);
         $html = bsDatetime()->name('name')->componentClass([$customComponentCLass])->toHtml();
-        $this->assertContains('class="form-control datetime-local-name-component ' . $customComponentCLass . '"',
-            $html);
-        $this->assertNotContains('class="form-control datetime-local-name-component ' . $configComponentCLass . '"',
-            $html);
+        $this->assertContains(
+            'class="form-control datetime-local-name-component ' . $customComponentCLass . '"',
+            $html
+        );
+        $this->assertNotContains(
+            'class="form-control datetime-local-name-component ' . $configComponentCLass . '"',
+            $html
+        );
     }
 
     public function testConfigContainerHtmlAttributes()

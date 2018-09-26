@@ -73,8 +73,10 @@ class SelectTest extends BootstrapComponentsTestCase
             ['id' => 2, 'name' => $this->faker->word],
         ];
         $html = bsSelect()->name('id')->options($optionsList, 'id', 'name')->toHtml();
-        $this->assertContains('<option value="" disabled="disabled" selected="selected">validation.attributes.id</option>',
-            $html);
+        $this->assertContains(
+            '<option value="" disabled="disabled" selected="selected">validation.attributes.id</option>',
+            $html
+        );
         $this->assertContains(
             '<option value="' . $optionsList[0]['id'] . '" >' . $optionsList[0]['name'] . '</option>',
             $html
@@ -120,8 +122,10 @@ class SelectTest extends BootstrapComponentsTestCase
         $users = $this->createMultipleUsers(2);
         $html = bsSelect()->name('id')->options($users, 'id', 'name')->toHtml();
         $users = $users->toArray();
-        $this->assertContains('<option value="" disabled="disabled" selected="selected">validation.attributes.id</option>',
-            $html);
+        $this->assertContains(
+            '<option value="" disabled="disabled" selected="selected">validation.attributes.id</option>',
+            $html
+        );
         $this->assertContains('<option value="' . $users[0]['id'] . '" >' . $users[0]['name'] . '</option>', $html);
         $this->assertContains('<option value="' . $users[1]['id'] . '" >' . $users[1]['name'] . '</option>', $html);
     }
@@ -159,7 +163,8 @@ class SelectTest extends BootstrapComponentsTestCase
         $this->assertContains('<option value="" disabled="disabled" >validation.attributes.id</option>', $html);
         $this->assertContains(
             '<option value="' . $users[0]['id'] . '" selected="selected">' . $users[0]['name'] . '</option>',
-            $html);
+            $html
+        );
         $this->assertContains('<option value="' . $users[1]['id'] . '" >' . $users[1]['name'] . '</option>', $html);
     }
 
@@ -233,8 +238,10 @@ class SelectTest extends BootstrapComponentsTestCase
             ->name('id')
             ->options($users, 'id', 'name')
             ->toHtml();
-        $this->assertContains('<option value="" disabled="disabled" selected="selected">validation.attributes.id</option>',
-            $html);
+        $this->assertContains(
+            '<option value="" disabled="disabled" selected="selected">validation.attributes.id</option>',
+            $html
+        );
         $this->assertContains(
             '<option value="' . $users[0]['id'] . '" >' . $users[0]['name'] . '</option>',
             $html
@@ -252,7 +259,7 @@ class SelectTest extends BootstrapComponentsTestCase
         $model = $users->get(1);
         $old = $users->get(2);
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function() use ($old) {
+            'middleware' => 'web', 'uses' => function () use ($old) {
                 $request = request()->merge(['name' => $old->id]);
                 $request->flash();
             },
@@ -324,12 +331,15 @@ class SelectTest extends BootstrapComponentsTestCase
         $companies = $this->createMultipleCompanies(5);
         $user->companies = [];
         $html = bsSelect()->model($user)->name('companies')->options($companies, 'id', 'name')->multiple()->toHtml();
-        $this->assertContains('<option value="" disabled="disabled" selected="selected">validation.attributes.companies</option>',
-            $html);
+        $this->assertContains(
+            '<option value="" disabled="disabled" selected="selected">validation.attributes.companies</option>',
+            $html
+        );
         foreach ($companies as $company) {
             $this->assertContains(
                 '<option value="' . $company->id . '" >' . $company->name . '</option>',
-                $html);
+                $html
+            );
         }
     }
 
@@ -361,12 +371,15 @@ class SelectTest extends BootstrapComponentsTestCase
             ->multiple()
             ->selected('id', [])
             ->toHtml();
-        $this->assertContains('<option value="" disabled="disabled" selected="selected">validation.attributes.companies</option>',
-            $html);
+        $this->assertContains(
+            '<option value="" disabled="disabled" selected="selected">validation.attributes.companies</option>',
+            $html
+        );
         foreach ($companies as $company) {
             $this->assertContains(
                 '<option value="' . $company->id . '" >' . $company->name . '</option>',
-                $html);
+                $html
+            );
         }
     }
 
@@ -441,7 +454,7 @@ class SelectTest extends BootstrapComponentsTestCase
         $selectedCompanies = $chunk[1];
         $oldCompanies = $chunk[2];
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function() use ($oldCompanies) {
+            'middleware' => 'web', 'uses' => function () use ($oldCompanies) {
                 $request = request()->merge(['companies' => $oldCompanies]);
                 $request->flash();
             },
@@ -546,7 +559,10 @@ class SelectTest extends BootstrapComponentsTestCase
         $label = 'test-custom-label';
         $html = bsSelect()->name('name')->label($label)->toHtml();
         $this->assertContains('<label for="select-name">' . $label . '</label>', $html);
-        $this->assertContains('<option value="" disabled="disabled" selected="selected">' . $label . '</option>', $html);
+        $this->assertContains(
+            '<option value="" disabled="disabled" selected="selected">' . $label . '</option>',
+            $html
+        );
     }
 
     public function testNoLabel()
@@ -565,7 +581,10 @@ class SelectTest extends BootstrapComponentsTestCase
     {
         $placeholder = 'test-custom-placeholder';
         $html = bsSelect()->name('name')->placeholder($placeholder)->toHtml();
-        $this->assertContains('<option value="" disabled="disabled" selected="selected">' . $placeholder . '</option>', $html);
+        $this->assertContains(
+            '<option value="" disabled="disabled" selected="selected">' . $placeholder . '</option>',
+            $html
+        );
     }
 
     public function testSetPlaceholderWithLabel()
@@ -573,13 +592,19 @@ class SelectTest extends BootstrapComponentsTestCase
         $label = 'test-custom-label';
         $placeholder = 'test-custom-placeholder';
         $html = bsSelect()->name('name')->label($label)->placeholder($placeholder)->toHtml();
-        $this->assertContains('<option value="" disabled="disabled" selected="selected">' . $placeholder . '</option>', $html);
+        $this->assertContains(
+            '<option value="" disabled="disabled" selected="selected">' . $placeholder . '</option>',
+            $html
+        );
     }
 
     public function testNoPlaceholder()
     {
         $html = bsSelect()->name('name')->toHtml();
-        $this->assertContains('<option value="" disabled="disabled" selected="selected">validation.attributes.name</option>', $html);
+        $this->assertContains(
+            '<option value="" disabled="disabled" selected="selected">validation.attributes.name</option>',
+            $html
+        );
     }
 
     public function testSuccess()
@@ -587,8 +612,10 @@ class SelectTest extends BootstrapComponentsTestCase
         $messageBag = app(MessageBag::class)->add('other_name', null);
         $html = bsSelect()->name('name')->render(['errors' => $messageBag]);
         $this->assertContains('<div class="valid-feedback d-block">', $html);
-        $this->assertContains(trans('bootstrap-components::bootstrap-components.notification.validation.success'),
-            $html);
+        $this->assertContains(
+            trans('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html
+        );
     }
 
     public function testNoSuccess()

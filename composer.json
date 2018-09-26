@@ -28,7 +28,8 @@
         "okipa/laravel-html-helper": "^1.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^3.6"
+        "orchestra/testbench": "^3.6",
+        "squizlabs/php_codesniffer": "^3.3"
     },
     "autoload": {
         "psr-4": {
@@ -44,7 +45,15 @@
         }
     },
     "scripts": {
-        "test": "phpunit"
+        "test": [
+            "phpunit"
+        ],
+        "codestyleCheck": [
+            "vendor/bin/phpcs"
+        ],
+        "codestyleFix": [
+            "vendor/bin/phpcbf"
+        ]
     },
     "extra": {
         "laravel": {

@@ -97,7 +97,8 @@ class FileTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.file.legend', $configLegend);
         $html = bsFile()->name('name')->toHtml();
         $this->assertContains(
-            '<small id="file-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend . '</small>',
+            '<small id="file-name-legend" class="form-text text-muted">bootstrap-components::'
+            . $configLegend . '</small>',
             $html
         );
     }
@@ -113,7 +114,8 @@ class FileTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertNotContains(
-            '<small id="file-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend . '</small>',
+            '<small id="file-name-legend" class="form-text text-muted">bootstrap-components::'
+            . $configLegend . '</small>',
             $html
         );
     }
@@ -148,7 +150,7 @@ class FileTest extends BootstrapComponentsTestCase
         $oldValue = 'test-old-value';
         $customValue = 'test-custom-value';
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function() use ($oldValue) {
+            'middleware' => 'web', 'uses' => function () use ($oldValue) {
                 $request = request()->merge(['name' => $oldValue]);
                 $request->flash();
             },
@@ -245,28 +247,16 @@ class FileTest extends BootstrapComponentsTestCase
             $html
         );
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
     public function testSuccess()
     {
         $messageBag = app(MessageBag::class)->add('other_name', null);
         $html = bsFile()->name('name')->render(['errors' => $messageBag]);
         $this->assertContains('<div class="valid-feedback d-block">', $html);
-        $this->assertContains(trans('bootstrap-components::bootstrap-components.notification.validation.success'),
-            $html);
+        $this->assertContains(
+            trans('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html
+        );
     }
 
     public function testNoSuccess()
@@ -401,7 +391,7 @@ class FileTest extends BootstrapComponentsTestCase
 
     public function testUploadedfileUpload()
     {
-        $html = bsFile()->name('name')->uploadedFile(function() {
+        $html = bsFile()->name('name')->uploadedFile(function () {
             return 'Uploaded file !';
         })->toHtml();
         $this->assertContains('Uploaded file !', $html);
@@ -410,7 +400,7 @@ class FileTest extends BootstrapComponentsTestCase
     public function testConfigShowRemoveCheckboxWithUploadedFile()
     {
         config()->set('bootstrap-components.form.file.show_remove_checkbox', true);
-        $html = bsFile()->name('name')->uploadedFile(function() {
+        $html = bsFile()->name('name')->uploadedFile(function () {
             return 'html';
         })->toHtml();
         $this->assertContains('<input id="checkbox-remove-name"', $html);
@@ -420,7 +410,7 @@ class FileTest extends BootstrapComponentsTestCase
     public function testConfigShowRemoveCheckboxWithEmptyUploadedFile()
     {
         config()->set('bootstrap-components.form.file.show_remove_checkbox', true);
-        $html = bsFile()->name('name')->uploadedFile(function() {
+        $html = bsFile()->name('name')->uploadedFile(function () {
             return null;
         })->toHtml();
         $this->assertNotContains('<input id="checkbox-remove-name"', $html);
@@ -438,7 +428,7 @@ class FileTest extends BootstrapComponentsTestCase
     public function testConfigHideRemoveCheckboxWithUploadedFile()
     {
         config()->set('bootstrap-components.form.file.show_remove_checkbox', false);
-        $html = bsFile()->name('name')->uploadedFile(function() {
+        $html = bsFile()->name('name')->uploadedFile(function () {
             return 'html';
         })->toHtml();
         $this->assertNotContains('<input id="checkbox-remove-name"', $html);
@@ -448,7 +438,7 @@ class FileTest extends BootstrapComponentsTestCase
     public function testShowRemoveCheckboxWithUploadedFile()
     {
         config()->set('bootstrap-components.form.file.show_remove_checkbox', false);
-        $html = bsFile()->name('name')->uploadedFile(function() {
+        $html = bsFile()->name('name')->uploadedFile(function () {
             return 'html';
         })->showRemoveCheckbox(true)->toHtml();
         $this->assertContains('<input id="checkbox-remove-name"', $html);
@@ -458,7 +448,7 @@ class FileTest extends BootstrapComponentsTestCase
     public function testHideRemoveCheckbox()
     {
         config()->set('bootstrap-components.form.file.show_remove_checkbox', true);
-        $html = bsFile()->name('name')->uploadedFile(function() {
+        $html = bsFile()->name('name')->uploadedFile(function () {
             return 'html';
         })->showRemoveCheckbox(false)->toHtml();
         $this->assertNotContains('<input id="checkbox-remove-name"', $html);

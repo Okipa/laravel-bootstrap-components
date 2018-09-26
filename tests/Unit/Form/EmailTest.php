@@ -102,7 +102,8 @@ class EmailTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.email.legend', $configLegend);
         $html = bsEmail()->name('name')->toHtml();
         $this->assertContains(
-            '<small id="email-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend . '</small>',
+            '<small id="email-name-legend" class="form-text text-muted">bootstrap-components::'
+            . $configLegend . '</small>',
             $html
         );
     }
@@ -118,7 +119,8 @@ class EmailTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertNotContains(
-            '<small id="email-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend . '</small>',
+            '<small id="email-name-legend" class="form-text text-muted">bootstrap-components::'
+            . $configLegend . '</small>',
             $html
         );
     }
@@ -150,7 +152,7 @@ class EmailTest extends BootstrapComponentsTestCase
         $oldValue = 'test-old-value';
         $customValue = 'test-custom-value';
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function() use ($oldValue) {
+            'middleware' => 'web', 'uses' => function () use ($oldValue) {
                 $request = request()->merge(['name' => $oldValue]);
                 $request->flash();
             },
@@ -210,8 +212,10 @@ class EmailTest extends BootstrapComponentsTestCase
         $messageBag = app(MessageBag::class)->add('other_name', null);
         $html = bsEmail()->name('name')->render(['errors' => $messageBag]);
         $this->assertContains('<div class="valid-feedback d-block">', $html);
-        $this->assertContains(trans('bootstrap-components::bootstrap-components.notification.validation.success'),
-            $html);
+        $this->assertContains(
+            trans('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html
+        );
     }
 
     public function testNoSuccess()

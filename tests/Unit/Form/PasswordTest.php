@@ -102,7 +102,8 @@ class PasswordTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.password.legend', $configLegend);
         $html = bsPassword()->name('name')->toHtml();
         $this->assertContains(
-            '<small id="password-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend . '</small>',
+            '<small id="password-name-legend" class="form-text text-muted">bootstrap-components::'
+            . $configLegend . '</small>',
             $html
         );
     }
@@ -118,7 +119,8 @@ class PasswordTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertNotContains(
-            '<small id="password-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend . '</small>',
+            '<small id="password-name-legend" class="form-text text-muted">bootstrap-components::'
+            . $configLegend . '</small>',
             $html
         );
     }
@@ -150,7 +152,7 @@ class PasswordTest extends BootstrapComponentsTestCase
         $oldValue = 'test-old-value';
         $customValue = 'test-custom-value';
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function() use ($oldValue) {
+            'middleware' => 'web', 'uses' => function () use ($oldValue) {
                 $request = request()->merge(['name' => $oldValue]);
                 $request->flash();
             },
@@ -204,16 +206,16 @@ class PasswordTest extends BootstrapComponentsTestCase
         $html = bsPassword()->name('name')->toHtml();
         $this->assertContains('placeholder="validation.attributes.name"', $html);
     }
-    
-    
 
     public function testSuccess()
     {
         $messageBag = app(MessageBag::class)->add('other_name', null);
         $html = bsPassword()->name('name')->render(['errors' => $messageBag]);
         $this->assertContains('<div class="valid-feedback d-block">', $html);
-        $this->assertContains(trans('bootstrap-components::bootstrap-components.notification.validation.success'),
-            $html);
+        $this->assertContains(
+            trans('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html
+        );
     }
 
     public function testNoSuccess()

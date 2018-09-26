@@ -28,7 +28,8 @@ class ComponentServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/bootstrap-components.php', 'bootstrap-components'
+            __DIR__ . '/../config/bootstrap-components.php',
+            'bootstrap-components'
         );
     }
 }

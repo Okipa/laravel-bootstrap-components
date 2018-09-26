@@ -169,7 +169,7 @@ abstract class Component implements Htmlable
     /**
      * Check the component values validity
      */
-    protected abstract function checkValuesValidity(): void;
+    abstract protected function checkValuesValidity(): void;
 
     /**
      * Set the component view.
@@ -207,12 +207,14 @@ abstract class Component implements Htmlable
             ? $this->containerHtmlAttributes
             : $this->defaultContainerHtmlAttributes();
 
-        return compact('componentId',
+        return compact(
+            'componentId',
             'containerId',
             'componentClass',
             'containerClass',
             'componentHtmlAttributes',
-            'containerHtmlAttributes');
+            'containerHtmlAttributes'
+        );
     }
 
     /**

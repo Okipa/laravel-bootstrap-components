@@ -6,7 +6,7 @@ use Okipa\LaravelBootstrapComponents\Button\Button;
 use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
 use Okipa\LaravelBootstrapComponents\Test\Fakers\RoutesFaker;
 
-class bsValidateTest extends BootstrapComponentsTestCase
+class ValidateTest extends BootstrapComponentsTestCase
 {
     use RoutesFaker;
 
@@ -24,8 +24,14 @@ class bsValidateTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.button.validate.class')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.button.validate.class')));
         // components.validate.html_attributes
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.button.validate.html_attributes')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.button.validate.html_attributes')));
+        $this->assertTrue(array_key_exists(
+            'container',
+            config('bootstrap-components.button.validate.html_attributes')
+        ));
+        $this->assertTrue(array_key_exists(
+            'component',
+            config('bootstrap-components.button.validate.html_attributes')
+        ));
     }
 
     public function testExtendsInput()
@@ -148,7 +154,7 @@ class bsValidateTest extends BootstrapComponentsTestCase
         $html = bsValidate()->componentId($customComponentId)->toHtml();
         $this->assertContains('<button id="' . $customComponentId . '"', $html);
     }
-    
+
     public function testConfigContainerClass()
     {
         $configContainerCLass = 'test-config-class-container';

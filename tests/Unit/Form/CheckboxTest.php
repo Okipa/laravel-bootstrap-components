@@ -193,8 +193,10 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $messageBag = app(MessageBag::class)->add('other_name', null);
         $html = bsCheckbox()->name('name')->render(['errors' => $messageBag]);
         $this->assertContains('<div class="valid-feedback d-block">', $html);
-        $this->assertContains(trans('bootstrap-components::bootstrap-components.notification.validation.success'),
-            $html);
+        $this->assertContains(
+            trans('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html
+        );
     }
 
     public function testNoSuccess()
@@ -272,8 +274,10 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $configComponentCLass = 'test-config-class-component';
         config()->set('bootstrap-components.form.checkbox.class.component', [$configComponentCLass]);
         $html = bsCheckbox()->name('name')->toHtml();
-        $this->assertContains('class="checkbox-name-component custom-control-input ' . $configComponentCLass . '"',
-            $html);
+        $this->assertContains(
+            'class="checkbox-name-component custom-control-input ' . $configComponentCLass . '"',
+            $html
+        );
     }
 
     public function testSetComponentClass()
@@ -282,8 +286,10 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $customComponentCLass = 'test-custom-class-component';
         config()->set('bootstrap-components.form.checkbox.class.component', [$customComponentCLass]);
         $html = bsCheckbox()->name('name')->componentClass([$customComponentCLass])->toHtml();
-        $this->assertContains('class="checkbox-name-component custom-control-input ' . $customComponentCLass . '"',
-            $html);
+        $this->assertContains(
+            'class="checkbox-name-component custom-control-input ' . $customComponentCLass . '"',
+            $html
+        );
         $this->assertNotContains('class="form-control checkbox-name-component ' . $configComponentCLass . '"', $html);
     }
 

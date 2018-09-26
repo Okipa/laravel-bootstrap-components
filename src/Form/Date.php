@@ -79,7 +79,7 @@ class Date extends Input
                 Carbon::parse($this->value);
             } catch (Exception $e) {
                 throw new Exception(
-                    get_class($this) . ' : the value must be a valid date object or string, « ' 
+                    get_class($this) . ' : the value must be a valid date object or string, « '
                     . $this->value . ' » given.'
                 );
             }

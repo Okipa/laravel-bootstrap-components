@@ -82,7 +82,7 @@ class RadioTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.radio.legend', $configLegend);
         $html = bsRadio()->name('name')->toHtml();
         $this->assertContains(
-            '<small id="radio-name-legend" class="form-text text-muted">bootstrap-components::' 
+            '<small id="radio-name-legend" class="form-text text-muted">bootstrap-components::'
             . $configLegend . '</small>',
             $html
         );
@@ -246,8 +246,10 @@ class RadioTest extends BootstrapComponentsTestCase
         $configContainerCLass = 'test-config-class-container';
         config()->set('bootstrap-components.form.radio.class.container', [$configContainerCLass]);
         $html = bsRadio()->name('name')->toHtml();
-        $this->assertContains('class="radio-name-container custom-control custom-radio ' . $configContainerCLass . '"',
-            $html);
+        $this->assertContains(
+            'class="radio-name-container custom-control custom-radio ' . $configContainerCLass . '"',
+            $html
+        );
     }
 
     public function testSetContainerClass()
@@ -256,8 +258,10 @@ class RadioTest extends BootstrapComponentsTestCase
         $customContainerCLass = 'test-custom-class-container';
         config()->set('bootstrap-components.form.radio.class.container', [$configContainerCLass]);
         $html = bsRadio()->name('name')->containerClass([$customContainerCLass])->toHtml();
-        $this->assertContains('class="radio-name-container custom-control custom-radio ' . $customContainerCLass . '"',
-            $html);
+        $this->assertContains(
+            'class="radio-name-container custom-control custom-radio ' . $customContainerCLass . '"',
+            $html
+        );
         $this->assertNotContains('class="radio-name-container custom-control custom-radio ' . $configContainerCLass
                                  . '"', $html);
     }

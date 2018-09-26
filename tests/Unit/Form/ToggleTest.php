@@ -82,7 +82,8 @@ class ToggleTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.toggle.legend', $configLegend);
         $html = bsToggle()->name('name')->toHtml();
         $this->assertContains(
-            '<small id="toggle-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend . '</small>',
+            '<small id="toggle-name-legend" class="form-text text-muted">bootstrap-components::'
+            . $configLegend . '</small>',
             $html
         );
     }
@@ -98,7 +99,8 @@ class ToggleTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertNotContains(
-            '<small id="toggle-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend . '</small>',
+            '<small id="toggle-name-legend" class="form-text text-muted">bootstrap-components::'
+            . $configLegend . '</small>',
             $html
         );
     }
@@ -136,7 +138,7 @@ class ToggleTest extends BootstrapComponentsTestCase
         $oldValue = true;
         $customValue = false;
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function() use ($oldValue) {
+            'middleware' => 'web', 'uses' => function () use ($oldValue) {
                 $request = request()->merge(['name' => $oldValue]);
                 $request->flash();
             },
@@ -151,7 +153,7 @@ class ToggleTest extends BootstrapComponentsTestCase
         $oldValue = false;
         $customValue = true;
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function() use ($oldValue) {
+            'middleware' => 'web', 'uses' => function () use ($oldValue) {
                 $request = request()->merge(['name' => $oldValue]);
                 $request->flash();
             },
@@ -185,8 +187,10 @@ class ToggleTest extends BootstrapComponentsTestCase
         $messageBag = app(MessageBag::class)->add('other_name', null);
         $html = bsToggle()->name('name')->render(['errors' => $messageBag]);
         $this->assertContains('<div class="valid-feedback d-block">', $html);
-        $this->assertContains(trans('bootstrap-components::bootstrap-components.notification.validation.success'),
-            $html);
+        $this->assertContains(
+            trans('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html
+        );
     }
 
     public function testNoSuccess()
@@ -243,8 +247,10 @@ class ToggleTest extends BootstrapComponentsTestCase
         $configContainerCLass = 'test-config-class-container';
         config()->set('bootstrap-components.form.toggle.class.container', [$configContainerCLass]);
         $html = bsToggle()->name('name')->toHtml();
-        $this->assertContains('class="toggle-name-container switch custom-control ' . $configContainerCLass . '"',
-            $html);
+        $this->assertContains(
+            'class="toggle-name-container switch custom-control ' . $configContainerCLass . '"',
+            $html
+        );
     }
 
     public function testSetContainerClass()
@@ -253,10 +259,14 @@ class ToggleTest extends BootstrapComponentsTestCase
         $customContainerCLass = 'test-custom-class-container';
         config()->set('bootstrap-components.form.toggle.class.container', [$configContainerCLass]);
         $html = bsToggle()->name('name')->containerClass([$customContainerCLass])->toHtml();
-        $this->assertContains('class="toggle-name-container switch custom-control ' . $customContainerCLass . '"',
-            $html);
-        $this->assertNotContains('class="toggle-name-container switch custom-control ' . $configContainerCLass . '"',
-            $html);
+        $this->assertContains(
+            'class="toggle-name-container switch custom-control ' . $customContainerCLass . '"',
+            $html
+        );
+        $this->assertNotContains(
+            'class="toggle-name-container switch custom-control ' . $configContainerCLass . '"',
+            $html
+        );
     }
 
     public function testConfigComponentClass()
@@ -264,8 +274,10 @@ class ToggleTest extends BootstrapComponentsTestCase
         $configComponentCLass = 'test-config-class-component';
         config()->set('bootstrap-components.form.toggle.class.component', [$configComponentCLass]);
         $html = bsToggle()->name('name')->toHtml();
-        $this->assertContains('class="toggle-name-component custom-control-input ' . $configComponentCLass . '"',
-            $html);
+        $this->assertContains(
+            'class="toggle-name-component custom-control-input ' . $configComponentCLass . '"',
+            $html
+        );
     }
 
     public function testSetComponentClass()
@@ -274,8 +286,10 @@ class ToggleTest extends BootstrapComponentsTestCase
         $customComponentCLass = 'test-custom-class-component';
         config()->set('bootstrap-components.form.toggle.class.component', [$customComponentCLass]);
         $html = bsToggle()->name('name')->componentClass([$customComponentCLass])->toHtml();
-        $this->assertContains('class="toggle-name-component custom-control-input ' . $customComponentCLass . '"',
-            $html);
+        $this->assertContains(
+            'class="toggle-name-component custom-control-input ' . $customComponentCLass . '"',
+            $html
+        );
         $this->assertNotContains('class="form-control toggle-name-component ' . $configComponentCLass . '"', $html);
     }
 
