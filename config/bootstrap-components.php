@@ -125,6 +125,7 @@ return [
         ],
         'checkbox' => [
             'view'            => 'bootstrap-components.form.checkbox',
+            'icon'            => null,
             'legend'          => null,
             'class'           => [
                 'container' => ['form-group'],
@@ -137,6 +138,7 @@ return [
         ],
         'toggle'   => [
             'view'            => 'bootstrap-components.form.toggle',
+            'icon'            => null,
             'legend'          => null,
             'class'           => [
                 'container' => ['form-group'],
@@ -149,6 +151,7 @@ return [
         ],
         'radio'    => [
             'view'            => 'bootstrap-components.form.radio',
+            'icon'            => null,
             'legend'          => null,
             'class'           => [
                 'container' => ['form-group'],

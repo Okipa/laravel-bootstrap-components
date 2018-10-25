@@ -29,7 +29,8 @@
     },
     "require-dev": {
         "orchestra/testbench": "^3.6",
-        "squizlabs/php_codesniffer": "^3.3"
+        "squizlabs/php_codesniffer": "^3.3",
+        "mockery/mockery": "^1.2"
     },
     "autoload": {
         "psr-4": {
@@ -46,13 +47,9 @@
     },
     "scripts": {
         "test": [
+            "vendor/bin/phpcbf",
+            "vendor/bin/phpcs",
             "phpunit"
-        ],
-        "codestyleCheck": [
-            "vendor/bin/phpcs"
-        ],
-        "codestyleFix": [
-            "vendor/bin/phpcbf"
         ]
     },
     "extra": {

@@ -17,6 +17,7 @@ class ToggleTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('toggle', config('bootstrap-components.form')));
         // components.form.toggle
         $this->assertTrue(array_key_exists('view', config('bootstrap-components.form.toggle')));
+        $this->assertTrue(array_key_exists('icon', config('bootstrap-components.form.toggle')));
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.toggle')));
         $this->assertTrue(array_key_exists('class', config('bootstrap-components.form.toggle')));
         $this->assertTrue(array_key_exists('html_attributes', config('bootstrap-components.form.toggle')));
@@ -60,6 +61,43 @@ class ToggleTest extends BootstrapComponentsTestCase
         $user = $this->createUniqueUser();
         $html = bsToggle()->model($user)->name('name')->toHtml();
         $this->assertContains('checked="checked"', $html);
+    }
+
+    public function testConfigIcon()
+    {
+        $configIcon = 'test-config-icon';
+        config()->set('bootstrap-components.form.toggle.icon', $configIcon);
+        $html = bsToggle()->name('name')->toHtml();
+        $this->assertContains(
+            '<label class="custom-control-label" for="toggle-name"><span class="toggle-name-icon">'
+            . $configIcon . '</span> validation.attributes.name</label>',
+            $html
+        );
+    }
+
+    public function testSetIcon()
+    {
+        $configIcon = 'test-config-icon';
+        $customIcon = 'test-custom-icon';
+        config()->set('bootstrap-components.form.toggle.icon', $configIcon);
+        $html = bsToggle()->name('name')->icon($customIcon)->toHtml();
+        $this->assertNotContains(
+            '<label class="custom-control-label" for="toggle-name"><span class="toggle-name-icon">'
+            . $configIcon . '</span> validation.attributes.name</label>',
+            $html
+        );
+        $this->assertContains(
+            '<label class="custom-control-label" for="toggle-name"><span class="toggle-name-icon">'
+            . $customIcon . '</span> validation.attributes.name</label>',
+            $html
+        );
+    }
+
+    public function testNoIcon()
+    {
+        config()->set('bootstrap-components.form.toggle.icon', null);
+        $html = bsToggle()->name('name')->toHtml();
+        $this->assertNotContains('<span class="toggle-name-icon">', $html);
     }
 
     public function testChecked()

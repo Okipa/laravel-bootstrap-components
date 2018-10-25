@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.5.1](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.5.1)
+2018-10-25
+- Added the missing implementation to set an icon for the `bsCheckbox`, `bsRadio` and `bsToggle` components :
+  - **Important :** The listed components bellow should now have a config `icon` line with `null` as value by default, authorizing you to define a default icon for all those components.
+```php
+// the bsToggle component should now look like this
+'toggle'   => [
+    'view'            => 'bootstrap-components.form.toggle',
+    'icon'            => null, // => add this line
+    'legend'          => null,
+    'class'           => [
+        'container' => ['form-group'],
+        'component' => [],
+    ],
+    'html_attributes' => [
+        'container' => [],
+        'component' => [],
+    ]
+]
+```
+
 ## [0.5.0](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.5.0)
 2018-09-26
 - Fixed the `->componentId()` method call for form components, which didn't update the associated label `for=""` tag content.

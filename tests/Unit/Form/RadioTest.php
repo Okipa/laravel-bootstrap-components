@@ -17,6 +17,7 @@ class RadioTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('radio', config('bootstrap-components.form')));
         // components.form.radio
         $this->assertTrue(array_key_exists('view', config('bootstrap-components.form.radio')));
+        $this->assertTrue(array_key_exists('icon', config('bootstrap-components.form.radio')));
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.radio')));
         $this->assertTrue(array_key_exists('class', config('bootstrap-components.form.radio')));
         $this->assertTrue(array_key_exists('html_attributes', config('bootstrap-components.form.radio')));
@@ -60,6 +61,43 @@ class RadioTest extends BootstrapComponentsTestCase
         $user = $this->createUniqueUser();
         $html = bsRadio()->model($user)->name('name')->toHtml();
         $this->assertContains('checked="checked"', $html);
+    }
+
+    public function testConfigIcon()
+    {
+        $configIcon = 'test-config-icon';
+        config()->set('bootstrap-components.form.radio.icon', $configIcon);
+        $html = bsRadio()->name('name')->toHtml();
+        $this->assertContains(
+            '<label class="custom-control-label" for="radio-name"><span class="radio-name-icon">'
+            . $configIcon . '</span> validation.attributes.name</label>',
+            $html
+        );
+    }
+
+    public function testSetIcon()
+    {
+        $configIcon = 'test-config-icon';
+        $customIcon = 'test-custom-icon';
+        config()->set('bootstrap-components.form.radio.icon', $configIcon);
+        $html = bsRadio()->name('name')->icon($customIcon)->toHtml();
+        $this->assertNotContains(
+            '<label class="custom-control-label" for="radio-name"><span class="radio-name-icon">'
+            . $configIcon . '</span> validation.attributes.name</label>',
+            $html
+        );
+        $this->assertContains(
+            '<label class="custom-control-label" for="radio-name"><span class="radio-name-icon">'
+            . $customIcon . '</span> validation.attributes.name</label>',
+            $html
+        );
+    }
+
+    public function testNoIcon()
+    {
+        config()->set('bootstrap-components.form.radio.icon', null);
+        $html = bsRadio()->name('name')->toHtml();
+        $this->assertNotContains('<span class="radio-name-icon">', $html);
     }
 
     public function testChecked()
