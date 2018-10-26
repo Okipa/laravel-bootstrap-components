@@ -14,6 +14,13 @@ if (! function_exists('bsTel')) {
     }
 }
 
+if (! function_exists('bsDatetime')) {
+    function bsDatetime()
+    {
+        return app(\Okipa\LaravelBootstrapComponents\Form\Datetime::class);
+    }
+}
+
 if (! function_exists('bsDate')) {
     function bsDate()
     {
@@ -21,10 +28,10 @@ if (! function_exists('bsDate')) {
     }
 }
 
-if (! function_exists('bsDatetime')) {
-    function bsDatetime()
+if (! function_exists('bsTime')) {
+    function bsTime()
     {
-        return app(\Okipa\LaravelBootstrapComponents\Form\Datetime::class);
+        return app(\Okipa\LaravelBootstrapComponents\Form\Time::class);
     }
 }
 

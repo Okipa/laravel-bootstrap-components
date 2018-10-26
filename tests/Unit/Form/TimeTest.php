@@ -8,75 +8,75 @@ use Okipa\LaravelBootstrapComponents\Form\Input;
 use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
 use Okipa\LaravelBootstrapComponents\Test\Fakers\UsersFaker;
 
-class DateTest extends BootstrapComponentsTestCase
+class TimeTest extends BootstrapComponentsTestCase
 {
     use UsersFaker;
 
     public function testConfigStructure()
     {
         // components.form
-        $this->assertTrue(array_key_exists('date', config('bootstrap-components.form')));
-        // components.form.date
-        $this->assertTrue(array_key_exists('view', config('bootstrap-components.form.date')));
-        $this->assertTrue(array_key_exists('icon', config('bootstrap-components.form.date')));
-        $this->assertTrue(array_key_exists('format', config('bootstrap-components.form.date')));
-        $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.date')));
-        $this->assertTrue(array_key_exists('class', config('bootstrap-components.form.date')));
-        $this->assertTrue(array_key_exists('html_attributes', config('bootstrap-components.form.date')));
-        // components.form.date.class
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.date.class')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.date.class')));
-        // components.form.date.html_attributes
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.date.html_attributes')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.date.html_attributes')));
+        $this->assertTrue(array_key_exists('time', config('bootstrap-components.form')));
+        // components.form.time
+        $this->assertTrue(array_key_exists('view', config('bootstrap-components.form.time')));
+        $this->assertTrue(array_key_exists('icon', config('bootstrap-components.form.time')));
+        $this->assertTrue(array_key_exists('format', config('bootstrap-components.form.time')));
+        $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.time')));
+        $this->assertTrue(array_key_exists('class', config('bootstrap-components.form.time')));
+        $this->assertTrue(array_key_exists('html_attributes', config('bootstrap-components.form.time')));
+        // components.form.time.class
+        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.time.class')));
+        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.time.class')));
+        // components.form.time.html_attributes
+        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.time.html_attributes')));
+        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.time.html_attributes')));
     }
 
     public function testExtendsInput()
     {
-        $this->assertEquals(Input::class, get_parent_class(bsDate()));
+        $this->assertEquals(Input::class, get_parent_class(bsTime()));
     }
 
     public function testSetName()
     {
-        $html = bsDate()->name('name')->toHtml();
+        $html = bsTime()->name('name')->toHtml();
         $this->assertContains('name="name"', $html);
     }
 
     public function testType()
     {
-        $html = bsDate()->name('name')->toHtml();
-        $this->assertContains('type="date"', $html);
+        $html = bsTime()->name('name')->toHtml();
+        $this->assertContains('type="time"', $html);
     }
 
     /**
      * @expectedException \Exception
-     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Date : Missing $name property. Please use the
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Time : Missing $name property. Please use the
      *                           name() method to set a name.
      */
     public function testInputWithoutName()
     {
-        bsDate()->toHtml();
+        bsTime()->toHtml();
     }
 
     /**
      * @expectedException \Exception
-     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Date : the value must be a valid DateTime object
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Time : the value must be a valid DateTime object
      *                           or formatted string, « test-custom-name » given.
      */
     public function testWrongModelValue()
     {
         $user = $this->createUniqueUser();
         $user->name = 'test-custom-name';
-        bsDate()->model($user)->name('name')->toHtml();
+        bsTime()->model($user)->name('name')->toHtml();
     }
 
     public function testModelDateTimeObjectValue()
     {
         $user = $this->createUniqueUser();
         $user->published_at = $this->faker->dateTime;
-        $html = bsDate()->model($user)->name('published_at')->toHtml();
+        $html = bsTime()->model($user)->name('published_at')->toHtml();
         $this->assertContains(
-            'value="' . $user->published_at->format(config('bootstrap-components.form.date.format')) . '"',
+            'value="' . $user->published_at->format(config('bootstrap-components.form.time.format')) . '"',
             $html
         );
     }
@@ -84,10 +84,10 @@ class DateTest extends BootstrapComponentsTestCase
     public function testModelDateTimeStringValue()
     {
         $user = $this->createUniqueUser();
-        $user->published_at = $this->faker->dateTime->format('Y-m-d');
-        $html = bsDate()->model($user)->name('published_at')->toHtml();
+        $user->published_at = $this->faker->dateTime->format('H:i:i');
+        $html = bsTime()->model($user)->name('published_at')->toHtml();
         $this->assertContains(
-            'value="' . Carbon::parse($user->published_at)->format(config('bootstrap-components.form.date.format'))
+            'value="' . Carbon::parse($user->published_at)->format(config('bootstrap-components.form.time.format'))
             . '"',
             $html
         );
@@ -95,43 +95,43 @@ class DateTest extends BootstrapComponentsTestCase
 
     public function testSetConfigFormat()
     {
-        $configFormat = 'Y-m-d H:i:s';
-        config()->set('bootstrap-components.form.date.format', $configFormat);
+        $configFormat = 'H:i:s';
+        config()->set('bootstrap-components.form.time.format', $configFormat);
         $user = $this->createUniqueUser();
         $user->published_at = $this->faker->dateTime;
-        $html = bsDate()->model($user)->name('published_at')->toHtml();
+        $html = bsTime()->model($user)->name('published_at')->toHtml();
         $this->assertContains($user->published_at->format($configFormat), $html);
     }
 
     public function testSetFormat()
     {
-        $configFormat = 'Y-m-d H:i:s';
-        $customFormat = 'Y-m-d H:i';
-        config()->set('bootstrap-components.form.date.format', $configFormat);
+        $configFormat = 'H:i:s';
+        $customFormat = 'H:i';
+        config()->set('bootstrap-components.form.time.format', $configFormat);
         $user = $this->createUniqueUser();
         $user->published_at = $this->faker->dateTime;
-        $html = bsDate()->model($user)->name('published_at')->format($customFormat)->toHtml();
+        $html = bsTime()->model($user)->name('published_at')->format($customFormat)->toHtml();
         $this->assertContains($user->published_at->format($customFormat), $html);
     }
 
     /**
      * @expectedException \Exception
-     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Date : No config or custom format is given for
-     *                           the bsDate() component.
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Time : No config or custom format is given for
+     *                           the bsTime() component.
      */
     public function testNoFormat()
     {
-        config()->set('bootstrap-components.form.date.format', null);
+        config()->set('bootstrap-components.form.time.format', null);
         $user = $this->createUniqueUser();
         $user->published_at = $this->faker->dateTime;
-        bsDate()->model($user)->name('published_at')->toHtml();
+        bsTime()->model($user)->name('published_at')->toHtml();
     }
 
     public function testConfigIcon()
     {
         $configIcon = 'test-config-icon';
-        config()->set('bootstrap-components.form.date.icon', $configIcon);
-        $html = bsDate()->name('name')->toHtml();
+        config()->set('bootstrap-components.form.time.icon', $configIcon);
+        $html = bsTime()->name('name')->toHtml();
         $this->assertContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
     }
 
@@ -139,34 +139,34 @@ class DateTest extends BootstrapComponentsTestCase
     {
         $configIcon = 'test-config-icon';
         $customIcon = 'test-custom-icon';
-        config()->set('bootstrap-components.form.date.icon', $configIcon);
-        $html = bsDate()->name('name')->icon($customIcon)->toHtml();
+        config()->set('bootstrap-components.form.time.icon', $configIcon);
+        $html = bsTime()->name('name')->icon($customIcon)->toHtml();
         $this->assertContains('<span class="icon input-group-text">' . $customIcon . '</span>', $html);
         $this->assertNotContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
     }
 
     public function testNoIcon()
     {
-        config()->set('bootstrap-components.form.date.icon', null);
-        $html = bsDate()->name('name')->toHtml();
+        config()->set('bootstrap-components.form.time.icon', null);
+        $html = bsTime()->name('name')->toHtml();
         $this->assertNotContains('<span class="icon input-group-text">', $html);
     }
 
     public function testHideIcon()
     {
         $configIcon = 'test-config-icon';
-        config()->set('bootstrap-components.form.date.icon', $configIcon);
-        $html = bsDate()->name('name')->hideIcon()->toHtml();
+        config()->set('bootstrap-components.form.time.icon', $configIcon);
+        $html = bsTime()->name('name')->hideIcon()->toHtml();
         $this->assertNotContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
     }
 
     public function testConfigLegend()
     {
         $configLegend = 'test-config-legend';
-        config()->set('bootstrap-components.form.date.legend', $configLegend);
-        $html = bsDate()->name('name')->toHtml();
+        config()->set('bootstrap-components.form.time.legend', $configLegend);
+        $html = bsTime()->name('name')->toHtml();
         $this->assertContains(
-            '<small id="date-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend
+            '<small id="time-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend
             . '</small>',
             $html
         );
@@ -176,15 +176,15 @@ class DateTest extends BootstrapComponentsTestCase
     {
         $configLegend = 'test-config-legend';
         $customLegend = 'test-custom-legend';
-        config()->set('bootstrap-components.form.date.legend', $configLegend);
-        $html = bsDate()->name('name')->legend($customLegend)->toHtml();
+        config()->set('bootstrap-components.form.time.legend', $configLegend);
+        $html = bsTime()->name('name')->legend($customLegend)->toHtml();
         $this->assertContains(
-            '<small id="date-name-legend" class="form-text text-muted">' . $customLegend
+            '<small id="time-name-legend" class="form-text text-muted">' . $customLegend
             . '</small>',
             $html
         );
         $this->assertNotContains(
-            '<small id="date-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend
+            '<small id="time-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend
             . '</small>',
             $html
         );
@@ -192,37 +192,37 @@ class DateTest extends BootstrapComponentsTestCase
 
     public function testNoLegend()
     {
-        config()->set('bootstrap-components.form.date.legend', null);
-        $html = bsDate()->name('name')->toHtml();
-        $this->assertNotContains('<small id="date-name-legend" class="form-text text-muted">', $html);
+        config()->set('bootstrap-components.form.time.legend', null);
+        $html = bsTime()->name('name')->toHtml();
+        $this->assertNotContains('<small id="time-name-legend" class="form-text text-muted">', $html);
     }
 
     public function testHideLegend()
     {
         $configLegend = 'test-config-legend';
-        config()->set('bootstrap-components.form.date.legend', $configLegend);
-        $html = bsDate()->name('name')->hideLegend()->toHtml();
-        $this->assertNotContains('<small id="date-name-legend" class="form-text text-muted">', $html);
+        config()->set('bootstrap-components.form.time.legend', $configLegend);
+        $html = bsTime()->name('name')->hideLegend()->toHtml();
+        $this->assertNotContains('<small id="time-name-legend" class="form-text text-muted">', $html);
     }
 
     /**
      * @expectedException \Exception
-     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Date : the value must be a valid DateTime object
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Time : the value must be a valid DateTime object
      *                           or formatted string, « test-custom-value » given.
      */
     public function testSetWrongValue()
     {
         $customValue = 'test-custom-value';
-        $html = bsDate()->name('name')->value($customValue)->toHtml();
+        $html = bsTime()->name('name')->value($customValue)->toHtml();
         $this->assertContains('value="' . $customValue . '"', $html);
     }
 
     public function testSetValue()
     {
         $customValue = $this->faker->dateTime;
-        $html = bsDate()->name('name')->value($customValue)->toHtml();
+        $html = bsTime()->name('name')->value($customValue)->toHtml();
         $this->assertContains(
-            'value="' . $customValue->format(config('bootstrap-components.form.date.format')) . '"',
+            'value="' . $customValue->format(config('bootstrap-components.form.time.format')) . '"',
             $html
         );
     }
@@ -238,7 +238,7 @@ class DateTest extends BootstrapComponentsTestCase
             },
         ]);
         $this->call('GET', 'test');
-        $html = bsDate()->name('name')->value($customValue)->toHtml();
+        $html = bsTime()->name('name')->value($customValue)->toHtml();
         $this->assertContains('value="' . $oldValue . '"', $html);
         $this->assertNotContains('value="' . $customValue . '"', $html);
     }
@@ -246,30 +246,30 @@ class DateTest extends BootstrapComponentsTestCase
     public function testSetLabel()
     {
         $label = 'test-custom-label';
-        $html = bsDate()->name('name')->label($label)->toHtml();
-        $this->assertContains('<label for="date-name">' . $label . '</label>', $html);
+        $html = bsTime()->name('name')->label($label)->toHtml();
+        $this->assertContains('<label for="time-name">' . $label . '</label>', $html);
         $this->assertContains('placeholder="' . $label . '"', $html);
         $this->assertContains('aria-label="' . $label . '"', $html);
     }
 
     public function testNoLabel()
     {
-        $html = bsDate()->name('name')->toHtml();
-        $this->assertContains('<label for="date-name">validation.attributes.name</label>', $html);
+        $html = bsTime()->name('name')->toHtml();
+        $this->assertContains('<label for="time-name">validation.attributes.name</label>', $html);
         $this->assertContains('aria-label="validation.attributes.name"', $html);
     }
 
     public function testHideLabel()
     {
-        $html = bsDate()->name('name')->hideLabel()->toHtml();
-        $this->assertNotContains('<label for="date-name">validation.attributes.name</label>', $html);
+        $html = bsTime()->name('name')->hideLabel()->toHtml();
+        $this->assertNotContains('<label for="time-name">validation.attributes.name</label>', $html);
         $this->assertNotContains('aria-label="validation.attributes.name"', $html);
     }
 
     public function testSetPlaceholder()
     {
         $placeholder = 'test-custom-placeholder';
-        $html = bsDate()->name('name')->placeholder($placeholder)->toHtml();
+        $html = bsTime()->name('name')->placeholder($placeholder)->toHtml();
         $this->assertContains('placeholder="' . $placeholder . '"', $html);
     }
 
@@ -277,20 +277,20 @@ class DateTest extends BootstrapComponentsTestCase
     {
         $label = 'test-custom-label';
         $placeholder = 'test-custom-placeholder';
-        $html = bsDate()->name('name')->label($label)->placeholder($placeholder)->toHtml();
+        $html = bsTime()->name('name')->label($label)->placeholder($placeholder)->toHtml();
         $this->assertContains('placeholder="' . $placeholder . '"', $html);
     }
 
     public function testNoPlaceholder()
     {
-        $html = bsDate()->name('name')->toHtml();
+        $html = bsTime()->name('name')->toHtml();
         $this->assertContains('placeholder="validation.attributes.name"', $html);
     }
 
     public function testSuccess()
     {
         $messageBag = app(MessageBag::class)->add('other_name', null);
-        $html = bsDate()->name('name')->render(['errors' => $messageBag]);
+        $html = bsTime()->name('name')->render(['errors' => $messageBag]);
         $this->assertContains('<div class="valid-feedback d-block">', $html);
         $this->assertContains(
             trans('bootstrap-components::bootstrap-components.notification.validation.success'),
@@ -300,7 +300,7 @@ class DateTest extends BootstrapComponentsTestCase
 
     public function testNoSuccess()
     {
-        $html = bsDate()->name('name')->toHtml();
+        $html = bsTime()->name('name')->toHtml();
         $this->assertNotContains('<div class="valid-feedback d-block">', $html);
     }
 
@@ -308,41 +308,41 @@ class DateTest extends BootstrapComponentsTestCase
     {
         $errorMessage = 'This a test error message';
         $messageBag = app(MessageBag::class)->add('name', $errorMessage);
-        $html = bsDate()->name('name')->render(['errors' => $messageBag]);
+        $html = bsTime()->name('name')->render(['errors' => $messageBag]);
         $this->assertContains('<div class="invalid-feedback d-block">', $html);
         $this->assertContains($errorMessage, $html);
     }
 
     public function testNoError()
     {
-        $html = bsDate()->name('name')->toHtml();
+        $html = bsTime()->name('name')->toHtml();
         $this->assertNotContains('<div class="invalid-feedback d-block">', $html);
     }
 
     public function testSetNoContainerId()
     {
-        $html = bsDate()->name('name')->toHtml();
+        $html = bsTime()->name('name')->toHtml();
         $this->assertNotContains('<div id="', $html);
     }
 
     public function testSetContainerId()
     {
         $customContainerId = 'test-custom-container-id';
-        $html = bsDate()->name('name')->containerId($customContainerId)->toHtml();
+        $html = bsTime()->name('name')->containerId($customContainerId)->toHtml();
         $this->assertContains('<div id="' . $customContainerId . '"', $html);
     }
 
     public function testSetNoComponentId()
     {
-        $html = bsDate()->name('name')->toHtml();
-        $this->assertContains('for="date-name"', $html);
-        $this->assertContains('<input id="date-name"', $html);
+        $html = bsTime()->name('name')->toHtml();
+        $this->assertContains('for="time-name"', $html);
+        $this->assertContains('<input id="time-name"', $html);
     }
 
     public function testSetComponentId()
     {
         $customComponentId = 'test-custom-component-id';
-        $html = bsDate()->name('name')->componentId($customComponentId)->toHtml();
+        $html = bsTime()->name('name')->componentId($customComponentId)->toHtml();
         $this->assertContains('for="' . $customComponentId . '"', $html);
         $this->assertContains('<input id="' . $customComponentId . '"', $html);
     }
@@ -350,28 +350,28 @@ class DateTest extends BootstrapComponentsTestCase
     public function testConfigContainerClass()
     {
         $configContainerCLass = 'test-config-class-container';
-        config()->set('bootstrap-components.form.date.class.container', [$configContainerCLass]);
-        $html = bsDate()->name('name')->toHtml();
-        $this->assertContains('class="date-name-container ' . $configContainerCLass . '"', $html);
+        config()->set('bootstrap-components.form.time.class.container', [$configContainerCLass]);
+        $html = bsTime()->name('name')->toHtml();
+        $this->assertContains('class="time-name-container ' . $configContainerCLass . '"', $html);
     }
 
     public function testSetContainerClass()
     {
         $configContainerCLass = 'test-config-class-container';
         $customContainerCLass = 'test-custom-class-container';
-        config()->set('bootstrap-components.form.date.class.container', [$configContainerCLass]);
-        $html = bsDate()->name('name')->containerClass([$customContainerCLass])->toHtml();
-        $this->assertContains('class="date-name-container ' . $customContainerCLass . '"', $html);
-        $this->assertNotContains('class="date-name-container ' . $configContainerCLass . '"', $html);
+        config()->set('bootstrap-components.form.time.class.container', [$configContainerCLass]);
+        $html = bsTime()->name('name')->containerClass([$customContainerCLass])->toHtml();
+        $this->assertContains('class="time-name-container ' . $customContainerCLass . '"', $html);
+        $this->assertNotContains('class="time-name-container ' . $configContainerCLass . '"', $html);
     }
 
     public function testConfigComponentClass()
     {
         $configComponentCLass = 'test-config-class-component';
-        config()->set('bootstrap-components.form.date.class.component', [$configComponentCLass]);
-        $html = bsDate()->name('name')->toHtml();
+        config()->set('bootstrap-components.form.time.class.component', [$configComponentCLass]);
+        $html = bsTime()->name('name')->toHtml();
         $this->assertContains(
-            'class="form-control date-name-component ' . $configComponentCLass . '"',
+            'class="form-control time-name-component ' . $configComponentCLass . '"',
             $html
         );
     }
@@ -380,14 +380,14 @@ class DateTest extends BootstrapComponentsTestCase
     {
         $configComponentCLass = 'test-config-class-component';
         $customComponentCLass = 'test-custom-class-component';
-        config()->set('bootstrap-components.form.date.class.component', [$customComponentCLass]);
-        $html = bsDate()->name('name')->componentClass([$customComponentCLass])->toHtml();
+        config()->set('bootstrap-components.form.time.class.component', [$customComponentCLass]);
+        $html = bsTime()->name('name')->componentClass([$customComponentCLass])->toHtml();
         $this->assertContains(
-            'class="form-control date-name-component ' . $customComponentCLass . '"',
+            'class="form-control time-name-component ' . $customComponentCLass . '"',
             $html
         );
         $this->assertNotContains(
-            'class="form-control date-name-component ' . $configComponentCLass . '"',
+            'class="form-control time-name-component ' . $configComponentCLass . '"',
             $html
         );
     }
@@ -395,8 +395,8 @@ class DateTest extends BootstrapComponentsTestCase
     public function testConfigContainerHtmlAttributes()
     {
         $configContainerAttributes = 'test-config-attributes-container';
-        config()->set('bootstrap-components.form.date.html_attributes.container', [$configContainerAttributes]);
-        $html = bsDate()->name('name')->toHtml();
+        config()->set('bootstrap-components.form.time.html_attributes.container', [$configContainerAttributes]);
+        $html = bsTime()->name('name')->toHtml();
         $this->assertContains($configContainerAttributes, $html);
     }
 
@@ -404,8 +404,8 @@ class DateTest extends BootstrapComponentsTestCase
     {
         $configContainerAttributes = 'test-config-attributes-container';
         $customContainerAttributes = 'test-custom-attributes-container';
-        config()->set('bootstrap-components.form.date.html_attributes.container', [$configContainerAttributes]);
-        $html = bsDate()->name('name')->containerHtmlAttributes([$customContainerAttributes])->toHtml();
+        config()->set('bootstrap-components.form.time.html_attributes.container', [$configContainerAttributes]);
+        $html = bsTime()->name('name')->containerHtmlAttributes([$customContainerAttributes])->toHtml();
         $this->assertContains($customContainerAttributes, $html);
         $this->assertNotContains($configContainerAttributes, $html);
     }
@@ -413,8 +413,8 @@ class DateTest extends BootstrapComponentsTestCase
     public function testConfigComponentHtmlAttributes()
     {
         $configComponentAttributes = 'test-config-attributes-component';
-        config()->set('bootstrap-components.form.date.html_attributes.component', [$configComponentAttributes]);
-        $html = bsDate()->name('name')->toHtml();
+        config()->set('bootstrap-components.form.time.html_attributes.component', [$configComponentAttributes]);
+        $html = bsTime()->name('name')->toHtml();
         $this->assertContains($configComponentAttributes, $html);
     }
 
@@ -422,8 +422,8 @@ class DateTest extends BootstrapComponentsTestCase
     {
         $configComponentAttributes = 'test-config-attributes-component';
         $customComponentAttributes = 'test-custom-attributes-component';
-        config()->set('bootstrap-components.form.date.html_attributes.component', [$configComponentAttributes]);
-        $html = bsDate()->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
+        config()->set('bootstrap-components.form.time.html_attributes.component', [$configComponentAttributes]);
+        $html = bsTime()->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
         $this->assertContains($customComponentAttributes, $html);
         $this->assertNotContains($configComponentAttributes, $html);
     }

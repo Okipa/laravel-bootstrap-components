@@ -22,8 +22,9 @@ This package provides a ready-to-use and customizable bootstrap components libra
 ### [Form](#form-components)
 - [bsText()](#bstext)
 - [bsTel()](#bstel)
-- [bsDate()](#bsdate)
 - [bsDatetime()](#bsdatetime)
+- [bsDate()](#bsdate)
+- [bsTime()](#bstime)
 - [bsUrl()](#bsurl)
 - [bsEmail()](#bsemail)
 - [bsPassword()](#bspassword)
@@ -184,6 +185,28 @@ bsTel()->name('phone_number')
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
 ```
 
+#### bsDatetime()
+
+```php
+bsDatetime()->name('published_at')
+    ->model($user) // value is automatically detected from the field name
+    ->value() // or manually set the value
+    ->format('Y-m-d') // override the default config format
+    ->label('Name') // override the default trans('validation.attributes.[name]') label
+    ->hideLabel() // or hide the label
+    ->placeholder() // override the default placeholder (label)
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
+    ->hideIcon() // or hide the icon
+    ->legend('Select a user.') // override the default config legend
+    ->hideLegend() // or hide the legend
+    ->containerId('container-id') // set the container id
+    ->componentId('component-id') // override the default component id (datetime-local-[name])
+    ->containerClass(['container', 'class]) // override the default config container class list
+    ->componentClass(['component', 'class']) // override the default config component class list
+    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
+    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
+```
+
 #### bsDate()
 
 ```php
@@ -206,13 +229,13 @@ bsDate()->name('published_at')
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
 ```
 
-#### bsDatetime()
+#### bsTime()
 
 ```php
-bsDatetime()->name('published_at')
+bsTime()->name('published_at')
     ->model($user) // value is automatically detected from the field name
     ->value() // or manually set the value
-    ->format('Y-m-d') // override the default config format
+    ->format('H\h i\m\i\n') // override the default config format
     ->label('Name') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder() // override the default placeholder (label)
@@ -221,7 +244,7 @@ bsDatetime()->name('published_at')
     ->legend('Select a user.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->containerId('container-id') // set the container id
-    ->componentId('component-id') // override the default component id (datetime-local-[name])
+    ->componentId('component-id') // override the default component id (date-[name])
     ->containerClass(['container', 'class]) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list

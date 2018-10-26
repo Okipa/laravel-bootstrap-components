@@ -5,29 +5,29 @@ namespace Okipa\LaravelBootstrapComponents\Form;
 use Carbon\Carbon;
 use Exception;
 
-class Datetime extends Input
+class Time extends Input
 {
     /**
      * The component config key.
      *
      * @property string $view
      */
-    protected $configKey = 'form.datetime';
+    protected $configKey = 'form.time';
     /**
      * The input type.
      *
      * @property string $type
      */
-    protected $type = 'datetime-local';
+    protected $type = 'time';
     /**
-     * The datetime format.
+     * The time format.
      *
      * @property string $format
      */
     protected $format;
 
     /**
-     * Set the datetime format.
+     * Set the time format.
      *
      * @param string $format
      *
@@ -71,7 +71,7 @@ class Datetime extends Input
         $this->format = $this->format ? $this->format : $this->defaultFormat();
         if (! $this->format) {
             throw new Exception(
-                get_class($this) . ' : No config or custom format is given for the bsDatetime() component.'
+                get_class($this) . ' : No config or custom format is given for the bsTime() component.'
             );
         }
         if ($this->value && is_string($this->value) && ! is_a($this->value, 'DateTime')) {
@@ -87,7 +87,7 @@ class Datetime extends Input
     }
 
     /**
-     * Set the datetime default format
+     * Set the time default format
      *
      * @return string
      */

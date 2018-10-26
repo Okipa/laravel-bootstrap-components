@@ -20,14 +20,14 @@ class Date extends Input
      */
     protected $type = 'date';
     /**
-     * The datetime format.
+     * The date format.
      *
      * @property string $format
      */
     protected $format;
 
     /**
-     * Set the datetime format.
+     * Set the date format.
      *
      * @param string $format
      *
@@ -79,7 +79,7 @@ class Date extends Input
                 Carbon::parse($this->value);
             } catch (Exception $e) {
                 throw new Exception(
-                    get_class($this) . ' : the value must be a valid date object or string, « '
+                    get_class($this) . ' : the value must be a valid DateTime object or formatted string, « '
                     . $this->value . ' » given.'
                 );
             }
@@ -87,7 +87,7 @@ class Date extends Input
     }
 
     /**
-     * Set the datetime default format
+     * Set the date default format
      *
      * @return string
      */

@@ -60,8 +60,8 @@ class DatetimeTest extends BootstrapComponentsTestCase
 
     /**
      * @expectedException \Exception
-     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Datetime : the value must be a valid datetime
-     *                           object or string, « test-custom-value » given.
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Datetime : the value must be a valid DateTime
+     *                           object or formatted string, « test-custom-value » given.
      */
     public function testWrongModelValue()
     {
@@ -207,8 +207,8 @@ class DatetimeTest extends BootstrapComponentsTestCase
 
     /**
      * @expectedException \Exception
-     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Datetime : the value must be a valid datetime
-     *                           object or string, « test-custom-name » given.
+     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Datetime : the value must be a valid DateTime
+     *                           object or formatted string, « test-custom-name » given.
      */
     public function testSetWrongValue()
     {

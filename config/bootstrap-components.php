@@ -29,6 +29,20 @@ return [
                 'component' => [],
             ],
         ],
+        'datetime' => [
+            'view'            => 'bootstrap-components.form.input',
+            'icon'            => '<i class="fas fa-calendar-alt"></i>',
+            'format'          => 'd/m/Y H:i',
+            'legend'          => 'bootstrap-components.legend.datetime',
+            'class'           => [
+                'container' => ['form-group'],
+                'component' => [],
+            ],
+            'html_attributes' => [
+                'container' => [],
+                'component' => [],
+            ],
+        ],
         'date'     => [
             'view'            => 'bootstrap-components.form.input',
             'icon'            => '<i class="fas fa-calendar-alt"></i>',
@@ -43,11 +57,11 @@ return [
                 'component' => [],
             ],
         ],
-        'datetime' => [
+        'time' => [
             'view'            => 'bootstrap-components.form.input',
-            'icon'            => '<i class="fas fa-calendar-alt"></i>',
-            'format'          => 'd/m/Y H:i',
-            'legend'          => 'bootstrap-components.legend.datetime',
+            'icon'            => '<i class="fas fa-clock"></i>',
+            'format'          => 'H:i:s',
+            'legend'          => 'bootstrap-components.legend.time',
             'class'           => [
                 'container' => ['form-group'],
                 'component' => [],

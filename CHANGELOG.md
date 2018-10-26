@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.5.2](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.5.2)
+2018-10-26
+- Added the `bsTime()` component.
+
 ## [0.5.1](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.5.1)
 2018-10-25
 - Added the missing implementation to set an icon for the `bsCheckbox`, `bsRadio` and `bsToggle` components :
