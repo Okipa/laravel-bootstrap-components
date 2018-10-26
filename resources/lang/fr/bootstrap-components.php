@@ -22,8 +22,8 @@ return [
 
     'legend' => [
         'tel'      => 'Veuillez saisir le numéro de téléphone avec son indicatif pays (exemple : +33 pour la France).',
-        'datetime' => 'Format attendu : date/mois/Année Heure:minutes',
-        'date'     => 'Format attendu : date/mois/Année',
-        'time'     => 'Format attendu : Heure:minutes',
+        'datetime' => 'Format attendu : Jour/Mois/Année Heure:Minutes',
+        'date'     => 'Format attendu : Jour/Mois/Année',
+        'time'     => 'Format attendu : Heure:Minutes',
     ],
 ];

@@ -22,7 +22,8 @@ return [
 
     'legend' => [
         'tel'      => 'Please fill in the telephone number with its country code (e.g. +44 for UK).',
-        'date'     => 'Awaited format : d/m/Y',
-        'datetime' => 'Awaited format : d/m/Y H:i',
+        'datetime' => 'Awaited format : Day/Month/Year Hour:Minutes',
+        'date'     => 'Awaited format : Day/Month/Year',
+        'time'     => 'Awaited format : Hour:Minutes',
     ],
 ];

@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.5.3](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.5.3)
+2018-10-26
+- Updated the `bsDatetime`, `bsDate` and `bsTime` default legend translations.
+
 ## [0.5.2](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.5.2)
 2018-10-26
 - Added the `bsTime()` component.
