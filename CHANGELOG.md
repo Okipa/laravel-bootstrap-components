@@ -1,6 +1,10 @@
 # Changelog
 
-## [0.5.4](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.5.3)
+## [0.5.5](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.5.5)
+2018-11-08
+- Adjusted the `bsToggle` style to vertically center the label whatever its size or its number of lines.
+
+## [0.5.4](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.5.4)
 2018-11-08
 - Updated the `bsToggle` component style to fix display for long labels on mobile screens (when label is displayed on more than one line). This component does now behave as the `bsCheckbox` component.
 
