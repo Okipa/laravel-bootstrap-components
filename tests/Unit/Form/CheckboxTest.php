@@ -69,7 +69,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.checkbox.icon', $configIcon);
         $html = bsCheckbox()->name('name')->toHtml();
         $this->assertContains(
-            '<label class="custom-control-label" for="checkbox-name"><span class="checkbox-name-icon">'
+            '<label class="custom-control-label" for="checkbox-name"><span class="label-icon">'
             . $configIcon . '</span> validation.attributes.name</label>',
             $html
         );
@@ -82,12 +82,12 @@ class CheckboxTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.checkbox.icon', $configIcon);
         $html = bsCheckbox()->name('name')->icon($customIcon)->toHtml();
         $this->assertNotContains(
-            '<label class="custom-control-label" for="checkbox-name"><span class="checkbox-name-icon">'
+            '<label class="custom-control-label" for="checkbox-name"><span class="label-icon">'
             . $configIcon . '</span> validation.attributes.name</label>',
             $html
         );
         $this->assertContains(
-            '<label class="custom-control-label" for="checkbox-name"><span class="checkbox-name-icon">'
+            '<label class="custom-control-label" for="checkbox-name"><span class="label-icon">'
             . $customIcon . '</span> validation.attributes.name</label>',
             $html
         );
@@ -97,7 +97,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
     {
         config()->set('bootstrap-components.form.checkbox.icon', null);
         $html = bsCheckbox()->name('name')->toHtml();
-        $this->assertNotContains('<span class="checkbox-name-icon">', $html);
+        $this->assertNotContains('<span class="label-icon">', $html);
     }
 
     public function testChecked()

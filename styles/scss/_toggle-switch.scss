@@ -1,7 +1,7 @@
 .switch {
     font-size: $font-size-base;
     position: relative;
-    padding: 0;
+    padding: 0 0 0 calc(calc(#{$switch-height} * 2) + .5rem);
 
     input {
         position: absolute;
@@ -18,14 +18,12 @@
             position: relative;
             min-width: calc(#{$switch-height} * 2);
             border-radius: $switch-border-radius;
-            height: $switch-height;
-            line-height: $switch-height;
+            padding-top: calc(#{$switch-height} / 15);
             display: inline-block;
             cursor: pointer;
             outline: none;
             user-select: none;
             vertical-align: middle;
-            text-indent: calc(calc(#{$switch-height} * 2) + .5rem);
             margin: 0;
         }
 
@@ -34,7 +32,7 @@
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
+            left: calc(0px - calc(#{$switch-height} * 2) - .5rem);
             width: calc(#{$switch-height} * 2);
             bottom: 0;
             display: block;
@@ -50,7 +48,7 @@
 
         + label::after {
             top: $switch-thumb-padding;
-            left: $switch-thumb-padding;
+            left: calc(0px - calc(#{$switch-height} * 2) - .5rem + #{$switch-thumb-padding});
             width: calc(#{$switch-height} - calc(#{$switch-thumb-padding} * 2));
             height: calc(#{$switch-height} - calc(#{$switch-thumb-padding} * 2));
             border-radius: $switch-thumb-border-radius;
@@ -81,16 +79,21 @@
         }
     }
 
-    // Small variation
+    // small variation
     &.switch-sm {
         font-size: $font-size-sm;
+        padding: 0 0 0 calc(calc(#{$switch-height-sm} * 2) + .5rem);
 
         input {
+
             + label {
                 min-width: calc(#{$switch-height-sm} * 2);
-                height: $switch-height-sm;
-                line-height: $switch-height-sm;
-                text-indent: calc(calc(#{$switch-height-sm} * 2) + .5rem);
+                padding-top: calc(#{$switch-height-sm} / 15);
+            }
+
+            + label::before,
+            + label::after {
+                left: calc(0px - calc(#{$switch-height-sm} * 2) - .5rem);
             }
 
             + label::before {
@@ -101,6 +104,7 @@
             + label::after {
                 width: calc(#{$switch-height-sm} - calc(#{$switch-thumb-padding} * 2));
                 height: calc(#{$switch-height-sm} - calc(#{$switch-thumb-padding} * 2));
+                left: calc(0px - calc(#{$switch-height-sm} * 2) - .5rem + #{$switch-thumb-padding});
             }
 
             &:checked + label::after {
@@ -109,16 +113,21 @@
         }
     }
 
-    // Large variation
+    // large variation
     &.switch-lg {
         font-size: $font-size-lg;
+        padding: 0 0 0 calc(calc(#{$switch-height-lg} * 2) + .5rem);
 
         input {
+
             + label {
                 min-width: calc(#{$switch-height-lg} * 2);
-                height: $switch-height-lg;
-                line-height: $switch-height-lg;
-                text-indent: calc(calc(#{$switch-height-lg} * 2) + .5rem);
+                padding-top: calc(#{$input-height} / 15);
+            }
+
+            + label::before,
+            + label::after {
+                left: calc(0px - calc(#{$switch-height-lg} * 2) - .5rem);
             }
 
             + label::before {
@@ -129,6 +138,7 @@
             + label::after {
                 width: calc(#{$switch-height-lg} - calc(#{$switch-thumb-padding} * 2));
                 height: calc(#{$switch-height-lg} - calc(#{$switch-thumb-padding} * 2));
+                left: calc(0px - calc(#{$switch-height-lg} * 2) - .5rem + #{$switch-thumb-padding});
             }
 
             &:checked + label::after {

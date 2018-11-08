@@ -69,7 +69,7 @@ class RadioTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.radio.icon', $configIcon);
         $html = bsRadio()->name('name')->toHtml();
         $this->assertContains(
-            '<label class="custom-control-label" for="radio-name"><span class="radio-name-icon">'
+            '<label class="custom-control-label" for="radio-name"><span class="label-icon">'
             . $configIcon . '</span> validation.attributes.name</label>',
             $html
         );
@@ -82,12 +82,12 @@ class RadioTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.radio.icon', $configIcon);
         $html = bsRadio()->name('name')->icon($customIcon)->toHtml();
         $this->assertNotContains(
-            '<label class="custom-control-label" for="radio-name"><span class="radio-name-icon">'
+            '<label class="custom-control-label" for="radio-name"><span class="label-icon">'
             . $configIcon . '</span> validation.attributes.name</label>',
             $html
         );
         $this->assertContains(
-            '<label class="custom-control-label" for="radio-name"><span class="radio-name-icon">'
+            '<label class="custom-control-label" for="radio-name"><span class="label-icon">'
             . $customIcon . '</span> validation.attributes.name</label>',
             $html
         );
@@ -97,7 +97,7 @@ class RadioTest extends BootstrapComponentsTestCase
     {
         config()->set('bootstrap-components.form.radio.icon', null);
         $html = bsRadio()->name('name')->toHtml();
-        $this->assertNotContains('<span class="radio-name-icon">', $html);
+        $this->assertNotContains('<span class="label-icon">', $html);
     }
 
     public function testChecked()

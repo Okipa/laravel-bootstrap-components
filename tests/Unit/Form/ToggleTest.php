@@ -69,7 +69,7 @@ class ToggleTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.toggle.icon', $configIcon);
         $html = bsToggle()->name('name')->toHtml();
         $this->assertContains(
-            '<label class="custom-control-label" for="toggle-name"><span class="toggle-name-icon">'
+            '<label class="custom-control-label" for="toggle-name"><span class="label-icon">'
             . $configIcon . '</span> validation.attributes.name</label>',
             $html
         );
@@ -82,12 +82,12 @@ class ToggleTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.toggle.icon', $configIcon);
         $html = bsToggle()->name('name')->icon($customIcon)->toHtml();
         $this->assertNotContains(
-            '<label class="custom-control-label" for="toggle-name"><span class="toggle-name-icon">'
+            '<label class="custom-control-label" for="toggle-name"><span class="label-icon">'
             . $configIcon . '</span> validation.attributes.name</label>',
             $html
         );
         $this->assertContains(
-            '<label class="custom-control-label" for="toggle-name"><span class="toggle-name-icon">'
+            '<label class="custom-control-label" for="toggle-name"><span class="label-icon">'
             . $customIcon . '</span> validation.attributes.name</label>',
             $html
         );
@@ -97,7 +97,7 @@ class ToggleTest extends BootstrapComponentsTestCase
     {
         config()->set('bootstrap-components.form.toggle.icon', null);
         $html = bsToggle()->name('name')->toHtml();
-        $this->assertNotContains('<span class="toggle-name-icon">', $html);
+        $this->assertNotContains('<span class="label-icon">', $html);
     }
 
     public function testChecked()
