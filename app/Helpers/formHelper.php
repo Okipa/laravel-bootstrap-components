@@ -49,6 +49,13 @@ if (! function_exists('bsEmail')) {
     }
 }
 
+if (! function_exists('bsColor')) {
+    function bsColor()
+    {
+        return app(\Okipa\LaravelBootstrapComponents\Form\Color::class);
+    }
+}
+
 
 if (! function_exists('bsPassword')) {
     function bsPassword()

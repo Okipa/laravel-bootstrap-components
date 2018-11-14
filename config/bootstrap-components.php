@@ -97,6 +97,19 @@ return [
                 'component' => [],
             ],
         ],
+        'color' => [
+            'view'            => 'bootstrap-components.form.input',
+            'icon'            => '<i class="fas fa-palette"></i>',
+            'legend'          => null,
+            'class'           => [
+                'container' => ['form-group'],
+                'component' => [],
+            ],
+            'html_attributes' => [
+                'container' => [],
+                'component' => [],
+            ],
+        ],
         'password' => [
             'view'            => 'bootstrap-components.form.input',
             'icon'            => '<i class="fas fa-user-secret"></i>',

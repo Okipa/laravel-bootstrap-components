@@ -27,6 +27,7 @@ This package provides a ready-to-use and customizable bootstrap components libra
 - [bsTime()](#bstime)
 - [bsUrl()](#bsurl)
 - [bsEmail()](#bsemail)
+- [bsColor()](#bscolor)
 - [bsPassword()](#bspassword)
 - [bsFile()](#bsfileupload)
 - [bsTextarea()](#bstextarea)
@@ -148,13 +149,13 @@ php artisan vendor:publish --tag=bootstrap-components::views
 ```php
 bsText()->name('name')
     ->model($user) // value is automatically detected from the field name
-    ->value() // or manually set the value
+    ->value('John Doe') // or manually set the value
     ->label('Name') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
-    ->placeholder() // override the default placeholder (label)
+    ->placeholder('Set your name') // override the default placeholder (label)
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
     ->hideIcon() // or hide the icon
-    ->legend('Select a user.') // override the default config legend
+    ->legend('Set your name here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (text-[name])
@@ -169,13 +170,13 @@ bsText()->name('name')
 ```php
 bsTel()->name('phone_number')
     ->model($user) // value is automatically detected from the field name
-    ->value() // or manually set the value
-    ->label('Name') // override the default trans('validation.attributes.[name]') label
+    ->value('+33612345678') // or manually set the value
+    ->label('Phone number') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
-    ->placeholder() // override the default placeholder (label)
+    ->placeholder('Set your phone number') // override the default placeholder (label)
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
-    ->legend('Select a user.') // override the default config legend
+    ->legend('Set your phone number here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (tel-[name])
@@ -190,14 +191,14 @@ bsTel()->name('phone_number')
 ```php
 bsDatetime()->name('published_at')
     ->model($user) // value is automatically detected from the field name
-    ->value() // or manually set the value
-    ->format('Y-m-d') // override the default config format
-    ->label('Name') // override the default trans('validation.attributes.[name]') label
+    ->value('2018-01-01 12:30') // or manually set the value
+    ->format('Y-m-d H:i') // override the default config format
+    ->label('Publication date') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
-    ->placeholder() // override the default placeholder (label)
+    ->placeholder('Set the publication date') // override the default placeholder (label)
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
-    ->legend('Select a user.') // override the default config legend
+    ->legend('Set the publication date here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (datetime-local-[name])
@@ -210,16 +211,16 @@ bsDatetime()->name('published_at')
 #### bsDate()
 
 ```php
-bsDate()->name('published_at')
+bsDate()->name('birthday')
     ->model($user) // value is automatically detected from the field name
-    ->value() // or manually set the value
+    ->value('1985-03-24') // or manually set the value
     ->format('Y-m-d') // override the default config format
-    ->label('Name') // override the default trans('validation.attributes.[name]') label
+    ->label('Birthday') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
-    ->placeholder() // override the default placeholder (label)
+    ->placeholder('Set your birthday') // override the default placeholder (label)
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
-    ->legend('Select a user.') // override the default config legend
+    ->legend('Set your birthday here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (date-[name])
@@ -232,16 +233,16 @@ bsDate()->name('published_at')
 #### bsTime()
 
 ```php
-bsTime()->name('published_at')
+bsTime()->name('opening')
     ->model($user) // value is automatically detected from the field name
-    ->value() // or manually set the value
+    ->value('08:30') // or manually set the value
     ->format('H\h i\m\i\n') // override the default config format
-    ->label('Name') // override the default trans('validation.attributes.[name]') label
+    ->label('Opening') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
-    ->placeholder() // override the default placeholder (label)
+    ->placeholder('Set the shop opening') // override the default placeholder (label)
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
-    ->legend('Select a user.') // override the default config legend
+    ->legend('Set the shop opening here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (date-[name])
@@ -256,13 +257,13 @@ bsTime()->name('published_at')
 ```php
 bsUrl()->name('facebook_page')
     ->model($user) // value is automatically detected from the field name
-    ->value() // or manually set the value
-    ->label('Name') // override the default trans('validation.attributes.[name]') label
+    ->value('https://facebook.com') // or manually set the value
+    ->label('Facebook page URL') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
-    ->placeholder() // override the default placeholder (label)
+    ->placeholder('Set your Facebook page URL') // override the default placeholder (label)
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
-    ->legend('Select a user.') // override the default config legend
+    ->legend('Set your Facebook page URL here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (url-[name])
@@ -277,16 +278,37 @@ bsUrl()->name('facebook_page')
 ```php
 bsEmail()->name('email')
     ->model($user) // value is automatically detected from the field name
-    ->value() // or manually set the value
-    ->label('Name') // override the default trans('validation.attributes.[name]') label
+    ->value('john.doe@domain.com') // or manually set the value
+    ->label('Email') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
-    ->placeholder() // override the default placeholder (label)
+    ->placeholder('Set your e-mail') // override the default placeholder (label)
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
-    ->legend('Select a user.') // override the default config legend
+    ->legend('Set your e-mail here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (email-[name])
+    ->containerClass(['container', 'class]) // override the default config container class list
+    ->componentClass(['component', 'class']) // override the default config component class list
+    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
+    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
+```
+
+#### bsColor()
+
+```php
+bsColor()->name('color')
+    ->model($user) // value is automatically detected from the field name
+    ->value('#ffffff') // or manually set the value
+    ->label('Color') // override the default trans('validation.attributes.[name]') label
+    ->hideLabel() // or hide the label
+    ->placeholder('Choose the color") // override the default placeholder (label)
+    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
+    ->hideIcon() // or hide the icon
+    ->legend('Select a color here.') // override the default config legend
+    ->hideLegend() // or hide the legend
+    ->containerId('container-id') // set the container id
+    ->componentId('component-id') // override the default component id (url-[name])
     ->containerClass(['container', 'class]) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
@@ -298,13 +320,13 @@ bsEmail()->name('email')
 ```php
 bsPassword()->name('password')
     ->model($user) // value is automatically detected from the field name
-    ->value() // or manually set the value
-    ->label('Name') // override the default trans('validation.attributes.[name]') label
+    ->value('secret') // or manually set the value
+    ->label('Password') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
-    ->placeholder() // override the default placeholder (label)
+    ->placeholder('Set your password') // override the default placeholder (label)
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
-    ->legend('Select a user.') // override the default config legend
+    ->legend('Set your password here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (password-[name])
@@ -319,13 +341,13 @@ bsPassword()->name('password')
 ```php
 bsFile()->name('avatar')
     ->model($user) // value is automatically detected from the field name
-    ->value() // or manually set the value
-    ->label('Name') // override the default trans('validation.attributes.[name]') label
+    ->value('https://website.com/storage/avatar-url.jpg') // or manually set the value
+    ->label('Avatar') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
-    ->placeholder() // override the default placeholder (label)
+    ->placeholder('Set your avatar') // override the default placeholder (label)
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
-    ->legend('Select a user.') // override the default config legend
+    ->legend('Set your avatar here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->uploadedFile(function(){
         return '<div>Some HTML</div>'
@@ -351,13 +373,13 @@ _Component additional methods :_
 ```php
 bsTextarea()->name('message')
     ->model($user) // value is automatically detected from the field name
-    ->value() // or manually set the value
-    ->label('Name') // override the default trans('validation.attributes.[name]') label
+    ->value('Hello, this is a message.') // or manually set the value
+    ->label('Message') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
-    ->placeholder() // override the default placeholder (label)
+    ->placeholder('Set your message') // override the default placeholder (label)
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
-    ->legend('Select a user.') // override the default config legend
+    ->legend('Set your message here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (textarea-[name])
@@ -373,11 +395,11 @@ bsTextarea()->name('message')
 bsCheckbox()->name('active')
     ->model($user) // checked status is automatically detected from the field name
     ->checked(true) // or manually set the value
-    ->label('Name') // override the default trans('validation.attributes.[name]') label
+    ->label('Active') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
-    ->legend('Select a user.') // override the default config legend
+    ->legend('Set your active status here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (checkbox-[name])
@@ -399,11 +421,11 @@ _Component additional methods :_
 bsToggle()->name('active')
     ->model($user) // checked status is automatically detected from the field name
     ->checked(true) // or manually set the value
-    ->label('Name') // override the default trans('validation.attributes.[name]') label
+    ->label('Active') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
-    ->legend('Select a user.') // override the default config legend
+    ->legend('Set your active status here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (toggle-[name])
@@ -433,7 +455,7 @@ bsRadio()->name('gender')
     ->hideLabel() // or hide the label
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
-    ->legend('Select a user.') // override the default config legend
+    ->legend('Set your gender here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (radio-[name])
@@ -452,17 +474,17 @@ _Component additional methods :_
 #### bsSelect()
 
 ```php
-bsSelect()->name('selected')
+bsSelect()->name('skills')
     ->model($user) // selected option is automatically detected
     ->selected('id', 1) // or manually set the selected option
-    ->options($usersList, 'id', 'name') // work with a models collection or an array
-    ->multiple(false) // activate the multiple mode, default value = true
-    ->label('Select a user') // override the default trans('validation.attributes.[name]') label
+    ->options($skills, 'id', 'title') // work with a models collection or an array
+    ->multiple(true) // activate the multiple mode, default value = true
+    ->label('Skills') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
-    ->placeholder() // override the default placeholder (label)
+    ->placeholder('Select your skills') // override the default placeholder (label)
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
-    ->legend('Select a user.') // override the default config legend
+    ->legend('Select your skills here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (select-[name])
@@ -498,7 +520,7 @@ _Component additional methods :_
 #### bsValidate()
 
 ```php
-bsValidate()->label('Select a user') // override the default trans('validation.attributes.[name]') label
+bsValidate()->label('Send') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
@@ -513,7 +535,7 @@ bsValidate()->label('Select a user') // override the default trans('validation.a
 #### bsCreate()
 
 ```php
-bsCreate()->label('Select a user') // override the default trans('validation.attributes.[name]') label
+bsCreate()->label('Create a new user') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
@@ -528,7 +550,7 @@ bsCreate()->label('Select a user') // override the default trans('validation.att
 #### bsUpdate()
 
 ```php
-bsUpdate()->label('Select a user') // override the default trans('validation.attributes.[name]') label
+bsUpdate()->label('Update this user') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
@@ -543,9 +565,9 @@ bsUpdate()->label('Select a user') // override the default trans('validation.att
 #### bsCancel()
 
 ```php
-bsCancel()->url('https://www.google.com') // set the button url
+bsCancel()->url('https://website.com/admin/users') // set the button url
     ->route('users.index') // or set the route name
-    ->label('Select a user') // override the default trans('validation.attributes.[name]') label
+    ->label('Cancel action') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
@@ -567,9 +589,9 @@ _Component additional methods :_
 #### bsBack()
 
 ```php
-bsBack()->url('https://www.google.com') // set the button url
+bsBack()->url('https://website.com/admin/users') // set the button url
     ->route('users.index') // or set the route name
-    ->label('Select a user') // override the default trans('validation.attributes.[name]') label
+    ->label('Back to the users list') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon

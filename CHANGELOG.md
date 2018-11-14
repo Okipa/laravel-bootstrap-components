@@ -1,5 +1,27 @@
 # Changelog
 
+## [0.5.6](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.5.6)
+2018-11-14
+- Updated components examples in the readme doc to improve comprehension.
+- Added the [bsColor](https://github.com/Okipa/laravel-bootstrap-components#bscolor) component.
+  - **Important :** You should now add the new `bsColor` component config in your `config/bootstrap-components.php` file.
+```php
+// add these lines after the `email` config
+'color' => [
+    'view'            => 'bootstrap-components.form.input',
+    'icon'            => '<i class="fas fa-palette"></i>',
+    'legend'          => null,
+    'class'           => [
+        'container' => ['form-group'],
+        'component' => [],
+    ],
+    'html_attributes' => [
+        'container' => [],
+        'component' => [],
+    ],
+],
+```
+
 ## [0.5.5](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.5.5)
 2018-11-08
 - Adjusted the `bsToggle` style to vertically center the label whatever its size or its number of lines.
