@@ -700,6 +700,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 - [Okipa](https://github.com/Okipa)
 - [ACID-Solutions](https://github.com/ACID-Solutions)
+- [Daniel Lucas](https://github.com/daniel-chris-lucas)
 - [yepzy](https://github.com/yepzy)
 
 ------------------------------------------------------------------------------------------------------------------------

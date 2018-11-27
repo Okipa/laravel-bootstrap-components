@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.5.7](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.5.7)
+2018-11-27 
+- Fixed the publish path so that Laravel can find the customized published views.
+
 ## [0.5.6](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.5.6)
 2018-11-14
 - Updated components examples in the readme doc to improve comprehension.
