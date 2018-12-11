@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.5.8](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.5.8)
+2018-12-11 
+- Added the [bsNumber()](https://github.com/Okipa/laravel-bootstrap-components#bsnumber) component (thanks to [Daniel Lucas](https://github.com/daniel-chris-lucas) !).
+
 ## [0.5.7](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.5.7)
 2018-11-27 
 - Fixed the publish path so that Laravel can find the customized published views.
@@ -40,7 +44,7 @@
 
 ## [0.5.2](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.5.2)
 2018-10-26
-- Added the `bsTime()` component.
+- Added the [bsTime()](https://github.com/Okipa/laravel-bootstrap-components#bstime) component.
 
 ## [0.5.1](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.5.1)
 2018-10-25
