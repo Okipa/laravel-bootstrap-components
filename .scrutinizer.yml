@@ -6,7 +6,7 @@ checks:
 tools:
     php_mess_detector: true
     php_sim: true
-    php_cpd: false # Must be disabled to use php_sim instead
+    php_cpd: false # must be disabled to use php_sim instead
     php_pdepend: true
     php_code_coverage: true
     php_code_sniffer:
@@ -18,9 +18,6 @@ tools:
     php_loc:
         enabled: true
         excluded_dirs: [vendor, test]
-#    php_cpd:
-#        enabled: true
-#        excluded_dirs: [vendor, test]
 build:
     nodes:
         analysis:
