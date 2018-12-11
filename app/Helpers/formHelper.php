@@ -7,6 +7,13 @@ if (! function_exists('bsText')) {
     }
 }
 
+if (! function_exists('bsNumber')) {
+    function bsNumber()
+    {
+        return app(\Okipa\LaravelBootstrapComponents\Form\Number::class);
+    }
+}
+
 if (! function_exists('bsTel')) {
     function bsTel()
     {

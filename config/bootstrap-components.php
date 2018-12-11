@@ -16,6 +16,19 @@ return [
                 'component' => [],
             ],
         ],
+        'number'     => [
+            'view'            => 'bootstrap-components.form.input',
+            'icon'            => '<i class="fas fa-euro-sign"></i>',
+            'legend'          => null,
+            'class'           => [
+                'container' => ['form-group'],
+                'component' => [],
+            ],
+            'html_attributes' => [
+                'container' => [],
+                'component' => [],
+            ],
+        ],
         'tel'      => [
             'view'            => 'bootstrap-components.form.input',
             'icon'            => '<i class="fas fa-phone"></i>',

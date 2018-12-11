@@ -21,6 +21,7 @@ This package provides a ready-to-use and customizable bootstrap components libra
 
 ### [Form](#form-components)
 - [bsText()](#bstext)
+- [bsNumber()](#bsnumber)
 - [bsTel()](#bstel)
 - [bsDatetime()](#bsdatetime)
 - [bsDate()](#bsdate)
@@ -156,6 +157,27 @@ bsText()->name('name')
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
     ->hideIcon() // or hide the icon
     ->legend('Set your name here.') // override the default config legend
+    ->hideLegend() // or hide the legend
+    ->containerId('container-id') // set the container id
+    ->componentId('component-id') // override the default component id (text-[name])
+    ->containerClass(['container', 'class]) // override the default config container class list
+    ->componentClass(['component', 'class']) // override the default config component class list
+    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
+    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
+```
+
+#### bsNumber()
+
+```php
+bsNumber()->name('amount')
+    ->model($invoice) // value is automatically detected from the field name
+    ->value(20) // or manually set the value
+    ->label('Amount') // override the default trans('validation.attributes.[name]') label
+    ->hideLabel() // or hide the label
+    ->placeholder('Set the amount') // override the default placeholder (label)
+    ->icon('<i class="fas fa-dollar-sign"></i>') // override the default config
+    ->hideIcon() // or hide the icon
+    ->legend('Set the amount here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (text-[name])
