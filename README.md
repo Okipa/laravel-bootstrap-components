@@ -11,9 +11,9 @@
 This package provides a ready-to-use and customizable bootstrap components library.  
 
 **Notes :**
-- This version provides a **Bootstrap 4** components implementation with a **FontAwesome 5** pre-configuration.
-- No implementation of **Bootstrap 3** has been done. Is someone is up to prepare views for this version, I would merge them in another version number.
-- Components implementation is in progress : help is welcomed !
+- Implemented components are stables.
+- Implementation of new components in progress.
+- Help welcomed (tested and documented PR).
 
 ------------------------------------------------------------------------------------------------------------------------
 
