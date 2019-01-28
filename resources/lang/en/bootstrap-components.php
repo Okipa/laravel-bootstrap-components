@@ -9,7 +9,7 @@ return [
         'back'     => 'Back',
         'cancel'   => 'Cancel',
         'file'     => 'No file selected.',
-        'download' => 'Download',
+        'remove'   => 'Remove',
     ],
 
     'notification' => [

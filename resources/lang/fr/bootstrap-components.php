@@ -9,7 +9,7 @@ return [
         'back'     => 'Retour',
         'cancel'   => 'Annuler',
         'file'     => 'Aucun fichier choisi.',
-        'download' => 'Télécharger',
+        'remove'   => 'Supprimer',
     ],
 
     'notification' => [

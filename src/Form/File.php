@@ -29,9 +29,15 @@ class File extends Input
     /**
      * The show remove file checkbox status.
      *
-     * @property \Closure $uploadedFile
+     * @property boolean $showRemoveCheckbox
      */
     protected $showRemoveCheckbox;
+    /**
+     * The remove-file-checkbox label.
+     *
+     * @property string $removeCheckboxLabel
+     */
+    protected $removeCheckboxLabel;
 
     /**
      * Set the uploaded file closure.
@@ -51,12 +57,14 @@ class File extends Input
      * Show the remove checkbox.
      *
      * @param bool $showed
+     * @param string|null $removeCheckboxLabel
      *
      * @return \Okipa\LaravelBootstrapComponents\Form\File
      */
-    public function showRemoveCheckbox(bool $showed = true): File
+    public function showRemoveCheckbox(bool $showed = true, string $removeCheckboxLabel = null): File
     {
         $this->showRemoveCheckbox = $showed;
+        $this->removeCheckboxLabel = $removeCheckboxLabel;
 
         return $this;
     }
@@ -69,15 +77,40 @@ class File extends Input
      */
     protected function values(): array
     {
-        $parentValues = parent::values();
-        return array_merge($parentValues, [
-            'placeholder'        => ($this->showLabel ? '' : $parentValues['placeholder'] . ' : ')
-                                    . trans('bootstrap-components::bootstrap-components.label.file'),
+        return array_merge(parent::values(), [
             'uploadedFileHtml'   => $this->getUploadedFileHtml(),
-            'showRemoveCheckbox' => isset($this->showRemoveCheckbox)
-                ? $this->showRemoveCheckbox
-                : $this->defaultRemoveCheckboxShowStatus(),
+            'showRemoveCheckbox' => $this->defineShowRemoveCheckboxStatus(),
+            'removeCheckboxLabel' => $this->defineRemoveCheckboxLabel()
         ]);
+    }
+
+    /**
+     * @return string|null
+     */
+    protected function definePlaceholder(): ?string
+    {
+        return ($this->showLabel ? '' : parent::definePlaceholder() . ' : ')
+               . trans('bootstrap-components::bootstrap-components.label.file');
+    }
+
+    /**
+     * @return string
+     */
+    protected function defineRemoveCheckboxLabel(): string
+    {
+        return isset($this->removeCheckboxLabel) 
+            ? $this->removeCheckboxLabel 
+            : trans('bootstrap-components::bootstrap-components.label.remove') . ' ' . $this->defineLabel();
+    }
+    
+    /**
+     * @return bool
+     */
+    protected function defineShowRemoveCheckboxStatus(): bool
+    {
+        return isset($this->showRemoveCheckbox)
+            ? $this->showRemoveCheckbox
+            : $this->defaultRemoveCheckboxShowStatus();
     }
 
     /**
@@ -102,12 +135,12 @@ class File extends Input
     /**
      * Set the file default checkbox show status
      *
-     * @return string
+     * @return bool
      */
-    protected function defaultRemoveCheckboxShowStatus(): string
+    protected function defaultRemoveCheckboxShowStatus(): bool
     {
-        $showRemoveCheckbox = config('bootstrap-components.' . $this->configKey . '.show_remove_checkbox');
+        $showRemoveCheckbox = boolval(config('bootstrap-components.' . $this->configKey . '.show_remove_checkbox'));
 
-        return $showRemoveCheckbox ? true : false;
+        return $showRemoveCheckbox;
     }
 }

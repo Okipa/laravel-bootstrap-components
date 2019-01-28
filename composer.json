@@ -23,9 +23,11 @@
         }
     ],
     "require": {
+        "ext-json": "*",
         "php": ">=7.1",
         "illuminate/support": "~5.0",
-        "okipa/laravel-html-helper": "^1.0"
+        "okipa/laravel-html-helper": "^1.0",
+        "phpmd/phpmd": "^2.6"
     },
     "require-dev": {
         "orchestra/testbench": "^3.6",
@@ -49,6 +51,8 @@
         "test": [
             "vendor/bin/phpcbf",
             "vendor/bin/phpcs",
+            "vendor/bin/phpmd app,config,src text phpmd.xml",
+            "vendor/bin/phpstan analyse",
             "phpunit"
         ]
     },

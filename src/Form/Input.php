@@ -2,12 +2,14 @@
 
 namespace Okipa\LaravelBootstrapComponents\Form;
 
-use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Okipa\LaravelBootstrapComponents\Component;
+use Okipa\LaravelBootstrapComponents\Form\Traits\InputValidityChecks;
 
 abstract class Input extends Component
 {
+    use InputValidityChecks;
+    
     /**
      * The component config key.
      *
@@ -222,50 +224,92 @@ abstract class Input extends Component
      */
     protected function values(): array
     {
-        return array_merge(parent::values(), [
-            'model'       => $this->model,
-            'type'        => $this->type,
-            'name'        => $this->name,
-            'icon'        => $this->showIcon ? ($this->icon ? $this->icon : $this->defaultIcon()) : '',
-            'legend'      => $this->showLegend
-                ? ($this->legend ? trans($this->legend) : $this->defaultLegend())
-                : '',
-            'label'       => $this->showLabel
-                ? ($this->label
-                    ? $this->label
-                    : trans('validation.attributes.' . str_slug($this->name, '_')))
-                : '',
-            'value'       => $this->value ? $this->value : ($this->model ? $this->model->{$this->name} : null),
-            'placeholder' => $this->placeholder
-                ? $this->placeholder
-                : ($this->label
-                    ? $this->label
-                    : trans('validation.attributes.' . str_slug($this->name, '_'))),
-        ]);
+        return array_merge(parent::values(), $this->defineValues());
     }
 
     /**
-     * Set the input default icon
-     *
+     * @return string|null
+     */
+    protected function defineIcon(): ?string
+    {
+        return $this->showIcon ? ($this->icon ? $this->icon : $this->defaultIcon()) : null;
+    }
+
+    /**
+     * @return string|null
+     */
+    protected function defineLegend(): ?string
+    {
+        return $this->showLegend
+            ? ($this->legend ? trans($this->legend) : $this->defaultLegend())
+            : null;
+    }
+
+    /**
      * @return string
      */
-    protected function defaultIcon(): string
+    protected function defineLabel(): string
+    {
+        return $this->label
+            ? $this->label
+            : trans('validation.attributes.' . str_slug($this->name, '_'));
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function defineValue()
+    {
+        return $this->value ? $this->value : ($this->model ? $this->model->{$this->name} : null);
+    }
+    
+    /**
+     * @return array
+     */
+    protected function defineValues()
+    {
+        $model = $this->model;
+        $type = $this->type;
+        $name = $this->name;
+        $icon = $this->defineIcon();
+        $legend = $this->defineLegend();
+        $label = $this->showLabel ? $this->defineLabel() : null;
+        $value = $this->defineValue();
+        $placeholder = $this->definePlaceholder();
+        
+        return compact('model', 'type', 'name', 'icon', 'legend', 'label', 'value', 'placeholder');
+    }
+
+    /**
+     * @return string|null
+     */
+    protected function definePlaceholder(): ?string
+    {
+        return $this->placeholder ? $this->placeholder : $this->defineLabel();
+    }
+    
+    /**
+     * Set the input default icon
+     *
+     * @return string|null
+     */
+    protected function defaultIcon(): ?string
     {
         $icon = config('bootstrap-components.' . $this->configKey . '.icon');
 
-        return $icon ? $icon : '';
+        return $icon ? $icon : null;
     }
 
     /**
      * Set the input default icon
      *
-     * @return string
+     * @return string|null
      */
-    protected function defaultLegend(): string
+    protected function defaultLegend(): ?string
     {
         $legend = config('bootstrap-components.' . $this->configKey . '.legend');
 
-        return $legend ? trans('bootstrap-components::' . $legend) : '';
+        return $legend ? trans('bootstrap-components::' . $legend) : null;
     }
 
     /**
@@ -276,20 +320,5 @@ abstract class Input extends Component
     protected function defaultComponentId(): string
     {
         return $this->type . '-' . str_slug($this->name);
-    }
-
-    /**
-     * Check the component values validity
-     *
-     * @throws \Exception
-     * @return void
-     */
-    protected function checkValuesValidity(): void
-    {
-        if (! $this->name) {
-            throw new Exception(
-                get_class($this) . ' : Missing $name property. Please use the name() method to set a name.'
-            );
-        }
     }
 }

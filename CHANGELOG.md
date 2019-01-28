@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.5.9](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.5.9)
+2019-01-28 
+- Refactored form classes to improve maintainability.
+- Updated the `showRemoveCheckbox()` from the `bsFile()` component in order the provide a default translation for the remove checkbox label. The component does now accept the following arguments : `bool $showed = true` and `  - string $removeCheckboxLabel = null`.
+  - **Important :** You should now add the new `bootstrap-components.label.remove` translation if you have published the translations files.
+
 ## [0.5.8](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.5.8)
 2018-12-11 
 - Added the [bsNumber()](https://github.com/Okipa/laravel-bootstrap-components#bsnumber) component (thanks to [Daniel Lucas](https://github.com/daniel-chris-lucas) !).
