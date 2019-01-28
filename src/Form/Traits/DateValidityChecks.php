@@ -8,6 +8,12 @@ use Exception;
 trait DateValidityChecks
 {
     /**
+     * Set the datetime default format
+     *
+     * @return string
+     */
+    abstract protected function defaultFormat(): string;
+    /**
      * Check the component values validity
      *
      * @throws \Exception
