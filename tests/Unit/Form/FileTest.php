@@ -405,8 +405,8 @@ class FileTest extends BootstrapComponentsTestCase
         })->toHtml();
         $this->assertContains('<input id="checkbox-remove-name"', $html);
         $this->assertContains('name="remove_name"', $html);
-        $this->assertContains('for="checkbox-remove-name">' 
-                              . trans('bootstrap-components::bootstrap-components.label.remove') 
+        $this->assertContains('for="checkbox-remove-name">'
+                              . trans('bootstrap-components::bootstrap-components.label.remove')
                               . ' validation.attributes.name', $html);
     }
 

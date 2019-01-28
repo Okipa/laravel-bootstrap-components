@@ -78,39 +78,10 @@ class File extends Input
     protected function values(): array
     {
         return array_merge(parent::values(), [
-            'uploadedFileHtml'   => $this->getUploadedFileHtml(),
-            'showRemoveCheckbox' => $this->defineShowRemoveCheckboxStatus(),
-            'removeCheckboxLabel' => $this->defineRemoveCheckboxLabel()
+            'uploadedFileHtml'    => $this->getUploadedFileHtml(),
+            'showRemoveCheckbox'  => $this->defineShowRemoveCheckboxStatus(),
+            'removeCheckboxLabel' => $this->defineRemoveCheckboxLabel(),
         ]);
-    }
-
-    /**
-     * @return string|null
-     */
-    protected function definePlaceholder(): ?string
-    {
-        return ($this->showLabel ? '' : parent::definePlaceholder() . ' : ')
-               . trans('bootstrap-components::bootstrap-components.label.file');
-    }
-
-    /**
-     * @return string
-     */
-    protected function defineRemoveCheckboxLabel(): string
-    {
-        return isset($this->removeCheckboxLabel) 
-            ? $this->removeCheckboxLabel 
-            : trans('bootstrap-components::bootstrap-components.label.remove') . ' ' . $this->defineLabel();
-    }
-    
-    /**
-     * @return bool
-     */
-    protected function defineShowRemoveCheckboxStatus(): bool
-    {
-        return isset($this->showRemoveCheckbox)
-            ? $this->showRemoveCheckbox
-            : $this->defaultRemoveCheckboxShowStatus();
     }
 
     /**
@@ -133,6 +104,16 @@ class File extends Input
     }
 
     /**
+     * @return bool
+     */
+    protected function defineShowRemoveCheckboxStatus(): bool
+    {
+        return isset($this->showRemoveCheckbox)
+            ? $this->showRemoveCheckbox
+            : $this->defaultRemoveCheckboxShowStatus();
+    }
+
+    /**
      * Set the file default checkbox show status
      *
      * @return bool
@@ -142,5 +123,24 @@ class File extends Input
         $showRemoveCheckbox = boolval(config('bootstrap-components.' . $this->configKey . '.show_remove_checkbox'));
 
         return $showRemoveCheckbox;
+    }
+
+    /**
+     * @return string
+     */
+    protected function defineRemoveCheckboxLabel(): string
+    {
+        return isset($this->removeCheckboxLabel)
+            ? $this->removeCheckboxLabel
+            : trans('bootstrap-components::bootstrap-components.label.remove') . ' ' . strtolower($this->defineLabel());
+    }
+
+    /**
+     * @return string|null
+     */
+    protected function definePlaceholder(): ?string
+    {
+        return ($this->showLabel ? '' : parent::definePlaceholder() . ' : ')
+               . trans('bootstrap-components::bootstrap-components.label.file');
     }
 }
