@@ -374,7 +374,7 @@ bsFile()->name('avatar')
     ->uploadedFile(function(){
         return '<div>Some HTML</div>'
     })
-    -showRemoveCheckbox() // override the default config show remove checkbox status
+    -showRemoveCheckbox(true, 'Remove this file') // override the default config show remove checkbox status and the default remove-checkbox label.
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (file-[name])
     ->containerClass(['container', 'class]) // override the default config container class list
