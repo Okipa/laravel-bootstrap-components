@@ -30,7 +30,7 @@ This package provides a ready-to-use and customizable bootstrap components libra
 - [bsEmail()](#bsemail)
 - [bsColor()](#bscolor)
 - [bsPassword()](#bspassword)
-- [bsFile()](#bsfileupload)
+- [bsFile()](#bsfile)
 - [bsTextarea()](#bstextarea)
 - [bsCheckbox()](#bscheckbox)
 - [bsToggle()](#bstoggle)
@@ -388,7 +388,7 @@ _Component additional methods :_
 | Signature | Required | Description |
 |---|---|---|
 | uploadedFile(Closure $uploadedFile): InputFile  | No | Allows to set html or another component to render the uploaded file. |
-| showRemoveCheckbox(bool $showed = true): File  | No | Show the file remove checkbox (will appear only if an uploaded file is detected). Will send a `remove_[name]` value with the form data. Default value : `config('bootstrap-components.file.show_remove_checkbox')`. |
+| showRemoveCheckbox(bool $showed = true, string $removeCheckboxLabel = null): File  | No | Show the file remove checkbox option (will appear only if an uploaded file is detected). Default value : `config('bootstrap-components.file.show_remove_checkbox')`. The remove checkbox label can be precised with the second parameter, by default, it will take the following value : `trans('bootstrap-components.label.remove') . ' ' . [name]` |
 
 #### bsTextarea()
 
