@@ -12,42 +12,50 @@ This package provides a ready-to-use and customizable bootstrap components libra
 
 **Notes :**
 - Implemented components are stables.
-- Implementation of new components in progress.
-- Help welcomed (tested and documented PR).
+- Implementation of new components is currently in progress.
+- Help welcomed (you are free to send tested and documented PR).
 
 ------------------------------------------------------------------------------------------------------------------------
 
-## Components
-
-### [Form](#form-components)
-- [bsText()](#bstext)
-- [bsNumber()](#bsnumber)
-- [bsTel()](#bstel)
-- [bsDatetime()](#bsdatetime)
-- [bsDate()](#bsdate)
-- [bsTime()](#bstime)
-- [bsUrl()](#bsurl)
-- [bsEmail()](#bsemail)
-- [bsColor()](#bscolor)
-- [bsPassword()](#bspassword)
-- [bsFile()](#bsfile)
-- [bsTextarea()](#bstextarea)
-- [bsCheckbox()](#bscheckbox)
-- [bsToggle()](#bstoggle)
-- [bsRadio()](#bsradio)
-- [bsSelect()](#bsselect)
-
-### [Buttons](#buttons-components)
-- [bsValidate()](#bsvalidate)
-- [bsCreate()](#bscreate)
-- [bsUpdate()](#bsupdate)
-- [bsCancel()](#bscancel)
-- [bsBack()](#bsback)
-
-### [Media](#media-components)
-- [image()](#image)
-- [audio()](#audio)
-- [video()](#video)
+## Table of Contents
+- [Installation](#installation)
+- [Styles](#styles)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [Translations](#translations)
+- [Customization](#customization)
+- [API](#api)
+  - [Form components](#form-components)
+    - [bsText()](#bstext)
+    - [bsNumber()](#bsnumber)
+    - [bsTel()](#bstel)
+    - [bsDatetime()](#bsdatetime)
+    - [bsDate()](#bsdate)
+    - [bsTime()](#bstime)
+    - [bsUrl()](#bsurl)
+    - [bsEmail()](#bsemail)
+    - [bsColor()](#bscolor)
+    - [bsPassword()](#bspassword)
+    - [bsFile()](#bsfile)
+    - [bsTextarea()](#bstextarea)
+    - [bsCheckbox()](#bscheckbox)
+    - [bsToggle()](#bstoggle)
+    - [bsRadio()](#bsradio)
+    - [bsSelect()](#bsselect)
+  - [Buttons components](#buttons-components)
+    - [bsValidate()](#bsvalidate)
+    - [bsCreate()](#bscreate)
+    - [bsUpdate()](#bsupdate)
+    - [bsCancel()](#bscancel)
+    - [bsBack()](#bsback)
+  - [Media components](#media-components)
+    - [image()](#image)
+    - [audio()](#audio)
+    - [video()](#video)
+- [Changelog](#changelog)
+- [Testing](#testing)
+- [Credits](#credits)
+- [Licence](#license)
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -68,6 +76,13 @@ $this->app->register(Okipa\LaravelBootstrapComponents\ComponentServiceProvider::
 
 ------------------------------------------------------------------------------------------------------------------------
 
+## Styles
+
+If you use some extra components ([see API](#api)), you will have to load the package styles.  
+For this, load the package `sass` file from the `[path/to/composer/vendor]/okipa/laravel-bootstrap-components/styles/scss/bootstrap-components` directory to your project.
+
+------------------------------------------------------------------------------------------------------------------------
+
 ## Usage
 
 Just call the component you need in your view.
@@ -76,13 +91,6 @@ Just call the component you need in your view.
 // example
 {{ bsText()->name('username') }}
 ```
-
-------------------------------------------------------------------------------------------------------------------------
-
-## Styles
-
-If you use some extra components ([see API](#api)), you will have to load the package styles.  
-For this, load the package `sass` file from the `[path/to/composer/vendor]/okipa/laravel-bootstrap-components/styles/scss/bootstrap-components` directory to your project.
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -704,6 +712,12 @@ _Component additional methods :_
 
 ------------------------------------------------------------------------------------------------------------------------
 
+## Changelog
+
+Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+
+------------------------------------------------------------------------------------------------------------------------
+
 ## Testing
 
 ```bash
@@ -712,13 +726,7 @@ composer test
 
 ------------------------------------------------------------------------------------------------------------------------
 
-## Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
-
-------------------------------------------------------------------------------------------------------------------------
-
-## Contributors
+## Credits
 
 - [Okipa](https://github.com/Okipa)
 - [ACID-Solutions](https://github.com/ACID-Solutions)

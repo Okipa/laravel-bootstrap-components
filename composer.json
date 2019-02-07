@@ -52,7 +52,6 @@
             "vendor/bin/phpcbf",
             "vendor/bin/phpcs",
             "vendor/bin/phpmd app,config,src text phpmd.xml",
-            "vendor/bin/phpstan analyse",
             "phpunit"
         ]
     },
