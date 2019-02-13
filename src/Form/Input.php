@@ -9,7 +9,6 @@ use Okipa\LaravelBootstrapComponents\Form\Traits\InputValidityChecks;
 abstract class Input extends Component
 {
     use InputValidityChecks;
-    
     /**
      * The component config key.
      *
@@ -34,18 +33,18 @@ abstract class Input extends Component
      * @property string $name
      */
     protected $name;
-    /**.
-     * The input icon show status.
-     *
-     * @property bool $showIcon
-     */
-    protected $showIcon = true;
     /**
-     * The input icon.
+     * The component prepended html.
      *
-     * @property string $icon
+     * @property string $prepend
      */
-    protected $icon;
+    protected $prepend;
+    /**
+     * The component appended html.
+     *
+     * @property string $append
+     */
+    protected $append;
     /**.
      * The input legend show status.
      *
@@ -112,27 +111,29 @@ abstract class Input extends Component
     }
 
     /**
-     * Set the input icon.
+     * Prepend html to the component.
      *
-     * @param string $icon
+     * @param string|null $html
      *
      * @return \Okipa\LaravelBootstrapComponents\Form\Input
      */
-    public function icon(string $icon): Input
+    public function prepend(?string $html): Input
     {
-        $this->icon = $icon;
+        $this->prepend = $html;
 
         return $this;
     }
 
     /**
-     * Hide the input icon.
+     * Append html to the component.
+     *
+     * @param string|null $html
      *
      * @return \Okipa\LaravelBootstrapComponents\Form\Input
      */
-    public function hideIcon(): Input
+    public function append(?string $html): Input
     {
-        $this->showIcon = false;
+        $this->append = $html;
 
         return $this;
     }
@@ -228,11 +229,37 @@ abstract class Input extends Component
     }
 
     /**
+     * @return array
+     */
+    protected function defineValues()
+    {
+        return [
+            'model'       => $this->model,
+            'type'        => $this->type,
+            'name'        => $this->name,
+            'prepend'     => $this->prepend ?? $this->defaultPrepend(),
+            'append'      => $this->append ?? $this->defaultAppend(),
+            'legend'      => $this->defineLegend(),
+            'label'       => $this->showLabel ? $this->defineLabel() : null,
+            'value'       => $this->defineValue(),
+            'placeholder' => $this->definePlaceholder(),
+        ];
+    }
+
+    /**
      * @return string|null
      */
-    protected function defineIcon(): ?string
+    protected function defaultPrepend(): ?string
     {
-        return $this->showIcon ? ($this->icon ? $this->icon : $this->defaultIcon()) : null;
+        return config('bootstrap-components.' . $this->configKey . '.prepend') ?? null;
+    }
+
+    /**
+     * @return string|null
+     */
+    protected function defaultAppend(): ?string
+    {
+        return config('bootstrap-components.' . $this->configKey . '.append') ?? null;
     }
 
     /**
@@ -243,6 +270,18 @@ abstract class Input extends Component
         return $this->showLegend
             ? ($this->legend ? trans($this->legend) : $this->defaultLegend())
             : null;
+    }
+
+    /**
+     * Set the input default icon
+     *
+     * @return string|null
+     */
+    protected function defaultLegend(): ?string
+    {
+        $legend = config('bootstrap-components.' . $this->configKey . '.legend');
+
+        return $legend ? trans('bootstrap-components::' . $legend) : null;
     }
 
     /**
@@ -262,23 +301,6 @@ abstract class Input extends Component
     {
         return $this->value ? $this->value : ($this->model ? $this->model->{$this->name} : null);
     }
-    
-    /**
-     * @return array
-     */
-    protected function defineValues()
-    {
-        $model = $this->model;
-        $type = $this->type;
-        $name = $this->name;
-        $icon = $this->defineIcon();
-        $legend = $this->defineLegend();
-        $label = $this->showLabel ? $this->defineLabel() : null;
-        $value = $this->defineValue();
-        $placeholder = $this->definePlaceholder();
-        
-        return compact('model', 'type', 'name', 'icon', 'legend', 'label', 'value', 'placeholder');
-    }
 
     /**
      * @return string|null
@@ -286,30 +308,6 @@ abstract class Input extends Component
     protected function definePlaceholder(): ?string
     {
         return $this->placeholder ? $this->placeholder : $this->defineLabel();
-    }
-    
-    /**
-     * Set the input default icon
-     *
-     * @return string|null
-     */
-    protected function defaultIcon(): ?string
-    {
-        $icon = config('bootstrap-components.' . $this->configKey . '.icon');
-
-        return $icon ? $icon : null;
-    }
-
-    /**
-     * Set the input default icon
-     *
-     * @return string|null
-     */
-    protected function defaultLegend(): ?string
-    {
-        $legend = config('bootstrap-components.' . $this->configKey . '.legend');
-
-        return $legend ? trans('bootstrap-components::' . $legend) : null;
     }
 
     /**

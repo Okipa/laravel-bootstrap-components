@@ -3,7 +3,7 @@
     {{ htmlAttributes($containerHtmlAttributes) }}>
     @include('bootstrap-components::bootstrap-components.partials.label')
     <div class="input-group">
-        @include('bootstrap-components::bootstrap-components.partials.icon')
+        @include('bootstrap-components::bootstrap-components.partials.prepend')
         <textarea id="{{ $componentId }}"
                name="{{ $name }}"
                {{ classTag('form-control', $type . '-' . str_slug($name) . '-component', $componentClass, validationStatus($name)) }}

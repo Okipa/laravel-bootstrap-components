@@ -9,7 +9,7 @@
             ->containerClass(['mb-1']) }}@endif
     @endif
     <div class="input-group">
-        @include('bootstrap-components::bootstrap-components.partials.icon')
+        @include('bootstrap-components::bootstrap-components.partials.prepend')
         <div class="custom-file">
             <input id="{{ $componentId }}"
                    type="file"

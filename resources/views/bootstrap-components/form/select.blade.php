@@ -3,7 +3,7 @@
     {{ htmlAttributes($containerHtmlAttributes) }}>
     @include('bootstrap-components::bootstrap-components.partials.label')
     <div class="input-group">
-        @include('bootstrap-components::bootstrap-components.partials.icon')
+        @include('bootstrap-components::bootstrap-components.partials.prepend')
         <select id="{{ $componentId }}"
                 {{ classTag($type . '-' . str_slug($name) . '-component', 'custom-select', $componentClass, validationStatus($name)) }}
                 name="{{ $name . ($multiple ? '[]' : '') }}"
