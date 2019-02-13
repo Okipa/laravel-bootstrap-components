@@ -146,7 +146,7 @@ class UrlTest extends BootstrapComponentsTestCase
     {
         $configPrepend = 'test-config-prepend';
         $configAppend = 'test-config-append';
-        config()->set('bootstrap-components.form.url.preprend', $configPrepend);
+        config()->set('bootstrap-components.form.url.prepend', $configPrepend);
         config()->set('bootstrap-components.form.url.append', $configAppend);
         $html = bsUrl()->name('name')->prepend(false)->append(false)->toHtml();
         $this->assertNotContains('<div class="input-group">', $html);

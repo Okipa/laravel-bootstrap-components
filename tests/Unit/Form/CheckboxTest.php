@@ -17,7 +17,8 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('checkbox', config('bootstrap-components.form')));
         // components.form.checkbox
         $this->assertTrue(array_key_exists('view', config('bootstrap-components.form.checkbox')));
-        $this->assertTrue(array_key_exists('icon', config('bootstrap-components.form.checkbox')));
+        $this->assertTrue(array_key_exists('prepend', config('bootstrap-components.form.checkbox')));
+        $this->assertTrue(array_key_exists('append', config('bootstrap-components.form.checkbox')));
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.checkbox')));
         $this->assertTrue(array_key_exists('class', config('bootstrap-components.form.checkbox')));
         $this->assertTrue(array_key_exists('html_attributes', config('bootstrap-components.form.checkbox')));
@@ -63,41 +64,70 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $this->assertContains('checked="checked"', $html);
     }
 
-    public function testConfigIcon()
+    public function testConfigPrepend()
     {
-        $configIcon = 'test-config-icon';
-        config()->set('bootstrap-components.form.checkbox.icon', $configIcon);
+        $configPrepend = 'test-config-prepend';
+        config()->set('bootstrap-components.form.checkbox.prepend', $configPrepend);
         $html = bsCheckbox()->name('name')->toHtml();
-        $this->assertContains(
-            '<label class="custom-control-label" for="checkbox-name"><span class="label-icon">'
-            . $configIcon . '</span> validation.attributes.name</label>',
-            $html
-        );
+        $this->assertContains('<span class="label-prepend">' . $configPrepend . '</span>', $html);
     }
 
-    public function testSetIcon()
+    public function testSetPrepend()
     {
-        $configIcon = 'test-config-icon';
-        $customIcon = 'test-custom-icon';
-        config()->set('bootstrap-components.form.checkbox.icon', $configIcon);
-        $html = bsCheckbox()->name('name')->icon($customIcon)->toHtml();
-        $this->assertNotContains(
-            '<label class="custom-control-label" for="checkbox-name"><span class="label-icon">'
-            . $configIcon . '</span> validation.attributes.name</label>',
-            $html
-        );
-        $this->assertContains(
-            '<label class="custom-control-label" for="checkbox-name"><span class="label-icon">'
-            . $customIcon . '</span> validation.attributes.name</label>',
-            $html
-        );
+        $configPrepend = 'test-config-prepend';
+        $customPrepend = 'test-custom-prepend';
+        config()->set('bootstrap-components.form.checkbox.prepend', $configPrepend);
+        $html = bsCheckbox()->name('name')->prepend($customPrepend)->toHtml();
+        $this->assertContains('<span class="label-prepend">' . $customPrepend . '</span>', $html);
+        $this->assertNotContains('<span class="label-prepend">' . $configPrepend . '</span>', $html);
     }
 
-    public function testNoIcon()
+    public function testNoPrepend()
     {
-        config()->set('bootstrap-components.form.checkbox.icon', null);
+        config()->set('bootstrap-components.form.checkbox.prepend', null);
         $html = bsCheckbox()->name('name')->toHtml();
-        $this->assertNotContains('<span class="label-icon">', $html);
+        $this->assertNotContains('<span class="label-prepend">', $html);
+    }
+
+    public function testHidePrepend()
+    {
+        $configPrepend = 'test-config-prepend';
+        config()->set('bootstrap-components.form.checkbox.prepend', $configPrepend);
+        $html = bsCheckbox()->name('name')->prepend(false)->toHtml();
+        $this->assertNotContains('<span class="label-prepend">', $html);
+    }
+
+    public function testConfigAppend()
+    {
+        $configAppend = 'test-config-append';
+        config()->set('bootstrap-components.form.checkbox.append', $configAppend);
+        $html = bsCheckbox()->name('name')->toHtml();
+        $this->assertContains('<span class="label-append">' . $configAppend . '</span>', $html);
+    }
+
+    public function testSetAppend()
+    {
+        $configAppend = 'test-config-append';
+        $customAppend = 'test-custom-append';
+        config()->set('bootstrap-components.form.checkbox.append', $configAppend);
+        $html = bsCheckbox()->name('name')->append($customAppend)->toHtml();
+        $this->assertContains('<span class="label-append">' . $customAppend . '</span>', $html);
+        $this->assertNotContains('<span class="label-append">' . $configAppend . '</span>', $html);
+    }
+
+    public function testNoAppend()
+    {
+        config()->set('bootstrap-components.form.checkbox.append', null);
+        $html = bsCheckbox()->name('name')->toHtml();
+        $this->assertNotContains('<span class="label-append">', $html);
+    }
+
+    public function testHideAppend()
+    {
+        $configAppend = 'test-config-append';
+        config()->set('bootstrap-components.form.checkbox.append', $configAppend);
+        $html = bsCheckbox()->name('name')->append(false)->toHtml();
+        $this->assertNotContains('<span class="label-append">', $html);
     }
 
     public function testChecked()

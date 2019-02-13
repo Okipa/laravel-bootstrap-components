@@ -18,7 +18,8 @@ class DatetimeTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('datetime', config('bootstrap-components.form')));
         // components.form.datetime
         $this->assertTrue(array_key_exists('view', config('bootstrap-components.form.datetime')));
-        $this->assertTrue(array_key_exists('icon', config('bootstrap-components.form.datetime')));
+        $this->assertTrue(array_key_exists('prepend', config('bootstrap-components.form.datetime')));
+        $this->assertTrue(array_key_exists('append', config('bootstrap-components.form.datetime')));
         $this->assertTrue(array_key_exists('format', config('bootstrap-components.form.datetime')));
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.datetime')));
         $this->assertTrue(array_key_exists('class', config('bootstrap-components.form.datetime')));
@@ -127,37 +128,92 @@ class DatetimeTest extends BootstrapComponentsTestCase
         bsDatetime()->model($user)->name('published_at')->toHtml();
     }
 
-    public function testConfigIcon()
+    public function testConfigPrepend()
     {
-        $configIcon = 'test-config-icon';
-        config()->set('bootstrap-components.form.datetime.icon', $configIcon);
+        $configPrepend = 'test-config-prepend';
+        config()->set('bootstrap-components.form.datetime.prepend', $configPrepend);
         $html = bsDatetime()->name('name')->toHtml();
-        $this->assertContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
+        $this->assertContains('input-group-prepend', $html);
+        $this->assertContains('<span class="input-group-text">' . $configPrepend . '</span>', $html);
     }
 
-    public function testSetIcon()
+    public function testSetPrepend()
     {
-        $configIcon = 'test-config-icon';
-        $customIcon = 'test-custom-icon';
-        config()->set('bootstrap-components.form.datetime.icon', $configIcon);
-        $html = bsDatetime()->name('name')->icon($customIcon)->toHtml();
-        $this->assertContains('<span class="icon input-group-text">' . $customIcon . '</span>', $html);
-        $this->assertNotContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
+        $configPrepend = 'test-config-prepend';
+        $customPrepend = 'test-custom-prepend';
+        config()->set('bootstrap-components.form.datetime.prepend', $configPrepend);
+        $html = bsDatetime()->name('name')->prepend($customPrepend)->toHtml();
+        $this->assertContains('input-group-prepend', $html);
+        $this->assertContains('<span class="input-group-text">' . $customPrepend . '</span>', $html);
+        $this->assertNotContains('<span class="input-group-text">' . $configPrepend . '</span>', $html);
     }
 
-    public function testNoIcon()
+    public function testNoPrepend()
     {
-        config()->set('bootstrap-components.form.datetime.icon', null);
+        config()->set('bootstrap-components.form.datetime.prepend', null);
         $html = bsDatetime()->name('name')->toHtml();
-        $this->assertNotContains('<span class="icon input-group-text">', $html);
+        $this->assertNotContains('input-group-prepend', $html);
     }
 
-    public function testHideIcon()
+    public function testHidePrepend()
     {
-        $configIcon = 'test-config-icon';
-        config()->set('bootstrap-components.form.datetime.icon', $configIcon);
-        $html = bsDatetime()->name('name')->hideIcon()->toHtml();
-        $this->assertNotContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
+        $configPrepend = 'test-config-prepend';
+        config()->set('bootstrap-components.form.datetime.prepend', $configPrepend);
+        $html = bsDatetime()->name('name')->prepend(false)->toHtml();
+        $this->assertNotContains('input-group-prepend', $html);
+    }
+
+    public function testConfigAppend()
+    {
+        $configAppend = 'test-config-append';
+        config()->set('bootstrap-components.form.datetime.append', $configAppend);
+        $html = bsDatetime()->name('name')->toHtml();
+        $this->assertContains('input-group-append', $html);
+        $this->assertContains('<span class="input-group-text">' . $configAppend . '</span>', $html);
+    }
+
+    public function testSetAppend()
+    {
+        $configAppend = 'test-config-append';
+        $customAppend = 'test-custom-append';
+        config()->set('bootstrap-components.form.datetime.append', $configAppend);
+        $html = bsDatetime()->name('name')->append($customAppend)->toHtml();
+        $this->assertContains('input-group-append', $html);
+        $this->assertContains('<span class="input-group-text">' . $customAppend . '</span>', $html);
+        $this->assertNotContains('<span class="input-group-text">' . $configAppend . '</span>', $html);
+    }
+
+    public function testNoAppend()
+    {
+        config()->set('bootstrap-components.form.datetime.append', null);
+        $html = bsDatetime()->name('name')->toHtml();
+        $this->assertNotContains('input-group-append', $html);
+    }
+
+    public function testHideAppend()
+    {
+        $configAppend = 'test-config-append';
+        config()->set('bootstrap-components.form.datetime.append', $configAppend);
+        $html = bsDatetime()->name('name')->append(false)->toHtml();
+        $this->assertNotContains('input-group-append', $html);
+    }
+
+    public function testNoPrependNoAppend()
+    {
+        config()->set('bootstrap-components.form.datetime.prepend', null);
+        config()->set('bootstrap-components.form.datetime.append', null);
+        $html = bsDatetime()->name('name')->toHtml();
+        $this->assertNotContains('<div class="input-group">', $html);
+    }
+
+    public function testHidePrependHideAppend()
+    {
+        $configPrepend = 'test-config-prepend';
+        $configAppend = 'test-config-append';
+        config()->set('bootstrap-components.form.datetime.prepend', $configPrepend);
+        config()->set('bootstrap-components.form.datetime.append', $configAppend);
+        $html = bsDatetime()->name('name')->prepend(false)->append(false)->toHtml();
+        $this->assertNotContains('<div class="input-group">', $html);
     }
 
     public function testConfigLegend()

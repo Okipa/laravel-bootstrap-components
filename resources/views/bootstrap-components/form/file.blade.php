@@ -8,7 +8,9 @@
             ->label($removeCheckboxLabel)
             ->containerClass(['mb-1']) }}@endif
     @endif
-    <div class="input-group">
+    @if(! empty($prepend) || ! empty($append))
+        <div class="input-group">
+    @endif
         @include('bootstrap-components::bootstrap-components.partials.prepend')
         <div class="custom-file">
             <input id="{{ $componentId }}"
@@ -21,7 +23,10 @@
                    aria-describedby="file-{{ str_slug($name) }}">
             <label class="custom-file-label" for="{{ $componentId }}">@empty($value = old($name, $value)){{ $placeholder }}@else{{ $value }}@endempty</label>
         </div>
-    </div>
+        @include('bootstrap-components::bootstrap-components.partials.append')
+    @if(! empty($prepend) || ! empty($append))
+        </div>
+    @endif
     @include('bootstrap-components::bootstrap-components.partials.validation-feedback')
     @include('bootstrap-components::bootstrap-components.partials.legend')
 </div>

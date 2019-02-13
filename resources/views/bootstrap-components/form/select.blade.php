@@ -2,7 +2,9 @@
     {{ classTag($type . '-' . str_slug($name) . '-container', $containerClass) }}
     {{ htmlAttributes($containerHtmlAttributes) }}>
     @include('bootstrap-components::bootstrap-components.partials.label')
-    <div class="input-group">
+    @if(! empty($prepend) || ! empty($append))
+        <div class="input-group">
+    @endif
         @include('bootstrap-components::bootstrap-components.partials.prepend')
         <select id="{{ $componentId }}"
                 {{ classTag($type . '-' . str_slug($name) . '-component', 'custom-select', $componentClass, validationStatus($name)) }}
@@ -17,7 +19,10 @@
                         : null) }}>{{ $option[$optionLabelField] }}</option>
             @endforeach
         </select>
-    </div>
+        @include('bootstrap-components::bootstrap-components.partials.append')
+    @if(! empty($prepend) || ! empty($append))
+        </div>
+    @endif
     @include('bootstrap-components::bootstrap-components.partials.validation-feedback')
     @include('bootstrap-components::bootstrap-components.partials.legend')
 </div>

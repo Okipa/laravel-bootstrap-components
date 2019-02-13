@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.6.0](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.6.0)
+2019-01-28
+- Replaced `->icon()` method from `Input` components to `->prepend()`.
+- Added `->append()` method to `Input` components.
+
 ## [0.5.9](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.5.9)
 2019-01-28 
 - Refactored form classes to improve maintainability.

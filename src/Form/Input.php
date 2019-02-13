@@ -16,19 +16,19 @@ abstract class Input extends Component
      */
     protected $configKey;
     /**
-     * The input associated model.
+     * The component associated model.
      *
      * @property \Illuminate\Database\Eloquent\Model $model
      */
     protected $model;
     /**
-     * The input type.
+     * The component input type.
      *
      * @property string $type
      */
     protected $type;
     /**
-     * The input name.
+     * The component input name.
      *
      * @property string $name
      */
@@ -46,44 +46,44 @@ abstract class Input extends Component
      */
     protected $append;
     /**.
-     * The input legend show status.
+     * The component legend show status.
      *
      * @property bool $showLabel
      */
     protected $showLegend = true;
     /**
-     * The input legend.
+     * The component legend.
      *
      * @property string $legend
      */
     protected $legend;
     /**.
-     * The input label show status.
+     * The component label show status.
      *
      * @property bool $showLabel
      */
     protected $showLabel = true;
     /**
-     * The input label.
+     * The component label.
      *
      * @property string $label
      */
     protected $label;
     /**
-     * The input value.
+     * The component input value.
      *
      * @property string $value
      */
     protected $value;
     /**
-     * The input placeholder.
+     * The component input placeholder.
      *
      * @property string $placeholder
      */
     protected $placeholder;
 
     /**
-     * Set the input associated model.
+     * Set the component associated model.
      *
      * @param \Illuminate\Database\Eloquent\Model $model
      *
@@ -97,7 +97,7 @@ abstract class Input extends Component
     }
 
     /**
-     * Set the input name.
+     * Set the component input name.
      *
      * @param string $name
      *
@@ -139,7 +139,7 @@ abstract class Input extends Component
     }
 
     /**
-     * Set the input legend.
+     * Set the component legend.
      *
      * @param string $legend
      *
@@ -153,7 +153,7 @@ abstract class Input extends Component
     }
 
     /**
-     * Hide the input legend.
+     * Hide the component legend.
      *
      * @return \Okipa\LaravelBootstrapComponents\Form\Input
      */
@@ -165,7 +165,7 @@ abstract class Input extends Component
     }
 
     /**
-     * Set the input placeholder.
+     * Set the component input placeholder.
      *
      * @param string $placeholder
      *
@@ -179,7 +179,7 @@ abstract class Input extends Component
     }
 
     /**
-     * Set the input Value.
+     * Set the component input value.
      *
      * @param mixed $value
      *
@@ -193,7 +193,7 @@ abstract class Input extends Component
     }
 
     /**
-     * Set the input label.
+     * Set the component label.
      *
      * @param string $label
      *
@@ -207,7 +207,7 @@ abstract class Input extends Component
     }
 
     /**
-     * Hide the input label.
+     * Hide the component label.
      *
      * @return \Okipa\LaravelBootstrapComponents\Form\Input
      */
@@ -219,7 +219,7 @@ abstract class Input extends Component
     }
 
     /**
-     * Set the input values.
+     * Set the values for the view.
      *
      * @return array
      */
@@ -273,8 +273,6 @@ abstract class Input extends Component
     }
 
     /**
-     * Set the input default icon
-     *
      * @return string|null
      */
     protected function defaultLegend(): ?string

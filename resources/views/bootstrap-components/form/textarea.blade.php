@@ -2,7 +2,9 @@
     {{ classTag($type . '-' . str_slug($name) . '-container', $containerClass) }}
     {{ htmlAttributes($containerHtmlAttributes) }}>
     @include('bootstrap-components::bootstrap-components.partials.label')
-    <div class="input-group">
+    @if(! empty($prepend) || ! empty($append))
+        <div class="input-group">
+    @endif
         @include('bootstrap-components::bootstrap-components.partials.prepend')
         <textarea id="{{ $componentId }}"
                name="{{ $name }}"
@@ -11,7 +13,10 @@
                {{ htmlAttributes($componentHtmlAttributes) }}
                aria-label="{{ $label }}"
                aria-describedby="{{ $type }}-{{ str_slug($name) }}">{{ old($name, $value) }}</textarea>
-    </div>
+        @include('bootstrap-components::bootstrap-components.partials.append')
+    @if(! empty($prepend) || ! empty($append))
+        </div>
+    @endif
     @include('bootstrap-components::bootstrap-components.partials.validation-feedback')
     @include('bootstrap-components::bootstrap-components.partials.legend')
 </div>
