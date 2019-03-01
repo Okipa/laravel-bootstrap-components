@@ -82,6 +82,12 @@ abstract class Input extends Component
      * @property string $placeholder
      */
     protected $placeholder;
+    /**.
+     * The input placeholder  show status.
+     *
+     * @property bool $showIcon
+     */
+    protected $showPlaceholder = true;
 
     /**
      * Set the input associated model.
@@ -176,6 +182,18 @@ abstract class Input extends Component
 
         return $this;
     }
+    
+    /**
+     * Hide the input placeholder
+     *
+     * @return \Okipa\LaravelBootstrapComponents\Form\Input
+     */
+    public function hidePlaceholder(): Input
+    {
+        $this->showPlaceholder = false;
+
+        return $this;
+    }
 
     /**
      * Set the input Value.
@@ -264,6 +282,14 @@ abstract class Input extends Component
     }
     
     /**
+     * @return string|null
+     */
+    protected function definePlaceholder(): ?string
+    {
+        return $this->placeholder ? $this->placeholder : $this->defineLabel();
+    }
+    
+    /**
      * @return array
      */
     protected function defineValues()
@@ -275,17 +301,9 @@ abstract class Input extends Component
         $legend = $this->defineLegend();
         $label = $this->showLabel ? $this->defineLabel() : null;
         $value = $this->defineValue();
-        $placeholder = $this->definePlaceholder();
+        $placeholder = $this->showPlaceholder ? $this->definePlaceholder() : null;
         
         return compact('model', 'type', 'name', 'icon', 'legend', 'label', 'value', 'placeholder');
-    }
-
-    /**
-     * @return string|null
-     */
-    protected function definePlaceholder(): ?string
-    {
-        return $this->placeholder ? $this->placeholder : $this->defineLabel();
     }
     
     /**
