@@ -481,6 +481,7 @@ _Notes :_
 bsRadio()->name('gender')
     ->model($user) // checked status is automatically detected from the field name
     ->checked(true) // or manually set the value
+    ->value('man') // or manually set the value
     ->label('Name') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
@@ -494,6 +495,12 @@ bsRadio()->name('gender')
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
 ```
+
+_Component changed methods :_
+
+| Signature | Required | Description |
+|---|---|---|
+| value($value): Input  | Yes | default value : `$model->{$name}`. |
 
 _Component additional methods :_
 
