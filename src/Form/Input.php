@@ -252,7 +252,13 @@ abstract class Input extends Component
     {
         return $this->label
             ? $this->label
-            : trans('validation.attributes.' . str_slug($this->name, '_'));
+            : trans('validation.attributes.' . join('.',
+            array_map(function ($name) {
+                return str_slug($name, '_');
+            },
+                explode('.', $this->name)
+            )
+        ));
     }
 
     /**
