@@ -144,14 +144,16 @@ php artisan vendor:publish --tag=bootstrap-components::views
 |---|---|---|
 |  name(string $name): Input  | Yes |  |
 | model(Model $model): Input  | No |  |
-| icon(string $icon): Input  | No | default value : `config('bootstrap-components.input.icon')`. |
+| icon(string $icon): Input  | No | default value : `config('bootstrap-components.[component_config_key].icon')`. |
 | hideIcon(): Input  | No |  |
 | label(string $label): Input  | No | default value : `trans('validation.attributes.[name]')`. |
 | hideLabel(): Input  | No |  |
 | placeholder(string $placeholder): Input  | No | default value : `$label`. |
+| hidePlaceholder(): Input  | No |  |
 | value($value): Input  | No | default value : `$model->{$name}`. |
-| legend(string $legend): Input  | No | default value : `config('bootstrap-components.input.legend')`. |
-| hideLegend(): Input  | No |  |
+| legend(string $legend): Input  | No | default value : `config('bootstrap-components.[component_config_key].legend')`. |
+| hideSuccessFeedback(): Input  | No | default value : `! config('bootstrap-components.global.input.show_success_feedback)`.|
+| showSuccessFeedback(): Input  | No | default value : `config('bootstrap-components.global.input.show_success_feedback')`.|
   
 #### bsText()
 
@@ -162,13 +164,16 @@ bsText()->name('name')
     ->label('Name') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder('Set your name') // override the default placeholder (label)
+    ->hidePlaceholder() // or hide the placeholder
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
     ->hideIcon() // or hide the icon
     ->legend('Set your name here.') // override the default config legend
     ->hideLegend() // or hide the legend
+    ->hideSuccessFeedback() // override the default config global input show success feedback
+    ->showSuccessFeedback() // override the default config global input show success feedback
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (text-[name])
-    ->containerClass(['container', 'class]) // override the default config container class list
+    ->containerClass(['container', 'class']) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
@@ -183,13 +188,16 @@ bsNumber()->name('amount')
     ->label('Amount') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder('Set the amount') // override the default placeholder (label)
+    ->hidePlaceholder() // or hide the placeholder
     ->icon('<i class="fas fa-dollar-sign"></i>') // override the default config
     ->hideIcon() // or hide the icon
     ->legend('Set the amount here.') // override the default config legend
     ->hideLegend() // or hide the legend
+    ->hideSuccessFeedback() // override the default config global input show success feedback
+    ->showSuccessFeedback() // override the default config global input show success feedback
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (text-[name])
-    ->containerClass(['container', 'class]) // override the default config container class list
+    ->containerClass(['container', 'class']) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
@@ -204,13 +212,16 @@ bsTel()->name('phone_number')
     ->label('Phone number') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder('Set your phone number') // override the default placeholder (label)
+    ->hidePlaceholder() // or hide the placeholder
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
     ->legend('Set your phone number here.') // override the default config legend
     ->hideLegend() // or hide the legend
+    ->hideSuccessFeedback() // override the default config global input show success feedback
+    ->showSuccessFeedback() // override the default config global input show success feedback
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (tel-[name])
-    ->containerClass(['container', 'class]) // override the default config container class list
+    ->containerClass(['container', 'class']) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
@@ -226,13 +237,16 @@ bsDatetime()->name('published_at')
     ->label('Publication date') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder('Set the publication date') // override the default placeholder (label)
+    ->hidePlaceholder() // or hide the placeholder
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
     ->legend('Set the publication date here.') // override the default config legend
     ->hideLegend() // or hide the legend
+    ->hideSuccessFeedback() // override the default config global input show success feedback
+    ->showSuccessFeedback() // override the default config global input show success feedback
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (datetime-local-[name])
-    ->containerClass(['container', 'class]) // override the default config container class list
+    ->containerClass(['container', 'class']) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
@@ -248,13 +262,16 @@ bsDate()->name('birthday')
     ->label('Birthday') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder('Set your birthday') // override the default placeholder (label)
+    ->hidePlaceholder() // or hide the placeholder
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
     ->legend('Set your birthday here.') // override the default config legend
     ->hideLegend() // or hide the legend
+    ->hideSuccessFeedback() // override the default config global input show success feedback
+    ->showSuccessFeedback() // override the default config global input show success feedback
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (date-[name])
-    ->containerClass(['container', 'class]) // override the default config container class list
+    ->containerClass(['container', 'class']) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
@@ -270,13 +287,16 @@ bsTime()->name('opening')
     ->label('Opening') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder('Set the shop opening') // override the default placeholder (label)
+    ->hidePlaceholder() // or hide the placeholder
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
     ->legend('Set the shop opening here.') // override the default config legend
     ->hideLegend() // or hide the legend
+    ->hideSuccessFeedback() // override the default config global input show success feedback
+    ->showSuccessFeedback() // override the default config global input show success feedback
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (date-[name])
-    ->containerClass(['container', 'class]) // override the default config container class list
+    ->containerClass(['container', 'class']) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
@@ -291,13 +311,16 @@ bsUrl()->name('facebook_page')
     ->label('Facebook page URL') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder('Set your Facebook page URL') // override the default placeholder (label)
+    ->hidePlaceholder() // or hide the placeholder
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
     ->legend('Set your Facebook page URL here.') // override the default config legend
     ->hideLegend() // or hide the legend
+    ->hideSuccessFeedback() // override the default config global input show success feedback
+    ->showSuccessFeedback() // override the default config global input show success feedback
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (url-[name])
-    ->containerClass(['container', 'class]) // override the default config container class list
+    ->containerClass(['container', 'class']) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
@@ -312,13 +335,16 @@ bsEmail()->name('email')
     ->label('Email') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder('Set your e-mail') // override the default placeholder (label)
+    ->hidePlaceholder() // or hide the placeholder
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
     ->legend('Set your e-mail here.') // override the default config legend
     ->hideLegend() // or hide the legend
+    ->hideSuccessFeedback() // override the default config global input show success feedback
+    ->showSuccessFeedback() // override the default config global input show success feedback
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (email-[name])
-    ->containerClass(['container', 'class]) // override the default config container class list
+    ->containerClass(['container', 'class']) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
@@ -332,14 +358,17 @@ bsColor()->name('color')
     ->value('#ffffff') // or manually set the value
     ->label('Color') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
-    ->placeholder('Choose the color") // override the default placeholder (label)
+    ->placeholder('Choose the color') // override the default placeholder (label)
+    ->hidePlaceholder() // or hide the placeholder
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
     ->legend('Select a color here.') // override the default config legend
     ->hideLegend() // or hide the legend
+    ->hideSuccessFeedback() // override the default config global input show success feedback
+    ->showSuccessFeedback() // override the default config global input show success feedback
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (url-[name])
-    ->containerClass(['container', 'class]) // override the default config container class list
+    ->containerClass(['container', 'class']) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
@@ -354,13 +383,16 @@ bsPassword()->name('password')
     ->label('Password') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder('Set your password') // override the default placeholder (label)
+    ->hidePlaceholder() // or hide the placeholder
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
     ->legend('Set your password here.') // override the default config legend
     ->hideLegend() // or hide the legend
+    ->hideSuccessFeedback() // override the default config global input show success feedback
+    ->showSuccessFeedback() // override the default config global input show success feedback
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (password-[name])
-    ->containerClass(['container', 'class]) // override the default config container class list
+    ->containerClass(['container', 'class']) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
@@ -375,17 +407,20 @@ bsFile()->name('avatar')
     ->label('Avatar') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder('Set your avatar') // override the default placeholder (label)
+    ->hidePlaceholder() // or hide the placeholder
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
     ->legend('Set your avatar here.') // override the default config legend
     ->hideLegend() // or hide the legend
+    ->hideSuccessFeedback() // override the default config global input show success feedback
+    ->showSuccessFeedback() // override the default config global input show success feedback
     ->uploadedFile(function(){
-        return '<div>Some HTML</div>'
+        return '<div>Some HTML</div>';
     })
     -showRemoveCheckbox(true, 'Remove this file') // override the default config show remove checkbox status and the default remove-checkbox label.
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (file-[name])
-    ->containerClass(['container', 'class]) // override the default config container class list
+    ->containerClass(['container', 'class']) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
@@ -407,13 +442,16 @@ bsTextarea()->name('message')
     ->label('Message') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder('Set your message') // override the default placeholder (label)
+    ->hidePlaceholder() // or hide the placeholder
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
     ->legend('Set your message here.') // override the default config legend
     ->hideLegend() // or hide the legend
+    ->hideSuccessFeedback() // override the default config global input show success feedback
+    ->showSuccessFeedback() // override the default config global input show success feedback
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (textarea-[name])
-    ->containerClass(['container', 'class]) // override the default config container class list
+    ->containerClass(['container', 'class']) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
@@ -431,9 +469,11 @@ bsCheckbox()->name('active')
     ->hideIcon() // or hide the icon
     ->legend('Set your active status here.') // override the default config legend
     ->hideLegend() // or hide the legend
+    ->hideSuccessFeedback() // override the default config global input show success feedback
+    ->showSuccessFeedback() // override the default config global input show success feedback
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (checkbox-[name])
-    ->containerClass(['container', 'class]) // override the default config container class list
+    ->containerClass(['container', 'class']) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
@@ -457,9 +497,11 @@ bsToggle()->name('active')
     ->hideIcon() // or hide the icon
     ->legend('Set your active status here.') // override the default config legend
     ->hideLegend() // or hide the legend
+    ->hideSuccessFeedback() // override the default config global input show success feedback
+    ->showSuccessFeedback() // override the default config global input show success feedback
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (toggle-[name])
-    ->containerClass(['container', 'class]) // override the default config container class list
+    ->containerClass(['container', 'class']) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
@@ -488,9 +530,11 @@ bsRadio()->name('gender')
     ->hideIcon() // or hide the icon
     ->legend('Set your gender here.') // override the default config legend
     ->hideLegend() // or hide the legend
+    ->hideSuccessFeedback() // override the default config global input show success feedback
+    ->showSuccessFeedback() // override the default config global input show success feedback
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (radio-[name])
-    ->containerClass(['container', 'class]) // override the default config container class list
+    ->containerClass(['container', 'class']) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
@@ -519,13 +563,16 @@ bsSelect()->name('skills')
     ->label('Skills') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder('Select your skills') // override the default placeholder (label)
+    ->hidePlaceholder() // or hide the placeholder
     ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
     ->hideIcon() // or hide the icon
     ->legend('Select your skills here.') // override the default config legend
     ->hideLegend() // or hide the legend
+    ->hideSuccessFeedback() // override the default config global input show success feedback
+    ->showSuccessFeedback() // override the default config global input show success feedback
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // override the default component id (select-[name])
-    ->containerClass(['container', 'class]) // override the default config container class list
+    ->containerClass(['container', 'class']) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
@@ -563,7 +610,7 @@ bsValidate()->label('Send') // override the default trans('validation.attributes
     ->hideIcon() // or hide the icon
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // set the component id
-    ->containerClass(['container', 'class]) // override the default config container class list
+    ->containerClass(['container', 'class']) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
@@ -578,7 +625,7 @@ bsCreate()->label('Create a new user') // override the default trans('validation
     ->hideIcon() // or hide the icon
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // set the component id
-    ->containerClass(['container', 'class]) // override the default config container class list
+    ->containerClass(['container', 'class']) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
@@ -593,7 +640,7 @@ bsUpdate()->label('Update this user') // override the default trans('validation.
     ->hideIcon() // or hide the icon
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // set the component id
-    ->containerClass(['container', 'class]) // override the default config container class list
+    ->containerClass(['container', 'class']) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
@@ -610,7 +657,7 @@ bsCancel()->url('https://website.com/admin/users') // set the button url
     ->hideIcon() // or hide the icon
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // set the component id
-    ->containerClass(['container', 'class]) // override the default config container class list
+    ->containerClass(['container', 'class']) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
@@ -634,7 +681,7 @@ bsBack()->url('https://website.com/admin/users') // set the button url
     ->hideIcon() // or hide the icon
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // set the component id
-    ->containerClass(['container', 'class]) // override the default config container class list
+    ->containerClass(['container', 'class']) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
@@ -666,7 +713,7 @@ image()->src(https://yourapp.fr/public/media/image-thumb.jpg)
     ->containerId('container-id') // set the container id
     ->linkId('link-id') // set the link id
     ->componentId('component-id') // set the component id
-    ->containerClass(['container', 'class]) // override the default config container class list
+    ->containerClass(['container', 'class']) // override the default config container class list
     ->linkComponentClass(['link', 'component', 'class']) // override the default config link class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
@@ -692,7 +739,7 @@ _Component additional methods :_
 audio()->src(https://yourapp.fr/public/media/audio.mp3)
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // set the component id
-    ->containerClass(['container', 'class]) // override the default config container class list
+    ->containerClass(['container', 'class']) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
@@ -705,7 +752,7 @@ audio()->src(https://yourapp.fr/public/media/video.avi)
     ->poster(https://yourapp.fr/public/media/poster.jpg)
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // set the component id
-    ->containerClass(['container', 'class]) // override the default config container class list
+    ->containerClass(['container', 'class']) // override the default config container class list
     ->componentClass(['component', 'class']) // override the default config component class list
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default config container html attributes list
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default config component html attributes list
