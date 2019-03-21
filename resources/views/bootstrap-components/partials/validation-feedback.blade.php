@@ -4,7 +4,7 @@
             {{ $errors->first($name) }}
         </div>
     @else
-        @if($showSuccessFeedback)
+        @if(!isset($showSuccessFeedback) || $showSuccessFeedback)
             <div class="valid-feedback d-block">
                 {{ trans('bootstrap-components::bootstrap-components.notification.validation.success') }}
             </div>
