@@ -1,6 +1,12 @@
 <?php
 
 return [
+    // global parameters ***********************************************************************************************
+    'global' => [
+        'input' => [
+            'show_success_feedback' => true,
+        ],
+    ],
     // form components *************************************************************************************************
     'form'   => [
         'text'     => [
@@ -16,7 +22,7 @@ return [
                 'component' => [],
             ],
         ],
-        'number'     => [
+        'number'   => [
             'view'            => 'bootstrap-components.form.input',
             'icon'            => '<i class="fas fa-euro-sign"></i>',
             'legend'          => null,
@@ -70,7 +76,7 @@ return [
                 'component' => [],
             ],
         ],
-        'time' => [
+        'time'     => [
             'view'            => 'bootstrap-components.form.input',
             'icon'            => '<i class="fas fa-clock"></i>',
             'format'          => 'H:i:s',
@@ -110,7 +116,7 @@ return [
                 'component' => [],
             ],
         ],
-        'color' => [
+        'color'    => [
             'view'            => 'bootstrap-components.form.input',
             'icon'            => '<i class="fas fa-palette"></i>',
             'legend'          => null,

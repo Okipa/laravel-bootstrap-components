@@ -9,7 +9,6 @@ use Okipa\LaravelBootstrapComponents\Form\Traits\InputValidityChecks;
 abstract class Input extends Component
 {
     use InputValidityChecks;
-    
     /**
      * The component config key.
      *
@@ -49,7 +48,7 @@ abstract class Input extends Component
     /**.
      * The input legend show status.
      *
-     * @property bool $showLabel
+     * @property bool $showLegend
      */
     protected $showLegend = true;
     /**
@@ -77,11 +76,23 @@ abstract class Input extends Component
      */
     protected $value;
     /**
+     * The input placeholder show status.
+     *
+     * @property bool $showPlaceholder
+     */
+    protected $showPlaceholder = true;
+    /**
      * The input placeholder.
      *
      * @property string $placeholder
      */
     protected $placeholder;
+    /**
+     * Show the success feedback
+     *
+     * @property bool $showSuccessFeedback
+     */
+    protected $showSuccessFeedback;
 
     /**
      * Set the input associated model.
@@ -178,6 +189,18 @@ abstract class Input extends Component
     }
 
     /**
+     * Hide the input placeholder.
+     *
+     * @return \Okipa\LaravelBootstrapComponents\Form\Input
+     */
+    public function hidePlaceholder(): Input
+    {
+        $this->showPlaceholder = false;
+
+        return $this;
+    }
+
+    /**
      * Set the input Value.
      *
      * @param mixed $value
@@ -213,6 +236,30 @@ abstract class Input extends Component
     public function hideLabel(): Input
     {
         $this->showLabel = false;
+
+        return $this;
+    }
+
+    /**
+     * Show success feedback
+     *
+     * @return \Okipa\LaravelBootstrapComponents\Component
+     */
+    public function showSuccessFeedback(): Component
+    {
+        $this->showSuccessFeedback = true;
+
+        return $this;
+    }
+
+    /**
+     * Hide success feedback.
+     *
+     * @return \Okipa\LaravelBootstrapComponents\Component
+     */
+    public function hideSuccessFeedback(): Component
+    {
+        $this->showSuccessFeedback = false;
 
         return $this;
     }
@@ -262,7 +309,7 @@ abstract class Input extends Component
     {
         return $this->value ? $this->value : ($this->model ? $this->model->{$this->name} : null);
     }
-    
+
     /**
      * @return array
      */
@@ -275,9 +322,22 @@ abstract class Input extends Component
         $legend = $this->defineLegend();
         $label = $this->showLabel ? $this->defineLabel() : null;
         $value = $this->defineValue();
-        $placeholder = $this->definePlaceholder();
-        
-        return compact('model', 'type', 'name', 'icon', 'legend', 'label', 'value', 'placeholder');
+        $placeholder = $this->showPlaceholder ? $this->definePlaceholder() : null;
+        $showSuccessFeedback = isset($this->showSuccessFeedback)
+            ? $this->showSuccessFeedback
+            : $this->defaultShowSuccessFeedback();
+
+        return compact(
+            'model',
+            'type',
+            'name',
+            'icon',
+            'legend',
+            'label',
+            'value',
+            'placeholder',
+            'showSuccessFeedback'
+        );
     }
 
     /**
@@ -287,7 +347,7 @@ abstract class Input extends Component
     {
         return $this->placeholder ? $this->placeholder : $this->defineLabel();
     }
-    
+
     /**
      * Set the input default icon
      *
@@ -320,5 +380,15 @@ abstract class Input extends Component
     protected function defaultComponentId(): string
     {
         return $this->type . '-' . str_slug($this->name);
+    }
+
+    /**
+     * Set the default Show Success Feedback.
+     *
+     * @return bool
+     */
+    protected function defaultShowSuccessFeedback(): bool
+    {
+        return config('bootstrap-components.global.input.show_success_feedback', true);
     }
 }

@@ -60,7 +60,7 @@ class RadioTest extends BootstrapComponentsTestCase
     {
         $user = $this->createUniqueUser();
         $html = bsRadio()->model($user)->name('name')->toHtml();
-        $this->assertContains('checked="checked"', $html);
+        $this->assertContains('value="' . $user->name . '"', $html);
     }
 
     public function testConfigIcon()
@@ -173,7 +173,7 @@ class RadioTest extends BootstrapComponentsTestCase
     public function testOldValueChecked()
     {
         $oldValue = true;
-        $customValue = false;
+        $customValue = true;
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function () use ($oldValue) {
                 $request = request()->merge(['name' => $oldValue]);
@@ -188,7 +188,7 @@ class RadioTest extends BootstrapComponentsTestCase
     public function testOldValueNotChecked()
     {
         $oldValue = false;
-        $customValue = true;
+        $customValue = false;
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function () use ($oldValue) {
                 $request = request()->merge(['name' => $oldValue]);
@@ -356,5 +356,35 @@ class RadioTest extends BootstrapComponentsTestCase
         $html = bsRadio()->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
         $this->assertContains($customComponentAttributes, $html);
         $this->assertNotContains($configComponentAttributes, $html);
+    }
+
+    public function testConfigShowSuccessFeedback()
+    {
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        config()->set('bootstrap-components.global.input.show_success_feedback', true);
+        $html = bsRadio()->name('name')->render(['errors' => $messageBag]);
+        $this->assertContains('<div class="valid-feedback d-block">', $html);
+    }
+
+    public function testConfigHideSuccessFeedback()
+    {
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        config()->set('bootstrap-components.global.input.show_success_feedback', false);
+        $html = bsRadio()->name('name')->render(['errors' => $messageBag]);
+        $this->assertNotContains('<div class="valid-feedback d-block">', $html);
+    }
+
+    public function testSetShowSuccessFeedback()
+    {
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        $html = bsRadio()->name('name')->showSuccessFeedback()->render(['errors' => $messageBag]);
+        $this->assertContains('<div class="valid-feedback d-block">', $html);
+    }
+
+    public function testSetHideSuccessFeedback()
+    {
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        $html = bsRadio()->name('name')->hideSuccessFeedback()->render(['errors' => $messageBag]);
+        $this->assertNotContains('<div class="valid-feedback d-block">', $html);
     }
 }

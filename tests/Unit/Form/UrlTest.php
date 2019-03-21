@@ -207,6 +207,12 @@ class UrlTest extends BootstrapComponentsTestCase
         $this->assertContains('placeholder="validation.attributes.name"', $html);
     }
 
+    public function testHidePlaceholder()
+    {
+        $html = bsUrl()->name('name')->hidePlaceholder()->toHtml();
+        $this->assertNotContains('placeholder="validation.attributes.name"', $html);
+    }
+
     public function testSuccess()
     {
         $messageBag = app(MessageBag::class)->add('other_name', null);
@@ -337,5 +343,35 @@ class UrlTest extends BootstrapComponentsTestCase
         $html = bsUrl()->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
         $this->assertContains($customComponentAttributes, $html);
         $this->assertNotContains($configComponentAttributes, $html);
+    }
+
+    public function testConfigShowSuccessFeedback()
+    {
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        config()->set('bootstrap-components.global.input.show_success_feedback', true);
+        $html = bsUrl()->name('name')->render(['errors' => $messageBag]);
+        $this->assertContains('<div class="valid-feedback d-block">', $html);
+    }
+
+    public function testConfigHideSuccessFeedback()
+    {
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        config()->set('bootstrap-components.global.input.show_success_feedback', false);
+        $html = bsUrl()->name('name')->render(['errors' => $messageBag]);
+        $this->assertNotContains('<div class="valid-feedback d-block">', $html);
+    }
+
+    public function testSetShowSuccessFeedback()
+    {
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        $html = bsUrl()->name('name')->showSuccessFeedback()->render(['errors' => $messageBag]);
+        $this->assertContains('<div class="valid-feedback d-block">', $html);
+    }
+
+    public function testSetHideSuccessFeedback()
+    {
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        $html = bsUrl()->name('name')->hideSuccessFeedback()->render(['errors' => $messageBag]);
+        $this->assertNotContains('<div class="valid-feedback d-block">', $html);
     }
 }

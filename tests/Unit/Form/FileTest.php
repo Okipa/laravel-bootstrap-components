@@ -166,7 +166,7 @@ class FileTest extends BootstrapComponentsTestCase
             $html
         );
     }
-    
+
     public function testSetLabel()
     {
         $label = 'test-custom-label';
@@ -213,7 +213,7 @@ class FileTest extends BootstrapComponentsTestCase
     public function testSetPlaceholderWithDefaultLabel()
     {
         $placeholder = 'test-custom-placeholder';
-        $label= 'test-custom-label';
+        $label = 'test-custom-label';
         $html = bsFile()->name('name')->placeholder($placeholder)->label($label)->toHtml();
         $this->assertContains(
             '<label class="custom-file-label" for="file-name">'
@@ -246,6 +246,12 @@ class FileTest extends BootstrapComponentsTestCase
             . trans('bootstrap-components::bootstrap-components.label.file') . '</label>',
             $html
         );
+    }
+
+    public function testHidePlaceholder()
+    {
+        $html = bsFile()->name('name')->hidePlaceholder()->toHtml();
+        $this->assertNotContains('placeholder="validation.attributes.name"', $html);
     }
 
     public function testSuccess()
@@ -325,7 +331,7 @@ class FileTest extends BootstrapComponentsTestCase
         $this->assertContains('for="' . $customComponentId . '"', $html);
         $this->assertContains('<input id="' . $customComponentId . '"', $html);
     }
-    
+
     public function testConfigComponentClass()
     {
         $configComponentCLass = 'test-config-class-component';
@@ -468,5 +474,35 @@ class FileTest extends BootstrapComponentsTestCase
         })->showRemoveCheckbox(true, 'Test')->toHtml();
         $this->assertContains('<input id="checkbox-remove-name"', $html);
         $this->assertContains('for="checkbox-remove-name">Test', $html);
+    }
+
+    public function testConfigShowSuccessFeedback()
+    {
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        config()->set('bootstrap-components.global.input.show_success_feedback', true);
+        $html = bsFile()->name('name')->render(['errors' => $messageBag]);
+        $this->assertContains('<div class="valid-feedback d-block">', $html);
+    }
+
+    public function testConfigHideSuccessFeedback()
+    {
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        config()->set('bootstrap-components.global.input.show_success_feedback', false);
+        $html = bsFile()->name('name')->render(['errors' => $messageBag]);
+        $this->assertNotContains('<div class="valid-feedback d-block">', $html);
+    }
+
+    public function testSetShowSuccessFeedback()
+    {
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        $html = bsFile()->name('name')->showSuccessFeedback()->render(['errors' => $messageBag]);
+        $this->assertContains('<div class="valid-feedback d-block">', $html);
+    }
+
+    public function testSetHideSuccessFeedback()
+    {
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        $html = bsFile()->name('name')->hideSuccessFeedback()->render(['errors' => $messageBag]);
+        $this->assertNotContains('<div class="valid-feedback d-block">', $html);
     }
 }

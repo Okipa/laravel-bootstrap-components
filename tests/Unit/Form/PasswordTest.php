@@ -207,6 +207,12 @@ class PasswordTest extends BootstrapComponentsTestCase
         $this->assertContains('placeholder="validation.attributes.name"', $html);
     }
 
+    public function testHidePlaceholder()
+    {
+        $html = bsPassword()->name('name')->hidePlaceholder()->toHtml();
+        $this->assertNotContains('placeholder="validation.attributes.name"', $html);
+    }
+
     public function testSuccess()
     {
         $messageBag = app(MessageBag::class)->add('other_name', null);
@@ -337,5 +343,35 @@ class PasswordTest extends BootstrapComponentsTestCase
         $html = bsPassword()->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
         $this->assertContains($customComponentAttributes, $html);
         $this->assertNotContains($configComponentAttributes, $html);
+    }
+
+    public function testConfigShowSuccessFeedback()
+    {
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        config()->set('bootstrap-components.global.input.show_success_feedback', true);
+        $html = bsPassword()->name('name')->render(['errors' => $messageBag]);
+        $this->assertContains('<div class="valid-feedback d-block">', $html);
+    }
+
+    public function testConfigHideSuccessFeedback()
+    {
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        config()->set('bootstrap-components.global.input.show_success_feedback', false);
+        $html = bsPassword()->name('name')->render(['errors' => $messageBag]);
+        $this->assertNotContains('<div class="valid-feedback d-block">', $html);
+    }
+
+    public function testSetShowSuccessFeedback()
+    {
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        $html = bsPassword()->name('name')->showSuccessFeedback()->render(['errors' => $messageBag]);
+        $this->assertContains('<div class="valid-feedback d-block">', $html);
+    }
+
+    public function testSetHideSuccessFeedback()
+    {
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        $html = bsPassword()->name('name')->hideSuccessFeedback()->render(['errors' => $messageBag]);
+        $this->assertNotContains('<div class="valid-feedback d-block">', $html);
     }
 }
