@@ -14,7 +14,7 @@
             <input id="{{ $componentId }}"
                    type="file"
                    name="{{ $name }}"
-                   {{ classTag('custom-file-input', 'form-control', $type . '-' . str_slug($name) . '-component', $componentClass, validationStatus($name)) }}
+                   {{ classTag('custom-file-input', 'form-control', $type . '-' . str_slug($name) . '-component', $componentClass, validationStatus($name, isset($showSuccessFeedback) ? $showSuccessFeedback : true)) }}
                    lang="{{ app()->getLocale() }}"
                    {{ htmlAttributes($componentHtmlAttributes) }}
                    aria-label="{{ $label }}"

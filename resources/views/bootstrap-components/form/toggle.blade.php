@@ -2,7 +2,7 @@
     {{ classTag($type . '-' . str_slug($name) . '-container', 'switch', 'custom-control', $containerClass) }}
     {{ htmlAttributes($containerHtmlAttributes) }}>
     <input id="{{ $componentId }}"
-           {{ classTag($type . '-' . str_slug($name) . '-component', 'custom-control-input', $componentClass, validationStatus($name)) }}
+           {{ classTag($type . '-' . str_slug($name) . '-component', 'custom-control-input', $componentClass, validationStatus($name, isset($showSuccessFeedback) ? $showSuccessFeedback : true)) }}
            type="checkbox"
            name="{{ $name }}"
         {{ htmlAttributes($componentHtmlAttributes) }}>

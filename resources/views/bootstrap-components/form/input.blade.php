@@ -5,7 +5,7 @@
     <div class="input-group">
         @include('bootstrap-components::bootstrap-components.partials.icon')
         <input id="{{ $componentId }}"
-               {{ classTag('form-control', $type . '-' . str_slug($name) . '-component', $componentClass, validationStatus($name)) }}
+               {{ classTag('form-control', $type . '-' . str_slug($name) . '-component', $componentClass, validationStatus($name, isset($showSuccessFeedback) ? $showSuccessFeedback : true)) }}
                type="{{ $type }}"
                name="{{ $name }}"
                value="{{ old($name, $value) }}"

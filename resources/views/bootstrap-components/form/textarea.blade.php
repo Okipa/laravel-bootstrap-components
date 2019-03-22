@@ -6,7 +6,7 @@
         @include('bootstrap-components::bootstrap-components.partials.icon')
         <textarea id="{{ $componentId }}"
                name="{{ $name }}"
-               {{ classTag('form-control', $type . '-' . str_slug($name) . '-component', $componentClass, validationStatus($name)) }}
+               {{ classTag('form-control', $type . '-' . str_slug($name) . '-component', $componentClass, validationStatus($name, isset($showSuccessFeedback) ? $showSuccessFeedback : true)) }}
                placeholder="{{ $placeholder }}"
                {{ htmlAttributes($componentHtmlAttributes) }}
                aria-label="{{ $label }}"
