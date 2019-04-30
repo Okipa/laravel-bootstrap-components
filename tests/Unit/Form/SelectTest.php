@@ -2,7 +2,9 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
+use Exception;
 use Illuminate\Support\MessageBag;
+use InvalidArgumentException;
 use Okipa\LaravelBootstrapComponents\Form\Input;
 use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
 use Okipa\LaravelBootstrapComponents\Test\Fakers\CompaniesFaker;
@@ -38,29 +40,25 @@ class SelectTest extends BootstrapComponentsTestCase
     public function testName()
     {
         $html = bsSelect()->name('id')->toHtml();
-        $this->assertContains('name="id"', $html);
+        $this->assertStringContainsString('name="id"', $html);
     }
 
     public function testType()
     {
         $html = bsSelect()->name('id')->toHtml();
-        $this->assertContains('<select', $html);
+        $this->assertStringContainsString('<select', $html);
     }
 
-    /**
-     * @expectedException \Exception
-     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Select : Missing $name property. Please use the
-     *                           name() method to set a name.
-     */
     public function testInputWithoutName()
     {
+        $this->expectException(Exception::class);
         bsSelect()->toHtml();
     }
 
     public function testSetNoOptions()
     {
         $html = bsSelect()->name('id')->toHtml();
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<option value="" disabled="disabled" selected="selected">validation.attributes.id</option>',
             $html
         );
@@ -73,28 +71,23 @@ class SelectTest extends BootstrapComponentsTestCase
             ['id' => 2, 'name' => $this->faker->word],
         ];
         $html = bsSelect()->name('id')->options($optionsList, 'id', 'name')->toHtml();
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<option value="" disabled="disabled" selected="selected">validation.attributes.id</option>',
             $html
         );
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<option value="' . $optionsList[0]['id'] . '" >' . $optionsList[0]['name'] . '</option>',
             $html
         );
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<option value="' . $optionsList[1]['id'] . '" >' . $optionsList[1]['name'] . '</option>',
             $html
         );
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Select : Invalid options() second
-     *                           $optionValueField argument. « wrong »  does not exist the given first $optionsList
-     *                           argument.
-     */
     public function testSetOptionsFromArrayWithWrongOptionValueField()
     {
+        $this->expectException(InvalidArgumentException::class);
         $optionsList = [
             ['id' => 1, 'name' => $this->faker->word],
             ['id' => 2, 'name' => $this->faker->word],
@@ -102,14 +95,9 @@ class SelectTest extends BootstrapComponentsTestCase
         bsSelect()->name('id')->options($optionsList, 'wrong', 'name')->toHtml();
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Select : Invalid options() third
-     *                           $optionLabelField argument. « wrong »  does not exist the given first $optionsList
-     *                           argument.
-     */
     public function testSetOptionsFromArrayWithWrongOptionLabelField()
     {
+        $this->expectException(InvalidArgumentException::class);
         $optionsList = [
             ['id' => 1, 'name' => $this->faker->word],
             ['id' => 2, 'name' => $this->faker->word],
@@ -122,34 +110,30 @@ class SelectTest extends BootstrapComponentsTestCase
         $users = $this->createMultipleUsers(2);
         $html = bsSelect()->name('id')->options($users, 'id', 'name')->toHtml();
         $users = $users->toArray();
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<option value="" disabled="disabled" selected="selected">validation.attributes.id</option>',
             $html
         );
-        $this->assertContains('<option value="' . $users[0]['id'] . '" >' . $users[0]['name'] . '</option>', $html);
-        $this->assertContains('<option value="' . $users[1]['id'] . '" >' . $users[1]['name'] . '</option>', $html);
+        $this->assertStringContainsString(
+            '<option value="' . $users[0]['id'] . '" >' . $users[0]['name'] . '</option>',
+            $html
+        );
+        $this->assertStringContainsString(
+            '<option value="' . $users[1]['id'] . '" >' . $users[1]['name'] . '</option>',
+            $html
+        );
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Select : Invalid options() second
-     *                           $optionValueField argument. « wrong »  does not exist the given first $optionsList
-     *                           argument.
-     */
     public function testSetOptionsFromModelsCollectionWithWrongOptionValueField()
     {
+        $this->expectException(InvalidArgumentException::class);
         $users = $this->createMultipleUsers(2);
         bsSelect()->name('id')->options($users, 'wrong', 'name')->toHtml();
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Select : Invalid options() third
-     *                           $optionLabelField argument. « wrong »  does not exist the given first $optionsList
-     *                           argument.
-     */
     public function testSetOptionsFromModelsCollectionWithWrongOptionLabelField()
     {
+        $this->expectException(InvalidArgumentException::class);
         $users = $this->createMultipleUsers(2);
         bsSelect()->name('name')->options($users, 'id', 'wrong')->toHtml();
     }
@@ -160,28 +144,29 @@ class SelectTest extends BootstrapComponentsTestCase
         $user = $users->first();
         $html = bsSelect()->model($user)->name('id')->options($users, 'id', 'name')->toHtml();
         $users = $users->toArray();
-        $this->assertContains('<option value="" disabled="disabled" >validation.attributes.id</option>', $html);
-        $this->assertContains(
+        $this->assertStringContainsString(
+            '<option value="" disabled="disabled" >validation.attributes.id</option>',
+            $html
+        );
+        $this->assertStringContainsString(
             '<option value="' . $users[0]['id'] . '" selected="selected">' . $users[0]['name'] . '</option>',
             $html
         );
-        $this->assertContains('<option value="' . $users[1]['id'] . '" >' . $users[1]['name'] . '</option>', $html);
+        $this->assertStringContainsString(
+            '<option value="' . $users[1]['id'] . '" >' . $users[1]['name'] . '</option>',
+            $html
+        );
     }
 
     public function testSetSelectedOptionWithoutDeclaredOptions()
     {
         $html = bsSelect()->name('id')->selected('id', 1)->toHtml();
-        $this->assertContains('<select', $html);
+        $this->assertStringContainsString('<select', $html);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Select : Invalid selected() second
-     *                           $valueToCompare argument. This argument has to be an array when the bsSelect()
-     *                           component is not in multiple mode : « array » type given.
-     */
     public function testSetSelectedOptionFromWrongTypeValue()
     {
+        $this->expectException(InvalidArgumentException::class);
         $users = $this->createMultipleUsers(2);
         bsSelect()->name('id')
             ->options($users, 'id', 'name')
@@ -199,12 +184,15 @@ class SelectTest extends BootstrapComponentsTestCase
             ->options($users, 'id', 'name')
             ->selected('id', $users->get(1)->id)
             ->toHtml();
-        $this->assertContains('<option value="" disabled="disabled" >validation.attributes.id</option>', $html);
-        $this->assertContains(
+        $this->assertStringContainsString(
+            '<option value="" disabled="disabled" >validation.attributes.id</option>',
+            $html
+        );
+        $this->assertStringContainsString(
             '<option value="' . $users[0]['id'] . '" >' . $users[0]['name'] . '</option>',
             $html
         );
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<option value="' . $users[1]['id'] . '" selected="selected">' . $users[1]['name'] . '</option>',
             $html
         );
@@ -220,12 +208,15 @@ class SelectTest extends BootstrapComponentsTestCase
             ->options($users, 'name', 'name')
             ->selected('name', $users->get(1)->name)
             ->toHtml();
-        $this->assertContains('<option value="" disabled="disabled" >validation.attributes.name</option>', $html);
-        $this->assertContains(
+        $this->assertStringContainsString(
+            '<option value="" disabled="disabled" >validation.attributes.name</option>',
+            $html
+        );
+        $this->assertStringContainsString(
             '<option value="' . $users[0]['name'] . '" >' . $users[0]['name'] . '</option>',
             $html
         );
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<option value="' . $users[1]['name'] . '" selected="selected">' . $users[1]['name'] . '</option>',
             $html
         );
@@ -238,15 +229,15 @@ class SelectTest extends BootstrapComponentsTestCase
             ->name('id')
             ->options($users, 'id', 'name')
             ->toHtml();
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<option value="" disabled="disabled" selected="selected">validation.attributes.id</option>',
             $html
         );
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<option value="' . $users[0]['id'] . '" >' . $users[0]['name'] . '</option>',
             $html
         );
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<option value="' . $users[1]['id'] . '" >' . $users[1]['name'] . '</option>',
             $html
         );
@@ -271,15 +262,15 @@ class SelectTest extends BootstrapComponentsTestCase
             ->selected('id', $custom->id)
             ->options($users, 'id', 'name')
             ->toHtml();
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<option value="' . $custom->id . '" >' . $custom->name . '</option>',
             $html
         );
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<option value="' . $model->id . '" >' . $model->name . '</option>',
             $html
         );
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<option value="' . $old->id . '" selected="selected">' . $old->name . '</option>',
             $html
         );
@@ -289,36 +280,31 @@ class SelectTest extends BootstrapComponentsTestCase
     {
         $companies = $this->createMultipleCompanies(5);
         $html = bsSelect()->name('companies')->options($companies, 'id', 'name')->multiple()->toHtml();
-        $this->assertContains('companies[]', $html);
-        $this->assertContains('multiple>', $html);
+        $this->assertStringContainsString('companies[]', $html);
+        $this->assertStringContainsString('multiple>', $html);
     }
-    
+
     public function testSelectMultipleWithModelAndNonExistentAttribute()
     {
         $user = $this->createUniqueUser();
         $companies = $this->createMultipleCompanies(5);
         $user->companies = $companies->take(2)->pluck('id')->toArray();
         $html = bsSelect()->name('wrong')->model($user)->options($companies, 'id', 'name')->multiple()->toHtml();
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<option value="" disabled="disabled" selected="selected">validation.attributes.wrong</option>',
             $html
         );
         foreach ($companies as $company) {
-            $this->assertContains(
+            $this->assertStringContainsString(
                 '<option value="' . $company->id . '" >' . $company->name . '</option>',
                 $html
             );
         }
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Select : The « companies » attribute from the
-     *                           given « Okipa\LaravelBootstrapComponents\Test\Models\User » model has to be an array
-     *                           when the select is in multiple mode : « object » type given.
-     */
     public function testSelectMultipleWithModelAndWrongAttributeType()
     {
+        $this->expectException(InvalidArgumentException::class);
         $user = $this->createUniqueUser();
         $companies = $this->createMultipleCompanies(5);
         $user->companies = $companies->take(2)->pluck('id');
@@ -331,12 +317,12 @@ class SelectTest extends BootstrapComponentsTestCase
         $companies = $this->createMultipleCompanies(5);
         $user->companies = [];
         $html = bsSelect()->model($user)->name('companies')->options($companies, 'id', 'name')->multiple()->toHtml();
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<option value="" disabled="disabled" selected="selected">validation.attributes.companies</option>',
             $html
         );
         foreach ($companies as $company) {
-            $this->assertContains(
+            $this->assertStringContainsString(
                 '<option value="' . $company->id . '" >' . $company->name . '</option>',
                 $html
             );
@@ -349,12 +335,12 @@ class SelectTest extends BootstrapComponentsTestCase
         $companies = $this->createMultipleCompanies(5);
         $user->companies = $companies->take(2)->pluck('id')->toArray();
         $html = bsSelect()->model($user)->name('companies')->options($companies, 'id', 'name')->multiple()->toHtml();
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<option value="" disabled="disabled" >validation.attributes.companies</option>',
             $html
         );
         foreach ($companies as $company) {
-            $this->assertContains(
+            $this->assertStringContainsString(
                 '<option value="' . $company->id . '" ' . (in_array($company->id, $user->companies)
                     ? 'selected="selected"'
                     : '') . '>' . $company->name . '</option>',
@@ -371,26 +357,21 @@ class SelectTest extends BootstrapComponentsTestCase
             ->multiple()
             ->selected('id', [])
             ->toHtml();
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<option value="" disabled="disabled" selected="selected">validation.attributes.companies</option>',
             $html
         );
         foreach ($companies as $company) {
-            $this->assertContains(
+            $this->assertStringContainsString(
                 '<option value="' . $company->id . '" >' . $company->name . '</option>',
                 $html
             );
         }
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Select : Invalid selected() second
-     *                           $valueToCompare argument. This argument has to be an array when the bsSelect()
-     *                           component is in multiple mode : « string » type given.
-     */
     public function testSetSelectedMultipleOptionsFromWrongTypeValue()
     {
+        $this->expectException(InvalidArgumentException::class);
         $companies = $this->createMultipleCompanies(5);
         bsSelect()->name('companies')
             ->options($companies, 'id', 'name')
@@ -411,9 +392,12 @@ class SelectTest extends BootstrapComponentsTestCase
             ->multiple()
             ->selected('id', $selectedCompanies)
             ->toHtml();
-        $this->assertContains('<option value="" disabled="disabled" >validation.attributes.companies</option>', $html);
+        $this->assertStringContainsString(
+            '<option value="" disabled="disabled" >validation.attributes.companies</option>',
+            $html
+        );
         foreach ($companies as $company) {
-            $this->assertContains(
+            $this->assertStringContainsString(
                 '<option value="' . $company->id . '" ' . (in_array($company->id, $selectedCompanies)
                     ? 'selected="selected"'
                     : '') . '>' . $company->name . '</option>',
@@ -434,9 +418,12 @@ class SelectTest extends BootstrapComponentsTestCase
             ->multiple()
             ->selected('name', $selectedCompanies)
             ->toHtml();
-        $this->assertContains('<option value="" disabled="disabled" >validation.attributes.companies</option>', $html);
+        $this->assertStringContainsString(
+            '<option value="" disabled="disabled" >validation.attributes.companies</option>',
+            $html
+        );
         foreach ($companies as $company) {
-            $this->assertContains(
+            $this->assertStringContainsString(
                 '<option value="' . $company->id . '" ' . (in_array($company->name, $selectedCompanies)
                     ? 'selected="selected"'
                     : '') . '>' . $company->name . '</option>',
@@ -466,9 +453,12 @@ class SelectTest extends BootstrapComponentsTestCase
             ->multiple()
             ->selected('id', $selectedCompanies)
             ->toHtml();
-        $this->assertContains('<option value="" disabled="disabled" >validation.attributes.companies</option>', $html);
+        $this->assertStringContainsString(
+            '<option value="" disabled="disabled" >validation.attributes.companies</option>',
+            $html
+        );
         foreach ($companies as $company) {
-            $this->assertContains(
+            $this->assertStringContainsString(
                 '<option value="' . $company->id . '" ' . (in_array($company->id, $oldCompanies)
                     ? 'selected="selected"'
                     : '') . '>' . $company->name . '</option>',
@@ -482,7 +472,10 @@ class SelectTest extends BootstrapComponentsTestCase
         $configIcon = 'test-config-icon';
         config()->set('bootstrap-components.form.select.icon', $configIcon);
         $html = bsSelect()->name('name')->toHtml();
-        $this->assertContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
+        $this->assertStringContainsString(
+            '<span class="icon input-group-text">' . $configIcon . '</span>',
+            $html
+        );
     }
 
     public function testSetIcon()
@@ -491,15 +484,24 @@ class SelectTest extends BootstrapComponentsTestCase
         $customIcon = 'test-custom-icon';
         config()->set('bootstrap-components.form.select.icon', $configIcon);
         $html = bsSelect()->name('name')->icon($customIcon)->toHtml();
-        $this->assertContains('<span class="icon input-group-text">' . $customIcon . '</span>', $html);
-        $this->assertNotContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
+        $this->assertStringContainsString(
+            '<span class="icon input-group-text">' . $customIcon . '</span>',
+            $html
+        );
+        $this->assertStringNotContainsString(
+            '<span class="icon input-group-text">' . $configIcon . '</span>',
+            $html
+        );
     }
 
     public function testNoIcon()
     {
         config()->set('bootstrap-components.form.select.icon', null);
         $html = bsSelect()->name('name')->toHtml();
-        $this->assertNotContains('<span class="icon input-group-text">', $html);
+        $this->assertStringNotContainsString(
+            '<span class="icon input-group-text">',
+            $html
+        );
     }
 
     public function testHideIcon()
@@ -507,7 +509,10 @@ class SelectTest extends BootstrapComponentsTestCase
         $configIcon = 'test-config-icon';
         config()->set('bootstrap-components.form.select.icon', $configIcon);
         $html = bsSelect()->name('name')->hideIcon()->toHtml();
-        $this->assertNotContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
+        $this->assertStringNotContainsString(
+            '<span class="icon input-group-text">' . $configIcon . '</span>',
+            $html
+        );
     }
 
     public function testConfigLegend()
@@ -515,9 +520,9 @@ class SelectTest extends BootstrapComponentsTestCase
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.select.legend', $configLegend);
         $html = bsSelect()->name('name')->toHtml();
-        $this->assertContains(
-            '<small id="select-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend
-            . '</small>',
+        $this->assertStringContainsString(
+            '<small id="select-name-legend" class="form-text text-muted">bootstrap-components::'
+            . $configLegend . '</small>',
             $html
         );
     }
@@ -528,13 +533,13 @@ class SelectTest extends BootstrapComponentsTestCase
         $customLegend = 'test-custom-legend';
         config()->set('bootstrap-components.form.select.legend', $configLegend);
         $html = bsSelect()->name('name')->legend($customLegend)->toHtml();
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<small id="select-name-legend" class="form-text text-muted">' . $customLegend . '</small>',
             $html
         );
-        $this->assertNotContains(
-            '<small id="select-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend
-            . '</small>',
+        $this->assertStringNotContainsString(
+            '<small id="select-name-legend" class="form-text text-muted">bootstrap-components::'
+            . $configLegend . '</small>',
             $html
         );
     }
@@ -543,7 +548,10 @@ class SelectTest extends BootstrapComponentsTestCase
     {
         config()->set('bootstrap-components.form.select.legend', null);
         $html = bsSelect()->name('name')->toHtml();
-        $this->assertNotContains('<small id="select-name-legend" class="form-text text-muted">', $html);
+        $this->assertStringNotContainsString(
+            '<small id="select-name-legend" class="form-text text-muted">',
+            $html
+        );
     }
 
     public function testHideLegend()
@@ -551,15 +559,18 @@ class SelectTest extends BootstrapComponentsTestCase
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.select.legend', $configLegend);
         $html = bsSelect()->name('name')->hideLegend()->toHtml();
-        $this->assertNotContains('<small id="select-name-legend" class="form-text text-muted">', $html);
+        $this->assertStringNotContainsString(
+            '<small id="select-name-legend" class="form-text text-muted">',
+            $html
+        );
     }
 
     public function testSetLabel()
     {
         $label = 'test-custom-label';
         $html = bsSelect()->name('name')->label($label)->toHtml();
-        $this->assertContains('<label for="select-name">' . $label . '</label>', $html);
-        $this->assertContains(
+        $this->assertStringContainsString('<label for="select-name">' . $label . '</label>', $html);
+        $this->assertStringContainsString(
             '<option value="" disabled="disabled" selected="selected">' . $label . '</option>',
             $html
         );
@@ -568,20 +579,26 @@ class SelectTest extends BootstrapComponentsTestCase
     public function testNoLabel()
     {
         $html = bsSelect()->name('name')->toHtml();
-        $this->assertContains('<label for="select-name">validation.attributes.name</label>', $html);
+        $this->assertStringContainsString(
+            '<label for="select-name">validation.attributes.name</label>',
+            $html
+        );
     }
 
     public function testHideLabel()
     {
         $html = bsSelect()->name('name')->hideLabel()->toHtml();
-        $this->assertNotContains('<label for="select-name">validation.attributes.name</label>', $html);
+        $this->assertStringNotContainsString(
+            '<label for="select-name">validation.attributes.name</label>',
+            $html
+        );
     }
 
     public function testSetPlaceholder()
     {
         $placeholder = 'test-custom-placeholder';
         $html = bsSelect()->name('name')->placeholder($placeholder)->toHtml();
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<option value="" disabled="disabled" selected="selected">' . $placeholder . '</option>',
             $html
         );
@@ -592,7 +609,7 @@ class SelectTest extends BootstrapComponentsTestCase
         $label = 'test-custom-label';
         $placeholder = 'test-custom-placeholder';
         $html = bsSelect()->name('name')->label($label)->placeholder($placeholder)->toHtml();
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<option value="" disabled="disabled" selected="selected">' . $placeholder . '</option>',
             $html
         );
@@ -601,7 +618,7 @@ class SelectTest extends BootstrapComponentsTestCase
     public function testNoPlaceholder()
     {
         $html = bsSelect()->name('name')->toHtml();
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<option value="" disabled="disabled" selected="selected">validation.attributes.name</option>',
             $html
         );
@@ -611,8 +628,8 @@ class SelectTest extends BootstrapComponentsTestCase
     {
         $messageBag = app(MessageBag::class)->add('other_name', null);
         $html = bsSelect()->name('name')->render(['errors' => $messageBag]);
-        $this->assertContains('<div class="valid-feedback d-block">', $html);
-        $this->assertContains(
+        $this->assertStringContainsString('<div class="valid-feedback d-block">', $html);
+        $this->assertStringContainsString(
             trans('bootstrap-components::bootstrap-components.notification.validation.success'),
             $html
         );
@@ -621,7 +638,7 @@ class SelectTest extends BootstrapComponentsTestCase
     public function testNoSuccess()
     {
         $html = bsSelect()->name('name')->toHtml();
-        $this->assertNotContains('<div class="valid-feedback d-block">', $html);
+        $this->assertStringNotContainsString('<div class="valid-feedback d-block">', $html);
     }
 
     public function testError()
@@ -629,50 +646,50 @@ class SelectTest extends BootstrapComponentsTestCase
         $errorMessage = 'This a test error message';
         $messageBag = app(MessageBag::class)->add('name', $errorMessage);
         $html = bsSelect()->name('name')->render(['errors' => $messageBag]);
-        $this->assertContains('<div class="invalid-feedback d-block">', $html);
-        $this->assertContains($errorMessage, $html);
+        $this->assertStringContainsString('<div class="invalid-feedback d-block">', $html);
+        $this->assertStringContainsString($errorMessage, $html);
     }
 
     public function testNoError()
     {
         $html = bsSelect()->name('name')->toHtml();
-        $this->assertNotContains('<div class="invalid-feedback d-block">', $html);
+        $this->assertStringNotContainsString('<div class="invalid-feedback d-block">', $html);
     }
 
     public function testSetNoContainerId()
     {
         $html = bsSelect()->name('name')->toHtml();
-        $this->assertNotContains('<div id="', $html);
+        $this->assertStringNotContainsString('<div id="', $html);
     }
 
     public function testSetContainerId()
     {
         $customContainerId = 'test-custom-container-id';
         $html = bsSelect()->name('name')->containerId($customContainerId)->toHtml();
-        $this->assertContains('<div id="' . $customContainerId, $html);
+        $this->assertStringContainsString('<div id="' . $customContainerId, $html);
     }
 
     public function testSetNoComponentId()
     {
         $html = bsSelect()->name('name')->toHtml();
-        $this->assertContains('for="select-name"', $html);
-        $this->assertContains('<select id="select-name"', $html);
+        $this->assertStringContainsString('for="select-name"', $html);
+        $this->assertStringContainsString('<select id="select-name"', $html);
     }
 
     public function testSetComponentId()
     {
         $customComponentId = 'test-custom-component-id';
         $html = bsSelect()->name('name')->componentId($customComponentId)->toHtml();
-        $this->assertContains('for="' . $customComponentId . '"', $html);
-        $this->assertContains('<select id="' . $customComponentId . '"', $html);
+        $this->assertStringContainsString('for="' . $customComponentId . '"', $html);
+        $this->assertStringContainsString('<select id="' . $customComponentId . '"', $html);
     }
-    
+
     public function testConfigContainerClass()
     {
         $configContainerCLass = 'test-config-class-container';
         config()->set('bootstrap-components.form.select.class.container', [$configContainerCLass]);
         $html = bsSelect()->name('name')->toHtml();
-        $this->assertContains(
+        $this->assertStringContainsString(
             'class="select-name-container ' . $configContainerCLass . '"',
             $html
         );
@@ -684,11 +701,11 @@ class SelectTest extends BootstrapComponentsTestCase
         $customContainerCLass = 'test-custom-class-container';
         config()->set('bootstrap-components.form.select.class.container', [$configContainerCLass]);
         $html = bsSelect()->name('name')->containerClass([$customContainerCLass])->toHtml();
-        $this->assertContains(
+        $this->assertStringContainsString(
             'class="select-name-container ' . $customContainerCLass . '"',
             $html
         );
-        $this->assertNotContains(
+        $this->assertStringNotContainsString(
             'class="select-name-container ' . $configContainerCLass . '"',
             $html
         );
@@ -699,7 +716,10 @@ class SelectTest extends BootstrapComponentsTestCase
         $configComponentCLass = 'test-config-class-component';
         config()->set('bootstrap-components.form.select.class.component', [$configComponentCLass]);
         $html = bsSelect()->name('name')->toHtml();
-        $this->assertContains('class="select-name-component custom-select ' . $configComponentCLass . '"', $html);
+        $this->assertStringContainsString(
+            'class="select-name-component custom-select ' . $configComponentCLass . '"',
+            $html
+        );
     }
 
     public function testSetComponentClass()
@@ -708,8 +728,14 @@ class SelectTest extends BootstrapComponentsTestCase
         $customComponentCLass = 'test-custom-class-component';
         config()->set('bootstrap-components.form.select.class.component', [$customComponentCLass]);
         $html = bsSelect()->name('name')->componentClass([$customComponentCLass])->toHtml();
-        $this->assertContains('class="select-name-component custom-select ' . $customComponentCLass . '"', $html);
-        $this->assertNotContains('class="form-control select-name-component ' . $configComponentCLass . '"', $html);
+        $this->assertStringContainsString(
+            'class="select-name-component custom-select ' . $customComponentCLass . '"',
+            $html
+        );
+        $this->assertStringNotContainsString(
+            'class="form-control select-name-component ' . $configComponentCLass . '"',
+            $html
+        );
     }
 
     public function testConfigContainerHtmlAttributes()
@@ -717,7 +743,7 @@ class SelectTest extends BootstrapComponentsTestCase
         $configContainerAttributes = 'test-config-attributes-container';
         config()->set('bootstrap-components.form.select.html_attributes.container', [$configContainerAttributes]);
         $html = bsSelect()->name('name')->toHtml();
-        $this->assertContains($configContainerAttributes, $html);
+        $this->assertStringContainsString($configContainerAttributes, $html);
     }
 
     public function testSetContainerHtmlAttributes()
@@ -726,8 +752,8 @@ class SelectTest extends BootstrapComponentsTestCase
         $customContainerAttributes = 'test-custom-attributes-container';
         config()->set('bootstrap-components.form.select.html_attributes.container', [$configContainerAttributes]);
         $html = bsSelect()->name('name')->containerHtmlAttributes([$customContainerAttributes])->toHtml();
-        $this->assertContains($customContainerAttributes, $html);
-        $this->assertNotContains($configContainerAttributes, $html);
+        $this->assertStringContainsString($customContainerAttributes, $html);
+        $this->assertStringNotContainsString($configContainerAttributes, $html);
     }
 
     public function testConfigComponentHtmlAttributes()
@@ -735,7 +761,7 @@ class SelectTest extends BootstrapComponentsTestCase
         $configComponentAttributes = 'test-config-attributes-component';
         config()->set('bootstrap-components.form.select.html_attributes.component', [$configComponentAttributes]);
         $html = bsSelect()->name('name')->toHtml();
-        $this->assertContains($configComponentAttributes, $html);
+        $this->assertStringContainsString($configComponentAttributes, $html);
     }
 
     public function testSetComponentHtmlAttributes()
@@ -744,7 +770,7 @@ class SelectTest extends BootstrapComponentsTestCase
         $customComponentAttributes = 'test-custom-attributes-component';
         config()->set('bootstrap-components.form.select.html_attributes.component', [$configComponentAttributes]);
         $html = bsSelect()->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
-        $this->assertContains($customComponentAttributes, $html);
-        $this->assertNotContains($configComponentAttributes, $html);
+        $this->assertStringContainsString($customComponentAttributes, $html);
+        $this->assertStringNotContainsString($configComponentAttributes, $html);
     }
 }

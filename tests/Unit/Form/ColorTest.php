@@ -2,6 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
+use Exception;
 use Illuminate\Support\MessageBag;
 use Okipa\LaravelBootstrapComponents\Form\Input;
 use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
@@ -37,22 +38,18 @@ class ColorTest extends BootstrapComponentsTestCase
     public function testName()
     {
         $html = bsColor()->name('name')->toHtml();
-        $this->assertContains('name="name"', $html);
+        $this->assertStringContainsString('name="name"', $html);
     }
 
     public function testType()
     {
         $html = bsColor()->name('name')->toHtml();
-        $this->assertContains('type="color"', $html);
+        $this->assertStringContainsString('type="color"', $html);
     }
 
-    /**
-     * @expectedException \Exception
-     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Color : Missing $name property. Please use the
-     *                           name() method to set a name.
-     */
     public function testInputWithoutName()
     {
+        $this->expectException(Exception::class);
         bsColor()->toHtml();
     }
 
@@ -60,7 +57,7 @@ class ColorTest extends BootstrapComponentsTestCase
     {
         $user = $this->createUniqueUser();
         $html = bsColor()->model($user)->name('name')->toHtml();
-        $this->assertContains('value="' . $user->name . '"', $html);
+        $this->assertStringContainsString('value="' . $user->name . '"', $html);
     }
 
     public function testConfigIcon()
@@ -68,7 +65,10 @@ class ColorTest extends BootstrapComponentsTestCase
         $configIcon = 'test-config-icon';
         config()->set('bootstrap-components.form.color.icon', $configIcon);
         $html = bsColor()->name('name')->toHtml();
-        $this->assertContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
+        $this->assertStringContainsString(
+            '<span class="icon input-group-text">' . $configIcon . '</span>',
+            $html
+        );
     }
 
     public function testSetIcon()
@@ -77,15 +77,21 @@ class ColorTest extends BootstrapComponentsTestCase
         $customIcon = 'test-custom-icon';
         config()->set('bootstrap-components.form.color.icon', $configIcon);
         $html = bsColor()->name('name')->icon($customIcon)->toHtml();
-        $this->assertContains('<span class="icon input-group-text">' . $customIcon . '</span>', $html);
-        $this->assertNotContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
+        $this->assertStringContainsString(
+            '<span class="icon input-group-text">' . $customIcon . '</span>',
+            $html
+        );
+        $this->assertStringNotContainsString(
+            '<span class="icon input-group-text">' . $configIcon . '</span>',
+            $html
+        );
     }
 
     public function testNoIcon()
     {
         config()->set('bootstrap-components.form.color.icon', null);
         $html = bsColor()->name('name')->toHtml();
-        $this->assertNotContains('<span class="icon input-group-text">', $html);
+        $this->assertStringNotContainsString('<span class="icon input-group-text">', $html);
     }
 
     public function testHideIcon()
@@ -93,7 +99,10 @@ class ColorTest extends BootstrapComponentsTestCase
         $configIcon = 'test-config-icon';
         config()->set('bootstrap-components.form.color.icon', $configIcon);
         $html = bsColor()->name('name')->hideIcon()->toHtml();
-        $this->assertNotContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
+        $this->assertStringNotContainsString(
+            '<span class="icon input-group-text">' . $configIcon . '</span>',
+            $html
+        );
     }
 
     public function testConfigLegend()
@@ -101,7 +110,7 @@ class ColorTest extends BootstrapComponentsTestCase
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.color.legend', $configLegend);
         $html = bsColor()->name('name')->toHtml();
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<small id="color-name-legend" class="form-text text-muted">bootstrap-components::'
             . $configLegend . '</small>',
             $html
@@ -114,11 +123,11 @@ class ColorTest extends BootstrapComponentsTestCase
         $customLegend = 'test-custom-legend';
         config()->set('bootstrap-components.form.color.legend', $configLegend);
         $html = bsColor()->name('name')->legend($customLegend)->toHtml();
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<small id="color-name-legend" class="form-text text-muted">' . $customLegend . '</small>',
             $html
         );
-        $this->assertNotContains(
+        $this->assertStringNotContainsString(
             '<small id="color-name-legend" class="form-text text-muted">bootstrap-components::'
             . $configLegend . '</small>',
             $html
@@ -129,7 +138,10 @@ class ColorTest extends BootstrapComponentsTestCase
     {
         config()->set('bootstrap-components.form.color.legend', null);
         $html = bsColor()->name('name')->toHtml();
-        $this->assertNotContains('<small id="color-name-legend" class="form-text text-muted">', $html);
+        $this->assertStringNotContainsString(
+            '<small id="color-name-legend" class="form-text text-muted">',
+            $html
+        );
     }
 
     public function testHideLegend()
@@ -137,14 +149,17 @@ class ColorTest extends BootstrapComponentsTestCase
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.color.legend', $configLegend);
         $html = bsColor()->name('name')->hideLegend()->toHtml();
-        $this->assertNotContains('<small id="color-name-legend" class="form-text text-muted">', $html);
+        $this->assertStringNotContainsString(
+            '<small id="color-name-legend" class="form-text text-muted">',
+            $html
+        );
     }
 
     public function testSetValue()
     {
         $customValue = 'test-custom-value';
         $html = bsColor()->name('name')->value($customValue)->toHtml();
-        $this->assertContains('value="' . $customValue . '"', $html);
+        $this->assertStringContainsString('value="' . $customValue . '"', $html);
     }
 
     public function testOldValue()
@@ -159,38 +174,50 @@ class ColorTest extends BootstrapComponentsTestCase
         ]);
         $this->call('GET', 'test');
         $html = bsColor()->name('name')->value($customValue)->toHtml();
-        $this->assertContains('value="' . $oldValue . '"', $html);
-        $this->assertNotContains('value="' . $customValue . '"', $html);
+        $this->assertStringContainsString('value="' . $oldValue . '"', $html);
+        $this->assertStringNotContainsString('value="' . $customValue . '"', $html);
     }
 
     public function testSetLabel()
     {
         $label = 'test-custom-label';
         $html = bsColor()->name('name')->label($label)->toHtml();
-        $this->assertContains('<label for="color-name">' . $label . '</label>', $html);
-        $this->assertContains('placeholder="' . $label . '"', $html);
-        $this->assertContains('aria-label="' . $label . '"', $html);
+        $this->assertStringContainsString('<label for="color-name">' . $label . '</label>', $html);
+        $this->assertStringContainsString('placeholder="' . $label . '"', $html);
+        $this->assertStringContainsString('aria-label="' . $label . '"', $html);
     }
 
     public function testNoLabel()
     {
         $html = bsColor()->name('name')->toHtml();
-        $this->assertContains('<label for="color-name">validation.attributes.name</label>', $html);
-        $this->assertContains('aria-label="validation.attributes.name"', $html);
+        $this->assertStringContainsString(
+            '<label for="color-name">validation.attributes.name</label>',
+            $html
+        );
+        $this->assertStringContainsString(
+            'aria-label="validation.attributes.name"',
+            $html
+        );
     }
 
     public function testHideLabel()
     {
         $html = bsColor()->name('name')->hideLabel()->toHtml();
-        $this->assertNotContains('<label for="color-name">validation.attributes.name</label>', $html);
-        $this->assertNotContains('aria-label="validation.attributes.name"', $html);
+        $this->assertStringNotContainsString(
+            '<label for="color-name">validation.attributes.name</label>',
+            $html
+        );
+        $this->assertStringNotContainsString(
+            'aria-label="validation.attributes.name"',
+            $html
+        );
     }
 
     public function testSetPlaceholder()
     {
         $placeholder = 'test-custom-placeholder';
         $html = bsColor()->name('name')->placeholder($placeholder)->toHtml();
-        $this->assertContains('placeholder="' . $placeholder . '"', $html);
+        $this->assertStringContainsString('placeholder="' . $placeholder . '"', $html);
     }
 
     public function testSetPlaceholderWithLabel()
@@ -198,21 +225,21 @@ class ColorTest extends BootstrapComponentsTestCase
         $label = 'test-custom-label';
         $placeholder = 'test-custom-placeholder';
         $html = bsColor()->name('name')->label($label)->placeholder($placeholder)->toHtml();
-        $this->assertContains('placeholder="' . $placeholder . '"', $html);
+        $this->assertStringContainsString('placeholder="' . $placeholder . '"', $html);
     }
 
     public function testNoPlaceholder()
     {
         $html = bsColor()->name('name')->toHtml();
-        $this->assertContains('placeholder="validation.attributes.name"', $html);
+        $this->assertStringContainsString('placeholder="validation.attributes.name"', $html);
     }
 
     public function testSuccess()
     {
         $messageBag = app(MessageBag::class)->add('other_name', null);
         $html = bsColor()->name('name')->render(['errors' => $messageBag]);
-        $this->assertContains('<div class="valid-feedback d-block">', $html);
-        $this->assertContains(
+        $this->assertStringContainsString('<div class="valid-feedback d-block">', $html);
+        $this->assertStringContainsString(
             trans('bootstrap-components::bootstrap-components.notification.validation.success'),
             $html
         );
@@ -221,7 +248,7 @@ class ColorTest extends BootstrapComponentsTestCase
     public function testNoSuccess()
     {
         $html = bsColor()->name('name')->toHtml();
-        $this->assertNotContains('<div class="valid-feedback d-block">', $html);
+        $this->assertStringNotContainsString('<div class="valid-feedback d-block">', $html);
     }
 
     public function testError()
@@ -229,42 +256,42 @@ class ColorTest extends BootstrapComponentsTestCase
         $errorMessage = 'This a test error message';
         $messageBag = app(MessageBag::class)->add('name', $errorMessage);
         $html = bsColor()->name('name')->render(['errors' => $messageBag]);
-        $this->assertContains('<div class="invalid-feedback d-block">', $html);
-        $this->assertContains($errorMessage, $html);
+        $this->assertStringContainsString('<div class="invalid-feedback d-block">', $html);
+        $this->assertStringContainsString($errorMessage, $html);
     }
 
     public function testNoError()
     {
         $html = bsColor()->name('name')->toHtml();
-        $this->assertNotContains('<div class="invalid-feedback d-block">', $html);
+        $this->assertStringNotContainsString('<div class="invalid-feedback d-block">', $html);
     }
 
     public function testSetNoContainerId()
     {
         $html = bsColor()->name('name')->toHtml();
-        $this->assertNotContains('<div id="', $html);
+        $this->assertStringNotContainsString('<div id="', $html);
     }
 
     public function testSetContainerId()
     {
         $customContainerId = 'test-custom-container-id';
         $html = bsColor()->name('name')->containerId($customContainerId)->toHtml();
-        $this->assertContains('<div id="' . $customContainerId . '"', $html);
+        $this->assertStringContainsString('<div id="' . $customContainerId . '"', $html);
     }
 
     public function testSetNoComponentId()
     {
         $html = bsColor()->name('name')->toHtml();
-        $this->assertContains('for="color-name"', $html);
-        $this->assertContains('<input id="color-name"', $html);
+        $this->assertStringContainsString('for="color-name"', $html);
+        $this->assertStringContainsString('<input id="color-name"', $html);
     }
 
     public function testSetComponentId()
     {
         $customComponentId = 'test-custom-component-id';
         $html = bsColor()->name('name')->componentId($customComponentId)->toHtml();
-        $this->assertContains('for="' . $customComponentId . '"', $html);
-        $this->assertContains('<input id="' . $customComponentId . '"', $html);
+        $this->assertStringContainsString('for="' . $customComponentId . '"', $html);
+        $this->assertStringContainsString('<input id="' . $customComponentId . '"', $html);
     }
 
     public function testConfigContainerClass()
@@ -272,7 +299,10 @@ class ColorTest extends BootstrapComponentsTestCase
         $configContainerCLass = 'test-config-class-container';
         config()->set('bootstrap-components.form.color.class.container', [$configContainerCLass]);
         $html = bsColor()->name('name')->toHtml();
-        $this->assertContains('class="color-name-container ' . $configContainerCLass . '"', $html);
+        $this->assertStringContainsString(
+            'class="color-name-container ' . $configContainerCLass . '"',
+            $html
+        );
     }
 
     public function testSetContainerClass()
@@ -281,8 +311,14 @@ class ColorTest extends BootstrapComponentsTestCase
         $customContainerCLass = 'test-custom-class-container';
         config()->set('bootstrap-components.form.color.class.container', [$configContainerCLass]);
         $html = bsColor()->name('name')->containerClass([$customContainerCLass])->toHtml();
-        $this->assertContains('class="color-name-container ' . $customContainerCLass . '"', $html);
-        $this->assertNotContains('class="color-name-container ' . $configContainerCLass . '"', $html);
+        $this->assertStringContainsString(
+            'class="color-name-container ' . $customContainerCLass . '"',
+            $html
+        );
+        $this->assertStringNotContainsString(
+            'class="color-name-container ' . $configContainerCLass . '"',
+            $html
+        );
     }
 
     public function testConfigComponentClass()
@@ -290,7 +326,10 @@ class ColorTest extends BootstrapComponentsTestCase
         $configComponentCLass = 'test-config-class-component';
         config()->set('bootstrap-components.form.color.class.component', [$configComponentCLass]);
         $html = bsColor()->name('name')->toHtml();
-        $this->assertContains('class="form-control color-name-component ' . $configComponentCLass . '"', $html);
+        $this->assertStringContainsString(
+            'class="form-control color-name-component ' . $configComponentCLass . '"',
+            $html
+        );
     }
 
     public function testSetComponentClass()
@@ -299,8 +338,14 @@ class ColorTest extends BootstrapComponentsTestCase
         $customComponentCLass = 'test-custom-class-component';
         config()->set('bootstrap-components.form.color.class.component', [$customComponentCLass]);
         $html = bsColor()->name('name')->componentClass([$customComponentCLass])->toHtml();
-        $this->assertContains('class="form-control color-name-component ' . $customComponentCLass . '"', $html);
-        $this->assertNotContains('class="form-control color-name-component ' . $configComponentCLass . '"', $html);
+        $this->assertStringContainsString(
+            'class="form-control color-name-component ' . $customComponentCLass . '"',
+            $html
+        );
+        $this->assertStringNotContainsString(
+            'class="form-control color-name-component ' . $configComponentCLass . '"',
+            $html
+        );
     }
 
     public function testConfigContainerHtmlAttributes()
@@ -308,7 +353,7 @@ class ColorTest extends BootstrapComponentsTestCase
         $configContainerAttributes = 'test-config-attributes-container';
         config()->set('bootstrap-components.form.color.html_attributes.container', [$configContainerAttributes]);
         $html = bsColor()->name('name')->toHtml();
-        $this->assertContains($configContainerAttributes, $html);
+        $this->assertStringContainsString($configContainerAttributes, $html);
     }
 
     public function testSetContainerHtmlAttributes()
@@ -317,8 +362,8 @@ class ColorTest extends BootstrapComponentsTestCase
         $customContainerAttributes = 'test-custom-attributes-container';
         config()->set('bootstrap-components.form.color.html_attributes.container', [$configContainerAttributes]);
         $html = bsColor()->name('name')->containerHtmlAttributes([$customContainerAttributes])->toHtml();
-        $this->assertContains($customContainerAttributes, $html);
-        $this->assertNotContains($configContainerAttributes, $html);
+        $this->assertStringContainsString($customContainerAttributes, $html);
+        $this->assertStringNotContainsString($configContainerAttributes, $html);
     }
 
     public function testConfigComponentHtmlAttributes()
@@ -326,7 +371,7 @@ class ColorTest extends BootstrapComponentsTestCase
         $configComponentAttributes = 'test-config-attributes-component';
         config()->set('bootstrap-components.form.color.html_attributes.component', [$configComponentAttributes]);
         $html = bsColor()->name('name')->toHtml();
-        $this->assertContains($configComponentAttributes, $html);
+        $this->assertStringContainsString($configComponentAttributes, $html);
     }
 
     public function testSetComponentHtmlAttributes()
@@ -335,7 +380,7 @@ class ColorTest extends BootstrapComponentsTestCase
         $customComponentAttributes = 'test-custom-attributes-component';
         config()->set('bootstrap-components.form.color.html_attributes.component', [$configComponentAttributes]);
         $html = bsColor()->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
-        $this->assertContains($customComponentAttributes, $html);
-        $this->assertNotContains($configComponentAttributes, $html);
+        $this->assertStringContainsString($customComponentAttributes, $html);
+        $this->assertStringNotContainsString($configComponentAttributes, $html);
     }
 }

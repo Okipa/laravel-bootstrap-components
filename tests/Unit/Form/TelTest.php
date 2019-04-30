@@ -2,7 +2,9 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
+use Exception;
 use Illuminate\Support\MessageBag;
+use InvalidArgumentException;
 use Okipa\LaravelBootstrapComponents\Form\Input;
 use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
 use Okipa\LaravelBootstrapComponents\Test\Fakers\UsersFaker;
@@ -37,22 +39,18 @@ class TelTest extends BootstrapComponentsTestCase
     public function testSetName()
     {
         $html = bsTel()->name('name')->toHtml();
-        $this->assertContains('name="name"', $html);
+        $this->assertStringContainsString('name="name"', $html);
     }
 
     public function testType()
     {
         $html = bsTel()->name('name')->toHtml();
-        $this->assertContains('type="tel"', $html);
+        $this->assertStringContainsString('type="tel"', $html);
     }
 
-    /**
-     * @expectedException \Exception
-     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Tel : Missing $name property. Please use the
-     *                           name() method to set a name.
-     */
     public function testInputWithoutName()
     {
+        $this->expectException(Exception::class);
         bsTel()->toHtml();
     }
 
@@ -60,7 +58,7 @@ class TelTest extends BootstrapComponentsTestCase
     {
         $user = $this->createUniqueUser();
         $html = bsTel()->model($user)->name('name')->toHtml();
-        $this->assertContains('value="' . $user->name . '"', $html);
+        $this->assertStringContainsString('value="' . $user->name . '"', $html);
     }
 
     public function testConfigIcon()
@@ -68,7 +66,10 @@ class TelTest extends BootstrapComponentsTestCase
         $configIcon = 'test-config-icon';
         config()->set('bootstrap-components.form.tel.icon', $configIcon);
         $html = bsTel()->name('name')->toHtml();
-        $this->assertContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
+        $this->assertStringContainsString(
+            '<span class="icon input-group-text">' . $configIcon . '</span>',
+            $html
+        );
     }
 
     public function testSetIcon()
@@ -77,15 +78,21 @@ class TelTest extends BootstrapComponentsTestCase
         $customIcon = 'test-custom-icon';
         config()->set('bootstrap-components.form.tel.icon', $configIcon);
         $html = bsTel()->name('name')->icon($customIcon)->toHtml();
-        $this->assertContains('<span class="icon input-group-text">' . $customIcon . '</span>', $html);
-        $this->assertNotContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
+        $this->assertStringContainsString(
+            '<span class="icon input-group-text">' . $customIcon . '</span>',
+            $html
+        );
+        $this->assertStringNotContainsString(
+            '<span class="icon input-group-text">' . $configIcon . '</span>',
+            $html
+        );
     }
 
     public function testNoIcon()
     {
         config()->set('bootstrap-components.form.tel.icon', null);
         $html = bsTel()->name('name')->toHtml();
-        $this->assertNotContains('<span class="icon input-group-text">', $html);
+        $this->assertStringNotContainsString('<span class="icon input-group-text">', $html);
     }
 
     public function testHideIcon()
@@ -93,7 +100,10 @@ class TelTest extends BootstrapComponentsTestCase
         $configIcon = 'test-config-icon';
         config()->set('bootstrap-components.form.tel.icon', $configIcon);
         $html = bsTel()->name('name')->hideIcon()->toHtml();
-        $this->assertNotContains('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
+        $this->assertStringNotContainsString(
+            '<span class="icon input-group-text">' . $configIcon . '</span>',
+            $html
+        );
     }
 
     public function testConfigLegend()
@@ -101,7 +111,7 @@ class TelTest extends BootstrapComponentsTestCase
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.tel.legend', $configLegend);
         $html = bsTel()->name('name')->toHtml();
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<small id="tel-name-legend" class="form-text text-muted">bootstrap-components::'
             . $configLegend . '</small>',
             $html
@@ -114,11 +124,11 @@ class TelTest extends BootstrapComponentsTestCase
         $customLegend = 'test-custom-legend';
         config()->set('bootstrap-components.form.tel.legend', $configLegend);
         $html = bsTel()->name('name')->legend($customLegend)->toHtml();
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<small id="tel-name-legend" class="form-text text-muted">' . $customLegend . '</small>',
             $html
         );
-        $this->assertNotContains(
+        $this->assertStringNotContainsString(
             '<small id="tel-name-legend" class="form-text text-muted">bootstrap-components::'
             . $configLegend . '</small>',
             $html
@@ -129,7 +139,10 @@ class TelTest extends BootstrapComponentsTestCase
     {
         config()->set('bootstrap-components.form.tel.legend', null);
         $html = bsTel()->name('name')->toHtml();
-        $this->assertNotContains('<small id="tel-name-legend" class="form-text text-muted">"', $html);
+        $this->assertStringNotContainsString(
+            '<small id="tel-name-legend" class="form-text text-muted">"',
+            $html
+        );
     }
 
     public function testHideLegend()
@@ -137,14 +150,17 @@ class TelTest extends BootstrapComponentsTestCase
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.tel.legend', $configLegend);
         $html = bsTel()->name('name')->hideLegend()->toHtml();
-        $this->assertNotContains('<small id="tel-name-legend" class="form-text text-muted">', $html);
+        $this->assertStringNotContainsString(
+            '<small id="tel-name-legend" class="form-text text-muted">',
+            $html
+        );
     }
 
     public function testSetValue()
     {
         $customValue = 'test-custom-value';
         $html = bsTel()->name('name')->value($customValue)->toHtml();
-        $this->assertContains('value="' . $customValue . '"', $html);
+        $this->assertStringContainsString('value="' . $customValue . '"', $html);
     }
 
     public function testOldValue()
@@ -159,38 +175,50 @@ class TelTest extends BootstrapComponentsTestCase
         ]);
         $this->call('GET', 'test');
         $html = bsTel()->name('name')->value($customValue)->toHtml();
-        $this->assertContains('value="' . $oldValue . '"', $html);
-        $this->assertNotContains('value="' . $customValue . '"', $html);
+        $this->assertStringContainsString('value="' . $oldValue . '"', $html);
+        $this->assertStringNotContainsString('value="' . $customValue . '"', $html);
     }
 
     public function testSetLabel()
     {
         $label = 'test-custom-label';
         $html = bsTel()->name('name')->label($label)->toHtml();
-        $this->assertContains('<label for="tel-name">' . $label . '</label>', $html);
-        $this->assertContains('placeholder="' . $label . '"', $html);
-        $this->assertContains('aria-label="' . $label . '"', $html);
+        $this->assertStringContainsString('<label for="tel-name">' . $label . '</label>', $html);
+        $this->assertStringContainsString('placeholder="' . $label . '"', $html);
+        $this->assertStringContainsString('aria-label="' . $label . '"', $html);
     }
 
     public function testNoLabel()
     {
         $html = bsTel()->name('name')->toHtml();
-        $this->assertContains('<label for="tel-name">validation.attributes.name</label>', $html);
-        $this->assertContains('aria-label="validation.attributes.name"', $html);
+        $this->assertStringContainsString(
+            '<label for="tel-name">validation.attributes.name</label>',
+            $html
+        );
+        $this->assertStringContainsString(
+            'aria-label="validation.attributes.name"',
+            $html
+        );
     }
 
     public function testHideLabel()
     {
         $html = bsTel()->name('name')->hideLabel()->toHtml();
-        $this->assertNotContains('<label for="tel-name">validation.attributes.name</label>', $html);
-        $this->assertNotContains('aria-label="validation.attributes.name"', $html);
+        $this->assertStringNotContainsString(
+            '<label for="tel-name">validation.attributes.name</label>',
+            $html
+        );
+        $this->assertStringNotContainsString(
+            'aria-label="validation.attributes.name"',
+            $html
+        );
     }
 
     public function testSetPlaceholder()
     {
         $placeholder = 'test-custom-placeholder';
         $html = bsTel()->name('name')->placeholder($placeholder)->toHtml();
-        $this->assertContains('placeholder="' . $placeholder . '"', $html);
+        $this->assertStringContainsString('placeholder="' . $placeholder . '"', $html);
     }
 
     public function testSetPlaceholderWithLabel()
@@ -198,21 +226,21 @@ class TelTest extends BootstrapComponentsTestCase
         $label = 'test-custom-label';
         $placeholder = 'test-custom-placeholder';
         $html = bsTel()->name('name')->label($label)->placeholder($placeholder)->toHtml();
-        $this->assertContains('placeholder="' . $placeholder . '"', $html);
+        $this->assertStringContainsString('placeholder="' . $placeholder . '"', $html);
     }
 
     public function testNoPlaceholder()
     {
         $html = bsTel()->name('name')->toHtml();
-        $this->assertContains('placeholder="validation.attributes.name"', $html);
+        $this->assertStringContainsString('placeholder="validation.attributes.name"', $html);
     }
 
     public function testSuccess()
     {
         $messageBag = app(MessageBag::class)->add('other_name', null);
         $html = bsTel()->name('name')->render(['errors' => $messageBag]);
-        $this->assertContains('<div class="valid-feedback d-block">', $html);
-        $this->assertContains(
+        $this->assertStringContainsString('<div class="valid-feedback d-block">', $html);
+        $this->assertStringContainsString(
             trans('bootstrap-components::bootstrap-components.notification.validation.success'),
             $html
         );
@@ -221,7 +249,7 @@ class TelTest extends BootstrapComponentsTestCase
     public function testNoSuccess()
     {
         $html = bsTel()->name('name')->toHtml();
-        $this->assertNotContains('<div class="valid-feedback d-block">', $html);
+        $this->assertStringNotContainsString('<div class="valid-feedback d-block">', $html);
     }
 
     public function testError()
@@ -229,42 +257,42 @@ class TelTest extends BootstrapComponentsTestCase
         $errorMessage = 'This a test error message';
         $messageBag = app(MessageBag::class)->add('name', $errorMessage);
         $html = bsTel()->name('name')->render(['errors' => $messageBag]);
-        $this->assertContains('<div class="invalid-feedback d-block">', $html);
-        $this->assertContains($errorMessage, $html);
+        $this->assertStringContainsString('<div class="invalid-feedback d-block">', $html);
+        $this->assertStringContainsString($errorMessage, $html);
     }
 
     public function testNoError()
     {
         $html = bsTel()->name('name')->toHtml();
-        $this->assertNotContains('<div class="invalid-feedback d-block">', $html);
+        $this->assertStringNotContainsString('<div class="invalid-feedback d-block">', $html);
     }
 
     public function testSetNoContainerId()
     {
         $html = bsTel()->name('name')->toHtml();
-        $this->assertNotContains('<div id="', $html);
+        $this->assertStringNotContainsString('<div id="', $html);
     }
 
     public function testSetContainerId()
     {
         $customContainerId = 'test-custom-container-id';
         $html = bsTel()->name('name')->containerId($customContainerId)->toHtml();
-        $this->assertContains('<div id="' . $customContainerId, $html);
+        $this->assertStringContainsString('<div id="' . $customContainerId, $html);
     }
 
     public function testSetNoComponentId()
     {
         $html = bsTel()->name('name')->toHtml();
-        $this->assertContains('for="tel-name"', $html);
-        $this->assertContains('<input id="tel-name"', $html);
+        $this->assertStringContainsString('for="tel-name"', $html);
+        $this->assertStringContainsString('<input id="tel-name"', $html);
     }
 
     public function testSetComponentId()
     {
         $customComponentId = 'test-custom-component-id';
         $html = bsTel()->name('name')->componentId($customComponentId)->toHtml();
-        $this->assertContains('for="' . $customComponentId . '"', $html);
-        $this->assertContains('<input id="' . $customComponentId . '"', $html);
+        $this->assertStringContainsString('for="' . $customComponentId . '"', $html);
+        $this->assertStringContainsString('<input id="' . $customComponentId . '"', $html);
     }
 
     public function testConfigContainerClass()
@@ -272,7 +300,7 @@ class TelTest extends BootstrapComponentsTestCase
         $configContainerCLass = 'test-config-class-container';
         config()->set('bootstrap-components.form.tel.class.container', [$configContainerCLass]);
         $html = bsTel()->name('name')->toHtml();
-        $this->assertContains('class="tel-name-container ' . $configContainerCLass . '"', $html);
+        $this->assertStringContainsString('class="tel-name-container ' . $configContainerCLass . '"', $html);
     }
 
     public function testSetContainerClass()
@@ -281,8 +309,14 @@ class TelTest extends BootstrapComponentsTestCase
         $customContainerCLass = 'test-custom-class-container';
         config()->set('bootstrap-components.form.tel.class.container', [$configContainerCLass]);
         $html = bsTel()->name('name')->containerClass([$customContainerCLass])->toHtml();
-        $this->assertContains('class="tel-name-container ' . $customContainerCLass . '"', $html);
-        $this->assertNotContains('class="tel-name-container ' . $configContainerCLass . '"', $html);
+        $this->assertStringContainsString(
+            'class="tel-name-container ' . $customContainerCLass . '"',
+            $html
+        );
+        $this->assertStringNotContainsString(
+            'class="tel-name-container ' . $configContainerCLass . '"',
+            $html
+        );
     }
 
     public function testConfigComponentClass()
@@ -290,7 +324,10 @@ class TelTest extends BootstrapComponentsTestCase
         $configComponentCLass = 'test-config-class-component';
         config()->set('bootstrap-components.form.tel.class.component', [$configComponentCLass]);
         $html = bsTel()->name('name')->toHtml();
-        $this->assertContains('class="form-control tel-name-component ' . $configComponentCLass . '"', $html);
+        $this->assertStringContainsString(
+            'class="form-control tel-name-component ' . $configComponentCLass . '"',
+            $html
+        );
     }
 
     public function testSetComponentClass()
@@ -299,8 +336,14 @@ class TelTest extends BootstrapComponentsTestCase
         $customComponentCLass = 'test-custom-class-component';
         config()->set('bootstrap-components.form.tel.class.component', [$customComponentCLass]);
         $html = bsTel()->name('name')->componentClass([$customComponentCLass])->toHtml();
-        $this->assertContains('class="form-control tel-name-component ' . $customComponentCLass . '"', $html);
-        $this->assertNotContains('class="form-control tel-name-component ' . $configComponentCLass . '"', $html);
+        $this->assertStringContainsString(
+            'class="form-control tel-name-component ' . $customComponentCLass . '"',
+            $html
+        );
+        $this->assertStringNotContainsString(
+            'class="form-control tel-name-component ' . $configComponentCLass . '"',
+            $html
+        );
     }
 
     public function testConfigContainerHtmlAttributes()
@@ -308,7 +351,7 @@ class TelTest extends BootstrapComponentsTestCase
         $configContainerAttributes = 'test-config-attributes-container';
         config()->set('bootstrap-components.form.tel.html_attributes.container', [$configContainerAttributes]);
         $html = bsTel()->name('name')->toHtml();
-        $this->assertContains($configContainerAttributes, $html);
+        $this->assertStringContainsString($configContainerAttributes, $html);
     }
 
     public function testSetContainerHtmlAttributes()
@@ -317,8 +360,8 @@ class TelTest extends BootstrapComponentsTestCase
         $customContainerAttributes = 'test-custom-attributes-container';
         config()->set('bootstrap-components.form.tel.html_attributes.container', [$configContainerAttributes]);
         $html = bsTel()->name('name')->containerHtmlAttributes([$customContainerAttributes])->toHtml();
-        $this->assertContains($customContainerAttributes, $html);
-        $this->assertNotContains($configContainerAttributes, $html);
+        $this->assertStringContainsString($customContainerAttributes, $html);
+        $this->assertStringNotContainsString($configContainerAttributes, $html);
     }
 
     public function testConfigComponentHtmlAttributes()
@@ -326,7 +369,7 @@ class TelTest extends BootstrapComponentsTestCase
         $configComponentAttributes = 'test-config-attributes-component';
         config()->set('bootstrap-components.form.tel.html_attributes.component', [$configComponentAttributes]);
         $html = bsTel()->name('name')->toHtml();
-        $this->assertContains($configComponentAttributes, $html);
+        $this->assertStringContainsString($configComponentAttributes, $html);
     }
 
     public function testSetComponentHtmlAttributes()
@@ -335,7 +378,7 @@ class TelTest extends BootstrapComponentsTestCase
         $customComponentAttributes = 'test-custom-attributes-component';
         config()->set('bootstrap-components.form.tel.html_attributes.component', [$configComponentAttributes]);
         $html = bsTel()->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
-        $this->assertContains($customComponentAttributes, $html);
-        $this->assertNotContains($configComponentAttributes, $html);
+        $this->assertStringContainsString($customComponentAttributes, $html);
+        $this->assertStringNotContainsString($configComponentAttributes, $html);
     }
 }
