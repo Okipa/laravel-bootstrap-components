@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.5.10](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.5.10)
+## [0.6.1](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.5.10)
 2019-04-30 
 - Updated `bsToggle()` default style to fix the default component background color since bootstrap `$custom-control-indicator-bg` sass variable has now `white` for value.
 
