@@ -188,33 +188,18 @@ abstract class Component implements Htmlable
      */
     protected function values(): array
     {
-        $componentId = $this->componentId
-            ? $this->componentId
-            : $this->defaultComponentId();
-        $containerId = $this->containerId
-            ? $this->containerId
-            : $this->defaultContainerId();
-        $componentClass = $this->componentClass
-            ? $this->componentClass
-            : $this->defaultComponentClass();
-        $containerClass = $this->containerClass
-            ? $this->containerClass
-            : $this->defaultContainerClass();
-        $componentHtmlAttributes = $this->componentHtmlAttributes
-            ? $this->componentHtmlAttributes
-            : $this->defaultComponentHtmlAttributes();
-        $containerHtmlAttributes = $this->containerHtmlAttributes
-            ? $this->containerHtmlAttributes
-            : $this->defaultContainerHtmlAttributes();
-
-        return compact(
-            'componentId',
-            'containerId',
-            'componentClass',
-            'containerClass',
-            'componentHtmlAttributes',
-            'containerHtmlAttributes'
-        );
+        return [
+            'componentId'             => $this->componentId ? $this->componentId : $this->defaultComponentId(),
+            'containerId'             => $this->containerId ? $this->containerId : $this->defaultContainerId(),
+            'componentClass'          => $this->componentClass ? $this->componentClass : $this->defaultComponentClass(),
+            'containerClass'          => $this->containerClass ? $this->containerClass : $this->defaultContainerClass(),
+            'componentHtmlAttributes' => $this->componentHtmlAttributes
+                ? $this->componentHtmlAttributes
+                : $this->defaultComponentHtmlAttributes(),
+            'containerHtmlAttributes' => $this->containerHtmlAttributes
+                ? $this->containerHtmlAttributes
+                : $this->defaultContainerHtmlAttributes(),
+        ];
     }
 
     /**

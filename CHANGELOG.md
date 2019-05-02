@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.7.0)
+2019-01-28  
+:warning: **Breaking changes** :warning:
+- Replaced `->icon()` method by `->prepend()` for `Button` and `Form` components.
+- Added `->append()` for `Button` and `Form` components.
+- Removed `hideIcon()` method for `Button` and `Form` components. Hiding a prepended or appended html element can now be done with `->prepend(false)` or `->append(false)`.
+
 ## [0.6.1](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.6.1)
 2019-04-30 
 - Updated `bsToggle()` default style to fix the default component background color since bootstrap `$custom-control-indicator-bg` sass variable has now `white` for value.

@@ -18,7 +18,8 @@ class TextareaTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('textarea', config('bootstrap-components.form')));
         // components.form.textarea
         $this->assertTrue(array_key_exists('view', config('bootstrap-components.form.textarea')));
-        $this->assertTrue(array_key_exists('icon', config('bootstrap-components.form.textarea')));
+        $this->assertTrue(array_key_exists('prepend', config('bootstrap-components.form.textarea')));
+        $this->assertTrue(array_key_exists('append', config('bootstrap-components.form.textarea')));
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.textarea')));
         $this->assertTrue(array_key_exists('class', config('bootstrap-components.form.textarea')));
         $this->assertTrue(array_key_exists('html_attributes', config('bootstrap-components.form.textarea')));
@@ -63,46 +64,92 @@ class TextareaTest extends BootstrapComponentsTestCase
         );
     }
 
-    public function testConfigIcon()
+    public function testConfigPrepend()
     {
-        $configIcon = 'test-config-icon';
-        config()->set('bootstrap-components.form.textarea.icon', $configIcon);
+        $configPrepend = 'test-config-prepend';
+        config()->set('bootstrap-components.form.textarea.prepend', $configPrepend);
         $html = bsTextarea()->name('name')->toHtml();
-        $this->assertStringContainsString(
-            '<span class="icon input-group-text">' . $configIcon . '</span>',
-            $html
-        );
+        $this->assertStringContainsString('input-group-prepend', $html);
+        $this->assertStringContainsString('<span class="input-group-text">' . $configPrepend . '</span>', $html);
     }
 
-    public function testSetIcon()
+    public function testSetPrepend()
     {
-        $configIcon = 'test-config-icon';
-        $customIcon = 'test-custom-icon';
-        config()->set('bootstrap-components.form.textarea.icon', $configIcon);
-        $html = bsTextarea()->name('name')->icon($customIcon)->toHtml();
-        $this->assertStringContainsString(
-            '<span class="icon input-group-text">' . $customIcon . '</span>',
-            $html
-        );
-        $this->assertStringNotContainsString(
-            '<span class="icon input-group-text">' . $configIcon . '</span>',
-            $html
-        );
+        $configPrepend = 'test-config-prepend';
+        $customPrepend = 'test-custom-prepend';
+        config()->set('bootstrap-components.form.textarea.prepend', $configPrepend);
+        $html = bsTextarea()->name('name')->prepend($customPrepend)->toHtml();
+        $this->assertStringContainsString('input-group-prepend', $html);
+        $this->assertStringContainsString('<span class="input-group-text">' . $customPrepend . '</span>', $html);
+        $this->assertStringNotContainsString('<span class="input-group-text">' . $configPrepend . '</span>', $html);
     }
 
-    public function testNoIcon()
+    public function testNoPrepend()
     {
-        config()->set('bootstrap-components.form.textarea.icon', null);
+        config()->set('bootstrap-components.form.textarea.prepend', null);
         $html = bsTextarea()->name('name')->toHtml();
-        $this->assertStringNotContainsString('<span class="icon input-group-text">', $html);
+        $this->assertStringNotContainsString('input-group-prepend', $html);
     }
 
-    public function testHideIcon()
+    public function testHidePrepend()
     {
-        $configIcon = 'test-config-icon';
-        config()->set('bootstrap-components.form.textarea.icon', $configIcon);
-        $html = bsTextarea()->name('name')->hideIcon()->toHtml();
-        $this->assertStringNotContainsString('<span class="icon input-group-text">' . $configIcon . '</span>', $html);
+        $configPrepend = 'test-config-prepend';
+        config()->set('bootstrap-components.form.textarea.prepend', $configPrepend);
+        $html = bsTextarea()->name('name')->prepend(false)->toHtml();
+        $this->assertStringNotContainsString('input-group-prepend', $html);
+    }
+
+    public function testConfigAppend()
+    {
+        $configAppend = 'test-config-append';
+        config()->set('bootstrap-components.form.textarea.append', $configAppend);
+        $html = bsTextarea()->name('name')->toHtml();
+        $this->assertStringContainsString('input-group-append', $html);
+        $this->assertStringContainsString('<span class="input-group-text">' . $configAppend . '</span>', $html);
+    }
+
+    public function testSetAppend()
+    {
+        $configAppend = 'test-config-append';
+        $customAppend = 'test-custom-append';
+        config()->set('bootstrap-components.form.textarea.append', $configAppend);
+        $html = bsTextarea()->name('name')->append($customAppend)->toHtml();
+        $this->assertStringContainsString('input-group-append', $html);
+        $this->assertStringContainsString('<span class="input-group-text">' . $customAppend . '</span>', $html);
+        $this->assertStringNotContainsString('<span class="input-group-text">' . $configAppend . '</span>', $html);
+    }
+
+    public function testNoAppend()
+    {
+        config()->set('bootstrap-components.form.textarea.append', null);
+        $html = bsTextarea()->name('name')->toHtml();
+        $this->assertStringNotContainsString('input-group-append', $html);
+    }
+
+    public function testHideAppend()
+    {
+        $configAppend = 'test-config-append';
+        config()->set('bootstrap-components.form.textarea.append', $configAppend);
+        $html = bsTextarea()->name('name')->append(false)->toHtml();
+        $this->assertStringNotContainsString('input-group-append', $html);
+    }
+
+    public function testNoPrependNoAppend()
+    {
+        config()->set('bootstrap-components.form.textarea.prepend', null);
+        config()->set('bootstrap-components.form.textarea.append', null);
+        $html = bsTextarea()->name('name')->toHtml();
+        $this->assertStringNotContainsString('<div class="input-group">', $html);
+    }
+
+    public function testHidePrependHideAppend()
+    {
+        $configPrepend = 'test-config-prepend';
+        $configAppend = 'test-config-append';
+        config()->set('bootstrap-components.form.textarea.prepend', $configPrepend);
+        config()->set('bootstrap-components.form.textarea.append', $configAppend);
+        $html = bsTextarea()->name('name')->prepend(false)->append(false)->toHtml();
+        $this->assertStringNotContainsString('<div class="input-group">', $html);
     }
 
     public function testConfigLegend()

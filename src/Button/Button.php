@@ -24,18 +24,18 @@ abstract class Button extends Component
      * @property string $url
      */
     protected $url;
-    /**.
-     * The button icon show status.
-     *
-     * @property bool $showIcon
-     */
-    protected $showIcon = true;
     /**
-     * The button icon.
+     * The component prepended html.
      *
-     * @property string $icon
+     * @property string $prepend
      */
-    protected $icon;
+    protected $prepend;
+    /**
+     * The component appended html.
+     *
+     * @property string $append
+     */
+    protected $append;
     /**.
      * The button label show status.
      *
@@ -81,7 +81,7 @@ abstract class Button extends Component
      * Set the button route (only used for « button » type).
      *
      * @param string $route
-     * @param array  $params
+     * @param array $params
      *
      * @return \Okipa\LaravelBootstrapComponents\Button\Button
      */
@@ -93,27 +93,29 @@ abstract class Button extends Component
     }
 
     /**
-     * Set the button icon.
+     * Prepend html to the component label.
      *
-     * @param string $icon
+     * @param string|null $html
      *
      * @return \Okipa\LaravelBootstrapComponents\Button\Button
      */
-    public function icon(string $icon): Button
+    public function prepend(?string $html): Button
     {
-        $this->icon = $icon;
+        $this->prepend = $html;
 
         return $this;
     }
 
     /**
-     * Hide the button icon.
+     * Append html to the component label.
+     *
+     * @param string|null $html
      *
      * @return \Okipa\LaravelBootstrapComponents\Button\Button
      */
-    public function hideIcon(): Button
+    public function append(?string $html): Button
     {
-        $this->showIcon = false;
+        $this->append = $html;
 
         return $this;
     }
@@ -145,33 +147,43 @@ abstract class Button extends Component
     }
 
     /**
-     * Set the button values.
+     * Set the values for the view.
      *
      * @return array
      */
     protected function values(): array
     {
-        return array_merge(parent::values(), [
-            'type'  => $this->type,
-            'url'   => $this->url ? $this->url : url()->previous(),
-            'icon'  => $this->showIcon ? ($this->icon ? $this->icon : $this->defaultIcon()) : '',
-            'label' => $this->showLabel ? ($this->label
-                ? $this->label
-                : $this->defaultLabel()
-            ) : '',
-        ]);
+        return array_merge(parent::values(), $this->defineValues());
     }
 
     /**
-     * Set the input default icon
-     *
-     * @return string
+     * @return array
      */
-    protected function defaultIcon(): string
+    protected function defineValues(): array
     {
-        $icon = config('bootstrap-components.' . $this->configKey . '.icon');
+        return [
+            'type'    => $this->type,
+            'url'     => $this->url ? $this->url : url()->previous(),
+            'prepend' => $this->prepend ?? $this->defaultPrepend(),
+            'append'  => $this->append ?? $this->defaultAppend(),
+            'label'   => $this->showLabel ? ($this->label ? $this->label : $this->defaultLabel()) : '',
+        ];
+    }
 
-        return $icon ? $icon : '';
+    /**
+     * @return string|null
+     */
+    protected function defaultPrepend(): ?string
+    {
+        return config('bootstrap-components.' . $this->configKey . '.prepend') ?? null;
+    }
+
+    /**
+     * @return string|null
+     */
+    protected function defaultAppend(): ?string
+    {
+        return config('bootstrap-components.' . $this->configKey . '.append') ?? null;
     }
 
     /**

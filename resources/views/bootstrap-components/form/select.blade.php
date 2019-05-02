@@ -1,11 +1,13 @@
 <div {{ htmlAttributes($containerId ? ['id' => $containerId] : null) }}
-    {{ classTag($type . '-' . str_slug($name) . '-container', $containerClass) }}
+    {{ classTag($type . '-' . Str::slug($name) . '-container', $containerClass) }}
     {{ htmlAttributes($containerHtmlAttributes) }}>
     @include('bootstrap-components::bootstrap-components.partials.label')
-    <div class="input-group">
-        @include('bootstrap-components::bootstrap-components.partials.icon')
+    @if(! empty($prepend) || ! empty($append))
+        <div class="input-group">
+    @endif
+        @include('bootstrap-components::bootstrap-components.partials.prepend')
         <select id="{{ $componentId }}"
-                {{ classTag($type . '-' . str_slug($name) . '-component', 'custom-select', $componentClass, validationStatus($name)) }}
+                {{ classTag($type . '-' . Str::slug($name) . '-component', 'custom-select', $componentClass, validationStatus($name)) }}
                 name="{{ $name . ($multiple ? '[]' : '') }}"
                 {{ htmlAttributes($multiple ? 'multiple' : null, $componentHtmlAttributes) }}>
             <option value="" disabled="disabled" {{ htmlAttributes(count(array_filter(array_pluck($options, 'selected'))) 
@@ -17,7 +19,10 @@
                         : null) }}>{{ $option[$optionLabelField] }}</option>
             @endforeach
         </select>
-    </div>
+        @include('bootstrap-components::bootstrap-components.partials.append')
+    @if(! empty($prepend) || ! empty($append))
+        </div>
+    @endif
     @include('bootstrap-components::bootstrap-components.partials.validation-feedback')
     @include('bootstrap-components::bootstrap-components.partials.legend')
 </div>

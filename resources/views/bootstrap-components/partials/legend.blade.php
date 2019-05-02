@@ -1,3 +1,3 @@
 @if(!empty($legend))
-    <small id="{{ $type }}-{{ str_slug($name) }}-legend" class="form-text text-muted">{!! $legend !!}</small>
+    <small id="{{ $type }}-{{ Str::slug($name) }}-legend" class="form-text text-muted">{!! $legend !!}</small>
 @endif

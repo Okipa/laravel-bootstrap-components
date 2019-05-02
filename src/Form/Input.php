@@ -9,7 +9,6 @@ use Okipa\LaravelBootstrapComponents\Form\Traits\InputValidityChecks;
 abstract class Input extends Component
 {
     use InputValidityChecks;
-    
     /**
      * The component config key.
      *
@@ -17,74 +16,74 @@ abstract class Input extends Component
      */
     protected $configKey;
     /**
-     * The input associated model.
+     * The component associated model.
      *
      * @property \Illuminate\Database\Eloquent\Model $model
      */
     protected $model;
     /**
-     * The input type.
+     * The component input type.
      *
      * @property string $type
      */
     protected $type;
     /**
-     * The input name.
+     * The component input name.
      *
      * @property string $name
      */
     protected $name;
-    /**.
-     * The input icon show status.
-     *
-     * @property bool $showIcon
-     */
-    protected $showIcon = true;
     /**
-     * The input icon.
+     * The component prepended html.
      *
-     * @property string $icon
+     * @property string $prepend
      */
-    protected $icon;
+    protected $prepend;
+    /**
+     * The component appended html.
+     *
+     * @property string $append
+     */
+    protected $append;
     /**.
-     * The input legend show status.
+     * The component legend show status.
      *
      * @property bool $showLabel
      */
     protected $showLegend = true;
     /**
-     * The input legend.
+     * The component legend.
      *
      * @property string $legend
      */
     protected $legend;
     /**.
-     * The input label show status.
+     * The component label show status.
      *
      * @property bool $showLabel
      */
     protected $showLabel = true;
     /**
-     * The input label.
+     * The component label.
      *
      * @property string $label
      */
     protected $label;
     /**
-     * The input value.
+     * The component input value.
      *
      * @property string $value
      */
     protected $value;
     /**
-     * The input placeholder.
+     * The component input placeholder.
      *
      * @property string $placeholder
      */
     protected $placeholder;
 
     /**
-     * Set the input associated model.
+     * Set the component associated model.
      *
      * @param \Illuminate\Database\Eloquent\Model $model
      *
@@ -98,7 +97,7 @@ abstract class Input extends Component
     }
 
     /**
-     * Set the input name.
+     * Set the component input name.
      *
      * @param string $name
      *
@@ -112,33 +111,35 @@ abstract class Input extends Component
     }
 
     /**
-     * Set the input icon.
+     * Prepend html to the component.
      *
-     * @param string $icon
+     * @param string|null $html
      *
      * @return \Okipa\LaravelBootstrapComponents\Form\Input
      */
-    public function icon(string $icon): Input
+    public function prepend(?string $html): Input
     {
-        $this->icon = $icon;
+        $this->prepend = $html;
 
         return $this;
     }
 
     /**
-     * Hide the input icon.
+     * Append html to the component.
+     *
+     * @param string|null $html
      *
      * @return \Okipa\LaravelBootstrapComponents\Form\Input
      */
-    public function hideIcon(): Input
+    public function append(?string $html): Input
     {
-        $this->showIcon = false;
+        $this->append = $html;
 
         return $this;
     }
 
     /**
-     * Set the input legend.
+     * Set the component legend.
      *
      * @param string $legend
      *
@@ -152,7 +153,7 @@ abstract class Input extends Component
     }
 
     /**
-     * Hide the input legend.
+     * Hide the component legend.
      *
      * @return \Okipa\LaravelBootstrapComponents\Form\Input
      */
@@ -164,7 +165,7 @@ abstract class Input extends Component
     }
 
     /**
-     * Set the input placeholder.
+     * Set the component input placeholder.
      *
      * @param string $placeholder
      *
@@ -178,7 +179,7 @@ abstract class Input extends Component
     }
 
     /**
-     * Set the input Value.
+     * Set the component input value.
      *
      * @param mixed $value
      *
@@ -192,7 +193,7 @@ abstract class Input extends Component
     }
 
     /**
-     * Set the input label.
+     * Set the component label.
      *
      * @param string $label
      *
@@ -206,7 +207,7 @@ abstract class Input extends Component
     }
 
     /**
-     * Hide the input label.
+     * Hide the component label.
      *
      * @return \Okipa\LaravelBootstrapComponents\Form\Input
      */
@@ -218,7 +219,7 @@ abstract class Input extends Component
     }
 
     /**
-     * Set the input values.
+     * Set the values for the view.
      *
      * @return array
      */
@@ -228,11 +229,37 @@ abstract class Input extends Component
     }
 
     /**
+     * @return array
+     */
+    protected function defineValues(): array
+    {
+        return [
+            'model'       => $this->model,
+            'type'        => $this->type,
+            'name'        => $this->name,
+            'prepend'     => $this->prepend ?? $this->defaultPrepend(),
+            'append'      => $this->append ?? $this->defaultAppend(),
+            'legend'      => $this->defineLegend(),
+            'label'       => $this->showLabel ? $this->defineLabel() : null,
+            'value'       => $this->defineValue(),
+            'placeholder' => $this->definePlaceholder(),
+        ];
+    }
+
+    /**
      * @return string|null
      */
-    protected function defineIcon(): ?string
+    protected function defaultPrepend(): ?string
     {
-        return $this->showIcon ? ($this->icon ? $this->icon : $this->defaultIcon()) : null;
+        return config('bootstrap-components.' . $this->configKey . '.prepend') ?? null;
+    }
+
+    /**
+     * @return string|null
+     */
+    protected function defaultAppend(): ?string
+    {
+        return config('bootstrap-components.' . $this->configKey . '.append') ?? null;
     }
 
     /**
@@ -246,63 +273,6 @@ abstract class Input extends Component
     }
 
     /**
-     * @return string
-     */
-    protected function defineLabel(): string
-    {
-        return $this->label
-            ? $this->label
-            : trans('validation.attributes.' . str_slug($this->name, '_'));
-    }
-
-    /**
-     * @return mixed
-     */
-    protected function defineValue()
-    {
-        return $this->value ? $this->value : ($this->model ? $this->model->{$this->name} : null);
-    }
-    
-    /**
-     * @return array
-     */
-    protected function defineValues()
-    {
-        $model = $this->model;
-        $type = $this->type;
-        $name = $this->name;
-        $icon = $this->defineIcon();
-        $legend = $this->defineLegend();
-        $label = $this->showLabel ? $this->defineLabel() : null;
-        $value = $this->defineValue();
-        $placeholder = $this->definePlaceholder();
-        
-        return compact('model', 'type', 'name', 'icon', 'legend', 'label', 'value', 'placeholder');
-    }
-
-    /**
-     * @return string|null
-     */
-    protected function definePlaceholder(): ?string
-    {
-        return $this->placeholder ? $this->placeholder : $this->defineLabel();
-    }
-    
-    /**
-     * Set the input default icon
-     *
-     * @return string|null
-     */
-    protected function defaultIcon(): ?string
-    {
-        $icon = config('bootstrap-components.' . $this->configKey . '.icon');
-
-        return $icon ? $icon : null;
-    }
-
-    /**
-     * Set the input default icon
-     *
      * @return string|null
      */
     protected function defaultLegend(): ?string
@@ -313,12 +283,38 @@ abstract class Input extends Component
     }
 
     /**
+     * @return string
+     */
+    protected function defineLabel(): string
+    {
+        return $this->label
+            ? $this->label
+            : trans('validation.attributes.' . Str::slug($this->name, '_'));
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function defineValue()
+    {
+        return $this->value ? $this->value : ($this->model ? $this->model->{$this->name} : null);
+    }
+
+    /**
+     * @return string|null
+     */
+    protected function definePlaceholder(): ?string
+    {
+        return $this->placeholder ? $this->placeholder : $this->defineLabel();
+    }
+
+    /**
      * Set the default component id.
      *
      * @return string
      */
     protected function defaultComponentId(): string
     {
-        return $this->type . '-' . str_slug($this->name);
+        return $this->type . '-' . Str::slug($this->name);
     }
 }

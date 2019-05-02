@@ -18,7 +18,8 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('checkbox', config('bootstrap-components.form')));
         // components.form.checkbox
         $this->assertTrue(array_key_exists('view', config('bootstrap-components.form.checkbox')));
-        $this->assertTrue(array_key_exists('icon', config('bootstrap-components.form.checkbox')));
+        $this->assertTrue(array_key_exists('prepend', config('bootstrap-components.form.checkbox')));
+        $this->assertTrue(array_key_exists('append', config('bootstrap-components.form.checkbox')));
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.checkbox')));
         $this->assertTrue(array_key_exists('class', config('bootstrap-components.form.checkbox')));
         $this->assertTrue(array_key_exists('html_attributes', config('bootstrap-components.form.checkbox')));
@@ -60,41 +61,91 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('checked="checked"', $html);
     }
 
-    public function testConfigIcon()
+    public function testConfigPrepend()
     {
-        $configIcon = 'test-config-icon';
-        config()->set('bootstrap-components.form.checkbox.icon', $configIcon);
+        $configPrepend = 'test-config-prepend';
+        config()->set('bootstrap-components.form.checkbox.prepend', $configPrepend);
         $html = bsCheckbox()->name('name')->toHtml();
-        $this->assertStringContainsString(
-            '<label class="custom-control-label" for="checkbox-name"><span class="label-icon">'
-            . $configIcon . '</span> validation.attributes.name</label>',
-            $html
-        );
+        $this->assertStringContainsString('<span class="label-prepend">' . $configPrepend . '</span>', $html);
     }
 
-    public function testSetIcon()
+    public function testSetPrepend()
     {
-        $configIcon = 'test-config-icon';
-        $customIcon = 'test-custom-icon';
-        config()->set('bootstrap-components.form.checkbox.icon', $configIcon);
-        $html = bsCheckbox()->name('name')->icon($customIcon)->toHtml();
+        $configPrepend = 'test-config-prepend';
+        $customPrepend = 'test-custom-prepend';
+        config()->set('bootstrap-components.form.checkbox.prepend', $configPrepend);
+        $html = bsCheckbox()->name('name')->prepend($customPrepend)->toHtml();
+        $this->assertStringContainsString('<span class="label-prepend">' . $customPrepend . '</span>', $html);
+        $this->assertStringNotContainsString('<span class="label-prepend">' . $configPrepend . '</span>', $html);
+    }
+
+    public function testNoPrepend()
+    {
+        config()->set('bootstrap-components.form.checkbox.prepend', null);
+        $html = bsCheckbox()->name('name')->toHtml();
+        $this->assertStringNotContainsString('<span class="label-prepend">', $html);
+    }
+
+    public function testHidePrepend()
+    {
+        $configPrepend = 'test-config-prepend';
+        config()->set('bootstrap-components.form.checkbox.prepend', $configPrepend);
+        $html = bsCheckbox()->name('name')->prepend(false)->toHtml();
+        $this->assertStringNotContainsString('<span class="label-prepend">', $html);
+    }
+
+    public function testConfigAppend()
+    {
+        $configAppend = 'test-config-append';
+        config()->set('bootstrap-components.form.checkbox.append', $configAppend);
+        $html = bsCheckbox()->name('name')->toHtml();
+        $this->assertStringContainsString('<span class="label-append">' . $configAppend . '</span>', $html);
+    }
+
+    public function testSetAppend()
+    {
+        $configAppend = 'test-config-append';
+        $customAppend = 'test-custom-append';
+        config()->set('bootstrap-components.form.checkbox.append', $configAppend);
+        $html = bsCheckbox()->name('name')->append($customAppend)->toHtml();
+        $this->assertStringContainsString('<span class="label-append">' . $customAppend . '</span>', $html);
         $this->assertStringNotContainsString(
-            '<label class="custom-control-label" for="checkbox-name"><span class="label-icon">'
-            . $configIcon . '</span> validation.attributes.name</label>',
-            $html
-        );
-        $this->assertStringContainsString(
-            '<label class="custom-control-label" for="checkbox-name"><span class="label-icon">'
-            . $customIcon . '</span> validation.attributes.name</label>',
+            '<span class="label-append">' . $configAppend . '</span>',
             $html
         );
     }
 
-    public function testNoIcon()
+    public function testNoAppend()
     {
-        config()->set('bootstrap-components.form.checkbox.icon', null);
+        config()->set('bootstrap-components.form.checkbox.append', null);
         $html = bsCheckbox()->name('name')->toHtml();
-        $this->assertStringNotContainsString('<span class="label-icon">', $html);
+        $this->assertStringNotContainsString('<span class="label-append">', $html);
+    }
+
+    public function testHideAppend()
+    {
+        $configAppend = 'test-config-append';
+        config()->set('bootstrap-components.form.checkbox.append', $configAppend);
+        $html = bsCheckbox()->name('name')->append(false)->toHtml();
+        $this->assertStringNotContainsString('<span class="label-append">', $html);
+    }
+
+    public function testNoPrependNoAppend()
+    {
+        config()->set('bootstrap-components.form.checkbox.prepend', null);
+        config()->set('bootstrap-components.form.checkbox.append', null);
+        $html = bsCheckbox()->name('name')->toHtml();
+        $this->assertStringNotContainsString('<div class="input-group">', $html);
+    }
+
+    public function testHidePrependHideAppend()
+    {
+        $configPrepend = 'test-config-prepend';
+        $configAppend = 'test-config-append';
+        config()->set('bootstrap-components.form.checkbox.prepend', $configPrepend);
+        config()->set('bootstrap-components.form.checkbox.append', $configAppend);
+        $html = bsCheckbox()->name('name')->prepend(false)->append(false)->toHtml();
+        $this->assertStringNotContainsString('<div class="input-group">', $html);
     }
 
     public function testChecked()
@@ -117,8 +168,8 @@ class CheckboxTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.checkbox.legend', $configLegend);
         $html = bsCheckbox()->name('name')->toHtml();
         $this->assertStringContainsString(
-            '<small id="checkbox-name-legend" class="form-text text-muted">bootstrap-components::'
-            . $configLegend . '</small>',
+            '<small id="checkbox-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend
+            . '</small>',
             $html
         );
     }
@@ -134,8 +185,8 @@ class CheckboxTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertStringNotContainsString(
-            '<small id="checkbox-name-legend" class="form-text text-muted">bootstrap-components::'
-            . $configLegend . '</small>',
+            '<small id="checkbox-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend
+            . '</small>',
             $html
         );
     }
@@ -144,10 +195,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
     {
         config()->set('bootstrap-components.form.checkbox.legend', null);
         $html = bsCheckbox()->name('name')->toHtml();
-        $this->assertStringNotContainsString(
-            '<small id="checkbox-name-legend" class="form-text text-muted">',
-            $html
-        );
+        $this->assertStringNotContainsString('<small id="checkbox-name-legend" class="form-text text-muted">', $html);
     }
 
     public function testHideLegend()
@@ -155,10 +203,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.checkbox.legend', $configLegend);
         $html = bsCheckbox()->name('name')->hideLegend()->toHtml();
-        $this->assertStringNotContainsString(
-            '<small id="checkbox-name-legend" class="form-text text-muted">',
-            $html
-        );
+        $this->assertStringNotContainsString('<small id="checkbox-name-legend" class="form-text text-muted">', $html);
     }
 
     public function testSetValueDefaultCheckStatus()
@@ -294,12 +339,8 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $configContainerCLass = 'test-config-class-container';
         config()->set('bootstrap-components.form.checkbox.class.container', [$configContainerCLass]);
         $html = bsCheckbox()->name('name')->toHtml();
-        $this->assertStringContainsString(
-            'class="checkbox-name-container custom-control custom-checkbox '
-            . $configContainerCLass
-            . '"',
-            $html
-        );
+        $this->assertStringContainsString('class="checkbox-name-container custom-control custom-checkbox ' . $configContainerCLass
+                              . '"', $html);
     }
 
     public function testSetContainerClass()
@@ -308,14 +349,10 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $customContainerCLass = 'test-custom-class-container';
         config()->set('bootstrap-components.form.checkbox.class.container', [$configContainerCLass]);
         $html = bsCheckbox()->name('name')->containerClass([$customContainerCLass])->toHtml();
-        $this->assertStringContainsString(
-            'class="checkbox-name-container custom-control custom-checkbox ' . $customContainerCLass . '"',
-            $html
-        );
-        $this->assertStringNotContainsString(
-            'class="checkbox-name-container custom-control custom-checkbox ' . $configContainerCLass . '"',
-            $html
-        );
+        $this->assertStringContainsString('class="checkbox-name-container custom-control custom-checkbox ' . $customContainerCLass
+                              . '"', $html);
+        $this->assertStringNotContainsString('class="checkbox-name-container custom-control custom-checkbox '
+                                 . $configContainerCLass . '"', $html);
     }
 
     public function testConfigComponentClass()

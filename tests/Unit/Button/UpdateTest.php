@@ -16,7 +16,8 @@ class UpdateTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('update', config('bootstrap-components.button')));
         // components.button.update
         $this->assertTrue(array_key_exists('view', config('bootstrap-components.button.update')));
-        $this->assertTrue(array_key_exists('icon', config('bootstrap-components.button.update')));
+        $this->assertTrue(array_key_exists('prepend', config('bootstrap-components.button.cancel')));
+        $this->assertTrue(array_key_exists('append', config('bootstrap-components.button.cancel')));
         $this->assertTrue(array_key_exists('label', config('bootstrap-components.button.update')));
         $this->assertTrue(array_key_exists('class', config('bootstrap-components.button.update')));
         $this->assertTrue(array_key_exists('html_attributes', config('bootstrap-components.button.update')));
@@ -56,37 +57,90 @@ class UpdateTest extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString('href="' . route($customRoute) . '"', $html);
     }
 
-    public function testConfigIcon()
+    public function testConfigPrepend()
     {
-        $configIcon = 'test-config-icon';
-        config()->set('bootstrap-components.button.update.icon', $configIcon);
+        $configPrepend = 'test-config-prepend';
+        config()->set('bootstrap-components.button.update.prepend', $configPrepend);
         $html = bsUpdate()->toHtml();
-        $this->assertStringContainsString($configIcon, $html);
+        $this->assertStringContainsString('<span class="label-prepend">' . $configPrepend . '</span>', $html);
     }
 
-    public function testSetIcon()
+    public function testSetPrepend()
     {
-        $configIcon = 'test-config-icon';
-        $customIcon = 'test-custom-icon';
-        config()->set('bootstrap-components.button.update.icon', $configIcon);
-        $html = bsUpdate()->icon($customIcon)->toHtml();
-        $this->assertStringContainsString('<span class="icon">' . $customIcon . '</span>', $html);
-        $this->assertStringNotContainsString('<span class="icon">' . $configIcon . '</span>', $html);
+        $configPrepend = 'test-config-prepend';
+        $customPrepend = 'test-custom-prepend';
+        config()->set('bootstrap-components.button.update.prepend', $configPrepend);
+        $html = bsUpdate()->prepend($customPrepend)->toHtml();
+        $this->assertStringContainsString('<span class="label-prepend">' . $customPrepend . '</span>', $html);
+        $this->assertStringNotContainsString('<span class="label-prepend">' . $configPrepend . '</span>', $html);
     }
 
-    public function testNoIcon()
+    public function testNoPrepend()
     {
-        config()->set('bootstrap-components.button.update.icon', null);
+        config()->set('bootstrap-components.button.update.prepend', null);
         $html = bsUpdate()->toHtml();
-        $this->assertStringNotContainsString('<span class="icon">', $html);
+        $this->assertStringNotContainsString('label-prepend', $html);
     }
 
-    public function testHideIcon()
+    public function testHidePrepend()
     {
-        $configIcon = 'test-config-icon';
-        config()->set('bootstrap-components.button.update.icon', $configIcon);
-        $html = bsUpdate()->hideIcon()->toHtml();
-        $this->assertStringNotContainsString('<span class="icon">' . $configIcon . '</span>', $html);
+        $configPrepend = 'test-config-prepend';
+        config()->set('bootstrap-components.button.update.prepend', $configPrepend);
+        $html = bsUpdate()->prepend(false)->toHtml();
+        $this->assertStringNotContainsString('label-prepend', $html);
+    }
+
+    public function testConfigAppend()
+    {
+        $configAppend = 'test-config-append';
+        config()->set('bootstrap-components.button.update.append', $configAppend);
+        $html = bsUpdate()->toHtml();
+        $this->assertStringContainsString('<span class="label-append">' . $configAppend . '</span>', $html);
+    }
+
+    public function testSetAppend()
+    {
+        $configAppend = 'test-config-append';
+        $customAppend = 'test-custom-append';
+        config()->set('bootstrap-components.button.update.append', $configAppend);
+        $html = bsUpdate()->append($customAppend)->toHtml();
+        $this->assertStringContainsString('<span class="label-append">' . $customAppend . '</span>', $html);
+        $this->assertStringNotContainsString('<span class="label-append">' . $configAppend . '</span>', $html);
+    }
+
+    public function testNoAppend()
+    {
+        config()->set('bootstrap-components.button.update.append', null);
+        $html = bsUpdate()->toHtml();
+        $this->assertStringNotContainsString('label-append', $html);
+    }
+
+    public function testHideAppend()
+    {
+        $configAppend = 'test-config-append';
+        config()->set('bootstrap-components.button.update.append', $configAppend);
+        $html = bsUpdate()->append(false)->toHtml();
+        $this->assertStringNotContainsString('label-append', $html);
+    }
+
+    public function testNoPrependNoAppend()
+    {
+        config()->set('bootstrap-components.button.update.prepend', null);
+        config()->set('bootstrap-components.button.update.append', null);
+        $html = bsUpdate()->toHtml();
+        $this->assertStringNotContainsString('label-prepend', $html);
+        $this->assertStringNotContainsString('label-append', $html);
+    }
+
+    public function testHidePrependHideAppend()
+    {
+        $configPrepend = 'test-config-prepend';
+        $configAppend = 'test-config-append';
+        config()->set('bootstrap-components.button.update.prepend', $configPrepend);
+        config()->set('bootstrap-components.button.update.append', $configAppend);
+        $html = bsUpdate()->prepend(false)->append(false)->toHtml();
+        $this->assertStringNotContainsString('label-prepend', $html);
+        $this->assertStringNotContainsString('label-append', $html);
     }
 
     public function testConfigLabel()

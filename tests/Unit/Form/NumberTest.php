@@ -16,9 +16,10 @@ class NumberTest extends BootstrapComponentsTestCase
     {
         // components.form
         $this->assertTrue(array_key_exists('number', config('bootstrap-components.form')));
-        // components.form.text
+        // components.form.number
         $this->assertTrue(array_key_exists('view', config('bootstrap-components.form.number')));
-        $this->assertTrue(array_key_exists('icon', config('bootstrap-components.form.number')));
+        $this->assertTrue(array_key_exists('prepend', config('bootstrap-components.form.number')));
+        $this->assertTrue(array_key_exists('append', config('bootstrap-components.form.number')));
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.number')));
         $this->assertTrue(array_key_exists('class', config('bootstrap-components.form.number')));
         $this->assertTrue(array_key_exists('html_attributes', config('bootstrap-components.form.number')));
@@ -60,51 +61,92 @@ class NumberTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('value="' . $user->credit . '"', $html);
     }
 
-    public function testConfigIcon()
+    public function testConfigPrepend()
     {
-        $configIcon = 'test-config-icon';
-        config()->set('bootstrap-components.form.number.icon', $configIcon);
-        $html = bsNumber()->name('credit')->toHtml();
-        $this->assertStringContainsString(
-            '<span class="icon input-group-text">' . $configIcon . '</span>',
-            $html
-        );
+        $configPrepend = 'test-config-prepend';
+        config()->set('bootstrap-components.form.number.prepend', $configPrepend);
+        $html = bsNumber()->name('name')->toHtml();
+        $this->assertStringContainsString('input-group-prepend', $html);
+        $this->assertStringContainsString('<span class="input-group-text">' . $configPrepend . '</span>', $html);
     }
 
-    public function testSetIcon()
+    public function testSetPrepend()
     {
-        $configIcon = 'test-config-icon';
-        $customIcon = 'test-custom-icon';
-        config()->set('bootstrap-components.form.number.icon', $configIcon);
-        $html = bsNumber()->name('credit')->icon($customIcon)->toHtml();
-        $this->assertStringContainsString(
-            '<span class="icon input-group-text">' . $customIcon . '</span>',
-            $html
-        )
-        ;
-        $this->assertStringNotContainsString(
-            '<span class="icon input-group-text">' . $configIcon . '</span>',
-            $html
-        )
-        ;
+        $configPrepend = 'test-config-prepend';
+        $customPrepend = 'test-custom-prepend';
+        config()->set('bootstrap-components.form.number.prepend', $configPrepend);
+        $html = bsNumber()->name('name')->prepend($customPrepend)->toHtml();
+        $this->assertStringContainsString('input-group-prepend', $html);
+        $this->assertStringContainsString('<span class="input-group-text">' . $customPrepend . '</span>', $html);
+        $this->assertStringNotContainsString('<span class="input-group-text">' . $configPrepend . '</span>', $html);
     }
 
-    public function testNoIcon()
+    public function testNoPrepend()
     {
-        config()->set('bootstrap-components.form.number.icon', null);
-        $html = bsNumber()->name('credit')->toHtml();
-        $this->assertStringNotContainsString('<span class="icon input-group-text">', $html);
+        config()->set('bootstrap-components.form.number.prepend', null);
+        $html = bsNumber()->name('name')->toHtml();
+        $this->assertStringNotContainsString('input-group-prepend', $html);
     }
 
-    public function testHideIcon()
+    public function testHidePrepend()
     {
-        $configIcon = 'test-config-icon';
-        config()->set('bootstrap-components.form.number.icon', $configIcon);
-        $html = bsNumber()->name('credit')->hideIcon()->toHtml();
-        $this->assertStringNotContainsString(
-            '<span class="icon input-group-text">' . $configIcon . '</span>',
-            $html
-        );
+        $configPrepend = 'test-config-prepend';
+        config()->set('bootstrap-components.form.number.prepend', $configPrepend);
+        $html = bsNumber()->name('name')->prepend(false)->toHtml();
+        $this->assertStringNotContainsString('input-group-prepend', $html);
+    }
+
+    public function testConfigAppend()
+    {
+        $configAppend = 'test-config-append';
+        config()->set('bootstrap-components.form.number.append', $configAppend);
+        $html = bsNumber()->name('name')->toHtml();
+        $this->assertStringContainsString('input-group-append', $html);
+        $this->assertStringContainsString('<span class="input-group-text">' . $configAppend . '</span>', $html);
+    }
+
+    public function testSetAppend()
+    {
+        $configAppend = 'test-config-append';
+        $customAppend = 'test-custom-append';
+        config()->set('bootstrap-components.form.number.append', $configAppend);
+        $html = bsNumber()->name('name')->append($customAppend)->toHtml();
+        $this->assertStringContainsString('input-group-append', $html);
+        $this->assertStringContainsString('<span class="input-group-text">' . $customAppend . '</span>', $html);
+        $this->assertStringNotContainsString('<span class="input-group-text">' . $configAppend . '</span>', $html);
+    }
+
+    public function testNoAppend()
+    {
+        config()->set('bootstrap-components.form.number.append', null);
+        $html = bsNumber()->name('name')->toHtml();
+        $this->assertStringNotContainsString('input-group-append', $html);
+    }
+
+    public function testHideAppend()
+    {
+        $configAppend = 'test-config-append';
+        config()->set('bootstrap-components.form.number.append', $configAppend);
+        $html = bsNumber()->name('name')->append(false)->toHtml();
+        $this->assertStringNotContainsString('input-group-append', $html);
+    }
+
+    public function testNoPrependNoAppend()
+    {
+        config()->set('bootstrap-components.form.number.prepend', null);
+        config()->set('bootstrap-components.form.number.append', null);
+        $html = bsNumber()->name('name')->toHtml();
+        $this->assertStringNotContainsString('<div class="input-group">', $html);
+    }
+
+    public function testHidePrependHideAppend()
+    {
+        $configPrepend = 'test-config-prepend';
+        $configAppend = 'test-config-append';
+        config()->set('bootstrap-components.form.number.prepend', $configPrepend);
+        config()->set('bootstrap-components.form.number.append', $configAppend);
+        $html = bsNumber()->name('name')->prepend(false)->append(false)->toHtml();
+        $this->assertStringNotContainsString('<div class="input-group">', $html);
     }
 
     public function testConfigLegend()
