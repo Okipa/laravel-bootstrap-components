@@ -80,7 +80,8 @@ class File extends Input
         return array_merge(parent::values(), [
             'uploadedFileHtml'    => $this->getUploadedFileHtml(),
             'showRemoveCheckbox'  => $this->defineShowRemoveCheckboxStatus(),
-            'removeCheckboxLabel' => $this->defineRemoveCheckboxLabel(),
+            'removeCheckboxLabel' => $this->defineRemoveCheckboxLabel(parent::values()['label']),
+            'placeholder'         => $this->placeholder ?? __('bootstrap-components::bootstrap-components.label.file'),
         ]);
     }
 
@@ -126,21 +127,18 @@ class File extends Input
     }
 
     /**
+     * @param string|null $defaultLabel
+     *
      * @return string
      */
-    protected function defineRemoveCheckboxLabel(): string
+    protected function defineRemoveCheckboxLabel(?string $defaultLabel): string
     {
+        $defaultRemoveCheckboxLabel = __('bootstrap-components::bootstrap-components.label.remove') . ($defaultLabel
+                ? ' ' . strtolower($defaultLabel)
+                : null);
+
         return isset($this->removeCheckboxLabel)
             ? $this->removeCheckboxLabel
-            : trans('bootstrap-components::bootstrap-components.label.remove') . ' ' . strtolower($this->defineLabel());
-    }
-
-    /**
-     * @return string|null
-     */
-    protected function definePlaceholder(): ?string
-    {
-        return ($this->showLabel ? '' : parent::definePlaceholder() . ' : ')
-               . trans('bootstrap-components::bootstrap-components.label.file');
+            : $defaultRemoveCheckboxLabel;
     }
 }

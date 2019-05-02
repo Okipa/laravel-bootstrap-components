@@ -27,25 +27,19 @@ abstract class Button extends Component
     /**
      * The component prepended html.
      *
-     * @property string $prepend
+     * @property string|false $prepend
      */
     protected $prepend;
     /**
      * The component appended html.
      *
-     * @property string $append
+     * @property string|false $append
      */
     protected $append;
-    /**.
-     * The button label show status.
-     *
-     * @property bool $showLabel
-     */
-    protected $showLabel = true;
     /**
      * The button label.
      *
-     * @property string $label
+     * @property string|false $label
      */
     protected $label;
 
@@ -123,25 +117,13 @@ abstract class Button extends Component
     /**
      * Set the button label.
      *
-     * @param string $label
+     * @param string|false $label
      *
      * @return \Okipa\LaravelBootstrapComponents\Button\Button
      */
-    public function label(string $label): Button
+    public function label(?string $label): Button
     {
         $this->label = $label;
-
-        return $this;
-    }
-
-    /**
-     * Hide the button label.
-     *
-     * @return \Okipa\LaravelBootstrapComponents\Button\Button
-     */
-    public function hideLabel(): Button
-    {
-        $this->showLabel = false;
 
         return $this;
     }
@@ -166,7 +148,7 @@ abstract class Button extends Component
             'url'     => $this->url ? $this->url : url()->previous(),
             'prepend' => $this->prepend ?? $this->defaultPrepend(),
             'append'  => $this->append ?? $this->defaultAppend(),
-            'label'   => $this->showLabel ? ($this->label ? $this->label : $this->defaultLabel()) : '',
+            'label'   => $this->label ?? $this->defaultLabel(),
         ];
     }
 
@@ -195,7 +177,7 @@ abstract class Button extends Component
     {
         $label = config('bootstrap-components.' . $this->configKey . '.label');
 
-        return $label ? trans('bootstrap-components::' . $label) : '';
+        return $label ? __('bootstrap-components::' . $label) : '';
     }
 
     /**

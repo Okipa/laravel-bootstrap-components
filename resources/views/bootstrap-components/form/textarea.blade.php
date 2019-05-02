@@ -9,8 +9,10 @@
         <textarea id="{{ $componentId }}"
                name="{{ $name }}"
                {{ classTag('form-control', $type . '-' . Str::slug($name) . '-component', $componentClass, validationStatus($name)) }}
-               placeholder="{{ $placeholder }}"
-               {{ htmlAttributes($componentHtmlAttributes) }}
+               {{ htmlAttributes(
+                   ! empty($placeholder) ? ['placeholder' => $placeholder] : null,
+                   $componentHtmlAttributes
+               ) }}
                aria-label="{{ $label }}"
                aria-describedby="{{ $type }}-{{ Str::slug($name) }}">{{ old($name, $value) }}</textarea>
         @include('bootstrap-components::bootstrap-components.partials.append')

@@ -5,7 +5,7 @@
         </div>
     @else
         <div class="valid-feedback d-block">
-            {{ trans('bootstrap-components::bootstrap-components.notification.validation.success') }}
+            @lang('bootstrap-components::bootstrap-components.notification.validation.success')
         </div>
     @endif
 @endisset

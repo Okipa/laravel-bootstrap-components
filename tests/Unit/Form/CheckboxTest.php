@@ -167,11 +167,8 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.checkbox.legend', $configLegend);
         $html = bsCheckbox()->name('name')->toHtml();
-        $this->assertStringContainsString(
-            '<small id="checkbox-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend
-            . '</small>',
-            $html
-        );
+        $this->assertStringContainsString('checkbox-name-legend', $html);
+        $this->assertStringContainsString($configLegend, $html);
     }
 
     public function testSetLegend()
@@ -180,30 +177,24 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $customLegend = 'test-custom-legend';
         config()->set('bootstrap-components.form.checkbox.legend', $configLegend);
         $html = bsCheckbox()->name('name')->legend($customLegend)->toHtml();
-        $this->assertStringContainsString(
-            '<small id="checkbox-name-legend" class="form-text text-muted">' . $customLegend . '</small>',
-            $html
-        );
-        $this->assertStringNotContainsString(
-            '<small id="checkbox-name-legend" class="form-text text-muted">bootstrap-components::' . $configLegend
-            . '</small>',
-            $html
-        );
+        $this->assertStringContainsString('checkbox-name-legend', $html);
+        $this->assertStringContainsString($customLegend, $html);
+        $this->assertStringNotContainsString($configLegend, $html);
     }
 
     public function testNoLegend()
     {
         config()->set('bootstrap-components.form.checkbox.legend', null);
         $html = bsCheckbox()->name('name')->toHtml();
-        $this->assertStringNotContainsString('<small id="checkbox-name-legend" class="form-text text-muted">', $html);
+        $this->assertStringNotContainsString('checkbox-name-legend', $html);
     }
 
     public function testHideLegend()
     {
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.checkbox.legend', $configLegend);
-        $html = bsCheckbox()->name('name')->hideLegend()->toHtml();
-        $this->assertStringNotContainsString('<small id="checkbox-name-legend" class="form-text text-muted">', $html);
+        $html = bsCheckbox()->name('name')->legend(false)->toHtml();
+        $this->assertStringNotContainsString('checkbox-name-legend', $html);
     }
 
     public function testSetValueDefaultCheckStatus()
@@ -267,7 +258,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
 
     public function testHideLabel()
     {
-        $html = bsCheckbox()->name('name')->hideLabel()->toHtml();
+        $html = bsCheckbox()->name('name')->label(false)->toHtml();
         $this->assertStringNotContainsString(
             'for="checkbox-name">validation.attributes.name</label>',
             $html
@@ -280,7 +271,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $html = bsCheckbox()->name('name')->render(['errors' => $messageBag]);
         $this->assertStringContainsString('<div class="valid-feedback d-block">', $html);
         $this->assertStringContainsString(
-            trans('bootstrap-components::bootstrap-components.notification.validation.success'),
+            __('bootstrap-components::bootstrap-components.notification.validation.success'),
             $html
         );
     }

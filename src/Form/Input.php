@@ -3,6 +3,7 @@
 namespace Okipa\LaravelBootstrapComponents\Form;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use Okipa\LaravelBootstrapComponents\Component;
 use Okipa\LaravelBootstrapComponents\Form\Traits\InputValidityChecks;
 
@@ -36,37 +37,25 @@ abstract class Input extends Component
     /**
      * The component prepended html.
      *
-     * @property string $prepend
+     * @property string|false $prepend
      */
     protected $prepend;
     /**
      * The component appended html.
      *
-     * @property string $append
+     * @property string|false $append
      */
     protected $append;
-    /**.
-     * The component legend show status.
-     *
-     * @property bool $showLabel
-     */
-    protected $showLegend = true;
     /**
      * The component legend.
      *
-     * @property string $legend
+     * @property string|false $legend
      */
     protected $legend;
-    /**.
-     * The component label show status.
-     *
-     * @property bool $showLabel
-     */
-    protected $showLabel = true;
     /**
      * The component label.
      *
-     * @property string $label
+     * @property string|false $label
      */
     protected $label;
     /**
@@ -78,7 +67,7 @@ abstract class Input extends Component
     /**
      * The component input placeholder.
      *
-     * @property string $placeholder
+     * @property string|false $placeholder
      */
     protected $placeholder;
 
@@ -113,7 +102,7 @@ abstract class Input extends Component
     /**
      * Prepend html to the component.
      *
-     * @param string|null $html
+     * @param string|false $html
      *
      * @return \Okipa\LaravelBootstrapComponents\Form\Input
      */
@@ -127,7 +116,7 @@ abstract class Input extends Component
     /**
      * Append html to the component.
      *
-     * @param string|null $html
+     * @param string|false $html
      *
      * @return \Okipa\LaravelBootstrapComponents\Form\Input
      */
@@ -141,11 +130,11 @@ abstract class Input extends Component
     /**
      * Set the component legend.
      *
-     * @param string $legend
+     * @param string|false $legend
      *
      * @return \Okipa\LaravelBootstrapComponents\Form\Input
      */
-    public function legend(string $legend): Input
+    public function legend(?string $legend): Input
     {
         $this->legend = $legend;
 
@@ -153,25 +142,13 @@ abstract class Input extends Component
     }
 
     /**
-     * Hide the component legend.
-     *
-     * @return \Okipa\LaravelBootstrapComponents\Form\Input
-     */
-    public function hideLegend(): Input
-    {
-        $this->showLegend = false;
-
-        return $this;
-    }
-
-    /**
      * Set the component input placeholder.
      *
-     * @param string $placeholder
+     * @param string|false $placeholder
      *
      * @return \Okipa\LaravelBootstrapComponents\Form\Input
      */
-    public function placeholder(string $placeholder): Input
+    public function placeholder(?string $placeholder): Input
     {
         $this->placeholder = $placeholder;
 
@@ -195,25 +172,13 @@ abstract class Input extends Component
     /**
      * Set the component label.
      *
-     * @param string $label
+     * @param string|false $label
      *
      * @return \Okipa\LaravelBootstrapComponents\Form\Input
      */
-    public function label(string $label): Input
+    public function label(?string $label): Input
     {
         $this->label = $label;
-
-        return $this;
-    }
-
-    /**
-     * Hide the component label.
-     *
-     * @return \Okipa\LaravelBootstrapComponents\Form\Input
-     */
-    public function hideLabel(): Input
-    {
-        $this->showLabel = false;
 
         return $this;
     }
@@ -239,10 +204,10 @@ abstract class Input extends Component
             'name'        => $this->name,
             'prepend'     => $this->prepend ?? $this->defaultPrepend(),
             'append'      => $this->append ?? $this->defaultAppend(),
-            'legend'      => $this->defineLegend(),
-            'label'       => $this->showLabel ? $this->defineLabel() : null,
+            'legend'      => __($this->legend) ?? $this->defaultLegend(),
+            'label'       => $this->label ?? $this->defaultLabel(),
             'value'       => $this->defineValue(),
-            'placeholder' => $this->definePlaceholder(),
+            'placeholder' => $this->placeholder ?? ($this->label ?? $this->defaultLabel()),
         ];
     }
 
@@ -265,31 +230,19 @@ abstract class Input extends Component
     /**
      * @return string|null
      */
-    protected function defineLegend(): ?string
-    {
-        return $this->showLegend
-            ? ($this->legend ? trans($this->legend) : $this->defaultLegend())
-            : null;
-    }
-
-    /**
-     * @return string|null
-     */
     protected function defaultLegend(): ?string
     {
-        $legend = config('bootstrap-components.' . $this->configKey . '.legend');
-
-        return $legend ? trans('bootstrap-components::' . $legend) : null;
+        return ($legend = config('bootstrap-components.' . $this->configKey . '.legend'))
+            ? __('bootstrap-components::' . $legend)
+            : null;
     }
 
     /**
      * @return string
      */
-    protected function defineLabel(): string
+    protected function defaultLabel(): string
     {
-        return $this->label
-            ? $this->label
-            : trans('validation.attributes.' . Str::slug($this->name, '_'));
+        return __('validation.attributes.' . Str::slug($this->name, '_'));
     }
 
     /**
@@ -298,14 +251,6 @@ abstract class Input extends Component
     protected function defineValue()
     {
         return $this->value ? $this->value : ($this->model ? $this->model->{$this->name} : null);
-    }
-
-    /**
-     * @return string|null
-     */
-    protected function definePlaceholder(): ?string
-    {
-        return $this->placeholder ? $this->placeholder : $this->defineLabel();
     }
 
     /**

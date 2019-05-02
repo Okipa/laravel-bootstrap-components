@@ -6,6 +6,9 @@
 - Replaced `->icon()` method by `->prepend()` for `Button` and `Form` components.
 - Added `->append()` for `Button` and `Form` components.
 - Removed `hideIcon()` method for `Button` and `Form` components. Hiding a prepended or appended html element can now be done with `->prepend(false)` or `->append(false)`.
+- Removed `hideLabel()` method for `Button` and `Form` components. Hiding a label can now be done with `->label(false)`.
+- Removed `hideLegend()` method for `Form` components. Hiding a legend can now be done with `->legend(false)`.
+- Added possibility to hide placeholder value with `->placeholder(false)` for `Form` components.
 
 ## [0.6.1](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.6.1)
 2019-04-30 

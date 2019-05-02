@@ -181,7 +181,7 @@ class ValidateTest extends BootstrapComponentsTestCase
     {
         $configLabel = 'test-config-label';
         config()->set('bootstrap-components.button.validate.label', $configLabel);
-        $html = bsValidate()->hideLabel()->toHtml();
+        $html = bsValidate()->label(false)->toHtml();
         $this->assertStringNotContainsString(
             'title="bootstrap-components::' . $configLabel . '">',
             $html

@@ -146,11 +146,8 @@ class RadioTest extends BootstrapComponentsTestCase
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.radio.legend', $configLegend);
         $html = bsRadio()->name('name')->toHtml();
-        $this->assertStringContainsString(
-            '<small id="radio-name-legend" class="form-text text-muted">bootstrap-components::'
-            . $configLegend . '</small>',
-            $html
-        );
+        $this->assertStringContainsString('radio-name-legend', $html);
+        $this->assertStringContainsString($configLegend, $html);
     }
 
     public function testSetLegend()
@@ -159,35 +156,24 @@ class RadioTest extends BootstrapComponentsTestCase
         $customLegend = 'test-custom-legend';
         config()->set('bootstrap-components.form.radio.legend', $configLegend);
         $html = bsRadio()->name('name')->legend($customLegend)->toHtml();
-        $this->assertStringContainsString(
-            '<small id="radio-name-legend" class="form-text text-muted">' . $customLegend . '</small>',
-            $html
-        );
-        $this->assertStringNotContainsString(
-            '<small id="radio-name-legend" class="form-text text-muted">' . $configLegend . '</small>',
-            $html
-        );
+        $this->assertStringContainsString('radio-name-legend', $html);
+        $this->assertStringContainsString($customLegend, $html);
+        $this->assertStringNotContainsString($configLegend, $html);
     }
 
     public function testNoLegend()
     {
         config()->set('bootstrap-components.form.radio.legend', null);
         $html = bsRadio()->name('name')->toHtml();
-        $this->assertStringNotContainsString(
-            '<small id="radio-name-legend" class="form-text text-muted">',
-            $html
-        );
+        $this->assertStringNotContainsString('radio-name-legend', $html);
     }
 
     public function testHideLegend()
     {
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.radio.legend', $configLegend);
-        $html = bsRadio()->name('name')->hideLegend()->toHtml();
-        $this->assertStringNotContainsString(
-            '<small id="radio-name-legend" class="form-text text-muted">',
-            $html
-        );
+        $html = bsRadio()->name('name')->legend(false)->toHtml();
+        $this->assertStringNotContainsString('radio-name-legend', $html);
     }
 
     public function testSetValueDefaultCheckStatus()
@@ -248,7 +234,7 @@ class RadioTest extends BootstrapComponentsTestCase
 
     public function testHideLabel()
     {
-        $html = bsRadio()->name('name')->hideLabel()->toHtml();
+        $html = bsRadio()->name('name')->label(false)->toHtml();
         $this->assertStringNotContainsString('for="radio-name">validation.attributes.name</label>', $html);
     }
 
@@ -258,7 +244,7 @@ class RadioTest extends BootstrapComponentsTestCase
         $html = bsRadio()->name('name')->render(['errors' => $messageBag]);
         $this->assertStringContainsString('<div class="valid-feedback d-block">', $html);
         $this->assertStringContainsString(
-            trans('bootstrap-components::bootstrap-components.notification.validation.success'),
+            __('bootstrap-components::bootstrap-components.notification.validation.success'),
             $html
         );
     }
