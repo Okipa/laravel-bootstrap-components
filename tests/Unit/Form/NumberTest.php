@@ -153,12 +153,9 @@ class NumberTest extends BootstrapComponentsTestCase
     {
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.number.legend', $configLegend);
-        $html = bsNumber()->name('credit')->toHtml();
-        $this->assertStringContainsString(
-            '<small id="number-credit-legend" class="form-text text-muted">bootstrap-components::'
-            . $configLegend . '</small>',
-            $html
-        );
+        $html = bsNumber()->name('name')->toHtml();
+        $this->assertStringContainsString('number-name-legend', $html);
+        $this->assertStringContainsString($configLegend, $html);
     }
 
     public function testSetLegend()
@@ -166,37 +163,25 @@ class NumberTest extends BootstrapComponentsTestCase
         $configLegend = 'test-config-legend';
         $customLegend = 'test-custom-legend';
         config()->set('bootstrap-components.form.number.legend', $configLegend);
-        $html = bsNumber()->name('credit')->legend($customLegend)->toHtml();
-        $this->assertStringContainsString(
-            '<small id="number-credit-legend" class="form-text text-muted">' . $customLegend . '</small>',
-            $html
-        );
-        $this->assertStringNotContainsString(
-            '<small id="number-credit-legend" class="form-text text-muted">bootstrap-components::'
-            . $configLegend . '</small>',
-            $html
-        );
+        $html = bsNumber()->name('name')->legend($customLegend)->toHtml();
+        $this->assertStringContainsString('number-name-legend', $html);
+        $this->assertStringContainsString($customLegend, $html);
+        $this->assertStringNotContainsString($configLegend, $html);
     }
 
     public function testNoLegend()
     {
         config()->set('bootstrap-components.form.number.legend', null);
-        $html = bsNumber()->name('credit')->toHtml();
-        $this->assertStringNotContainsString(
-            '<small id="number-credit-legend" class="form-text text-muted">',
-            $html
-        );
+        $html = bsNumber()->name('name')->toHtml();
+        $this->assertStringNotContainsString('number-name-legend', $html);
     }
 
     public function testHideLegend()
     {
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.number.legend', $configLegend);
-        $html = bsNumber()->name('credit')->hideLegend()->toHtml();
-        $this->assertStringNotContainsString(
-            '<small id="number-credit-legend" class="form-text text-muted">',
-            $html
-        );
+        $html = bsNumber()->name('name')->legend(false)->toHtml();
+        $this->assertStringNotContainsString('number-name-legend', $html);
     }
 
     public function testSetValue()
@@ -243,7 +228,7 @@ class NumberTest extends BootstrapComponentsTestCase
 
     public function testHideLabel()
     {
-        $html = bsNumber()->name('credit')->hideLabel()->toHtml();
+        $html = bsNumber()->name('credit')->label(false)->toHtml();
         $this->assertStringNotContainsString(
             '<label for="number-credit">validation.attributes.name</label>',
             $html
@@ -275,13 +260,19 @@ class NumberTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('placeholder="validation.attributes.credit"', $html);
     }
 
+    public function testHidePlaceholder()
+    {
+        $html = bsNumber()->name('name')->placeholder(false)->toHtml();
+        $this->assertStringNotContainsString('placeholder="', $html);
+    }
+
     public function testSuccess()
     {
         $messageBag = app(MessageBag::class)->add('other_name', null);
         $html = bsNumber()->name('credit')->render(['errors' => $messageBag]);
         $this->assertStringContainsString('<div class="valid-feedback d-block">', $html);
         $this->assertStringContainsString(
-            trans('bootstrap-components::bootstrap-components.notification.validation.success'),
+            __('bootstrap-components::bootstrap-components.notification.validation.success'),
             $html
         );
     }

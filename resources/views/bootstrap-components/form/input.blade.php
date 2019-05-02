@@ -11,8 +11,10 @@
                type="{{ $type }}"
                name="{{ $name }}"
                value="{{ old($name, $value) }}"
-               placeholder="{{ $placeholder }}"
-               {{ htmlAttributes($componentHtmlAttributes) }}
+               {{ htmlAttributes(
+                    ! empty($placeholder) ? ['placeholder' => $placeholder] : null,
+                    $componentHtmlAttributes
+               ) }}
                aria-label="{{ $label }}"
                aria-describedby="{{ $type }}-{{ Str::slug($name) }}">
         @include('bootstrap-components::bootstrap-components.partials.append')

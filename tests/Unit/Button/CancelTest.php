@@ -175,7 +175,7 @@ class CancelTest extends BootstrapComponentsTestCase
     {
         $configLabel = 'test-config-label';
         config()->set('bootstrap-components.button.cancel.label', $configLabel);
-        $html = bsCancel()->hideLabel()->toHtml();
+        $html = bsCancel()->label(false)->toHtml();
         $this->assertStringNotContainsString('title="bootstrap-components::' . $configLabel . '">', $html);
         $this->assertStringNotContainsString(
             '<span class="label">bootstrap-components::' . $configLabel . '</span>',

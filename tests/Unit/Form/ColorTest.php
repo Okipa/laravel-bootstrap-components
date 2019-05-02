@@ -154,11 +154,8 @@ class ColorTest extends BootstrapComponentsTestCase
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.color.legend', $configLegend);
         $html = bsColor()->name('name')->toHtml();
-        $this->assertStringContainsString(
-            '<small id="color-name-legend" class="form-text text-muted">bootstrap-components::'
-            . $configLegend . '</small>',
-            $html
-        );
+        $this->assertStringContainsString('color-name-legend', $html);
+        $this->assertStringContainsString($configLegend, $html);
     }
 
     public function testSetLegend()
@@ -167,36 +164,24 @@ class ColorTest extends BootstrapComponentsTestCase
         $customLegend = 'test-custom-legend';
         config()->set('bootstrap-components.form.color.legend', $configLegend);
         $html = bsColor()->name('name')->legend($customLegend)->toHtml();
-        $this->assertStringContainsString(
-            '<small id="color-name-legend" class="form-text text-muted">' . $customLegend . '</small>',
-            $html
-        );
-        $this->assertStringNotContainsString(
-            '<small id="color-name-legend" class="form-text text-muted">bootstrap-components::'
-            . $configLegend . '</small>',
-            $html
-        );
+        $this->assertStringContainsString('color-name-legend', $html);
+        $this->assertStringContainsString($customLegend, $html);
+        $this->assertStringNotContainsString($configLegend, $html);
     }
 
     public function testNoLegend()
     {
         config()->set('bootstrap-components.form.color.legend', null);
         $html = bsColor()->name('name')->toHtml();
-        $this->assertStringNotContainsString(
-            '<small id="color-name-legend" class="form-text text-muted">',
-            $html
-        );
+        $this->assertStringNotContainsString('color-name-legend', $html);
     }
 
     public function testHideLegend()
     {
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.color.legend', $configLegend);
-        $html = bsColor()->name('name')->hideLegend()->toHtml();
-        $this->assertStringNotContainsString(
-            '<small id="color-name-legend" class="form-text text-muted">',
-            $html
-        );
+        $html = bsColor()->name('name')->legend(false)->toHtml();
+        $this->assertStringNotContainsString('color-name-legend', $html);
     }
 
     public function testSetValue()
@@ -246,7 +231,7 @@ class ColorTest extends BootstrapComponentsTestCase
 
     public function testHideLabel()
     {
-        $html = bsColor()->name('name')->hideLabel()->toHtml();
+        $html = bsColor()->name('name')->label(false)->toHtml();
         $this->assertStringNotContainsString(
             '<label for="color-name">validation.attributes.name</label>',
             $html
@@ -278,13 +263,19 @@ class ColorTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('placeholder="validation.attributes.name"', $html);
     }
 
+    public function testHidePlaceholder()
+    {
+        $html = bsColor()->name('name')->placeholder(false)->toHtml();
+        $this->assertStringNotContainsString('placeholder="', $html);
+    }
+
     public function testSuccess()
     {
         $messageBag = app(MessageBag::class)->add('other_name', null);
         $html = bsColor()->name('name')->render(['errors' => $messageBag]);
         $this->assertStringContainsString('<div class="valid-feedback d-block">', $html);
         $this->assertStringContainsString(
-            trans('bootstrap-components::bootstrap-components.notification.validation.success'),
+            __('bootstrap-components::bootstrap-components.notification.validation.success'),
             $html
         );
     }

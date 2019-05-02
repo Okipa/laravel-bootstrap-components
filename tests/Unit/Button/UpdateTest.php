@@ -175,7 +175,7 @@ class UpdateTest extends BootstrapComponentsTestCase
     {
         $configLabel = 'test-config-label';
         config()->set('bootstrap-components.button.update.label', $configLabel);
-        $html = bsUpdate()->hideLabel()->toHtml();
+        $html = bsUpdate()->label(false)->toHtml();
         $this->assertStringNotContainsString('title="bootstrap-components::' . $configLabel . '">', $html);
         $this->assertStringNotContainsString(
             '<span class="label">bootstrap-components::' . $configLabel . '</span>',

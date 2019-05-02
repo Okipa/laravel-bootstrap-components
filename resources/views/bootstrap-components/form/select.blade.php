@@ -10,9 +10,11 @@
                 {{ classTag($type . '-' . Str::slug($name) . '-component', 'custom-select', $componentClass, validationStatus($name)) }}
                 name="{{ $name . ($multiple ? '[]' : '') }}"
                 {{ htmlAttributes($multiple ? 'multiple' : null, $componentHtmlAttributes) }}>
-            <option value="" disabled="disabled" {{ htmlAttributes(count(array_filter(array_pluck($options, 'selected'))) 
-                ? null 
-                : ['selected' => 'selected']) }}>{{ $placeholder }}</option>
+            @if(! empty($placeholder))
+                <option value="" disabled="disabled" {{ htmlAttributes(count(array_filter(Arr::pluck($options, 'selected')))
+                    ? null
+                    : ['selected' => 'selected']) }}>{{ $placeholder }}</option>
+            @endif
             @foreach($options as $option)
                 <option value="{{ $option[$optionValueField] }}" {{ htmlAttributes(!empty($option['selected']) && $option['selected'] === true 
                         ? ['selected' => 'selected'] 

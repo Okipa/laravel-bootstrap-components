@@ -14,14 +14,16 @@
         @include('bootstrap-components::bootstrap-components.partials.prepend')
         <div class="custom-file">
             <input id="{{ $componentId }}"
-                   type="file"
-                   name="{{ $name }}"
                    {{ classTag('custom-file-input', 'form-control', $type . '-' . Str::slug($name) . '-component', $componentClass, validationStatus($name)) }}
+                   type="{{ $type }}"
+                   name="{{ $name }}"
                    lang="{{ app()->getLocale() }}"
                    {{ htmlAttributes($componentHtmlAttributes) }}
                    aria-label="{{ $label }}"
                    aria-describedby="file-{{ Str::slug($name) }}">
-            <label class="custom-file-label" for="{{ $componentId }}">@empty($value = old($name, $value)){{ $placeholder }}@else{{ $value }}@endempty</label>
+            @if(($value = old($name, $value)) || $placeholder)
+                <label class="custom-file-label" for="{{ $componentId }}">@empty($value){{ $placeholder }}@else{{ $value }}@endempty</label>
+            @endif
         </div>
         @include('bootstrap-components::bootstrap-components.partials.append')
     @if(! empty($prepend) || ! empty($append))
