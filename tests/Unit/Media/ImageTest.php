@@ -34,65 +34,65 @@ class ImageTest extends BootstrapComponentsTestCase
     {
         $customLinkUrl = 'test-custom-link-url';
         $html = image()->linkUrl($customLinkUrl)->toHtml();
-        $this->assertContains('href="' . $customLinkUrl . '"', $html);
+        $this->assertStringContainsString('href="' . $customLinkUrl . '"', $html);
     }
 
     public function testNoLinkUrl()
     {
         $html = image()->toHtml();
-        $this->assertNotContains('href="', $html);
+        $this->assertStringNotContainsString('href="', $html);
     }
 
     public function testSetSrc()
     {
         $customSrc = 'test-custom-src';
         $html = image()->src($customSrc)->toHtml();
-        $this->assertContains('src="' . $customSrc . '"', $html);
+        $this->assertStringContainsString('src="' . $customSrc . '"', $html);
     }
 
     public function testNoSrc()
     {
         $html = image()->toHtml();
-        $this->assertNotContains('src="', $html);
+        $this->assertStringNotContainsString('src="', $html);
     }
 
     public function testSetAlt()
     {
         $customAlt = 'test-custom-alt';
         $html = image()->alt($customAlt)->toHtml();
-        $this->assertContains('alt="' . $customAlt . '"', $html);
+        $this->assertStringContainsString('alt="' . $customAlt . '"', $html);
     }
 
     public function testNoAlt()
     {
         $html = image()->toHtml();
-        $this->assertNotContains('alt="', $html);
+        $this->assertStringNotContainsString('alt="', $html);
     }
 
     public function testSetWidth()
     {
         $customWidth = 100;
         $html = image()->width($customWidth)->toHtml();
-        $this->assertContains('width="' . $customWidth . '"', $html);
+        $this->assertStringContainsString('width="' . $customWidth . '"', $html);
     }
 
     public function testNoWidth()
     {
         $html = image()->toHtml();
-        $this->assertNotContains('width="', $html);
+        $this->assertStringNotContainsString('width="', $html);
     }
 
     public function testSetHeight()
     {
         $customHeight = 100;
         $html = image()->height($customHeight)->toHtml();
-        $this->assertContains('height="' . $customHeight . '"', $html);
+        $this->assertStringContainsString('height="' . $customHeight . '"', $html);
     }
 
     public function testNoHeight()
     {
         $html = image()->toHtml();
-        $this->assertNotContains('height="', $html);
+        $this->assertStringNotContainsString('height="', $html);
     }
 
     public function testConfigContainerClass()
@@ -100,7 +100,7 @@ class ImageTest extends BootstrapComponentsTestCase
         $configContainerCLass = 'test-config-class-container';
         config()->set('bootstrap-components.media.image.class.container', [$configContainerCLass]);
         $html = image()->toHtml();
-        $this->assertContains('class="image-container ' . $configContainerCLass . '"', $html);
+        $this->assertStringContainsString('class="image-container ' . $configContainerCLass . '"', $html);
     }
 
     public function testSetContainerClass()
@@ -109,8 +109,8 @@ class ImageTest extends BootstrapComponentsTestCase
         $customContainerCLass = 'test-custom-class-container';
         config()->set('bootstrap-components.input.class.container', [$configContainerCLass]);
         $html = image()->containerClass([$customContainerCLass])->toHtml();
-        $this->assertContains('class="image-container ' . $customContainerCLass . '"', $html);
-        $this->assertNotContains('class="image-container ' . $configContainerCLass . '"', $html);
+        $this->assertStringContainsString('class="image-container ' . $customContainerCLass . '"', $html);
+        $this->assertStringNotContainsString('class="image-container ' . $configContainerCLass . '"', $html);
     }
 
     public function testConfigLinkClass()
@@ -118,7 +118,7 @@ class ImageTest extends BootstrapComponentsTestCase
         $configLinkCLass = 'test-config-class-link';
         config()->set('bootstrap-components.media.image.class.link', [$configLinkCLass]);
         $html = image()->toHtml();
-        $this->assertContains('class="image-link ' . $configLinkCLass . '"', $html);
+        $this->assertStringContainsString('class="image-link ' . $configLinkCLass . '"', $html);
     }
 
     public function testSetLinkClass()
@@ -127,47 +127,47 @@ class ImageTest extends BootstrapComponentsTestCase
         $customLinkCLass = 'test-custom-class-link';
         config()->set('bootstrap-components.media.image.class.link', [$configLinkCLass]);
         $html = image()->linkClass([$customLinkCLass])->toHtml();
-        $this->assertContains('class="image-link ' . $customLinkCLass . '"', $html);
-        $this->assertNotContains('class="image-link ' . $configLinkCLass . '"', $html);
+        $this->assertStringContainsString('class="image-link ' . $customLinkCLass . '"', $html);
+        $this->assertStringNotContainsString('class="image-link ' . $configLinkCLass . '"', $html);
     }
 
     public function testSetNoContainerId()
     {
         $html = image()->toHtml();
-        $this->assertNotContains('<div id="', $html);
+        $this->assertStringNotContainsString('<div id="', $html);
     }
 
     public function testSetContainerId()
     {
         $customContainerId = 'test-custom-container-id';
         $html = image()->containerId($customContainerId)->toHtml();
-        $this->assertContains('<div id="' . $customContainerId, $html);
+        $this->assertStringContainsString('<div id="' . $customContainerId, $html);
     }
 
     public function testSetNoLinkId()
     {
         $html = image()->toHtml();
-        $this->assertNotContains('<a id="', $html);
+        $this->assertStringNotContainsString('<a id="', $html);
     }
 
     public function testSetLinkId()
     {
         $customContainerId = 'test-custom-link-id';
         $html = image()->linkId($customContainerId)->toHtml();
-        $this->assertContains('<a id="' . $customContainerId, $html);
+        $this->assertStringContainsString('<a id="' . $customContainerId, $html);
     }
 
     public function testSetNoComponentId()
     {
         $html = image()->toHtml();
-        $this->assertNotContains('<img id="', $html);
+        $this->assertStringNotContainsString('<img id="', $html);
     }
 
     public function testSetComponentId()
     {
         $customComponentId = 'test-custom-component-id';
         $html = image()->componentId($customComponentId)->toHtml();
-        $this->assertContains('<img id="' . $customComponentId . '"', $html);
+        $this->assertStringContainsString('<img id="' . $customComponentId . '"', $html);
     }
 
     public function testConfigComponentClass()
@@ -175,7 +175,7 @@ class ImageTest extends BootstrapComponentsTestCase
         $configComponentCLass = 'test-config-class-component';
         config()->set('bootstrap-components.media.image.class.component', [$configComponentCLass]);
         $html = image()->toHtml();
-        $this->assertContains('class="image-component ' . $configComponentCLass . '"', $html);
+        $this->assertStringContainsString('class="image-component ' . $configComponentCLass . '"', $html);
     }
 
     public function testSetComponentClass()
@@ -184,8 +184,8 @@ class ImageTest extends BootstrapComponentsTestCase
         $customComponentCLass = 'test-custom-class-component';
         config()->set('bootstrap-components.media.image.class.component', [$customComponentCLass]);
         $html = image()->componentClass([$customComponentCLass])->toHtml();
-        $this->assertContains('class="image-component ' . $customComponentCLass . '"', $html);
-        $this->assertNotContains('class="image-component ' . $configComponentCLass . '"', $html);
+        $this->assertStringContainsString('class="image-component ' . $customComponentCLass . '"', $html);
+        $this->assertStringNotContainsString('class="image-component ' . $configComponentCLass . '"', $html);
     }
 
     public function testConfigContainerHtmlAttributes()
@@ -193,7 +193,7 @@ class ImageTest extends BootstrapComponentsTestCase
         $configContainerAttributes = 'test-config-attributes-container';
         config()->set('bootstrap-components.media.image.html_attributes.container', [$configContainerAttributes]);
         $html = image()->toHtml();
-        $this->assertContains($configContainerAttributes, $html);
+        $this->assertStringContainsString($configContainerAttributes, $html);
     }
 
     public function testSetContainerHtmlAttributes()
@@ -202,8 +202,8 @@ class ImageTest extends BootstrapComponentsTestCase
         $customContainerAttributes = 'test-custom-attributes-container';
         config()->set('bootstrap-components.media.image.html_attributes.container', [$configContainerAttributes]);
         $html = image()->containerHtmlAttributes([$customContainerAttributes])->toHtml();
-        $this->assertContains($customContainerAttributes, $html);
-        $this->assertNotContains($configContainerAttributes, $html);
+        $this->assertStringContainsString($customContainerAttributes, $html);
+        $this->assertStringNotContainsString($configContainerAttributes, $html);
     }
 
     public function testConfigLinkHtmlAttributes()
@@ -211,7 +211,7 @@ class ImageTest extends BootstrapComponentsTestCase
         $configLinkAttributes = 'test-config-attributes-link';
         config()->set('bootstrap-components.media.image.html_attributes.link', [$configLinkAttributes]);
         $html = image()->toHtml();
-        $this->assertContains($configLinkAttributes, $html);
+        $this->assertStringContainsString($configLinkAttributes, $html);
     }
 
     public function testSetLinkHtmlAttributes()
@@ -220,8 +220,8 @@ class ImageTest extends BootstrapComponentsTestCase
         $customLinkAttributes = 'test-custom-attributes-link';
         config()->set('bootstrap-components.media.image.html_attributes.link', [$configLinkAttributes]);
         $html = image()->linkHtmlAttributes([$customLinkAttributes])->toHtml();
-        $this->assertContains($customLinkAttributes, $html);
-        $this->assertNotContains($configLinkAttributes, $html);
+        $this->assertStringContainsString($customLinkAttributes, $html);
+        $this->assertStringNotContainsString($configLinkAttributes, $html);
     }
     
     public function testConfigComponentHtmlAttributes()
@@ -229,7 +229,7 @@ class ImageTest extends BootstrapComponentsTestCase
         $configComponentAttributes = 'test-config-attributes-component';
         config()->set('bootstrap-components.media.image.html_attributes.component', [$configComponentAttributes]);
         $html = image()->toHtml();
-        $this->assertContains($configComponentAttributes, $html);
+        $this->assertStringContainsString($configComponentAttributes, $html);
     }
 
     public function testSetComponentHtmlAttributes()
@@ -238,7 +238,7 @@ class ImageTest extends BootstrapComponentsTestCase
         $customComponentAttributes = 'test-custom-attributes-component';
         config()->set('bootstrap-components.media.image.html_attributes.component', [$configComponentAttributes]);
         $html = image()->componentHtmlAttributes([$customComponentAttributes])->toHtml();
-        $this->assertContains($customComponentAttributes, $html);
-        $this->assertNotContains($configComponentAttributes, $html);
+        $this->assertStringContainsString($customComponentAttributes, $html);
+        $this->assertStringNotContainsString($configComponentAttributes, $html);
     }
 }

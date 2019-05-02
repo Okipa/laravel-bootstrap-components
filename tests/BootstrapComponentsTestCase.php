@@ -44,8 +44,10 @@ abstract class BootstrapComponentsTestCase extends TestCase
 
     /**
      * Setup the test environment.
+     *
+     * @return void
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->loadMigrationsFrom([

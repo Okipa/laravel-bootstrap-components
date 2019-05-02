@@ -2,6 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
+use Exception;
 use Illuminate\Support\MessageBag;
 use Okipa\LaravelBootstrapComponents\Form\Input;
 use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
@@ -38,22 +39,18 @@ class EmailTest extends BootstrapComponentsTestCase
     public function testSetName()
     {
         $html = bsEmail()->name('name')->toHtml();
-        $this->assertContains('name="name"', $html);
+        $this->assertStringContainsString('name="name"', $html);
     }
 
     public function testType()
     {
         $html = bsEmail()->name('name')->toHtml();
-        $this->assertContains('type="email"', $html);
+        $this->assertStringContainsString('type="email"', $html);
     }
 
-    /**
-     * @expectedException \Exception
-     * @expectedExceptionMessage Okipa\LaravelBootstrapComponents\Form\Email : Missing $name property. Please use the
-     *                           name() method to set a name.
-     */
     public function testInputWithoutName()
     {
+        $this->expectException(Exception::class);
         bsEmail()->toHtml();
     }
 
@@ -61,7 +58,7 @@ class EmailTest extends BootstrapComponentsTestCase
     {
         $user = $this->createUniqueUser();
         $html = bsEmail()->model($user)->name('name')->toHtml();
-        $this->assertContains('value="' . $user->name . '"', $html);
+        $this->assertStringContainsString('value="' . $user->name . '"', $html);
     }
 
     public function testConfigPrepend()
@@ -69,8 +66,8 @@ class EmailTest extends BootstrapComponentsTestCase
         $configPrepend = 'test-config-prepend';
         config()->set('bootstrap-components.form.email.prepend', $configPrepend);
         $html = bsEmail()->name('name')->toHtml();
-        $this->assertContains('input-group-prepend', $html);
-        $this->assertContains('<span class="input-group-text">' . $configPrepend . '</span>', $html);
+        $this->assertStringContainsString('input-group-prepend', $html);
+        $this->assertStringContainsString('<span class="input-group-text">' . $configPrepend . '</span>', $html);
     }
 
     public function testSetPrepend()
@@ -79,16 +76,16 @@ class EmailTest extends BootstrapComponentsTestCase
         $customPrepend = 'test-custom-prepend';
         config()->set('bootstrap-components.form.email.prepend', $configPrepend);
         $html = bsEmail()->name('name')->prepend($customPrepend)->toHtml();
-        $this->assertContains('input-group-prepend', $html);
-        $this->assertContains('<span class="input-group-text">' . $customPrepend . '</span>', $html);
-        $this->assertNotContains('<span class="input-group-text">' . $configPrepend . '</span>', $html);
+        $this->assertStringContainsString('input-group-prepend', $html);
+        $this->assertStringContainsString('<span class="input-group-text">' . $customPrepend . '</span>', $html);
+        $this->assertStringNotContainsString('<span class="input-group-text">' . $configPrepend . '</span>', $html);
     }
 
     public function testNoPrepend()
     {
         config()->set('bootstrap-components.form.email.prepend', null);
         $html = bsEmail()->name('name')->toHtml();
-        $this->assertNotContains('input-group-prepend', $html);
+        $this->assertStringNotContainsString('input-group-prepend', $html);
     }
 
     public function testHidePrepend()
@@ -96,7 +93,7 @@ class EmailTest extends BootstrapComponentsTestCase
         $configPrepend = 'test-config-prepend';
         config()->set('bootstrap-components.form.email.prepend', $configPrepend);
         $html = bsEmail()->name('name')->prepend(false)->toHtml();
-        $this->assertNotContains('input-group-prepend', $html);
+        $this->assertStringNotContainsString('input-group-prepend', $html);
     }
 
     public function testConfigAppend()
@@ -104,8 +101,8 @@ class EmailTest extends BootstrapComponentsTestCase
         $configAppend = 'test-config-append';
         config()->set('bootstrap-components.form.email.append', $configAppend);
         $html = bsEmail()->name('name')->toHtml();
-        $this->assertContains('input-group-append', $html);
-        $this->assertContains('<span class="input-group-text">' . $configAppend . '</span>', $html);
+        $this->assertStringContainsString('input-group-append', $html);
+        $this->assertStringContainsString('<span class="input-group-text">' . $configAppend . '</span>', $html);
     }
 
     public function testSetAppend()
@@ -114,16 +111,16 @@ class EmailTest extends BootstrapComponentsTestCase
         $customAppend = 'test-custom-append';
         config()->set('bootstrap-components.form.email.append', $configAppend);
         $html = bsEmail()->name('name')->append($customAppend)->toHtml();
-        $this->assertContains('input-group-append', $html);
-        $this->assertContains('<span class="input-group-text">' . $customAppend . '</span>', $html);
-        $this->assertNotContains('<span class="input-group-text">' . $configAppend . '</span>', $html);
+        $this->assertStringContainsString('input-group-append', $html);
+        $this->assertStringContainsString('<span class="input-group-text">' . $customAppend . '</span>', $html);
+        $this->assertStringNotContainsString('<span class="input-group-text">' . $configAppend . '</span>', $html);
     }
 
     public function testNoAppend()
     {
         config()->set('bootstrap-components.form.email.append', null);
         $html = bsEmail()->name('name')->toHtml();
-        $this->assertNotContains('input-group-append', $html);
+        $this->assertStringNotContainsString('input-group-append', $html);
     }
 
     public function testHideAppend()
@@ -131,7 +128,7 @@ class EmailTest extends BootstrapComponentsTestCase
         $configAppend = 'test-config-append';
         config()->set('bootstrap-components.form.email.append', $configAppend);
         $html = bsEmail()->name('name')->append(false)->toHtml();
-        $this->assertNotContains('input-group-append', $html);
+        $this->assertStringNotContainsString('input-group-append', $html);
     }
 
     public function testNoPrependNoAppend()
@@ -139,7 +136,7 @@ class EmailTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.email.prepend', null);
         config()->set('bootstrap-components.form.email.append', null);
         $html = bsEmail()->name('name')->toHtml();
-        $this->assertNotContains('<div class="input-group">', $html);
+        $this->assertStringNotContainsString('<div class="input-group">', $html);
     }
 
     public function testHidePrependHideAppend()
@@ -149,7 +146,7 @@ class EmailTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.email.prepend', $configPrepend);
         config()->set('bootstrap-components.form.email.append', $configAppend);
         $html = bsEmail()->name('name')->prepend(false)->append(false)->toHtml();
-        $this->assertNotContains('<div class="input-group">', $html);
+        $this->assertStringNotContainsString('<div class="input-group">', $html);
     }
 
     public function testConfigLegend()
@@ -157,7 +154,7 @@ class EmailTest extends BootstrapComponentsTestCase
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.email.legend', $configLegend);
         $html = bsEmail()->name('name')->toHtml();
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<small id="email-name-legend" class="form-text text-muted">bootstrap-components::'
             . $configLegend . '</small>',
             $html
@@ -170,11 +167,11 @@ class EmailTest extends BootstrapComponentsTestCase
         $customLegend = 'test-custom-legend';
         config()->set('bootstrap-components.form.email.legend', $configLegend);
         $html = bsEmail()->name('name')->legend($customLegend)->toHtml();
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<small id="email-name-legend" class="form-text text-muted">' . $customLegend . '</small>',
             $html
         );
-        $this->assertNotContains(
+        $this->assertStringNotContainsString(
             '<small id="email-name-legend" class="form-text text-muted">bootstrap-components::'
             . $configLegend . '</small>',
             $html
@@ -185,7 +182,10 @@ class EmailTest extends BootstrapComponentsTestCase
     {
         config()->set('bootstrap-components.form.email.legend', null);
         $html = bsEmail()->name('name')->toHtml();
-        $this->assertNotContains('<small id="email-name-legend" class="form-text text-muted">', $html);
+        $this->assertStringNotContainsString(
+            '<small id="email-name-legend" class="form-text text-muted">',
+            $html
+        );
     }
 
     public function testHideLegend()
@@ -193,14 +193,17 @@ class EmailTest extends BootstrapComponentsTestCase
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.email.legend', $configLegend);
         $html = bsEmail()->name('name')->hideLegend()->toHtml();
-        $this->assertNotContains('<small id="email-name-legend" class="form-text text-muted">', $html);
+        $this->assertStringNotContainsString(
+            '<small id="email-name-legend" class="form-text text-muted">',
+            $html
+        );
     }
 
     public function testSetValue()
     {
         $customValue = 'test-custom-value';
         $html = bsEmail()->name('name')->value($customValue)->toHtml();
-        $this->assertContains('value="' . $customValue . '"', $html);
+        $this->assertStringContainsString('value="' . $customValue . '"', $html);
     }
 
     public function testOldValue()
@@ -215,38 +218,47 @@ class EmailTest extends BootstrapComponentsTestCase
         ]);
         $this->call('GET', 'test');
         $html = bsEmail()->name('name')->value($customValue)->toHtml();
-        $this->assertContains('value="' . $oldValue . '"', $html);
-        $this->assertNotContains('value="' . $customValue . '"', $html);
+        $this->assertStringContainsString('value="' . $oldValue . '"', $html);
+        $this->assertStringNotContainsString('value="' . $customValue . '"', $html);
     }
 
     public function testSetLabel()
     {
         $label = 'test-custom-label';
         $html = bsEmail()->name('name')->label($label)->toHtml();
-        $this->assertContains('<label for="email-name">' . $label . '</label>', $html);
-        $this->assertContains('placeholder="' . $label . '"', $html);
-        $this->assertContains('aria-label="' . $label . '"', $html);
+        $this->assertStringContainsString('<label for="email-name">' . $label . '</label>', $html);
+        $this->assertStringContainsString('placeholder="' . $label . '"', $html);
+        $this->assertStringContainsString('aria-label="' . $label . '"', $html);
     }
 
     public function testNoLabel()
     {
         $html = bsEmail()->name('name')->toHtml();
-        $this->assertContains('<label for="email-name">validation.attributes.name</label>', $html);
-        $this->assertContains('aria-label="validation.attributes.name"', $html);
+        $this->assertStringContainsString(
+            '<label for="email-name">validation.attributes.name</label>',
+            $html
+        );
+        $this->assertStringContainsString('aria-label="validation.attributes.name"', $html);
     }
 
     public function testHideLabel()
     {
         $html = bsEmail()->name('name')->hideLabel()->toHtml();
-        $this->assertNotContains('<label for="email-name">validation.attributes.name</label>', $html);
-        $this->assertNotContains('aria-label="validation.attributes.name"', $html);
+        $this->assertStringNotContainsString(
+            '<label for="email-name">validation.attributes.name</label>',
+            $html
+        );
+        $this->assertStringNotContainsString(
+            'aria-label="validation.attributes.name"',
+            $html
+        );
     }
 
     public function testSetPlaceholder()
     {
         $placeholder = 'test-custom-placeholder';
         $html = bsEmail()->name('name')->placeholder($placeholder)->toHtml();
-        $this->assertContains('placeholder="' . $placeholder . '"', $html);
+        $this->assertStringContainsString('placeholder="' . $placeholder . '"', $html);
     }
 
     public function testSetPlaceholderWithLabel()
@@ -254,21 +266,21 @@ class EmailTest extends BootstrapComponentsTestCase
         $label = 'test-custom-label';
         $placeholder = 'test-custom-placeholder';
         $html = bsEmail()->name('name')->label($label)->placeholder($placeholder)->toHtml();
-        $this->assertContains('placeholder="' . $placeholder . '"', $html);
+        $this->assertStringContainsString('placeholder="' . $placeholder . '"', $html);
     }
 
     public function testNoPlaceholder()
     {
         $html = bsEmail()->name('name')->toHtml();
-        $this->assertContains('placeholder="validation.attributes.name"', $html);
+        $this->assertStringContainsString('placeholder="validation.attributes.name"', $html);
     }
 
     public function testSuccess()
     {
         $messageBag = app(MessageBag::class)->add('other_name', null);
         $html = bsEmail()->name('name')->render(['errors' => $messageBag]);
-        $this->assertContains('<div class="valid-feedback d-block">', $html);
-        $this->assertContains(
+        $this->assertStringContainsString('<div class="valid-feedback d-block">', $html);
+        $this->assertStringContainsString(
             trans('bootstrap-components::bootstrap-components.notification.validation.success'),
             $html
         );
@@ -277,7 +289,7 @@ class EmailTest extends BootstrapComponentsTestCase
     public function testNoSuccess()
     {
         $html = bsEmail()->name('name')->toHtml();
-        $this->assertNotContains('<div class="valid-feedback d-block">', $html);
+        $this->assertStringNotContainsString('<div class="valid-feedback d-block">', $html);
     }
 
     public function testError()
@@ -285,42 +297,42 @@ class EmailTest extends BootstrapComponentsTestCase
         $errorMessage = 'This a test error message';
         $messageBag = app(MessageBag::class)->add('name', $errorMessage);
         $html = bsEmail()->name('name')->render(['errors' => $messageBag]);
-        $this->assertContains('<div class="invalid-feedback d-block">', $html);
-        $this->assertContains($errorMessage, $html);
+        $this->assertStringContainsString('<div class="invalid-feedback d-block">', $html);
+        $this->assertStringContainsString($errorMessage, $html);
     }
 
     public function testNoError()
     {
         $html = bsEmail()->name('name')->toHtml();
-        $this->assertNotContains('<div class="invalid-feedback d-block">', $html);
+        $this->assertStringNotContainsString('<div class="invalid-feedback d-block">', $html);
     }
 
     public function testSetNoContainerId()
     {
         $html = bsEmail()->name('name')->toHtml();
-        $this->assertNotContains('<div id="', $html);
+        $this->assertStringNotContainsString('<div id="', $html);
     }
 
     public function testSetContainerId()
     {
         $customContainerId = 'test-custom-container-id';
         $html = bsEmail()->name('name')->containerId($customContainerId)->toHtml();
-        $this->assertContains('<div id="' . $customContainerId . '"', $html);
+        $this->assertStringContainsString('<div id="' . $customContainerId . '"', $html);
     }
 
     public function testSetNoComponentId()
     {
         $html = bsEmail()->name('name')->toHtml();
-        $this->assertContains('for="email-name"', $html);
-        $this->assertContains('<input id="email-name', $html);
+        $this->assertStringContainsString('for="email-name"', $html);
+        $this->assertStringContainsString('<input id="email-name', $html);
     }
 
     public function testSetComponentId()
     {
         $customComponentId = 'test-custom-component-id';
         $html = bsEmail()->name('name')->componentId($customComponentId)->toHtml();
-        $this->assertContains('for="' . $customComponentId . '"', $html);
-        $this->assertContains('<input id="' . $customComponentId . '"', $html);
+        $this->assertStringContainsString('for="' . $customComponentId . '"', $html);
+        $this->assertStringContainsString('<input id="' . $customComponentId . '"', $html);
     }
 
     public function testConfigContainerClass()
@@ -328,7 +340,7 @@ class EmailTest extends BootstrapComponentsTestCase
         $configContainerCLass = 'test-config-class-container';
         config()->set('bootstrap-components.form.email.class.container', [$configContainerCLass]);
         $html = bsEmail()->name('name')->toHtml();
-        $this->assertContains('class="email-name-container ' . $configContainerCLass . '"', $html);
+        $this->assertStringContainsString('class="email-name-container ' . $configContainerCLass . '"', $html);
     }
 
     public function testSetContainerClass()
@@ -337,8 +349,14 @@ class EmailTest extends BootstrapComponentsTestCase
         $customContainerCLass = 'test-custom-class-container';
         config()->set('bootstrap-components.form.email.class.container', [$configContainerCLass]);
         $html = bsEmail()->name('name')->containerClass([$customContainerCLass])->toHtml();
-        $this->assertContains('class="email-name-container ' . $customContainerCLass . '"', $html);
-        $this->assertNotContains('class="email-name-container ' . $configContainerCLass . '"', $html);
+        $this->assertStringContainsString(
+            'class="email-name-container ' . $customContainerCLass . '"',
+            $html
+        );
+        $this->assertStringNotContainsString(
+            'class="email-name-container ' . $configContainerCLass . '"',
+            $html
+        );
     }
 
     public function testConfigComponentClass()
@@ -346,7 +364,10 @@ class EmailTest extends BootstrapComponentsTestCase
         $configComponentCLass = 'test-config-class-component';
         config()->set('bootstrap-components.form.email.class.component', [$configComponentCLass]);
         $html = bsEmail()->name('name')->toHtml();
-        $this->assertContains('class="form-control email-name-component ' . $configComponentCLass . '"', $html);
+        $this->assertStringContainsString(
+            'class="form-control email-name-component ' . $configComponentCLass . '"',
+            $html
+        );
     }
 
     public function testSetComponentClass()
@@ -355,8 +376,14 @@ class EmailTest extends BootstrapComponentsTestCase
         $customComponentCLass = 'test-custom-class-component';
         config()->set('bootstrap-components.form.email.class.component', [$customComponentCLass]);
         $html = bsEmail()->name('name')->componentClass([$customComponentCLass])->toHtml();
-        $this->assertContains('class="form-control email-name-component ' . $customComponentCLass . '"', $html);
-        $this->assertNotContains('class="form-control email-name-component ' . $configComponentCLass . '"', $html);
+        $this->assertStringContainsString(
+            'class="form-control email-name-component ' . $customComponentCLass . '"',
+            $html
+        );
+        $this->assertStringNotContainsString(
+            'class="form-control email-name-component ' . $configComponentCLass . '"',
+            $html
+        );
     }
 
     public function testConfigContainerHtmlAttributes()
@@ -364,7 +391,7 @@ class EmailTest extends BootstrapComponentsTestCase
         $configContainerAttributes = 'test-config-attributes-container';
         config()->set('bootstrap-components.form.email.html_attributes.container', [$configContainerAttributes]);
         $html = bsEmail()->name('name')->toHtml();
-        $this->assertContains($configContainerAttributes, $html);
+        $this->assertStringContainsString($configContainerAttributes, $html);
     }
 
     public function testSetContainerHtmlAttributes()
@@ -373,8 +400,8 @@ class EmailTest extends BootstrapComponentsTestCase
         $customContainerAttributes = 'test-custom-attributes-container';
         config()->set('bootstrap-components.form.email.html_attributes.container', [$configContainerAttributes]);
         $html = bsEmail()->name('name')->containerHtmlAttributes([$customContainerAttributes])->toHtml();
-        $this->assertContains($customContainerAttributes, $html);
-        $this->assertNotContains($configContainerAttributes, $html);
+        $this->assertStringContainsString($customContainerAttributes, $html);
+        $this->assertStringNotContainsString($configContainerAttributes, $html);
     }
 
     public function testConfigComponentHtmlAttributes()
@@ -382,7 +409,7 @@ class EmailTest extends BootstrapComponentsTestCase
         $configComponentAttributes = 'test-config-attributes-component';
         config()->set('bootstrap-components.form.email.html_attributes.component', [$configComponentAttributes]);
         $html = bsEmail()->name('name')->toHtml();
-        $this->assertContains($configComponentAttributes, $html);
+        $this->assertStringContainsString($configComponentAttributes, $html);
     }
 
     public function testSetComponentHtmlAttributes()
@@ -391,7 +418,7 @@ class EmailTest extends BootstrapComponentsTestCase
         $customComponentAttributes = 'test-custom-attributes-component';
         config()->set('bootstrap-components.form.email.html_attributes.component', [$configComponentAttributes]);
         $html = bsEmail()->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
-        $this->assertContains($customComponentAttributes, $html);
-        $this->assertNotContains($configComponentAttributes, $html);
+        $this->assertStringContainsString($customComponentAttributes, $html);
+        $this->assertStringNotContainsString($configComponentAttributes, $html);
     }
 }

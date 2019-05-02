@@ -131,10 +131,10 @@ php artisan vendor:publish --tag=bootstrap-components::views
 |---|---|---|
 | containerId(string $containerId): Component  | No |  |
 | componentId(string $componentId): Component  | No |  |
-| containerClass(array $containerClass): Component  | No | default value : `config('bootstrap-components.[component_config_key].class.container')`. |
-| componentClass(array $componentClass): Component  | No | default value : `config('bootstrap-components.[component_config_key].class.component')`. |
-| containerHtmlAttributes(array $containerHtmlAttributes): Component  | No | default value : `config('bootstrap-components.[component_config_key].html_attributes.container')`. |
-| componentHtmlAttributes(array $componentHtmlAttributes): Component  | No | default value : `config('bootstrap-components.[component_config_key].html_attributes.component')`. |
+| containerClass(array $containerClass): Component  | No | default value : `config('bootstrap-components.[componentConfigKey].class.container')`. |
+| componentClass(array $componentClass): Component  | No | default value : `config('bootstrap-components.[componentConfigKey].class.component')`. |
+| containerHtmlAttributes(array $containerHtmlAttributes): Component  | No | default value : `config('bootstrap-components.[componentConfigKey].html_attributes.container')`. |
+| componentHtmlAttributes(array $componentHtmlAttributes): Component  | No | default value : `config('bootstrap-components.[componentConfigKey].html_attributes.component')`. |
 
 ### Form components
 
@@ -144,8 +144,8 @@ php artisan vendor:publish --tag=bootstrap-components::views
 |---|---|---|
 |  name(string $name): Input  | Yes |  |
 | model(Model $model): Input  | No |  |
-| icon(string $icon): Input  | No | default value : `config('bootstrap-components.input.icon')`. |
-| hideIcon(): Input  | No |  |
+| prepend(?string $html): Input  | No | default value : `config('bootstrap-components.[componentConfigKey].prepend')` |
+| append(?string $html): Input  | No | default value : `config('bootstrap-components.[componentConfigKey].append')` |
 | label(string $label): Input  | No | default value : `trans('validation.attributes.[name]')`. |
 | hideLabel(): Input  | No |  |
 | placeholder(string $placeholder): Input  | No | default value : `$label`. |
@@ -162,8 +162,8 @@ bsText()->name('name')
     ->label('Name') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder('Set your name') // override the default placeholder (label)
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config
-    ->hideIcon() // or hide the icon
+    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
+    ->append('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
     ->legend('Set your name here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->containerId('container-id') // set the container id
@@ -183,8 +183,8 @@ bsNumber()->name('amount')
     ->label('Amount') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder('Set the amount') // override the default placeholder (label)
-    ->icon('<i class="fas fa-dollar-sign"></i>') // override the default config
-    ->hideIcon() // or hide the icon
+    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
+    ->append('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
     ->legend('Set the amount here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->containerId('container-id') // set the container id
@@ -204,8 +204,8 @@ bsTel()->name('phone_number')
     ->label('Phone number') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder('Set your phone number') // override the default placeholder (label)
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
-    ->hideIcon() // or hide the icon
+    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
+    ->append('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
     ->legend('Set your phone number here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->containerId('container-id') // set the container id
@@ -226,8 +226,8 @@ bsDatetime()->name('published_at')
     ->label('Publication date') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder('Set the publication date') // override the default placeholder (label)
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
-    ->hideIcon() // or hide the icon
+    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
+    ->append('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
     ->legend('Set the publication date here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->containerId('container-id') // set the container id
@@ -248,8 +248,8 @@ bsDate()->name('birthday')
     ->label('Birthday') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder('Set your birthday') // override the default placeholder (label)
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
-    ->hideIcon() // or hide the icon
+    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
+    ->append('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
     ->legend('Set your birthday here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->containerId('container-id') // set the container id
@@ -270,8 +270,8 @@ bsTime()->name('opening')
     ->label('Opening') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder('Set the shop opening') // override the default placeholder (label)
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
-    ->hideIcon() // or hide the icon
+    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
+    ->append('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
     ->legend('Set the shop opening here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->containerId('container-id') // set the container id
@@ -291,8 +291,8 @@ bsUrl()->name('facebook_page')
     ->label('Facebook page URL') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder('Set your Facebook page URL') // override the default placeholder (label)
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
-    ->hideIcon() // or hide the icon
+    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
+    ->append('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
     ->legend('Set your Facebook page URL here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->containerId('container-id') // set the container id
@@ -312,8 +312,8 @@ bsEmail()->name('email')
     ->label('Email') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder('Set your e-mail') // override the default placeholder (label)
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
-    ->hideIcon() // or hide the icon
+    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
+    ->append('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
     ->legend('Set your e-mail here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->containerId('container-id') // set the container id
@@ -333,8 +333,8 @@ bsColor()->name('color')
     ->label('Color') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder('Choose the color") // override the default placeholder (label)
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
-    ->hideIcon() // or hide the icon
+    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
+    ->append('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
     ->legend('Select a color here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->containerId('container-id') // set the container id
@@ -354,8 +354,8 @@ bsPassword()->name('password')
     ->label('Password') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder('Set your password') // override the default placeholder (label)
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
-    ->hideIcon() // or hide the icon
+    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
+    ->append('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
     ->legend('Set your password here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->containerId('container-id') // set the container id
@@ -375,8 +375,8 @@ bsFile()->name('avatar')
     ->label('Avatar') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder('Set your avatar') // override the default placeholder (label)
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
-    ->hideIcon() // or hide the icon
+    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
+    ->append('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
     ->legend('Set your avatar here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->uploadedFile(function(){
@@ -407,8 +407,8 @@ bsTextarea()->name('message')
     ->label('Message') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder('Set your message') // override the default placeholder (label)
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
-    ->hideIcon() // or hide the icon
+    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
+    ->append('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
     ->legend('Set your message here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->containerId('container-id') // set the container id
@@ -427,8 +427,8 @@ bsCheckbox()->name('active')
     ->checked(true) // or manually set the value
     ->label('Active') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
-    ->hideIcon() // or hide the icon
+    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
+    ->append('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
     ->legend('Set your active status here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->containerId('container-id') // set the container id
@@ -453,8 +453,8 @@ bsToggle()->name('active')
     ->checked(true) // or manually set the value
     ->label('Active') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
-    ->hideIcon() // or hide the icon
+    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
+    ->append('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
     ->legend('Set your active status here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->containerId('container-id') // set the container id
@@ -483,8 +483,8 @@ bsRadio()->name('gender')
     ->checked(true) // or manually set the value
     ->label('Name') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
-    ->hideIcon() // or hide the icon
+    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
+    ->append('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
     ->legend('Set your gender here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->containerId('container-id') // set the container id
@@ -512,8 +512,8 @@ bsSelect()->name('skills')
     ->label('Skills') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
     ->placeholder('Select your skills') // override the default placeholder (label)
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
-    ->hideIcon() // or hide the icon
+    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
+    ->append('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
     ->legend('Select your skills here.') // override the default config legend
     ->hideLegend() // or hide the legend
     ->containerId('container-id') // set the container id
@@ -542,18 +542,18 @@ _Component additional methods :_
 
 | Signature | Required | Description |
 |---|---|---|
-| icon(string $icon): Input  | No | default value : `config('bootstrap-components.button.icon')`. |
-| hideIcon(): Input  | No |  |
-| label(string $label): Input  | No | default value : `config('bootstrap-components.button.label')`. |
-| hideLabel(): Input  | No |  |
+| prepend(?string $html): Button  | No | default value : `config('bootstrap-components.button.prepend')`. |
+| append(?string $html): Button  | No | default value : `config('bootstrap-components.button.append')`. |
+| label(string $label): Button  | No | default value : `config('bootstrap-components.button.label')`. |
+| hideLabel(): Button  | No |  |
 
 #### bsValidate()
 
 ```php
 bsValidate()->label('Send') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
-    ->hideIcon() // or hide the icon
+    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
+    ->append('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // set the component id
     ->containerClass(['container', 'class]) // override the default config container class list
@@ -567,8 +567,8 @@ bsValidate()->label('Send') // override the default trans('validation.attributes
 ```php
 bsCreate()->label('Create a new user') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
-    ->hideIcon() // or hide the icon
+    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
+    ->append('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // set the component id
     ->containerClass(['container', 'class]) // override the default config container class list
@@ -582,8 +582,8 @@ bsCreate()->label('Create a new user') // override the default trans('validation
 ```php
 bsUpdate()->label('Update this user') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
-    ->hideIcon() // or hide the icon
+    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
+    ->append('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // set the component id
     ->containerClass(['container', 'class]) // override the default config container class list
@@ -599,8 +599,8 @@ bsCancel()->url('https://website.com/admin/users') // set the button url
     ->route('users.index') // or set the route name
     ->label('Cancel action') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
-    ->hideIcon() // or hide the icon
+    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
+    ->append('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // set the component id
     ->containerClass(['container', 'class]) // override the default config container class list
@@ -623,8 +623,8 @@ bsBack()->url('https://website.com/admin/users') // set the button url
     ->route('users.index') // or set the route name
     ->label('Back to the users list') // override the default trans('validation.attributes.[name]') label
     ->hideLabel() // or hide the label
-    ->icon('<i class="fas fa-hand-pointer"></i>') // override the default config icon
-    ->hideIcon() // or hide the icon
+    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
+    ->append('<i class="fas fa-hand-pointer"></i>') // override the default prepend config
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // set the component id
     ->containerClass(['container', 'class]) // override the default config container class list

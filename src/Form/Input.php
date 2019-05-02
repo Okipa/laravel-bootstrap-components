@@ -231,7 +231,7 @@ abstract class Input extends Component
     /**
      * @return array
      */
-    protected function defineValues()
+    protected function defineValues(): array
     {
         return [
             'model'       => $this->model,
@@ -289,7 +289,7 @@ abstract class Input extends Component
     {
         return $this->label
             ? $this->label
-            : trans('validation.attributes.' . str_slug($this->name, '_'));
+            : trans('validation.attributes.' . Str::slug($this->name, '_'));
     }
 
     /**
@@ -315,6 +315,6 @@ abstract class Input extends Component
      */
     protected function defaultComponentId(): string
     {
-        return $this->type . '-' . str_slug($this->name);
+        return $this->type . '-' . Str::slug($this->name);
     }
 }

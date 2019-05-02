@@ -3,7 +3,7 @@ $switch-height: calc(#{$input-height} * .8) !default;
 $switch-height-sm: calc(#{$input-height-sm} * .8) !default;
 $switch-height-lg: calc(#{$input-height-lg} * .8) !default;
 $switch-border-radius: $switch-height !default;
-$switch-bg: $custom-control-indicator-bg !default;
+$switch-bg: $input-group-addon-bg !default;
 $switch-checked-bg: map-get($theme-colors, 'primary') !default;
 $switch-disabled-bg: $custom-control-indicator-disabled-bg !default;
 $switch-disabled-color: $custom-control-label-disabled-color !default;

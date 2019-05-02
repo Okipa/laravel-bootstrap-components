@@ -1,5 +1,5 @@
 <div {{ htmlAttributes($containerId ? ['id' => $containerId] : null) }}
-    {{ classTag($type . '-' . str_slug($name) . '-container', $containerClass) }}
+    {{ classTag($type . '-' . Str::slug($name) . '-container', $containerClass) }}
     {{ htmlAttributes($containerHtmlAttributes) }}>
     @include('bootstrap-components::bootstrap-components.partials.label')
     @if(! empty($prepend) || ! empty($append))
@@ -8,11 +8,11 @@
         @include('bootstrap-components::bootstrap-components.partials.prepend')
         <textarea id="{{ $componentId }}"
                name="{{ $name }}"
-               {{ classTag('form-control', $type . '-' . str_slug($name) . '-component', $componentClass, validationStatus($name)) }}
+               {{ classTag('form-control', $type . '-' . Str::slug($name) . '-component', $componentClass, validationStatus($name)) }}
                placeholder="{{ $placeholder }}"
                {{ htmlAttributes($componentHtmlAttributes) }}
                aria-label="{{ $label }}"
-               aria-describedby="{{ $type }}-{{ str_slug($name) }}">{{ old($name, $value) }}</textarea>
+               aria-describedby="{{ $type }}-{{ Str::slug($name) }}">{{ old($name, $value) }}</textarea>
         @include('bootstrap-components::bootstrap-components.partials.append')
     @if(! empty($prepend) || ! empty($append))
         </div>

@@ -6,7 +6,8 @@
         {{ classTag($type . '-component', $componentClass) }}
         {{ htmlAttributes($componentHtmlAttributes) }}
         {{ htmlAttributes($label ? 'title="' . $label .'"' : null) }}>
-        @if($icon)<span class="icon">{!! $icon !!}</span>@endif
+        @if(! empty($prepend))<span class="label-prepend">{!! $prepend !!}</span>@endif
         @if($label)<span class="label">{{ $label }}</span>@endif
+        @if(! empty($append))<span class="label-append">{!! $append !!}</span>@endif
     {{ htmlAttributes($type === 'button' ? '</a>' : '</button>') }}
 </div>

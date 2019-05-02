@@ -16,7 +16,8 @@ class ValidateTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('validate', config('bootstrap-components.button')));
         // components.button.validate
         $this->assertTrue(array_key_exists('view', config('bootstrap-components.button.validate')));
-        $this->assertTrue(array_key_exists('icon', config('bootstrap-components.button.validate')));
+        $this->assertTrue(array_key_exists('prepend', config('bootstrap-components.button.cancel')));
+        $this->assertTrue(array_key_exists('append', config('bootstrap-components.button.cancel')));
         $this->assertTrue(array_key_exists('label', config('bootstrap-components.button.validate')));
         $this->assertTrue(array_key_exists('class', config('bootstrap-components.button.validate')));
         $this->assertTrue(array_key_exists('html_attributes', config('bootstrap-components.button.validate')));
@@ -42,16 +43,16 @@ class ValidateTest extends BootstrapComponentsTestCase
     public function testType()
     {
         $html = bsValidate()->toHtml();
-        $this->assertContains('class="submit-container', $html);
-        $this->assertNotContains('href="http://localhost"', $html);
-        $this->assertContains('class="submit-component', $html);
+        $this->assertStringContainsString('class="submit-container', $html);
+        $this->assertStringNotContainsString('href="http://localhost"', $html);
+        $this->assertStringContainsString('class="submit-component', $html);
     }
 
     public function testSetUrl()
     {
         $customUrl = 'test-custom-url';
         $html = bsValidate()->url($customUrl)->toHtml();
-        $this->assertNotContains('href="' . $customUrl . '"', $html);
+        $this->assertStringNotContainsString('href="' . $customUrl . '"', $html);
     }
 
     public function testSetRoute()
@@ -59,40 +60,93 @@ class ValidateTest extends BootstrapComponentsTestCase
         $this->setRoutes();
         $customRoute = 'users.index';
         $html = bsValidate()->route($customRoute)->toHtml();
-        $this->assertNotContains('href="' . route($customRoute) . '"', $html);
+        $this->assertStringNotContainsString('href="' . route($customRoute) . '"', $html);
     }
 
-    public function testConfigIcon()
+    public function testConfigPrepend()
     {
-        $configIcon = 'test-config-icon';
-        config()->set('bootstrap-components.button.validate.icon', $configIcon);
+        $configPrepend = 'test-config-prepend';
+        config()->set('bootstrap-components.button.validate.prepend', $configPrepend);
         $html = bsValidate()->toHtml();
-        $this->assertContains($configIcon, $html);
+        $this->assertStringContainsString('<span class="label-prepend">' . $configPrepend . '</span>', $html);
     }
 
-    public function testSetIcon()
+    public function testSetPrepend()
     {
-        $configIcon = 'test-config-icon';
-        $customIcon = 'test-custom-icon';
-        config()->set('bootstrap-components.button.validate.icon', $configIcon);
-        $html = bsValidate()->icon($customIcon)->toHtml();
-        $this->assertContains('<span class="icon">' . $customIcon . '</span>', $html);
-        $this->assertNotContains('<span class="icon">' . $configIcon . '</span>', $html);
+        $configPrepend = 'test-config-prepend';
+        $customPrepend = 'test-custom-prepend';
+        config()->set('bootstrap-components.button.validate.prepend', $configPrepend);
+        $html = bsValidate()->prepend($customPrepend)->toHtml();
+        $this->assertStringContainsString('<span class="label-prepend">' . $customPrepend . '</span>', $html);
+        $this->assertStringNotContainsString('<span class="label-prepend">' . $configPrepend . '</span>', $html);
     }
 
-    public function testNoIcon()
+    public function testNoPrepend()
     {
-        config()->set('bootstrap-components.button.validate.icon', null);
+        config()->set('bootstrap-components.button.validate.prepend', null);
         $html = bsValidate()->toHtml();
-        $this->assertNotContains('<span class="icon">', $html);
+        $this->assertStringNotContainsString('label-prepend', $html);
     }
 
-    public function testHideIcon()
+    public function testHidePrepend()
     {
-        $configIcon = 'test-config-icon';
-        config()->set('bootstrap-components.button.validate.icon', $configIcon);
-        $html = bsValidate()->hideIcon()->toHtml();
-        $this->assertNotContains('<span class="icon">' . $configIcon . '</span>', $html);
+        $configPrepend = 'test-config-prepend';
+        config()->set('bootstrap-components.button.validate.prepend', $configPrepend);
+        $html = bsValidate()->prepend(false)->toHtml();
+        $this->assertStringNotContainsString('label-prepend', $html);
+    }
+
+    public function testConfigAppend()
+    {
+        $configAppend = 'test-config-append';
+        config()->set('bootstrap-components.button.validate.append', $configAppend);
+        $html = bsValidate()->toHtml();
+        $this->assertStringContainsString('<span class="label-append">' . $configAppend . '</span>', $html);
+    }
+
+    public function testSetAppend()
+    {
+        $configAppend = 'test-config-append';
+        $customAppend = 'test-custom-append';
+        config()->set('bootstrap-components.button.validate.append', $configAppend);
+        $html = bsValidate()->append($customAppend)->toHtml();
+        $this->assertStringContainsString('<span class="label-append">' . $customAppend . '</span>', $html);
+        $this->assertStringNotContainsString('<span class="label-append">' . $configAppend . '</span>', $html);
+    }
+
+    public function testNoAppend()
+    {
+        config()->set('bootstrap-components.button.validate.append', null);
+        $html = bsValidate()->toHtml();
+        $this->assertStringNotContainsString('label-append', $html);
+    }
+
+    public function testHideAppend()
+    {
+        $configAppend = 'test-config-append';
+        config()->set('bootstrap-components.button.validate.append', $configAppend);
+        $html = bsValidate()->append(false)->toHtml();
+        $this->assertStringNotContainsString('label-append', $html);
+    }
+
+    public function testNoPrependNoAppend()
+    {
+        config()->set('bootstrap-components.button.validate.prepend', null);
+        config()->set('bootstrap-components.button.validate.append', null);
+        $html = bsValidate()->toHtml();
+        $this->assertStringNotContainsString('label-prepend', $html);
+        $this->assertStringNotContainsString('label-append', $html);
+    }
+
+    public function testHidePrependHideAppend()
+    {
+        $configPrepend = 'test-config-prepend';
+        $configAppend = 'test-config-append';
+        config()->set('bootstrap-components.button.validate.prepend', $configPrepend);
+        config()->set('bootstrap-components.button.validate.append', $configAppend);
+        $html = bsValidate()->prepend(false)->append(false)->toHtml();
+        $this->assertStringNotContainsString('label-prepend', $html);
+        $this->assertStringNotContainsString('label-append', $html);
     }
 
     public function testConfigLabel()
@@ -100,24 +154,27 @@ class ValidateTest extends BootstrapComponentsTestCase
         $configLabel = 'test-config-label';
         config()->set('bootstrap-components.button.validate.label', $configLabel);
         $html = bsValidate()->toHtml();
-        $this->assertContains('title="bootstrap-components::' . $configLabel . '">', $html);
-        $this->assertContains('<span class="label">bootstrap-components::' . $configLabel . '</span>', $html);
+        $this->assertStringContainsString('title="bootstrap-components::' . $configLabel . '">', $html);
+        $this->assertStringContainsString(
+            '<span class="label">bootstrap-components::' . $configLabel . '</span>',
+            $html
+        );
     }
 
     public function testSetLabel()
     {
         $label = 'test-custom-label';
         $html = bsValidate()->label($label)->toHtml();
-        $this->assertContains('<span class="label">' . $label . '</span>', $html);
+        $this->assertStringContainsString('<span class="label">' . $label . '</span>', $html);
     }
 
     public function testNoLabel()
     {
         config()->set('bootstrap-components.button.validate.label', null);
         $html = bsValidate()->toHtml();
-        $this->assertNotContains('<span class="label">', $html);
-        $this->assertNotContains('title="', $html);
-        $this->assertNotContains('<span class="label">', $html);
+        $this->assertStringNotContainsString('<span class="label">', $html);
+        $this->assertStringNotContainsString('title="', $html);
+        $this->assertStringNotContainsString('<span class="label">', $html);
     }
 
     public function testHideLabel()
@@ -125,34 +182,40 @@ class ValidateTest extends BootstrapComponentsTestCase
         $configLabel = 'test-config-label';
         config()->set('bootstrap-components.button.validate.label', $configLabel);
         $html = bsValidate()->hideLabel()->toHtml();
-        $this->assertNotContains('title="bootstrap-components::' . $configLabel . '">', $html);
-        $this->assertNotContains('<span class="label">bootstrap-components::' . $configLabel . '</span>', $html);
+        $this->assertStringNotContainsString(
+            'title="bootstrap-components::' . $configLabel . '">',
+            $html
+        );
+        $this->assertStringNotContainsString(
+            '<span class="label">bootstrap-components::' . $configLabel . '</span>',
+            $html
+        );
     }
 
     public function testSetNoContainerId()
     {
         $html = bsValidate()->toHtml();
-        $this->assertNotContains('<div id="', $html);
+        $this->assertStringNotContainsString('<div id="', $html);
     }
 
     public function testSetContainerId()
     {
         $customContainerId = 'test-custom-container-id';
         $html = bsValidate()->containerId($customContainerId)->toHtml();
-        $this->assertContains('<div id="' . $customContainerId . '"', $html);
+        $this->assertStringContainsString('<div id="' . $customContainerId . '"', $html);
     }
 
     public function testSetNoComponentId()
     {
         $html = bsValidate()->toHtml();
-        $this->assertNotContains('<button id="', $html);
+        $this->assertStringNotContainsString('<button id="', $html);
     }
 
     public function testSetComponentId()
     {
         $customComponentId = 'test-custom-component-id';
         $html = bsValidate()->componentId($customComponentId)->toHtml();
-        $this->assertContains('<button id="' . $customComponentId . '"', $html);
+        $this->assertStringContainsString('<button id="' . $customComponentId . '"', $html);
     }
 
     public function testConfigContainerClass()
@@ -160,7 +223,7 @@ class ValidateTest extends BootstrapComponentsTestCase
         $configContainerCLass = 'test-config-class-container';
         config()->set('bootstrap-components.button.validate.class.container', [$configContainerCLass]);
         $html = bsValidate()->toHtml();
-        $this->assertContains('class="submit-container ' . $configContainerCLass . '">', $html);
+        $this->assertStringContainsString('class="submit-container ' . $configContainerCLass . '">', $html);
     }
 
     public function testSetContainerClass()
@@ -169,8 +232,8 @@ class ValidateTest extends BootstrapComponentsTestCase
         $customContainerCLass = 'test-custom-class-container';
         config()->set('bootstrap-components.input.class.container', [$configContainerCLass]);
         $html = bsValidate()->containerClass([$customContainerCLass])->toHtml();
-        $this->assertContains('class="submit-container ' . $customContainerCLass . '">', $html);
-        $this->assertNotContains('class="submit-container ' . $configContainerCLass . '">', $html);
+        $this->assertStringContainsString('class="submit-container ' . $customContainerCLass . '">', $html);
+        $this->assertStringNotContainsString('class="submit-container ' . $configContainerCLass . '">', $html);
     }
 
     public function testConfigComponentClass()
@@ -178,7 +241,7 @@ class ValidateTest extends BootstrapComponentsTestCase
         $configComponentCLass = 'test-config-class-component';
         config()->set('bootstrap-components.button.validate.class.component', [$configComponentCLass]);
         $html = bsValidate()->toHtml();
-        $this->assertContains('class="submit-component ' . $configComponentCLass . '"', $html);
+        $this->assertStringContainsString('class="submit-component ' . $configComponentCLass . '"', $html);
     }
 
     public function testSetComponentClass()
@@ -187,8 +250,8 @@ class ValidateTest extends BootstrapComponentsTestCase
         $customComponentCLass = 'test-custom-class-component';
         config()->set('bootstrap-components.button.validate.class.component', [$customComponentCLass]);
         $html = bsValidate()->componentClass([$customComponentCLass])->toHtml();
-        $this->assertContains('class="submit-component ' . $customComponentCLass . '"', $html);
-        $this->assertNotContains('class="submit-component ' . $configComponentCLass . '"', $html);
+        $this->assertStringContainsString('class="submit-component ' . $customComponentCLass . '"', $html);
+        $this->assertStringNotContainsString('class="submit-component ' . $configComponentCLass . '"', $html);
     }
 
     public function testConfigContainerHtmlAttributes()
@@ -196,7 +259,7 @@ class ValidateTest extends BootstrapComponentsTestCase
         $configContainerAttributes = 'test-config-attributes-container';
         config()->set('bootstrap-components.button.validate.html_attributes.container', [$configContainerAttributes]);
         $html = bsValidate()->toHtml();
-        $this->assertContains($configContainerAttributes, $html);
+        $this->assertStringContainsString($configContainerAttributes, $html);
     }
 
     public function testSetContainerHtmlAttributes()
@@ -205,8 +268,8 @@ class ValidateTest extends BootstrapComponentsTestCase
         $customContainerAttributes = 'test-custom-attributes-container';
         config()->set('bootstrap-components.button.validate.html_attributes.container', [$configContainerAttributes]);
         $html = bsValidate()->containerHtmlAttributes([$customContainerAttributes])->toHtml();
-        $this->assertContains($customContainerAttributes, $html);
-        $this->assertNotContains($configContainerAttributes, $html);
+        $this->assertStringContainsString($customContainerAttributes, $html);
+        $this->assertStringNotContainsString($configContainerAttributes, $html);
     }
 
     public function testConfigComponentHtmlAttributes()
@@ -214,7 +277,7 @@ class ValidateTest extends BootstrapComponentsTestCase
         $configComponentAttributes = 'test-config-attributes-component';
         config()->set('bootstrap-components.button.validate.html_attributes.component', [$configComponentAttributes]);
         $html = bsValidate()->toHtml();
-        $this->assertContains($configComponentAttributes, $html);
+        $this->assertStringContainsString($configComponentAttributes, $html);
     }
 
     public function testSetComponentHtmlAttributes()
@@ -223,7 +286,7 @@ class ValidateTest extends BootstrapComponentsTestCase
         $customComponentAttributes = 'test-custom-attributes-component';
         config()->set('bootstrap-components.button.validate.html_attributes.component', [$configComponentAttributes]);
         $html = bsValidate()->componentHtmlAttributes([$customComponentAttributes])->toHtml();
-        $this->assertContains($customComponentAttributes, $html);
-        $this->assertNotContains($configComponentAttributes, $html);
+        $this->assertStringContainsString($customComponentAttributes, $html);
+        $this->assertStringNotContainsString($configComponentAttributes, $html);
     }
 }
