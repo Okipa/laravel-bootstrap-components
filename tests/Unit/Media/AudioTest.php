@@ -14,13 +14,13 @@ class AudioTest extends BootstrapComponentsTestCase
         // components.media.audio
         $this->assertTrue(array_key_exists('view', config('bootstrap-components.media.audio')));
         $this->assertTrue(array_key_exists('class', config('bootstrap-components.media.audio')));
-        $this->assertTrue(array_key_exists('html_attributes', config('bootstrap-components.media.audio')));
+        $this->assertTrue(array_key_exists('htmlAttributes', config('bootstrap-components.media.audio')));
         // components.media.audio.class
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.media.audio.class')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.media.audio.class')));
-        // components.media.audio.html_attributes
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.media.audio.html_attributes')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.media.audio.html_attributes')));
+        // components.media.audio.htmlAttributes
+        $this->assertTrue(array_key_exists('container', config('bootstrap-components.media.audio.htmlAttributes')));
+        $this->assertTrue(array_key_exists('component', config('bootstrap-components.media.audio.htmlAttributes')));
     }
 
     public function testExtendsInput()
@@ -106,7 +106,7 @@ class AudioTest extends BootstrapComponentsTestCase
     public function testConfigContainerHtmlAttributes()
     {
         $configContainerAttributes = 'test-config-attributes-container';
-        config()->set('bootstrap-components.media.audio.html_attributes.container', [$configContainerAttributes]);
+        config()->set('bootstrap-components.media.audio.htmlAttributes.container', [$configContainerAttributes]);
         $html = audio()->toHtml();
         $this->assertStringContainsString($configContainerAttributes, $html);
     }
@@ -115,7 +115,7 @@ class AudioTest extends BootstrapComponentsTestCase
     {
         $configContainerAttributes = 'test-config-attributes-container';
         $customContainerAttributes = 'test-custom-attributes-container';
-        config()->set('bootstrap-components.media.audio.html_attributes.container', [$configContainerAttributes]);
+        config()->set('bootstrap-components.media.audio.htmlAttributes.container', [$configContainerAttributes]);
         $html = audio()->containerHtmlAttributes([$customContainerAttributes])->toHtml();
         $this->assertStringContainsString($customContainerAttributes, $html);
         $this->assertStringNotContainsString($configContainerAttributes, $html);
@@ -124,7 +124,7 @@ class AudioTest extends BootstrapComponentsTestCase
     public function testConfigComponentHtmlAttributes()
     {
         $configComponentAttributes = 'test-config-attributes-component';
-        config()->set('bootstrap-components.media.audio.html_attributes.component', [$configComponentAttributes]);
+        config()->set('bootstrap-components.media.audio.htmlAttributes.component', [$configComponentAttributes]);
         $html = audio()->toHtml();
         $this->assertStringContainsString($configComponentAttributes, $html);
     }
@@ -133,7 +133,7 @@ class AudioTest extends BootstrapComponentsTestCase
     {
         $configComponentAttributes = 'test-config-attributes-component';
         $customComponentAttributes = 'test-custom-attributes-component';
-        config()->set('bootstrap-components.media.audio.html_attributes.component', [$configComponentAttributes]);
+        config()->set('bootstrap-components.media.audio.htmlAttributes.component', [$configComponentAttributes]);
         $html = audio()->componentHtmlAttributes([$customComponentAttributes])->toHtml();
         $this->assertStringContainsString($customComponentAttributes, $html);
         $this->assertStringNotContainsString($configComponentAttributes, $html);

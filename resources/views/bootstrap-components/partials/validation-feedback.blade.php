@@ -1,9 +1,9 @@
-@if(isset($errors) && ! $errors->isEmpty())
-    @if($errors->has($name))
+@if(isset($errors) && $errors->isNotEmpty() && ($displaySuccess || $displayFailure))
+    @if($displayFailure && $errors->has($name))
         <div class="invalid-feedback d-block">
             {{ $errors->first($name) }}
         </div>
-    @else
+    @elseif($displaySuccess)
         <div class="valid-feedback d-block">
             @lang('bootstrap-components::bootstrap-components.notification.validation.success')
         </div>

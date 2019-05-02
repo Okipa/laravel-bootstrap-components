@@ -22,13 +22,13 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('append', config('bootstrap-components.form.checkbox')));
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.checkbox')));
         $this->assertTrue(array_key_exists('class', config('bootstrap-components.form.checkbox')));
-        $this->assertTrue(array_key_exists('html_attributes', config('bootstrap-components.form.checkbox')));
+        $this->assertTrue(array_key_exists('htmlAttributes', config('bootstrap-components.form.checkbox')));
         // components.form.checkbox.class
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.checkbox.class')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.checkbox.class')));
-        // components.form.checkbox.html_attributes
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.checkbox.html_attributes')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.checkbox.html_attributes')));
+        // components.form.checkbox.htmlAttributes
+        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.checkbox.htmlAttributes')));
+        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.checkbox.htmlAttributes')));
     }
 
     public function testExtendsInput()
@@ -265,8 +265,9 @@ class CheckboxTest extends BootstrapComponentsTestCase
         );
     }
 
-    public function testSuccess()
+    public function testConfigDisplaySuccess()
     {
+        config()->set('bootstrap-components.form.checkbox.formValidation.displaySuccess', true);
         $messageBag = app(MessageBag::class)->add('other_name', null);
         $html = bsCheckbox()->name('name')->render(['errors' => $messageBag]);
         $this->assertStringContainsString('<div class="valid-feedback d-block">', $html);
@@ -276,14 +277,45 @@ class CheckboxTest extends BootstrapComponentsTestCase
         );
     }
 
-    public function testNoSuccess()
+    public function testConfigDoNotDisplaySuccess()
     {
-        $html = bsCheckbox()->name('name')->toHtml();
+        config()->set('bootstrap-components.form.checkbox.formValidation.displaySuccess', false);
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        $html = bsCheckbox()->name('name')->render(['errors' => $messageBag]);
         $this->assertStringNotContainsString('<div class="valid-feedback d-block">', $html);
+        $this->assertStringNotContainsString(
+            __('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html
+        );
     }
 
-    public function testError()
+    public function testDisplaySuccess()
     {
+        config()->set('bootstrap-components.form.checkbox.formValidation.displaySuccess', false);
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        $html = bsCheckbox()->name('name')->displaySuccess(true)->render(['errors' => $messageBag]);
+        $this->assertStringContainsString('<div class="valid-feedback d-block">', $html);
+        $this->assertStringContainsString(
+            __('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html
+        );
+    }
+
+    public function testDoNotDisplaySuccess()
+    {
+        config()->set('bootstrap-components.form.checkbox.formValidation.displaySuccess', true);
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        $html = bsCheckbox()->name('name')->displaySuccess(false)->render(['errors' => $messageBag]);
+        $this->assertStringNotContainsString('<div class="valid-feedback d-block">', $html);
+        $this->assertStringNotContainsString(
+            __('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html
+        );
+    }
+
+    public function testConfigDisplayFailure()
+    {
+        config()->set('bootstrap-components.form.checkbox.formValidation.displayFailure', true);
         $errorMessage = 'This a test error message';
         $messageBag = app(MessageBag::class)->add('name', $errorMessage);
         $html = bsCheckbox()->name('name')->render(['errors' => $messageBag]);
@@ -291,10 +323,34 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString($errorMessage, $html);
     }
 
-    public function testNoError()
+    public function testConfigDoNotDisplayFailure()
     {
-        $html = bsCheckbox()->name('name')->toHtml();
+        config()->set('bootstrap-components.form.checkbox.formValidation.displayFailure', false);
+        $errorMessage = 'This a test error message';
+        $messageBag = app(MessageBag::class)->add('name', $errorMessage);
+        $html = bsCheckbox()->name('name')->render(['errors' => $messageBag]);
         $this->assertStringNotContainsString('<div class="invalid-feedback d-block">', $html);
+        $this->assertStringNotContainsString($errorMessage, $html);
+    }
+
+    public function testDisplayFailure()
+    {
+        config()->set('bootstrap-components.form.checkbox.formValidation.displayFailure', false);
+        $errorMessage = 'This a test error message';
+        $messageBag = app(MessageBag::class)->add('name', $errorMessage);
+        $html = bsCheckbox()->name('name')->displayFailure(true)->render(['errors' => $messageBag]);
+        $this->assertStringContainsString('<div class="invalid-feedback d-block">', $html);
+        $this->assertStringContainsString($errorMessage, $html);
+    }
+
+    public function testDoNotDisplayFailure()
+    {
+        config()->set('bootstrap-components.form.checkbox.formValidation.displayFailure', true);
+        $errorMessage = 'This a test error message';
+        $messageBag = app(MessageBag::class)->add('name', $errorMessage);
+        $html = bsCheckbox()->name('name')->displayFailure(false)->render(['errors' => $messageBag]);
+        $this->assertStringNotContainsString('<div class="invalid-feedback d-block">', $html);
+        $this->assertStringNotContainsString($errorMessage, $html);
     }
 
     public function testSetNoContainerId()
@@ -376,7 +432,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
     public function testConfigContainerHtmlAttributes()
     {
         $configContainerAttributes = 'test-config-attributes-container';
-        config()->set('bootstrap-components.form.checkbox.html_attributes.container', [$configContainerAttributes]);
+        config()->set('bootstrap-components.form.checkbox.htmlAttributes.container', [$configContainerAttributes]);
         $html = bsCheckbox()->name('name')->toHtml();
         $this->assertStringContainsString($configContainerAttributes, $html);
     }
@@ -385,7 +441,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
     {
         $configContainerAttributes = 'test-config-attributes-container';
         $customContainerAttributes = 'test-custom-attributes-container';
-        config()->set('bootstrap-components.form.checkbox.html_attributes.container', [$configContainerAttributes]);
+        config()->set('bootstrap-components.form.checkbox.htmlAttributes.container', [$configContainerAttributes]);
         $html = bsCheckbox()->name('name')->containerHtmlAttributes([$customContainerAttributes])->toHtml();
         $this->assertStringContainsString($customContainerAttributes, $html);
         $this->assertStringNotContainsString($configContainerAttributes, $html);
@@ -394,7 +450,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
     public function testConfigComponentHtmlAttributes()
     {
         $configComponentAttributes = 'test-config-attributes-component';
-        config()->set('bootstrap-components.form.checkbox.html_attributes.component', [$configComponentAttributes]);
+        config()->set('bootstrap-components.form.checkbox.htmlAttributes.component', [$configComponentAttributes]);
         $html = bsCheckbox()->name('name')->toHtml();
         $this->assertStringContainsString($configComponentAttributes, $html);
     }
@@ -403,7 +459,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
     {
         $configComponentAttributes = 'test-config-attributes-component';
         $customComponentAttributes = 'test-custom-attributes-component';
-        config()->set('bootstrap-components.form.checkbox.html_attributes.component', [$configComponentAttributes]);
+        config()->set('bootstrap-components.form.checkbox.htmlAttributes.component', [$configComponentAttributes]);
         $html = bsCheckbox()->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
         $this->assertStringContainsString($customComponentAttributes, $html);
         $this->assertStringNotContainsString($configComponentAttributes, $html);

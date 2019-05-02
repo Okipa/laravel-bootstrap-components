@@ -70,6 +70,18 @@ abstract class Input extends Component
      * @property string|false $placeholder
      */
     protected $placeholder;
+    /**
+     * The component form validation success display status.
+     *
+     * @property boolean $displaySuccess
+     */
+    protected $displaySuccess;
+    /**
+     * The component form validation failure display status.
+     *
+     * @property boolean $displayFailure
+     */
+    protected $displayFailure;
 
     /**
      * Set the component associated model.
@@ -184,6 +196,34 @@ abstract class Input extends Component
     }
 
     /**
+     * Set the component form validation success display status.
+     *
+     * @param bool $displaySuccess
+     *
+     * @return \Okipa\LaravelBootstrapComponents\Form\Input
+     */
+    public function displaySuccess(bool $displaySuccess): Input
+    {
+        $this->displaySuccess = $displaySuccess;
+
+        return $this;
+    }
+
+    /**
+     * Set the component form validation failure display status.
+     *
+     * @param bool $displayFailure
+     *
+     * @return \Okipa\LaravelBootstrapComponents\Form\Input
+     */
+    public function displayFailure(bool $displayFailure): Input
+    {
+        $this->displayFailure = $displayFailure;
+
+        return $this;
+    }
+
+    /**
      * Set the values for the view.
      *
      * @return array
@@ -194,21 +234,41 @@ abstract class Input extends Component
     }
 
     /**
+     * Define the component values.
+     *
      * @return array
      */
     protected function defineValues(): array
     {
         return [
-            'model'       => $this->model,
-            'type'        => $this->type,
-            'name'        => $this->name,
-            'prepend'     => $this->prepend ?? $this->defaultPrepend(),
-            'append'      => $this->append ?? $this->defaultAppend(),
-            'legend'      => __($this->legend) ?? $this->defaultLegend(),
-            'label'       => $this->label ?? $this->defaultLabel(),
-            'value'       => $this->defineValue(),
-            'placeholder' => $this->placeholder ?? ($this->label ?? $this->defaultLabel()),
+            'model'          => $this->model,
+            'type'           => $this->type,
+            'name'           => $this->name,
+            'prepend'        => $this->prepend ?? $this->defaultPrepend(),
+            'append'         => $this->append ?? $this->defaultAppend(),
+            'legend'         => __($this->legend) ?? $this->defaultLegend(),
+            'label'          => $this->label ?? $this->defaultLabel(),
+            'value'          => $this->defineValue(),
+            'placeholder'    => $this->placeholder ?? ($this->label ?? $this->defaultLabel()),
+            'displaySuccess' => $this->displaySuccess ?? $this->defaultDisplaySuccess(),
+            'displayFailure' => $this->displayFailure ?? $this->defaultDisplayFailure(),
         ];
+    }
+
+    /**
+     * @return bool
+     */
+    protected function defaultDisplaySuccess(): bool
+    {
+        return config('bootstrap-components.' . $this->configKey . '.formValidation.displaySuccess');
+    }
+
+    /**
+     * @return bool
+     */
+    protected function defaultDisplayFailure(): bool
+    {
+        return config('bootstrap-components.' . $this->configKey . '.formValidation.displayFailure');
     }
 
     /**

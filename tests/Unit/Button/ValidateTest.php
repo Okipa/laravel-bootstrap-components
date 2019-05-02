@@ -20,18 +20,18 @@ class ValidateTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('append', config('bootstrap-components.button.cancel')));
         $this->assertTrue(array_key_exists('label', config('bootstrap-components.button.validate')));
         $this->assertTrue(array_key_exists('class', config('bootstrap-components.button.validate')));
-        $this->assertTrue(array_key_exists('html_attributes', config('bootstrap-components.button.validate')));
+        $this->assertTrue(array_key_exists('htmlAttributes', config('bootstrap-components.button.validate')));
         // components.validate.class
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.button.validate.class')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.button.validate.class')));
-        // components.validate.html_attributes
+        // components.validate.htmlAttributes
         $this->assertTrue(array_key_exists(
             'container',
-            config('bootstrap-components.button.validate.html_attributes')
+            config('bootstrap-components.button.validate.htmlAttributes')
         ));
         $this->assertTrue(array_key_exists(
             'component',
-            config('bootstrap-components.button.validate.html_attributes')
+            config('bootstrap-components.button.validate.htmlAttributes')
         ));
     }
 
@@ -257,7 +257,7 @@ class ValidateTest extends BootstrapComponentsTestCase
     public function testConfigContainerHtmlAttributes()
     {
         $configContainerAttributes = 'test-config-attributes-container';
-        config()->set('bootstrap-components.button.validate.html_attributes.container', [$configContainerAttributes]);
+        config()->set('bootstrap-components.button.validate.htmlAttributes.container', [$configContainerAttributes]);
         $html = bsValidate()->toHtml();
         $this->assertStringContainsString($configContainerAttributes, $html);
     }
@@ -266,7 +266,7 @@ class ValidateTest extends BootstrapComponentsTestCase
     {
         $configContainerAttributes = 'test-config-attributes-container';
         $customContainerAttributes = 'test-custom-attributes-container';
-        config()->set('bootstrap-components.button.validate.html_attributes.container', [$configContainerAttributes]);
+        config()->set('bootstrap-components.button.validate.htmlAttributes.container', [$configContainerAttributes]);
         $html = bsValidate()->containerHtmlAttributes([$customContainerAttributes])->toHtml();
         $this->assertStringContainsString($customContainerAttributes, $html);
         $this->assertStringNotContainsString($configContainerAttributes, $html);
@@ -275,7 +275,7 @@ class ValidateTest extends BootstrapComponentsTestCase
     public function testConfigComponentHtmlAttributes()
     {
         $configComponentAttributes = 'test-config-attributes-component';
-        config()->set('bootstrap-components.button.validate.html_attributes.component', [$configComponentAttributes]);
+        config()->set('bootstrap-components.button.validate.htmlAttributes.component', [$configComponentAttributes]);
         $html = bsValidate()->toHtml();
         $this->assertStringContainsString($configComponentAttributes, $html);
     }
@@ -284,7 +284,7 @@ class ValidateTest extends BootstrapComponentsTestCase
     {
         $configComponentAttributes = 'test-config-attributes-component';
         $customComponentAttributes = 'test-custom-attributes-component';
-        config()->set('bootstrap-components.button.validate.html_attributes.component', [$configComponentAttributes]);
+        config()->set('bootstrap-components.button.validate.htmlAttributes.component', [$configComponentAttributes]);
         $html = bsValidate()->componentHtmlAttributes([$customComponentAttributes])->toHtml();
         $this->assertStringContainsString($customComponentAttributes, $html);
         $this->assertStringNotContainsString($configComponentAttributes, $html);

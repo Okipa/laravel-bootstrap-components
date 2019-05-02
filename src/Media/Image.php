@@ -200,7 +200,7 @@ class Image extends Media
      */
     protected function defaultLinkHtmlAttributes(): array
     {
-        $linkHtmlAttributes = config('bootstrap-components.' . $this->configKey . '.html_attributes.link');
+        $linkHtmlAttributes = config('bootstrap-components.' . $this->configKey . '.htmlAttributes.link');
 
         return $linkHtmlAttributes ? $linkHtmlAttributes : [];
     }

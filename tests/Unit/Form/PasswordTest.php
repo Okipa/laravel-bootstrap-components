@@ -22,13 +22,13 @@ class PasswordTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('append', config('bootstrap-components.form.password')));
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.password')));
         $this->assertTrue(array_key_exists('class', config('bootstrap-components.form.password')));
-        $this->assertTrue(array_key_exists('html_attributes', config('bootstrap-components.form.password')));
+        $this->assertTrue(array_key_exists('htmlAttributes', config('bootstrap-components.form.password')));
         // components.form.password.class
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.password.class')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.password.class')));
-        // components.form.password.html_attributes
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.password.html_attributes')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.password.html_attributes')));
+        // components.form.password.htmlAttributes
+        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.password.htmlAttributes')));
+        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.password.htmlAttributes')));
     }
 
     public function testExtendsInput()
@@ -269,8 +269,9 @@ class PasswordTest extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString('placeholder="', $html);
     }
 
-    public function testSuccess()
+    public function testConfigDisplaySuccess()
     {
+        config()->set('bootstrap-components.form.password.formValidation.displaySuccess', true);
         $messageBag = app(MessageBag::class)->add('other_name', null);
         $html = bsPassword()->name('name')->render(['errors' => $messageBag]);
         $this->assertStringContainsString('<div class="valid-feedback d-block">', $html);
@@ -280,14 +281,45 @@ class PasswordTest extends BootstrapComponentsTestCase
         );
     }
 
-    public function testNoSuccess()
+    public function testConfigDoNotDisplaySuccess()
     {
-        $html = bsPassword()->name('name')->toHtml();
+        config()->set('bootstrap-components.form.password.formValidation.displaySuccess', false);
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        $html = bsPassword()->name('name')->render(['errors' => $messageBag]);
         $this->assertStringNotContainsString('<div class="valid-feedback d-block">', $html);
+        $this->assertStringNotContainsString(
+            __('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html
+        );
     }
 
-    public function testError()
+    public function testDisplaySuccess()
     {
+        config()->set('bootstrap-components.form.password.formValidation.displaySuccess', false);
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        $html = bsPassword()->name('name')->displaySuccess(true)->render(['errors' => $messageBag]);
+        $this->assertStringContainsString('<div class="valid-feedback d-block">', $html);
+        $this->assertStringContainsString(
+            __('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html
+        );
+    }
+
+    public function testDoNotDisplaySuccess()
+    {
+        config()->set('bootstrap-components.form.password.formValidation.displaySuccess', true);
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        $html = bsPassword()->name('name')->displaySuccess(false)->render(['errors' => $messageBag]);
+        $this->assertStringNotContainsString('<div class="valid-feedback d-block">', $html);
+        $this->assertStringNotContainsString(
+            __('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html
+        );
+    }
+
+    public function testConfigDisplayFailure()
+    {
+        config()->set('bootstrap-components.form.password.formValidation.displayFailure', true);
         $errorMessage = 'This a test error message';
         $messageBag = app(MessageBag::class)->add('name', $errorMessage);
         $html = bsPassword()->name('name')->render(['errors' => $messageBag]);
@@ -295,10 +327,34 @@ class PasswordTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString($errorMessage, $html);
     }
 
-    public function testNoError()
+    public function testConfigDoNotDisplayFailure()
     {
-        $html = bsPassword()->name('name')->toHtml();
+        config()->set('bootstrap-components.form.password.formValidation.displayFailure', false);
+        $errorMessage = 'This a test error message';
+        $messageBag = app(MessageBag::class)->add('name', $errorMessage);
+        $html = bsPassword()->name('name')->render(['errors' => $messageBag]);
         $this->assertStringNotContainsString('<div class="invalid-feedback d-block">', $html);
+        $this->assertStringNotContainsString($errorMessage, $html);
+    }
+
+    public function testDisplayFailure()
+    {
+        config()->set('bootstrap-components.form.password.formValidation.displayFailure', false);
+        $errorMessage = 'This a test error message';
+        $messageBag = app(MessageBag::class)->add('name', $errorMessage);
+        $html = bsPassword()->name('name')->displayFailure(true)->render(['errors' => $messageBag]);
+        $this->assertStringContainsString('<div class="invalid-feedback d-block">', $html);
+        $this->assertStringContainsString($errorMessage, $html);
+    }
+
+    public function testDoNotDisplayFailure()
+    {
+        config()->set('bootstrap-components.form.password.formValidation.displayFailure', true);
+        $errorMessage = 'This a test error message';
+        $messageBag = app(MessageBag::class)->add('name', $errorMessage);
+        $html = bsPassword()->name('name')->displayFailure(false)->render(['errors' => $messageBag]);
+        $this->assertStringNotContainsString('<div class="invalid-feedback d-block">', $html);
+        $this->assertStringNotContainsString($errorMessage, $html);
     }
 
     public function testSetNoContainerId()
@@ -386,7 +442,7 @@ class PasswordTest extends BootstrapComponentsTestCase
     public function testConfigContainerHtmlAttributes()
     {
         $configContainerAttributes = 'test-config-attributes-container';
-        config()->set('bootstrap-components.form.password.html_attributes.container', [$configContainerAttributes]);
+        config()->set('bootstrap-components.form.password.htmlAttributes.container', [$configContainerAttributes]);
         $html = bsPassword()->name('name')->toHtml();
         $this->assertStringContainsString($configContainerAttributes, $html);
     }
@@ -395,7 +451,7 @@ class PasswordTest extends BootstrapComponentsTestCase
     {
         $configContainerAttributes = 'test-config-attributes-container';
         $customContainerAttributes = 'test-custom-attributes-container';
-        config()->set('bootstrap-components.form.password.html_attributes.container', [$configContainerAttributes]);
+        config()->set('bootstrap-components.form.password.htmlAttributes.container', [$configContainerAttributes]);
         $html = bsPassword()->name('name')->containerHtmlAttributes([$customContainerAttributes])->toHtml();
         $this->assertStringContainsString($customContainerAttributes, $html);
         $this->assertStringNotContainsString($configContainerAttributes, $html);
@@ -404,7 +460,7 @@ class PasswordTest extends BootstrapComponentsTestCase
     public function testConfigComponentHtmlAttributes()
     {
         $configComponentAttributes = 'test-config-attributes-component';
-        config()->set('bootstrap-components.form.password.html_attributes.component', [$configComponentAttributes]);
+        config()->set('bootstrap-components.form.password.htmlAttributes.component', [$configComponentAttributes]);
         $html = bsPassword()->name('name')->toHtml();
         $this->assertStringContainsString($configComponentAttributes, $html);
     }
@@ -413,7 +469,7 @@ class PasswordTest extends BootstrapComponentsTestCase
     {
         $configComponentAttributes = 'test-config-attributes-component';
         $customComponentAttributes = 'test-custom-attributes-component';
-        config()->set('bootstrap-components.form.password.html_attributes.component', [$configComponentAttributes]);
+        config()->set('bootstrap-components.form.password.htmlAttributes.component', [$configComponentAttributes]);
         $html = bsPassword()->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
         $this->assertStringContainsString($customComponentAttributes, $html);
         $this->assertStringNotContainsString($configComponentAttributes, $html);

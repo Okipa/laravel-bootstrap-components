@@ -22,13 +22,13 @@ class ToggleTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('append', config('bootstrap-components.form.toggle')));
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.toggle')));
         $this->assertTrue(array_key_exists('class', config('bootstrap-components.form.toggle')));
-        $this->assertTrue(array_key_exists('html_attributes', config('bootstrap-components.form.toggle')));
+        $this->assertTrue(array_key_exists('htmlAttributes', config('bootstrap-components.form.toggle')));
         // components.form.toggle.class
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.toggle.class')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.toggle.class')));
-        // components.form.toggle.html_attributes
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.toggle.html_attributes')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.toggle.html_attributes')));
+        // components.form.toggle.htmlAttributes
+        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.toggle.htmlAttributes')));
+        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.toggle.htmlAttributes')));
     }
 
     public function testExtendsInput()
@@ -244,8 +244,9 @@ class ToggleTest extends BootstrapComponentsTestCase
         );
     }
 
-    public function testSuccess()
+    public function testConfigDisplaySuccess()
     {
+        config()->set('bootstrap-components.form.toggle.formValidation.displaySuccess', true);
         $messageBag = app(MessageBag::class)->add('other_name', null);
         $html = bsToggle()->name('name')->render(['errors' => $messageBag]);
         $this->assertStringContainsString('<div class="valid-feedback d-block">', $html);
@@ -255,14 +256,45 @@ class ToggleTest extends BootstrapComponentsTestCase
         );
     }
 
-    public function testNoSuccess()
+    public function testConfigDoNotDisplaySuccess()
     {
-        $html = bsToggle()->name('name')->toHtml();
+        config()->set('bootstrap-components.form.toggle.formValidation.displaySuccess', false);
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        $html = bsToggle()->name('name')->render(['errors' => $messageBag]);
         $this->assertStringNotContainsString('<div class="valid-feedback d-block">', $html);
+        $this->assertStringNotContainsString(
+            __('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html
+        );
     }
 
-    public function testError()
+    public function testDisplaySuccess()
     {
+        config()->set('bootstrap-components.form.toggle.formValidation.displaySuccess', false);
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        $html = bsToggle()->name('name')->displaySuccess(true)->render(['errors' => $messageBag]);
+        $this->assertStringContainsString('<div class="valid-feedback d-block">', $html);
+        $this->assertStringContainsString(
+            __('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html
+        );
+    }
+
+    public function testDoNotDisplaySuccess()
+    {
+        config()->set('bootstrap-components.form.toggle.formValidation.displaySuccess', true);
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        $html = bsToggle()->name('name')->displaySuccess(false)->render(['errors' => $messageBag]);
+        $this->assertStringNotContainsString('<div class="valid-feedback d-block">', $html);
+        $this->assertStringNotContainsString(
+            __('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html
+        );
+    }
+
+    public function testConfigDisplayFailure()
+    {
+        config()->set('bootstrap-components.form.toggle.formValidation.displayFailure', true);
         $errorMessage = 'This a test error message';
         $messageBag = app(MessageBag::class)->add('name', $errorMessage);
         $html = bsToggle()->name('name')->render(['errors' => $messageBag]);
@@ -270,10 +302,34 @@ class ToggleTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString($errorMessage, $html);
     }
 
-    public function testNoError()
+    public function testConfigDoNotDisplayFailure()
     {
-        $html = bsToggle()->name('name')->toHtml();
+        config()->set('bootstrap-components.form.toggle.formValidation.displayFailure', false);
+        $errorMessage = 'This a test error message';
+        $messageBag = app(MessageBag::class)->add('name', $errorMessage);
+        $html = bsToggle()->name('name')->render(['errors' => $messageBag]);
         $this->assertStringNotContainsString('<div class="invalid-feedback d-block">', $html);
+        $this->assertStringNotContainsString($errorMessage, $html);
+    }
+
+    public function testDisplayFailure()
+    {
+        config()->set('bootstrap-components.form.toggle.formValidation.displayFailure', false);
+        $errorMessage = 'This a test error message';
+        $messageBag = app(MessageBag::class)->add('name', $errorMessage);
+        $html = bsToggle()->name('name')->displayFailure(true)->render(['errors' => $messageBag]);
+        $this->assertStringContainsString('<div class="invalid-feedback d-block">', $html);
+        $this->assertStringContainsString($errorMessage, $html);
+    }
+
+    public function testDoNotDisplayFailure()
+    {
+        config()->set('bootstrap-components.form.toggle.formValidation.displayFailure', true);
+        $errorMessage = 'This a test error message';
+        $messageBag = app(MessageBag::class)->add('name', $errorMessage);
+        $html = bsToggle()->name('name')->displayFailure(false)->render(['errors' => $messageBag]);
+        $this->assertStringNotContainsString('<div class="invalid-feedback d-block">', $html);
+        $this->assertStringNotContainsString($errorMessage, $html);
     }
 
     public function testSetNoContainerId()
@@ -361,7 +417,7 @@ class ToggleTest extends BootstrapComponentsTestCase
     public function testConfigContainerHtmlAttributes()
     {
         $configContainerAttributes = 'test-config-attributes-container';
-        config()->set('bootstrap-components.form.toggle.html_attributes.container', [$configContainerAttributes]);
+        config()->set('bootstrap-components.form.toggle.htmlAttributes.container', [$configContainerAttributes]);
         $html = bsToggle()->name('name')->toHtml();
         $this->assertStringContainsString($configContainerAttributes, $html);
     }
@@ -370,7 +426,7 @@ class ToggleTest extends BootstrapComponentsTestCase
     {
         $configContainerAttributes = 'test-config-attributes-container';
         $customContainerAttributes = 'test-custom-attributes-container';
-        config()->set('bootstrap-components.form.toggle.html_attributes.container', [$configContainerAttributes]);
+        config()->set('bootstrap-components.form.toggle.htmlAttributes.container', [$configContainerAttributes]);
         $html = bsToggle()->name('name')->containerHtmlAttributes([$customContainerAttributes])->toHtml();
         $this->assertStringContainsString($customContainerAttributes, $html);
         $this->assertStringNotContainsString($configContainerAttributes, $html);
@@ -379,7 +435,7 @@ class ToggleTest extends BootstrapComponentsTestCase
     public function testConfigComponentHtmlAttributes()
     {
         $configComponentAttributes = 'test-config-attributes-component';
-        config()->set('bootstrap-components.form.toggle.html_attributes.component', [$configComponentAttributes]);
+        config()->set('bootstrap-components.form.toggle.htmlAttributes.component', [$configComponentAttributes]);
         $html = bsToggle()->name('name')->toHtml();
         $this->assertStringContainsString($configComponentAttributes, $html);
     }
@@ -388,7 +444,7 @@ class ToggleTest extends BootstrapComponentsTestCase
     {
         $configComponentAttributes = 'test-config-attributes-component';
         $customComponentAttributes = 'test-custom-attributes-component';
-        config()->set('bootstrap-components.form.toggle.html_attributes.component', [$configComponentAttributes]);
+        config()->set('bootstrap-components.form.toggle.htmlAttributes.component', [$configComponentAttributes]);
         $html = bsToggle()->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
         $this->assertStringContainsString($customComponentAttributes, $html);
         $this->assertStringNotContainsString($configComponentAttributes, $html);

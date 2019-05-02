@@ -24,13 +24,13 @@ class TimeTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('format', config('bootstrap-components.form.time')));
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.time')));
         $this->assertTrue(array_key_exists('class', config('bootstrap-components.form.time')));
-        $this->assertTrue(array_key_exists('html_attributes', config('bootstrap-components.form.time')));
+        $this->assertTrue(array_key_exists('htmlAttributes', config('bootstrap-components.form.time')));
         // components.form.time.class
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.time.class')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.time.class')));
-        // components.form.time.html_attributes
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.time.html_attributes')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.time.html_attributes')));
+        // components.form.time.htmlAttributes
+        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.time.htmlAttributes')));
+        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.time.htmlAttributes')));
     }
 
     public function testExtendsInput()
@@ -336,8 +336,9 @@ class TimeTest extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString('placeholder="', $html);
     }
 
-    public function testSuccess()
+    public function testConfigDisplaySuccess()
     {
+        config()->set('bootstrap-components.form.time.formValidation.displaySuccess', true);
         $messageBag = app(MessageBag::class)->add('other_name', null);
         $html = bsTime()->name('name')->render(['errors' => $messageBag]);
         $this->assertStringContainsString('<div class="valid-feedback d-block">', $html);
@@ -347,14 +348,45 @@ class TimeTest extends BootstrapComponentsTestCase
         );
     }
 
-    public function testNoSuccess()
+    public function testConfigDoNotDisplaySuccess()
     {
-        $html = bsTime()->name('name')->toHtml();
+        config()->set('bootstrap-components.form.time.formValidation.displaySuccess', false);
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        $html = bsTime()->name('name')->render(['errors' => $messageBag]);
         $this->assertStringNotContainsString('<div class="valid-feedback d-block">', $html);
+        $this->assertStringNotContainsString(
+            __('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html
+        );
     }
 
-    public function testError()
+    public function testDisplaySuccess()
     {
+        config()->set('bootstrap-components.form.time.formValidation.displaySuccess', false);
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        $html = bsTime()->name('name')->displaySuccess(true)->render(['errors' => $messageBag]);
+        $this->assertStringContainsString('<div class="valid-feedback d-block">', $html);
+        $this->assertStringContainsString(
+            __('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html
+        );
+    }
+
+    public function testDoNotDisplaySuccess()
+    {
+        config()->set('bootstrap-components.form.time.formValidation.displaySuccess', true);
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        $html = bsTime()->name('name')->displaySuccess(false)->render(['errors' => $messageBag]);
+        $this->assertStringNotContainsString('<div class="valid-feedback d-block">', $html);
+        $this->assertStringNotContainsString(
+            __('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html
+        );
+    }
+
+    public function testConfigDisplayFailure()
+    {
+        config()->set('bootstrap-components.form.time.formValidation.displayFailure', true);
         $errorMessage = 'This a test error message';
         $messageBag = app(MessageBag::class)->add('name', $errorMessage);
         $html = bsTime()->name('name')->render(['errors' => $messageBag]);
@@ -362,10 +394,34 @@ class TimeTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString($errorMessage, $html);
     }
 
-    public function testNoError()
+    public function testConfigDoNotDisplayFailure()
     {
-        $html = bsTime()->name('name')->toHtml();
+        config()->set('bootstrap-components.form.time.formValidation.displayFailure', false);
+        $errorMessage = 'This a test error message';
+        $messageBag = app(MessageBag::class)->add('name', $errorMessage);
+        $html = bsTime()->name('name')->render(['errors' => $messageBag]);
         $this->assertStringNotContainsString('<div class="invalid-feedback d-block">', $html);
+        $this->assertStringNotContainsString($errorMessage, $html);
+    }
+
+    public function testDisplayFailure()
+    {
+        config()->set('bootstrap-components.form.time.formValidation.displayFailure', false);
+        $errorMessage = 'This a test error message';
+        $messageBag = app(MessageBag::class)->add('name', $errorMessage);
+        $html = bsTime()->name('name')->displayFailure(true)->render(['errors' => $messageBag]);
+        $this->assertStringContainsString('<div class="invalid-feedback d-block">', $html);
+        $this->assertStringContainsString($errorMessage, $html);
+    }
+
+    public function testDoNotDisplayFailure()
+    {
+        config()->set('bootstrap-components.form.time.formValidation.displayFailure', true);
+        $errorMessage = 'This a test error message';
+        $messageBag = app(MessageBag::class)->add('name', $errorMessage);
+        $html = bsTime()->name('name')->displayFailure(false)->render(['errors' => $messageBag]);
+        $this->assertStringNotContainsString('<div class="invalid-feedback d-block">', $html);
+        $this->assertStringNotContainsString($errorMessage, $html);
     }
 
     public function testSetNoContainerId()
@@ -450,7 +506,7 @@ class TimeTest extends BootstrapComponentsTestCase
     public function testConfigContainerHtmlAttributes()
     {
         $configContainerAttributes = 'test-config-attributes-container';
-        config()->set('bootstrap-components.form.time.html_attributes.container', [$configContainerAttributes]);
+        config()->set('bootstrap-components.form.time.htmlAttributes.container', [$configContainerAttributes]);
         $html = bsTime()->name('name')->toHtml();
         $this->assertStringContainsString($configContainerAttributes, $html);
     }
@@ -459,7 +515,7 @@ class TimeTest extends BootstrapComponentsTestCase
     {
         $configContainerAttributes = 'test-config-attributes-container';
         $customContainerAttributes = 'test-custom-attributes-container';
-        config()->set('bootstrap-components.form.time.html_attributes.container', [$configContainerAttributes]);
+        config()->set('bootstrap-components.form.time.htmlAttributes.container', [$configContainerAttributes]);
         $html = bsTime()->name('name')->containerHtmlAttributes([$customContainerAttributes])->toHtml();
         $this->assertStringContainsString($customContainerAttributes, $html);
         $this->assertStringNotContainsString($configContainerAttributes, $html);
@@ -468,7 +524,7 @@ class TimeTest extends BootstrapComponentsTestCase
     public function testConfigComponentHtmlAttributes()
     {
         $configComponentAttributes = 'test-config-attributes-component';
-        config()->set('bootstrap-components.form.time.html_attributes.component', [$configComponentAttributes]);
+        config()->set('bootstrap-components.form.time.htmlAttributes.component', [$configComponentAttributes]);
         $html = bsTime()->name('name')->toHtml();
         $this->assertStringContainsString($configComponentAttributes, $html);
     }
@@ -477,7 +533,7 @@ class TimeTest extends BootstrapComponentsTestCase
     {
         $configComponentAttributes = 'test-config-attributes-component';
         $customComponentAttributes = 'test-custom-attributes-component';
-        config()->set('bootstrap-components.form.time.html_attributes.component', [$configComponentAttributes]);
+        config()->set('bootstrap-components.form.time.htmlAttributes.component', [$configComponentAttributes]);
         $html = bsTime()->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
         $this->assertStringContainsString($customComponentAttributes, $html);
         $this->assertStringNotContainsString($configComponentAttributes, $html);

@@ -56,14 +56,14 @@ class File extends Input
     /**
      * Show the remove checkbox.
      *
-     * @param bool $showed
+     * @param bool $showRemoveCheckbox
      * @param string|null $removeCheckboxLabel
      *
      * @return \Okipa\LaravelBootstrapComponents\Form\File
      */
-    public function showRemoveCheckbox(bool $showed = true, string $removeCheckboxLabel = null): File
+    public function showRemoveCheckbox(bool $showRemoveCheckbox = true, string $removeCheckboxLabel = null): File
     {
-        $this->showRemoveCheckbox = $showed;
+        $this->showRemoveCheckbox = $showRemoveCheckbox;
         $this->removeCheckboxLabel = $removeCheckboxLabel;
 
         return $this;

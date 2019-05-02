@@ -22,13 +22,13 @@ class TextareaTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('append', config('bootstrap-components.form.textarea')));
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.textarea')));
         $this->assertTrue(array_key_exists('class', config('bootstrap-components.form.textarea')));
-        $this->assertTrue(array_key_exists('html_attributes', config('bootstrap-components.form.textarea')));
+        $this->assertTrue(array_key_exists('htmlAttributes', config('bootstrap-components.form.textarea')));
         // components.form.textarea.class
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.textarea.class')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.textarea.class')));
-        // components.form.textarea.html_attributes
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.textarea.html_attributes')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.textarea.html_attributes')));
+        // components.form.textarea.htmlAttributes
+        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.textarea.htmlAttributes')));
+        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.textarea.htmlAttributes')));
     }
 
     public function testExtendsInput()
@@ -281,8 +281,9 @@ class TextareaTest extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString('placeholder="', $html);
     }
 
-    public function testSuccess()
+    public function testConfigDisplaySuccess()
     {
+        config()->set('bootstrap-components.form.textarea.formValidation.displaySuccess', true);
         $messageBag = app(MessageBag::class)->add('other_name', null);
         $html = bsTextarea()->name('name')->render(['errors' => $messageBag]);
         $this->assertStringContainsString('<div class="valid-feedback d-block">', $html);
@@ -292,14 +293,45 @@ class TextareaTest extends BootstrapComponentsTestCase
         );
     }
 
-    public function testNoSuccess()
+    public function testConfigDoNotDisplaySuccess()
     {
-        $html = bsTextarea()->name('name')->toHtml();
+        config()->set('bootstrap-components.form.textarea.formValidation.displaySuccess', false);
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        $html = bsTextarea()->name('name')->render(['errors' => $messageBag]);
         $this->assertStringNotContainsString('<div class="valid-feedback d-block">', $html);
+        $this->assertStringNotContainsString(
+            __('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html
+        );
     }
 
-    public function testError()
+    public function testDisplaySuccess()
     {
+        config()->set('bootstrap-components.form.textarea.formValidation.displaySuccess', false);
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        $html = bsTextarea()->name('name')->displaySuccess(true)->render(['errors' => $messageBag]);
+        $this->assertStringContainsString('<div class="valid-feedback d-block">', $html);
+        $this->assertStringContainsString(
+            __('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html
+        );
+    }
+
+    public function testDoNotDisplaySuccess()
+    {
+        config()->set('bootstrap-components.form.textarea.formValidation.displaySuccess', true);
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        $html = bsTextarea()->name('name')->displaySuccess(false)->render(['errors' => $messageBag]);
+        $this->assertStringNotContainsString('<div class="valid-feedback d-block">', $html);
+        $this->assertStringNotContainsString(
+            __('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html
+        );
+    }
+
+    public function testConfigDisplayFailure()
+    {
+        config()->set('bootstrap-components.form.textarea.formValidation.displayFailure', true);
         $errorMessage = 'This a test error message';
         $messageBag = app(MessageBag::class)->add('name', $errorMessage);
         $html = bsTextarea()->name('name')->render(['errors' => $messageBag]);
@@ -307,10 +339,34 @@ class TextareaTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString($errorMessage, $html);
     }
 
-    public function testNoError()
+    public function testConfigDoNotDisplayFailure()
     {
-        $html = bsTextarea()->name('name')->toHtml();
+        config()->set('bootstrap-components.form.textarea.formValidation.displayFailure', false);
+        $errorMessage = 'This a test error message';
+        $messageBag = app(MessageBag::class)->add('name', $errorMessage);
+        $html = bsTextarea()->name('name')->render(['errors' => $messageBag]);
         $this->assertStringNotContainsString('<div class="invalid-feedback d-block">', $html);
+        $this->assertStringNotContainsString($errorMessage, $html);
+    }
+
+    public function testDisplayFailure()
+    {
+        config()->set('bootstrap-components.form.textarea.formValidation.displayFailure', false);
+        $errorMessage = 'This a test error message';
+        $messageBag = app(MessageBag::class)->add('name', $errorMessage);
+        $html = bsTextarea()->name('name')->displayFailure(true)->render(['errors' => $messageBag]);
+        $this->assertStringContainsString('<div class="invalid-feedback d-block">', $html);
+        $this->assertStringContainsString($errorMessage, $html);
+    }
+
+    public function testDoNotDisplayFailure()
+    {
+        config()->set('bootstrap-components.form.textarea.formValidation.displayFailure', true);
+        $errorMessage = 'This a test error message';
+        $messageBag = app(MessageBag::class)->add('name', $errorMessage);
+        $html = bsTextarea()->name('name')->displayFailure(false)->render(['errors' => $messageBag]);
+        $this->assertStringNotContainsString('<div class="invalid-feedback d-block">', $html);
+        $this->assertStringNotContainsString($errorMessage, $html);
     }
 
     public function testSetNoContainerId()
@@ -398,7 +454,7 @@ class TextareaTest extends BootstrapComponentsTestCase
     public function testConfigContainerHtmlAttributes()
     {
         $configContainerAttributes = 'test-config-attributes-container';
-        config()->set('bootstrap-components.form.textarea.html_attributes.container', [$configContainerAttributes]);
+        config()->set('bootstrap-components.form.textarea.htmlAttributes.container', [$configContainerAttributes]);
         $html = bsTextarea()->name('name')->toHtml();
         $this->assertStringContainsString($configContainerAttributes, $html);
     }
@@ -407,7 +463,7 @@ class TextareaTest extends BootstrapComponentsTestCase
     {
         $configContainerAttributes = 'test-config-attributes-container';
         $customContainerAttributes = 'test-custom-attributes-container';
-        config()->set('bootstrap-components.form.textarea.html_attributes.container', [$configContainerAttributes]);
+        config()->set('bootstrap-components.form.textarea.htmlAttributes.container', [$configContainerAttributes]);
         $html = bsTextarea()->name('name')->containerHtmlAttributes([$customContainerAttributes])->toHtml();
         $this->assertStringContainsString($customContainerAttributes, $html);
         $this->assertStringNotContainsString($configContainerAttributes, $html);
@@ -416,7 +472,7 @@ class TextareaTest extends BootstrapComponentsTestCase
     public function testConfigComponentHtmlAttributes()
     {
         $configComponentAttributes = 'test-config-attributes-component';
-        config()->set('bootstrap-components.form.textarea.html_attributes.component', [$configComponentAttributes]);
+        config()->set('bootstrap-components.form.textarea.htmlAttributes.component', [$configComponentAttributes]);
         $html = bsTextarea()->name('name')->toHtml();
         $this->assertStringContainsString($configComponentAttributes, $html);
     }
@@ -425,7 +481,7 @@ class TextareaTest extends BootstrapComponentsTestCase
     {
         $configComponentAttributes = 'test-config-attributes-component';
         $customComponentAttributes = 'test-custom-attributes-component';
-        config()->set('bootstrap-components.form.textarea.html_attributes.component', [$configComponentAttributes]);
+        config()->set('bootstrap-components.form.textarea.htmlAttributes.component', [$configComponentAttributes]);
         $html = bsTextarea()->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
         $this->assertStringContainsString($customComponentAttributes, $html);
         $this->assertStringNotContainsString($configComponentAttributes, $html);

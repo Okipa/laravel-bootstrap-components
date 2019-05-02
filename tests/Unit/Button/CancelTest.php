@@ -20,13 +20,13 @@ class CancelTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('append', config('bootstrap-components.button.cancel')));
         $this->assertTrue(array_key_exists('label', config('bootstrap-components.button.cancel')));
         $this->assertTrue(array_key_exists('class', config('bootstrap-components.button.cancel')));
-        $this->assertTrue(array_key_exists('html_attributes', config('bootstrap-components.button.cancel')));
+        $this->assertTrue(array_key_exists('htmlAttributes', config('bootstrap-components.button.cancel')));
         // components.cancel.class
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.button.cancel.class')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.button.cancel.class')));
-        // components.cancel.html_attributes
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.button.cancel.html_attributes')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.button.cancel.html_attributes')));
+        // components.cancel.htmlAttributes
+        $this->assertTrue(array_key_exists('container', config('bootstrap-components.button.cancel.htmlAttributes')));
+        $this->assertTrue(array_key_exists('component', config('bootstrap-components.button.cancel.htmlAttributes')));
     }
 
     public function testExtendsInput()
@@ -248,7 +248,7 @@ class CancelTest extends BootstrapComponentsTestCase
     public function testConfigContainerHtmlAttributes()
     {
         $configContainerAttributes = 'test-config-attributes-container';
-        config()->set('bootstrap-components.button.cancel.html_attributes.container', [$configContainerAttributes]);
+        config()->set('bootstrap-components.button.cancel.htmlAttributes.container', [$configContainerAttributes]);
         $html = bsCancel()->toHtml();
         $this->assertStringContainsString($configContainerAttributes, $html);
     }
@@ -257,7 +257,7 @@ class CancelTest extends BootstrapComponentsTestCase
     {
         $configContainerAttributes = 'test-config-attributes-container';
         $customContainerAttributes = 'test-custom-attributes-container';
-        config()->set('bootstrap-components.button.cancel.html_attributes.container', [$configContainerAttributes]);
+        config()->set('bootstrap-components.button.cancel.htmlAttributes.container', [$configContainerAttributes]);
         $html = bsCancel()->containerHtmlAttributes([$customContainerAttributes])->toHtml();
         $this->assertStringContainsString($customContainerAttributes, $html);
         $this->assertStringNotContainsString($configContainerAttributes, $html);
@@ -266,7 +266,7 @@ class CancelTest extends BootstrapComponentsTestCase
     public function testConfigComponentHtmlAttributes()
     {
         $configComponentAttributes = 'test-config-attributes-component';
-        config()->set('bootstrap-components.button.cancel.html_attributes.component', [$configComponentAttributes]);
+        config()->set('bootstrap-components.button.cancel.htmlAttributes.component', [$configComponentAttributes]);
         $html = bsCancel()->toHtml();
         $this->assertStringContainsString($configComponentAttributes, $html);
     }
@@ -275,7 +275,7 @@ class CancelTest extends BootstrapComponentsTestCase
     {
         $configComponentAttributes = 'test-config-attributes-component';
         $customComponentAttributes = 'test-custom-attributes-component';
-        config()->set('bootstrap-components.button.cancel.html_attributes.component', [$configComponentAttributes]);
+        config()->set('bootstrap-components.button.cancel.htmlAttributes.component', [$configComponentAttributes]);
         $html = bsCancel()->componentHtmlAttributes([$customComponentAttributes])->toHtml();
         $this->assertStringContainsString($customComponentAttributes, $html);
         $this->assertStringNotContainsString($configComponentAttributes, $html);

@@ -9,6 +9,8 @@
 - Removed `hideLabel()` method for `Button` and `Form` components. Hiding a label can now be done with `->label(false)`.
 - Removed `hideLegend()` method for `Form` components. Hiding a legend can now be done with `->legend(false)`.
 - Added possibility to hide placeholder value with `->placeholder(false)` for `Form` components.
+- Added possibility to choose for all `Form` components if the the success / error status should be displayed or not after a form submission. The default behavior can be set with the `config('bootstrap-components.[componentConfigKey].formValidation.displaySuccess')` and `config('bootstrap-components.[componentConfigKey].formValidation.displayFailure')` and a custom behaviour can be set with the `->displaySuccess()` and `->displayFailure()` methods on each of those components.
+- Replace `html_attributes` config key by `htmlAttributes`.
 
 ## [0.6.1](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.6.1)
 2019-04-30 

@@ -253,7 +253,7 @@ abstract class Component implements Htmlable
      */
     protected function defaultComponentHtmlAttributes(): array
     {
-        $componentHtmlAttributes = config('bootstrap-components.' . $this->configKey . '.html_attributes.component');
+        $componentHtmlAttributes = config('bootstrap-components.' . $this->configKey . '.htmlAttributes.component');
 
         return $componentHtmlAttributes ? $componentHtmlAttributes : [];
     }
@@ -265,7 +265,7 @@ abstract class Component implements Htmlable
      */
     protected function defaultContainerHtmlAttributes(): array
     {
-        $containerHtmlAttributes = config('bootstrap-components.' . $this->configKey . '.html_attributes.container');
+        $containerHtmlAttributes = config('bootstrap-components.' . $this->configKey . '.htmlAttributes.container');
 
         return $containerHtmlAttributes ? $containerHtmlAttributes : [];
     }

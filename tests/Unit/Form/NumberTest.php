@@ -22,13 +22,13 @@ class NumberTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('append', config('bootstrap-components.form.number')));
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.number')));
         $this->assertTrue(array_key_exists('class', config('bootstrap-components.form.number')));
-        $this->assertTrue(array_key_exists('html_attributes', config('bootstrap-components.form.number')));
+        $this->assertTrue(array_key_exists('htmlAttributes', config('bootstrap-components.form.number')));
         // components.form.number.class
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.number.class')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.number.class')));
-        // components.form.number.html_attributes
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.number.html_attributes')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.number.html_attributes')));
+        // components.form.number.htmlAttributes
+        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.number.htmlAttributes')));
+        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.number.htmlAttributes')));
     }
 
     public function testExtendsInput()
@@ -266,10 +266,11 @@ class NumberTest extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString('placeholder="', $html);
     }
 
-    public function testSuccess()
+    public function testConfigDisplaySuccess()
     {
+        config()->set('bootstrap-components.form.number.formValidation.displaySuccess', true);
         $messageBag = app(MessageBag::class)->add('other_name', null);
-        $html = bsNumber()->name('credit')->render(['errors' => $messageBag]);
+        $html = bsNumber()->name('name')->render(['errors' => $messageBag]);
         $this->assertStringContainsString('<div class="valid-feedback d-block">', $html);
         $this->assertStringContainsString(
             __('bootstrap-components::bootstrap-components.notification.validation.success'),
@@ -277,25 +278,80 @@ class NumberTest extends BootstrapComponentsTestCase
         );
     }
 
-    public function testNoSuccess()
+    public function testConfigDoNotDisplaySuccess()
     {
-        $html = bsNumber()->name('credit')->toHtml();
+        config()->set('bootstrap-components.form.number.formValidation.displaySuccess', false);
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        $html = bsNumber()->name('name')->render(['errors' => $messageBag]);
         $this->assertStringNotContainsString('<div class="valid-feedback d-block">', $html);
+        $this->assertStringNotContainsString(
+            __('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html
+        );
     }
 
-    public function testError()
+    public function testDisplaySuccess()
     {
+        config()->set('bootstrap-components.form.number.formValidation.displaySuccess', false);
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        $html = bsNumber()->name('name')->displaySuccess(true)->render(['errors' => $messageBag]);
+        $this->assertStringContainsString('<div class="valid-feedback d-block">', $html);
+        $this->assertStringContainsString(
+            __('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html
+        );
+    }
+
+    public function testDoNotDisplaySuccess()
+    {
+        config()->set('bootstrap-components.form.number.formValidation.displaySuccess', true);
+        $messageBag = app(MessageBag::class)->add('other_name', null);
+        $html = bsNumber()->name('name')->displaySuccess(false)->render(['errors' => $messageBag]);
+        $this->assertStringNotContainsString('<div class="valid-feedback d-block">', $html);
+        $this->assertStringNotContainsString(
+            __('bootstrap-components::bootstrap-components.notification.validation.success'),
+            $html
+        );
+    }
+
+    public function testConfigDisplayFailure()
+    {
+        config()->set('bootstrap-components.form.number.formValidation.displayFailure', true);
         $errorMessage = 'This a test error message';
-        $messageBag = app(MessageBag::class)->add('credit', $errorMessage);
-        $html = bsNumber()->name('credit')->render(['errors' => $messageBag]);
+        $messageBag = app(MessageBag::class)->add('name', $errorMessage);
+        $html = bsNumber()->name('name')->render(['errors' => $messageBag]);
         $this->assertStringContainsString('<div class="invalid-feedback d-block">', $html);
         $this->assertStringContainsString($errorMessage, $html);
     }
 
-    public function testNoError()
+    public function testConfigDoNotDisplayFailure()
     {
-        $html = bsNumber()->name('credit')->toHtml();
+        config()->set('bootstrap-components.form.number.formValidation.displayFailure', false);
+        $errorMessage = 'This a test error message';
+        $messageBag = app(MessageBag::class)->add('name', $errorMessage);
+        $html = bsNumber()->name('name')->render(['errors' => $messageBag]);
         $this->assertStringNotContainsString('<div class="invalid-feedback d-block">', $html);
+        $this->assertStringNotContainsString($errorMessage, $html);
+    }
+
+    public function testDisplayFailure()
+    {
+        config()->set('bootstrap-components.form.number.formValidation.displayFailure', false);
+        $errorMessage = 'This a test error message';
+        $messageBag = app(MessageBag::class)->add('name', $errorMessage);
+        $html = bsNumber()->name('name')->displayFailure(true)->render(['errors' => $messageBag]);
+        $this->assertStringContainsString('<div class="invalid-feedback d-block">', $html);
+        $this->assertStringContainsString($errorMessage, $html);
+    }
+
+    public function testDoNotDisplayFailure()
+    {
+        config()->set('bootstrap-components.form.number.formValidation.displayFailure', true);
+        $errorMessage = 'This a test error message';
+        $messageBag = app(MessageBag::class)->add('name', $errorMessage);
+        $html = bsNumber()->name('name')->displayFailure(false)->render(['errors' => $messageBag]);
+        $this->assertStringNotContainsString('<div class="invalid-feedback d-block">', $html);
+        $this->assertStringNotContainsString($errorMessage, $html);
     }
 
     public function testSetNoContainerId()
@@ -383,7 +439,7 @@ class NumberTest extends BootstrapComponentsTestCase
     public function testConfigContainerHtmlAttributes()
     {
         $configContainerAttributes = 'test-config-attributes-container';
-        config()->set('bootstrap-components.form.number.html_attributes.container', [$configContainerAttributes]);
+        config()->set('bootstrap-components.form.number.htmlAttributes.container', [$configContainerAttributes]);
         $html = bsNumber()->name('credit')->toHtml();
         $this->assertStringContainsString($configContainerAttributes, $html);
     }
@@ -392,7 +448,7 @@ class NumberTest extends BootstrapComponentsTestCase
     {
         $configContainerAttributes = 'test-config-attributes-container';
         $customContainerAttributes = 'test-custom-attributes-container';
-        config()->set('bootstrap-components.form.number.html_attributes.container', [$configContainerAttributes]);
+        config()->set('bootstrap-components.form.number.htmlAttributes.container', [$configContainerAttributes]);
         $html = bsNumber()->name('credit')->containerHtmlAttributes([$customContainerAttributes])->toHtml();
         $this->assertStringContainsString($customContainerAttributes, $html);
         $this->assertStringNotContainsString($configContainerAttributes, $html);
@@ -401,7 +457,7 @@ class NumberTest extends BootstrapComponentsTestCase
     public function testConfigComponentHtmlAttributes()
     {
         $configComponentAttributes = 'test-config-attributes-component';
-        config()->set('bootstrap-components.form.number.html_attributes.component', [$configComponentAttributes]);
+        config()->set('bootstrap-components.form.number.htmlAttributes.component', [$configComponentAttributes]);
         $html = bsNumber()->name('credit')->toHtml();
         $this->assertStringContainsString($configComponentAttributes, $html);
     }
@@ -410,7 +466,7 @@ class NumberTest extends BootstrapComponentsTestCase
     {
         $configComponentAttributes = 'test-config-attributes-component';
         $customComponentAttributes = 'test-custom-attributes-component';
-        config()->set('bootstrap-components.form.number.html_attributes.component', [$configComponentAttributes]);
+        config()->set('bootstrap-components.form.number.htmlAttributes.component', [$configComponentAttributes]);
         $html = bsNumber()->name('credit')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
         $this->assertStringContainsString($customComponentAttributes, $html);
         $this->assertStringNotContainsString($configComponentAttributes, $html);
