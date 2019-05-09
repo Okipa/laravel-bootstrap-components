@@ -385,56 +385,56 @@ class TextTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('<input id="' . $customComponentId . '"', $html);
     }
 
-    public function testConfigContainerClass()
+    public function testConfigContainerClasses()
     {
-        $configContainerCLass = 'test-config-class-container';
-        config()->set('bootstrap-components.form.text.class.container', [$configContainerCLass]);
+        $configContainerClasses = 'test-config-class-container';
+        config()->set('bootstrap-components.form.text.class.container', [$configContainerClasses]);
         $html = bsText()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="text-name-container ' . $configContainerCLass . '"',
+            'class="text-name-container ' . $configContainerClasses . '"',
             $html
         );
     }
 
-    public function testSetContainerClass()
+    public function testSetContainerClasses()
     {
-        $configContainerCLass = 'test-config-class-container';
-        $customContainerCLass = 'test-custom-class-container';
-        config()->set('bootstrap-components.form.text.class.container', [$configContainerCLass]);
-        $html = bsText()->name('name')->containerClass([$customContainerCLass])->toHtml();
+        $configContainerClasses = 'test-config-class-container';
+        $customContainerClasses = 'test-custom-class-container';
+        config()->set('bootstrap-components.form.text.class.container', [$configContainerClasses]);
+        $html = bsText()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="text-name-container ' . $customContainerCLass . '"',
+            'class="text-name-container ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="text-name-container ' . $configContainerCLass . '"',
+            'class="text-name-container ' . $configContainerClasses . '"',
             $html
         );
     }
 
     public function testConfigComponentClass()
     {
-        $configComponentCLass = 'test-config-class-component';
-        config()->set('bootstrap-components.form.text.class.component', [$configComponentCLass]);
+        $configComponentClasses = 'test-config-class-component';
+        config()->set('bootstrap-components.form.text.class.component', [$configComponentClasses]);
         $html = bsText()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="form-control text-name-component ' . $configComponentCLass . '"',
+            'class="form-control text-name-component ' . $configComponentClasses . '"',
             $html
         );
     }
 
     public function testSetComponentClass()
     {
-        $configComponentCLass = 'test-config-class-component';
-        $customComponentCLass = 'test-custom-class-component';
-        config()->set('bootstrap-components.form.text.class.component', [$customComponentCLass]);
-        $html = bsText()->name('name')->componentClass([$customComponentCLass])->toHtml();
+        $configComponentClasses = 'test-config-class-component';
+        $customComponentClasses = 'test-custom-class-component';
+        config()->set('bootstrap-components.form.text.class.component', [$customComponentClasses]);
+        $html = bsText()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="form-control text-name-component ' . $customComponentCLass . '"',
+            'class="form-control text-name-component ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="form-control text-name-component ' . $configComponentCLass . '"',
+            'class="form-control text-name-component ' . $configComponentClasses . '"',
             $html
         );
     }

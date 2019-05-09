@@ -1,6 +1,6 @@
 {
     "name": "okipa/laravel-bootstrap-components",
-    "description": "Laravel bootstrap components generator.",
+    "description": "Generate bootstrap components with Laravel.",
     "keywords": [
         "okipa",
         "package",
@@ -24,8 +24,8 @@
     ],
     "require": {
         "ext-json": "*",
-        "php": ">=7.1",
-        "illuminate/support": "~5.0",
+        "php": "^7.2",
+        "illuminate/support": "~5.5.0|~5.6.0|~5.7.0|~5.8.0",
         "okipa/laravel-html-helper": "^1.0"
     },
     "require-dev": {
@@ -64,5 +64,9 @@
             ]
         }
     },
-    "minimum-stability": "stable"
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

@@ -1,5 +1,5 @@
 <div {{ htmlAttributes($containerId ? ['id' => $containerId] : null) }}
-    {{ classTag($type . '-' . Str::slug($name) . '-container', $containerClass) }}
+    {{ classTag($type . '-' . Str::slug($name) . '-container', $containerClasses) }}
     {{ htmlAttributes($containerHtmlAttributes) }}>
     @include('bootstrap-components::bootstrap-components.partials.label')
     @if(! empty($prepend) || ! empty($append))
@@ -7,7 +7,7 @@
     @endif
         @include('bootstrap-components::bootstrap-components.partials.prepend')
         <select id="{{ $componentId }}"
-                {{ classTag($type . '-' . Str::slug($name) . '-component', 'custom-select', $componentClass, validationStatus($name)) }}
+                {{ classTag($type . '-' . Str::slug($name) . '-component', 'custom-select', $componentClasses, validationStatus($name)) }}
                 name="{{ $name . ($multiple ? '[]' : '') }}"
                 {{ htmlAttributes($multiple ? 'multiple' : null, $componentHtmlAttributes) }}>
             @if(! empty($placeholder))

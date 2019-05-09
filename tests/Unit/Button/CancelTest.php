@@ -209,40 +209,40 @@ class CancelTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('<a id="' . $customComponentId . '"', $html);
     }
 
-    public function testConfigContainerClass()
+    public function testConfigContainerClasses()
     {
-        $configContainerCLass = 'test-config-class-container';
-        config()->set('bootstrap-components.button.cancel.class.container', [$configContainerCLass]);
+        $configContainerClasses = 'test-config-class-container';
+        config()->set('bootstrap-components.button.cancel.class.container', [$configContainerClasses]);
         $html = bsCancel()->toHtml();
-        $this->assertStringContainsString('class="button-container ' . $configContainerCLass . '">', $html);
+        $this->assertStringContainsString('class="button-container ' . $configContainerClasses . '">', $html);
     }
 
-    public function testSetContainerClass()
+    public function testSetContainerClasses()
     {
-        $configContainerCLass = 'test-config-class-container';
-        $customContainerCLass = 'test-custom-class-container';
-        config()->set('bootstrap-components.input.class.container', [$configContainerCLass]);
-        $html = bsCancel()->containerClass([$customContainerCLass])->toHtml();
-        $this->assertStringContainsString('class="button-container ' . $customContainerCLass . '">', $html);
-        $this->assertStringNotContainsString('class="button-container ' . $configContainerCLass . '">', $html);
+        $configContainerClasses = 'test-config-class-container';
+        $customContainerClasses = 'test-custom-class-container';
+        config()->set('bootstrap-components.input.class.container', [$configContainerClasses]);
+        $html = bsCancel()->containerClasses([$customContainerClasses])->toHtml();
+        $this->assertStringContainsString('class="button-container ' . $customContainerClasses . '">', $html);
+        $this->assertStringNotContainsString('class="button-container ' . $configContainerClasses . '">', $html);
     }
 
     public function testConfigComponentClass()
     {
-        $configComponentCLass = 'test-config-class-component';
-        config()->set('bootstrap-components.button.cancel.class.component', [$configComponentCLass]);
+        $configComponentClasses = 'test-config-class-component';
+        config()->set('bootstrap-components.button.cancel.class.component', [$configComponentClasses]);
         $html = bsCancel()->toHtml();
-        $this->assertStringContainsString('class="button-component ' . $configComponentCLass . '"', $html);
+        $this->assertStringContainsString('class="button-component ' . $configComponentClasses . '"', $html);
     }
 
     public function testSetComponentClass()
     {
-        $configComponentCLass = 'test-config-class-component';
-        $customComponentCLass = 'test-custom-class-component';
-        config()->set('bootstrap-components.button.cancel.class.component', [$customComponentCLass]);
-        $html = bsCancel()->componentClass([$customComponentCLass])->toHtml();
-        $this->assertStringContainsString('class="button-component ' . $customComponentCLass . '"', $html);
-        $this->assertStringNotContainsString('class="button-component ' . $configComponentCLass . '"', $html);
+        $configComponentClasses = 'test-config-class-component';
+        $customComponentClasses = 'test-custom-class-component';
+        config()->set('bootstrap-components.button.cancel.class.component', [$customComponentClasses]);
+        $html = bsCancel()->componentClasses([$customComponentClasses])->toHtml();
+        $this->assertStringContainsString('class="button-component ' . $customComponentClasses . '"', $html);
+        $this->assertStringNotContainsString('class="button-component ' . $configComponentClasses . '"', $html);
     }
 
     public function testConfigContainerHtmlAttributes()

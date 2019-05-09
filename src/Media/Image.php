@@ -43,9 +43,9 @@ class Image extends Media
     /**
      * The image link class.
      *
-     * @property array $linkClass
+     * @property array $linkClasses
      */
-    protected $linkClass;
+    protected $linkClasses;
     /**
      * The image link html attributes.
      *
@@ -126,13 +126,13 @@ class Image extends Media
     /**
      * Set the image link class tag.
      *
-     * @param array $linkClass
+     * @param array $linkClasses
      *
      * @return $this
      */
-    public function linkClass(array $linkClass): Image
+    public function linkClasses(array $linkClasses): Image
     {
-        $this->linkClass = $linkClass;
+        $this->linkClasses = $linkClasses;
 
         return $this;
     }
@@ -164,7 +164,7 @@ class Image extends Media
             'width'              => $this->width,
             'height'             => $this->height,
             'linkId'             => $this->linkId ? $this->linkId : $this->defaultLinkId(),
-            'linkClass'          => $this->linkClass ? $this->linkClass : $this->defaultLinkClass(),
+            'linkClasses'        => $this->linkClasses ? $this->linkClasses : $this->defaultLinkClasses(),
             'linkHtmlAttributes' => $this->linkHtmlAttributes
                 ? $this->linkHtmlAttributes
                 : $this->defaultLinkHtmlAttributes(),
@@ -186,11 +186,11 @@ class Image extends Media
      *
      * @return array
      */
-    protected function defaultLinkClass(): array
+    protected function defaultLinkClasses(): array
     {
-        $linkClass = config('bootstrap-components.' . $this->configKey . '.class.link');
+        $linkClasses = config('bootstrap-components.' . $this->configKey . '.class.link');
 
-        return $linkClass ? $linkClass : [];
+        return $linkClasses ? $linkClasses : [];
     }
 
     /**

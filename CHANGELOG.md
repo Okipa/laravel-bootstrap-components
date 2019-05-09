@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.8.0)
+2019-04-09  
+:warning: **Breaking changes** :warning:
+- Locked project compatibility to Laravel 5.5+ and PHP7.2+ to avoid issues.
+- Replaced `->containerClass()` method by `->containerClasses()`.
+- Replaced `->componentClass()` method by `->componentClasses()`.
+
 ## [0.7.0](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.7.0)
 2019-01-28  
 :warning: **Breaking changes** :warning:

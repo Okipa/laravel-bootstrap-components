@@ -382,56 +382,56 @@ class NumberTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('<input id="' . $customComponentId . '"', $html);
     }
 
-    public function testConfigContainerClass()
+    public function testConfigContainerClasses()
     {
-        $configContainerCLass = 'test-config-class-container';
-        config()->set('bootstrap-components.form.number.class.container', [$configContainerCLass]);
+        $configContainerClasses = 'test-config-class-container';
+        config()->set('bootstrap-components.form.number.class.container', [$configContainerClasses]);
         $html = bsNumber()->name('credit')->toHtml();
         $this->assertStringContainsString(
-            'class="number-credit-container ' . $configContainerCLass . '"',
+            'class="number-credit-container ' . $configContainerClasses . '"',
             $html
         );
     }
 
-    public function testSetContainerClass()
+    public function testSetContainerClasses()
     {
-        $configContainerCLass = 'test-config-class-container';
-        $customContainerCLass = 'test-custom-class-container';
-        config()->set('bootstrap-components.form.number.class.container', [$configContainerCLass]);
-        $html = bsNumber()->name('credit')->containerClass([$customContainerCLass])->toHtml();
+        $configContainerClasses = 'test-config-class-container';
+        $customContainerClasses = 'test-custom-class-container';
+        config()->set('bootstrap-components.form.number.class.container', [$configContainerClasses]);
+        $html = bsNumber()->name('credit')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="number-credit-container ' . $customContainerCLass . '"',
+            'class="number-credit-container ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="number-credit-container ' . $configContainerCLass . '"',
+            'class="number-credit-container ' . $configContainerClasses . '"',
             $html
         );
     }
 
     public function testConfigComponentClass()
     {
-        $configComponentCLass = 'test-config-class-component';
-        config()->set('bootstrap-components.form.number.class.component', [$configComponentCLass]);
+        $configComponentClasses = 'test-config-class-component';
+        config()->set('bootstrap-components.form.number.class.component', [$configComponentClasses]);
         $html = bsNumber()->name('credit')->toHtml();
         $this->assertStringContainsString(
-            'class="form-control number-credit-component ' . $configComponentCLass . '"',
+            'class="form-control number-credit-component ' . $configComponentClasses . '"',
             $html
         );
     }
 
     public function testSetComponentClass()
     {
-        $configComponentCLass = 'test-config-class-component';
-        $customComponentCLass = 'test-custom-class-component';
-        config()->set('bootstrap-components.form.number.class.component', [$customComponentCLass]);
-        $html = bsNumber()->name('credit')->componentClass([$customComponentCLass])->toHtml();
+        $configComponentClasses = 'test-config-class-component';
+        $customComponentClasses = 'test-custom-class-component';
+        config()->set('bootstrap-components.form.number.class.component', [$customComponentClasses]);
+        $html = bsNumber()->name('credit')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="form-control number-credit-component ' . $customComponentCLass . '"',
+            'class="form-control number-credit-component ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="form-control number-credit-component ' . $configComponentCLass . '"',
+            'class="form-control number-credit-component ' . $configComponentClasses . '"',
             $html
         );
     }

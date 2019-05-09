@@ -1,5 +1,5 @@
 <div {{ htmlAttributes($containerId ? ['id' => $containerId] : null) }}
-    {{ classTag($type . '-' . Str::slug($name) . '-container', $containerClass) }}
+    {{ classTag($type . '-' . Str::slug($name) . '-container', $containerClasses) }}
     {{ htmlAttributes($containerHtmlAttributes) }}>
     @include('bootstrap-components::bootstrap-components.partials.label')
     @if(! empty($prepend) || ! empty($append))
@@ -8,7 +8,7 @@
         @include('bootstrap-components::bootstrap-components.partials.prepend')
         <textarea id="{{ $componentId }}"
                name="{{ $name }}"
-               {{ classTag('form-control', $type . '-' . Str::slug($name) . '-component', $componentClass, validationStatus($name)) }}
+               {{ classTag('form-control', $type . '-' . Str::slug($name) . '-component', $componentClasses, validationStatus($name)) }}
                {{ htmlAttributes(
                    ! empty($placeholder) ? ['placeholder' => $placeholder] : null,
                    $componentHtmlAttributes

@@ -382,53 +382,53 @@ class EmailTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('<input id="' . $customComponentId . '"', $html);
     }
 
-    public function testConfigContainerClass()
+    public function testConfigContainerClasses()
     {
-        $configContainerCLass = 'test-config-class-container';
-        config()->set('bootstrap-components.form.email.class.container', [$configContainerCLass]);
+        $configContainerClasses = 'test-config-class-container';
+        config()->set('bootstrap-components.form.email.class.container', [$configContainerClasses]);
         $html = bsEmail()->name('name')->toHtml();
-        $this->assertStringContainsString('class="email-name-container ' . $configContainerCLass . '"', $html);
+        $this->assertStringContainsString('class="email-name-container ' . $configContainerClasses . '"', $html);
     }
 
-    public function testSetContainerClass()
+    public function testSetContainerClasses()
     {
-        $configContainerCLass = 'test-config-class-container';
-        $customContainerCLass = 'test-custom-class-container';
-        config()->set('bootstrap-components.form.email.class.container', [$configContainerCLass]);
-        $html = bsEmail()->name('name')->containerClass([$customContainerCLass])->toHtml();
+        $configContainerClasses = 'test-config-class-container';
+        $customContainerClasses = 'test-custom-class-container';
+        config()->set('bootstrap-components.form.email.class.container', [$configContainerClasses]);
+        $html = bsEmail()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="email-name-container ' . $customContainerCLass . '"',
+            'class="email-name-container ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="email-name-container ' . $configContainerCLass . '"',
+            'class="email-name-container ' . $configContainerClasses . '"',
             $html
         );
     }
 
     public function testConfigComponentClass()
     {
-        $configComponentCLass = 'test-config-class-component';
-        config()->set('bootstrap-components.form.email.class.component', [$configComponentCLass]);
+        $configComponentClasses = 'test-config-class-component';
+        config()->set('bootstrap-components.form.email.class.component', [$configComponentClasses]);
         $html = bsEmail()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="form-control email-name-component ' . $configComponentCLass . '"',
+            'class="form-control email-name-component ' . $configComponentClasses . '"',
             $html
         );
     }
 
     public function testSetComponentClass()
     {
-        $configComponentCLass = 'test-config-class-component';
-        $customComponentCLass = 'test-custom-class-component';
-        config()->set('bootstrap-components.form.email.class.component', [$customComponentCLass]);
-        $html = bsEmail()->name('name')->componentClass([$customComponentCLass])->toHtml();
+        $configComponentClasses = 'test-config-class-component';
+        $customComponentClasses = 'test-custom-class-component';
+        config()->set('bootstrap-components.form.email.class.component', [$customComponentClasses]);
+        $html = bsEmail()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="form-control email-name-component ' . $customComponentCLass . '"',
+            'class="form-control email-name-component ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="form-control email-name-component ' . $configComponentCLass . '"',
+            'class="form-control email-name-component ' . $configComponentClasses . '"',
             $html
         );
     }

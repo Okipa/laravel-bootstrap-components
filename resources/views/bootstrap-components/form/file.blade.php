@@ -1,12 +1,12 @@
 <div {{ htmlAttributes($containerId ? ['id' => $containerId] : null) }}
-    {{ classTag($type . '-' . Str::slug($name) . '-container', $containerClass) }}
+    {{ classTag($type . '-' . Str::slug($name) . '-container', $containerClasses) }}
     {{ htmlAttributes($containerHtmlAttributes) }}>
     @include('bootstrap-components::bootstrap-components.partials.label')
     @if($uploadedFileHtml->toHtml())
         {{ $uploadedFileHtml }}
         @if($showRemoveCheckbox){{ bsCheckbox()->name('remove_' . $name )
             ->label($removeCheckboxLabel)
-            ->containerClass(['mb-1']) }}@endif
+            ->containerClasses(['mb-1']) }}@endif
     @endif
     @if(! empty($prepend) || ! empty($append))
         <div class="input-group">
@@ -14,7 +14,7 @@
         @include('bootstrap-components::bootstrap-components.partials.prepend')
         <div class="custom-file">
             <input id="{{ $componentId }}"
-                   {{ classTag('custom-file-input', 'form-control', $type . '-' . Str::slug($name) . '-component', $componentClass, validationStatus($name)) }}
+                   {{ classTag('custom-file-input', 'form-control', $type . '-' . Str::slug($name) . '-component', $componentClasses, validationStatus($name)) }}
                    type="{{ $type }}"
                    name="{{ $name }}"
                    lang="{{ app()->getLocale() }}"

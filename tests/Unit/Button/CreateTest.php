@@ -212,40 +212,40 @@ class CreateTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('<button id="' . $customComponentId . '"', $html);
     }
 
-    public function testConfigContainerClass()
+    public function testConfigContainerClasses()
     {
-        $configContainerCLass = 'test-config-class-container';
-        config()->set('bootstrap-components.button.create.class.container', [$configContainerCLass]);
+        $configContainerClasses = 'test-config-class-container';
+        config()->set('bootstrap-components.button.create.class.container', [$configContainerClasses]);
         $html = bsCreate()->toHtml();
-        $this->assertStringContainsString('class="submit-container ' . $configContainerCLass . '">', $html);
+        $this->assertStringContainsString('class="submit-container ' . $configContainerClasses . '">', $html);
     }
 
-    public function testSetContainerClass()
+    public function testSetContainerClasses()
     {
-        $configContainerCLass = 'test-config-class-container';
-        $customContainerCLass = 'test-custom-class-container';
-        config()->set('bootstrap-components.input.class.container', [$configContainerCLass]);
-        $html = bsCreate()->containerClass([$customContainerCLass])->toHtml();
-        $this->assertStringContainsString('class="submit-container ' . $customContainerCLass . '">', $html);
-        $this->assertStringNotContainsString('class="submit-container ' . $configContainerCLass . '">', $html);
+        $configContainerClasses = 'test-config-class-container';
+        $customContainerClasses = 'test-custom-class-container';
+        config()->set('bootstrap-components.input.class.container', [$configContainerClasses]);
+        $html = bsCreate()->containerClasses([$customContainerClasses])->toHtml();
+        $this->assertStringContainsString('class="submit-container ' . $customContainerClasses . '">', $html);
+        $this->assertStringNotContainsString('class="submit-container ' . $configContainerClasses . '">', $html);
     }
 
     public function testConfigComponentClass()
     {
-        $configComponentCLass = 'test-config-class-component';
-        config()->set('bootstrap-components.button.create.class.component', [$configComponentCLass]);
+        $configComponentClasses = 'test-config-class-component';
+        config()->set('bootstrap-components.button.create.class.component', [$configComponentClasses]);
         $html = bsCreate()->toHtml();
-        $this->assertStringContainsString('class="submit-component ' . $configComponentCLass . '"', $html);
+        $this->assertStringContainsString('class="submit-component ' . $configComponentClasses . '"', $html);
     }
 
     public function testSetComponentClass()
     {
-        $configComponentCLass = 'test-config-class-component';
-        $customComponentCLass = 'test-custom-class-component';
-        config()->set('bootstrap-components.button.create.class.component', [$customComponentCLass]);
-        $html = bsCreate()->componentClass([$customComponentCLass])->toHtml();
-        $this->assertStringContainsString('class="submit-component ' . $customComponentCLass . '"', $html);
-        $this->assertStringNotContainsString('class="submit-component ' . $configComponentCLass . '"', $html);
+        $configComponentClasses = 'test-config-class-component';
+        $customComponentClasses = 'test-custom-class-component';
+        config()->set('bootstrap-components.button.create.class.component', [$customComponentClasses]);
+        $html = bsCreate()->componentClasses([$customComponentClasses])->toHtml();
+        $this->assertStringContainsString('class="submit-component ' . $customComponentClasses . '"', $html);
+        $this->assertStringNotContainsString('class="submit-component ' . $configComponentClasses . '"', $html);
     }
 
     public function testConfigContainerHtmlAttributes()

@@ -1,8 +1,8 @@
 <div {{ htmlAttributes($containerId ? ['id' => $containerId] : null) }}
-    {{ classTag($type . '-' . Str::slug($name) . '-container', 'custom-control', 'custom-radio', $containerClass) }}
+    {{ classTag($type . '-' . Str::slug($name) . '-container', 'custom-control', 'custom-radio', $containerClasses) }}
     {{ htmlAttributes($containerHtmlAttributes) }}>
     <input id="{{ $componentId }}"
-           {{ classTag($type . '-' . Str::slug($name) . '-component', 'custom-control-input', $componentClass, validationStatus($name)) }}
+           {{ classTag($type . '-' . Str::slug($name) . '-component', 'custom-control-input', $componentClasses, validationStatus($name)) }}
            type="{{ $type }}"
            name="{{ $name }}"
         {{ htmlAttributes($componentHtmlAttributes) }}>

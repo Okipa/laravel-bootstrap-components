@@ -381,50 +381,56 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('<input id="' . $customComponentId . '"', $html);
     }
 
-    public function testConfigContainerClass()
+    public function testConfigContainerClasses()
     {
-        $configContainerCLass = 'test-config-class-container';
-        config()->set('bootstrap-components.form.checkbox.class.container', [$configContainerCLass]);
+        $configContainerClasses = 'test-config-class-container';
+        config()->set('bootstrap-components.form.checkbox.class.container', [$configContainerClasses]);
         $html = bsCheckbox()->name('name')->toHtml();
-        $this->assertStringContainsString('class="checkbox-name-container custom-control custom-checkbox ' . $configContainerCLass
-                              . '"', $html);
+        $this->assertStringContainsString(
+            'class="checkbox-name-container custom-control custom-checkbox ' . $configContainerClasses . '"',
+            $html
+        );
     }
 
-    public function testSetContainerClass()
+    public function testSetContainerClasses()
     {
-        $configContainerCLass = 'test-config-class-container';
-        $customContainerCLass = 'test-custom-class-container';
-        config()->set('bootstrap-components.form.checkbox.class.container', [$configContainerCLass]);
-        $html = bsCheckbox()->name('name')->containerClass([$customContainerCLass])->toHtml();
-        $this->assertStringContainsString('class="checkbox-name-container custom-control custom-checkbox ' . $customContainerCLass
-                              . '"', $html);
-        $this->assertStringNotContainsString('class="checkbox-name-container custom-control custom-checkbox '
-                                 . $configContainerCLass . '"', $html);
+        $configContainerClasses = 'test-config-class-container';
+        $customContainerClasses = 'test-custom-class-container';
+        config()->set('bootstrap-components.form.checkbox.class.container', [$configContainerClasses]);
+        $html = bsCheckbox()->name('name')->containerClasses([$customContainerClasses])->toHtml();
+        $this->assertStringContainsString(
+            'class="checkbox-name-container custom-control custom-checkbox ' . $customContainerClasses . '"',
+            $html
+        );
+        $this->assertStringNotContainsString(
+            'class="checkbox-name-container custom-control custom-checkbox ' . $configContainerClasses . '"',
+            $html
+        );
     }
 
     public function testConfigComponentClass()
     {
-        $configComponentCLass = 'test-config-class-component';
-        config()->set('bootstrap-components.form.checkbox.class.component', [$configComponentCLass]);
+        $configComponentClasses = 'test-config-class-component';
+        config()->set('bootstrap-components.form.checkbox.class.component', [$configComponentClasses]);
         $html = bsCheckbox()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="checkbox-name-component custom-control-input ' . $configComponentCLass . '"',
+            'class="checkbox-name-component custom-control-input ' . $configComponentClasses . '"',
             $html
         );
     }
 
     public function testSetComponentClass()
     {
-        $configComponentCLass = 'test-config-class-component';
-        $customComponentCLass = 'test-custom-class-component';
-        config()->set('bootstrap-components.form.checkbox.class.component', [$customComponentCLass]);
-        $html = bsCheckbox()->name('name')->componentClass([$customComponentCLass])->toHtml();
+        $configComponentClasses = 'test-config-class-component';
+        $customComponentClasses = 'test-custom-class-component';
+        config()->set('bootstrap-components.form.checkbox.class.component', [$customComponentClasses]);
+        $html = bsCheckbox()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="checkbox-name-component custom-control-input ' . $customComponentCLass . '"',
+            'class="checkbox-name-component custom-control-input ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="form-control checkbox-name-component ' . $configComponentCLass . '"',
+            'class="form-control checkbox-name-component ' . $configComponentClasses . '"',
             $html
         );
     }

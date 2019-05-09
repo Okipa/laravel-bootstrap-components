@@ -354,56 +354,56 @@ class RadioTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('<input id="' . $customComponentId . '"', $html);
     }
 
-    public function testConfigContainerClass()
+    public function testConfigContainerClasses()
     {
-        $configContainerCLass = 'test-config-class-container';
-        config()->set('bootstrap-components.form.radio.class.container', [$configContainerCLass]);
+        $configContainerClasses = 'test-config-class-container';
+        config()->set('bootstrap-components.form.radio.class.container', [$configContainerClasses]);
         $html = bsRadio()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="radio-name-container custom-control custom-radio ' . $configContainerCLass . '"',
+            'class="radio-name-container custom-control custom-radio ' . $configContainerClasses . '"',
             $html
         );
     }
 
-    public function testSetContainerClass()
+    public function testSetContainerClasses()
     {
-        $configContainerCLass = 'test-config-class-container';
-        $customContainerCLass = 'test-custom-class-container';
-        config()->set('bootstrap-components.form.radio.class.container', [$configContainerCLass]);
-        $html = bsRadio()->name('name')->containerClass([$customContainerCLass])->toHtml();
+        $configContainerClasses = 'test-config-class-container';
+        $customContainerClasses = 'test-custom-class-container';
+        config()->set('bootstrap-components.form.radio.class.container', [$configContainerClasses]);
+        $html = bsRadio()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="radio-name-container custom-control custom-radio ' . $customContainerCLass . '"',
+            'class="radio-name-container custom-control custom-radio ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="radio-name-container custom-control custom-radio ' . $configContainerCLass . '"',
+            'class="radio-name-container custom-control custom-radio ' . $configContainerClasses . '"',
             $html
         );
     }
 
     public function testConfigComponentClass()
     {
-        $configComponentCLass = 'test-config-class-component';
-        config()->set('bootstrap-components.form.radio.class.component', [$configComponentCLass]);
+        $configComponentClasses = 'test-config-class-component';
+        config()->set('bootstrap-components.form.radio.class.component', [$configComponentClasses]);
         $html = bsRadio()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="radio-name-component custom-control-input ' . $configComponentCLass . '"',
+            'class="radio-name-component custom-control-input ' . $configComponentClasses . '"',
             $html
         );
     }
 
     public function testSetComponentClass()
     {
-        $configComponentCLass = 'test-config-class-component';
-        $customComponentCLass = 'test-custom-class-component';
-        config()->set('bootstrap-components.form.radio.class.component', [$customComponentCLass]);
-        $html = bsRadio()->name('name')->componentClass([$customComponentCLass])->toHtml();
+        $configComponentClasses = 'test-config-class-component';
+        $customComponentClasses = 'test-custom-class-component';
+        config()->set('bootstrap-components.form.radio.class.component', [$customComponentClasses]);
+        $html = bsRadio()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="radio-name-component custom-control-input ' . $customComponentCLass . '"',
+            'class="radio-name-component custom-control-input ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="form-control radio-name-component ' . $configComponentCLass . '"',
+            'class="form-control radio-name-component ' . $configComponentClasses . '"',
             $html
         );
     }
