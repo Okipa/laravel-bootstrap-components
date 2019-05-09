@@ -155,10 +155,10 @@ abstract class Component implements Htmlable
      *
      * @param array $data
      *
-     * @return string
+     * @return string|null
      * @throws \Throwable
      */
-    public function render(array $data = []): string
+    public function render(array $data = []): ?string
     {
         $this->checkValuesValidity();
         if ($view = $this->view()) {

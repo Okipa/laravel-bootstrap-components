@@ -13,12 +13,12 @@ trait DatetimeValidityChecks
      * @return string
      */
     abstract protected function defaultFormat(): string;
-    
+
     /**
      * Check the component values validity
      *
-     * @throws \Exception
      * @return void
+     * @throws \Exception
      */
     protected function checkValuesValidity(): void
     {
