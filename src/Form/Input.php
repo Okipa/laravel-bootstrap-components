@@ -293,7 +293,7 @@ abstract class Input extends Component
     protected function defaultLegend(): ?string
     {
         return ($legend = config('bootstrap-components.' . $this->configKey . '.legend'))
-            ? __('bootstrap-components::' . $legend)
+            ? (string) __('bootstrap-components::' . $legend)
             : null;
     }
 
@@ -302,7 +302,7 @@ abstract class Input extends Component
      */
     protected function defaultLabel(): string
     {
-        return __('validation.attributes.' . Str::slug($this->name, '_'));
+        return (string) __('validation.attributes.' . Str::slug($this->name, '_'));
     }
 
     /**

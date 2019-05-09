@@ -173,11 +173,11 @@ abstract class Button extends Component
      *
      * @return string
      */
-    public function defaultLabel()
+    public function defaultLabel(): string
     {
         $label = config('bootstrap-components.' . $this->configKey . '.label');
 
-        return $label ? __('bootstrap-components::' . $label) : '';
+        return $label ? (string) __('bootstrap-components::' . $label) : '';
     }
 
     /**

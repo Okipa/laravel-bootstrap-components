@@ -133,9 +133,8 @@ class File extends Input
      */
     protected function defineRemoveCheckboxLabel(?string $defaultLabel): string
     {
-        $defaultRemoveCheckboxLabel = __('bootstrap-components::bootstrap-components.label.remove') . ($defaultLabel
-                ? ' ' . strtolower($defaultLabel)
-                : null);
+        $defaultRemoveCheckboxLabel = (string) __('bootstrap-components::bootstrap-components.label.remove')
+            . ($defaultLabel ? ' ' . strtolower($defaultLabel) : null);
 
         return isset($this->removeCheckboxLabel)
             ? $this->removeCheckboxLabel

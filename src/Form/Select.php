@@ -2,6 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Form;
 
+use Illuminate\Support\Arr;
 use Okipa\LaravelBootstrapComponents\Form\Traits\SelectValidityChecks;
 
 class Select extends Input
@@ -174,7 +175,7 @@ class Select extends Input
     protected function searchMultipleSelectedOptionFromOldValue()
     {
         if ($oldValue = old($this->name)) {
-            $selectedMultipleOptions = array_where($this->options, function ($option) use ($oldValue) {
+            $selectedMultipleOptions = Arr::where($this->options, function ($option) use ($oldValue) {
                 return in_array($option[$this->optionValueField], $oldValue);
             });
             if (! empty($selectedMultipleOptions)) {
@@ -193,7 +194,7 @@ class Select extends Input
     protected function searchMultipleSelectedOptionsFromSelectedMethod()
     {
         if (isset($this->selectedFieldToCompare) && isset($this->selectedValueToCompare)) {
-            $selectedMultipleOptions = array_where($this->options, function ($option) {
+            $selectedMultipleOptions = Arr::where($this->options, function ($option) {
                 return in_array($option[$this->selectedFieldToCompare], $this->selectedValueToCompare);
             });
             if (! empty($selectedMultipleOptions)) {
@@ -212,7 +213,7 @@ class Select extends Input
     protected function searchMultipleSelectedOptionsFromModel()
     {
         if ($this->model && $this->model->{$this->name}) {
-            $multipleSelectedOptions = array_where($this->options, function ($option) {
+            $multipleSelectedOptions = Arr::where($this->options, function ($option) {
                 return in_array(
                     $option[$this->optionValueField],
                     $this->model->{$this->name}
@@ -254,7 +255,7 @@ class Select extends Input
     protected function searchSelectedOptionFromOldValue()
     {
         if ($oldValue = old($this->name)) {
-            $selectedOption = array_where($this->options, function ($option) use ($oldValue) {
+            $selectedOption = Arr::where($this->options, function ($option) use ($oldValue) {
                 return $option[$this->optionValueField] == $oldValue;
             });
             if (! empty($selectedOption)) {
@@ -273,7 +274,7 @@ class Select extends Input
     protected function searchSelectedOptionFromSelectedMethod()
     {
         if (isset($this->selectedFieldToCompare) && isset($this->selectedValueToCompare)) {
-            $selectedOption = array_where($this->options, function ($option) {
+            $selectedOption = Arr::where($this->options, function ($option) {
                 return $option[$this->selectedFieldToCompare] == $this->selectedValueToCompare;
             });
             if (! empty($selectedOption)) {
@@ -292,7 +293,7 @@ class Select extends Input
     protected function searchSelectedOptionFromModel()
     {
         if ($this->model) {
-            $selectedOption = array_where($this->options, function ($option) {
+            $selectedOption = Arr::where($this->options, function ($option) {
                 return $option[$this->optionValueField] == $this->model->{$this->name};
             });
             if (! empty($selectedOption)) {

@@ -158,11 +158,11 @@ abstract class Component implements Htmlable
      * @return string
      * @throws \Throwable
      */
-    public function render(array $data = [])
+    public function render(array $data = []): string
     {
         $this->checkValuesValidity();
         if ($view = $this->view()) {
-            return view('bootstrap-components::' . $view, $this->values(), $data)->render();
+            return (string) view('bootstrap-components::' . $view, $this->values(), $data)->render();
         }
     }
 
