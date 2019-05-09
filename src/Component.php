@@ -33,15 +33,15 @@ abstract class Component implements Htmlable
     /**
      * The component class.
      *
-     * @property array $componentClass
+     * @property array $componentClasses
      */
-    protected $componentClass;
+    protected $componentClasses;
     /**
      * The component container class.
      *
-     * @property array $containerClass
+     * @property array $containerClasses
      */
-    protected $containerClass;
+    protected $containerClasses;
     /**
      * The component html attributes.
      *
@@ -72,13 +72,13 @@ abstract class Component implements Htmlable
     /**
      * Set the component class.
      *
-     * @param array $componentClass
+     * @param array $componentClasses
      *
      * @return \Okipa\LaravelBootstrapComponents\Component
      */
-    public function componentClass(array $componentClass): Component
+    public function componentClasses(array $componentClasses): Component
     {
-        $this->componentClass = $componentClass;
+        $this->componentClasses = $componentClasses;
 
         return $this;
     }
@@ -100,13 +100,13 @@ abstract class Component implements Htmlable
     /**
      * Set the component container class.
      *
-     * @param array $containerClass
+     * @param array $containerClasses
      *
      * @return \Okipa\LaravelBootstrapComponents\Component
      */
-    public function containerClass(array $containerClass): Component
+    public function containerClasses(array $containerClasses): Component
     {
-        $this->containerClass = $containerClass;
+        $this->containerClasses = $containerClasses;
 
         return $this;
     }
@@ -191,8 +191,11 @@ abstract class Component implements Htmlable
         return [
             'componentId'             => $this->componentId ? $this->componentId : $this->defaultComponentId(),
             'containerId'             => $this->containerId ? $this->containerId : $this->defaultContainerId(),
-            'componentClass'          => $this->componentClass ? $this->componentClass : $this->defaultComponentClass(),
-            'containerClass'          => $this->containerClass ? $this->containerClass : $this->defaultContainerClass(),
+            'componentClasses'        => $this->componentClasses ? $this->componentClasses
+                : $this->defaultComponentClass(),
+            'containerClasses'        => $this->containerClasses
+                ? $this->containerClasses
+                : $this->defaultContainerClasses(),
             'componentHtmlAttributes' => $this->componentHtmlAttributes
                 ? $this->componentHtmlAttributes
                 : $this->defaultComponentHtmlAttributes(),
@@ -229,9 +232,9 @@ abstract class Component implements Htmlable
      */
     protected function defaultComponentClass(): array
     {
-        $componentClass = config('bootstrap-components.' . $this->configKey . '.class.component');
+        $componentClasses = config('bootstrap-components.' . $this->configKey . '.class.component');
 
-        return $componentClass ? $componentClass : [];
+        return $componentClasses ? $componentClasses : [];
     }
 
     /**
@@ -239,11 +242,11 @@ abstract class Component implements Htmlable
      *
      * @return array
      */
-    protected function defaultContainerClass(): array
+    protected function defaultContainerClasses(): array
     {
-        $containerClass = config('bootstrap-components.' . $this->configKey . '.class.container');
+        $containerClasses = config('bootstrap-components.' . $this->configKey . '.class.container');
 
-        return $containerClass ? $containerClass : [];
+        return $containerClasses ? $containerClasses : [];
     }
 
     /**

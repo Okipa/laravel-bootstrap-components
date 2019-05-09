@@ -1,9 +1,9 @@
 <div {{ htmlAttributes($containerId ? ['id' => $containerId] : null) }}
-    {{ classTag($type . '-container', $containerClass) }}>
+    {{ classTag($type . '-container', $containerClasses) }}>
     {{ htmlAttributes($containerHtmlAttributes) }}
     {{ htmlAttributes($type === 'button' ? '<a' : '<button') }} {{ htmlAttributes($componentId ? ['id' => $componentId] : null) }}
         {{ htmlAttributes($type === 'button' ? 'href="' . $url . '"' : 'type="' . $type . '"') }}
-        {{ classTag($type . '-component', $componentClass) }}
+        {{ classTag($type . '-component', $componentClasses) }}
         {{ htmlAttributes($componentHtmlAttributes) }}
         {{ htmlAttributes($label ? 'title="' . $label .'"' : null) }}>
         @if(! empty($prepend))<span class="label-prepend">{!! $prepend !!}</span>@endif

@@ -1,5 +1,5 @@
 <div {{ htmlAttributes($containerId ? ['id' => $containerId] : null) }}
-    {{ classTag($type . '-' . Str::slug($name) . '-container', $containerClass) }}
+    {{ classTag($type . '-' . Str::slug($name) . '-container', $containerClasses) }}
     {{ htmlAttributes($containerHtmlAttributes) }}>
     @include('bootstrap-components::bootstrap-components.partials.label')
     @if(! empty($prepend) || ! empty($append))
@@ -7,7 +7,7 @@
     @endif
         @include('bootstrap-components::bootstrap-components.partials.prepend')
         <input id="{{ $componentId }}"
-               {{ classTag('form-control', $type . '-' . Str::slug($name) . '-component', $componentClass, validationStatus($name)) }}
+               {{ classTag('form-control', $type . '-' . Str::slug($name) . '-component', $componentClasses, validationStatus($name)) }}
                type="{{ $type }}"
                name="{{ $name }}"
                value="{{ old($name, $value) }}"

@@ -114,7 +114,7 @@ abstract class Input extends Component
     /**
      * Prepend html to the component.
      *
-     * @param string|false $html
+     * @param string|null $html
      *
      * @return \Okipa\LaravelBootstrapComponents\Form\Input
      */
@@ -128,7 +128,7 @@ abstract class Input extends Component
     /**
      * Append html to the component.
      *
-     * @param string|false $html
+     * @param string|null $html
      *
      * @return \Okipa\LaravelBootstrapComponents\Form\Input
      */
@@ -142,7 +142,7 @@ abstract class Input extends Component
     /**
      * Set the component legend.
      *
-     * @param string|false $legend
+     * @param string|null $legend
      *
      * @return \Okipa\LaravelBootstrapComponents\Form\Input
      */
@@ -156,7 +156,7 @@ abstract class Input extends Component
     /**
      * Set the component input placeholder.
      *
-     * @param string|false $placeholder
+     * @param string|null $placeholder
      *
      * @return \Okipa\LaravelBootstrapComponents\Form\Input
      */
@@ -184,7 +184,7 @@ abstract class Input extends Component
     /**
      * Set the component label.
      *
-     * @param string|false $label
+     * @param string|null $label
      *
      * @return \Okipa\LaravelBootstrapComponents\Form\Input
      */

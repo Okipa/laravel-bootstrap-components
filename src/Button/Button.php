@@ -117,7 +117,7 @@ abstract class Button extends Component
     /**
      * Set the button label.
      *
-     * @param string|false $label
+     * @param string|null $label
      *
      * @return \Okipa\LaravelBootstrapComponents\Button\Button
      */

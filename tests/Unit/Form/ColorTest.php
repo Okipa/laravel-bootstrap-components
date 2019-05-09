@@ -385,56 +385,56 @@ class ColorTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('<input id="' . $customComponentId . '"', $html);
     }
 
-    public function testConfigContainerClass()
+    public function testConfigContainerClasses()
     {
-        $configContainerCLass = 'test-config-class-container';
-        config()->set('bootstrap-components.form.color.class.container', [$configContainerCLass]);
+        $configContainerClasses = 'test-config-class-container';
+        config()->set('bootstrap-components.form.color.class.container', [$configContainerClasses]);
         $html = bsColor()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="color-name-container ' . $configContainerCLass . '"',
+            'class="color-name-container ' . $configContainerClasses . '"',
             $html
         );
     }
 
-    public function testSetContainerClass()
+    public function testSetContainerClasses()
     {
-        $configContainerCLass = 'test-config-class-container';
-        $customContainerCLass = 'test-custom-class-container';
-        config()->set('bootstrap-components.form.color.class.container', [$configContainerCLass]);
-        $html = bsColor()->name('name')->containerClass([$customContainerCLass])->toHtml();
+        $configContainerClasses = 'test-config-class-container';
+        $customContainerClasses = 'test-custom-class-container';
+        config()->set('bootstrap-components.form.color.class.container', [$configContainerClasses]);
+        $html = bsColor()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="color-name-container ' . $customContainerCLass . '"',
+            'class="color-name-container ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="color-name-container ' . $configContainerCLass . '"',
+            'class="color-name-container ' . $configContainerClasses . '"',
             $html
         );
     }
 
     public function testConfigComponentClass()
     {
-        $configComponentCLass = 'test-config-class-component';
-        config()->set('bootstrap-components.form.color.class.component', [$configComponentCLass]);
+        $configComponentClasses = 'test-config-class-component';
+        config()->set('bootstrap-components.form.color.class.component', [$configComponentClasses]);
         $html = bsColor()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="form-control color-name-component ' . $configComponentCLass . '"',
+            'class="form-control color-name-component ' . $configComponentClasses . '"',
             $html
         );
     }
 
     public function testSetComponentClass()
     {
-        $configComponentCLass = 'test-config-class-component';
-        $customComponentCLass = 'test-custom-class-component';
-        config()->set('bootstrap-components.form.color.class.component', [$customComponentCLass]);
-        $html = bsColor()->name('name')->componentClass([$customComponentCLass])->toHtml();
+        $configComponentClasses = 'test-config-class-component';
+        $customComponentClasses = 'test-custom-class-component';
+        config()->set('bootstrap-components.form.color.class.component', [$customComponentClasses]);
+        $html = bsColor()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="form-control color-name-component ' . $customComponentCLass . '"',
+            'class="form-control color-name-component ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="form-control color-name-component ' . $configComponentCLass . '"',
+            'class="form-control color-name-component ' . $configComponentClasses . '"',
             $html
         );
     }

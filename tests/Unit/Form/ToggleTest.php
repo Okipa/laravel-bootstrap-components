@@ -360,56 +360,56 @@ class ToggleTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('<input id="' . $customComponentId . '"', $html);
     }
 
-    public function testConfigContainerClass()
+    public function testConfigContainerClasses()
     {
-        $configContainerCLass = 'test-config-class-container';
-        config()->set('bootstrap-components.form.toggle.class.container', [$configContainerCLass]);
+        $configContainerClasses = 'test-config-class-container';
+        config()->set('bootstrap-components.form.toggle.class.container', [$configContainerClasses]);
         $html = bsToggle()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="toggle-name-container switch custom-control ' . $configContainerCLass . '"',
+            'class="toggle-name-container switch custom-control ' . $configContainerClasses . '"',
             $html
         );
     }
 
-    public function testSetContainerClass()
+    public function testSetContainerClasses()
     {
-        $configContainerCLass = 'test-config-class-container';
-        $customContainerCLass = 'test-custom-class-container';
-        config()->set('bootstrap-components.form.toggle.class.container', [$configContainerCLass]);
-        $html = bsToggle()->name('name')->containerClass([$customContainerCLass])->toHtml();
+        $configContainerClasses = 'test-config-class-container';
+        $customContainerClasses = 'test-custom-class-container';
+        config()->set('bootstrap-components.form.toggle.class.container', [$configContainerClasses]);
+        $html = bsToggle()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="toggle-name-container switch custom-control ' . $customContainerCLass . '"',
+            'class="toggle-name-container switch custom-control ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="toggle-name-container switch custom-control ' . $configContainerCLass . '"',
+            'class="toggle-name-container switch custom-control ' . $configContainerClasses . '"',
             $html
         );
     }
 
     public function testConfigComponentClass()
     {
-        $configComponentCLass = 'test-config-class-component';
-        config()->set('bootstrap-components.form.toggle.class.component', [$configComponentCLass]);
+        $configComponentClasses = 'test-config-class-component';
+        config()->set('bootstrap-components.form.toggle.class.component', [$configComponentClasses]);
         $html = bsToggle()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="toggle-name-component custom-control-input ' . $configComponentCLass . '"',
+            'class="toggle-name-component custom-control-input ' . $configComponentClasses . '"',
             $html
         );
     }
 
     public function testSetComponentClass()
     {
-        $configComponentCLass = 'test-config-class-component';
-        $customComponentCLass = 'test-custom-class-component';
-        config()->set('bootstrap-components.form.toggle.class.component', [$customComponentCLass]);
-        $html = bsToggle()->name('name')->componentClass([$customComponentCLass])->toHtml();
+        $configComponentClasses = 'test-config-class-component';
+        $customComponentClasses = 'test-custom-class-component';
+        config()->set('bootstrap-components.form.toggle.class.component', [$customComponentClasses]);
+        $html = bsToggle()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="toggle-name-component custom-control-input ' . $customComponentCLass . '"',
+            'class="toggle-name-component custom-control-input ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="form-control toggle-name-component ' . $configComponentCLass . '"',
+            'class="form-control toggle-name-component ' . $configComponentClasses . '"',
             $html
         );
     }

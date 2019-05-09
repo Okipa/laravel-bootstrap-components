@@ -452,53 +452,53 @@ class TimeTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('<input id="' . $customComponentId . '"', $html);
     }
 
-    public function testConfigContainerClass()
+    public function testConfigContainerClasses()
     {
-        $configContainerCLass = 'test-config-class-container';
-        config()->set('bootstrap-components.form.time.class.container', [$configContainerCLass]);
+        $configContainerClasses = 'test-config-class-container';
+        config()->set('bootstrap-components.form.time.class.container', [$configContainerClasses]);
         $html = bsTime()->name('name')->toHtml();
-        $this->assertStringContainsString('class="time-name-container ' . $configContainerCLass . '"', $html);
+        $this->assertStringContainsString('class="time-name-container ' . $configContainerClasses . '"', $html);
     }
 
-    public function testSetContainerClass()
+    public function testSetContainerClasses()
     {
-        $configContainerCLass = 'test-config-class-container';
-        $customContainerCLass = 'test-custom-class-container';
-        config()->set('bootstrap-components.form.time.class.container', [$configContainerCLass]);
-        $html = bsTime()->name('name')->containerClass([$customContainerCLass])->toHtml();
+        $configContainerClasses = 'test-config-class-container';
+        $customContainerClasses = 'test-custom-class-container';
+        config()->set('bootstrap-components.form.time.class.container', [$configContainerClasses]);
+        $html = bsTime()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="time-name-container ' . $customContainerCLass . '"',
+            'class="time-name-container ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="time-name-container ' . $configContainerCLass . '"',
+            'class="time-name-container ' . $configContainerClasses . '"',
             $html
         );
     }
 
     public function testConfigComponentClass()
     {
-        $configComponentCLass = 'test-config-class-component';
-        config()->set('bootstrap-components.form.time.class.component', [$configComponentCLass]);
+        $configComponentClasses = 'test-config-class-component';
+        config()->set('bootstrap-components.form.time.class.component', [$configComponentClasses]);
         $html = bsTime()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="form-control time-name-component ' . $configComponentCLass . '"',
+            'class="form-control time-name-component ' . $configComponentClasses . '"',
             $html
         );
     }
 
     public function testSetComponentClass()
     {
-        $configComponentCLass = 'test-config-class-component';
-        $customComponentCLass = 'test-custom-class-component';
-        config()->set('bootstrap-components.form.time.class.component', [$customComponentCLass]);
-        $html = bsTime()->name('name')->componentClass([$customComponentCLass])->toHtml();
+        $configComponentClasses = 'test-config-class-component';
+        $customComponentClasses = 'test-custom-class-component';
+        config()->set('bootstrap-components.form.time.class.component', [$customComponentClasses]);
+        $html = bsTime()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="form-control time-name-component ' . $customComponentCLass . '"',
+            'class="form-control time-name-component ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="form-control time-name-component ' . $configComponentCLass . '"',
+            'class="form-control time-name-component ' . $configComponentClasses . '"',
             $html
         );
     }

@@ -385,56 +385,56 @@ class PasswordTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('<input id="' . $customComponentId . '"', $html);
     }
 
-    public function testConfigContainerClass()
+    public function testConfigContainerClasses()
     {
-        $configContainerCLass = 'test-config-class-container';
-        config()->set('bootstrap-components.form.password.class.container', [$configContainerCLass]);
+        $configContainerClasses = 'test-config-class-container';
+        config()->set('bootstrap-components.form.password.class.container', [$configContainerClasses]);
         $html = bsPassword()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="password-name-container ' . $configContainerCLass . '"',
+            'class="password-name-container ' . $configContainerClasses . '"',
             $html
         );
     }
 
-    public function testSetContainerClass()
+    public function testSetContainerClasses()
     {
-        $configContainerCLass = 'test-config-class-container';
-        $customContainerCLass = 'test-custom-class-container';
-        config()->set('bootstrap-components.form.password.class.container', [$configContainerCLass]);
-        $html = bsPassword()->name('name')->containerClass([$customContainerCLass])->toHtml();
+        $configContainerClasses = 'test-config-class-container';
+        $customContainerClasses = 'test-custom-class-container';
+        config()->set('bootstrap-components.form.password.class.container', [$configContainerClasses]);
+        $html = bsPassword()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="password-name-container ' . $customContainerCLass . '"',
+            'class="password-name-container ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="password-name-container ' . $configContainerCLass . '"',
+            'class="password-name-container ' . $configContainerClasses . '"',
             $html
         );
     }
 
     public function testConfigComponentClass()
     {
-        $configComponentCLass = 'test-config-class-component';
-        config()->set('bootstrap-components.form.password.class.component', [$configComponentCLass]);
+        $configComponentClasses = 'test-config-class-component';
+        config()->set('bootstrap-components.form.password.class.component', [$configComponentClasses]);
         $html = bsPassword()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="form-control password-name-component ' . $configComponentCLass . '"',
+            'class="form-control password-name-component ' . $configComponentClasses . '"',
             $html
         );
     }
 
     public function testSetComponentClass()
     {
-        $configComponentCLass = 'test-config-class-component';
-        $customComponentCLass = 'test-custom-class-component';
-        config()->set('bootstrap-components.form.password.class.component', [$customComponentCLass]);
-        $html = bsPassword()->name('name')->componentClass([$customComponentCLass])->toHtml();
+        $configComponentClasses = 'test-config-class-component';
+        $customComponentClasses = 'test-custom-class-component';
+        config()->set('bootstrap-components.form.password.class.component', [$customComponentClasses]);
+        $html = bsPassword()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="form-control password-name-component ' . $customComponentCLass . '"',
+            'class="form-control password-name-component ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="form-control password-name-component ' . $configComponentCLass . '"',
+            'class="form-control password-name-component ' . $configComponentClasses . '"',
             $html
         );
     }

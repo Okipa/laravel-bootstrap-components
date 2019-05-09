@@ -452,56 +452,56 @@ class DatetimeTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('<input id="' . $customComponentId . '"', $html);
     }
 
-    public function testConfigContainerClass()
+    public function testConfigContainerClasses()
     {
-        $configContainerCLass = 'test-config-class-container';
-        config()->set('bootstrap-components.form.datetime.class.container', [$configContainerCLass]);
+        $configContainerClasses = 'test-config-class-container';
+        config()->set('bootstrap-components.form.datetime.class.container', [$configContainerClasses]);
         $html = bsDatetime()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="datetime-local-name-container ' . $configContainerCLass . '"',
+            'class="datetime-local-name-container ' . $configContainerClasses . '"',
             $html
         );
     }
 
-    public function testSetContainerClass()
+    public function testSetContainerClasses()
     {
-        $configContainerCLass = 'test-config-class-container';
-        $customContainerCLass = 'test-custom-class-container';
-        config()->set('bootstrap-components.form.datetime.class.container', [$configContainerCLass]);
-        $html = bsDatetime()->name('name')->containerClass([$customContainerCLass])->toHtml();
+        $configContainerClasses = 'test-config-class-container';
+        $customContainerClasses = 'test-custom-class-container';
+        config()->set('bootstrap-components.form.datetime.class.container', [$configContainerClasses]);
+        $html = bsDatetime()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="datetime-local-name-container ' . $customContainerCLass . '"',
+            'class="datetime-local-name-container ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="datetime-local-name-container ' . $configContainerCLass . '"',
+            'class="datetime-local-name-container ' . $configContainerClasses . '"',
             $html
         );
     }
 
     public function testConfigComponentClass()
     {
-        $configComponentCLass = 'test-config-class-component';
-        config()->set('bootstrap-components.form.datetime.class.component', [$configComponentCLass]);
+        $configComponentClasses = 'test-config-class-component';
+        config()->set('bootstrap-components.form.datetime.class.component', [$configComponentClasses]);
         $html = bsDatetime()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="form-control datetime-local-name-component ' . $configComponentCLass . '"',
+            'class="form-control datetime-local-name-component ' . $configComponentClasses . '"',
             $html
         );
     }
 
     public function testSetComponentClass()
     {
-        $configComponentCLass = 'test-config-class-component';
-        $customComponentCLass = 'test-custom-class-component';
-        config()->set('bootstrap-components.form.datetime.class.component', [$customComponentCLass]);
-        $html = bsDatetime()->name('name')->componentClass([$customComponentCLass])->toHtml();
+        $configComponentClasses = 'test-config-class-component';
+        $customComponentClasses = 'test-custom-class-component';
+        config()->set('bootstrap-components.form.datetime.class.component', [$customComponentClasses]);
+        $html = bsDatetime()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="form-control datetime-local-name-component ' . $customComponentCLass . '"',
+            'class="form-control datetime-local-name-component ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="form-control datetime-local-name-component ' . $configComponentCLass . '"',
+            'class="form-control datetime-local-name-component ' . $configComponentClasses . '"',
             $html
         );
     }

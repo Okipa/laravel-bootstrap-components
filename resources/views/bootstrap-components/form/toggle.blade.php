@@ -1,8 +1,8 @@
 <div {{ htmlAttributes($containerId ? ['id' => $containerId] : null) }}
-    {{ classTag($type . '-' . Str::slug($name) . '-container', 'switch', 'custom-control', $containerClass) }}
+    {{ classTag($type . '-' . Str::slug($name) . '-container', 'switch', 'custom-control', $containerClasses) }}
     {{ htmlAttributes($containerHtmlAttributes) }}>
     <input id="{{ $componentId }}"
-           {{ classTag($type . '-' . Str::slug($name) . '-component', 'custom-control-input', $componentClass, validationStatus($name)) }}
+           {{ classTag($type . '-' . Str::slug($name) . '-component', 'custom-control-input', $componentClasses, validationStatus($name)) }}
            type="checkbox"
            name="{{ $name }}"
         {{ htmlAttributes($componentHtmlAttributes) }}>

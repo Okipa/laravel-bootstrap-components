@@ -376,53 +376,53 @@ class UrlTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('<input id="' . $customComponentId . '"', $html);
     }
 
-    public function testConfigContainerClass()
+    public function testConfigContainerClasses()
     {
-        $configContainerCLass = 'test-config-class-container';
-        config()->set('bootstrap-components.form.url.class.container', [$configContainerCLass]);
+        $configContainerClasses = 'test-config-class-container';
+        config()->set('bootstrap-components.form.url.class.container', [$configContainerClasses]);
         $html = bsUrl()->name('name')->toHtml();
-        $this->assertStringContainsString('class="url-name-container ' . $configContainerCLass . '"', $html);
+        $this->assertStringContainsString('class="url-name-container ' . $configContainerClasses . '"', $html);
     }
 
-    public function testSetContainerClass()
+    public function testSetContainerClasses()
     {
-        $configContainerCLass = 'test-config-class-container';
-        $customContainerCLass = 'test-custom-class-container';
-        config()->set('bootstrap-components.form.url.class.container', [$configContainerCLass]);
-        $html = bsUrl()->name('name')->containerClass([$customContainerCLass])->toHtml();
+        $configContainerClasses = 'test-config-class-container';
+        $customContainerClasses = 'test-custom-class-container';
+        config()->set('bootstrap-components.form.url.class.container', [$configContainerClasses]);
+        $html = bsUrl()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="url-name-container ' . $customContainerCLass . '"',
+            'class="url-name-container ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="url-name-container ' . $configContainerCLass . '"',
+            'class="url-name-container ' . $configContainerClasses . '"',
             $html
         );
     }
 
     public function testConfigComponentClass()
     {
-        $configComponentCLass = 'test-config-class-component';
-        config()->set('bootstrap-components.form.url.class.component', [$configComponentCLass]);
+        $configComponentClasses = 'test-config-class-component';
+        config()->set('bootstrap-components.form.url.class.component', [$configComponentClasses]);
         $html = bsUrl()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="form-control url-name-component ' . $configComponentCLass . '"',
+            'class="form-control url-name-component ' . $configComponentClasses . '"',
             $html
         );
     }
 
     public function testSetComponentClass()
     {
-        $configComponentCLass = 'test-config-class-component';
-        $customComponentCLass = 'test-custom-class-component';
-        config()->set('bootstrap-components.form.url.class.component', [$customComponentCLass]);
-        $html = bsUrl()->name('name')->componentClass([$customComponentCLass])->toHtml();
+        $configComponentClasses = 'test-config-class-component';
+        $customComponentClasses = 'test-custom-class-component';
+        config()->set('bootstrap-components.form.url.class.component', [$customComponentClasses]);
+        $html = bsUrl()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="form-control url-name-component ' . $customComponentCLass . '"',
+            'class="form-control url-name-component ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="form-control url-name-component ' . $configComponentCLass . '"',
+            'class="form-control url-name-component ' . $configComponentClasses . '"',
             $html
         );
     }

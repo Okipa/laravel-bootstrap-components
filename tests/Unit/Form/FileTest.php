@@ -408,26 +408,26 @@ class FileTest extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString($errorMessage, $html);
     }
 
-    public function testConfigContainerClass()
+    public function testConfigContainerClasses()
     {
-        $configContainerCLass = 'test-config-class-container';
-        config()->set('bootstrap-components.form.file.class.container', [$configContainerCLass]);
+        $configContainerClasses = 'test-config-class-container';
+        config()->set('bootstrap-components.form.file.class.container', [$configContainerClasses]);
         $html = bsFile()->name('name')->toHtml();
-        $this->assertStringContainsString('class="file-name-container ' . $configContainerCLass . '"', $html);
+        $this->assertStringContainsString('class="file-name-container ' . $configContainerClasses . '"', $html);
     }
 
-    public function testSetContainerClass()
+    public function testSetContainerClasses()
     {
-        $configContainerCLass = 'test-config-class-container';
-        $customContainerCLass = 'test-custom-class-container';
-        config()->set('bootstrap-components.form.file.class.container', [$configContainerCLass]);
-        $html = bsFile()->name('name')->containerClass([$customContainerCLass])->toHtml();
+        $configContainerClasses = 'test-config-class-container';
+        $customContainerClasses = 'test-custom-class-container';
+        config()->set('bootstrap-components.form.file.class.container', [$configContainerClasses]);
+        $html = bsFile()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="file-name-container ' . $customContainerCLass . '"',
+            'class="file-name-container ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="file-name-container ' . $configContainerCLass . '"',
+            'class="file-name-container ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -462,27 +462,27 @@ class FileTest extends BootstrapComponentsTestCase
 
     public function testConfigComponentClass()
     {
-        $configComponentCLass = 'test-config-class-component';
-        config()->set('bootstrap-components.form.file.class.component', [$configComponentCLass]);
+        $configComponentClasses = 'test-config-class-component';
+        config()->set('bootstrap-components.form.file.class.component', [$configComponentClasses]);
         $html = bsFile()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="custom-file-input form-control file-name-component ' . $configComponentCLass . '"',
+            'class="custom-file-input form-control file-name-component ' . $configComponentClasses . '"',
             $html
         );
     }
 
     public function testSetComponentClass()
     {
-        $configComponentCLass = 'test-config-class-component';
-        $customComponentCLass = 'test-custom-class-component';
-        config()->set('bootstrap-components.form.file.class.component', [$customComponentCLass]);
-        $html = bsFile()->name('name')->componentClass([$customComponentCLass])->toHtml();
+        $configComponentClasses = 'test-config-class-component';
+        $customComponentClasses = 'test-custom-class-component';
+        config()->set('bootstrap-components.form.file.class.component', [$customComponentClasses]);
+        $html = bsFile()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="custom-file-input form-control file-name-component ' . $customComponentCLass . '"',
+            'class="custom-file-input form-control file-name-component ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="custom-file-input form-control file-name-component ' . $configComponentCLass . '"',
+            'class="custom-file-input form-control file-name-component ' . $configComponentClasses . '"',
             $html
         );
     }
