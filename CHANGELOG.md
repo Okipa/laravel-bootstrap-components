@@ -12,11 +12,23 @@
 :warning: **Breaking changes** :warning:
 - Replaced `->icon()` method by `->prepend()` for `Button` and `Form` components.
 - Added `->append()` for `Button` and `Form` components.
-- Removed `hideIcon()` method for `Button` and `Form` components. Hiding a prepended or appended html element can now be done with `->prepend(false)` or `->append(false)`.
-- Removed `hideLabel()` method for `Button` and `Form` components. Hiding a label can now be done with `->label(false)`.
-- Removed `hideLegend()` method for `Form` components. Hiding a legend can now be done with `->legend(false)`.
+- Removed `->hideIcon()` method for `Button` and `Form` components. Hiding a prepended or appended html element can now be done with `->prepend(false)` or `->append(false)`.
+- Removed `->hideLabel()` method for `Button` and `Form` components. Hiding a label can now be done with `->label(false)`.
+- Removed `->hideLegend()` method for `Form` components. Hiding a legend can now be done with `->legend(false)`.
 - Added possibility to hide placeholder value with `->placeholder(false)` for `Form` components.
-- Added possibility to choose for all `Form` components if the the success / error status should be displayed or not after a form submission. The default behavior can be set with the `config('bootstrap-components.[componentConfigKey].formValidation.displaySuccess')` and `config('bootstrap-components.[componentConfigKey].formValidation.displayFailure')` and a custom behaviour can be set with the `->displaySuccess()` and `->displayFailure()` methods on each of those components.
+- Added possibility to choose for all `Form` components if the the success / error status should be displayed or not after a form submission.
+  - Each `Form` component has now a the following config values (to add in your published `config/bootstrap-components.php` file) :
+  ```php
+  // example
+  'text'     => [
+      // ...
+      'formValidation' => [
+          'displaySuccess' => false,
+          'displayFailure' => true,
+      ],
+  ],
+  ```
+  - The default behavior can be set with the `config('bootstrap-components.[componentConfigKey].formValidation.displaySuccess')` and `config('bootstrap-components.[componentConfigKey].formValidation.displayFailure')` and a custom behaviour can be set with the `->displaySuccess()` and `->displayFailure()` methods on each of those components.
 - Replace `html_attributes` config key by `htmlAttributes`.
 
 ## [0.6.1](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.6.1)

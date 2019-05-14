@@ -3438,16 +3438,16 @@
         },
         {
             "name": "orchestra/testbench-core",
-            "version": "v3.8.2",
+            "version": "v3.8.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchestral/testbench-core.git",
-                "reference": "598caa6f7813b8a29b2f1b69912b40659dcef79b"
+                "reference": "b8f827ace31a15d5343301daf8eb6ce2db00726b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/testbench-core/zipball/598caa6f7813b8a29b2f1b69912b40659dcef79b",
-                "reference": "598caa6f7813b8a29b2f1b69912b40659dcef79b",
+                "url": "https://api.github.com/repos/orchestral/testbench-core/zipball/b8f827ace31a15d5343301daf8eb6ce2db00726b",
+                "reference": "b8f827ace31a15d5343301daf8eb6ce2db00726b",
                 "shasum": ""
             },
             "require": {
@@ -3461,7 +3461,7 @@
                 "phpunit/phpunit": "^7.5 || ^8.0"
             },
             "suggest": {
-                "laravel/framework": "Required for testing (~5.8.3).",
+                "laravel/framework": "Required for testing (~5.8.15).",
                 "mockery/mockery": "Allow to use Mockery for testing (^1.0).",
                 "orchestra/testbench-browser-kit": "Allow to use legacy Laravel BrowserKit for testing (^3.8).",
                 "orchestra/testbench-dusk": "Allow to use Laravel Dusk for testing (^3.8).",
@@ -3499,7 +3499,7 @@
                 "orchestral",
                 "testing"
             ],
-            "time": "2019-04-10T12:50:29+00:00"
+            "time": "2019-05-13T02:02:41+00:00"
         },
         {
             "name": "pdepend/pdepend",
@@ -4298,16 +4298,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "8.1.4",
+            "version": "8.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "b534b017daaef2d7f60c6ee61e6aa2e13fdc6910"
+                "reference": "01392d4b5878aa617e8d9bc7a529e5febc8fe956"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b534b017daaef2d7f60c6ee61e6aa2e13fdc6910",
-                "reference": "b534b017daaef2d7f60c6ee61e6aa2e13fdc6910",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/01392d4b5878aa617e8d9bc7a529e5febc8fe956",
+                "reference": "01392d4b5878aa617e8d9bc7a529e5febc8fe956",
                 "shasum": ""
             },
             "require": {
@@ -4376,7 +4376,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-05-09T05:13:39+00:00"
+            "time": "2019-05-14T04:57:31+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
