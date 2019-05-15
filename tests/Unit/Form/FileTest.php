@@ -248,45 +248,6 @@ class FileTest extends BootstrapComponentsTestCase
         );
     }
 
-//    public function testSetPlaceholderWithDefaultLabel()
-//    {
-//        $placeholder = 'test-custom-placeholder';
-//        $label = 'test-custom-label';
-//        $html = bsFile()->name('name')->placeholder($placeholder)->label($label)->toHtml();
-//        dd($html);
-//        $this->assertStringContainsString(
-//            '<label class="custom-file-label" for="file-name">'
-//            . __('bootstrap-components::bootstrap-components.label.file') . '</label>',
-//            $html
-//        );
-//        $this->assertStringNotContainsString(
-//            '<label class="custom-file-label" for="file-name">' . $placeholder . ' : '
-//            . __('bootstrap-components::bootstrap-components.label.file') . '</label>',
-//            $html
-//        );
-//        $this->assertStringNotContainsString(
-//            '<label class="custom-file-label" for="file-name">validation.attributes.name : '
-//            . __('bootstrap-components::bootstrap-components.label.file') . '</label>',
-//            $html
-//        );
-//    }
-//
-//    public function testSetPlaceholderWithNoLabel()
-//    {
-//        $placeholder = 'test-custom-placeholder';
-//        $html = bsFile()->name('name')->placeholder($placeholder)->hideLabel()->toHtml();
-//        $this->assertStringContainsString(
-//            '<label class="custom-file-label" for="file-name">' . $placeholder . ' : '
-//            . __('bootstrap-components::bootstrap-components.label.file') . '</label>',
-//            $html
-//        );
-//        $this->assertStringNotContainsString(
-//            '<label class="custom-file-label" for="file-name">validation.attributes.name : '
-//            . __('bootstrap-components::bootstrap-components.label.file') . '</label>',
-//            $html
-//        );
-//    }
-
     public function testSetPlaceholder()
     {
         $placeholder = 'test-custom-placeholder';
