@@ -651,6 +651,15 @@ class SelectTest extends BootstrapComponentsTestCase
         );
     }
 
+    public function testNoPlaceholderWithNoLabel()
+    {
+        $html = bsSelect()->name('name')->label(false)->toHtml();
+        $this->assertStringContainsString(
+            '<option value="" disabled="disabled" selected="selected">validation.attributes.name</option>',
+            $html
+        );
+    }
+
     public function testHidePlaceholder()
     {
         $html = bsSelect()->name('name')->placeholder(false)->toHtml();

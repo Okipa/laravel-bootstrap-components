@@ -249,7 +249,7 @@ abstract class Input extends Component
             'legend'         => __($this->legend) ?? $this->defaultLegend(),
             'label'          => $this->label ?? $this->defaultLabel(),
             'value'          => $this->defineValue(),
-            'placeholder'    => $this->placeholder ?? ($this->label ?? $this->defaultLabel()),
+            'placeholder'    => $this->placeholder ?? ($this->label ?: $this->defaultLabel()),
             'displaySuccess' => $this->displaySuccess ?? $this->defaultDisplaySuccess(),
             'displayFailure' => $this->displayFailure ?? $this->defaultDisplayFailure(),
         ];

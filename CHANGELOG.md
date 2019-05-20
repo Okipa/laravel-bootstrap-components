@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.8.1](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.8.1)
+2019-04-09  
+- Fixed `bsSelect()` placeholder disappearing when the label is hidden (`->label(false)`).
+
 ## [0.8.0](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.8.0)
 2019-04-09  
 :warning: **Breaking changes** :warning:
