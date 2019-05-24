@@ -310,7 +310,7 @@ abstract class Input extends Component
      */
     protected function defineValue()
     {
-        return $this->value ? $this->value : ($this->model ? $this->model->{$this->name} : null);
+        return isset($this->value) ? $this->value : ($this->model ? $this->model->{$this->name} : null);
     }
 
     /**

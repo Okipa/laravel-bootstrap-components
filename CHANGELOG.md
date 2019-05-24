@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.8.2](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.8.2)
+2019-05-24
+- Fixed `Form` components issue : `0` value was considered as no value at all.
+
 ## [0.8.1](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.8.1)
 2019-05-20  
 - Fixed `bsSelect()` placeholder disappearing when the label is hidden (`->label(false)`).

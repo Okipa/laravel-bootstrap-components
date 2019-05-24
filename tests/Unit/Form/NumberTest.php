@@ -186,7 +186,14 @@ class NumberTest extends BootstrapComponentsTestCase
 
     public function testSetValue()
     {
-        $customValue = 'test-custom-value';
+        $customValue = 17;
+        $html = bsNumber()->name('credit')->value($customValue)->toHtml();
+        $this->assertStringContainsString('value="' . $customValue . '"', $html);
+    }
+
+    public function testSetZeroValue()
+    {
+        $customValue = 0;
         $html = bsNumber()->name('credit')->value($customValue)->toHtml();
         $this->assertStringContainsString('value="' . $customValue . '"', $html);
     }
