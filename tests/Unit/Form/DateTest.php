@@ -318,6 +318,12 @@ class DateTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('placeholder="validation.attributes.name"', $html);
     }
 
+    public function testNoPlaceholderWithNoLabel()
+    {
+        $html = bsDate()->name('name')->label(false)->toHtml();
+        $this->assertStringContainsString('placeholder="validation.attributes.name"', $html);
+    }
+
     public function testHidePlaceholder()
     {
         $html = bsDate()->name('name')->placeholder(false)->toHtml();

@@ -267,6 +267,12 @@ class NumberTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('placeholder="validation.attributes.credit"', $html);
     }
 
+    public function testNoPlaceholderWithNoLabel()
+    {
+        $html = bsNumber()->name('name')->label(false)->toHtml();
+        $this->assertStringContainsString('placeholder="validation.attributes.name"', $html);
+    }
+
     public function testHidePlaceholder()
     {
         $html = bsNumber()->name('name')->placeholder(false)->toHtml();

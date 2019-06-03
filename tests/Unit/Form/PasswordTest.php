@@ -263,6 +263,12 @@ class PasswordTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('placeholder="validation.attributes.name"', $html);
     }
 
+    public function testNoPlaceholderWithNoLabel()
+    {
+        $html = bsPassword()->name('name')->label(false)->toHtml();
+        $this->assertStringContainsString('placeholder="validation.attributes.name"', $html);
+    }
+
     public function testHidePlaceholder()
     {
         $html = bsPassword()->name('name')->placeholder(false)->toHtml();

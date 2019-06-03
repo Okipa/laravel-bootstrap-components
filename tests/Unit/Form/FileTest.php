@@ -270,6 +270,17 @@ class FileTest extends BootstrapComponentsTestCase
         );
     }
 
+    public function testNoPlaceholderWithNoLabel()
+    {
+        $html = bsFile()->name('name')->label(false)->toHtml();
+        $this->assertStringContainsString('custom-file-label', $html);
+        $this->assertStringContainsString(
+            '<label class="custom-file-label" for="file-name">'
+            . __('bootstrap-components::bootstrap-components.label.file') . '</label>',
+            $html
+        );
+    }
+
     public function testHidePlaceholder()
     {
         $html = bsFile()->name('name')->placeholder(false)->toHtml();

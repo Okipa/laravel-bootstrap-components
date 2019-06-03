@@ -254,6 +254,12 @@ class UrlTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('placeholder="validation.attributes.name"', $html);
     }
 
+    public function testNoPlaceholderWithNoLabel()
+    {
+        $html = bsUrl()->name('name')->label(false)->toHtml();
+        $this->assertStringContainsString('placeholder="validation.attributes.name"', $html);
+    }
+
     public function testHidePlaceholder()
     {
         $html = bsUrl()->name('name')->placeholder(false)->toHtml();

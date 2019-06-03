@@ -275,6 +275,12 @@ class TextareaTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('placeholder="validation.attributes.name"', $html);
     }
 
+    public function testNoPlaceholderWithNoLabel()
+    {
+        $html = bsTextarea()->name('name')->label(false)->toHtml();
+        $this->assertStringContainsString('placeholder="validation.attributes.name"', $html);
+    }
+
     public function testHidePlaceholder()
     {
         $html = bsTextarea()->name('name')->placeholder(false)->toHtml();

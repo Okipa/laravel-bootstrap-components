@@ -263,6 +263,12 @@ class TextTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('placeholder="validation.attributes.name"', $html);
     }
 
+    public function testNoPlaceholderWithNoLabel()
+    {
+        $html = bsText()->name('name')->label(false)->toHtml();
+        $this->assertStringContainsString('placeholder="validation.attributes.name"', $html);
+    }
+
     public function testHidePlaceholder()
     {
         $html = bsText()->name('name')->placeholder(false)->toHtml();
