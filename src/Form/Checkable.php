@@ -34,12 +34,10 @@ abstract class Checkable extends Input
     protected function values(): array
     {
         $parentValues = parent::values();
-        $old = old($this->name);
-        if (isset($old)) {
-            $this->checked = $old;
-        } elseif (isset($this->checked)) {
-            // do nothing
-        } elseif ($parentValues['value']) {
+        $oldValue = old($this->name);
+        if (isset($oldValue)) {
+            $this->checked = $oldValue;
+        } elseif ($parentValues['value'] && ! isset($this->checked)) {
             $this->checked = true;
         }
 

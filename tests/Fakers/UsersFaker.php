@@ -34,7 +34,8 @@ trait UsersFaker
             'name'     => $this->faker->word,
             'email'    => $this->faker->email,
             'password' => Hash::make($this->clearPassword),
-            'credit'   => 50
+            'credit'   => 50,
+            'active'   => true,
         ];
     }
 }

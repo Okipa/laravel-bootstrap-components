@@ -4,7 +4,7 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
 use Exception;
 use Illuminate\Support\MessageBag;
-use Okipa\LaravelBootstrapComponents\Form\Checkable;
+use Okipa\LaravelBootstrapComponents\Form\Input;
 use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
 use Okipa\LaravelBootstrapComponents\Test\Fakers\UsersFaker;
 
@@ -33,18 +33,20 @@ class RadioTest extends BootstrapComponentsTestCase
 
     public function testExtendsInput()
     {
-        $this->assertEquals(Checkable::class, get_parent_class(bsRadio()));
+        $this->assertEquals(Input::class, get_parent_class(bsRadio()));
     }
 
     public function testName()
     {
-        $html = bsRadio()->name('name')->toHtml();
+        $customValue = 'test-custom-value';
+        $html = bsRadio()->name('name')->value($customValue)->toHtml();
         $this->assertStringContainsString('name="name"', $html);
     }
 
     public function testType()
     {
-        $html = bsRadio()->name('name')->toHtml();
+        $customValue = 'test-custom-value';
+        $html = bsRadio()->name('name')->value($customValue)->toHtml();
         $this->assertStringContainsString('type="radio"', $html);
     }
 
@@ -54,108 +56,167 @@ class RadioTest extends BootstrapComponentsTestCase
         bsRadio()->toHtml();
     }
 
-    public function testModelValue()
+    public function testInputWithoutValue()
     {
-        $user = $this->createUniqueUser();
-        $html = bsRadio()->model($user)->name('name')->toHtml();
-        $this->assertStringContainsString('checked="checked"', $html);
+        $this->expectException(Exception::class);
+        bsRadio()->name('name')->toHtml();
+    }
+
+    public function testSetValue()
+    {
+        $customValue = 'test-custom-value';
+        $html = bsRadio()->name('name')->value($customValue)->toHtml();
+        $this->assertStringContainsString('value="' . $customValue . '"', $html);
     }
 
     public function testConfigPrepend()
     {
+        $customValue = 'test-custom-value';
         $configPrepend = 'test-config-prepend';
         config()->set('bootstrap-components.form.radio.prepend', $configPrepend);
-        $html = bsRadio()->name('name')->toHtml();
+        $html = bsRadio()->name('name')->value($customValue)->toHtml();
         $this->assertStringContainsString('<span class="label-prepend">' . $configPrepend . '</span>', $html);
     }
 
     public function testSetPrepend()
     {
+        $customValue = 'test-custom-value';
         $configPrepend = 'test-config-prepend';
         $customPrepend = 'test-custom-prepend';
         config()->set('bootstrap-components.form.radio.prepend', $configPrepend);
-        $html = bsRadio()->name('name')->prepend($customPrepend)->toHtml();
+        $html = bsRadio()->name('name')->value($customValue)->prepend($customPrepend)->toHtml();
         $this->assertStringContainsString('<span class="label-prepend">' . $customPrepend . '</span>', $html);
         $this->assertStringNotContainsString('<span class="label-prepend">' . $configPrepend . '</span>', $html);
     }
 
     public function testNoPrepend()
     {
+        $customValue = 'test-custom-value';
         config()->set('bootstrap-components.form.radio.prepend', null);
-        $html = bsRadio()->name('name')->toHtml();
+        $html = bsRadio()->name('name')->value($customValue)->toHtml();
         $this->assertStringNotContainsString('<span class="label-prepend">', $html);
     }
 
     public function testHidePrepend()
     {
+        $customValue = 'test-custom-value';
         $configPrepend = 'test-config-prepend';
         config()->set('bootstrap-components.form.radio.prepend', $configPrepend);
-        $html = bsRadio()->name('name')->prepend(false)->toHtml();
+        $html = bsRadio()->name('name')->value($customValue)->prepend(false)->toHtml();
         $this->assertStringNotContainsString('<span class="label-prepend">', $html);
     }
 
     public function testConfigAppend()
     {
+        $customValue = 'test-custom-value';
         $configAppend = 'test-config-append';
         config()->set('bootstrap-components.form.radio.append', $configAppend);
-        $html = bsRadio()->name('name')->toHtml();
+        $html = bsRadio()->name('name')->value($customValue)->toHtml();
         $this->assertStringContainsString('<span class="label-append">' . $configAppend . '</span>', $html);
     }
 
     public function testSetAppend()
     {
+        $customValue = 'test-custom-value';
         $configAppend = 'test-config-append';
         $customAppend = 'test-custom-append';
         config()->set('bootstrap-components.form.radio.append', $configAppend);
-        $html = bsRadio()->name('name')->append($customAppend)->toHtml();
+        $html = bsRadio()->name('name')->value($customValue)->append($customAppend)->toHtml();
         $this->assertStringContainsString('<span class="label-append">' . $customAppend . '</span>', $html);
         $this->assertStringNotContainsString('<span class="label-append">' . $configAppend . '</span>', $html);
     }
 
     public function testNoAppend()
     {
+        $customValue = 'test-custom-value';
         config()->set('bootstrap-components.form.radio.append', null);
-        $html = bsRadio()->name('name')->toHtml();
+        $html = bsRadio()->name('name')->value($customValue)->toHtml();
         $this->assertStringNotContainsString('<span class="label-append">', $html);
     }
 
     public function testHideAppend()
     {
+        $customValue = 'test-custom-value';
         $configAppend = 'test-config-append';
         config()->set('bootstrap-components.form.radio.append', $configAppend);
-        $html = bsRadio()->name('name')->append(false)->toHtml();
+        $html = bsRadio()->name('name')->value($customValue)->append(false)->toHtml();
         $this->assertStringNotContainsString('<span class="label-append">', $html);
+    }
+
+    public function testDefaultCheckStatus()
+    {
+        $customValue = 'test-custom-value';
+        $html = bsRadio()->name('name')->value($customValue)->toHtml();
+        $this->assertStringNotContainsString('checked="checked', $html);
     }
 
     public function testChecked()
     {
-        $user = null;
-        $html = bsRadio()->model($user)->name('name')->checked(true)->toHtml();
+        $customValue = 'test-custom-value';
+        $html = bsRadio()->name('name')->value($customValue)->checked()->toHtml();
         $this->assertStringContainsString('checked="checked"', $html);
     }
 
     public function testNotChecked()
     {
-        $user = $this->createUniqueUser();
-        $html = bsRadio()->model($user)->name('name')->checked(false)->toHtml();
+        $customValue = 'test-custom-value';
+        $html = bsRadio()->name('name')->value($customValue)->checked(false)->toHtml();
         $this->assertStringNotContainsString('checked="checked"', $html);
+    }
+
+    public function testModelValueChecked()
+    {
+        $user = $this->createUniqueUser();
+        $html = bsRadio()->name('name')->model($user)->value($user->name)->toHtml();
+        $this->assertStringContainsString('checked="checked"', $html);
+    }
+
+    public function testOldValueChecked()
+    {
+        $oldValue = 'test-old-value';
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => function () use ($oldValue) {
+                $request = request()->merge(['name' => $oldValue]);
+                $request->flash();
+            },
+        ]);
+        $this->call('GET', 'test');
+        $html = bsRadio()->name('name')->value($oldValue)->checked(false)->toHtml();
+        $this->assertStringContainsString('checked="checked', $html);
+    }
+
+    public function testOldValueNotChecked()
+    {
+        $oldValue = 'test-old-value';
+        $customValue = 'test-custom-value';
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => function () use ($oldValue) {
+                $request = request()->merge(['name' => $oldValue]);
+                $request->flash();
+            },
+        ]);
+        $this->call('GET', 'test');
+        $html = bsRadio()->name('name')->value($customValue)->checked()->toHtml();
+        $this->assertStringNotContainsString('checked="checked', $html);
     }
 
     public function testConfigLegend()
     {
+        $customValue = 'test-custom-value';
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.radio.legend', $configLegend);
-        $html = bsRadio()->name('name')->toHtml();
+        $html = bsRadio()->name('name')->value($customValue)->toHtml();
         $this->assertStringContainsString('radio-name-legend', $html);
         $this->assertStringContainsString($configLegend, $html);
     }
 
     public function testSetLegend()
     {
+        $customValue = 'test-custom-value';
         $configLegend = 'test-config-legend';
         $customLegend = 'test-custom-legend';
         config()->set('bootstrap-components.form.radio.legend', $configLegend);
-        $html = bsRadio()->name('name')->legend($customLegend)->toHtml();
+        $html = bsRadio()->name('name')->value($customValue)->legend($customLegend)->toHtml();
         $this->assertStringContainsString('radio-name-legend', $html);
         $this->assertStringContainsString($customLegend, $html);
         $this->assertStringNotContainsString($configLegend, $html);
@@ -163,86 +224,49 @@ class RadioTest extends BootstrapComponentsTestCase
 
     public function testNoLegend()
     {
+        $customValue = 'test-custom-value';
         config()->set('bootstrap-components.form.radio.legend', null);
-        $html = bsRadio()->name('name')->toHtml();
+        $html = bsRadio()->name('name')->value($customValue)->toHtml();
         $this->assertStringNotContainsString('radio-name-legend', $html);
     }
 
     public function testHideLegend()
     {
+        $customValue = 'test-custom-value';
         $configLegend = 'test-config-legend';
         config()->set('bootstrap-components.form.radio.legend', $configLegend);
-        $html = bsRadio()->name('name')->legend(false)->toHtml();
+        $html = bsRadio()->name('name')->value($customValue)->legend(false)->toHtml();
         $this->assertStringNotContainsString('radio-name-legend', $html);
-    }
-
-    public function testSetValueDefaultCheckStatus()
-    {
-        $html = bsRadio()->name('name')->toHtml();
-        $this->assertStringNotContainsString('checked="checked', $html);
-    }
-
-    public function testSetValueChecked()
-    {
-        $customValue = true;
-        $html = bsRadio()->name('name')->checked($customValue)->toHtml();
-        $this->assertStringContainsString('checked="checked', $html);
-    }
-
-    public function testOldValueChecked()
-    {
-        $oldValue = true;
-        $customValue = false;
-        $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                $request = request()->merge(['name' => $oldValue]);
-                $request->flash();
-            },
-        ]);
-        $this->call('GET', 'test');
-        $html = bsRadio()->name('name')->checked($customValue)->toHtml();
-        $this->assertStringContainsString('checked="checked', $html);
-    }
-
-    public function testOldValueNotChecked()
-    {
-        $oldValue = false;
-        $customValue = true;
-        $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                $request = request()->merge(['name' => $oldValue]);
-                $request->flash();
-            },
-        ]);
-        $this->call('GET', 'test');
-        $html = bsRadio()->name('name')->checked($customValue)->toHtml();
-        $this->assertStringNotContainsString('checked="checked', $html);
     }
 
     public function testSetLabel()
     {
+        $customValue = 'test-custom-value';
         $label = 'test-custom-label';
-        $html = bsRadio()->name('name')->label($label)->toHtml();
-        $this->assertStringContainsString('for="radio-name">' . $label . '</label>', $html);
+        $html = bsRadio()->name('name')->value($customValue)->label($label)->toHtml();
+        $this->assertStringContainsString($label . '</label>', $html);
     }
 
     public function testNoLabel()
     {
-        $html = bsRadio()->name('name')->toHtml();
-        $this->assertStringContainsString('for="radio-name">validation.attributes.name</label>', $html);
+        $customValue = 'test-custom-value';
+        $html = bsRadio()->name('name')->value($customValue)->toHtml();
+        $this->assertStringContainsString('validation.attributes.name</label>', $html);
     }
 
     public function testHideLabel()
     {
-        $html = bsRadio()->name('name')->label(false)->toHtml();
+        $customValue = 'test-custom-value';
+        $html = bsRadio()->name('name')->value($customValue)->label(false)->toHtml();
         $this->assertStringNotContainsString('for="radio-name">validation.attributes.name</label>', $html);
     }
 
     public function testConfigDisplaySuccess()
     {
+        $customValue = 'test-custom-value';
         config()->set('bootstrap-components.form.radio.formValidation.displaySuccess', true);
         $messageBag = app(MessageBag::class)->add('other_name', null);
-        $html = bsRadio()->name('name')->render(['errors' => $messageBag]);
+        $html = bsRadio()->name('name')->value($customValue)->render(['errors' => $messageBag]);
         $this->assertStringContainsString('<div class="valid-feedback d-block">', $html);
         $this->assertStringContainsString(
             __('bootstrap-components::bootstrap-components.notification.validation.success'),
@@ -252,9 +276,10 @@ class RadioTest extends BootstrapComponentsTestCase
 
     public function testConfigDoNotDisplaySuccess()
     {
+        $customValue = 'test-custom-value';
         config()->set('bootstrap-components.form.radio.formValidation.displaySuccess', false);
         $messageBag = app(MessageBag::class)->add('other_name', null);
-        $html = bsRadio()->name('name')->render(['errors' => $messageBag]);
+        $html = bsRadio()->name('name')->value($customValue)->render(['errors' => $messageBag]);
         $this->assertStringNotContainsString('<div class="valid-feedback d-block">', $html);
         $this->assertStringNotContainsString(
             __('bootstrap-components::bootstrap-components.notification.validation.success'),
@@ -264,9 +289,10 @@ class RadioTest extends BootstrapComponentsTestCase
 
     public function testDisplaySuccess()
     {
+        $customValue = 'test-custom-value';
         config()->set('bootstrap-components.form.radio.formValidation.displaySuccess', false);
         $messageBag = app(MessageBag::class)->add('other_name', null);
-        $html = bsRadio()->name('name')->displaySuccess(true)->render(['errors' => $messageBag]);
+        $html = bsRadio()->name('name')->value($customValue)->displaySuccess(true)->render(['errors' => $messageBag]);
         $this->assertStringContainsString('<div class="valid-feedback d-block">', $html);
         $this->assertStringContainsString(
             __('bootstrap-components::bootstrap-components.notification.validation.success'),
@@ -276,9 +302,10 @@ class RadioTest extends BootstrapComponentsTestCase
 
     public function testDoNotDisplaySuccess()
     {
+        $customValue = 'test-custom-value';
         config()->set('bootstrap-components.form.radio.formValidation.displaySuccess', true);
         $messageBag = app(MessageBag::class)->add('other_name', null);
-        $html = bsRadio()->name('name')->displaySuccess(false)->render(['errors' => $messageBag]);
+        $html = bsRadio()->name('name')->value($customValue)->displaySuccess(false)->render(['errors' => $messageBag]);
         $this->assertStringNotContainsString('<div class="valid-feedback d-block">', $html);
         $this->assertStringNotContainsString(
             __('bootstrap-components::bootstrap-components.notification.validation.success'),
@@ -288,77 +315,86 @@ class RadioTest extends BootstrapComponentsTestCase
 
     public function testConfigDisplayFailure()
     {
+        $customValue = 'test-custom-value';
         config()->set('bootstrap-components.form.radio.formValidation.displayFailure', true);
         $errorMessage = 'This a test error message';
         $messageBag = app(MessageBag::class)->add('name', $errorMessage);
-        $html = bsRadio()->name('name')->render(['errors' => $messageBag]);
+        $html = bsRadio()->name('name')->value($customValue)->render(['errors' => $messageBag]);
         $this->assertStringContainsString('<div class="invalid-feedback d-block">', $html);
         $this->assertStringContainsString($errorMessage, $html);
     }
 
     public function testConfigDoNotDisplayFailure()
     {
+        $customValue = 'test-custom-value';
         config()->set('bootstrap-components.form.radio.formValidation.displayFailure', false);
         $errorMessage = 'This a test error message';
         $messageBag = app(MessageBag::class)->add('name', $errorMessage);
-        $html = bsRadio()->name('name')->render(['errors' => $messageBag]);
+        $html = bsRadio()->name('name')->value($customValue)->render(['errors' => $messageBag]);
         $this->assertStringNotContainsString('<div class="invalid-feedback d-block">', $html);
         $this->assertStringNotContainsString($errorMessage, $html);
     }
 
     public function testDisplayFailure()
     {
+        $customValue = 'test-custom-value';
         config()->set('bootstrap-components.form.radio.formValidation.displayFailure', false);
         $errorMessage = 'This a test error message';
         $messageBag = app(MessageBag::class)->add('name', $errorMessage);
-        $html = bsRadio()->name('name')->displayFailure(true)->render(['errors' => $messageBag]);
+        $html = bsRadio()->name('name')->value($customValue)->displayFailure(true)->render(['errors' => $messageBag]);
         $this->assertStringContainsString('<div class="invalid-feedback d-block">', $html);
         $this->assertStringContainsString($errorMessage, $html);
     }
 
     public function testDoNotDisplayFailure()
     {
+        $customValue = 'test-custom-value';
         config()->set('bootstrap-components.form.radio.formValidation.displayFailure', true);
         $errorMessage = 'This a test error message';
         $messageBag = app(MessageBag::class)->add('name', $errorMessage);
-        $html = bsRadio()->name('name')->displayFailure(false)->render(['errors' => $messageBag]);
+        $html = bsRadio()->name('name')->value($customValue)->displayFailure(false)->render(['errors' => $messageBag]);
         $this->assertStringNotContainsString('<div class="invalid-feedback d-block">', $html);
         $this->assertStringNotContainsString($errorMessage, $html);
     }
 
     public function testSetNoContainerId()
     {
-        $html = bsRadio()->name('name')->toHtml();
+        $customValue = 'test-custom-value';
+        $html = bsRadio()->name('name')->value($customValue)->toHtml();
         $this->assertStringNotContainsString('<div id="', $html);
     }
 
     public function testSetContainerId()
     {
+        $customValue = 'test-custom-value';
         $customContainerId = 'test-custom-container-id';
-        $html = bsRadio()->name('name')->containerId($customContainerId)->toHtml();
+        $html = bsRadio()->name('name')->value($customValue)->containerId($customContainerId)->toHtml();
         $this->assertStringContainsString('<div id="' . $customContainerId, $html);
     }
 
     public function testSetNoComponentId()
     {
-        $html = bsRadio()->name('name')->toHtml();
-        $this->assertStringContainsString('for="radio-name"', $html);
-        $this->assertStringContainsString('<input id="radio-name"', $html);
+        $customValue = 'test-custom-value';
+        $html = bsRadio()->name('name')->value($customValue)->toHtml();
+        $this->assertStringContainsString('for="radio-name-test-custom-value"', $html);
+        $this->assertStringContainsString('<input id="radio-name-test-custom-value"', $html);
     }
 
     public function testSetComponentId()
     {
+        $customValue = 'test-custom-value';
         $customComponentId = 'test-custom-component-id';
-        $html = bsRadio()->name('name')->componentId($customComponentId)->toHtml();
+        $html = bsRadio()->name('name')->value($customValue)->componentId($customComponentId)->toHtml();
         $this->assertStringContainsString('for="' . $customComponentId . '"', $html);
         $this->assertStringContainsString('<input id="' . $customComponentId . '"', $html);
     }
 
     public function testConfigContainerClasses()
     {
+        $customValue = 'test-custom-value';
         $configContainerClasses = 'test-config-class-container';
         config()->set('bootstrap-components.form.radio.class.container', [$configContainerClasses]);
-        $html = bsRadio()->name('name')->toHtml();
+        $html = bsRadio()->name('name')->value($customValue)->toHtml();
         $this->assertStringContainsString(
             'class="radio-name-container custom-control custom-radio ' . $configContainerClasses . '"',
             $html
@@ -367,10 +403,11 @@ class RadioTest extends BootstrapComponentsTestCase
 
     public function testSetContainerClasses()
     {
+        $customValue = 'test-custom-value';
         $configContainerClasses = 'test-config-class-container';
         $customContainerClasses = 'test-custom-class-container';
         config()->set('bootstrap-components.form.radio.class.container', [$configContainerClasses]);
-        $html = bsRadio()->name('name')->containerClasses([$customContainerClasses])->toHtml();
+        $html = bsRadio()->name('name')->value($customValue)->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
             'class="radio-name-container custom-control custom-radio ' . $customContainerClasses . '"',
             $html
@@ -383,9 +420,10 @@ class RadioTest extends BootstrapComponentsTestCase
 
     public function testConfigComponentClass()
     {
+        $customValue = 'test-custom-value';
         $configComponentClasses = 'test-config-class-component';
         config()->set('bootstrap-components.form.radio.class.component', [$configComponentClasses]);
-        $html = bsRadio()->name('name')->toHtml();
+        $html = bsRadio()->name('name')->value($customValue)->toHtml();
         $this->assertStringContainsString(
             'class="radio-name-component custom-control-input ' . $configComponentClasses . '"',
             $html
@@ -394,10 +432,11 @@ class RadioTest extends BootstrapComponentsTestCase
 
     public function testSetComponentClass()
     {
+        $customValue = 'test-custom-value';
         $configComponentClasses = 'test-config-class-component';
         $customComponentClasses = 'test-custom-class-component';
         config()->set('bootstrap-components.form.radio.class.component', [$customComponentClasses]);
-        $html = bsRadio()->name('name')->componentClasses([$customComponentClasses])->toHtml();
+        $html = bsRadio()->name('name')->value($customValue)->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
             'class="radio-name-component custom-control-input ' . $customComponentClasses . '"',
             $html
@@ -410,36 +449,48 @@ class RadioTest extends BootstrapComponentsTestCase
 
     public function testConfigContainerHtmlAttributes()
     {
+        $customValue = 'test-custom-value';
         $configContainerAttributes = 'test-config-attributes-container';
         config()->set('bootstrap-components.form.radio.htmlAttributes.container', [$configContainerAttributes]);
-        $html = bsRadio()->name('name')->toHtml();
+        $html = bsRadio()->name('name')->value($customValue)->toHtml();
         $this->assertStringContainsString($configContainerAttributes, $html);
     }
 
     public function testSetContainerHtmlAttributes()
     {
+        $customValue = 'test-custom-value';
         $configContainerAttributes = 'test-config-attributes-container';
         $customContainerAttributes = 'test-custom-attributes-container';
         config()->set('bootstrap-components.form.radio.htmlAttributes.container', [$configContainerAttributes]);
-        $html = bsRadio()->name('name')->containerHtmlAttributes([$customContainerAttributes])->toHtml();
+        $html = bsRadio()
+            ->name('name')
+            ->value($customValue)
+            ->containerHtmlAttributes([$customContainerAttributes])
+            ->toHtml();
         $this->assertStringContainsString($customContainerAttributes, $html);
         $this->assertStringNotContainsString($configContainerAttributes, $html);
     }
 
     public function testConfigComponentHtmlAttributes()
     {
+        $customValue = 'test-custom-value';
         $configComponentAttributes = 'test-config-attributes-component';
         config()->set('bootstrap-components.form.radio.htmlAttributes.component', [$configComponentAttributes]);
-        $html = bsRadio()->name('name')->toHtml();
+        $html = bsRadio()->name('name')->value($customValue)->toHtml();
         $this->assertStringContainsString($configComponentAttributes, $html);
     }
 
     public function testSetComponentHtmlAttributes()
     {
+        $customValue = 'test-custom-value';
         $configComponentAttributes = 'test-config-attributes-component';
         $customComponentAttributes = 'test-custom-attributes-component';
         config()->set('bootstrap-components.form.radio.htmlAttributes.component', [$configComponentAttributes]);
-        $html = bsRadio()->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
+        $html = bsRadio()
+            ->name('name')
+            ->value($customValue)
+            ->componentHtmlAttributes([$customComponentAttributes])
+            ->toHtml();
         $this->assertStringContainsString($customComponentAttributes, $html);
         $this->assertStringNotContainsString($configComponentAttributes, $html);
     }

@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.8.3](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.8.3)
+2019-05-24
+- Fixed `bsRadio()` component, which was not really ready to use until now.
+
 ## [0.8.2](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.8.2)
 2019-05-24
 - Fixed `Form` components issue : `0` value was considered as no value at all.
