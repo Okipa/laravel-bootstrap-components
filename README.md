@@ -146,7 +146,7 @@ php artisan vendor:publish --tag=bootstrap-components::views
 #### bsText()
 
 ```php
-bsText()->name('name')
+bsText()->name('name') // set the input name
     ->model($user) // value is automatically detected from the field name
     ->value('John Doe') // or manually set the value
     ->label('Name') // override the default __('validation.attributes.[name]') label or set `false` to hide it
@@ -167,7 +167,7 @@ bsText()->name('name')
 #### bsNumber()
 
 ```php
-bsNumber()->name('amount')
+bsNumber()->name('amount') // set the input name
     ->model($invoice) // value is automatically detected from the field name
     ->value(20) // or manually set the value
     ->label('Amount') // override the default __('validation.attributes.[name]') label or set `false` to hide it
@@ -188,7 +188,7 @@ bsNumber()->name('amount')
 #### bsTel()
 
 ```php
-bsTel()->name('phone_number')
+bsTel()->name('phone_number') // set the input name
     ->model($user) // value is automatically detected from the field name
     ->value('+33612345678') // or manually set the value
     ->label('Phone number') // override the default __('validation.attributes.[name]') label or set `false` to hide it
@@ -209,7 +209,7 @@ bsTel()->name('phone_number')
 #### bsDatetime()
 
 ```php
-bsDatetime()->name('published_at')
+bsDatetime()->name('published_at') // set the input name
     ->model($user) // value is automatically detected from the field name
     ->value('2018-01-01 12:30') // or manually set the value
     ->format('Y-m-d H:i') // override the default config format
@@ -231,7 +231,7 @@ bsDatetime()->name('published_at')
 #### bsDate()
 
 ```php
-bsDate()->name('birthday')
+bsDate()->name('birthday') // set the input name
     ->model($user) // value is automatically detected from the field name
     ->value('1985-03-24') // or manually set the value
     ->format('Y-m-d') // override the default config format
@@ -253,7 +253,7 @@ bsDate()->name('birthday')
 #### bsTime()
 
 ```php
-bsTime()->name('opening')
+bsTime()->name('opening') // set the input name
     ->model($user) // value is automatically detected from the field name
     ->value('08:30') // or manually set the value
     ->format('H\h i\m\i\n') // override the default config format
@@ -275,7 +275,7 @@ bsTime()->name('opening')
 #### bsUrl()
 
 ```php
-bsUrl()->name('facebook_page')
+bsUrl()->name('facebook_page') // set the input name
     ->model($user) // value is automatically detected from the field name
     ->value('https://facebook.com') // or manually set the value
     ->label('Facebook page URL') // override the default __('validation.attributes.[name]') label or set `false` to hide it
@@ -296,7 +296,7 @@ bsUrl()->name('facebook_page')
 #### bsEmail()
 
 ```php
-bsEmail()->name('email')
+bsEmail()->name('email') // set the input name
     ->model($user) // value is automatically detected from the field name
     ->value('john.doe@domain.com') // or manually set the value
     ->label('Email') // override the default __('validation.attributes.[name]') label or set `false` to hide it
@@ -317,7 +317,7 @@ bsEmail()->name('email')
 #### bsColor()
 
 ```php
-bsColor()->name('color')
+bsColor()->name('color') // set the input name
     ->model($user) // value is automatically detected from the field name
     ->value('#ffffff') // or manually set the value
     ->label('Color') // override the default __('validation.attributes.[name]') label or set `false` to hide it
@@ -338,7 +338,7 @@ bsColor()->name('color')
 #### bsPassword()
 
 ```php
-bsPassword()->name('password')
+bsPassword()->name('password') // set the input name
     ->model($user) // value is automatically detected from the field name
     ->value('secret') // or manually set the value
     ->label('Password') // override the default __('validation.attributes.[name]') label or set `false` to hide it
@@ -359,7 +359,7 @@ bsPassword()->name('password')
 #### bsFile()
 
 ```php
-bsFile()->name('avatar')
+bsFile()->name('avatar') // set the input name
     ->model($user) // value is automatically detected from the field name
     ->value('https://website.com/storage/avatar-url.jpg') // or manually set the value
     ->label('Avatar') // override the default __('validation.attributes.[name]') label or set `false` to hide it
@@ -391,7 +391,7 @@ _Component additional methods :_
 #### bsTextarea()
 
 ```php
-bsTextarea()->name('message')
+bsTextarea()->name('message') // set the input name
     ->model($user) // value is automatically detected from the field name
     ->value('Hello, this is a message.') // or manually set the value
     ->label('Message') // override the default __('validation.attributes.[name]') label or set `false` to hide it
@@ -412,9 +412,9 @@ bsTextarea()->name('message')
 #### bsCheckbox()
 
 ```php
-bsCheckbox()->name('active')
-    ->model($user) // checked status is automatically detected from the field name
-    ->checked(true) // or manually set the value
+bsCheckbox()->name('active') // set the input name
+    ->model($user) // checked status is automatically detected from the model field name
+    ->checked() // or manually set the value, default value = true
     ->label('Active') // override the default __('validation.attributes.[name]') label or set `false` to hide it
     ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config value or set `false` to hide it
     ->append('<i class="fas fa-hand-pointer"></i>') // override the default append config value or set `false` to hide it
@@ -438,9 +438,9 @@ _Component additional methods :_
 #### bsToggle()
 
 ```php
-bsToggle()->name('active')
-    ->model($user) // checked status is automatically detected from the field name
-    ->checked(true) // or manually set the value
+bsToggle()->name('active') // set the input name
+    ->model($user) // checked status is automatically detected from the model field name
+    ->checked() // or manually set the value, default value = true
     ->label('Active') // override the default __('validation.attributes.[name]') label or set `false` to hide it
     ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config value or set `false` to hide it
     ->append('<i class="fas fa-hand-pointer"></i>') // override the default append config value or set `false` to hide it
@@ -468,15 +468,16 @@ _Notes :_
 #### bsRadio()
 
 ```php
-bsRadio()->name('gender')
-    ->model($user) // checked status is automatically detected from the field name
-    ->checked(true) // or manually set the value
+bsRadio()->name('gender') // set the input name
+    ->value('female') // set the radio button value (mandatory, see the notice above)
+    ->model($user) // checked status is automatically detected from the model field name
+    ->checked() // or manually set the value, default value = true
     ->label('Name') // override the default __('validation.attributes.[name]') label or set `false` to hide it
     ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config value or set `false` to hide it
     ->append('<i class="fas fa-hand-pointer"></i>') // override the default append config value or set `false` to hide it
     ->legend('Set your legend here.') // override the default legend config value or set `false` to hide it
     ->containerId('container-id') // set the container id
-    ->componentId('component-id') // override the default component id (radio-[name])
+    ->componentId('component-id') // override the default component id (radio-[name]-[value])
     ->containerClasses(['container', 'classes']) // override the default container classes config value
     ->componentClasses(['component', 'classes']) // override the default component classes config value
     ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default container html attributes config value
@@ -484,6 +485,10 @@ bsRadio()->name('gender')
     ->displaySuccess(false) // // override the default form validation display success config value
     ->displayFailure(false) // // override the default form validation display failure config value
 ```
+
+**:warning: Notes :**
+- Setting the value is mandatory for this component.
+- Differently from other `Form` components, the value will not be set from the associated model. Associating a model will only detect the checked status for the radio button.
 
 _Component additional methods :_
 
@@ -494,11 +499,11 @@ _Component additional methods :_
 #### bsSelect()
 
 ```php
-bsSelect()->name('skills')
+bsSelect()->name('skills') // set the input name
     ->model($user) // selected option is automatically detected
     ->selected('id', 1) // or manually set the selected option
     ->options($skills, 'id', 'title') // work with a models collection or an array
-    ->multiple(true) // activate the multiple mode, default value = true
+    ->multiple() // activate the multiple mode, default value = true
     ->label('Skills') // override the default __('validation.attributes.[name]') label or set `false` to hide it
     ->placeholder('Select your skills') // override the default placeholder (label) or set `false` to hide it
     ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config value or set `false` to hide it
@@ -514,7 +519,7 @@ bsSelect()->name('skills')
     ->displayFailure(false) // // override the default form validation display failure config value
 ```
 
-**Notes : ** 
+**:warning: Notes :**
 - in `single` mode, the selected() method second attribute only accept a string or an integer.
 - in `multiple` mode, the selected() method second attribute only accept an array.
 
