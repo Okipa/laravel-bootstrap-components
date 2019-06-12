@@ -59,6 +59,12 @@ abstract class Input extends Component
      */
     protected $label;
     /**
+     * The component as label after input.
+     *
+     * @property bool $labelAfter
+     */
+    protected $labelAfter;
+    /**
      * The component input value.
      *
      * @property string $value
@@ -196,6 +202,20 @@ abstract class Input extends Component
     }
 
     /**
+     * Set the component label after the input.
+     *
+     * @param bool $labelAfter
+     *
+     * @return \Okipa\LaravelBootstrapComponents\Form\Input
+     */
+    public function labelAfter(bool $labelAfter = true): Input
+    {
+        $this->labelAfter = $labelAfter;
+
+        return $this;
+    }
+
+    /**
      * Set the component form validation success display status.
      *
      * @param bool $displaySuccess
@@ -248,6 +268,7 @@ abstract class Input extends Component
             'append'         => $this->append ?? $this->defaultAppend(),
             'legend'         => __($this->legend) ?? $this->defaultLegend(),
             'label'          => $this->label ?? $this->defaultLabel(),
+            'labelAfter'     => $this->labelAfter ?? $this->defaultLabelAfter(),
             'value'          => $this->defineValue(),
             'placeholder'    => $this->placeholder ?? ($this->label ?: $this->defaultLabel()),
             'displaySuccess' => $this->displaySuccess ?? $this->defaultDisplaySuccess(),
@@ -303,6 +324,14 @@ abstract class Input extends Component
     protected function defaultLabel(): string
     {
         return (string) __('validation.attributes.' . Str::slug($this->name, '_'));
+    }
+
+    /**
+     * @return bool
+     */
+    protected function defaultLabelAfter(): bool
+    {
+        return config('bootstrap-components.' . $this->configKey . '.label_after') ?? false;
     }
 
     /**

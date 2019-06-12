@@ -9,6 +9,7 @@ return [
             'prepend'        => '<i class="fas fa-font"></i>',
             'append'         => null,
             'legend'         => null,
+            'labelAfter'     => false,
             'class'          => [
                 'container' => ['form-group'],
                 'component' => [],
@@ -27,6 +28,7 @@ return [
             'prepend'           => '<i class="fas fa-euro-sign"></i>',
             'append'            => null,
             'legend'            => null,
+            'labelAfter'     => false,
             'class'             => [
                 'container' => ['form-group'],
                 'component' => [],
@@ -45,6 +47,7 @@ return [
             'prepend'           => '<i class="fas fa-phone"></i>',
             'append'            => null,
             'legend'            => 'bootstrap-components.legend.tel',
+            'labelAfter'     => false,
             'class'             => [
                 'container' => ['form-group'],
                 'component' => [],
@@ -64,6 +67,7 @@ return [
             'append'            => null,
             'format'            => 'd/m/Y H:i',
             'legend'            => 'bootstrap-components.legend.datetime',
+            'labelAfter'     => false,
             'class'             => [
                 'container' => ['form-group'],
                 'component' => [],
@@ -83,6 +87,7 @@ return [
             'append'            => null,
             'format'            => 'd/m/Y',
             'legend'            => 'bootstrap-components.legend.date',
+            'labelAfter'     => false,
             'class'             => [
                 'container' => ['form-group'],
                 'component' => [],
@@ -102,6 +107,7 @@ return [
             'append'            => null,
             'format'            => 'H:i:s',
             'legend'            => 'bootstrap-components.legend.time',
+            'labelAfter'     => false,
             'class'             => [
                 'container' => ['form-group'],
                 'component' => [],
@@ -120,6 +126,7 @@ return [
             'prepend'           => '<i class="fas fa-link"></i>',
             'append'            => null,
             'legend'            => null,
+            'labelAfter'     => false,
             'class'             => [
                 'container' => ['form-group'],
                 'component' => [],
@@ -138,6 +145,7 @@ return [
             'prepend'           => '<i class="fas fa-at"></i>',
             'append'            => null,
             'legend'            => null,
+            'labelAfter'     => false,
             'class'             => [
                 'container' => ['form-group'],
                 'component' => [],
@@ -156,6 +164,7 @@ return [
             'prepend'           => '<i class="fas fa-palette"></i>',
             'append'            => null,
             'legend'            => null,
+            'labelAfter'     => false,
             'class'             => [
                 'container' => ['form-group'],
                 'component' => [],
@@ -174,6 +183,7 @@ return [
             'prepend'           => '<i class="fas fa-user-secret"></i>',
             'append'            => null,
             'legend'            => null,
+            'labelAfter'     => false,
             'class'             => [
                 'container' => ['form-group'],
                 'component' => [],
@@ -193,6 +203,7 @@ return [
             'append'               => null,
             'legend'               => null,
             'show_remove_checkbox' => true,
+            'labelAfter'     => false,
             'class'                => [
                 'container' => ['form-group'],
                 'component' => [],
@@ -211,6 +222,7 @@ return [
             'prepend'           => '<i class="fas fa-comment"></i>',
             'append'            => null,
             'legend'            => null,
+            'labelAfter'     => false,
             'class'             => [
                 'container' => ['form-group'],
                 'component' => [],
