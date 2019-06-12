@@ -300,7 +300,7 @@ class DatetimeTest extends BootstrapComponentsTestCase
     {
         $html = bsDatetime()->name('name')->label(false)->toHtml();
         $this->assertStringNotContainsString(
-            '<label for="date-name">validation.attributes.name</label>',
+            '<label for="datetime-local-name">validation.attributes.name</label>',
             $html
         );
         $this->assertStringNotContainsString(
@@ -313,7 +313,7 @@ class DatetimeTest extends BootstrapComponentsTestCase
     {
         $html = bsDatetime()->name('name')->labelAfter(false)->toHtml();
         $this->assertStringContainsString(
-            '<label for="date-name">validation.attributes.name</label>',
+            '<label for="datetime-local-name">validation.attributes.name</label>',
             $html
         );
         $this->assertStringContainsString(
@@ -321,8 +321,8 @@ class DatetimeTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertLessThan(
-            strrpos($html, '<input id="date-name"'),
-            strrpos($html, '<label for="date-name">validation.attributes.name</label>')
+            strrpos($html, '<input id="datetime-local-name"'),
+            strrpos($html, '<label for="datetime-local-name">validation.attributes.name</label>')
         );
     }
 
@@ -330,7 +330,7 @@ class DatetimeTest extends BootstrapComponentsTestCase
     {
         $html = bsDatetime()->name('name')->labelAfter(true)->toHtml();
         $this->assertStringContainsString(
-            '<label for="date-name">validation.attributes.name</label>',
+            '<label for="datetime-local-name">validation.attributes.name</label>',
             $html
         );
         $this->assertStringContainsString(
@@ -338,8 +338,8 @@ class DatetimeTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertGreaterThan(
-            strrpos($html, '<input id="date-name"'),
-            strrpos($html, '<label for="date-name">validation.attributes.name</label>')
+            strrpos($html, '<input id="datetime-local-name"'),
+            strrpos($html, '<label for="datetime-local-name">validation.attributes.name</label>')
         );
     }
 

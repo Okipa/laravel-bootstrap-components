@@ -250,7 +250,7 @@ class NumberTest extends BootstrapComponentsTestCase
     {
         $html = bsNumber()->name('credit')->labelAfter(false)->toHtml();
         $this->assertStringContainsString(
-            '<label for="number-name">validation.attributes.credit</label>',
+            '<label for="number-credit">validation.attributes.credit</label>',
             $html
         );
         $this->assertStringContainsString(
