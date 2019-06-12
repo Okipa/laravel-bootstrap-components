@@ -242,6 +242,40 @@ class PasswordTest extends BootstrapComponentsTestCase
         );
     }
 
+    public function testLabelNotAfter()
+    {
+        $html = bsPassword()->name('name')->labelAfter(false)->toHtml();
+        $this->assertStringContainsString(
+            '<label for="password-name">validation.attributes.name</label>',
+            $html
+        );
+        $this->assertStringContainsString(
+            'aria-label="validation.attributes.name"',
+            $html
+        );
+        $this->assertLessThan(
+            strrpos($html, '<input id="password-name"'),
+            strrpos($html, '<label for="password-name">validation.attributes.name</label>')
+        );
+    }
+
+    public function testLabelAfter()
+    {
+        $html = bsPassword()->name('name')->labelAfter(true)->toHtml();
+        $this->assertStringContainsString(
+            '<label for="password-name">validation.attributes.name</label>',
+            $html
+        );
+        $this->assertStringContainsString(
+            'aria-label="validation.attributes.name"',
+            $html
+        );
+        $this->assertGreaterThan(
+            strrpos($html, '<input id="password-name"'),
+            strrpos($html, '<label for="password-name">validation.attributes.name</label>')
+        );
+    }
+
     public function testSetPlaceholder()
     {
         $placeholder = 'test-custom-placeholder';

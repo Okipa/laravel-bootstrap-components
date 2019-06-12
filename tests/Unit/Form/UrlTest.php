@@ -233,6 +233,40 @@ class UrlTest extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString('aria-label="validation.attributes.name"', $html);
     }
 
+    public function testLabelNotAfter()
+    {
+        $html = bsUrl()->name('name')->labelAfter(false)->toHtml();
+        $this->assertStringContainsString(
+            '<label for="url-name">validation.attributes.name</label>',
+            $html
+        );
+        $this->assertStringContainsString(
+            'aria-label="validation.attributes.name"',
+            $html
+        );
+        $this->assertLessThan(
+            strrpos($html, '<input id="url-name"'),
+            strrpos($html, '<label for="url-name">validation.attributes.name</label>')
+        );
+    }
+
+    public function testLabelAfter()
+    {
+        $html = bsUrl()->name('name')->labelAfter(true)->toHtml();
+        $this->assertStringContainsString(
+            '<label for="url-name">validation.attributes.name</label>',
+            $html
+        );
+        $this->assertStringContainsString(
+            'aria-label="validation.attributes.name"',
+            $html
+        );
+        $this->assertGreaterThan(
+            strrpos($html, '<input id="url-name"'),
+            strrpos($html, '<label for="url-name">validation.attributes.name</label>')
+        );
+    }
+
     public function testSetPlaceholder()
     {
         $placeholder = 'test-custom-placeholder';

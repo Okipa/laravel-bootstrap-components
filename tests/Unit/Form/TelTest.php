@@ -243,6 +243,40 @@ class TelTest extends BootstrapComponentsTestCase
         );
     }
 
+    public function testLabelNotAfter()
+    {
+        $html = bsTel()->name('name')->labelAfter(false)->toHtml();
+        $this->assertStringContainsString(
+            '<label for="tel-name">validation.attributes.name</label>',
+            $html
+        );
+        $this->assertStringContainsString(
+            'aria-label="validation.attributes.name"',
+            $html
+        );
+        $this->assertLessThan(
+            strrpos($html, '<input id="tel-name"'),
+            strrpos($html, '<label for="tel-name">validation.attributes.name</label>')
+        );
+    }
+
+    public function testLabelAfter()
+    {
+        $html = bsTel()->name('name')->labelAfter(true)->toHtml();
+        $this->assertStringContainsString(
+            '<label for="tel-name">validation.attributes.name</label>',
+            $html
+        );
+        $this->assertStringContainsString(
+            'aria-label="validation.attributes.name"',
+            $html
+        );
+        $this->assertGreaterThan(
+            strrpos($html, '<input id="tel-name"'),
+            strrpos($html, '<label for="tel-name">validation.attributes.name</label>')
+        );
+    }
+
     public function testSetPlaceholder()
     {
         $placeholder = 'test-custom-placeholder';

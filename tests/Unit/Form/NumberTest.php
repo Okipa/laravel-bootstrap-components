@@ -246,6 +246,40 @@ class NumberTest extends BootstrapComponentsTestCase
         );
     }
 
+    public function testLabelNotAfter()
+    {
+        $html = bsNumber()->name('credit')->labelAfter(false)->toHtml();
+        $this->assertStringContainsString(
+            '<label for="number-name">validation.attributes.credit</label>',
+            $html
+        );
+        $this->assertStringContainsString(
+            'aria-label="validation.attributes.credit"',
+            $html
+        );
+        $this->assertLessThan(
+            strrpos($html, '<input id="number-credit"'),
+            strrpos($html, '<label for="number-credit">validation.attributes.credit</label>')
+        );
+    }
+
+    public function testLabelAfter()
+    {
+        $html = bsNumber()->name('credit')->labelAfter(true)->toHtml();
+        $this->assertStringContainsString(
+            '<label for="number-credit">validation.attributes.credit</label>',
+            $html
+        );
+        $this->assertStringContainsString(
+            'aria-label="validation.attributes.credit"',
+            $html
+        );
+        $this->assertGreaterThan(
+            strrpos($html, '<input id="number-credit"'),
+            strrpos($html, '<label for="number-credit">validation.attributes.credit</label>')
+        );
+    }
+
     public function testSetPlaceholder()
     {
         $placeholder = 'test-custom-placeholder';

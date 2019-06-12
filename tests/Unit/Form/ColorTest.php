@@ -242,6 +242,40 @@ class ColorTest extends BootstrapComponentsTestCase
         );
     }
 
+    public function testLabelNotAfter()
+    {
+        $html = bsColor()->name('name')->labelAfter(false)->toHtml();
+        $this->assertStringContainsString(
+            '<label for="color-name">validation.attributes.name</label>',
+            $html
+        );
+        $this->assertStringContainsString(
+            'aria-label="validation.attributes.name"',
+            $html
+        );
+        $this->assertLessThan(
+            strrpos($html, '<input id="color-name"'),
+            strrpos($html, '<label for="color-name">validation.attributes.name</label>')
+        );
+    }
+
+    public function testLabelAfter()
+    {
+        $html = bsColor()->name('name')->labelAfter(true)->toHtml();
+        $this->assertStringContainsString(
+            '<label for="color-name">validation.attributes.name</label>',
+            $html
+        );
+        $this->assertStringContainsString(
+            'aria-label="validation.attributes.name"',
+            $html
+        );
+        $this->assertGreaterThan(
+            strrpos($html, '<input id="color-name"'),
+            strrpos($html, '<label for="color-name">validation.attributes.name</label>')
+        );
+    }
+
     public function testSetPlaceholder()
     {
         $placeholder = 'test-custom-placeholder';

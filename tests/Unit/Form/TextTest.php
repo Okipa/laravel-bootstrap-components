@@ -254,8 +254,8 @@ class TextTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertLessThan(
-            strrpos($html, '<label for="text-name">validation.attributes.name</label>'),
-            strrpos($html, '<input id="text-name"')
+            strrpos($html, '<input id="text-name"'),
+            strrpos($html, '<label for="text-name">validation.attributes.name</label>')
         );
     }
 
@@ -271,8 +271,8 @@ class TextTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertGreaterThan(
-            strrpos($html, '<label for="text-name">validation.attributes.name</label>'),
-            strrpos($html, '<input id="text-name"')
+            strrpos($html, '<input id="text-name"'),
+            strrpos($html, '<label for="text-name">validation.attributes.name</label>')
         );
     }
 

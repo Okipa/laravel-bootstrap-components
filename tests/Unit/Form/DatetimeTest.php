@@ -309,6 +309,40 @@ class DatetimeTest extends BootstrapComponentsTestCase
         );
     }
 
+    public function testLabelNotAfter()
+    {
+        $html = bsDatetime()->name('name')->labelAfter(false)->toHtml();
+        $this->assertStringContainsString(
+            '<label for="date-name">validation.attributes.name</label>',
+            $html
+        );
+        $this->assertStringContainsString(
+            'aria-label="validation.attributes.name"',
+            $html
+        );
+        $this->assertLessThan(
+            strrpos($html, '<input id="date-name"'),
+            strrpos($html, '<label for="date-name">validation.attributes.name</label>')
+        );
+    }
+
+    public function testLabelAfter()
+    {
+        $html = bsDatetime()->name('name')->labelAfter(true)->toHtml();
+        $this->assertStringContainsString(
+            '<label for="date-name">validation.attributes.name</label>',
+            $html
+        );
+        $this->assertStringContainsString(
+            'aria-label="validation.attributes.name"',
+            $html
+        );
+        $this->assertGreaterThan(
+            strrpos($html, '<input id="date-name"'),
+            strrpos($html, '<label for="date-name">validation.attributes.name</label>')
+        );
+    }
+
     public function testSetPlaceholder()
     {
         $placeholder = 'test-custom-placeholder';

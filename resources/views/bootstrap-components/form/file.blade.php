@@ -24,8 +24,7 @@
                        aria-label="{{ $label }}"
                        aria-describedby="file-{{ Str::slug($name) }}">
                 @if(($value = old($name, $value)) || $placeholder)
-                    <label class="custom-file-label"
-                           for="{{ $componentId }}">@empty($value){{ $placeholder }}@else{{ $value }}@endempty</label>
+                    <label class="custom-file-label" for="{{ $componentId }}">@empty($value){{ $placeholder }}@else{{ $value }}@endempty</label>
                 @endif
             </div>
             @include('bootstrap-components::bootstrap-components.partials.append')
