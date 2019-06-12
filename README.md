@@ -162,6 +162,7 @@ bsText()->name('name') // set the input name
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
     ->displaySuccess(false) // // override the default form validation display success config value
     ->displayFailure(false) // // override the default form validation display failure config value
+    ->labelAfter(true) // put the label after the input
 ```
 
 #### bsNumber()
@@ -183,6 +184,7 @@ bsNumber()->name('amount') // set the input name
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
     ->displaySuccess(false) // // override the default form validation display success config value
     ->displayFailure(false) // // override the default form validation display failure config value
+    ->labelAfter(true) // put the label after the input
 ```
 
 #### bsTel()
@@ -204,6 +206,7 @@ bsTel()->name('phone_number') // set the input name
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
     ->displaySuccess(false) // // override the default form validation display success config value
     ->displayFailure(false) // // override the default form validation display failure config value
+    ->labelAfter(true) // put the label after the input
 ```
 
 #### bsDatetime()
@@ -226,6 +229,7 @@ bsDatetime()->name('published_at') // set the input name
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
     ->displaySuccess(false) // // override the default form validation display success config value
     ->displayFailure(false) // // override the default form validation display failure config value
+    ->labelAfter(true) // put the label after the input
 ```
 
 #### bsDate()
@@ -248,6 +252,7 @@ bsDate()->name('birthday') // set the input name
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
     ->displaySuccess(false) // // override the default form validation display success config value
     ->displayFailure(false) // // override the default form validation display failure config value
+    ->labelAfter(true) // put the label after the input
 ```
 
 #### bsTime()
@@ -270,6 +275,7 @@ bsTime()->name('opening') // set the input name
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
     ->displaySuccess(false) // // override the default form validation display success config value
     ->displayFailure(false) // // override the default form validation display failure config value
+    ->labelAfter(true) // put the label after the input
 ```
 
 #### bsUrl()
@@ -291,6 +297,7 @@ bsUrl()->name('facebook_page') // set the input name
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
     ->displaySuccess(false) // // override the default form validation display success config value
     ->displayFailure(false) // // override the default form validation display failure config value
+    ->labelAfter(true) // put the label after the input
 ```
 
 #### bsEmail()
@@ -312,6 +319,7 @@ bsEmail()->name('email') // set the input name
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
     ->displaySuccess(false) // // override the default form validation display success config value
     ->displayFailure(false) // // override the default form validation display failure config value
+    ->labelAfter(true) // put the label after the input
 ```
 
 #### bsColor()
@@ -321,7 +329,7 @@ bsColor()->name('color') // set the input name
     ->model($user) // value is automatically detected from the field name
     ->value('#ffffff') // or manually set the value
     ->label('Color') // override the default __('validation.attributes.[name]') label or set `false` to hide it
-    ->placeholder('Choose the color") // override the default placeholder (label) or set `false` to hide it
+    ->placeholder('Choose the color') // override the default placeholder (label) or set `false` to hide it
     ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config value or set `false` to hide it
     ->append('<i class="fas fa-hand-pointer"></i>') // override the default append config value or set `false` to hide it
     ->legend('Set your legend here.') // override the default legend config value or set `false` to hide it
@@ -333,6 +341,7 @@ bsColor()->name('color') // set the input name
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
     ->displaySuccess(false) // // override the default form validation display success config value
     ->displayFailure(false) // // override the default form validation display failure config value
+    ->labelAfter(true) // put the label after the input
 ```
 
 #### bsPassword()
@@ -354,6 +363,7 @@ bsPassword()->name('password') // set the input name
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
     ->displaySuccess(false) // // override the default form validation display success config value
     ->displayFailure(false) // // override the default form validation display failure config value
+    ->labelAfter(true) // put the label after the input
 ```
 
 #### bsFile()
@@ -379,6 +389,7 @@ bsFile()->name('avatar') // set the input name
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
     ->displaySuccess(false) // // override the default form validation display success config value
     ->displayFailure(false) // // override the default form validation display failure config value
+    ->labelAfter(true) // put the label after the input
 ```
 
 _Component additional methods :_
@@ -407,6 +418,7 @@ bsTextarea()->name('message') // set the input name
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
     ->displaySuccess(false) // // override the default form validation display success config value
     ->displayFailure(false) // // override the default form validation display failure config value
+    ->labelAfter(true) // put the label after the textarea
 ```
 
 #### bsCheckbox()
