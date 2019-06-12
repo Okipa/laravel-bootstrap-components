@@ -242,6 +242,40 @@ class TextTest extends BootstrapComponentsTestCase
         );
     }
 
+    public function testLabelNotAfter()
+    {
+        $html = bsText()->name('name')->labelAfter(false)->toHtml();
+        $this->assertStringContainsString(
+            '<label for="text-name">validation.attributes.name</label>',
+            $html
+        );
+        $this->assertStringContainsString(
+            'aria-label="validation.attributes.name"',
+            $html
+        );
+        $this->assertLessThan(
+            strrpos($html, '<label for="text-name">validation.attributes.name</label>'),
+            strrpos($html, '<input id="text-name"')
+        );
+    }
+
+    public function testLabelAfter()
+    {
+        $html = bsText()->name('name')->labelAfter(true)->toHtml();
+        $this->assertStringContainsString(
+            '<label for="text-name">validation.attributes.name</label>',
+            $html
+        );
+        $this->assertStringContainsString(
+            'aria-label="validation.attributes.name"',
+            $html
+        );
+        $this->assertGreaterThan(
+            strrpos($html, '<label for="text-name">validation.attributes.name</label>'),
+            strrpos($html, '<input id="text-name"')
+        );
+    }
+
     public function testSetPlaceholder()
     {
         $placeholder = 'test-custom-placeholder';

@@ -331,7 +331,7 @@ abstract class Input extends Component
      */
     protected function defaultLabelAfter(): bool
     {
-        return config('bootstrap-components.' . $this->configKey . '.label_after') ?? false;
+        return config('bootstrap-components.' . $this->configKey . '.labelAfter') ?? false;
     }
 
     /**
