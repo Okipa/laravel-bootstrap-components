@@ -4,3 +4,4 @@ vendor
 coverage
 tests/Support/temp
 tests/temp
+.phpunit.result.cache
