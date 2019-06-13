@@ -393,7 +393,7 @@ bsFile()->name('avatar') // set the input name
     ->displayFailure(false) // // override the default form validation display failure config value
 ```
 
-**:info: Additional methods :**
+**:mega: Additional methods :**
 
 | Signature | Required | Description |
 |---|---|---|
@@ -445,7 +445,7 @@ bsSelect()->name('skills') // set the input name
     ->displayFailure(false) // // override the default form validation display failure config value
 ```
 
-**:info: Additional methods :**
+**:mega: Additional methods :**
 
 | Signature | Required | Description |
 |---|---|---|
@@ -477,7 +477,7 @@ bsCheckbox()->name('active') // set the input name
     ->displayFailure(false) // // override the default form validation display failure config value
 ```
 
-**:info: Additional methods :**
+**:mega: Additional methods :**
 
 | Signature | Required | Description |
 |---|---|---|
@@ -507,7 +507,7 @@ bsToggle()->name('active') // set the input name
     ->displayFailure(false) // // override the default form validation display failure config value
 ```
 
-**:info: Additional methods :**
+**:mega: Additional methods :**
 
 | Signature | Required | Description |
 |---|---|---|
@@ -540,7 +540,7 @@ bsRadio()->name('gender') // set the input name
     ->displayFailure(false) // // override the default form validation display failure config value
 ```
 
-**:info: Additional methods :**
+**:mega: Additional methods :**
 
 | Signature | Required | Description |
 |---|---|---|
@@ -683,7 +683,7 @@ image()->src(https://yourapp.fr/public/media/image-thumb.jpg)
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
 ```
 
-**:info: Additional methods :**
+**:mega: Additional methods :**
 
 | Signature | Required | Description |
 |---|---|---|
@@ -720,7 +720,7 @@ audio()->src(https://yourapp.fr/public/media/video.avi)
     ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
 ```
 
-**:info: Additional methods :**
+**:mega: Additional methods :**
 
 | Signature | Required | Description |
 |---|---|---|
