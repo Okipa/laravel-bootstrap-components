@@ -13,12 +13,12 @@ class ImageTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('image', config('bootstrap-components.media')));
         // components.media.image
         $this->assertTrue(array_key_exists('view', config('bootstrap-components.media.image')));
-        $this->assertTrue(array_key_exists('class', config('bootstrap-components.media.image')));
+        $this->assertTrue(array_key_exists('classes', config('bootstrap-components.media.image')));
         $this->assertTrue(array_key_exists('htmlAttributes', config('bootstrap-components.media.image')));
-        // components.image.class
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.media.image.class')));
-        $this->assertTrue(array_key_exists('link', config('bootstrap-components.media.image.class')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.media.image.class')));
+        // components.image.classes
+        $this->assertTrue(array_key_exists('container', config('bootstrap-components.media.image.classes')));
+        $this->assertTrue(array_key_exists('link', config('bootstrap-components.media.image.classes')));
+        $this->assertTrue(array_key_exists('component', config('bootstrap-components.media.image.classes')));
         // components.image.htmlAttributes
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.media.image.htmlAttributes')));
         $this->assertTrue(array_key_exists('link', config('bootstrap-components.media.image.htmlAttributes')));
@@ -98,7 +98,7 @@ class ImageTest extends BootstrapComponentsTestCase
     public function testConfigContainerClasses()
     {
         $configContainerClasses = 'test-config-class-container';
-        config()->set('bootstrap-components.media.image.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.media.image.classes.container', [$configContainerClasses]);
         $html = image()->toHtml();
         $this->assertStringContainsString('class="image-container ' . $configContainerClasses . '"', $html);
     }
@@ -107,7 +107,7 @@ class ImageTest extends BootstrapComponentsTestCase
     {
         $configContainerClasses = 'test-config-class-container';
         $customContainerClasses = 'test-custom-class-container';
-        config()->set('bootstrap-components.input.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.input.classes.container', [$configContainerClasses]);
         $html = image()->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString('class="image-container ' . $customContainerClasses . '"', $html);
         $this->assertStringNotContainsString('class="image-container ' . $configContainerClasses . '"', $html);
@@ -116,7 +116,7 @@ class ImageTest extends BootstrapComponentsTestCase
     public function testConfigLinkClass()
     {
         $configLinkCLass = 'test-config-class-link';
-        config()->set('bootstrap-components.media.image.class.link', [$configLinkCLass]);
+        config()->set('bootstrap-components.media.image.classes.link', [$configLinkCLass]);
         $html = image()->toHtml();
         $this->assertStringContainsString('class="image-link ' . $configLinkCLass . '"', $html);
     }
@@ -125,7 +125,7 @@ class ImageTest extends BootstrapComponentsTestCase
     {
         $configLinkCLass = 'test-config-class-link';
         $customLinkCLass = 'test-custom-class-link';
-        config()->set('bootstrap-components.media.image.class.link', [$configLinkCLass]);
+        config()->set('bootstrap-components.media.image.classes.link', [$configLinkCLass]);
         $html = image()->linkClasses([$customLinkCLass])->toHtml();
         $this->assertStringContainsString('class="image-link ' . $customLinkCLass . '"', $html);
         $this->assertStringNotContainsString('class="image-link ' . $configLinkCLass . '"', $html);
@@ -173,7 +173,7 @@ class ImageTest extends BootstrapComponentsTestCase
     public function testConfigComponentClass()
     {
         $configComponentClasses = 'test-config-class-component';
-        config()->set('bootstrap-components.media.image.class.component', [$configComponentClasses]);
+        config()->set('bootstrap-components.media.image.classes.component', [$configComponentClasses]);
         $html = image()->toHtml();
         $this->assertStringContainsString('class="image-component ' . $configComponentClasses . '"', $html);
     }
@@ -182,7 +182,7 @@ class ImageTest extends BootstrapComponentsTestCase
     {
         $configComponentClasses = 'test-config-class-component';
         $customComponentClasses = 'test-custom-class-component';
-        config()->set('bootstrap-components.media.image.class.component', [$customComponentClasses]);
+        config()->set('bootstrap-components.media.image.classes.component', [$customComponentClasses]);
         $html = image()->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString('class="image-component ' . $customComponentClasses . '"', $html);
         $this->assertStringNotContainsString('class="image-component ' . $configComponentClasses . '"', $html);

@@ -21,11 +21,11 @@ class RadioTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('prepend', config('bootstrap-components.form.radio')));
         $this->assertTrue(array_key_exists('append', config('bootstrap-components.form.radio')));
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.radio')));
-        $this->assertTrue(array_key_exists('class', config('bootstrap-components.form.radio')));
+        $this->assertTrue(array_key_exists('classes', config('bootstrap-components.form.radio')));
         $this->assertTrue(array_key_exists('htmlAttributes', config('bootstrap-components.form.radio')));
-        // components.form.radio.class
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.radio.class')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.radio.class')));
+        // components.form.radio.classes
+        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.radio.classes')));
+        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.radio.classes')));
         // components.form.radio.htmlAttributes
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.radio.htmlAttributes')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.radio.htmlAttributes')));
@@ -393,7 +393,7 @@ class RadioTest extends BootstrapComponentsTestCase
     {
         $customValue = 'test-custom-value';
         $configContainerClasses = 'test-config-class-container';
-        config()->set('bootstrap-components.form.radio.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.form.radio.classes.container', [$configContainerClasses]);
         $html = bsRadio()->name('name')->value($customValue)->toHtml();
         $this->assertStringContainsString(
             'class="radio-name-container custom-control custom-radio ' . $configContainerClasses . '"',
@@ -406,7 +406,7 @@ class RadioTest extends BootstrapComponentsTestCase
         $customValue = 'test-custom-value';
         $configContainerClasses = 'test-config-class-container';
         $customContainerClasses = 'test-custom-class-container';
-        config()->set('bootstrap-components.form.radio.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.form.radio.classes.container', [$configContainerClasses]);
         $html = bsRadio()->name('name')->value($customValue)->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
             'class="radio-name-container custom-control custom-radio ' . $customContainerClasses . '"',
@@ -422,7 +422,7 @@ class RadioTest extends BootstrapComponentsTestCase
     {
         $customValue = 'test-custom-value';
         $configComponentClasses = 'test-config-class-component';
-        config()->set('bootstrap-components.form.radio.class.component', [$configComponentClasses]);
+        config()->set('bootstrap-components.form.radio.classes.component', [$configComponentClasses]);
         $html = bsRadio()->name('name')->value($customValue)->toHtml();
         $this->assertStringContainsString(
             'class="radio-name-component custom-control-input ' . $configComponentClasses . '"',
@@ -435,7 +435,7 @@ class RadioTest extends BootstrapComponentsTestCase
         $customValue = 'test-custom-value';
         $configComponentClasses = 'test-config-class-component';
         $customComponentClasses = 'test-custom-class-component';
-        config()->set('bootstrap-components.form.radio.class.component', [$customComponentClasses]);
+        config()->set('bootstrap-components.form.radio.classes.component', [$customComponentClasses]);
         $html = bsRadio()->name('name')->value($customValue)->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
             'class="radio-name-component custom-control-input ' . $customComponentClasses . '"',

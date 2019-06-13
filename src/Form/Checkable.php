@@ -14,7 +14,7 @@ abstract class Checkable extends Input
     protected $checked;
 
     /**
-     * Set the input label.
+     * Set the checkable component check status.
      *
      * @param bool $checked
      *

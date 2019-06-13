@@ -21,11 +21,11 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('prepend', config('bootstrap-components.form.checkbox')));
         $this->assertTrue(array_key_exists('append', config('bootstrap-components.form.checkbox')));
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.checkbox')));
-        $this->assertTrue(array_key_exists('class', config('bootstrap-components.form.checkbox')));
+        $this->assertTrue(array_key_exists('classes', config('bootstrap-components.form.checkbox')));
         $this->assertTrue(array_key_exists('htmlAttributes', config('bootstrap-components.form.checkbox')));
-        // components.form.checkbox.class
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.checkbox.class')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.checkbox.class')));
+        // components.form.checkbox.classes
+        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.checkbox.classes')));
+        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.checkbox.classes')));
         // components.form.checkbox.htmlAttributes
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.checkbox.htmlAttributes')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.checkbox.htmlAttributes')));
@@ -383,7 +383,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
     public function testConfigContainerClasses()
     {
         $configContainerClasses = 'test-config-class-container';
-        config()->set('bootstrap-components.form.checkbox.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.form.checkbox.classes.container', [$configContainerClasses]);
         $html = bsCheckbox()->name('active')->toHtml();
         $this->assertStringContainsString(
             'class="checkbox-active-container custom-control custom-checkbox ' . $configContainerClasses . '"',
@@ -395,7 +395,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
     {
         $configContainerClasses = 'test-config-class-container';
         $customContainerClasses = 'test-custom-class-container';
-        config()->set('bootstrap-components.form.checkbox.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.form.checkbox.classes.container', [$configContainerClasses]);
         $html = bsCheckbox()->name('active')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
             'class="checkbox-active-container custom-control custom-checkbox ' . $customContainerClasses . '"',
@@ -410,7 +410,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
     public function testConfigComponentClass()
     {
         $configComponentClasses = 'test-config-class-component';
-        config()->set('bootstrap-components.form.checkbox.class.component', [$configComponentClasses]);
+        config()->set('bootstrap-components.form.checkbox.classes.component', [$configComponentClasses]);
         $html = bsCheckbox()->name('active')->toHtml();
         $this->assertStringContainsString(
             'class="checkbox-active-component custom-control-input ' . $configComponentClasses . '"',
@@ -422,7 +422,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
     {
         $configComponentClasses = 'test-config-class-component';
         $customComponentClasses = 'test-custom-class-component';
-        config()->set('bootstrap-components.form.checkbox.class.component', [$customComponentClasses]);
+        config()->set('bootstrap-components.form.checkbox.classes.component', [$customComponentClasses]);
         $html = bsCheckbox()->name('active')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
             'class="checkbox-active-component custom-control-input ' . $customComponentClasses . '"',

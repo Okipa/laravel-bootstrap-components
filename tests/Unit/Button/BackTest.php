@@ -19,11 +19,11 @@ class BackTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('prepend', config('bootstrap-components.button.back')));
         $this->assertTrue(array_key_exists('append', config('bootstrap-components.button.back')));
         $this->assertTrue(array_key_exists('label', config('bootstrap-components.button.back')));
-        $this->assertTrue(array_key_exists('class', config('bootstrap-components.button.back')));
+        $this->assertTrue(array_key_exists('classes', config('bootstrap-components.button.back')));
         $this->assertTrue(array_key_exists('htmlAttributes', config('bootstrap-components.button.back')));
-        // components.back.class
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.button.back.class')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.button.back.class')));
+        // components.back.classes
+        $this->assertTrue(array_key_exists('container', config('bootstrap-components.button.back.classes')));
+        $this->assertTrue(array_key_exists('component', config('bootstrap-components.button.back.classes')));
         // components.back.htmlAttributes
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.button.back.htmlAttributes')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.button.back.htmlAttributes')));
@@ -215,7 +215,7 @@ class BackTest extends BootstrapComponentsTestCase
     public function testConfigContainerClasses()
     {
         $configContainerClasses = 'test-config-class-container';
-        config()->set('bootstrap-components.button.back.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.button.back.classes.container', [$configContainerClasses]);
         $html = bsBack()->toHtml();
         $this->assertStringContainsString('class="button-container ' . $configContainerClasses . '">', $html);
     }
@@ -224,7 +224,7 @@ class BackTest extends BootstrapComponentsTestCase
     {
         $configContainerClasses = 'test-config-class-container';
         $customContainerClasses = 'test-custom-class-container';
-        config()->set('bootstrap-components.input.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.input.classes.container', [$configContainerClasses]);
         $html = bsBack()->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString('class="button-container ' . $customContainerClasses . '">', $html);
         $this->assertStringNotContainsString('class="button-container ' . $configContainerClasses . '">', $html);
@@ -233,7 +233,7 @@ class BackTest extends BootstrapComponentsTestCase
     public function testConfigComponentClass()
     {
         $configComponentClasses = 'test-config-class-component';
-        config()->set('bootstrap-components.button.back.class.component', [$configComponentClasses]);
+        config()->set('bootstrap-components.button.back.classes.component', [$configComponentClasses]);
         $html = bsBack()->toHtml();
         $this->assertStringContainsString('class="button-component ' . $configComponentClasses . '"', $html);
     }
@@ -242,7 +242,7 @@ class BackTest extends BootstrapComponentsTestCase
     {
         $configComponentClasses = 'test-config-class-component';
         $customComponentClasses = 'test-custom-class-component';
-        config()->set('bootstrap-components.button.back.class.component', [$customComponentClasses]);
+        config()->set('bootstrap-components.button.back.classes.component', [$customComponentClasses]);
         $html = bsBack()->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString('class="button-component ' . $customComponentClasses . '"', $html);
         $this->assertStringNotContainsString('class="button-component ' . $configComponentClasses . '"', $html);

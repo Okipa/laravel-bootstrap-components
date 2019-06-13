@@ -23,12 +23,13 @@ class SelectTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('view', config('bootstrap-components.form.select')));
         $this->assertTrue(array_key_exists('prepend', config('bootstrap-components.form.select')));
         $this->assertTrue(array_key_exists('append', config('bootstrap-components.form.select')));
+        $this->assertTrue(array_key_exists('labelPositionedAbove', config('bootstrap-components.form.select')));
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.select')));
-        $this->assertTrue(array_key_exists('class', config('bootstrap-components.form.select')));
+        $this->assertTrue(array_key_exists('classes', config('bootstrap-components.form.select')));
         $this->assertTrue(array_key_exists('htmlAttributes', config('bootstrap-components.form.select')));
-        // components.form.select.class
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.select.class')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.select.class')));
+        // components.form.select.classes
+        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.select.classes')));
+        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.select.classes')));
         // components.form.select.htmlAttributes
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.select.htmlAttributes')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.select.htmlAttributes')));
@@ -621,6 +622,42 @@ class SelectTest extends BootstrapComponentsTestCase
         );
     }
 
+    public function testConfigLabelPositionedAbove()
+    {
+        config()->set('bootstrap-components.form.select.labelPositionedAbove', true);
+        $html = bsSelect()->name('name')->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<select');
+        $this->assertLessThan($inputPosition, $labelPosition);
+    }
+
+    public function testConfigLabelPositionedUnder()
+    {
+        config()->set('bootstrap-components.form.select.labelPositionedAbove', false);
+        $html = bsSelect()->name('name')->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<select');
+        $this->assertLessThan($labelPosition, $inputPosition);
+    }
+
+    public function testLabelPositionedAbove()
+    {
+        config()->set('bootstrap-components.form.select.labelPositionedAbove', false);
+        $html = bsSelect()->name('name')->labelPositionedAbove()->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<select');
+        $this->assertLessThan($inputPosition, $labelPosition);
+    }
+
+    public function testLabelPositionedUnder()
+    {
+        config()->set('bootstrap-components.form.select.labelPositionedAbove', true);
+        $html = bsSelect()->name('name')->labelPositionedAbove(false)->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<select');
+        $this->assertLessThan($labelPosition, $inputPosition);
+    }
+
     public function testSetPlaceholder()
     {
         $placeholder = 'test-custom-placeholder';
@@ -788,7 +825,7 @@ class SelectTest extends BootstrapComponentsTestCase
     public function testConfigContainerClasses()
     {
         $configContainerClasses = 'test-config-class-container';
-        config()->set('bootstrap-components.form.select.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.form.select.classes.container', [$configContainerClasses]);
         $html = bsSelect()->name('name')->toHtml();
         $this->assertStringContainsString(
             'class="select-name-container ' . $configContainerClasses . '"',
@@ -800,7 +837,7 @@ class SelectTest extends BootstrapComponentsTestCase
     {
         $configContainerClasses = 'test-config-class-container';
         $customContainerClasses = 'test-custom-class-container';
-        config()->set('bootstrap-components.form.select.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.form.select.classes.container', [$configContainerClasses]);
         $html = bsSelect()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
             'class="select-name-container ' . $customContainerClasses . '"',
@@ -815,7 +852,7 @@ class SelectTest extends BootstrapComponentsTestCase
     public function testConfigComponentClass()
     {
         $configComponentClasses = 'test-config-class-component';
-        config()->set('bootstrap-components.form.select.class.component', [$configComponentClasses]);
+        config()->set('bootstrap-components.form.select.classes.component', [$configComponentClasses]);
         $html = bsSelect()->name('name')->toHtml();
         $this->assertStringContainsString(
             'class="select-name-component custom-select ' . $configComponentClasses . '"',
@@ -827,7 +864,7 @@ class SelectTest extends BootstrapComponentsTestCase
     {
         $configComponentClasses = 'test-config-class-component';
         $customComponentClasses = 'test-custom-class-component';
-        config()->set('bootstrap-components.form.select.class.component', [$customComponentClasses]);
+        config()->set('bootstrap-components.form.select.classes.component', [$customComponentClasses]);
         $html = bsSelect()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
             'class="select-name-component custom-select ' . $customComponentClasses . '"',

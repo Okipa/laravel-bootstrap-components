@@ -18,7 +18,7 @@ class Video extends Media
     protected $poster;
 
     /**
-     * Set the video poster.
+     * Set the video component poster.
      *
      * @param string $poster
      *

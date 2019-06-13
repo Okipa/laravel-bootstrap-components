@@ -20,12 +20,13 @@ class PasswordTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('view', config('bootstrap-components.form.password')));
         $this->assertTrue(array_key_exists('prepend', config('bootstrap-components.form.password')));
         $this->assertTrue(array_key_exists('append', config('bootstrap-components.form.password')));
+        $this->assertTrue(array_key_exists('labelPositionedAbove', config('bootstrap-components.form.password')));
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.password')));
-        $this->assertTrue(array_key_exists('class', config('bootstrap-components.form.password')));
+        $this->assertTrue(array_key_exists('classes', config('bootstrap-components.form.password')));
         $this->assertTrue(array_key_exists('htmlAttributes', config('bootstrap-components.form.password')));
-        // components.form.password.class
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.password.class')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.password.class')));
+        // components.form.password.classes
+        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.password.classes')));
+        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.password.classes')));
         // components.form.password.htmlAttributes
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.password.htmlAttributes')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.password.htmlAttributes')));
@@ -242,6 +243,42 @@ class PasswordTest extends BootstrapComponentsTestCase
         );
     }
 
+    public function testConfigLabelPositionedAbove()
+    {
+        config()->set('bootstrap-components.form.password.labelPositionedAbove', true);
+        $html = bsPassword()->name('name')->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<input');
+        $this->assertLessThan($inputPosition, $labelPosition);
+    }
+
+    public function testConfigLabelPositionedUnder()
+    {
+        config()->set('bootstrap-components.form.password.labelPositionedAbove', false);
+        $html = bsPassword()->name('name')->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<input');
+        $this->assertLessThan($labelPosition, $inputPosition);
+    }
+
+    public function testLabelPositionedAbove()
+    {
+        config()->set('bootstrap-components.form.password.labelPositionedAbove', false);
+        $html = bsPassword()->name('name')->labelPositionedAbove()->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<input');
+        $this->assertLessThan($inputPosition, $labelPosition);
+    }
+
+    public function testLabelPositionedUnder()
+    {
+        config()->set('bootstrap-components.form.password.labelPositionedAbove', true);
+        $html = bsPassword()->name('name')->labelPositionedAbove(false)->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<input');
+        $this->assertLessThan($labelPosition, $inputPosition);
+    }
+
     public function testSetPlaceholder()
     {
         $placeholder = 'test-custom-placeholder';
@@ -394,7 +431,7 @@ class PasswordTest extends BootstrapComponentsTestCase
     public function testConfigContainerClasses()
     {
         $configContainerClasses = 'test-config-class-container';
-        config()->set('bootstrap-components.form.password.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.form.password.classes.container', [$configContainerClasses]);
         $html = bsPassword()->name('name')->toHtml();
         $this->assertStringContainsString(
             'class="password-name-container ' . $configContainerClasses . '"',
@@ -406,7 +443,7 @@ class PasswordTest extends BootstrapComponentsTestCase
     {
         $configContainerClasses = 'test-config-class-container';
         $customContainerClasses = 'test-custom-class-container';
-        config()->set('bootstrap-components.form.password.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.form.password.classes.container', [$configContainerClasses]);
         $html = bsPassword()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
             'class="password-name-container ' . $customContainerClasses . '"',
@@ -421,7 +458,7 @@ class PasswordTest extends BootstrapComponentsTestCase
     public function testConfigComponentClass()
     {
         $configComponentClasses = 'test-config-class-component';
-        config()->set('bootstrap-components.form.password.class.component', [$configComponentClasses]);
+        config()->set('bootstrap-components.form.password.classes.component', [$configComponentClasses]);
         $html = bsPassword()->name('name')->toHtml();
         $this->assertStringContainsString(
             'class="form-control password-name-component ' . $configComponentClasses . '"',
@@ -433,7 +470,7 @@ class PasswordTest extends BootstrapComponentsTestCase
     {
         $configComponentClasses = 'test-config-class-component';
         $customComponentClasses = 'test-custom-class-component';
-        config()->set('bootstrap-components.form.password.class.component', [$customComponentClasses]);
+        config()->set('bootstrap-components.form.password.classes.component', [$customComponentClasses]);
         $html = bsPassword()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
             'class="form-control password-name-component ' . $customComponentClasses . '"',

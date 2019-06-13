@@ -14,11 +14,11 @@ class VideoTest extends BootstrapComponentsTestCase
         // components.media.video
         $this->assertTrue(array_key_exists('view', config('bootstrap-components.media.video')));
         $this->assertTrue(array_key_exists('poster', config('bootstrap-components.media.video')));
-        $this->assertTrue(array_key_exists('class', config('bootstrap-components.media.video')));
+        $this->assertTrue(array_key_exists('classes', config('bootstrap-components.media.video')));
         $this->assertTrue(array_key_exists('htmlAttributes', config('bootstrap-components.media.video')));
-        // components.video.class
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.media.video.class')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.media.video.class')));
+        // components.video.classes
+        $this->assertTrue(array_key_exists('container', config('bootstrap-components.media.video.classes')));
+        $this->assertTrue(array_key_exists('component', config('bootstrap-components.media.video.classes')));
         // components.video.htmlAttributes
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.media.video.htmlAttributes')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.media.video.htmlAttributes')));
@@ -95,7 +95,7 @@ class VideoTest extends BootstrapComponentsTestCase
     public function testConfigContainerClasses()
     {
         $configContainerClasses = 'test-config-class-container';
-        config()->set('bootstrap-components.media.video.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.media.video.classes.container', [$configContainerClasses]);
         $html = video()->toHtml();
         $this->assertStringContainsString('class="video-container ' . $configContainerClasses . '"', $html);
     }
@@ -104,7 +104,7 @@ class VideoTest extends BootstrapComponentsTestCase
     {
         $configContainerClasses = 'test-config-class-container';
         $customContainerClasses = 'test-custom-class-container';
-        config()->set('bootstrap-components.input.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.input.classes.container', [$configContainerClasses]);
         $html = video()->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString('class="video-container ' . $customContainerClasses . '"', $html);
         $this->assertStringNotContainsString('class="video-container ' . $configContainerClasses . '"', $html);
@@ -113,7 +113,7 @@ class VideoTest extends BootstrapComponentsTestCase
     public function testConfigComponentClass()
     {
         $configComponentClasses = 'test-config-class-component';
-        config()->set('bootstrap-components.media.video.class.component', [$configComponentClasses]);
+        config()->set('bootstrap-components.media.video.classes.component', [$configComponentClasses]);
         $html = video()->toHtml();
         $this->assertStringContainsString('class="video-component ' . $configComponentClasses . '"', $html);
     }
@@ -122,7 +122,7 @@ class VideoTest extends BootstrapComponentsTestCase
     {
         $configComponentClasses = 'test-config-class-component';
         $customComponentClasses = 'test-custom-class-component';
-        config()->set('bootstrap-components.media.video.class.component', [$customComponentClasses]);
+        config()->set('bootstrap-components.media.video.classes.component', [$customComponentClasses]);
         $html = video()->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString('class="video-component ' . $customComponentClasses . '"', $html);
         $this->assertStringNotContainsString('class="video-component ' . $configComponentClasses . '"', $html);

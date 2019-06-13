@@ -20,12 +20,13 @@ class EmailTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('view', config('bootstrap-components.form.email')));
         $this->assertTrue(array_key_exists('prepend', config('bootstrap-components.form.email')));
         $this->assertTrue(array_key_exists('append', config('bootstrap-components.form.email')));
+        $this->assertTrue(array_key_exists('labelPositionedAbove', config('bootstrap-components.form.email')));
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.email')));
-        $this->assertTrue(array_key_exists('class', config('bootstrap-components.form.email')));
+        $this->assertTrue(array_key_exists('classes', config('bootstrap-components.form.email')));
         $this->assertTrue(array_key_exists('htmlAttributes', config('bootstrap-components.form.email')));
-        // components.form.email.class
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.email.class')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.email.class')));
+        // components.form.email.classes
+        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.email.classes')));
+        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.email.classes')));
         // components.form.email.htmlAttributes
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.email.htmlAttributes')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.email.htmlAttributes')));
@@ -239,6 +240,42 @@ class EmailTest extends BootstrapComponentsTestCase
         );
     }
 
+    public function testConfigLabelPositionedAbove()
+    {
+        config()->set('bootstrap-components.form.email.labelPositionedAbove', true);
+        $html = bsEmail()->name('name')->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<input');
+        $this->assertLessThan($inputPosition, $labelPosition);
+    }
+
+    public function testConfigLabelPositionedUnder()
+    {
+        config()->set('bootstrap-components.form.email.labelPositionedAbove', false);
+        $html = bsEmail()->name('name')->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<input');
+        $this->assertLessThan($labelPosition, $inputPosition);
+    }
+
+    public function testLabelPositionedAbove()
+    {
+        config()->set('bootstrap-components.form.email.labelPositionedAbove', false);
+        $html = bsEmail()->name('name')->labelPositionedAbove()->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<input');
+        $this->assertLessThan($inputPosition, $labelPosition);
+    }
+
+    public function testLabelPositionedUnder()
+    {
+        config()->set('bootstrap-components.form.email.labelPositionedAbove', true);
+        $html = bsEmail()->name('name')->labelPositionedAbove(false)->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<input');
+        $this->assertLessThan($labelPosition, $inputPosition);
+    }
+
     public function testSetPlaceholder()
     {
         $placeholder = 'test-custom-placeholder';
@@ -391,7 +428,7 @@ class EmailTest extends BootstrapComponentsTestCase
     public function testConfigContainerClasses()
     {
         $configContainerClasses = 'test-config-class-container';
-        config()->set('bootstrap-components.form.email.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.form.email.classes.container', [$configContainerClasses]);
         $html = bsEmail()->name('name')->toHtml();
         $this->assertStringContainsString('class="email-name-container ' . $configContainerClasses . '"', $html);
     }
@@ -400,7 +437,7 @@ class EmailTest extends BootstrapComponentsTestCase
     {
         $configContainerClasses = 'test-config-class-container';
         $customContainerClasses = 'test-custom-class-container';
-        config()->set('bootstrap-components.form.email.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.form.email.classes.container', [$configContainerClasses]);
         $html = bsEmail()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
             'class="email-name-container ' . $customContainerClasses . '"',
@@ -415,7 +452,7 @@ class EmailTest extends BootstrapComponentsTestCase
     public function testConfigComponentClass()
     {
         $configComponentClasses = 'test-config-class-component';
-        config()->set('bootstrap-components.form.email.class.component', [$configComponentClasses]);
+        config()->set('bootstrap-components.form.email.classes.component', [$configComponentClasses]);
         $html = bsEmail()->name('name')->toHtml();
         $this->assertStringContainsString(
             'class="form-control email-name-component ' . $configComponentClasses . '"',
@@ -427,7 +464,7 @@ class EmailTest extends BootstrapComponentsTestCase
     {
         $configComponentClasses = 'test-config-class-component';
         $customComponentClasses = 'test-custom-class-component';
-        config()->set('bootstrap-components.form.email.class.component', [$customComponentClasses]);
+        config()->set('bootstrap-components.form.email.classes.component', [$customComponentClasses]);
         $html = bsEmail()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
             'class="form-control email-name-component ' . $customComponentClasses . '"',
