@@ -29,7 +29,7 @@ class Radio extends Input
     protected $checked;
 
     /**
-     * Set the input label.
+     * Set the radio checked status.
      *
      * @param bool $checked
      *

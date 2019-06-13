@@ -54,7 +54,7 @@ class Image extends Media
     protected $linkHtmlAttributes;
 
     /**
-     * Set the image link id.
+     * Set the image component link id.
      *
      * @param string $linkId
      *
@@ -68,7 +68,7 @@ class Image extends Media
     }
 
     /**
-     * Wrap the image in a link and set its url.
+     * Wrap the component image html tag in a link and set its url.
      *
      * @param string $linkUrl
      *
@@ -82,7 +82,7 @@ class Image extends Media
     }
 
     /**
-     * Set the image alt.
+     * Define the image component alt html tag.
      *
      * @param string $alt
      *
@@ -96,7 +96,7 @@ class Image extends Media
     }
 
     /**
-     * Set the image width.
+     * Define the component image html tag width.
      *
      * @param int $width
      *
@@ -110,7 +110,7 @@ class Image extends Media
     }
 
     /**
-     * Set the image height.
+     * Define the component image html tag height.
      *
      * @param int $height
      *
@@ -124,7 +124,7 @@ class Image extends Media
     }
 
     /**
-     * Set the image link class tag.
+     * Set the image component link classes.
      *
      * @param array $linkClasses
      *
@@ -138,7 +138,7 @@ class Image extends Media
     }
 
     /**
-     * Set the component html attributes.
+     * Set the image component link html attributes.
      *
      * @param array $linkHtmlAttributes
      *
@@ -188,7 +188,7 @@ class Image extends Media
      */
     protected function defaultLinkClasses(): array
     {
-        $linkClasses = config('bootstrap-components.' . $this->configKey . '.class.link');
+        $linkClasses = config('bootstrap-components.' . $this->configKey . '.classes.link');
 
         return $linkClasses ? $linkClasses : [];
     }

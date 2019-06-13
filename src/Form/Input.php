@@ -59,6 +59,12 @@ abstract class Input extends Component
      */
     protected $label;
     /**
+     * The component label above-positioning status.
+     *
+     * @property boolean $labelPositionedAbove
+     */
+    protected $labelPositionedAbove;
+    /**
      * The component input value.
      *
      * @property string $value
@@ -98,7 +104,7 @@ abstract class Input extends Component
     }
 
     /**
-     * Set the component input name.
+     * Set the component input name tag.
      *
      * @param string $name
      *
@@ -112,7 +118,7 @@ abstract class Input extends Component
     }
 
     /**
-     * Prepend html to the component.
+     * Prepend html to the component input group.
      *
      * @param string|null $html
      *
@@ -126,7 +132,7 @@ abstract class Input extends Component
     }
 
     /**
-     * Append html to the component.
+     * Append html to the component input group.
      *
      * @param string|null $html
      *
@@ -182,7 +188,7 @@ abstract class Input extends Component
     }
 
     /**
-     * Set the component label.
+     * Set the component input label.
      *
      * @param string|null $label
      *
@@ -196,7 +202,22 @@ abstract class Input extends Component
     }
 
     /**
-     * Set the component form validation success display status.
+     * Set the label above-positioning status.
+     * If not positioned above, the label will be positioned under the input.
+     *
+     * @param bool $positionedAbove
+     *
+     * @return \Okipa\LaravelBootstrapComponents\Form\Input
+     */
+    public function labelPositionedAbove(bool $positionedAbove = true): Input
+    {
+        $this->labelPositionedAbove = $positionedAbove;
+
+        return $this;
+    }
+
+    /**
+     * Set the component input validation success display status.
      *
      * @param bool $displaySuccess
      *
@@ -210,7 +231,7 @@ abstract class Input extends Component
     }
 
     /**
-     * Set the component form validation failure display status.
+     * Set the component input validation failure display status.
      *
      * @param bool $displayFailure
      *
@@ -241,34 +262,19 @@ abstract class Input extends Component
     protected function defineValues(): array
     {
         return [
-            'model'          => $this->model,
-            'type'           => $this->type,
-            'name'           => $this->name,
-            'prepend'        => $this->prepend ?? $this->defaultPrepend(),
-            'append'         => $this->append ?? $this->defaultAppend(),
-            'legend'         => __($this->legend) ?? $this->defaultLegend(),
-            'label'          => $this->label ?? $this->defaultLabel(),
-            'value'          => $this->defineValue(),
-            'placeholder'    => $this->placeholder ?? ($this->label ?: $this->defaultLabel()),
-            'displaySuccess' => $this->displaySuccess ?? $this->defaultDisplaySuccess(),
-            'displayFailure' => $this->displayFailure ?? $this->defaultDisplayFailure(),
+            'model'                => $this->model,
+            'type'                 => $this->type,
+            'name'                 => $this->name,
+            'prepend'              => $this->prepend ?? $this->defaultPrepend(),
+            'append'               => $this->append ?? $this->defaultAppend(),
+            'legend'               => __($this->legend) ?? $this->defaultLegend(),
+            'label'                => $this->label ?? $this->defaultLabel(),
+            'labelPositionedAbove' => $this->labelPositionedAbove ?? $this->defaultLabelPositionedAbove(),
+            'value'                => $this->defineValue(),
+            'placeholder'          => $this->placeholder ?? ($this->label ?: $this->defaultLabel()),
+            'displaySuccess'       => $this->displaySuccess ?? $this->defaultDisplaySuccess(),
+            'displayFailure'       => $this->displayFailure ?? $this->defaultDisplayFailure(),
         ];
-    }
-
-    /**
-     * @return bool
-     */
-    protected function defaultDisplaySuccess(): bool
-    {
-        return config('bootstrap-components.' . $this->configKey . '.formValidation.displaySuccess');
-    }
-
-    /**
-     * @return bool
-     */
-    protected function defaultDisplayFailure(): bool
-    {
-        return config('bootstrap-components.' . $this->configKey . '.formValidation.displayFailure');
     }
 
     /**
@@ -306,11 +312,35 @@ abstract class Input extends Component
     }
 
     /**
+     * @return bool
+     */
+    protected function defaultLabelPositionedAbove(): bool
+    {
+        return config('bootstrap-components.' . $this->configKey . '.labelPositionedAbove') ?? true;
+    }
+
+    /**
      * @return mixed
      */
     protected function defineValue()
     {
         return isset($this->value) ? $this->value : ($this->model ? $this->model->{$this->name} : null);
+    }
+
+    /**
+     * @return bool
+     */
+    protected function defaultDisplaySuccess(): bool
+    {
+        return config('bootstrap-components.' . $this->configKey . '.formValidation.displaySuccess');
+    }
+
+    /**
+     * @return bool
+     */
+    protected function defaultDisplayFailure(): bool
+    {
+        return config('bootstrap-components.' . $this->configKey . '.formValidation.displayFailure');
     }
 
     /**

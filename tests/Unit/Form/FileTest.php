@@ -21,12 +21,13 @@ class FileTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('prepend', config('bootstrap-components.form.file')));
         $this->assertTrue(array_key_exists('append', config('bootstrap-components.form.file')));
         $this->assertTrue(array_key_exists('show_remove_checkbox', config('bootstrap-components.form.file')));
+        $this->assertTrue(array_key_exists('labelPositionedAbove', config('bootstrap-components.form.file')));
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.file')));
-        $this->assertTrue(array_key_exists('class', config('bootstrap-components.form.file')));
+        $this->assertTrue(array_key_exists('classes', config('bootstrap-components.form.file')));
         $this->assertTrue(array_key_exists('htmlAttributes', config('bootstrap-components.form.file')));
-        // components.form.file.class
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.file.class')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.file.class')));
+        // components.form.file.classes
+        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.file.classes')));
+        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.file.classes')));
         // components.form.file.htmlAttributes
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.file.htmlAttributes')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.file.htmlAttributes')));
@@ -248,6 +249,42 @@ class FileTest extends BootstrapComponentsTestCase
         );
     }
 
+    public function testConfigLabelPositionedAbove()
+    {
+        config()->set('bootstrap-components.form.file.labelPositionedAbove', true);
+        $html = bsFile()->name('name')->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<input');
+        $this->assertLessThan($inputPosition, $labelPosition);
+    }
+
+    public function testConfigLabelPositionedUnder()
+    {
+        config()->set('bootstrap-components.form.file.labelPositionedAbove', false);
+        $html = bsFile()->name('name')->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<input');
+        $this->assertLessThan($labelPosition, $inputPosition);
+    }
+
+    public function testLabelPositionedAbove()
+    {
+        config()->set('bootstrap-components.form.file.labelPositionedAbove', false);
+        $html = bsFile()->name('name')->labelPositionedAbove()->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<input');
+        $this->assertLessThan($inputPosition, $labelPosition);
+    }
+
+    public function testLabelPositionedUnder()
+    {
+        config()->set('bootstrap-components.form.file.labelPositionedAbove', true);
+        $html = bsFile()->name('name')->labelPositionedAbove(false)->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<input');
+        $this->assertLessThan($labelPosition, $inputPosition);
+    }
+
     public function testSetPlaceholder()
     {
         $placeholder = 'test-custom-placeholder';
@@ -383,7 +420,7 @@ class FileTest extends BootstrapComponentsTestCase
     public function testConfigContainerClasses()
     {
         $configContainerClasses = 'test-config-class-container';
-        config()->set('bootstrap-components.form.file.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.form.file.classes.container', [$configContainerClasses]);
         $html = bsFile()->name('name')->toHtml();
         $this->assertStringContainsString('class="file-name-container ' . $configContainerClasses . '"', $html);
     }
@@ -392,7 +429,7 @@ class FileTest extends BootstrapComponentsTestCase
     {
         $configContainerClasses = 'test-config-class-container';
         $customContainerClasses = 'test-custom-class-container';
-        config()->set('bootstrap-components.form.file.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.form.file.classes.container', [$configContainerClasses]);
         $html = bsFile()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
             'class="file-name-container ' . $customContainerClasses . '"',
@@ -435,7 +472,7 @@ class FileTest extends BootstrapComponentsTestCase
     public function testConfigComponentClass()
     {
         $configComponentClasses = 'test-config-class-component';
-        config()->set('bootstrap-components.form.file.class.component', [$configComponentClasses]);
+        config()->set('bootstrap-components.form.file.classes.component', [$configComponentClasses]);
         $html = bsFile()->name('name')->toHtml();
         $this->assertStringContainsString(
             'class="custom-file-input form-control file-name-component ' . $configComponentClasses . '"',
@@ -447,7 +484,7 @@ class FileTest extends BootstrapComponentsTestCase
     {
         $configComponentClasses = 'test-config-class-component';
         $customComponentClasses = 'test-custom-class-component';
-        config()->set('bootstrap-components.form.file.class.component', [$customComponentClasses]);
+        config()->set('bootstrap-components.form.file.classes.component', [$customComponentClasses]);
         $html = bsFile()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
             'class="custom-file-input form-control file-name-component ' . $customComponentClasses . '"',

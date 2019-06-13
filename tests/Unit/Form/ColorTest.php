@@ -20,12 +20,13 @@ class ColorTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('view', config('bootstrap-components.form.color')));
         $this->assertTrue(array_key_exists('prepend', config('bootstrap-components.form.color')));
         $this->assertTrue(array_key_exists('append', config('bootstrap-components.form.color')));
+        $this->assertTrue(array_key_exists('labelPositionedAbove', config('bootstrap-components.form.color')));
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.color')));
-        $this->assertTrue(array_key_exists('class', config('bootstrap-components.form.color')));
+        $this->assertTrue(array_key_exists('classes', config('bootstrap-components.form.color')));
         $this->assertTrue(array_key_exists('htmlAttributes', config('bootstrap-components.form.color')));
-        // components.form.color.class
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.color.class')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.color.class')));
+        // components.form.color.classes
+        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.color.classes')));
+        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.color.classes')));
         // components.form.color.htmlAttributes
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.color.htmlAttributes')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.color.htmlAttributes')));
@@ -242,6 +243,42 @@ class ColorTest extends BootstrapComponentsTestCase
         );
     }
 
+    public function testConfigLabelPositionedAbove()
+    {
+        config()->set('bootstrap-components.form.color.labelPositionedAbove', true);
+        $html = bsColor()->name('name')->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<input');
+        $this->assertLessThan($inputPosition, $labelPosition);
+    }
+
+    public function testConfigLabelPositionedUnder()
+    {
+        config()->set('bootstrap-components.form.color.labelPositionedAbove', false);
+        $html = bsColor()->name('name')->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<input');
+        $this->assertLessThan($labelPosition, $inputPosition);
+    }
+
+    public function testLabelPositionedAbove()
+    {
+        config()->set('bootstrap-components.form.color.labelPositionedAbove', false);
+        $html = bsColor()->name('name')->labelPositionedAbove()->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<input');
+        $this->assertLessThan($inputPosition, $labelPosition);
+    }
+
+    public function testLabelPositionedUnder()
+    {
+        config()->set('bootstrap-components.form.color.labelPositionedAbove', true);
+        $html = bsColor()->name('name')->labelPositionedAbove(false)->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<input');
+        $this->assertLessThan($labelPosition, $inputPosition);
+    }
+
     public function testSetPlaceholder()
     {
         $placeholder = 'test-custom-placeholder';
@@ -394,7 +431,7 @@ class ColorTest extends BootstrapComponentsTestCase
     public function testConfigContainerClasses()
     {
         $configContainerClasses = 'test-config-class-container';
-        config()->set('bootstrap-components.form.color.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.form.color.classes.container', [$configContainerClasses]);
         $html = bsColor()->name('name')->toHtml();
         $this->assertStringContainsString(
             'class="color-name-container ' . $configContainerClasses . '"',
@@ -406,7 +443,7 @@ class ColorTest extends BootstrapComponentsTestCase
     {
         $configContainerClasses = 'test-config-class-container';
         $customContainerClasses = 'test-custom-class-container';
-        config()->set('bootstrap-components.form.color.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.form.color.classes.container', [$configContainerClasses]);
         $html = bsColor()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
             'class="color-name-container ' . $customContainerClasses . '"',
@@ -421,7 +458,7 @@ class ColorTest extends BootstrapComponentsTestCase
     public function testConfigComponentClass()
     {
         $configComponentClasses = 'test-config-class-component';
-        config()->set('bootstrap-components.form.color.class.component', [$configComponentClasses]);
+        config()->set('bootstrap-components.form.color.classes.component', [$configComponentClasses]);
         $html = bsColor()->name('name')->toHtml();
         $this->assertStringContainsString(
             'class="form-control color-name-component ' . $configComponentClasses . '"',
@@ -433,7 +470,7 @@ class ColorTest extends BootstrapComponentsTestCase
     {
         $configComponentClasses = 'test-config-class-component';
         $customComponentClasses = 'test-custom-class-component';
-        config()->set('bootstrap-components.form.color.class.component', [$customComponentClasses]);
+        config()->set('bootstrap-components.form.color.classes.component', [$customComponentClasses]);
         $html = bsColor()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
             'class="form-control color-name-component ' . $customComponentClasses . '"',

@@ -21,12 +21,13 @@ class TelTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('view', config('bootstrap-components.form.tel')));
         $this->assertTrue(array_key_exists('prepend', config('bootstrap-components.form.tel')));
         $this->assertTrue(array_key_exists('append', config('bootstrap-components.form.tel')));
+        $this->assertTrue(array_key_exists('labelPositionedAbove', config('bootstrap-components.form.tel')));
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.tel')));
-        $this->assertTrue(array_key_exists('class', config('bootstrap-components.form.tel')));
+        $this->assertTrue(array_key_exists('classes', config('bootstrap-components.form.tel')));
         $this->assertTrue(array_key_exists('htmlAttributes', config('bootstrap-components.form.tel')));
-        // components.form.tel.class
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.tel.class')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.tel.class')));
+        // components.form.tel.classes
+        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.tel.classes')));
+        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.tel.classes')));
         // components.form.tel.htmlAttributes
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.tel.htmlAttributes')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.tel.htmlAttributes')));
@@ -243,6 +244,42 @@ class TelTest extends BootstrapComponentsTestCase
         );
     }
 
+    public function testConfigLabelPositionedAbove()
+    {
+        config()->set('bootstrap-components.form.tel.labelPositionedAbove', true);
+        $html = bsTel()->name('name')->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<input');
+        $this->assertLessThan($inputPosition, $labelPosition);
+    }
+
+    public function testConfigLabelPositionedUnder()
+    {
+        config()->set('bootstrap-components.form.tel.labelPositionedAbove', false);
+        $html = bsTel()->name('name')->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<input');
+        $this->assertLessThan($labelPosition, $inputPosition);
+    }
+
+    public function testLabelPositionedAbove()
+    {
+        config()->set('bootstrap-components.form.tel.labelPositionedAbove', false);
+        $html = bsTel()->name('name')->labelPositionedAbove()->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<input');
+        $this->assertLessThan($inputPosition, $labelPosition);
+    }
+
+    public function testLabelPositionedUnder()
+    {
+        config()->set('bootstrap-components.form.tel.labelPositionedAbove', true);
+        $html = bsTel()->name('name')->labelPositionedAbove(false)->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<input');
+        $this->assertLessThan($labelPosition, $inputPosition);
+    }
+
     public function testSetPlaceholder()
     {
         $placeholder = 'test-custom-placeholder';
@@ -395,7 +432,7 @@ class TelTest extends BootstrapComponentsTestCase
     public function testConfigContainerClasses()
     {
         $configContainerClasses = 'test-config-class-container';
-        config()->set('bootstrap-components.form.tel.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.form.tel.classes.container', [$configContainerClasses]);
         $html = bsTel()->name('name')->toHtml();
         $this->assertStringContainsString('class="tel-name-container ' . $configContainerClasses . '"', $html);
     }
@@ -404,7 +441,7 @@ class TelTest extends BootstrapComponentsTestCase
     {
         $configContainerClasses = 'test-config-class-container';
         $customContainerClasses = 'test-custom-class-container';
-        config()->set('bootstrap-components.form.tel.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.form.tel.classes.container', [$configContainerClasses]);
         $html = bsTel()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
             'class="tel-name-container ' . $customContainerClasses . '"',
@@ -419,7 +456,7 @@ class TelTest extends BootstrapComponentsTestCase
     public function testConfigComponentClass()
     {
         $configComponentClasses = 'test-config-class-component';
-        config()->set('bootstrap-components.form.tel.class.component', [$configComponentClasses]);
+        config()->set('bootstrap-components.form.tel.classes.component', [$configComponentClasses]);
         $html = bsTel()->name('name')->toHtml();
         $this->assertStringContainsString(
             'class="form-control tel-name-component ' . $configComponentClasses . '"',
@@ -431,7 +468,7 @@ class TelTest extends BootstrapComponentsTestCase
     {
         $configComponentClasses = 'test-config-class-component';
         $customComponentClasses = 'test-custom-class-component';
-        config()->set('bootstrap-components.form.tel.class.component', [$customComponentClasses]);
+        config()->set('bootstrap-components.form.tel.classes.component', [$customComponentClasses]);
         $html = bsTel()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
             'class="form-control tel-name-component ' . $customComponentClasses . '"',

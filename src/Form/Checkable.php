@@ -2,6 +2,8 @@
 
 namespace Okipa\LaravelBootstrapComponents\Form;
 
+use Illuminate\Support\Arr;
+
 abstract class Checkable extends Input
 {
     /**
@@ -12,7 +14,7 @@ abstract class Checkable extends Input
     protected $checked;
 
     /**
-     * Set the input label.
+     * Set the checkable component check status.
      *
      * @param bool $checked
      *
@@ -40,6 +42,9 @@ abstract class Checkable extends Input
         } elseif ($parentValues['value'] && ! isset($this->checked)) {
             $this->checked = true;
         }
+
+//        dd(old('active'), $parentValues, $this->checked);
+//        dd(Arr::except($parentValues, 'model'), $this->model->toArray(), $this->checked);
 
         return array_merge($parentValues, [
             'componentHtmlAttributes' => array_merge(

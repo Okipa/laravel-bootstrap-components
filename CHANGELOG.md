@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.9.0](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.9.0)
+2019-06-13  
+:warning: **Breaking changes** :warning:
+- Added the possibility to choose the label positioning (above or under the input) for the `Form` components, except `bsCheckbox()`, `bsToggle()` and `bsRadio()`.
+  - Those components label positioning is now handled with the `->labelPositionedAbove(bool $positionedAbove = true): Input` method.
+  - The default value is set here `config('bootstrap-components.[componentConfigKey].labelPositionedAbove')`.
+  - This feature has been added in order to facilitate the Bootstrap 4 floating label implementation : https://getbootstrap.com/docs/4.3/examples/floating-labels.
+  - Each concerned `Form` component has now the following added config values (add it in your published `config/bootstrap-components.php` file) :
+  ```php
+  // example
+  'form' => [
+      'text' => [
+          // ...
+          'labelPositionedAbove' => true, // add this config
+      ], 
+      // other components config
+  ],
+  ```
+- Replaced `class` key by `classes` in the `config/bootstrap-components.php` file, so make sure you searched and replaced this key in your published config file.
+
 ## [0.8.3](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.8.3)
 2019-05-24
 - Fixed `bsRadio()` component, which was not really ready to use until now.
@@ -29,15 +49,18 @@
 - Removed `->hideLegend()` method for `Form` components. Hiding a legend can now be done with `->legend(false)`.
 - Added possibility to hide placeholder value with `->placeholder(false)` for `Form` components.
 - Added possibility to choose for all `Form` components if the the success / error status should be displayed or not after a form submission.
-  - Each `Form` component has now a the following config values (to add in your published `config/bootstrap-components.php` file) :
+  - Each `Form` component has now the following added config values (add it in your published `config/bootstrap-components.php` file) :
   ```php
   // example
-  'text'     => [
-      // ...
-      'formValidation' => [
-          'displaySuccess' => false,
-          'displayFailure' => true,
+  'form'   => [
+      'text'     => [
+          // ...
+          'formValidation' => [
+              'displaySuccess' => false,
+              'displayFailure' => true,
+          ], // add this config
       ],
+      // other components config
   ],
   ```
   - The default behavior can be set with the `config('bootstrap-components.[componentConfigKey].formValidation.displaySuccess')` and `config('bootstrap-components.[componentConfigKey].formValidation.displayFailure')` and a custom behaviour can be set with the `->displaySuccess()` and `->displayFailure()` methods on each of those components.
@@ -72,7 +95,7 @@
     'view'            => 'bootstrap-components.form.input',
     'icon'            => '<i class="fas fa-palette"></i>',
     'legend'          => null,
-    'class'           => [
+    'classes'           => [
         'container' => ['form-group'],
         'component' => [],
     ],
@@ -109,7 +132,7 @@
     'view'            => 'bootstrap-components.form.toggle',
     'icon'            => null, // => add this line
     'legend'          => null,
-    'class'           => [
+    'classes'           => [
         'container' => ['form-group'],
         'component' => [],
     ],

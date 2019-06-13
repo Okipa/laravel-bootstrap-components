@@ -22,12 +22,13 @@ class DatetimeTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('prepend', config('bootstrap-components.form.datetime')));
         $this->assertTrue(array_key_exists('append', config('bootstrap-components.form.datetime')));
         $this->assertTrue(array_key_exists('format', config('bootstrap-components.form.datetime')));
+        $this->assertTrue(array_key_exists('labelPositionedAbove', config('bootstrap-components.form.datetime')));
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.datetime')));
-        $this->assertTrue(array_key_exists('class', config('bootstrap-components.form.datetime')));
+        $this->assertTrue(array_key_exists('classes', config('bootstrap-components.form.datetime')));
         $this->assertTrue(array_key_exists('htmlAttributes', config('bootstrap-components.form.datetime')));
-        // components.form.datetime.class
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.datetime.class')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.datetime.class')));
+        // components.form.datetime.classes
+        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.datetime.classes')));
+        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.datetime.classes')));
         // components.form.datetime.htmlAttributes
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.datetime.htmlAttributes')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.datetime.htmlAttributes')));
@@ -309,6 +310,42 @@ class DatetimeTest extends BootstrapComponentsTestCase
         );
     }
 
+    public function testConfigLabelPositionedAbove()
+    {
+        config()->set('bootstrap-components.form.datetime.labelPositionedAbove', true);
+        $html = bsDatetime()->name('name')->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<input');
+        $this->assertLessThan($inputPosition, $labelPosition);
+    }
+
+    public function testConfigLabelPositionedUnder()
+    {
+        config()->set('bootstrap-components.form.datetime.labelPositionedAbove', false);
+        $html = bsDatetime()->name('name')->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<input');
+        $this->assertLessThan($labelPosition, $inputPosition);
+    }
+
+    public function testLabelPositionedAbove()
+    {
+        config()->set('bootstrap-components.form.datetime.labelPositionedAbove', false);
+        $html = bsDatetime()->name('name')->labelPositionedAbove()->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<input');
+        $this->assertLessThan($inputPosition, $labelPosition);
+    }
+
+    public function testLabelPositionedUnder()
+    {
+        config()->set('bootstrap-components.form.datetime.labelPositionedAbove', true);
+        $html = bsDatetime()->name('name')->labelPositionedAbove(false)->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<input');
+        $this->assertLessThan($labelPosition, $inputPosition);
+    }
+
     public function testSetPlaceholder()
     {
         $placeholder = 'test-custom-placeholder';
@@ -461,7 +498,7 @@ class DatetimeTest extends BootstrapComponentsTestCase
     public function testConfigContainerClasses()
     {
         $configContainerClasses = 'test-config-class-container';
-        config()->set('bootstrap-components.form.datetime.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.form.datetime.classes.container', [$configContainerClasses]);
         $html = bsDatetime()->name('name')->toHtml();
         $this->assertStringContainsString(
             'class="datetime-local-name-container ' . $configContainerClasses . '"',
@@ -473,7 +510,7 @@ class DatetimeTest extends BootstrapComponentsTestCase
     {
         $configContainerClasses = 'test-config-class-container';
         $customContainerClasses = 'test-custom-class-container';
-        config()->set('bootstrap-components.form.datetime.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.form.datetime.classes.container', [$configContainerClasses]);
         $html = bsDatetime()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
             'class="datetime-local-name-container ' . $customContainerClasses . '"',
@@ -488,7 +525,7 @@ class DatetimeTest extends BootstrapComponentsTestCase
     public function testConfigComponentClass()
     {
         $configComponentClasses = 'test-config-class-component';
-        config()->set('bootstrap-components.form.datetime.class.component', [$configComponentClasses]);
+        config()->set('bootstrap-components.form.datetime.classes.component', [$configComponentClasses]);
         $html = bsDatetime()->name('name')->toHtml();
         $this->assertStringContainsString(
             'class="form-control datetime-local-name-component ' . $configComponentClasses . '"',
@@ -500,7 +537,7 @@ class DatetimeTest extends BootstrapComponentsTestCase
     {
         $configComponentClasses = 'test-config-class-component';
         $customComponentClasses = 'test-custom-class-component';
-        config()->set('bootstrap-components.form.datetime.class.component', [$customComponentClasses]);
+        config()->set('bootstrap-components.form.datetime.classes.component', [$customComponentClasses]);
         $html = bsDatetime()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
             'class="form-control datetime-local-name-component ' . $customComponentClasses . '"',

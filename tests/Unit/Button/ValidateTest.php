@@ -19,11 +19,11 @@ class ValidateTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('prepend', config('bootstrap-components.button.cancel')));
         $this->assertTrue(array_key_exists('append', config('bootstrap-components.button.cancel')));
         $this->assertTrue(array_key_exists('label', config('bootstrap-components.button.validate')));
-        $this->assertTrue(array_key_exists('class', config('bootstrap-components.button.validate')));
+        $this->assertTrue(array_key_exists('classes', config('bootstrap-components.button.validate')));
         $this->assertTrue(array_key_exists('htmlAttributes', config('bootstrap-components.button.validate')));
-        // components.validate.class
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.button.validate.class')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.button.validate.class')));
+        // components.validate.classes
+        $this->assertTrue(array_key_exists('container', config('bootstrap-components.button.validate.classes')));
+        $this->assertTrue(array_key_exists('component', config('bootstrap-components.button.validate.classes')));
         // components.validate.htmlAttributes
         $this->assertTrue(array_key_exists(
             'container',
@@ -221,7 +221,7 @@ class ValidateTest extends BootstrapComponentsTestCase
     public function testConfigContainerClasses()
     {
         $configContainerClasses = 'test-config-class-container';
-        config()->set('bootstrap-components.button.validate.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.button.validate.classes.container', [$configContainerClasses]);
         $html = bsValidate()->toHtml();
         $this->assertStringContainsString('class="submit-container ' . $configContainerClasses . '">', $html);
     }
@@ -230,7 +230,7 @@ class ValidateTest extends BootstrapComponentsTestCase
     {
         $configContainerClasses = 'test-config-class-container';
         $customContainerClasses = 'test-custom-class-container';
-        config()->set('bootstrap-components.input.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.input.classes.container', [$configContainerClasses]);
         $html = bsValidate()->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString('class="submit-container ' . $customContainerClasses . '">', $html);
         $this->assertStringNotContainsString('class="submit-container ' . $configContainerClasses . '">', $html);
@@ -239,7 +239,7 @@ class ValidateTest extends BootstrapComponentsTestCase
     public function testConfigComponentClass()
     {
         $configComponentClasses = 'test-config-class-component';
-        config()->set('bootstrap-components.button.validate.class.component', [$configComponentClasses]);
+        config()->set('bootstrap-components.button.validate.classes.component', [$configComponentClasses]);
         $html = bsValidate()->toHtml();
         $this->assertStringContainsString('class="submit-component ' . $configComponentClasses . '"', $html);
     }
@@ -248,7 +248,7 @@ class ValidateTest extends BootstrapComponentsTestCase
     {
         $configComponentClasses = 'test-config-class-component';
         $customComponentClasses = 'test-custom-class-component';
-        config()->set('bootstrap-components.button.validate.class.component', [$customComponentClasses]);
+        config()->set('bootstrap-components.button.validate.classes.component', [$customComponentClasses]);
         $html = bsValidate()->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString('class="submit-component ' . $customComponentClasses . '"', $html);
         $this->assertStringNotContainsString('class="submit-component ' . $configComponentClasses . '"', $html);

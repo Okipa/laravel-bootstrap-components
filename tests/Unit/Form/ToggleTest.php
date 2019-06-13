@@ -21,11 +21,11 @@ class ToggleTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('prepend', config('bootstrap-components.form.toggle')));
         $this->assertTrue(array_key_exists('append', config('bootstrap-components.form.toggle')));
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.toggle')));
-        $this->assertTrue(array_key_exists('class', config('bootstrap-components.form.toggle')));
+        $this->assertTrue(array_key_exists('classes', config('bootstrap-components.form.toggle')));
         $this->assertTrue(array_key_exists('htmlAttributes', config('bootstrap-components.form.toggle')));
-        // components.form.toggle.class
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.toggle.class')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.toggle.class')));
+        // components.form.toggle.classes
+        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.toggle.classes')));
+        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.toggle.classes')));
         // components.form.toggle.htmlAttributes
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.toggle.htmlAttributes')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.toggle.htmlAttributes')));
@@ -363,7 +363,7 @@ class ToggleTest extends BootstrapComponentsTestCase
     public function testConfigContainerClasses()
     {
         $configContainerClasses = 'test-config-class-container';
-        config()->set('bootstrap-components.form.toggle.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.form.toggle.classes.container', [$configContainerClasses]);
         $html = bsToggle()->name('name')->toHtml();
         $this->assertStringContainsString(
             'class="toggle-name-container switch custom-control ' . $configContainerClasses . '"',
@@ -375,7 +375,7 @@ class ToggleTest extends BootstrapComponentsTestCase
     {
         $configContainerClasses = 'test-config-class-container';
         $customContainerClasses = 'test-custom-class-container';
-        config()->set('bootstrap-components.form.toggle.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.form.toggle.classes.container', [$configContainerClasses]);
         $html = bsToggle()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
             'class="toggle-name-container switch custom-control ' . $customContainerClasses . '"',
@@ -390,7 +390,7 @@ class ToggleTest extends BootstrapComponentsTestCase
     public function testConfigComponentClass()
     {
         $configComponentClasses = 'test-config-class-component';
-        config()->set('bootstrap-components.form.toggle.class.component', [$configComponentClasses]);
+        config()->set('bootstrap-components.form.toggle.classes.component', [$configComponentClasses]);
         $html = bsToggle()->name('name')->toHtml();
         $this->assertStringContainsString(
             'class="toggle-name-component custom-control-input ' . $configComponentClasses . '"',
@@ -402,7 +402,7 @@ class ToggleTest extends BootstrapComponentsTestCase
     {
         $configComponentClasses = 'test-config-class-component';
         $customComponentClasses = 'test-custom-class-component';
-        config()->set('bootstrap-components.form.toggle.class.component', [$customComponentClasses]);
+        config()->set('bootstrap-components.form.toggle.classes.component', [$customComponentClasses]);
         $html = bsToggle()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
             'class="toggle-name-component custom-control-input ' . $customComponentClasses . '"',

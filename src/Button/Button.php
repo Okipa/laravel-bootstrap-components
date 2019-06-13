@@ -58,7 +58,8 @@ abstract class Button extends Component
     }
 
     /**
-     * Set the button url (only used for « button » type).
+     * Set the button component url.
+     * Will only be effective for « button » typed button components.
      *
      * @param string $url
      *
@@ -72,7 +73,8 @@ abstract class Button extends Component
     }
 
     /**
-     * Set the button route (only used for « button » type).
+     * Set the button component route.
+     * Will only be effective for « button » typed button components.
      *
      * @param string $route
      * @param array $params
@@ -87,7 +89,7 @@ abstract class Button extends Component
     }
 
     /**
-     * Prepend html to the component label.
+     * Prepend html to the button component label.
      *
      * @param string|null $html
      *
@@ -101,7 +103,7 @@ abstract class Button extends Component
     }
 
     /**
-     * Append html to the component label.
+     * Append html to the button component label.
      *
      * @param string|null $html
      *
@@ -115,7 +117,7 @@ abstract class Button extends Component
     }
 
     /**
-     * Set the button label.
+     * Set the button component label.
      *
      * @param string|null $label
      *
@@ -145,7 +147,7 @@ abstract class Button extends Component
     {
         return [
             'type'    => $this->type,
-            'url'     => $this->url ? $this->url : url()->previous(),
+            'url'     => $this->url ?: url()->previous(),
             'prepend' => $this->prepend ?? $this->defaultPrepend(),
             'append'  => $this->append ?? $this->defaultAppend(),
             'label'   => $this->label ?? $this->defaultLabel(),

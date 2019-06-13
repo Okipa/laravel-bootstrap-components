@@ -20,12 +20,13 @@ class UrlTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('view', config('bootstrap-components.form.url')));
         $this->assertTrue(array_key_exists('prepend', config('bootstrap-components.form.url')));
         $this->assertTrue(array_key_exists('append', config('bootstrap-components.form.url')));
+        $this->assertTrue(array_key_exists('labelPositionedAbove', config('bootstrap-components.form.url')));
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.url')));
-        $this->assertTrue(array_key_exists('class', config('bootstrap-components.form.url')));
+        $this->assertTrue(array_key_exists('classes', config('bootstrap-components.form.url')));
         $this->assertTrue(array_key_exists('htmlAttributes', config('bootstrap-components.form.url')));
-        // components.form.url.class
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.url.class')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.url.class')));
+        // components.form.url.classes
+        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.url.classes')));
+        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.url.classes')));
         // components.form.url.htmlAttributes
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.url.htmlAttributes')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.url.htmlAttributes')));
@@ -233,6 +234,42 @@ class UrlTest extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString('aria-label="validation.attributes.name"', $html);
     }
 
+    public function testConfigLabelPositionedAbove()
+    {
+        config()->set('bootstrap-components.form.url.labelPositionedAbove', true);
+        $html = bsUrl()->name('name')->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<input');
+        $this->assertLessThan($inputPosition, $labelPosition);
+    }
+
+    public function testConfigLabelPositionedUnder()
+    {
+        config()->set('bootstrap-components.form.url.labelPositionedAbove', false);
+        $html = bsUrl()->name('name')->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<input');
+        $this->assertLessThan($labelPosition, $inputPosition);
+    }
+
+    public function testLabelPositionedAbove()
+    {
+        config()->set('bootstrap-components.form.url.labelPositionedAbove', false);
+        $html = bsUrl()->name('name')->labelPositionedAbove()->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<input');
+        $this->assertLessThan($inputPosition, $labelPosition);
+    }
+
+    public function testLabelPositionedUnder()
+    {
+        config()->set('bootstrap-components.form.url.labelPositionedAbove', true);
+        $html = bsUrl()->name('name')->labelPositionedAbove(false)->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<input');
+        $this->assertLessThan($labelPosition, $inputPosition);
+    }
+
     public function testSetPlaceholder()
     {
         $placeholder = 'test-custom-placeholder';
@@ -385,7 +422,7 @@ class UrlTest extends BootstrapComponentsTestCase
     public function testConfigContainerClasses()
     {
         $configContainerClasses = 'test-config-class-container';
-        config()->set('bootstrap-components.form.url.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.form.url.classes.container', [$configContainerClasses]);
         $html = bsUrl()->name('name')->toHtml();
         $this->assertStringContainsString('class="url-name-container ' . $configContainerClasses . '"', $html);
     }
@@ -394,7 +431,7 @@ class UrlTest extends BootstrapComponentsTestCase
     {
         $configContainerClasses = 'test-config-class-container';
         $customContainerClasses = 'test-custom-class-container';
-        config()->set('bootstrap-components.form.url.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.form.url.classes.container', [$configContainerClasses]);
         $html = bsUrl()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
             'class="url-name-container ' . $customContainerClasses . '"',
@@ -409,7 +446,7 @@ class UrlTest extends BootstrapComponentsTestCase
     public function testConfigComponentClass()
     {
         $configComponentClasses = 'test-config-class-component';
-        config()->set('bootstrap-components.form.url.class.component', [$configComponentClasses]);
+        config()->set('bootstrap-components.form.url.classes.component', [$configComponentClasses]);
         $html = bsUrl()->name('name')->toHtml();
         $this->assertStringContainsString(
             'class="form-control url-name-component ' . $configComponentClasses . '"',
@@ -421,7 +458,7 @@ class UrlTest extends BootstrapComponentsTestCase
     {
         $configComponentClasses = 'test-config-class-component';
         $customComponentClasses = 'test-custom-class-component';
-        config()->set('bootstrap-components.form.url.class.component', [$customComponentClasses]);
+        config()->set('bootstrap-components.form.url.classes.component', [$customComponentClasses]);
         $html = bsUrl()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
             'class="form-control url-name-component ' . $customComponentClasses . '"',

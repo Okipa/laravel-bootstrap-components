@@ -20,12 +20,13 @@ class TextareaTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('view', config('bootstrap-components.form.textarea')));
         $this->assertTrue(array_key_exists('prepend', config('bootstrap-components.form.textarea')));
         $this->assertTrue(array_key_exists('append', config('bootstrap-components.form.textarea')));
+        $this->assertTrue(array_key_exists('labelPositionedAbove', config('bootstrap-components.form.textarea')));
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.textarea')));
-        $this->assertTrue(array_key_exists('class', config('bootstrap-components.form.textarea')));
+        $this->assertTrue(array_key_exists('classes', config('bootstrap-components.form.textarea')));
         $this->assertTrue(array_key_exists('htmlAttributes', config('bootstrap-components.form.textarea')));
-        // components.form.textarea.class
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.textarea.class')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.textarea.class')));
+        // components.form.textarea.classes
+        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.textarea.classes')));
+        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.textarea.classes')));
         // components.form.textarea.htmlAttributes
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.textarea.htmlAttributes')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.textarea.htmlAttributes')));
@@ -254,6 +255,42 @@ class TextareaTest extends BootstrapComponentsTestCase
         );
     }
 
+    public function testConfigLabelPositionedAbove()
+    {
+        config()->set('bootstrap-components.form.textarea.labelPositionedAbove', true);
+        $html = bsTextarea()->name('name')->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<textarea');
+        $this->assertLessThan($inputPosition, $labelPosition);
+    }
+
+    public function testConfigLabelPositionedUnder()
+    {
+        config()->set('bootstrap-components.form.textarea.labelPositionedAbove', false);
+        $html = bsTextarea()->name('name')->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<textarea');
+        $this->assertLessThan($labelPosition, $inputPosition);
+    }
+
+    public function testLabelPositionedAbove()
+    {
+        config()->set('bootstrap-components.form.textarea.labelPositionedAbove', false);
+        $html = bsTextarea()->name('name')->labelPositionedAbove()->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<textarea');
+        $this->assertLessThan($inputPosition, $labelPosition);
+    }
+
+    public function testLabelPositionedUnder()
+    {
+        config()->set('bootstrap-components.form.textarea.labelPositionedAbove', true);
+        $html = bsTextarea()->name('name')->labelPositionedAbove(false)->toHtml();
+        $labelPosition = strrpos($html, '<label for="');
+        $inputPosition = strrpos($html, '<textarea');
+        $this->assertLessThan($labelPosition, $inputPosition);
+    }
+
     public function testSetPlaceholder()
     {
         $placeholder = 'test-custom-placeholder';
@@ -406,7 +443,7 @@ class TextareaTest extends BootstrapComponentsTestCase
     public function testConfigContainerClasses()
     {
         $configContainerClasses = 'test-config-class-container';
-        config()->set('bootstrap-components.form.textarea.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.form.textarea.classes.container', [$configContainerClasses]);
         $html = bsTextarea()->name('name')->toHtml();
         $this->assertStringContainsString(
             'class="textarea-name-container ' . $configContainerClasses . '"',
@@ -418,7 +455,7 @@ class TextareaTest extends BootstrapComponentsTestCase
     {
         $configContainerClasses = 'test-config-class-container';
         $customContainerClasses = 'test-custom-class-container';
-        config()->set('bootstrap-components.form.textarea.class.container', [$configContainerClasses]);
+        config()->set('bootstrap-components.form.textarea.classes.container', [$configContainerClasses]);
         $html = bsTextarea()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
             'class="textarea-name-container ' . $customContainerClasses . '"',
@@ -433,7 +470,7 @@ class TextareaTest extends BootstrapComponentsTestCase
     public function testConfigComponentClass()
     {
         $configComponentClasses = 'test-config-class-component';
-        config()->set('bootstrap-components.form.textarea.class.component', [$configComponentClasses]);
+        config()->set('bootstrap-components.form.textarea.classes.component', [$configComponentClasses]);
         $html = bsTextarea()->name('name')->toHtml();
         $this->assertStringContainsString(
             'class="form-control textarea-name-component ' . $configComponentClasses . '"',
@@ -445,7 +482,7 @@ class TextareaTest extends BootstrapComponentsTestCase
     {
         $configComponentClasses = 'test-config-class-component';
         $customComponentClasses = 'test-custom-class-component';
-        config()->set('bootstrap-components.form.textarea.class.component', [$customComponentClasses]);
+        config()->set('bootstrap-components.form.textarea.classes.component', [$customComponentClasses]);
         $html = bsTextarea()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
             'class="form-control textarea-name-component ' . $customComponentClasses . '"',

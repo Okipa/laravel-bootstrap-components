@@ -70,7 +70,7 @@ abstract class Component implements Htmlable
     }
 
     /**
-     * Set the component class.
+     * Set the component classes.
      *
      * @param array $componentClasses
      *
@@ -84,7 +84,7 @@ abstract class Component implements Htmlable
     }
 
     /**
-     * Set the container id.
+     * Set the component container id.
      *
      * @param string $containerId
      *
@@ -98,7 +98,7 @@ abstract class Component implements Htmlable
     }
 
     /**
-     * Set the component container class.
+     * Set the component container classes.
      *
      * @param array $containerClasses
      *
@@ -232,7 +232,7 @@ abstract class Component implements Htmlable
      */
     protected function defaultComponentClass(): array
     {
-        $componentClasses = config('bootstrap-components.' . $this->configKey . '.class.component');
+        $componentClasses = config('bootstrap-components.' . $this->configKey . '.classes.component');
 
         return $componentClasses ? $componentClasses : [];
     }
@@ -244,7 +244,7 @@ abstract class Component implements Htmlable
      */
     protected function defaultContainerClasses(): array
     {
-        $containerClasses = config('bootstrap-components.' . $this->configKey . '.class.container');
+        $containerClasses = config('bootstrap-components.' . $this->configKey . '.classes.container');
 
         return $containerClasses ? $containerClasses : [];
     }
