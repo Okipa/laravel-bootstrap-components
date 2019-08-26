@@ -161,7 +161,8 @@ abstract class Component implements Htmlable
     public function render(array $data = []): ?string
     {
         $this->checkValuesValidity();
-        if ($view = $this->view()) {
+        $view = $this->view();
+        if ($view) {
             return (string) view('bootstrap-components::' . $view, $this->values(), $data)->render();
         }
     }

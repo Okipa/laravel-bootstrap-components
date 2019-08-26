@@ -79,11 +79,11 @@ class SelectTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertStringContainsString(
-            '<option value="' . $optionsList[0]['id'] . '" >' . $optionsList[0]['name'] . '</option>',
+            '<option value="' . $optionsList[0]['id'] . '">' . $optionsList[0]['name'] . '</option>',
             $html
         );
         $this->assertStringContainsString(
-            '<option value="' . $optionsList[1]['id'] . '" >' . $optionsList[1]['name'] . '</option>',
+            '<option value="' . $optionsList[1]['id'] . '">' . $optionsList[1]['name'] . '</option>',
             $html
         );
     }
@@ -118,11 +118,11 @@ class SelectTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertStringContainsString(
-            '<option value="' . $users[0]['id'] . '" >' . $users[0]['name'] . '</option>',
+            '<option value="' . $users[0]['id'] . '">' . $users[0]['name'] . '</option>',
             $html
         );
         $this->assertStringContainsString(
-            '<option value="' . $users[1]['id'] . '" >' . $users[1]['name'] . '</option>',
+            '<option value="' . $users[1]['id'] . '">' . $users[1]['name'] . '</option>',
             $html
         );
     }
@@ -148,7 +148,7 @@ class SelectTest extends BootstrapComponentsTestCase
         $html = bsSelect()->model($user)->name('id')->options($users, 'id', 'name')->toHtml();
         $users = $users->toArray();
         $this->assertStringContainsString(
-            '<option value="" disabled="disabled" >validation.attributes.id</option>',
+            '<option value="" disabled="disabled">validation.attributes.id</option>',
             $html
         );
         $this->assertStringContainsString(
@@ -156,7 +156,7 @@ class SelectTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertStringContainsString(
-            '<option value="' . $users[1]['id'] . '" >' . $users[1]['name'] . '</option>',
+            '<option value="' . $users[1]['id'] . '">' . $users[1]['name'] . '</option>',
             $html
         );
     }
@@ -188,11 +188,11 @@ class SelectTest extends BootstrapComponentsTestCase
             ->selected('id', $users->get(1)->id)
             ->toHtml();
         $this->assertStringContainsString(
-            '<option value="" disabled="disabled" >validation.attributes.id</option>',
+            '<option value="" disabled="disabled">validation.attributes.id</option>',
             $html
         );
         $this->assertStringContainsString(
-            '<option value="' . $users[0]['id'] . '" >' . $users[0]['name'] . '</option>',
+            '<option value="' . $users[0]['id'] . '">' . $users[0]['name'] . '</option>',
             $html
         );
         $this->assertStringContainsString(
@@ -212,11 +212,11 @@ class SelectTest extends BootstrapComponentsTestCase
             ->selected('name', $users->get(1)->name)
             ->toHtml();
         $this->assertStringContainsString(
-            '<option value="" disabled="disabled" >validation.attributes.name</option>',
+            '<option value="" disabled="disabled">validation.attributes.name</option>',
             $html
         );
         $this->assertStringContainsString(
-            '<option value="' . $users[0]['name'] . '" >' . $users[0]['name'] . '</option>',
+            '<option value="' . $users[0]['name'] . '">' . $users[0]['name'] . '</option>',
             $html
         );
         $this->assertStringContainsString(
@@ -237,11 +237,11 @@ class SelectTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertStringContainsString(
-            '<option value="' . $users[0]['id'] . '" >' . $users[0]['name'] . '</option>',
+            '<option value="' . $users[0]['id'] . '">' . $users[0]['name'] . '</option>',
             $html
         );
         $this->assertStringContainsString(
-            '<option value="' . $users[1]['id'] . '" >' . $users[1]['name'] . '</option>',
+            '<option value="' . $users[1]['id'] . '">' . $users[1]['name'] . '</option>',
             $html
         );
     }
@@ -266,11 +266,11 @@ class SelectTest extends BootstrapComponentsTestCase
             ->options($users, 'id', 'name')
             ->toHtml();
         $this->assertStringContainsString(
-            '<option value="' . $custom->id . '" >' . $custom->name . '</option>',
+            '<option value="' . $custom->id . '">' . $custom->name . '</option>',
             $html
         );
         $this->assertStringContainsString(
-            '<option value="' . $model->id . '" >' . $model->name . '</option>',
+            '<option value="' . $model->id . '">' . $model->name . '</option>',
             $html
         );
         $this->assertStringContainsString(
@@ -299,7 +299,7 @@ class SelectTest extends BootstrapComponentsTestCase
         );
         foreach ($companies as $company) {
             $this->assertStringContainsString(
-                '<option value="' . $company->id . '" >' . $company->name . '</option>',
+                '<option value="' . $company->id . '">' . $company->name . '</option>',
                 $html
             );
         }
@@ -326,7 +326,7 @@ class SelectTest extends BootstrapComponentsTestCase
         );
         foreach ($companies as $company) {
             $this->assertStringContainsString(
-                '<option value="' . $company->id . '" >' . $company->name . '</option>',
+                '<option value="' . $company->id . '">' . $company->name . '</option>',
                 $html
             );
         }
@@ -339,14 +339,15 @@ class SelectTest extends BootstrapComponentsTestCase
         $user->companies = $companies->take(2)->pluck('id')->toArray();
         $html = bsSelect()->model($user)->name('companies')->options($companies, 'id', 'name')->multiple()->toHtml();
         $this->assertStringContainsString(
-            '<option value="" disabled="disabled" >validation.attributes.companies</option>',
+            '<option value="" disabled="disabled">validation.attributes.companies</option>',
             $html
         );
         foreach ($companies as $company) {
             $this->assertStringContainsString(
-                '<option value="' . $company->id . '" ' . (in_array($company->id, $user->companies)
-                    ? 'selected="selected"'
-                    : '') . '>' . $company->name . '</option>',
+                '<option value="' . $company->id . '"'
+                . (in_array($company->id, $user->companies) ? ' selected="selected"' : '') . '>'
+                . $company->name
+                . '</option>',
                 $html
             );
         }
@@ -366,7 +367,7 @@ class SelectTest extends BootstrapComponentsTestCase
         );
         foreach ($companies as $company) {
             $this->assertStringContainsString(
-                '<option value="' . $company->id . '" >' . $company->name . '</option>',
+                '<option value="' . $company->id . '">' . $company->name . '</option>',
                 $html
             );
         }
@@ -396,14 +397,15 @@ class SelectTest extends BootstrapComponentsTestCase
             ->selected('id', $selectedCompanies)
             ->toHtml();
         $this->assertStringContainsString(
-            '<option value="" disabled="disabled" >validation.attributes.companies</option>',
+            '<option value="" disabled="disabled">validation.attributes.companies</option>',
             $html
         );
         foreach ($companies as $company) {
             $this->assertStringContainsString(
-                '<option value="' . $company->id . '" ' . (in_array($company->id, $selectedCompanies)
-                    ? 'selected="selected"'
-                    : '') . '>' . $company->name . '</option>',
+                '<option value="' . $company->id . '"'
+                . (in_array($company->id, $selectedCompanies) ? ' selected="selected"' : '') . '>'
+                . $company->name
+                . '</option>',
                 $html
             );
         }
@@ -422,14 +424,15 @@ class SelectTest extends BootstrapComponentsTestCase
             ->selected('name', $selectedCompanies)
             ->toHtml();
         $this->assertStringContainsString(
-            '<option value="" disabled="disabled" >validation.attributes.companies</option>',
+            '<option value="" disabled="disabled">validation.attributes.companies</option>',
             $html
         );
         foreach ($companies as $company) {
             $this->assertStringContainsString(
-                '<option value="' . $company->id . '" ' . (in_array($company->name, $selectedCompanies)
-                    ? 'selected="selected"'
-                    : '') . '>' . $company->name . '</option>',
+                '<option value="' . $company->id . '"'
+                . (in_array($company->name, $selectedCompanies) ? ' selected="selected"' : '') . '>'
+                . $company->name
+                . '</option>',
                 $html
             );
         }
@@ -457,14 +460,15 @@ class SelectTest extends BootstrapComponentsTestCase
             ->selected('id', $selectedCompanies)
             ->toHtml();
         $this->assertStringContainsString(
-            '<option value="" disabled="disabled" >validation.attributes.companies</option>',
+            '<option value="" disabled="disabled">validation.attributes.companies</option>',
             $html
         );
         foreach ($companies as $company) {
             $this->assertStringContainsString(
-                '<option value="' . $company->id . '" ' . (in_array($company->id, $oldCompanies)
-                    ? 'selected="selected"'
-                    : '') . '>' . $company->name . '</option>',
+                '<option value="' . $company->id . '"'
+                . (in_array($company->id, $oldCompanies) ? ' selected="selected"' : '') . '>'
+                . $company->name
+                . '</option>',
                 $html
             );
         }

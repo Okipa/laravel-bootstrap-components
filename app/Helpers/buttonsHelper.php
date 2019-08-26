@@ -1,36 +1,57 @@
 <?php
 
+use Okipa\LaravelBootstrapComponents\Button\Back;
+use Okipa\LaravelBootstrapComponents\Button\Cancel;
+use Okipa\LaravelBootstrapComponents\Button\Create;
+use Okipa\LaravelBootstrapComponents\Button\Update;
+use Okipa\LaravelBootstrapComponents\Button\Validate;
+
 if (! function_exists('bsValidate')) {
-    function bsValidate()
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Button\Validate
+     */
+    function bsValidate(): Validate
     {
-        return app(\Okipa\LaravelBootstrapComponents\Button\Validate::class);
+        return (new Validate);
     }
 }
 
 if (! function_exists('bsCreate')) {
-    function bsCreate()
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Button\Create
+     */
+    function bsCreate(): Create
     {
-        return app(\Okipa\LaravelBootstrapComponents\Button\Create::class);
+        return (new Create);
     }
 }
 
 if (! function_exists('bsUpdate')) {
-    function bsUpdate()
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Button\Update
+     */
+    function bsUpdate(): Update
     {
-        return app(\Okipa\LaravelBootstrapComponents\Button\Update::class);
+        return (new Update);
     }
 }
 
 if (! function_exists('bsCancel')) {
-    function bsCancel()
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Button\Cancel
+     */
+    function bsCancel(): Cancel
     {
-        return app(\Okipa\LaravelBootstrapComponents\Button\Cancel::class);
+        return (new Cancel);
     }
 }
 
 if (! function_exists('bsBack')) {
-    function bsBack()
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Button\Back
+     */
+    function bsBack(): Back
     {
-        return app(\Okipa\LaravelBootstrapComponents\Button\Back::class);
+        return (new Back);
     }
 }

@@ -1,114 +1,179 @@
 <?php
 
+use Okipa\LaravelBootstrapComponents\Form\Checkbox;
+use Okipa\LaravelBootstrapComponents\Form\Color;
+use Okipa\LaravelBootstrapComponents\Form\Date;
+use \Okipa\LaravelBootstrapComponents\Form\Datetime as bsDatetime;
+use Okipa\LaravelBootstrapComponents\Form\Email;
+use Okipa\LaravelBootstrapComponents\Form\Number as bsNumber;
+use Okipa\LaravelBootstrapComponents\Form\Password;
+use \Okipa\LaravelBootstrapComponents\Form\File as bsFile;
+use Okipa\LaravelBootstrapComponents\Form\Radio;
+use Okipa\LaravelBootstrapComponents\Form\Select;
+use Okipa\LaravelBootstrapComponents\Form\Tel;
+use Okipa\LaravelBootstrapComponents\Form\Text;
+use Okipa\LaravelBootstrapComponents\Form\Textarea;
+use Okipa\LaravelBootstrapComponents\Form\Time;
+use Okipa\LaravelBootstrapComponents\Form\Toggle;
+use Okipa\LaravelBootstrapComponents\Form\Url;
+
 if (! function_exists('bsText')) {
-    function bsText()
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Form\Text
+     */
+    function bsText(): Text
     {
-        return app(\Okipa\LaravelBootstrapComponents\Form\Text::class);
+        return (new Text);
     }
 }
 
 if (! function_exists('bsNumber')) {
-    function bsNumber()
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Form\Number
+     */
+    function bsNumber(): bsNumber
     {
-        return app(\Okipa\LaravelBootstrapComponents\Form\Number::class);
+        return (new bsNumber);
     }
 }
 
 if (! function_exists('bsTel')) {
-    function bsTel()
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Form\Tel
+     */
+    function bsTel(): Tel
     {
-        return app(\Okipa\LaravelBootstrapComponents\Form\Tel::class);
+        return (new Tel);
     }
 }
 
 if (! function_exists('bsDatetime')) {
-    function bsDatetime()
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Form\Datetime
+     */
+    function bsDatetime(): bsDatetime
     {
-        return app(\Okipa\LaravelBootstrapComponents\Form\Datetime::class);
+        return (new bsDatetime);
     }
 }
 
 if (! function_exists('bsDate')) {
-    function bsDate()
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Form\Date
+     */
+    function bsDate(): Date
     {
-        return app(\Okipa\LaravelBootstrapComponents\Form\Date::class);
+        return (new Date);
     }
 }
 
 if (! function_exists('bsTime')) {
-    function bsTime()
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Form\Time
+     */
+    function bsTime(): Time
     {
-        return app(\Okipa\LaravelBootstrapComponents\Form\Time::class);
+        return (new Time);
     }
 }
 
 if (! function_exists('bsUrl')) {
-    function bsUrl()
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Form\Url
+     */
+    function bsUrl(): Url
     {
-        return app(\Okipa\LaravelBootstrapComponents\Form\Url::class);
+        return (new Url);
     }
 }
 
 if (! function_exists('bsEmail')) {
-    function bsEmail()
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Form\Email
+     */
+    function bsEmail(): Email
     {
-        return app(\Okipa\LaravelBootstrapComponents\Form\Email::class);
+        return (new Email);
     }
 }
 
 if (! function_exists('bsColor')) {
-    function bsColor()
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Form\Color
+     */
+    function bsColor(): Color
     {
-        return app(\Okipa\LaravelBootstrapComponents\Form\Color::class);
+        return (new Color);
     }
 }
 
 
 if (! function_exists('bsPassword')) {
-    function bsPassword()
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Form\Password
+     */
+    function bsPassword(): Password
     {
-        return app(\Okipa\LaravelBootstrapComponents\Form\Password::class);
+        return (new Password);
     }
 }
 
 if (! function_exists('bsFile')) {
-    function bsFile()
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Form\File
+     */
+    function bsFile(): bsFile
     {
-        return app(\Okipa\LaravelBootstrapComponents\Form\File::class);
+        return (new bsFile);
     }
 }
 
 if (! function_exists('bsTextarea')) {
-    function bsTextarea()
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Form\Textarea
+     */
+    function bsTextarea(): Textarea
     {
-        return app(\Okipa\LaravelBootstrapComponents\Form\Textarea::class);
+        return (new Textarea);
     }
 }
 
 if (! function_exists('bsCheckbox')) {
-    function bsCheckbox()
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Form\Checkbox
+     */
+    function bsCheckbox(): Checkbox
     {
-        return app(\Okipa\LaravelBootstrapComponents\Form\Checkbox::class);
+        return (new Checkbox);
     }
 }
 
 if (! function_exists('bsToggle')) {
-    function bsToggle()
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Form\Toggle
+     */
+    function bsToggle(): Toggle
     {
-        return app(\Okipa\LaravelBootstrapComponents\Form\Toggle::class);
+        return (new Toggle);
     }
 }
 
 if (! function_exists('bsRadio')) {
-    function bsRadio()
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Form\Radio
+     */
+    function bsRadio(): Radio
     {
-        return app(\Okipa\LaravelBootstrapComponents\Form\Radio::class);
+        return (new Radio);
     }
 }
 
 if (! function_exists('bsSelect')) {
-    function bsSelect()
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Form\Select
+     */
+    function bsSelect(): Select
     {
-        return app(\Okipa\LaravelBootstrapComponents\Form\Select::class);
+        return (new Select);
     }
 }

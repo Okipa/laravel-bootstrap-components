@@ -154,13 +154,16 @@ class Select extends Input
      */
     protected function getMultipleSelectedOptions()
     {
-        if ($oldValueMultipleSelectedOptions = $this->searchMultipleSelectedOptionFromOldValue()) {
+        $oldValueMultipleSelectedOptions = $this->searchMultipleSelectedOptionFromOldValue();
+        if ($oldValueMultipleSelectedOptions) {
             return $oldValueMultipleSelectedOptions;
         }
-        if ($manuallyMultipleSelectedOptions = $this->searchMultipleSelectedOptionsFromSelectedMethod()) {
+        $manuallyMultipleSelectedOptions = $this->searchMultipleSelectedOptionsFromSelectedMethod();
+        if ($manuallyMultipleSelectedOptions) {
             return $manuallyMultipleSelectedOptions;
         }
-        if ($modelMultipleSelectedOptions = $this->searchMultipleSelectedOptionsFromModel()) {
+        $modelMultipleSelectedOptions = $this->searchMultipleSelectedOptionsFromModel();
+        if ($modelMultipleSelectedOptions) {
             return $modelMultipleSelectedOptions;
         }
 
@@ -174,7 +177,8 @@ class Select extends Input
      */
     protected function searchMultipleSelectedOptionFromOldValue()
     {
-        if ($oldValue = old($this->name)) {
+        $oldValue = old($this->name);
+        if ($oldValue) {
             $selectedMultipleOptions = Arr::where($this->options, function ($option) use ($oldValue) {
                 return in_array($option[$this->optionValueField], $oldValue);
             });
@@ -234,13 +238,16 @@ class Select extends Input
      */
     protected function getSelectedOption()
     {
-        if ($oldValueSelectedOption = $this->searchSelectedOptionFromOldValue()) {
+        $oldValueSelectedOption = $this->searchSelectedOptionFromOldValue();
+        if ($oldValueSelectedOption) {
             return $oldValueSelectedOption;
         }
-        if ($manuallySelectedOption = $this->searchSelectedOptionFromSelectedMethod()) {
+        $manuallySelectedOption = $this->searchSelectedOptionFromSelectedMethod();
+        if ($manuallySelectedOption) {
             return $manuallySelectedOption;
         }
-        if ($modelSelectedOption = $this->searchSelectedOptionFromModel()) {
+        $modelSelectedOption = $this->searchSelectedOptionFromModel();
+        if ($modelSelectedOption) {
             return $modelSelectedOption;
         }
 
@@ -254,7 +261,8 @@ class Select extends Input
      */
     protected function searchSelectedOptionFromOldValue()
     {
-        if ($oldValue = old($this->name)) {
+        $oldValue = old($this->name);
+        if ($oldValue) {
             $selectedOption = Arr::where($this->options, function ($option) use ($oldValue) {
                 return $option[$this->optionValueField] == $oldValue;
             });

@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.9.1](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.9.1)
+2019-08-26
+- Fixed html generation after https://github.com/Okipa/laravel-html-helper upgrade.
+
 ## [0.9.0](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.9.0)
 2019-06-13  
 :warning: **Breaking changes** :warning:

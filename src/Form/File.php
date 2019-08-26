@@ -93,7 +93,8 @@ class File extends Input
     protected function getUploadedFileHtml(): HtmlString
     {
         $uploadedFileHtml = '';
-        if ($uploadedFile = $this->uploadedFile) {
+        $uploadedFile = $this->uploadedFile;
+        if ($uploadedFile) {
             if ($uploadedFile() instanceof Component) {
                 $uploadedFileHtml = $uploadedFile()->toHtml();
             } else {

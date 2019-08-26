@@ -1,22 +1,35 @@
 <?php
 
+use Okipa\LaravelBootstrapComponents\Media\Audio;
+use Okipa\LaravelBootstrapComponents\Media\Image;
+use Okipa\LaravelBootstrapComponents\Media\Video;
+
 if (! function_exists('image')) {
-    function image()
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Media\Image
+     */
+    function image(): Image
     {
-        return app(\Okipa\LaravelBootstrapComponents\Media\Image::class);
+        return (new Image);
     }
 }
 
 if (! function_exists('audio')) {
-    function audio()
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Media\Audio
+     */
+    function audio(): Audio
     {
-        return app(\Okipa\LaravelBootstrapComponents\Media\Audio::class);
+        return (new Audio);
     }
 }
 
 if (! function_exists('video')) {
-    function video()
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Media\Video
+     */
+    function video(): Video
     {
-        return app(\Okipa\LaravelBootstrapComponents\Media\Video::class);
+        return (new Video);
     }
 }
