@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.9.2](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.9.2)
+2019-09-03
+- Fixed default config for `datetime()` component => the default format has been corrected to `Y-m-d\TH:i`, in order to respect the `datetime-local` input type standards.
+
 ## [0.9.1](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.9.1)
 2019-08-26
 - Fixed html generation after https://github.com/Okipa/laravel-html-helper upgrade.
