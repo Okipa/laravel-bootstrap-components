@@ -1,6 +1,6 @@
 {
     "name": "okipa/laravel-bootstrap-components",
-    "description": "Generate bootstrap components with Laravel.",
+    "description": "Take advantage of ready-to-use and customizable bootstrap components.",
     "keywords": [
         "okipa",
         "package",

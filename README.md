@@ -1,4 +1,4 @@
-# Generate bootstrap components with Laravel
+# Take advantage of ready-to-use and customizable bootstrap components.
 
 [![Source Code](https://img.shields.io/badge/source-okipa/laravel--bootstrap--components-blue.svg)](https://github.com/Okipa/laravel-bootstrap-components)
 [![Latest Version](https://img.shields.io/github/release/okipa/laravel-bootstrap-components.svg?style=flat-square)](https://github.com/Okipa/laravel-bootstrap-components/releases)
@@ -8,13 +8,14 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/Okipa/laravel-bootstrap-components/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Okipa/laravel-bootstrap-components/?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Okipa/laravel-bootstrap-components/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Okipa/laravel-bootstrap-components/?branch=master)
 
-This package provides a ready-to-use and customizable bootstrap components library.  
+This package provides an extended set of ready-to-use and fully customizable bootstrap components.  
+The components which have been created are use on a daily basis. You feel like there is a missing component ? Feel free to open an issue or submit a fully tested and documented PR, we'll see what we can do !
 
 ## Compatibility
 
-| Laravel version | PHP version | Package version |
-|---|---|---|
-| ^5.5 | ^7.2 | ^1.0 |
+| Laravel version | PHP version | Bootstrap version | Package version |
+|---|---|---|---|
+| ^5.5 | ^7.2 | ^4.0 | ^1.0 |
 
 ## Table of Contents
 - [Installation](#installation)
