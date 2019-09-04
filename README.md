@@ -52,7 +52,6 @@ The components which have been created are use on a daily basis. You feel like t
     - [image()](#image)
     - [audio()](#audio)
     - [video()](#video)
-- [Changelog](#changelog)
 - [Testing](#testing)
 - [Changelog](#changelog)
 - [Contributing](#contributing)
