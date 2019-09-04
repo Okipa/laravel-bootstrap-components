@@ -63,7 +63,7 @@ The components which have been created are use on a daily basis. You feel like t
 
 - Install the package with composer :
 ```bash
-composer require okipa/laravel-bootstrap-components
+composer require "okipa/laravel-bootstrap-components:^1.0"
 ```
 
 - Laravel 5.5+ uses Package Auto-Discovery, so doesn't require you to manually add the ServiceProvider.
