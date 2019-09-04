@@ -10,11 +10,6 @@
 
 This package provides a ready-to-use and customizable bootstrap components library.  
 
-**Notes :**
-- Implemented components are stables.
-- Implementation of new components is currently in progress.
-- Help welcomed (tested and documented PR).
-
 ## Compatibility
 
 | Laravel version | PHP version | Package version |
