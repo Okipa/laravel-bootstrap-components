@@ -13,7 +13,7 @@ abstract class BootstrapComponentsTestCase extends TestCase
     /**
      * Define environment setup.
      *
-     * @param  \Illuminate\Foundation\Application $app
+     * @param \Illuminate\Foundation\Application $app
      *
      * @return void
      */
@@ -31,15 +31,13 @@ abstract class BootstrapComponentsTestCase extends TestCase
     /**
      * Get package providers.
      *
-     * @param  \Illuminate\Foundation\Application $app
+     * @param \Illuminate\Foundation\Application $app
      *
      * @return array
      */
     protected function getPackageProviders($app)
     {
-        return [
-            ComponentServiceProvider::class,
-        ];
+        return [ComponentServiceProvider::class];
     }
 
     /**
@@ -50,10 +48,7 @@ abstract class BootstrapComponentsTestCase extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->loadMigrationsFrom([
-            '--database' => 'testing',
-            '--realpath' => realpath(__DIR__ . '/database/migrations'),
-        ]);
+        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
         $this->faker = Factory::create();
     }
 }
