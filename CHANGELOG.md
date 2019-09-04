@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.0](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/1.0.0)
+2019-09-04
+- First stable release.
+
 ## [0.10.0](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/0.10.0)
 2019-09-04
 - Added compatibility for Laravel 6.

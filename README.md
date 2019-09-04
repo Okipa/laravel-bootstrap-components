@@ -17,7 +17,9 @@ This package provides a ready-to-use and customizable bootstrap components libra
 
 ## Compatibility
 
-This version is compatible with Laravel 5.5+ and PHP7.2+.
+| Laravel version | PHP version | Package version |
+|---|---|---|
+| ^5.5 | ^7.2 | ^1.0 |
 
 ## Table of Contents
 - [Installation](#installation)
