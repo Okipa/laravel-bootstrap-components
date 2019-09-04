@@ -85,7 +85,7 @@ return [
             'view'                 => 'bootstrap-components.form.input',
             'prepend'              => '<i class="fas fa-calendar-alt"></i>',
             'append'               => null,
-            'format'               => 'd/m/Y',
+            'format'               => 'Y-m-d',
             'labelPositionedAbove' => true,
             'legend'               => 'bootstrap-components.legend.date',
             'classes'              => [
