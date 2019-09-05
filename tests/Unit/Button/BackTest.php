@@ -148,9 +148,9 @@ class BackTest extends BootstrapComponentsTestCase
         $configLabel = 'test-config-label';
         config()->set('bootstrap-components.button.back.label', $configLabel);
         $html = bsBack()->toHtml();
-        $this->assertStringContainsString('title="bootstrap-components::' . $configLabel . '">', $html);
+        $this->assertStringContainsString('title="' . $configLabel . '">', $html);
         $this->assertStringContainsString(
-            '<span class="label">bootstrap-components::' . $configLabel . '</span>',
+            '<span class="label">' . $configLabel . '</span>',
             $html
         );
     }
