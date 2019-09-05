@@ -1,3 +1,3 @@
-@if(! empty($label))
-    <label for="{{ $componentId }}">{{ $label }}</label>
+@if($label)
+    <label for="{{ $componentId }}">@lang($label)</label>
 @endif

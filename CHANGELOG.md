@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.1](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/1.0.1)
+2019-09-05
+- Fixed wrong label and legend translation process.
+
 ## [1.0.0](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/1.0.0)
 2019-09-04
 - First stable release.

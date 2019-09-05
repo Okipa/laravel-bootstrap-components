@@ -142,10 +142,10 @@ abstract class Component implements Htmlable
     /**
      * Render the component html.
      *
-     * @return string
+     * @return string|null
      * @throws \Throwable
      */
-    public function toHtml()
+    public function toHtml(): ?string
     {
         return (string) $this->render();
     }

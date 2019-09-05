@@ -261,13 +261,14 @@ abstract class Input extends Component
      */
     protected function defineValues(): array
     {
+//        dd($this->legend, $this->defaultLegend(), $this->legend ?? $this->defaultLegend());
         return [
             'model'                => $this->model,
             'type'                 => $this->type,
             'name'                 => $this->name,
             'prepend'              => $this->prepend ?? $this->defaultPrepend(),
             'append'               => $this->append ?? $this->defaultAppend(),
-            'legend'               => __($this->legend) ?? $this->defaultLegend(),
+            'legend'               => $this->legend ?? $this->defaultLegend(),
             'label'                => $this->label ?? $this->defaultLabel(),
             'labelPositionedAbove' => $this->labelPositionedAbove ?? $this->defaultLabelPositionedAbove(),
             'value'                => $this->defineValue(),
@@ -298,9 +299,7 @@ abstract class Input extends Component
      */
     protected function defaultLegend(): ?string
     {
-        return ($legend = config('bootstrap-components.' . $this->configKey . '.legend'))
-            ? (string) __('bootstrap-components::' . $legend)
-            : null;
+        return config('bootstrap-components.' . $this->configKey . '.legend');
     }
 
     /**
@@ -308,7 +307,7 @@ abstract class Input extends Component
      */
     protected function defaultLabel(): string
     {
-        return (string) __('validation.attributes.' . Str::slug($this->name, '_'));
+        return 'validation.attributes.' . Str::slug($this->name, '_');
     }
 
     /**
