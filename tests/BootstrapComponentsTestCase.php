@@ -48,7 +48,6 @@ abstract class BootstrapComponentsTestCase extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        ini_set('memory_limit', '1024M');
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
         $this->faker = Factory::create();
     }
