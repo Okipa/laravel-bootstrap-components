@@ -170,6 +170,13 @@ class ColorTest extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString($configLegend, $html);
     }
 
+    public function testSetTranslatedLegend()
+    {
+        $legend = 'bootstrap-components::bootstrap-components.label.validate';
+        $html = bsColor()->name('name')->legend($legend)->toHtml();
+        $this->assertStringContainsString(__($legend), $html);
+    }
+
     public function testNoLegend()
     {
         config()->set('bootstrap-components.form.color.legend', null);
@@ -217,30 +224,27 @@ class ColorTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('aria-label="' . $label . '"', $html);
     }
 
+    public function testSetTranslatedLabel()
+    {
+        $label = 'bootstrap-components::bootstrap-components.label.validate';
+        $html = bsColor()->name('name')->label($label)->toHtml();
+        $this->assertStringContainsString('<label for="color-name">' . __($label) . '</label>', $html);
+        $this->assertStringContainsString('placeholder="' . __($label) . '"', $html);
+        $this->assertStringContainsString('aria-label="' . __($label) . '"', $html);
+    }
+
     public function testNoLabel()
     {
         $html = bsColor()->name('name')->toHtml();
-        $this->assertStringContainsString(
-            '<label for="color-name">validation.attributes.name</label>',
-            $html
-        );
-        $this->assertStringContainsString(
-            'aria-label="validation.attributes.name"',
-            $html
-        );
+        $this->assertStringContainsString('validation.attributes.name</label>', $html);
+        $this->assertStringContainsString('aria-label="validation.attributes.name"', $html);
     }
 
     public function testHideLabel()
     {
         $html = bsColor()->name('name')->label(false)->toHtml();
-        $this->assertStringNotContainsString(
-            '<label for="color-name">validation.attributes.name</label>',
-            $html
-        );
-        $this->assertStringNotContainsString(
-            'aria-label="validation.attributes.name"',
-            $html
-        );
+        $this->assertStringNotContainsString('validation.attributes.name</label>', $html);
+        $this->assertStringNotContainsString('aria-label="validation.attributes.name"', $html);
     }
 
     public function testConfigLabelPositionedAbove()
@@ -284,6 +288,13 @@ class ColorTest extends BootstrapComponentsTestCase
         $placeholder = 'test-custom-placeholder';
         $html = bsColor()->name('name')->placeholder($placeholder)->toHtml();
         $this->assertStringContainsString('placeholder="' . $placeholder . '"', $html);
+    }
+
+    public function testSetTranslatedPlaceholder()
+    {
+        $placeholder = 'bootstrap-components::bootstrap-components.label.validate';
+        $html = bsColor()->name('name')->placeholder($placeholder)->toHtml();
+        $this->assertStringContainsString('placeholder="' . __($placeholder) . '"', $html);
     }
 
     public function testSetPlaceholderWithLabel()

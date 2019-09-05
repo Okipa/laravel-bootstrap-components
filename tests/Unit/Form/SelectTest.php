@@ -582,6 +582,13 @@ class SelectTest extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString($configLegend, $html);
     }
 
+    public function testSetTranslatedLegend()
+    {
+        $legend = 'bootstrap-components::bootstrap-components.label.validate';
+        $html = bsSelect()->name('name')->legend($legend)->toHtml();
+        $this->assertStringContainsString(__($legend), $html);
+    }
+
     public function testNoLegend()
     {
         config()->set('bootstrap-components.form.select.legend', null);
@@ -604,6 +611,17 @@ class SelectTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('<label for="select-name">' . $label . '</label>', $html);
         $this->assertStringContainsString(
             '<option value="" disabled="disabled" selected="selected">' . $label . '</option>',
+            $html
+        );
+    }
+
+    public function testSetTranslatedLabel()
+    {
+        $label = 'bootstrap-components::bootstrap-components.label.validate';
+        $html = bsSelect()->name('name')->label($label)->toHtml();
+        $this->assertStringContainsString('<label for="select-name">' . __($label) . '</label>', $html);
+        $this->assertStringContainsString(
+            '<option value="" disabled="disabled" selected="selected">' . __($label) . '</option>',
             $html
         );
     }
@@ -668,6 +686,16 @@ class SelectTest extends BootstrapComponentsTestCase
         $html = bsSelect()->name('name')->placeholder($placeholder)->toHtml();
         $this->assertStringContainsString(
             '<option value="" disabled="disabled" selected="selected">' . $placeholder . '</option>',
+            $html
+        );
+    }
+
+    public function testSetTranslatedPlaceholder()
+    {
+        $placeholder = 'bootstrap-components::bootstrap-components.label.validate';
+        $html = bsSelect()->name('name')->placeholder($placeholder)->toHtml();
+        $this->assertStringContainsString(
+            '<option value="" disabled="disabled" selected="selected">' . __($placeholder) . '</option>',
             $html
         );
     }

@@ -4,6 +4,7 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
 use Exception;
 use Illuminate\Support\MessageBag;
+use Illuminate\Support\Str;
 use Okipa\LaravelBootstrapComponents\Form\Input;
 use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
 use Okipa\LaravelBootstrapComponents\Test\Fakers\UsersFaker;
@@ -222,6 +223,14 @@ class RadioTest extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString($configLegend, $html);
     }
 
+    public function testSetTranslatedLegend()
+    {
+        $customValue = 'test-custom-value';
+        $legend = 'bootstrap-components::bootstrap-components.label.validate';
+        $html = bsRadio()->name('name')->value($customValue)->legend($legend)->toHtml();
+        $this->assertStringContainsString(__($legend), $html);
+    }
+
     public function testNoLegend()
     {
         $customValue = 'test-custom-value';
@@ -244,7 +253,18 @@ class RadioTest extends BootstrapComponentsTestCase
         $customValue = 'test-custom-value';
         $label = 'test-custom-label';
         $html = bsRadio()->name('name')->value($customValue)->label($label)->toHtml();
-        $this->assertStringContainsString($label . '</label>', $html);
+        $this->assertStringContainsString('for="radio-name-test-custom-value">' . $label . '</label>', $html);
+    }
+
+    public function testSetTranslatedLabel()
+    {
+        $customValue = 'test-custom-value';
+        $label = 'bootstrap-components::bootstrap-components.label.validate';
+        $html = bsRadio()->name('name')->value($customValue)->label($label)->toHtml();
+        $this->assertStringContainsString(
+            'for="radio-name-test-custom-value">' . __($label) . '</label>',
+            $html
+        );
     }
 
     public function testNoLabel()

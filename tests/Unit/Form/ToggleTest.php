@@ -161,6 +161,13 @@ class ToggleTest extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString($configLegend, $html);
     }
 
+    public function testSetTranslatedLegend()
+    {
+        $legend = 'bootstrap-components::bootstrap-components.label.validate';
+        $html = bsToggle()->name('active')->legend($legend)->toHtml();
+        $this->assertStringContainsString(__($legend), $html);
+    }
+
     public function testNoLegend()
     {
         config()->set('bootstrap-components.form.toggle.legend', null);
@@ -224,6 +231,13 @@ class ToggleTest extends BootstrapComponentsTestCase
         $label = 'test-custom-label';
         $html = bsToggle()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('for="toggle-name">' . $label . '</label>', $html);
+    }
+
+    public function testSetTranslatedLabel()
+    {
+        $label = 'bootstrap-components::bootstrap-components.label.validate';
+        $html = bsToggle()->name('name')->label($label)->toHtml();
+        $this->assertStringContainsString('for="toggle-name">' . __($label) . '</label>', $html);
     }
 
     public function testNoLabel()

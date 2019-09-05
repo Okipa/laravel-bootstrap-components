@@ -173,6 +173,13 @@ class TextareaTest extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString($configLegend, $html);
     }
 
+    public function testSetTranslatedLegend()
+    {
+        $legend = 'bootstrap-components::bootstrap-components.label.validate';
+        $html = bsTextarea()->name('name')->legend($legend)->toHtml();
+        $this->assertStringContainsString(__($legend), $html);
+    }
+
     public function testNoLegend()
     {
         config()->set('bootstrap-components.form.textarea.legend', null);
@@ -227,6 +234,15 @@ class TextareaTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('<label for="textarea-name">' . $label . '</label>', $html);
         $this->assertStringContainsString('placeholder="' . $label . '"', $html);
         $this->assertStringContainsString('aria-label="' . $label . '"', $html);
+    }
+
+    public function testSetTranslatedLabel()
+    {
+        $label = 'bootstrap-components::bootstrap-components.label.validate';
+        $html = bsTextarea()->name('name')->label($label)->toHtml();
+        $this->assertStringContainsString('<label for="textarea-name">' . __($label) . '</label>', $html);
+        $this->assertStringContainsString('placeholder="' . __($label) . '"', $html);
+        $this->assertStringContainsString('aria-label="' . __($label) . '"', $html);
     }
 
     public function testNoLabel()
@@ -296,6 +312,13 @@ class TextareaTest extends BootstrapComponentsTestCase
         $placeholder = 'test-custom-placeholder';
         $html = bsTextarea()->name('name')->placeholder($placeholder)->toHtml();
         $this->assertStringContainsString('placeholder="' . $placeholder . '"', $html);
+    }
+
+    public function testSetTranslatedPlaceholder()
+    {
+        $placeholder = 'bootstrap-components::bootstrap-components.label.validate';
+        $html = bsTextarea()->name('name')->placeholder($placeholder)->toHtml();
+        $this->assertStringContainsString('placeholder="' . __($placeholder) . '"', $html);
     }
 
     public function testSetPlaceholderWithLabel()

@@ -226,6 +226,13 @@ class TimeTest extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString($configLegend, $html);
     }
 
+    public function testSetTranslatedLegend()
+    {
+        $legend = 'bootstrap-components::bootstrap-components.label.validate';
+        $html = bsTime()->name('name')->legend($legend)->toHtml();
+        $this->assertStringContainsString(__($legend), $html);
+    }
+
     public function testNoLegend()
     {
         config()->set('bootstrap-components.form.time.legend', null);
@@ -282,6 +289,15 @@ class TimeTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('<label for="time-name">' . $label . '</label>', $html);
         $this->assertStringContainsString('placeholder="' . $label . '"', $html);
         $this->assertStringContainsString('aria-label="' . $label . '"', $html);
+    }
+
+    public function testSetTranslatedLabel()
+    {
+        $label = 'bootstrap-components::bootstrap-components.label.validate';
+        $html = bsTime()->name('name')->label($label)->toHtml();
+        $this->assertStringContainsString('<label for="time-name">' . __($label) . '</label>', $html);
+        $this->assertStringContainsString('placeholder="' . __($label) . '"', $html);
+        $this->assertStringContainsString('aria-label="' . __($label) . '"', $html);
     }
 
     public function testNoLabel()
@@ -351,6 +367,13 @@ class TimeTest extends BootstrapComponentsTestCase
         $placeholder = 'test-custom-placeholder';
         $html = bsTime()->name('name')->placeholder($placeholder)->toHtml();
         $this->assertStringContainsString('placeholder="' . $placeholder . '"', $html);
+    }
+
+    public function testSetTranslatedPlaceholder()
+    {
+        $placeholder = 'bootstrap-components::bootstrap-components.label.validate';
+        $html = bsTime()->name('name')->placeholder($placeholder)->toHtml();
+        $this->assertStringContainsString('placeholder="' . __($placeholder) . '"', $html);
     }
 
     public function testSetPlaceholderWithLabel()
