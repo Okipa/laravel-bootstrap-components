@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.2](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/1.0.2)
+2019-09-05
+- Fixed missing labels, legends and placeholders translations on components.
+- Added some tests to avoid regression issues about translated label, legends and placeholders.
+
 ## [1.0.1](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/1.0.1)
 2019-09-05
 - Fixed wrong label and legend translation process.
