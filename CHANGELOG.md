@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.3](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/1.0.3)
+2019-09-05
+- Fixed missing `bootstrap-components::` prefix for default config translations.
+
 ## [1.0.2](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/1.0.2)
 2019-09-05
 - Fixed missing labels, legends and placeholders translations on components.
