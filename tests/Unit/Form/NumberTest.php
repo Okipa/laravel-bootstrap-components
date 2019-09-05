@@ -170,6 +170,13 @@ class NumberTest extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString($configLegend, $html);
     }
 
+    public function testSetTranslatedLegend()
+    {
+        $legend = 'bootstrap-components::bootstrap-components.label.validate';
+        $html = bsNumber()->name('name')->legend($legend)->toHtml();
+        $this->assertStringContainsString(__($legend), $html);
+    }
+
     public function testNoLegend()
     {
         config()->set('bootstrap-components.form.number.legend', null);
@@ -222,6 +229,15 @@ class NumberTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('<label for="number-credit">' . $label . '</label>', $html);
         $this->assertStringContainsString('placeholder="' . $label . '"', $html);
         $this->assertStringContainsString('aria-label="' . $label . '"', $html);
+    }
+
+    public function testSetTranslatedLabel()
+    {
+        $label = 'bootstrap-components::bootstrap-components.label.validate';
+        $html = bsNumber()->name('credit')->label($label)->toHtml();
+        $this->assertStringContainsString('<label for="number-credit">' . __($label) . '</label>', $html);
+        $this->assertStringContainsString('placeholder="' . __($label) . '"', $html);
+        $this->assertStringContainsString('aria-label="' . __($label) . '"', $html);
     }
 
     public function testNoLabel()
@@ -288,6 +304,13 @@ class NumberTest extends BootstrapComponentsTestCase
         $placeholder = 'test-custom-placeholder';
         $html = bsNumber()->name('credit')->placeholder($placeholder)->toHtml();
         $this->assertStringContainsString('placeholder="' . $placeholder . '"', $html);
+    }
+
+    public function testSetTranslatedPlaceholder()
+    {
+        $placeholder = 'bootstrap-components::bootstrap-components.label.validate';
+        $html = bsNumber()->name('name')->placeholder($placeholder)->toHtml();
+        $this->assertStringContainsString('placeholder="' . __($placeholder) . '"', $html);
     }
 
     public function testSetPlaceholderWithLabel()

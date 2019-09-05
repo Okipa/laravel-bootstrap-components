@@ -226,6 +226,13 @@ class DateTest extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString($configLegend, $html);
     }
 
+    public function testSetTranslatedLegend()
+    {
+        $legend = 'bootstrap-components::bootstrap-components.label.validate';
+        $html = bsDate()->name('name')->legend($legend)->toHtml();
+        $this->assertStringContainsString(__($legend), $html);
+    }
+
     public function testNoLegend()
     {
         config()->set('bootstrap-components.form.date.legend', null);
@@ -284,6 +291,15 @@ class DateTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('aria-label="' . $label . '"', $html);
     }
 
+    public function testSetTranslatedLabel()
+    {
+        $label = 'bootstrap-components::bootstrap-components.label.validate';
+        $html = bsDate()->name('name')->label($label)->toHtml();
+        $this->assertStringContainsString('<label for="date-name">' . __($label) . '</label>', $html);
+        $this->assertStringContainsString('placeholder="' . __($label) . '"', $html);
+        $this->assertStringContainsString('aria-label="' . __($label) . '"', $html);
+    }
+
     public function testNoLabel()
     {
         $html = bsDate()->name('name')->toHtml();
@@ -339,6 +355,13 @@ class DateTest extends BootstrapComponentsTestCase
         $placeholder = 'test-custom-placeholder';
         $html = bsDate()->name('name')->placeholder($placeholder)->toHtml();
         $this->assertStringContainsString('placeholder="' . $placeholder . '"', $html);
+    }
+
+    public function testSetTranslatedPlaceholder()
+    {
+        $placeholder = 'bootstrap-components::bootstrap-components.label.validate';
+        $html = bsDate()->name('name')->placeholder($placeholder)->toHtml();
+        $this->assertStringContainsString('placeholder="' . __($placeholder) . '"', $html);
     }
 
     public function testSetPlaceholderWithLabel()

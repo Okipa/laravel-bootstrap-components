@@ -13,9 +13,9 @@
     @endif
         @include('bootstrap-components::bootstrap-components.partials.prepend')
         <div class="custom-file">
-            <input id="{{ $componentId }}" {{ classTag('custom-file-input', 'form-control', $type . '-' . Str::slug($name) . '-component', $componentClasses, validationStatus($name)) }} type="{{ $type }}" name="{{ $name }}" lang="{{ app()->getLocale() }}" {{ htmlAttributes($componentHtmlAttributes) }}aria-label="{{ $label }}" aria-describedby="file-{{ Str::slug($name) }}">
+            <input id="{{ $componentId }}" {{ classTag('custom-file-input', 'form-control', $type . '-' . Str::slug($name) . '-component', $componentClasses, validationStatus($name)) }} type="{{ $type }}" name="{{ $name }}" lang="{{ app()->getLocale() }}" {{ htmlAttributes($componentHtmlAttributes) }}aria-label="{{ __($label) }}" aria-describedby="file-{{ Str::slug($name) }}">
             @if(($value = old($name, $value)) || $placeholder)
-                <label class="custom-file-label" for="{{ $componentId }}">@empty($value){{ $placeholder }}@else{{ $value }}@endempty</label>
+                <label class="custom-file-label" for="{{ $componentId }}">@empty($value){{ __($placeholder) }}@else{{ $value }}@endempty</label>
             @endif
         </div>
         @include('bootstrap-components::bootstrap-components.partials.append')

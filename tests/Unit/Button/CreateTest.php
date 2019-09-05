@@ -148,9 +148,9 @@ class CreateTest extends BootstrapComponentsTestCase
         $configLabel = 'test-config-label';
         config()->set('bootstrap-components.button.create.label', $configLabel);
         $html = bsCreate()->toHtml();
-        $this->assertStringContainsString('title="bootstrap-components::' . $configLabel . '">', $html);
+        $this->assertStringContainsString('title="' . $configLabel . '">', $html);
         $this->assertStringContainsString(
-            '<span class="label">bootstrap-components::' . $configLabel . '</span>',
+            '<span class="label">' . $configLabel . '</span>',
             $html
         );
     }
@@ -160,6 +160,13 @@ class CreateTest extends BootstrapComponentsTestCase
         $label = 'test-custom-label';
         $html = bsCreate()->label($label)->toHtml();
         $this->assertStringContainsString('<span class="label">' . $label . '</span>', $html);
+    }
+
+    public function testSetTranslatedLabel()
+    {
+        $label = 'bootstrap-components::bootstrap-components.label.validate';
+        $html = bsCreate()->label($label)->toHtml();
+        $this->assertStringContainsString('<span class="label">' . __($label) . '</span>', $html);
     }
 
     public function testNoLabel()
@@ -177,11 +184,11 @@ class CreateTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.button.create.label', $configLabel);
         $html = bsCreate()->label(false)->toHtml();
         $this->assertStringNotContainsString(
-            'title="bootstrap-components::' . $configLabel . '">',
+            'title="' . $configLabel . '">',
             $html
         );
         $this->assertStringNotContainsString(
-            '<span class="label">bootstrap-components::' . $configLabel . '</span>',
+            '<span class="label">' . $configLabel . '</span>',
             $html
         );
     }

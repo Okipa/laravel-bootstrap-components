@@ -261,7 +261,7 @@ abstract class Input extends Component
      */
     protected function defineValues(): array
     {
-//        dd($this->legend, $this->defaultLegend(), $this->legend ?? $this->defaultLegend());
+//        dd($this->label, $this->defaultLabel(), $this->label ?? $this->defaultLabel());
         return [
             'model'                => $this->model,
             'type'                 => $this->type,

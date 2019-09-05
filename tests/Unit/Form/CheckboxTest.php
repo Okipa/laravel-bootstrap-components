@@ -182,6 +182,13 @@ class CheckboxTest extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString($configLegend, $html);
     }
 
+    public function testSetTranslatedLegend()
+    {
+        $legend = 'bootstrap-components::bootstrap-components.label.validate';
+        $html = bsCheckbox()->name('active')->legend($legend)->toHtml();
+        $this->assertStringContainsString(__($legend), $html);
+    }
+
     public function testNoLegend()
     {
         config()->set('bootstrap-components.form.checkbox.legend', null);
@@ -249,19 +256,26 @@ class CheckboxTest extends BootstrapComponentsTestCase
     {
         $label = 'test-custom-label';
         $html = bsCheckbox()->name('active')->label($label)->toHtml();
-        $this->assertStringContainsString($label . '</label>', $html);
+        $this->assertStringContainsString('for="checkbox-active">' . $label . '</label>', $html);
+    }
+
+    public function testSetTranslatedLabel()
+    {
+        $label = 'bootstrap-components::bootstrap-components.label.validate';
+        $html = bsCheckbox()->name('active')->label($label)->toHtml();
+        $this->assertStringContainsString('for="checkbox-active">' . __($label) . '</label>', $html);
     }
 
     public function testNoLabel()
     {
         $html = bsCheckbox()->name('active')->toHtml();
-        $this->assertStringContainsString('validation.attributes.active</label>', $html);
+        $this->assertStringContainsString('for="checkbox-active">' . 'validation.attributes.active</label>', $html);
     }
 
     public function testHideLabel()
     {
         $html = bsCheckbox()->name('active')->label(false)->toHtml();
-        $this->assertStringNotContainsString('validation.attributes.active</label>', $html);
+        $this->assertStringNotContainsString('for="checkbox-active">' . 'validation.attributes.active</label>', $html);
     }
 
     public function testConfigDisplaySuccess()

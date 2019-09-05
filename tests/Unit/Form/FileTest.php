@@ -168,6 +168,13 @@ class FileTest extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString($configLegend, $html);
     }
 
+    public function testSetTranslatedLegend()
+    {
+        $legend = 'bootstrap-components::bootstrap-components.label.validate';
+        $html = bsFile()->name('name')->legend($legend)->toHtml();
+        $this->assertStringContainsString(__($legend), $html);
+    }
+
     public function testNoLegend()
     {
         config()->set('bootstrap-components.form.file.legend', null);
@@ -221,6 +228,14 @@ class FileTest extends BootstrapComponentsTestCase
         $html = bsFile()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="file-name">' . $label . '</label>', $html);
         $this->assertStringContainsString('aria-label="' . $label . '"', $html);
+    }
+
+    public function testSetTranslatedLabel()
+    {
+        $label = 'bootstrap-components::bootstrap-components.label.validate';
+        $html = bsFile()->name('name')->label($label)->toHtml();
+        $this->assertStringContainsString('<label for="file-name">' . __($label) . '</label>', $html);
+        $this->assertStringContainsString('aria-label="' . __($label) . '"', $html);
     }
 
     public function testNoLabel()
@@ -292,6 +307,16 @@ class FileTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('custom-file-label', $html);
         $this->assertStringContainsString(
             '<label class="custom-file-label" for="file-name">' . $placeholder . '</label>',
+            $html
+        );
+    }
+
+    public function testSetTranslatedPlaceholder()
+    {
+        $placeholder = 'bootstrap-components::bootstrap-components.label.validate';
+        $html = bsFile()->name('name')->placeholder($placeholder)->toHtml();
+        $this->assertStringContainsString(
+            '<label class="custom-file-label" for="file-name">' . __($placeholder) . '</label>',
             $html
         );
     }
