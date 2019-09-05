@@ -159,7 +159,7 @@ abstract class Button extends Component
      */
     protected function defaultPrepend(): ?string
     {
-        return config('bootstrap-components.' . $this->configKey . '.prepend') ?? null;
+        return config('bootstrap-components.' . $this->configKey . '.prepend');
     }
 
     /**
@@ -167,17 +167,17 @@ abstract class Button extends Component
      */
     protected function defaultAppend(): ?string
     {
-        return config('bootstrap-components.' . $this->configKey . '.append') ?? null;
+        return config('bootstrap-components.' . $this->configKey . '.append');
     }
 
     /**
-     * Set the button default label.
-     *
      * @return string|null
      */
     public function defaultLabel(): ?string
     {
-        return config('bootstrap-components.' . $this->configKey . '.label');
+        $label = config('bootstrap-components.' . $this->configKey . '.label');
+
+        return $label ? 'bootstrap-components::' . $label : null;
     }
 
     /**

@@ -159,7 +159,7 @@ class UrlTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.url.legend', $configLegend);
         $html = bsUrl()->name('name')->toHtml();
         $this->assertStringContainsString('url-name-legend', $html);
-        $this->assertStringContainsString($configLegend, $html);
+        $this->assertStringContainsString('bootstrap-components::' . $configLegend, $html);
     }
 
     public function testSetLegend()

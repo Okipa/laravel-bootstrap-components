@@ -159,7 +159,7 @@ class TextareaTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.textarea.legend', $configLegend);
         $html = bsTextarea()->name('name')->toHtml();
         $this->assertStringContainsString('textarea-name-legend', $html);
-        $this->assertStringContainsString($configLegend, $html);
+        $this->assertStringContainsString('bootstrap-components::' . $configLegend, $html);
     }
 
     public function testSetLegend()

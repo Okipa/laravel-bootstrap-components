@@ -156,7 +156,7 @@ class TextTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.text.legend', $configLegend);
         $html = bsText()->name('name')->toHtml();
         $this->assertStringContainsString('text-name-legend', $html);
-        $this->assertStringContainsString($configLegend, $html);
+        $this->assertStringContainsString('bootstrap-components::' . $configLegend, $html);
     }
 
     public function testSetLegend()

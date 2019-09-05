@@ -168,7 +168,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.checkbox.legend', $configLegend);
         $html = bsCheckbox()->name('active')->toHtml();
         $this->assertStringContainsString('checkbox-active-legend', $html);
-        $this->assertStringContainsString($configLegend, $html);
+        $this->assertStringContainsString('bootstrap-components::' . $configLegend, $html);
     }
 
     public function testSetLegend()
