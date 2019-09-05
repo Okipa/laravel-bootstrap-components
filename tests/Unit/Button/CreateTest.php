@@ -148,9 +148,9 @@ class CreateTest extends BootstrapComponentsTestCase
         $configLabel = 'test-config-label';
         config()->set('bootstrap-components.button.create.label', $configLabel);
         $html = bsCreate()->toHtml();
-        $this->assertStringContainsString('title="' . $configLabel . '">', $html);
+        $this->assertStringContainsString('title="bootstrap-components::' . $configLabel . '">', $html);
         $this->assertStringContainsString(
-            '<span class="label">' . $configLabel . '</span>',
+            '<span class="label">bootstrap-components::' . $configLabel . '</span>',
             $html
         );
     }
