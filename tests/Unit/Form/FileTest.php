@@ -154,7 +154,7 @@ class FileTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.file.legend', $configLegend);
         $html = bsFile()->name('name')->toHtml();
         $this->assertStringContainsString('file-name-legend', $html);
-        $this->assertStringContainsString($configLegend, $html);
+        $this->assertStringContainsString('bootstrap-components::' . $configLegend, $html);
     }
 
     public function testSetLegend()

@@ -261,7 +261,6 @@ abstract class Input extends Component
      */
     protected function defineValues(): array
     {
-//        dd($this->label, $this->defaultLabel(), $this->label ?? $this->defaultLabel());
         return [
             'model'                => $this->model,
             'type'                 => $this->type,
@@ -283,7 +282,7 @@ abstract class Input extends Component
      */
     protected function defaultPrepend(): ?string
     {
-        return config('bootstrap-components.' . $this->configKey . '.prepend') ?? null;
+        return config('bootstrap-components.' . $this->configKey . '.prepend');
     }
 
     /**
@@ -291,7 +290,7 @@ abstract class Input extends Component
      */
     protected function defaultAppend(): ?string
     {
-        return config('bootstrap-components.' . $this->configKey . '.append') ?? null;
+        return config('bootstrap-components.' . $this->configKey . '.append');
     }
 
     /**
@@ -299,7 +298,9 @@ abstract class Input extends Component
      */
     protected function defaultLegend(): ?string
     {
-        return config('bootstrap-components.' . $this->configKey . '.legend');
+        $legend = config('bootstrap-components.' . $this->configKey . '.legend');
+
+        return $legend ? 'bootstrap-components::' . $legend : null;
     }
 
     /**

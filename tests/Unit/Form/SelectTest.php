@@ -568,7 +568,7 @@ class SelectTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.select.legend', $configLegend);
         $html = bsSelect()->name('name')->toHtml();
         $this->assertStringContainsString('select-name-legend', $html);
-        $this->assertStringContainsString($configLegend, $html);
+        $this->assertStringContainsString('bootstrap-components::' . $configLegend, $html);
     }
 
     public function testSetLegend()

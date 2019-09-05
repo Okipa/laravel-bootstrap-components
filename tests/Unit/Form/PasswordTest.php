@@ -156,7 +156,7 @@ class PasswordTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.password.legend', $configLegend);
         $html = bsPassword()->name('name')->toHtml();
         $this->assertStringContainsString('password-name-legend', $html);
-        $this->assertStringContainsString($configLegend, $html);
+        $this->assertStringContainsString('bootstrap-components::' . $configLegend, $html);
     }
 
     public function testSetLegend()

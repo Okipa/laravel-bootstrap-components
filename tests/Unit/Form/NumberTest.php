@@ -156,7 +156,7 @@ class NumberTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.number.legend', $configLegend);
         $html = bsNumber()->name('name')->toHtml();
         $this->assertStringContainsString('number-name-legend', $html);
-        $this->assertStringContainsString($configLegend, $html);
+        $this->assertStringContainsString('bootstrap-components::' . $configLegend, $html);
     }
 
     public function testSetLegend()

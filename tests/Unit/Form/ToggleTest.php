@@ -147,7 +147,7 @@ class ToggleTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.toggle.legend', $configLegend);
         $html = bsToggle()->name('name')->toHtml();
         $this->assertStringContainsString('toggle-name-legend', $html);
-        $this->assertStringContainsString($configLegend, $html);
+        $this->assertStringContainsString('bootstrap-components::' . $configLegend, $html);
     }
 
     public function testSetLegend()

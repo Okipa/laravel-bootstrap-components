@@ -212,7 +212,7 @@ class DateTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.date.legend', $configLegend);
         $html = bsDate()->name('name')->toHtml();
         $this->assertStringContainsString('date-name-legend', $html);
-        $this->assertStringContainsString($configLegend, $html);
+        $this->assertStringContainsString('bootstrap-components::' . $configLegend, $html);
     }
 
     public function testSetLegend()

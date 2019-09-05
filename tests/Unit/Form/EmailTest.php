@@ -156,7 +156,7 @@ class EmailTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.email.legend', $configLegend);
         $html = bsEmail()->name('name')->toHtml();
         $this->assertStringContainsString('email-name-legend', $html);
-        $this->assertStringContainsString($configLegend, $html);
+        $this->assertStringContainsString('bootstrap-components::' . $configLegend, $html);
     }
 
     public function testSetLegend()

@@ -212,7 +212,7 @@ class TimeTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.time.legend', $configLegend);
         $html = bsTime()->name('name')->toHtml();
         $this->assertStringContainsString('time-name-legend', $html);
-        $this->assertStringContainsString($configLegend, $html);
+        $this->assertStringContainsString('bootstrap-components::' . $configLegend, $html);
     }
 
     public function testSetLegend()

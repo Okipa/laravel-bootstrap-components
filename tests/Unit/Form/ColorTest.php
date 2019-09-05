@@ -156,7 +156,7 @@ class ColorTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.color.legend', $configLegend);
         $html = bsColor()->name('name')->toHtml();
         $this->assertStringContainsString('color-name-legend', $html);
-        $this->assertStringContainsString($configLegend, $html);
+        $this->assertStringContainsString('bootstrap-components::' . $configLegend, $html);
     }
 
     public function testSetLegend()

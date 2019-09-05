@@ -157,7 +157,7 @@ class TelTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.tel.legend', $configLegend);
         $html = bsTel()->name('name')->toHtml();
         $this->assertStringContainsString('tel-name-legend', $html);
-        $this->assertStringContainsString($configLegend, $html);
+        $this->assertStringContainsString('bootstrap-components::' . $configLegend, $html);
     }
 
     public function testSetLegend()
