@@ -43,13 +43,13 @@ class UrlTest extends BootstrapComponentsTestCase
     public function testSetName()
     {
         $html = bsUrl()->name('name')->toHtml();
-        $this->assertStringContainsString('name="name"', $html);
+        $this->assertStringContainsString(' name="name"', $html);
     }
 
     public function testType()
     {
         $html = bsUrl()->name('name')->toHtml();
-        $this->assertStringContainsString('type="url"', $html);
+        $this->assertStringContainsString(' type="url"', $html);
     }
 
     public function testInputWithoutName()
@@ -62,7 +62,7 @@ class UrlTest extends BootstrapComponentsTestCase
     {
         $user = $this->createUniqueUser();
         $html = bsUrl()->model($user)->name('name')->toHtml();
-        $this->assertStringContainsString('value="' . $user->name . '"', $html);
+        $this->assertStringContainsString(' value="' . $user->name . '"', $html);
     }
 
     public function testConfigPrepend()
@@ -199,7 +199,7 @@ class UrlTest extends BootstrapComponentsTestCase
     {
         $customValue = 'test-custom-value';
         $html = bsUrl()->name('name')->value($customValue)->toHtml();
-        $this->assertStringContainsString('value="' . $customValue . '"', $html);
+        $this->assertStringContainsString(' value="' . $customValue . '"', $html);
     }
 
     public function testOldValue()
@@ -214,8 +214,8 @@ class UrlTest extends BootstrapComponentsTestCase
         ]);
         $this->call('GET', 'test');
         $html = bsUrl()->name('name')->value($customValue)->toHtml();
-        $this->assertStringContainsString('value="' . $oldValue . '"', $html);
-        $this->assertStringNotContainsString('value="' . $customValue . '"', $html);
+        $this->assertStringContainsString(' value="' . $oldValue . '"', $html);
+        $this->assertStringNotContainsString(' value="' . $customValue . '"', $html);
     }
 
     public function testSetLabel()
@@ -223,8 +223,8 @@ class UrlTest extends BootstrapComponentsTestCase
         $label = 'test-custom-label';
         $html = bsUrl()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="url-name">' . $label . '</label>', $html);
-        $this->assertStringContainsString('placeholder="' . $label . '"', $html);
-        $this->assertStringContainsString('aria-label="' . $label . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . $label . '"', $html);
+        $this->assertStringContainsString(' aria-label="' . $label . '"', $html);
     }
 
     public function testSetTranslatedLabel()
@@ -232,22 +232,22 @@ class UrlTest extends BootstrapComponentsTestCase
         $label = 'bootstrap-components::bootstrap-components.label.validate';
         $html = bsUrl()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="url-name">' . __($label) . '</label>', $html);
-        $this->assertStringContainsString('placeholder="' . __($label) . '"', $html);
-        $this->assertStringContainsString('aria-label="' . __($label) . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . __($label) . '"', $html);
+        $this->assertStringContainsString(' aria-label="' . __($label) . '"', $html);
     }
 
     public function testNoLabel()
     {
         $html = bsUrl()->name('name')->toHtml();
         $this->assertStringContainsString('<label for="url-name">validation.attributes.name</label>', $html);
-        $this->assertStringContainsString('aria-label="validation.attributes.name"', $html);
+        $this->assertStringContainsString(' aria-label="validation.attributes.name"', $html);
     }
 
     public function testHideLabel()
     {
         $html = bsUrl()->name('name')->label(false)->toHtml();
         $this->assertStringNotContainsString('<label for="url-name">validation.attributes.name</label>', $html);
-        $this->assertStringNotContainsString('aria-label="validation.attributes.name"', $html);
+        $this->assertStringNotContainsString(' aria-label="validation.attributes.name"', $html);
     }
 
     public function testConfigLabelPositionedAbove()
@@ -290,14 +290,14 @@ class UrlTest extends BootstrapComponentsTestCase
     {
         $placeholder = 'test-custom-placeholder';
         $html = bsUrl()->name('name')->placeholder($placeholder)->toHtml();
-        $this->assertStringContainsString('placeholder="' . $placeholder . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . $placeholder . '"', $html);
     }
 
     public function testSetTranslatedPlaceholder()
     {
         $placeholder = 'bootstrap-components::bootstrap-components.label.validate';
         $html = bsUrl()->name('name')->placeholder($placeholder)->toHtml();
-        $this->assertStringContainsString('placeholder="' . __($placeholder) . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . __($placeholder) . '"', $html);
     }
 
     public function testSetPlaceholderWithLabel()
@@ -305,25 +305,25 @@ class UrlTest extends BootstrapComponentsTestCase
         $label = 'test-custom-label';
         $placeholder = 'test-custom-placeholder';
         $html = bsUrl()->name('name')->label($label)->placeholder($placeholder)->toHtml();
-        $this->assertStringContainsString('placeholder="' . $placeholder . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . $placeholder . '"', $html);
     }
 
     public function testNoPlaceholder()
     {
         $html = bsUrl()->name('name')->toHtml();
-        $this->assertStringContainsString('placeholder="validation.attributes.name"', $html);
+        $this->assertStringContainsString(' placeholder="validation.attributes.name"', $html);
     }
 
     public function testNoPlaceholderWithNoLabel()
     {
         $html = bsUrl()->name('name')->label(false)->toHtml();
-        $this->assertStringContainsString('placeholder="validation.attributes.name"', $html);
+        $this->assertStringContainsString(' placeholder="validation.attributes.name"', $html);
     }
 
     public function testHidePlaceholder()
     {
         $html = bsUrl()->name('name')->placeholder(false)->toHtml();
-        $this->assertStringNotContainsString('placeholder="', $html);
+        $this->assertStringNotContainsString(' placeholder="', $html);
     }
 
     public function testConfigDisplaySuccess()
@@ -430,7 +430,7 @@ class UrlTest extends BootstrapComponentsTestCase
     public function testSetNoComponentId()
     {
         $html = bsUrl()->name('name')->toHtml();
-        $this->assertStringContainsString('for="url-name"', $html);
+        $this->assertStringContainsString(' for="url-name"', $html);
         $this->assertStringContainsString('<input id="url-name"', $html);
     }
 
@@ -438,7 +438,7 @@ class UrlTest extends BootstrapComponentsTestCase
     {
         $customComponentId = 'test-custom-component-id';
         $html = bsUrl()->name('name')->componentId($customComponentId)->toHtml();
-        $this->assertStringContainsString('for="' . $customComponentId . '"', $html);
+        $this->assertStringContainsString(' for="' . $customComponentId . '"', $html);
         $this->assertStringContainsString('<input id="' . $customComponentId . '"', $html);
     }
 

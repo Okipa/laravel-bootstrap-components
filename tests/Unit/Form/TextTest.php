@@ -40,13 +40,13 @@ class TextTest extends BootstrapComponentsTestCase
     public function testName()
     {
         $html = bsText()->name('name')->toHtml();
-        $this->assertStringContainsString('name="name"', $html);
+        $this->assertStringContainsString(' name="name"', $html);
     }
 
     public function testType()
     {
         $html = bsText()->name('name')->toHtml();
-        $this->assertStringContainsString('type="text"', $html);
+        $this->assertStringContainsString(' type="text"', $html);
     }
 
     public function testInputWithoutName()
@@ -59,7 +59,7 @@ class TextTest extends BootstrapComponentsTestCase
     {
         $user = $this->createUniqueUser();
         $html = bsText()->model($user)->name('name')->toHtml();
-        $this->assertStringContainsString('value="' . $user->name . '"', $html);
+        $this->assertStringContainsString(' value="' . $user->name . '"', $html);
     }
 
     public function testConfigPrepend()
@@ -196,7 +196,7 @@ class TextTest extends BootstrapComponentsTestCase
     {
         $customValue = 'test-custom-value';
         $html = bsText()->name('name')->value($customValue)->toHtml();
-        $this->assertStringContainsString('value="' . $customValue . '"', $html);
+        $this->assertStringContainsString(' value="' . $customValue . '"', $html);
     }
 
     public function testOldValue()
@@ -211,8 +211,8 @@ class TextTest extends BootstrapComponentsTestCase
         ]);
         $this->call('GET', 'test');
         $html = bsText()->name('name')->value($customValue)->toHtml();
-        $this->assertStringContainsString('value="' . $oldValue . '"', $html);
-        $this->assertStringNotContainsString('value="' . $customValue . '"', $html);
+        $this->assertStringContainsString(' value="' . $oldValue . '"', $html);
+        $this->assertStringNotContainsString(' value="' . $customValue . '"', $html);
     }
 
     public function testSetLabel()
@@ -220,8 +220,8 @@ class TextTest extends BootstrapComponentsTestCase
         $label = 'test-custom-label';
         $html = bsText()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="text-name">' . $label . '</label>', $html);
-        $this->assertStringContainsString('placeholder="' . $label . '"', $html);
-        $this->assertStringContainsString('aria-label="' . $label . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . $label . '"', $html);
+        $this->assertStringContainsString(' aria-label="' . $label . '"', $html);
     }
 
     public function testSetTranslatedLabel()
@@ -229,8 +229,8 @@ class TextTest extends BootstrapComponentsTestCase
         $label = 'bootstrap-components::bootstrap-components.label.validate';
         $html = bsText()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="text-name">' . __($label) . '</label>', $html);
-        $this->assertStringContainsString('placeholder="' . __($label) . '"', $html);
-        $this->assertStringContainsString('aria-label="' . __($label) . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . __($label) . '"', $html);
+        $this->assertStringContainsString(' aria-label="' . __($label) . '"', $html);
     }
 
     public function testNoLabel()
@@ -241,7 +241,7 @@ class TextTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertStringContainsString(
-            'aria-label="validation.attributes.name"',
+            ' aria-label="validation.attributes.name"',
             $html
         );
     }
@@ -254,7 +254,7 @@ class TextTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertStringNotContainsString(
-            'aria-label="validation.attributes.name"',
+            ' aria-label="validation.attributes.name"',
             $html
         );
     }
@@ -299,14 +299,14 @@ class TextTest extends BootstrapComponentsTestCase
     {
         $placeholder = 'test-custom-placeholder';
         $html = bsText()->name('name')->placeholder($placeholder)->toHtml();
-        $this->assertStringContainsString('placeholder="' . $placeholder . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . $placeholder . '"', $html);
     }
 
     public function testSetTranslatedPlaceholder()
     {
         $placeholder = 'bootstrap-components::bootstrap-components.label.validate';
         $html = bsText()->name('name')->placeholder($placeholder)->toHtml();
-        $this->assertStringContainsString('placeholder="' . __($placeholder) . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . __($placeholder) . '"', $html);
     }
 
     public function testSetPlaceholderWithLabel()
@@ -314,25 +314,25 @@ class TextTest extends BootstrapComponentsTestCase
         $label = 'test-custom-label';
         $placeholder = 'test-custom-placeholder';
         $html = bsText()->name('name')->label($label)->placeholder($placeholder)->toHtml();
-        $this->assertStringContainsString('placeholder="' . $placeholder . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . $placeholder . '"', $html);
     }
 
     public function testNoPlaceholder()
     {
         $html = bsText()->name('name')->toHtml();
-        $this->assertStringContainsString('placeholder="validation.attributes.name"', $html);
+        $this->assertStringContainsString(' placeholder="validation.attributes.name"', $html);
     }
 
     public function testNoPlaceholderWithNoLabel()
     {
         $html = bsText()->name('name')->label(false)->toHtml();
-        $this->assertStringContainsString('placeholder="validation.attributes.name"', $html);
+        $this->assertStringContainsString(' placeholder="validation.attributes.name"', $html);
     }
 
     public function testHidePlaceholder()
     {
         $html = bsText()->name('name')->placeholder(false)->toHtml();
-        $this->assertStringNotContainsString('placeholder="', $html);
+        $this->assertStringNotContainsString(' placeholder="', $html);
     }
 
     public function testConfigDisplaySuccess()
@@ -439,7 +439,7 @@ class TextTest extends BootstrapComponentsTestCase
     public function testSetNoComponentId()
     {
         $html = bsText()->name('name')->toHtml();
-        $this->assertStringContainsString('for="text-name"', $html);
+        $this->assertStringContainsString(' for="text-name"', $html);
         $this->assertStringContainsString('<input id="text-name"', $html);
     }
 
@@ -447,7 +447,7 @@ class TextTest extends BootstrapComponentsTestCase
     {
         $customComponentId = 'test-custom-component-id';
         $html = bsText()->name('name')->componentId($customComponentId)->toHtml();
-        $this->assertStringContainsString('for="' . $customComponentId . '"', $html);
+        $this->assertStringContainsString(' for="' . $customComponentId . '"', $html);
         $this->assertStringContainsString('<input id="' . $customComponentId . '"', $html);
     }
 
@@ -457,7 +457,7 @@ class TextTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.text.classes.container', [$configContainerClasses]);
         $html = bsText()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="text-name-container ' . $configContainerClasses . '"',
+            ' class="text-name-container ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -469,11 +469,11 @@ class TextTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.text.classes.container', [$configContainerClasses]);
         $html = bsText()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="text-name-container ' . $customContainerClasses . '"',
+            ' class="text-name-container ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="text-name-container ' . $configContainerClasses . '"',
+            ' class="text-name-container ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -484,7 +484,7 @@ class TextTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.text.classes.component', [$configComponentClasses]);
         $html = bsText()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="form-control text-name-component ' . $configComponentClasses . '"',
+            ' class="form-control text-name-component ' . $configComponentClasses . '"',
             $html
         );
     }
@@ -496,11 +496,11 @@ class TextTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.text.classes.component', [$customComponentClasses]);
         $html = bsText()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="form-control text-name-component ' . $customComponentClasses . '"',
+            ' class="form-control text-name-component ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="form-control text-name-component ' . $configComponentClasses . '"',
+            ' class="form-control text-name-component ' . $configComponentClasses . '"',
             $html
         );
     }

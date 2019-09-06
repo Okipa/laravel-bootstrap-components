@@ -43,9 +43,9 @@ class ValidateTest extends BootstrapComponentsTestCase
     public function testType()
     {
         $html = bsValidate()->toHtml();
-        $this->assertStringContainsString('class="submit-container', $html);
+        $this->assertStringContainsString(' class="submit-container', $html);
         $this->assertStringNotContainsString('href="http://localhost"', $html);
-        $this->assertStringContainsString('class="submit-component', $html);
+        $this->assertStringContainsString(' class="submit-component', $html);
     }
 
     public function testSetUrl()

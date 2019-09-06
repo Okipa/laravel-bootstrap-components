@@ -41,7 +41,7 @@ class FileTest extends BootstrapComponentsTestCase
     public function testSetName()
     {
         $html = bsFile()->name('name')->toHtml();
-        $this->assertStringContainsString('name="name"', $html);
+        $this->assertStringContainsString(' name="name"', $html);
     }
 
     public function testInputWithoutName()
@@ -227,7 +227,7 @@ class FileTest extends BootstrapComponentsTestCase
         $label = 'test-custom-label';
         $html = bsFile()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="file-name">' . $label . '</label>', $html);
-        $this->assertStringContainsString('aria-label="' . $label . '"', $html);
+        $this->assertStringContainsString(' aria-label="' . $label . '"', $html);
     }
 
     public function testSetTranslatedLabel()
@@ -235,7 +235,7 @@ class FileTest extends BootstrapComponentsTestCase
         $label = 'bootstrap-components::bootstrap-components.label.validate';
         $html = bsFile()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="file-name">' . __($label) . '</label>', $html);
-        $this->assertStringContainsString('aria-label="' . __($label) . '"', $html);
+        $this->assertStringContainsString(' aria-label="' . __($label) . '"', $html);
     }
 
     public function testNoLabel()
@@ -246,7 +246,7 @@ class FileTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertStringContainsString(
-            'aria-label="validation.attributes.name"',
+            ' aria-label="validation.attributes.name"',
             $html
         );
     }
@@ -259,7 +259,7 @@ class FileTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertStringNotContainsString(
-            'aria-label="validation.attributes.name"',
+            ' aria-label="validation.attributes.name"',
             $html
         );
     }
@@ -447,7 +447,7 @@ class FileTest extends BootstrapComponentsTestCase
         $configContainerClasses = 'test-config-class-container';
         config()->set('bootstrap-components.form.file.classes.container', [$configContainerClasses]);
         $html = bsFile()->name('name')->toHtml();
-        $this->assertStringContainsString('class="file-name-container ' . $configContainerClasses . '"', $html);
+        $this->assertStringContainsString(' class="file-name-container ' . $configContainerClasses . '"', $html);
     }
 
     public function testSetContainerClasses()
@@ -457,11 +457,11 @@ class FileTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.file.classes.container', [$configContainerClasses]);
         $html = bsFile()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="file-name-container ' . $customContainerClasses . '"',
+            ' class="file-name-container ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="file-name-container ' . $configContainerClasses . '"',
+            ' class="file-name-container ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -482,7 +482,7 @@ class FileTest extends BootstrapComponentsTestCase
     public function testSetNoComponentId()
     {
         $html = bsFile()->name('name')->toHtml();
-        $this->assertStringContainsString('for="file-name"', $html);
+        $this->assertStringContainsString(' for="file-name"', $html);
         $this->assertStringContainsString('<input id="file-name"', $html);
     }
 
@@ -490,7 +490,7 @@ class FileTest extends BootstrapComponentsTestCase
     {
         $customComponentId = 'test-custom-component-id';
         $html = bsFile()->name('name')->componentId($customComponentId)->toHtml();
-        $this->assertStringContainsString('for="' . $customComponentId . '"', $html);
+        $this->assertStringContainsString(' for="' . $customComponentId . '"', $html);
         $this->assertStringContainsString('<input id="' . $customComponentId . '"', $html);
     }
 
@@ -500,7 +500,7 @@ class FileTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.file.classes.component', [$configComponentClasses]);
         $html = bsFile()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="custom-file-input form-control file-name-component ' . $configComponentClasses . '"',
+            ' class="custom-file-input form-control file-name-component ' . $configComponentClasses . '"',
             $html
         );
     }
@@ -512,11 +512,11 @@ class FileTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.file.classes.component', [$customComponentClasses]);
         $html = bsFile()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="custom-file-input form-control file-name-component ' . $customComponentClasses . '"',
+            ' class="custom-file-input form-control file-name-component ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="custom-file-input form-control file-name-component ' . $configComponentClasses . '"',
+            ' class="custom-file-input form-control file-name-component ' . $configComponentClasses . '"',
             $html
         );
     }
@@ -572,8 +572,8 @@ class FileTest extends BootstrapComponentsTestCase
             return 'html';
         })->toHtml();
         $this->assertStringContainsString('<input id="checkbox-remove-name"', $html);
-        $this->assertStringContainsString('name="remove_name"', $html);
-        $this->assertStringContainsString('for="checkbox-remove-name">'
+        $this->assertStringContainsString(' name="remove_name"', $html);
+        $this->assertStringContainsString(' for="checkbox-remove-name">'
             . __('bootstrap-components::bootstrap-components.label.remove')
             . ' validation.attributes.name', $html);
     }
@@ -585,7 +585,7 @@ class FileTest extends BootstrapComponentsTestCase
             return null;
         })->toHtml();
         $this->assertStringNotContainsString('<input id="checkbox-remove-name"', $html);
-        $this->assertStringNotContainsString('name="remove_name"', $html);
+        $this->assertStringNotContainsString(' name="remove_name"', $html);
     }
 
     public function testConfigShowRemoveCheckboxWithoutUploadedFile()
@@ -593,7 +593,7 @@ class FileTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.file.show_remove_checkbox', true);
         $html = bsFile()->name('name')->toHtml();
         $this->assertStringNotContainsString('<input id="checkbox-remove-name"', $html);
-        $this->assertStringNotContainsString('name="remove_name"', $html);
+        $this->assertStringNotContainsString(' name="remove_name"', $html);
     }
 
     public function testConfigHideRemoveCheckboxWithUploadedFile()
@@ -603,7 +603,7 @@ class FileTest extends BootstrapComponentsTestCase
             return 'html';
         })->toHtml();
         $this->assertStringNotContainsString('<input id="checkbox-remove-name"', $html);
-        $this->assertStringNotContainsString('name="remove_name"', $html);
+        $this->assertStringNotContainsString(' name="remove_name"', $html);
     }
 
     public function testShowRemoveCheckboxWithUploadedFile()
@@ -613,7 +613,7 @@ class FileTest extends BootstrapComponentsTestCase
             return 'html';
         })->showRemoveCheckbox(true)->toHtml();
         $this->assertStringContainsString('<input id="checkbox-remove-name"', $html);
-        $this->assertStringContainsString('for="checkbox-remove-name">'
+        $this->assertStringContainsString(' for="checkbox-remove-name">'
             . __('bootstrap-components::bootstrap-components.label.remove')
             . ' validation.attributes.name', $html);
     }
@@ -625,7 +625,7 @@ class FileTest extends BootstrapComponentsTestCase
             return 'html';
         })->showRemoveCheckbox(false)->toHtml();
         $this->assertStringNotContainsString('<input id="checkbox-remove-name"', $html);
-        $this->assertStringNotContainsString('name="remove_name"', $html);
+        $this->assertStringNotContainsString(' name="remove_name"', $html);
     }
 
     public function testShowRemoveCheckboxWithCustomRemoveLabel()
@@ -635,6 +635,6 @@ class FileTest extends BootstrapComponentsTestCase
             return 'html';
         })->showRemoveCheckbox(true, 'Test')->toHtml();
         $this->assertStringContainsString('<input id="checkbox-remove-name"', $html);
-        $this->assertStringContainsString('for="checkbox-remove-name">Test', $html);
+        $this->assertStringContainsString(' for="checkbox-remove-name">Test', $html);
     }
 }

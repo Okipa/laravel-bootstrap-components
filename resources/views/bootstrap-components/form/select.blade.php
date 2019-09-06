@@ -6,7 +6,7 @@
         <div class="input-group">
     @endif
         @include('bootstrap-components::bootstrap-components.partials.prepend')
-        <select id="{{ $componentId }}" {{ classTag($type . '-' . Str::slug($name) . '-component', 'custom-select', $componentClasses, validationStatus($name)) }}name="{{ $name . ($multiple ? '[]' : '') }}" {{ htmlAttributes($multiple ? 'multiple' : null, $componentHtmlAttributes) }}>
+        <select id="{{ $componentId }}"{{ classTag($type . '-' . Str::slug($name) . '-component', 'custom-select', $componentClasses, validationStatus($name)) }} name="{{ $name . ($multiple ? '[]' : '') }}"{{ htmlAttributes($multiple ? 'multiple' : null, $componentHtmlAttributes) }}>
             @if($placeholder)
                 <option value="" disabled="disabled"{{ htmlAttributes(count(array_filter(Arr::pluck($options, 'selected'))) ? null : ['selected' => 'selected']) }}>@lang($placeholder)</option>
             @endif
