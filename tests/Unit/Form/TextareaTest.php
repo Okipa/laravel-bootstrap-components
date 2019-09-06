@@ -40,7 +40,7 @@ class TextareaTest extends BootstrapComponentsTestCase
     public function testSetName()
     {
         $html = bsTextarea()->name('name')->toHtml();
-        $this->assertStringContainsString('name="name"', $html);
+        $this->assertStringContainsString(' name="name"', $html);
     }
 
     public function testType()
@@ -60,7 +60,7 @@ class TextareaTest extends BootstrapComponentsTestCase
         $user = $this->createUniqueUser();
         $html = bsTextarea()->model($user)->name('name')->toHtml();
         $this->assertStringContainsString(
-            'aria-describedby="textarea-name">' . $user->name . '</textarea>',
+            ' aria-describedby="textarea-name">' . $user->name . '</textarea>',
             $html
         );
     }
@@ -200,7 +200,7 @@ class TextareaTest extends BootstrapComponentsTestCase
         $customValue = 'test-custom-value';
         $html = bsTextarea()->name('name')->value($customValue)->toHtml();
         $this->assertStringContainsString(
-            'aria-describedby="textarea-name">' . $customValue . '</textarea>',
+            ' aria-describedby="textarea-name">' . $customValue . '</textarea>',
             $html
         );
     }
@@ -218,11 +218,11 @@ class TextareaTest extends BootstrapComponentsTestCase
         $this->call('GET', 'test');
         $html = bsTextarea()->name('name')->value($customValue)->toHtml();
         $this->assertStringContainsString(
-            'aria-describedby="textarea-name">' . $oldValue . '</textarea>',
+            ' aria-describedby="textarea-name">' . $oldValue . '</textarea>',
             $html
         );
         $this->assertStringNotContainsString(
-            'aria-describedby="textarea-name">' . $customValue . '</textarea>',
+            ' aria-describedby="textarea-name">' . $customValue . '</textarea>',
             $html
         );
     }
@@ -232,8 +232,8 @@ class TextareaTest extends BootstrapComponentsTestCase
         $label = 'test-custom-label';
         $html = bsTextarea()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="textarea-name">' . $label . '</label>', $html);
-        $this->assertStringContainsString('placeholder="' . $label . '"', $html);
-        $this->assertStringContainsString('aria-label="' . $label . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . $label . '"', $html);
+        $this->assertStringContainsString(' aria-label="' . $label . '"', $html);
     }
 
     public function testSetTranslatedLabel()
@@ -241,8 +241,8 @@ class TextareaTest extends BootstrapComponentsTestCase
         $label = 'bootstrap-components::bootstrap-components.label.validate';
         $html = bsTextarea()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="textarea-name">' . __($label) . '</label>', $html);
-        $this->assertStringContainsString('placeholder="' . __($label) . '"', $html);
-        $this->assertStringContainsString('aria-label="' . __($label) . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . __($label) . '"', $html);
+        $this->assertStringContainsString(' aria-label="' . __($label) . '"', $html);
     }
 
     public function testNoLabel()
@@ -253,7 +253,7 @@ class TextareaTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertStringContainsString(
-            'aria-label="validation.attributes.name"',
+            ' aria-label="validation.attributes.name"',
             $html
         );
     }
@@ -266,7 +266,7 @@ class TextareaTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertStringNotContainsString(
-            'aria-label="validation.attributes.name"',
+            ' aria-label="validation.attributes.name"',
             $html
         );
     }
@@ -311,14 +311,14 @@ class TextareaTest extends BootstrapComponentsTestCase
     {
         $placeholder = 'test-custom-placeholder';
         $html = bsTextarea()->name('name')->placeholder($placeholder)->toHtml();
-        $this->assertStringContainsString('placeholder="' . $placeholder . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . $placeholder . '"', $html);
     }
 
     public function testSetTranslatedPlaceholder()
     {
         $placeholder = 'bootstrap-components::bootstrap-components.label.validate';
         $html = bsTextarea()->name('name')->placeholder($placeholder)->toHtml();
-        $this->assertStringContainsString('placeholder="' . __($placeholder) . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . __($placeholder) . '"', $html);
     }
 
     public function testSetPlaceholderWithLabel()
@@ -326,25 +326,25 @@ class TextareaTest extends BootstrapComponentsTestCase
         $label = 'test-custom-label';
         $placeholder = 'test-custom-placeholder';
         $html = bsTextarea()->name('name')->label($label)->placeholder($placeholder)->toHtml();
-        $this->assertStringContainsString('placeholder="' . $placeholder . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . $placeholder . '"', $html);
     }
 
     public function testNoPlaceholder()
     {
         $html = bsTextarea()->name('name')->toHtml();
-        $this->assertStringContainsString('placeholder="validation.attributes.name"', $html);
+        $this->assertStringContainsString(' placeholder="validation.attributes.name"', $html);
     }
 
     public function testNoPlaceholderWithNoLabel()
     {
         $html = bsTextarea()->name('name')->label(false)->toHtml();
-        $this->assertStringContainsString('placeholder="validation.attributes.name"', $html);
+        $this->assertStringContainsString(' placeholder="validation.attributes.name"', $html);
     }
 
     public function testHidePlaceholder()
     {
         $html = bsTextarea()->name('name')->placeholder(false)->toHtml();
-        $this->assertStringNotContainsString('placeholder="', $html);
+        $this->assertStringNotContainsString(' placeholder="', $html);
     }
 
     public function testConfigDisplaySuccess()
@@ -451,7 +451,7 @@ class TextareaTest extends BootstrapComponentsTestCase
     public function testSetNoComponentId()
     {
         $html = bsTextarea()->name('name')->toHtml();
-        $this->assertStringContainsString('for="textarea-name"', $html);
+        $this->assertStringContainsString(' for="textarea-name"', $html);
         $this->assertStringContainsString('<textarea id="textarea-name"', $html);
     }
 
@@ -459,7 +459,7 @@ class TextareaTest extends BootstrapComponentsTestCase
     {
         $customComponentId = 'test-custom-component-id';
         $html = bsTextarea()->name('name')->componentId($customComponentId)->toHtml();
-        $this->assertStringContainsString('for="' . $customComponentId . '"', $html);
+        $this->assertStringContainsString(' for="' . $customComponentId . '"', $html);
         $this->assertStringContainsString('<textarea id="' . $customComponentId . '"', $html);
     }
 
@@ -469,7 +469,7 @@ class TextareaTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.textarea.classes.container', [$configContainerClasses]);
         $html = bsTextarea()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="textarea-name-container ' . $configContainerClasses . '"',
+            ' class="textarea-name-container ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -481,11 +481,11 @@ class TextareaTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.textarea.classes.container', [$configContainerClasses]);
         $html = bsTextarea()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="textarea-name-container ' . $customContainerClasses . '"',
+            ' class="textarea-name-container ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="textarea-name-container ' . $configContainerClasses . '"',
+            ' class="textarea-name-container ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -496,7 +496,7 @@ class TextareaTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.textarea.classes.component', [$configComponentClasses]);
         $html = bsTextarea()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="form-control textarea-name-component ' . $configComponentClasses . '"',
+            ' class="form-control textarea-name-component ' . $configComponentClasses . '"',
             $html
         );
     }
@@ -508,11 +508,11 @@ class TextareaTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.textarea.classes.component', [$customComponentClasses]);
         $html = bsTextarea()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="form-control textarea-name-component ' . $customComponentClasses . '"',
+            ' class="form-control textarea-name-component ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="form-control textarea-name-component ' . $configComponentClasses . '"',
+            ' class="form-control textarea-name-component ' . $configComponentClasses . '"',
             $html
         );
     }

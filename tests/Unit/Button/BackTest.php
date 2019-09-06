@@ -37,9 +37,9 @@ class BackTest extends BootstrapComponentsTestCase
     public function testType()
     {
         $html = bsBack()->toHtml();
-        $this->assertStringContainsString('class="button-container', $html);
+        $this->assertStringContainsString(' class="button-container', $html);
         $this->assertStringContainsString('href="http://localhost"', $html);
-        $this->assertStringContainsString('class="button-component', $html);
+        $this->assertStringContainsString(' class="button-component', $html);
     }
 
     public function testSetUrl()
@@ -224,7 +224,7 @@ class BackTest extends BootstrapComponentsTestCase
         $configContainerClasses = 'test-config-class-container';
         config()->set('bootstrap-components.button.back.classes.container', [$configContainerClasses]);
         $html = bsBack()->toHtml();
-        $this->assertStringContainsString('class="button-container ' . $configContainerClasses . '">', $html);
+        $this->assertStringContainsString(' class="button-container ' . $configContainerClasses . '">', $html);
     }
 
     public function testSetContainerClasses()
@@ -233,8 +233,8 @@ class BackTest extends BootstrapComponentsTestCase
         $customContainerClasses = 'test-custom-class-container';
         config()->set('bootstrap-components.input.classes.container', [$configContainerClasses]);
         $html = bsBack()->containerClasses([$customContainerClasses])->toHtml();
-        $this->assertStringContainsString('class="button-container ' . $customContainerClasses . '">', $html);
-        $this->assertStringNotContainsString('class="button-container ' . $configContainerClasses . '">', $html);
+        $this->assertStringContainsString(' class="button-container ' . $customContainerClasses . '">', $html);
+        $this->assertStringNotContainsString(' class="button-container ' . $configContainerClasses . '">', $html);
     }
 
     public function testConfigComponentClass()
@@ -242,7 +242,7 @@ class BackTest extends BootstrapComponentsTestCase
         $configComponentClasses = 'test-config-class-component';
         config()->set('bootstrap-components.button.back.classes.component', [$configComponentClasses]);
         $html = bsBack()->toHtml();
-        $this->assertStringContainsString('class="button-component ' . $configComponentClasses . '"', $html);
+        $this->assertStringContainsString(' class="button-component ' . $configComponentClasses . '"', $html);
     }
 
     public function testSetComponentClass()

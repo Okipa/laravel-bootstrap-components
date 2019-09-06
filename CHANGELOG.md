@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.4](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/1.0.4)
+2019-09-05
+- Fixed wrong use of https://github.com/Okipa/laravel-html-helper. Tests added to avoid regression.
+
 ## [1.0.3](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/1.0.3)
 2019-09-05
 - Fixed missing `bootstrap-components::` prefix for default config translations.

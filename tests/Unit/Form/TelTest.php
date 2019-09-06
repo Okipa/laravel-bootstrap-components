@@ -41,13 +41,13 @@ class TelTest extends BootstrapComponentsTestCase
     public function testSetName()
     {
         $html = bsTel()->name('name')->toHtml();
-        $this->assertStringContainsString('name="name"', $html);
+        $this->assertStringContainsString(' name="name"', $html);
     }
 
     public function testType()
     {
         $html = bsTel()->name('name')->toHtml();
-        $this->assertStringContainsString('type="tel"', $html);
+        $this->assertStringContainsString(' type="tel"', $html);
     }
 
     public function testInputWithoutName()
@@ -60,7 +60,7 @@ class TelTest extends BootstrapComponentsTestCase
     {
         $user = $this->createUniqueUser();
         $html = bsTel()->model($user)->name('name')->toHtml();
-        $this->assertStringContainsString('value="' . $user->name . '"', $html);
+        $this->assertStringContainsString(' value="' . $user->name . '"', $html);
     }
 
     public function testConfigPrepend()
@@ -197,7 +197,7 @@ class TelTest extends BootstrapComponentsTestCase
     {
         $customValue = 'test-custom-value';
         $html = bsTel()->name('name')->value($customValue)->toHtml();
-        $this->assertStringContainsString('value="' . $customValue . '"', $html);
+        $this->assertStringContainsString(' value="' . $customValue . '"', $html);
     }
 
     public function testOldValue()
@@ -212,8 +212,8 @@ class TelTest extends BootstrapComponentsTestCase
         ]);
         $this->call('GET', 'test');
         $html = bsTel()->name('name')->value($customValue)->toHtml();
-        $this->assertStringContainsString('value="' . $oldValue . '"', $html);
-        $this->assertStringNotContainsString('value="' . $customValue . '"', $html);
+        $this->assertStringContainsString(' value="' . $oldValue . '"', $html);
+        $this->assertStringNotContainsString(' value="' . $customValue . '"', $html);
     }
 
     public function testSetLabel()
@@ -221,8 +221,8 @@ class TelTest extends BootstrapComponentsTestCase
         $label = 'test-custom-label';
         $html = bsTel()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="tel-name">' . $label . '</label>', $html);
-        $this->assertStringContainsString('placeholder="' . $label . '"', $html);
-        $this->assertStringContainsString('aria-label="' . $label . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . $label . '"', $html);
+        $this->assertStringContainsString(' aria-label="' . $label . '"', $html);
     }
 
     public function testSetTranslatedLabel()
@@ -230,8 +230,8 @@ class TelTest extends BootstrapComponentsTestCase
         $label = 'bootstrap-components::bootstrap-components.label.validate';
         $html = bsTel()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="tel-name">' . __($label) . '</label>', $html);
-        $this->assertStringContainsString('placeholder="' . __($label) . '"', $html);
-        $this->assertStringContainsString('aria-label="' . __($label) . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . __($label) . '"', $html);
+        $this->assertStringContainsString(' aria-label="' . __($label) . '"', $html);
     }
 
     public function testNoLabel()
@@ -242,7 +242,7 @@ class TelTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertStringContainsString(
-            'aria-label="validation.attributes.name"',
+            ' aria-label="validation.attributes.name"',
             $html
         );
     }
@@ -255,7 +255,7 @@ class TelTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertStringNotContainsString(
-            'aria-label="validation.attributes.name"',
+            ' aria-label="validation.attributes.name"',
             $html
         );
     }
@@ -300,14 +300,14 @@ class TelTest extends BootstrapComponentsTestCase
     {
         $placeholder = 'test-custom-placeholder';
         $html = bsTel()->name('name')->placeholder($placeholder)->toHtml();
-        $this->assertStringContainsString('placeholder="' . $placeholder . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . $placeholder . '"', $html);
     }
 
     public function testSetTranslatedPlaceholder()
     {
         $placeholder = 'bootstrap-components::bootstrap-components.label.validate';
         $html = bsTel()->name('name')->placeholder($placeholder)->toHtml();
-        $this->assertStringContainsString('placeholder="' . __($placeholder) . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . __($placeholder) . '"', $html);
     }
 
     public function testSetPlaceholderWithLabel()
@@ -315,25 +315,25 @@ class TelTest extends BootstrapComponentsTestCase
         $label = 'test-custom-label';
         $placeholder = 'test-custom-placeholder';
         $html = bsTel()->name('name')->label($label)->placeholder($placeholder)->toHtml();
-        $this->assertStringContainsString('placeholder="' . $placeholder . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . $placeholder . '"', $html);
     }
 
     public function testNoPlaceholder()
     {
         $html = bsTel()->name('name')->toHtml();
-        $this->assertStringContainsString('placeholder="validation.attributes.name"', $html);
+        $this->assertStringContainsString(' placeholder="validation.attributes.name"', $html);
     }
 
     public function testNoPlaceholderWithNoLabel()
     {
         $html = bsTel()->name('name')->label(false)->toHtml();
-        $this->assertStringContainsString('placeholder="validation.attributes.name"', $html);
+        $this->assertStringContainsString(' placeholder="validation.attributes.name"', $html);
     }
 
     public function testHidePlaceholder()
     {
         $html = bsTel()->name('name')->placeholder(false)->toHtml();
-        $this->assertStringNotContainsString('placeholder="', $html);
+        $this->assertStringNotContainsString(' placeholder="', $html);
     }
 
     public function testConfigDisplaySuccess()
@@ -440,7 +440,7 @@ class TelTest extends BootstrapComponentsTestCase
     public function testSetNoComponentId()
     {
         $html = bsTel()->name('name')->toHtml();
-        $this->assertStringContainsString('for="tel-name"', $html);
+        $this->assertStringContainsString(' for="tel-name"', $html);
         $this->assertStringContainsString('<input id="tel-name"', $html);
     }
 
@@ -448,7 +448,7 @@ class TelTest extends BootstrapComponentsTestCase
     {
         $customComponentId = 'test-custom-component-id';
         $html = bsTel()->name('name')->componentId($customComponentId)->toHtml();
-        $this->assertStringContainsString('for="' . $customComponentId . '"', $html);
+        $this->assertStringContainsString(' for="' . $customComponentId . '"', $html);
         $this->assertStringContainsString('<input id="' . $customComponentId . '"', $html);
     }
 
@@ -457,7 +457,7 @@ class TelTest extends BootstrapComponentsTestCase
         $configContainerClasses = 'test-config-class-container';
         config()->set('bootstrap-components.form.tel.classes.container', [$configContainerClasses]);
         $html = bsTel()->name('name')->toHtml();
-        $this->assertStringContainsString('class="tel-name-container ' . $configContainerClasses . '"', $html);
+        $this->assertStringContainsString(' class="tel-name-container ' . $configContainerClasses . '"', $html);
     }
 
     public function testSetContainerClasses()
@@ -467,11 +467,11 @@ class TelTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.tel.classes.container', [$configContainerClasses]);
         $html = bsTel()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="tel-name-container ' . $customContainerClasses . '"',
+            ' class="tel-name-container ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="tel-name-container ' . $configContainerClasses . '"',
+            ' class="tel-name-container ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -482,7 +482,7 @@ class TelTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.tel.classes.component', [$configComponentClasses]);
         $html = bsTel()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="form-control tel-name-component ' . $configComponentClasses . '"',
+            ' class="form-control tel-name-component ' . $configComponentClasses . '"',
             $html
         );
     }
@@ -494,11 +494,11 @@ class TelTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.tel.classes.component', [$customComponentClasses]);
         $html = bsTel()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="form-control tel-name-component ' . $customComponentClasses . '"',
+            ' class="form-control tel-name-component ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="form-control tel-name-component ' . $configComponentClasses . '"',
+            ' class="form-control tel-name-component ' . $configComponentClasses . '"',
             $html
         );
     }

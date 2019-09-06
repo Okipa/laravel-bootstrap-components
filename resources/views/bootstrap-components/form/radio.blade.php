@@ -1,5 +1,5 @@
 <div{{ htmlAttributes($containerId ? ['id' => $containerId] : null) }}{{ classTag($type . '-' . Str::slug($name) . '-container', 'custom-control', 'custom-radio', $containerClasses) }}{{ htmlAttributes($containerHtmlAttributes) }}>
-    <input id="{{ $componentId }}" {{ classTag($type . '-' . Str::slug($name) . '-component', 'custom-control-input', $componentClasses, validationStatus($name)) }}type="{{ $type }}" name="{{ $name }}" value="{{ $value }}" {{ htmlAttributes($componentHtmlAttributes) }}>
+    <input id="{{ $componentId }}"{{ classTag($type . '-' . Str::slug($name) . '-component', 'custom-control-input', $componentClasses, validationStatus($name)) }} type="{{ $type }}" name="{{ $name }}" value="{{ $value }}"{{ htmlAttributes($componentHtmlAttributes) }}>
     <label class="custom-control-label" for="{{ $componentId }}">@if(! empty($prepend))<span class="label-prepend">{!! $prepend !!}</span> @endif{{ __($label) }}@if(! empty($append))<span class="label-append">{!! $append !!}</span> @endif</label>
     @include('bootstrap-components::bootstrap-components.partials.validation-feedback')
     @include('bootstrap-components::bootstrap-components.partials.legend')

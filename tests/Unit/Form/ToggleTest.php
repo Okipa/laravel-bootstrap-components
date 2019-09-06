@@ -39,13 +39,13 @@ class ToggleTest extends BootstrapComponentsTestCase
     public function testName()
     {
         $html = bsToggle()->name('name')->toHtml();
-        $this->assertStringContainsString('name="name"', $html);
+        $this->assertStringContainsString(' name="name"', $html);
     }
 
     public function testType()
     {
         $html = bsToggle()->name('name')->toHtml();
-        $this->assertStringContainsString('type="checkbox"', $html);
+        $this->assertStringContainsString(' type="checkbox"', $html);
     }
 
     public function testInputWithoutName()
@@ -230,21 +230,21 @@ class ToggleTest extends BootstrapComponentsTestCase
     {
         $label = 'test-custom-label';
         $html = bsToggle()->name('name')->label($label)->toHtml();
-        $this->assertStringContainsString('for="toggle-name">' . $label . '</label>', $html);
+        $this->assertStringContainsString(' for="toggle-name">' . $label . '</label>', $html);
     }
 
     public function testSetTranslatedLabel()
     {
         $label = 'bootstrap-components::bootstrap-components.label.validate';
         $html = bsToggle()->name('name')->label($label)->toHtml();
-        $this->assertStringContainsString('for="toggle-name">' . __($label) . '</label>', $html);
+        $this->assertStringContainsString(' for="toggle-name">' . __($label) . '</label>', $html);
     }
 
     public function testNoLabel()
     {
         $html = bsToggle()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'for="toggle-name">validation.attributes.name</label>',
+            ' for="toggle-name">validation.attributes.name</label>',
             $html
         );
     }
@@ -253,7 +253,7 @@ class ToggleTest extends BootstrapComponentsTestCase
     {
         $html = bsToggle()->name('name')->label(false)->toHtml();
         $this->assertStringNotContainsString(
-            'for="toggle-name">validation.attributes.name</label>',
+            ' for="toggle-name">validation.attributes.name</label>',
             $html
         );
     }
@@ -362,7 +362,7 @@ class ToggleTest extends BootstrapComponentsTestCase
     public function testSetNoComponentId()
     {
         $html = bsToggle()->name('name')->toHtml();
-        $this->assertStringContainsString('for="toggle-name"', $html);
+        $this->assertStringContainsString(' for="toggle-name"', $html);
         $this->assertStringContainsString('<input id="toggle-name"', $html);
     }
 
@@ -370,7 +370,7 @@ class ToggleTest extends BootstrapComponentsTestCase
     {
         $customComponentId = 'test-custom-component-id';
         $html = bsToggle()->name('name')->componentId($customComponentId)->toHtml();
-        $this->assertStringContainsString('for="' . $customComponentId . '"', $html);
+        $this->assertStringContainsString(' for="' . $customComponentId . '"', $html);
         $this->assertStringContainsString('<input id="' . $customComponentId . '"', $html);
     }
 

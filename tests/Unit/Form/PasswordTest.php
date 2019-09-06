@@ -40,13 +40,13 @@ class PasswordTest extends BootstrapComponentsTestCase
     public function testSetName()
     {
         $html = bsPassword()->name('name')->toHtml();
-        $this->assertStringContainsString('name="name"', $html);
+        $this->assertStringContainsString(' name="name"', $html);
     }
 
     public function testType()
     {
         $html = bsPassword()->name('name')->toHtml();
-        $this->assertStringContainsString('type="password"', $html);
+        $this->assertStringContainsString(' type="password"', $html);
     }
 
     public function testInputWithoutName()
@@ -59,7 +59,7 @@ class PasswordTest extends BootstrapComponentsTestCase
     {
         $user = $this->createUniqueUser();
         $html = bsPassword()->model($user)->name('name')->toHtml();
-        $this->assertStringContainsString('value="' . $user->name . '"', $html);
+        $this->assertStringContainsString(' value="' . $user->name . '"', $html);
     }
 
     public function testConfigPrepend()
@@ -196,7 +196,7 @@ class PasswordTest extends BootstrapComponentsTestCase
     {
         $customValue = 'test-custom-value';
         $html = bsPassword()->name('name')->value($customValue)->toHtml();
-        $this->assertStringContainsString('value="' . $customValue . '"', $html);
+        $this->assertStringContainsString(' value="' . $customValue . '"', $html);
     }
 
     public function testOldValue()
@@ -211,8 +211,8 @@ class PasswordTest extends BootstrapComponentsTestCase
         ]);
         $this->call('GET', 'test');
         $html = bsPassword()->name('name')->value($customValue)->toHtml();
-        $this->assertStringContainsString('value="' . $oldValue . '"', $html);
-        $this->assertStringNotContainsString('value="' . $customValue . '"', $html);
+        $this->assertStringContainsString(' value="' . $oldValue . '"', $html);
+        $this->assertStringNotContainsString(' value="' . $customValue . '"', $html);
     }
 
     public function testSetLabel()
@@ -220,8 +220,8 @@ class PasswordTest extends BootstrapComponentsTestCase
         $label = 'test-custom-label';
         $html = bsPassword()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="password-name">' . $label . '</label>', $html);
-        $this->assertStringContainsString('placeholder="' . $label . '"', $html);
-        $this->assertStringContainsString('aria-label="' . $label . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . $label . '"', $html);
+        $this->assertStringContainsString(' aria-label="' . $label . '"', $html);
     }
 
     public function testSetTranslatedLabel()
@@ -229,8 +229,8 @@ class PasswordTest extends BootstrapComponentsTestCase
         $label = 'bootstrap-components::bootstrap-components.label.validate';
         $html = bsPassword()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="password-name">' . __($label) . '</label>', $html);
-        $this->assertStringContainsString('placeholder="' . __($label) . '"', $html);
-        $this->assertStringContainsString('aria-label="' . __($label) . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . __($label) . '"', $html);
+        $this->assertStringContainsString(' aria-label="' . __($label) . '"', $html);
     }
 
     public function testNoLabel()
@@ -241,7 +241,7 @@ class PasswordTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertStringContainsString(
-            'aria-label="validation.attributes.name"',
+            ' aria-label="validation.attributes.name"',
             $html
         );
     }
@@ -254,7 +254,7 @@ class PasswordTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertStringNotContainsString(
-            'aria-label="validation.attributes.name"',
+            ' aria-label="validation.attributes.name"',
             $html
         );
     }
@@ -299,14 +299,14 @@ class PasswordTest extends BootstrapComponentsTestCase
     {
         $placeholder = 'test-custom-placeholder';
         $html = bsPassword()->name('name')->placeholder($placeholder)->toHtml();
-        $this->assertStringContainsString('placeholder="' . $placeholder . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . $placeholder . '"', $html);
     }
 
     public function testSetTranslatedPlaceholder()
     {
         $placeholder = 'bootstrap-components::bootstrap-components.label.validate';
         $html = bsPassword()->name('name')->placeholder($placeholder)->toHtml();
-        $this->assertStringContainsString('placeholder="' . __($placeholder) . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . __($placeholder) . '"', $html);
     }
 
     public function testSetPlaceholderWithLabel()
@@ -314,25 +314,25 @@ class PasswordTest extends BootstrapComponentsTestCase
         $label = 'test-custom-label';
         $placeholder = 'test-custom-placeholder';
         $html = bsPassword()->name('name')->label($label)->placeholder($placeholder)->toHtml();
-        $this->assertStringContainsString('placeholder="' . $placeholder . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . $placeholder . '"', $html);
     }
 
     public function testNoPlaceholder()
     {
         $html = bsPassword()->name('name')->toHtml();
-        $this->assertStringContainsString('placeholder="validation.attributes.name"', $html);
+        $this->assertStringContainsString(' placeholder="validation.attributes.name"', $html);
     }
 
     public function testNoPlaceholderWithNoLabel()
     {
         $html = bsPassword()->name('name')->label(false)->toHtml();
-        $this->assertStringContainsString('placeholder="validation.attributes.name"', $html);
+        $this->assertStringContainsString(' placeholder="validation.attributes.name"', $html);
     }
 
     public function testHidePlaceholder()
     {
         $html = bsPassword()->name('name')->placeholder(false)->toHtml();
-        $this->assertStringNotContainsString('placeholder="', $html);
+        $this->assertStringNotContainsString(' placeholder="', $html);
     }
 
     public function testConfigDisplaySuccess()
@@ -439,7 +439,7 @@ class PasswordTest extends BootstrapComponentsTestCase
     public function testSetNoComponentId()
     {
         $html = bsPassword()->name('name')->toHtml();
-        $this->assertStringContainsString('for="password-name"', $html);
+        $this->assertStringContainsString(' for="password-name"', $html);
         $this->assertStringContainsString('<input id="password-name"', $html);
     }
 
@@ -447,7 +447,7 @@ class PasswordTest extends BootstrapComponentsTestCase
     {
         $customComponentId = 'test-custom-component-id';
         $html = bsPassword()->name('name')->componentId($customComponentId)->toHtml();
-        $this->assertStringContainsString('for="' . $customComponentId . '"', $html);
+        $this->assertStringContainsString(' for="' . $customComponentId . '"', $html);
         $this->assertStringContainsString('<input id="' . $customComponentId . '"', $html);
     }
 
@@ -457,7 +457,7 @@ class PasswordTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.password.classes.container', [$configContainerClasses]);
         $html = bsPassword()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="password-name-container ' . $configContainerClasses . '"',
+            ' class="password-name-container ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -469,11 +469,11 @@ class PasswordTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.password.classes.container', [$configContainerClasses]);
         $html = bsPassword()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="password-name-container ' . $customContainerClasses . '"',
+            ' class="password-name-container ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="password-name-container ' . $configContainerClasses . '"',
+            ' class="password-name-container ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -484,7 +484,7 @@ class PasswordTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.password.classes.component', [$configComponentClasses]);
         $html = bsPassword()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="form-control password-name-component ' . $configComponentClasses . '"',
+            ' class="form-control password-name-component ' . $configComponentClasses . '"',
             $html
         );
     }
@@ -496,11 +496,11 @@ class PasswordTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.password.classes.component', [$customComponentClasses]);
         $html = bsPassword()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="form-control password-name-component ' . $customComponentClasses . '"',
+            ' class="form-control password-name-component ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="form-control password-name-component ' . $configComponentClasses . '"',
+            ' class="form-control password-name-component ' . $configComponentClasses . '"',
             $html
         );
     }

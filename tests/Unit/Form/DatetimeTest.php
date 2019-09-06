@@ -42,13 +42,13 @@ class DatetimeTest extends BootstrapComponentsTestCase
     public function testSetName()
     {
         $html = bsDatetime()->name('name')->toHtml();
-        $this->assertStringContainsString('name="name"', $html);
+        $this->assertStringContainsString(' name="name"', $html);
     }
 
     public function testType()
     {
         $html = bsDatetime()->name('name')->toHtml();
-        $this->assertStringContainsString('type="datetime-local"', $html);
+        $this->assertStringContainsString(' type="datetime-local"', $html);
     }
 
     public function testInputWithoutName()
@@ -71,7 +71,7 @@ class DatetimeTest extends BootstrapComponentsTestCase
         $user->published_at = $this->faker->dateTime;
         $html = bsDatetime()->model($user)->name('published_at')->toHtml();
         $this->assertStringContainsString(
-            'value="' . $user->published_at->format(config('bootstrap-components.form.datetime.format')) . '"',
+            ' value="' . $user->published_at->format(config('bootstrap-components.form.datetime.format')) . '"',
             $html
         );
     }
@@ -82,7 +82,7 @@ class DatetimeTest extends BootstrapComponentsTestCase
         $user->published_at = $this->faker->dateTime->format('Y-m-d H:i:s');
         $html = bsDatetime()->model($user)->name('published_at')->toHtml();
         $this->assertStringContainsString(
-            'value="' . Carbon::parse($user->published_at)->format(config('bootstrap-components.form.datetime.format'))
+            ' value="' . Carbon::parse($user->published_at)->format(config('bootstrap-components.form.datetime.format'))
             . '"',
             $html
         );
@@ -253,7 +253,7 @@ class DatetimeTest extends BootstrapComponentsTestCase
         $this->expectException(Exception::class);
         $customValue = 'test-custom-value';
         $html = bsDatetime()->name('name')->value($customValue)->toHtml();
-        $this->assertStringContainsString('value="' . $customValue . '"', $html);
+        $this->assertStringContainsString(' value="' . $customValue . '"', $html);
     }
 
     public function testSetValue()
@@ -261,7 +261,7 @@ class DatetimeTest extends BootstrapComponentsTestCase
         $customValue = $this->faker->dateTime;
         $html = bsDatetime()->name('name')->value($customValue)->toHtml();
         $this->assertStringContainsString(
-            'value="' . $customValue->format(config('bootstrap-components.form.datetime.format')) . '"',
+            ' value="' . $customValue->format(config('bootstrap-components.form.datetime.format')) . '"',
             $html
         );
     }
@@ -278,8 +278,8 @@ class DatetimeTest extends BootstrapComponentsTestCase
         ]);
         $this->call('GET', 'test');
         $html = bsDatetime()->name('name')->value($customValue)->toHtml();
-        $this->assertStringContainsString('value="' . $oldValue . '"', $html);
-        $this->assertStringNotContainsString('value="' . $customValue . '"', $html);
+        $this->assertStringContainsString(' value="' . $oldValue . '"', $html);
+        $this->assertStringNotContainsString(' value="' . $customValue . '"', $html);
     }
 
     public function testSetLabel()
@@ -287,8 +287,8 @@ class DatetimeTest extends BootstrapComponentsTestCase
         $label = 'test-custom-label';
         $html = bsDatetime()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="datetime-local-name">' . $label . '</label>', $html);
-        $this->assertStringContainsString('placeholder="' . $label . '"', $html);
-        $this->assertStringContainsString('aria-label="' . $label . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . $label . '"', $html);
+        $this->assertStringContainsString(' aria-label="' . $label . '"', $html);
     }
 
     public function testSetTranslatedLabel()
@@ -296,8 +296,8 @@ class DatetimeTest extends BootstrapComponentsTestCase
         $label = 'bootstrap-components::bootstrap-components.label.validate';
         $html = bsDatetime()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="datetime-local-name">' . __($label) . '</label>', $html);
-        $this->assertStringContainsString('placeholder="' . __($label) . '"', $html);
-        $this->assertStringContainsString('aria-label="' . __($label) . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . __($label) . '"', $html);
+        $this->assertStringContainsString(' aria-label="' . __($label) . '"', $html);
     }
 
     public function testNoLabel()
@@ -308,7 +308,7 @@ class DatetimeTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertStringContainsString(
-            'aria-label="validation.attributes.name"',
+            ' aria-label="validation.attributes.name"',
             $html
         );
     }
@@ -321,7 +321,7 @@ class DatetimeTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertStringNotContainsString(
-            'aria-label="validation.attributes.name"',
+            ' aria-label="validation.attributes.name"',
             $html
         );
     }
@@ -366,14 +366,14 @@ class DatetimeTest extends BootstrapComponentsTestCase
     {
         $placeholder = 'test-custom-placeholder';
         $html = bsDatetime()->name('name')->placeholder($placeholder)->toHtml();
-        $this->assertStringContainsString('placeholder="' . $placeholder . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . $placeholder . '"', $html);
     }
 
     public function testSetTranslatedPlaceholder()
     {
         $placeholder = 'bootstrap-components::bootstrap-components.label.validate';
         $html = bsDatetime()->name('name')->placeholder($placeholder)->toHtml();
-        $this->assertStringContainsString('placeholder="' . __($placeholder) . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . __($placeholder) . '"', $html);
     }
 
     public function testSetPlaceholderWithLabel()
@@ -381,25 +381,25 @@ class DatetimeTest extends BootstrapComponentsTestCase
         $label = 'test-custom-label';
         $placeholder = 'test-custom-placeholder';
         $html = bsDatetime()->name('name')->label($label)->placeholder($placeholder)->toHtml();
-        $this->assertStringContainsString('placeholder="' . $placeholder . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . $placeholder . '"', $html);
     }
 
     public function testNoPlaceholder()
     {
         $html = bsDatetime()->name('name')->toHtml();
-        $this->assertStringContainsString('placeholder="validation.attributes.name"', $html);
+        $this->assertStringContainsString(' placeholder="validation.attributes.name"', $html);
     }
 
     public function testNoPlaceholderWithNoLabel()
     {
         $html = bsDatetime()->name('name')->label(false)->toHtml();
-        $this->assertStringContainsString('placeholder="validation.attributes.name"', $html);
+        $this->assertStringContainsString(' placeholder="validation.attributes.name"', $html);
     }
 
     public function testHidePlaceholder()
     {
         $html = bsDatetime()->name('name')->placeholder(false)->toHtml();
-        $this->assertStringNotContainsString('placeholder="', $html);
+        $this->assertStringNotContainsString(' placeholder="', $html);
     }
 
     public function testConfigDisplaySuccess()
@@ -506,7 +506,7 @@ class DatetimeTest extends BootstrapComponentsTestCase
     public function testSetNoComponentId()
     {
         $html = bsDatetime()->name('name')->toHtml();
-        $this->assertStringContainsString('for="datetime-local-name"', $html);
+        $this->assertStringContainsString(' for="datetime-local-name"', $html);
         $this->assertStringContainsString('<input id="datetime-local-name"', $html);
     }
 
@@ -514,7 +514,7 @@ class DatetimeTest extends BootstrapComponentsTestCase
     {
         $customComponentId = 'test-custom-component-id';
         $html = bsDatetime()->name('name')->componentId($customComponentId)->toHtml();
-        $this->assertStringContainsString('for="' . $customComponentId . '"', $html);
+        $this->assertStringContainsString(' for="' . $customComponentId . '"', $html);
         $this->assertStringContainsString('<input id="' . $customComponentId . '"', $html);
     }
 

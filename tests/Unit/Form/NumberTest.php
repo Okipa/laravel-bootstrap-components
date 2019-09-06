@@ -40,13 +40,13 @@ class NumberTest extends BootstrapComponentsTestCase
     public function testName()
     {
         $html = bsNumber()->name('credit')->toHtml();
-        $this->assertStringContainsString('name="credit"', $html);
+        $this->assertStringContainsString(' name="credit"', $html);
     }
 
     public function testType()
     {
         $html = bsNumber()->name('credit')->toHtml();
-        $this->assertStringContainsString('type="number"', $html);
+        $this->assertStringContainsString(' type="number"', $html);
     }
 
     public function testInputWithoutName()
@@ -59,7 +59,7 @@ class NumberTest extends BootstrapComponentsTestCase
     {
         $user = $this->createUniqueUser();
         $html = bsNumber()->model($user)->name('credit')->toHtml();
-        $this->assertStringContainsString('value="' . $user->credit . '"', $html);
+        $this->assertStringContainsString(' value="' . $user->credit . '"', $html);
     }
 
     public function testConfigPrepend()
@@ -196,14 +196,14 @@ class NumberTest extends BootstrapComponentsTestCase
     {
         $customValue = 17;
         $html = bsNumber()->name('credit')->value($customValue)->toHtml();
-        $this->assertStringContainsString('value="' . $customValue . '"', $html);
+        $this->assertStringContainsString(' value="' . $customValue . '"', $html);
     }
 
     public function testSetZeroValue()
     {
         $customValue = 0;
         $html = bsNumber()->name('credit')->value($customValue)->toHtml();
-        $this->assertStringContainsString('value="' . $customValue . '"', $html);
+        $this->assertStringContainsString(' value="' . $customValue . '"', $html);
     }
 
     public function testOldValue()
@@ -218,8 +218,8 @@ class NumberTest extends BootstrapComponentsTestCase
         ]);
         $this->call('GET', 'test');
         $html = bsNumber()->name('credit')->value($customValue)->toHtml();
-        $this->assertStringContainsString('value="' . $oldValue . '"', $html);
-        $this->assertStringNotContainsString('value="' . $customValue . '"', $html);
+        $this->assertStringContainsString(' value="' . $oldValue . '"', $html);
+        $this->assertStringNotContainsString(' value="' . $customValue . '"', $html);
     }
 
     public function testSetLabel()
@@ -227,8 +227,8 @@ class NumberTest extends BootstrapComponentsTestCase
         $label = 'test-custom-label';
         $html = bsNumber()->name('credit')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="number-credit">' . $label . '</label>', $html);
-        $this->assertStringContainsString('placeholder="' . $label . '"', $html);
-        $this->assertStringContainsString('aria-label="' . $label . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . $label . '"', $html);
+        $this->assertStringContainsString(' aria-label="' . $label . '"', $html);
     }
 
     public function testSetTranslatedLabel()
@@ -236,8 +236,8 @@ class NumberTest extends BootstrapComponentsTestCase
         $label = 'bootstrap-components::bootstrap-components.label.validate';
         $html = bsNumber()->name('credit')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="number-credit">' . __($label) . '</label>', $html);
-        $this->assertStringContainsString('placeholder="' . __($label) . '"', $html);
-        $this->assertStringContainsString('aria-label="' . __($label) . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . __($label) . '"', $html);
+        $this->assertStringContainsString(' aria-label="' . __($label) . '"', $html);
     }
 
     public function testNoLabel()
@@ -247,7 +247,7 @@ class NumberTest extends BootstrapComponentsTestCase
             '<label for="number-credit">validation.attributes.credit</label>',
             $html
         );
-        $this->assertStringContainsString('aria-label="validation.attributes.credit"', $html);
+        $this->assertStringContainsString(' aria-label="validation.attributes.credit"', $html);
     }
 
     public function testHideLabel()
@@ -258,7 +258,7 @@ class NumberTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertStringNotContainsString(
-            'aria-label="validation.attributes.credit"',
+            ' aria-label="validation.attributes.credit"',
             $html
         );
     }
@@ -303,14 +303,14 @@ class NumberTest extends BootstrapComponentsTestCase
     {
         $placeholder = 'test-custom-placeholder';
         $html = bsNumber()->name('credit')->placeholder($placeholder)->toHtml();
-        $this->assertStringContainsString('placeholder="' . $placeholder . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . $placeholder . '"', $html);
     }
 
     public function testSetTranslatedPlaceholder()
     {
         $placeholder = 'bootstrap-components::bootstrap-components.label.validate';
         $html = bsNumber()->name('name')->placeholder($placeholder)->toHtml();
-        $this->assertStringContainsString('placeholder="' . __($placeholder) . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . __($placeholder) . '"', $html);
     }
 
     public function testSetPlaceholderWithLabel()
@@ -318,25 +318,25 @@ class NumberTest extends BootstrapComponentsTestCase
         $label = 'test-custom-label';
         $placeholder = 'test-custom-placeholder';
         $html = bsNumber()->name('credit')->label($label)->placeholder($placeholder)->toHtml();
-        $this->assertStringContainsString('placeholder="' . $placeholder . '"', $html);
+        $this->assertStringContainsString(' placeholder="' . $placeholder . '"', $html);
     }
 
     public function testNoPlaceholder()
     {
         $html = bsNumber()->name('credit')->toHtml();
-        $this->assertStringContainsString('placeholder="validation.attributes.credit"', $html);
+        $this->assertStringContainsString(' placeholder="validation.attributes.credit"', $html);
     }
 
     public function testNoPlaceholderWithNoLabel()
     {
         $html = bsNumber()->name('name')->label(false)->toHtml();
-        $this->assertStringContainsString('placeholder="validation.attributes.name"', $html);
+        $this->assertStringContainsString(' placeholder="validation.attributes.name"', $html);
     }
 
     public function testHidePlaceholder()
     {
         $html = bsNumber()->name('name')->placeholder(false)->toHtml();
-        $this->assertStringNotContainsString('placeholder="', $html);
+        $this->assertStringNotContainsString(' placeholder="', $html);
     }
 
     public function testConfigDisplaySuccess()
@@ -443,7 +443,7 @@ class NumberTest extends BootstrapComponentsTestCase
     public function testSetNoComponentId()
     {
         $html = bsNumber()->name('credit')->toHtml();
-        $this->assertStringContainsString('for="number-credit"', $html);
+        $this->assertStringContainsString(' for="number-credit"', $html);
         $this->assertStringContainsString('<input id="number-credit"', $html);
     }
 
@@ -451,7 +451,7 @@ class NumberTest extends BootstrapComponentsTestCase
     {
         $customComponentId = 'test-custom-component-id';
         $html = bsNumber()->name('credit')->componentId($customComponentId)->toHtml();
-        $this->assertStringContainsString('for="' . $customComponentId . '"', $html);
+        $this->assertStringContainsString(' for="' . $customComponentId . '"', $html);
         $this->assertStringContainsString('<input id="' . $customComponentId . '"', $html);
     }
 
@@ -461,7 +461,7 @@ class NumberTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.number.classes.container', [$configContainerClasses]);
         $html = bsNumber()->name('credit')->toHtml();
         $this->assertStringContainsString(
-            'class="number-credit-container ' . $configContainerClasses . '"',
+            ' class="number-credit-container ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -473,11 +473,11 @@ class NumberTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.number.classes.container', [$configContainerClasses]);
         $html = bsNumber()->name('credit')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="number-credit-container ' . $customContainerClasses . '"',
+            ' class="number-credit-container ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="number-credit-container ' . $configContainerClasses . '"',
+            ' class="number-credit-container ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -488,7 +488,7 @@ class NumberTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.number.classes.component', [$configComponentClasses]);
         $html = bsNumber()->name('credit')->toHtml();
         $this->assertStringContainsString(
-            'class="form-control number-credit-component ' . $configComponentClasses . '"',
+            ' class="form-control number-credit-component ' . $configComponentClasses . '"',
             $html
         );
     }
@@ -500,11 +500,11 @@ class NumberTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.number.classes.component', [$customComponentClasses]);
         $html = bsNumber()->name('credit')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="form-control number-credit-component ' . $customComponentClasses . '"',
+            ' class="form-control number-credit-component ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="form-control number-credit-component ' . $configComponentClasses . '"',
+            ' class="form-control number-credit-component ' . $configComponentClasses . '"',
             $html
         );
     }

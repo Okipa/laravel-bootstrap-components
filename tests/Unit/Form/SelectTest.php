@@ -43,7 +43,7 @@ class SelectTest extends BootstrapComponentsTestCase
     public function testName()
     {
         $html = bsSelect()->name('id')->toHtml();
-        $this->assertStringContainsString('name="id"', $html);
+        $this->assertStringContainsString(' name="id"', $html);
     }
 
     public function testType()
@@ -842,7 +842,7 @@ class SelectTest extends BootstrapComponentsTestCase
     public function testSetNoComponentId()
     {
         $html = bsSelect()->name('name')->toHtml();
-        $this->assertStringContainsString('for="select-name"', $html);
+        $this->assertStringContainsString(' for="select-name"', $html);
         $this->assertStringContainsString('<select id="select-name"', $html);
     }
 
@@ -850,7 +850,7 @@ class SelectTest extends BootstrapComponentsTestCase
     {
         $customComponentId = 'test-custom-component-id';
         $html = bsSelect()->name('name')->componentId($customComponentId)->toHtml();
-        $this->assertStringContainsString('for="' . $customComponentId . '"', $html);
+        $this->assertStringContainsString(' for="' . $customComponentId . '"', $html);
         $this->assertStringContainsString('<select id="' . $customComponentId . '"', $html);
     }
 
@@ -860,7 +860,7 @@ class SelectTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.select.classes.container', [$configContainerClasses]);
         $html = bsSelect()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="select-name-container ' . $configContainerClasses . '"',
+            ' class="select-name-container ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -872,11 +872,11 @@ class SelectTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.select.classes.container', [$configContainerClasses]);
         $html = bsSelect()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="select-name-container ' . $customContainerClasses . '"',
+            ' class="select-name-container ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="select-name-container ' . $configContainerClasses . '"',
+            ' class="select-name-container ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -887,7 +887,7 @@ class SelectTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.select.classes.component', [$configComponentClasses]);
         $html = bsSelect()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="select-name-component custom-select ' . $configComponentClasses . '"',
+            ' class="select-name-component custom-select ' . $configComponentClasses . '"',
             $html
         );
     }
@@ -899,11 +899,11 @@ class SelectTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.select.classes.component', [$customComponentClasses]);
         $html = bsSelect()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="select-name-component custom-select ' . $customComponentClasses . '"',
+            ' class="select-name-component custom-select ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="form-control select-name-component ' . $configComponentClasses . '"',
+            ' class="form-control select-name-component ' . $configComponentClasses . '"',
             $html
         );
     }
