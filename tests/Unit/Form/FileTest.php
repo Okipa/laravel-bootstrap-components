@@ -637,4 +637,14 @@ class FileTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('<input id="checkbox-remove-name"', $html);
         $this->assertStringContainsString(' for="checkbox-remove-name">Test', $html);
     }
+
+    public function testShowRemoveCheckboxWithCustomRemoveTranslatedLabel()
+    {
+        $label = 'bootstrap-components::bootstrap-components.label.validate';
+        $html = bsFile()->name('name')->uploadedFile(function () {
+            return 'html';
+        })->showRemoveCheckbox(true, $label)->toHtml();
+        $this->assertStringContainsString('<input id="checkbox-remove-name"', $html);
+        $this->assertStringContainsString(' for="checkbox-remove-name">' . __($label), $html);
+    }
 }
