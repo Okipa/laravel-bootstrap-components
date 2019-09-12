@@ -26,7 +26,7 @@ Just call the component you need in your view.
 {{ bsText()->name('address') }}
 ```
 
-Instead of redundant writing / copying this html :
+Instead of redundantly writing / copying this html :
 
 ```blade
 <div class="text-address-container form-group">
