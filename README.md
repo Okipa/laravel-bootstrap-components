@@ -1,4 +1,4 @@
-# Take advantage of ready-to-use and customizable bootstrap components.
+# Save time and take advantage of ready-to-use and customizable bootstrap components.
 
 [![Source Code](https://img.shields.io/badge/source-okipa/laravel--bootstrap--components-blue.svg)](https://github.com/Okipa/laravel-bootstrap-components)
 [![Latest Version](https://img.shields.io/github/release/okipa/laravel-bootstrap-components.svg?style=flat-square)](https://github.com/Okipa/laravel-bootstrap-components/releases)
@@ -17,10 +17,42 @@ The components which have been created are use on a daily basis. You feel like t
 |---|---|---|---|
 | ^5.5 | ^7.2 | ^4.0 | ^1.0 |
 
+## Usage
+
+Just call the component you need in your view.
+
+```blade
+// example
+{{ bsText()->name('address') }}
+```
+
+Instead of redundant writing / copying this html :
+
+```blade
+<div class="text-address-container form-group">
+    <label for="text-address">
+        Adress
+    </label>
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text">
+                <i class="fas fa-map-marker"></i>
+            </span>
+        </div>
+        <input id="text-address"
+            class="form-control text-address-component"
+            type="text" name="address"
+            value=""
+            placeholder="Adress"
+            aria-label="Adress"
+            aria-describedby="text-address">
+    </div>
+</div>
+```
+
 ## Table of Contents
 - [Installation](#installation)
 - [Styles](#styles)
-- [Usage](#usage)
 - [Configuration](#configuration)
 - [Translations](#translations)
 - [Customization](#customization)
@@ -77,15 +109,6 @@ $this->app->register(Okipa\LaravelBootstrapComponents\ComponentServiceProvider::
 
 If you use some extra components ([see API](#api)), you will have to load the package styles.  
 For this, load the package `sass` file from the `[path/to/composer/vendor]/okipa/laravel-bootstrap-components/styles/scss/bootstrap-components` directory to your project.
-
-## Usage
-
-Just call the component you need in your view.
-
-```
-// example
-{{ bsText()->name('username') }}
-```
 
 ## Configuration
 
