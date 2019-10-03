@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.6](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/1.0.6)
+2019-10-03
+- Fixed missing translation for buttons components's titles.
+
 ## [1.0.5](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/1.0.5)
 2019-09-10
 - Fixed missing default remove-checkbox-label-translation.

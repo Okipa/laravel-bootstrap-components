@@ -173,6 +173,7 @@ class ValidateTest extends BootstrapComponentsTestCase
         $label = 'bootstrap-components::bootstrap-components.label.validate';
         $html = bsValidate()->label($label)->toHtml();
         $this->assertStringContainsString('<span class="label">' . __($label) . '</span>', $html);
+        $this->assertStringContainsString('title="' . __($label) . '"', $html);
     }
 
     public function testNoLabel()
