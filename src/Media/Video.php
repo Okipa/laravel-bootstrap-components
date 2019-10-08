@@ -22,9 +22,9 @@ class Video extends Media
      *
      * @param string $poster
      *
-     * @return \Okipa\LaravelBootstrapComponents\Media\Video
+     * @return $this
      */
-    public function poster(string $poster): Video
+    public function poster(string $poster): self
     {
         $this->poster = $poster;
 

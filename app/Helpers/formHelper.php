@@ -1,29 +1,29 @@
 <?php
 
-use Okipa\LaravelBootstrapComponents\Form\Checkbox;
-use Okipa\LaravelBootstrapComponents\Form\Color;
-use Okipa\LaravelBootstrapComponents\Form\Date;
-use \Okipa\LaravelBootstrapComponents\Form\Datetime as bsDatetime;
-use Okipa\LaravelBootstrapComponents\Form\Email;
-use Okipa\LaravelBootstrapComponents\Form\Number as bsNumber;
-use Okipa\LaravelBootstrapComponents\Form\Password;
-use \Okipa\LaravelBootstrapComponents\Form\File as bsFile;
-use Okipa\LaravelBootstrapComponents\Form\Radio;
-use Okipa\LaravelBootstrapComponents\Form\Select;
-use Okipa\LaravelBootstrapComponents\Form\Tel;
-use Okipa\LaravelBootstrapComponents\Form\Text;
-use Okipa\LaravelBootstrapComponents\Form\Textarea;
-use Okipa\LaravelBootstrapComponents\Form\Time;
-use Okipa\LaravelBootstrapComponents\Form\Toggle;
-use Okipa\LaravelBootstrapComponents\Form\Url;
+use Okipa\LaravelBootstrapComponents\Form\Checkbox as CheckboxComponent;
+use Okipa\LaravelBootstrapComponents\Form\Color as ColorComponent;
+use Okipa\LaravelBootstrapComponents\Form\Date as DateComponent;
+use Okipa\LaravelBootstrapComponents\Form\Datetime as DateTimeComponent;
+use Okipa\LaravelBootstrapComponents\Form\Email as EmailComponent;
+use Okipa\LaravelBootstrapComponents\Form\File as FileComponent;
+use Okipa\LaravelBootstrapComponents\Form\Number as NumberComponent;
+use Okipa\LaravelBootstrapComponents\Form\Password as PasswordComponent;
+use Okipa\LaravelBootstrapComponents\Form\Radio as RadioComponent;
+use Okipa\LaravelBootstrapComponents\Form\Select as SelectComponent;
+use Okipa\LaravelBootstrapComponents\Form\Tel as TelComponent;
+use Okipa\LaravelBootstrapComponents\Form\Text as TextComponent;
+use Okipa\LaravelBootstrapComponents\Form\Textarea as TextareaComponent;
+use Okipa\LaravelBootstrapComponents\Form\Time as TimeComponent;
+use Okipa\LaravelBootstrapComponents\Form\Toggle as ToggleComponent;
+use Okipa\LaravelBootstrapComponents\Form\Url as UrlComponent;
 
 if (! function_exists('bsText')) {
     /**
      * @return \Okipa\LaravelBootstrapComponents\Form\Text
      */
-    function bsText(): Text
+    function bsText(): TextComponent
     {
-        return (new Text);
+        return (new TextComponent);
     }
 }
 
@@ -31,9 +31,9 @@ if (! function_exists('bsNumber')) {
     /**
      * @return \Okipa\LaravelBootstrapComponents\Form\Number
      */
-    function bsNumber(): bsNumber
+    function bsNumber(): NumberComponent
     {
-        return (new bsNumber);
+        return (new NumberComponent);
     }
 }
 
@@ -41,9 +41,9 @@ if (! function_exists('bsTel')) {
     /**
      * @return \Okipa\LaravelBootstrapComponents\Form\Tel
      */
-    function bsTel(): Tel
+    function bsTel(): TelComponent
     {
-        return (new Tel);
+        return (new TelComponent);
     }
 }
 
@@ -51,9 +51,9 @@ if (! function_exists('bsDatetime')) {
     /**
      * @return \Okipa\LaravelBootstrapComponents\Form\Datetime
      */
-    function bsDatetime(): bsDatetime
+    function bsDatetime(): DateTimeComponent
     {
-        return (new bsDatetime);
+        return (new DateTimeComponent);
     }
 }
 
@@ -61,9 +61,9 @@ if (! function_exists('bsDate')) {
     /**
      * @return \Okipa\LaravelBootstrapComponents\Form\Date
      */
-    function bsDate(): Date
+    function bsDate(): DateComponent
     {
-        return (new Date);
+        return (new DateComponent);
     }
 }
 
@@ -71,9 +71,9 @@ if (! function_exists('bsTime')) {
     /**
      * @return \Okipa\LaravelBootstrapComponents\Form\Time
      */
-    function bsTime(): Time
+    function bsTime(): TimeComponent
     {
-        return (new Time);
+        return (new TimeComponent);
     }
 }
 
@@ -81,9 +81,9 @@ if (! function_exists('bsUrl')) {
     /**
      * @return \Okipa\LaravelBootstrapComponents\Form\Url
      */
-    function bsUrl(): Url
+    function bsUrl(): UrlComponent
     {
-        return (new Url);
+        return (new UrlComponent);
     }
 }
 
@@ -91,9 +91,9 @@ if (! function_exists('bsEmail')) {
     /**
      * @return \Okipa\LaravelBootstrapComponents\Form\Email
      */
-    function bsEmail(): Email
+    function bsEmail(): EmailComponent
     {
-        return (new Email);
+        return (new EmailComponent);
     }
 }
 
@@ -101,20 +101,19 @@ if (! function_exists('bsColor')) {
     /**
      * @return \Okipa\LaravelBootstrapComponents\Form\Color
      */
-    function bsColor(): Color
+    function bsColor(): ColorComponent
     {
-        return (new Color);
+        return (new ColorComponent);
     }
 }
-
 
 if (! function_exists('bsPassword')) {
     /**
      * @return \Okipa\LaravelBootstrapComponents\Form\Password
      */
-    function bsPassword(): Password
+    function bsPassword(): PasswordComponent
     {
-        return (new Password);
+        return (new PasswordComponent);
     }
 }
 
@@ -122,9 +121,9 @@ if (! function_exists('bsFile')) {
     /**
      * @return \Okipa\LaravelBootstrapComponents\Form\File
      */
-    function bsFile(): bsFile
+    function bsFile(): FileComponent
     {
-        return (new bsFile);
+        return (new FileComponent);
     }
 }
 
@@ -132,9 +131,9 @@ if (! function_exists('bsTextarea')) {
     /**
      * @return \Okipa\LaravelBootstrapComponents\Form\Textarea
      */
-    function bsTextarea(): Textarea
+    function bsTextarea(): TextareaComponent
     {
-        return (new Textarea);
+        return (new TextareaComponent);
     }
 }
 
@@ -142,9 +141,9 @@ if (! function_exists('bsCheckbox')) {
     /**
      * @return \Okipa\LaravelBootstrapComponents\Form\Checkbox
      */
-    function bsCheckbox(): Checkbox
+    function bsCheckbox(): CheckboxComponent
     {
-        return (new Checkbox);
+        return (new CheckboxComponent);
     }
 }
 
@@ -152,9 +151,9 @@ if (! function_exists('bsToggle')) {
     /**
      * @return \Okipa\LaravelBootstrapComponents\Form\Toggle
      */
-    function bsToggle(): Toggle
+    function bsToggle(): ToggleComponent
     {
-        return (new Toggle);
+        return (new ToggleComponent);
     }
 }
 
@@ -162,9 +161,9 @@ if (! function_exists('bsRadio')) {
     /**
      * @return \Okipa\LaravelBootstrapComponents\Form\Radio
      */
-    function bsRadio(): Radio
+    function bsRadio(): RadioComponent
     {
-        return (new Radio);
+        return (new RadioComponent);
     }
 }
 
@@ -172,8 +171,8 @@ if (! function_exists('bsSelect')) {
     /**
      * @return \Okipa\LaravelBootstrapComponents\Form\Select
      */
-    function bsSelect(): Select
+    function bsSelect(): SelectComponent
     {
-        return (new Select);
+        return (new SelectComponent);
     }
 }

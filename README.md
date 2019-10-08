@@ -139,12 +139,12 @@ php artisan vendor:publish --tag=bootstrap-components::views
   
 | Signature | Required | Description |
 |---|---|---|
-| containerId(string $containerId): Component  | No | Set the component container id. |
-| componentId(string $componentId): Component  | No | Set the component id. |
-| containerClasses(array $containerClasses): Component  | No | Set the component container classes. Default value : `config('bootstrap-components.[componentConfigKey].classes.container')`. |
-| componentClasses(array $componentClasses): Component  | No | Set the component classes. Default value : `config('bootstrap-components.[componentConfigKey].classes.component')`. |
-| containerHtmlAttributes(array $containerHtmlAttributes): Component  | No | Set the component container html attributes. Default value : `config('bootstrap-components.[componentConfigKey].htmlAttributes.container')`. |
-| componentHtmlAttributes(array $componentHtmlAttributes): Component  | No | Set the component html attributes. Default value : `config('bootstrap-components.[componentConfigKey].htmlAttributes.component')`. |
+| containerId(string $containerId): self  | No | Set the component container id. |
+| componentId(string $componentId): self  | No | Set the component id. |
+| containerClasses(array $containerClasses): self  | No | Set the component container classes. Default value : `config('bootstrap-components.[componentConfigKey].classes.container')`. |
+| componentClasses(array $componentClasses): self  | No | Set the component classes. Default value : `config('bootstrap-components.[componentConfigKey].classes.component')`. |
+| containerHtmlAttributes(array $containerHtmlAttributes): self  | No | Set the component container html attributes. Default value : `config('bootstrap-components.[componentConfigKey].htmlAttributes.container')`. |
+| componentHtmlAttributes(array $componentHtmlAttributes): self  | No | Set the component html attributes. Default value : `config('bootstrap-components.[componentConfigKey].htmlAttributes.component')`. |
 
 ### Form components
 
@@ -152,17 +152,17 @@ php artisan vendor:publish --tag=bootstrap-components::views
 
 | Signature | Required | Description |
 |---|---|---|
-| name(string $name): Input  | Yes | Set the component input name tag. |
-| model(Model $model): Input  | No | Set the component associated model. |
-| prepend(?string $html): Input  | No | Prepend html to the component input group. Default value : `config('bootstrap-components.[componentConfigKey].prepend')`. |
-| append(?string $html): Input  | No | Append html to the component input group. Default value : `config('bootstrap-components.[componentConfigKey].append')`. |
-| label(?string $label): Input  | No | Set the component input label. Default value : `__('validation.attributes.[name]')`. |
-| labelPositionedAbove(bool $positionedAbove = true): Input  | No | Set the label above-positioning status. If not positioned above, the label will be positioned under the input. Default value : `config('bootstrap-components.[componentConfigKey].labelPositionedAbove')`. Value will set as `true` if the config value is not found. |
-| placeholder(?string $placeholder): Input  | No | Set the component input placeholder. Default value : `$label`. |
-| value($value): Input  | No | Set the component input value. Default value : `$model->{$name}`. |
-| legend(?string $legend): Input  | No | Set the component legend. Default value : `config('bootstrap-components.[componentConfigKey].legend')`. |
-| displaySuccess(boolean $display): Input  | No | Set the component input validation success display status. Default value : `config('bootstrap-components.[componentConfigKey].formValidation.displaySuccess')`. |
-| displayFailure(boolean $display): Input  | No | Set the component input validation failure display status.. Default value : `config('bootstrap-components.[componentConfigKey].formValidation.displayFailure')`. |
+| name(string $name): self  | Yes | Set the component input name tag. |
+| model(Model $model): self  | No | Set the component associated model. |
+| prepend(?string $html): self  | No | Prepend html to the component input group. Default value : `config('bootstrap-components.[componentConfigKey].prepend')`. |
+| append(?string $html): self  | No | Append html to the component input group. Default value : `config('bootstrap-components.[componentConfigKey].append')`. |
+| label(?string $label): self  | No | Set the component input label. Default value : `__('validation.attributes.[name]')`. |
+| labelPositionedAbove(bool $positionedAbove = true): self  | No | Set the label above-positioning status. If not positioned above, the label will be positioned under the input. Default value : `config('bootstrap-components.[componentConfigKey].labelPositionedAbove')`. Value will set as `true` if the config value is not found. |
+| placeholder(?string $placeholder): self  | No | Set the component input placeholder. Default value : `$label`. |
+| value($value): self  | No | Set the component input value. Default value : `$model->{$name}`. |
+| legend(?string $legend): self  | No | Set the component legend. Default value : `config('bootstrap-components.[componentConfigKey].legend')`. |
+| displaySuccess(boolean $display): self  | No | Set the component input validation success display status. Default value : `config('bootstrap-components.[componentConfigKey].formValidation.displaySuccess')`. |
+| displayFailure(boolean $display): self  | No | Set the component input validation failure display status.. Default value : `config('bootstrap-components.[componentConfigKey].formValidation.displayFailure')`. |
   
 #### bsText()
 
@@ -417,8 +417,8 @@ bsFile()->name('avatar') // set the input name
 
 | Signature | Required | Description |
 |---|---|---|
-| uploadedFile(Closure $uploadedFile): InputFile  | No | Allows to set html or another component to render the uploaded file. |
-| showRemoveCheckbox(bool $showed = true, string $removeCheckboxLabel = null): File  | No | Show the file remove checkbox option (will appear only if an uploaded file is detected). Default value : `config('bootstrap-components.file.show_remove_checkbox')`. The remove checkbox label can be precised with the second parameter, by default, it will take the following value : `__('bootstrap-components.label.remove') . ' ' . [name]` |
+| uploadedFile(Closure $uploadedFile): self  | No | Allows to set html or another component to render the uploaded file. |
+| showRemoveCheckbox(bool $showed = true, string $removeCheckboxLabel = null): self  | No | Show the file remove checkbox option (will appear only if an uploaded file is detected). Default value : `config('bootstrap-components.file.show_remove_checkbox')`. The remove checkbox label can be precised with the second parameter, by default, it will take the following value : `__('bootstrap-components.label.remove') . ' ' . [name]` |
 
 #### bsTextarea()
 
@@ -469,9 +469,9 @@ bsSelect()->name('skills') // set the input name
 
 | Signature | Required | Description |
 |---|---|---|
-| options(iterable $optionsList, string $optionValueField, string $optionLabelField): Select  | No | Set the options list (array or models collection) and declare which fields should be used for the options values and labels. |
-| selected(string $fieldToCompare, $valueToCompare): Select  | No | Choose which option should be selected, declaring the field and the value to compare with the declared options list. |
-| multiple(bool $multiple = true): Select  | No | Set the select multiple mode. |
+| options(iterable $optionsList, string $optionValueField, string $optionLabelField): self  | No | Set the options list (array or models collection) and declare which fields should be used for the options values and labels. |
+| selected(string $fieldToCompare, $valueToCompare): self  | No | Choose which option should be selected, declaring the field and the value to compare with the declared options list. |
+| multiple(bool $multiple = true): self  | No | Set the select multiple mode. |
 
 **:warning: Notes :**
 - in `single` mode, the selected() method second attribute only accept a string or an integer.
@@ -501,7 +501,7 @@ bsCheckbox()->name('active') // set the input name
 
 | Signature | Required | Description |
 |---|---|---|
-| checked(bool $checked = true): Input  | No | Set the checkable component check status. |
+| checked(bool $checked = true): self  | No | Set the checkable component checked status. |
 
 **:warning: Notes :**
 
@@ -531,7 +531,7 @@ bsToggle()->name('active') // set the input name
 
 | Signature | Required | Description |
 |---|---|---|
-| checked(bool $checked = true): Input  | No | Set the checkable component check status. |
+| checked(bool $checked = true): self  | No | Set the checkable component check status. |
   
 **:warning: Notes :**
 
@@ -564,7 +564,7 @@ bsRadio()->name('gender') // set the input name
 
 | Signature | Required | Description |
 |---|---|---|
-| checked(bool $checked = true): Input  | No | Set the radio checked status. |
+| checked(bool $checked = true): self  | No | Set the radio checked status. |
 
 **:warning: Notes :**
 
@@ -682,7 +682,7 @@ bsBack()->url('https://website.com/admin/users') // set the button url
 
 | Signature | Required | Description |
 |---|---|---|
-| src(string $src): Media  | No |  |
+| src(string $src): self  | No |  |
 
 #### image()
 
@@ -707,13 +707,13 @@ image()->src(https://yourapp.fr/public/media/image-thumb.jpg)
 
 | Signature | Required | Description |
 |---|---|---|
-| linkUrl(string $linkUrl): Image  | No | Wrap the component image html tag in a link and set its url. |
-| alt(string $alt): Image  | No | Define the image component alt html tag. |
-| width(int $width): Image  | No | Define the component image html tag width. |
-| height(int $height): Image  | No | Define the component image html tag height. |
-| linkId(string $linkId): Image  | No | Set the image component link id. |
-| linkClasses(array $linkClasses): Image  | No | Set the image component link classes. Default value : `config('bootstrap-components.media.image.classes.link')`. |
-| linkHtmlAttributes(array $linkHtmlAttributes): Image  | No | Set the image component link html attributes. Default value : `config('bootstrap-components.media.image.htmlAttributes.link')`. |
+| linkUrl(string $linkUrl): self  | No | Wrap the component image html tag in a link and set its url. |
+| alt(string $alt): self  | No | Define the image component alt html tag. |
+| width(int $width): self  | No | Define the component image html tag width. |
+| height(int $height): self  | No | Define the component image html tag height. |
+| linkId(string $linkId): self  | No | Set the image component link id. |
+| linkClasses(array $linkClasses): self  | No | Set the image component link classes. Default value : `config('bootstrap-components.media.image.classes.link')`. |
+| linkHtmlAttributes(array $linkHtmlAttributes): self  | No | Set the image component link html attributes. Default value : `config('bootstrap-components.media.image.htmlAttributes.link')`. |
 
 #### audio()
 
@@ -744,7 +744,7 @@ audio()->src(https://yourapp.fr/public/media/video.avi)
 
 | Signature | Required | Description |
 |---|---|---|
-| poster(string $poster): Video | No | Set the video component poster. Default value : `config('bootstrap-components.media.video.poster')`. |
+| poster(string $poster): self | No | Set the video component poster. Default value : `config('bootstrap-components.media.video.poster')`. |
 
 ## Testing
 

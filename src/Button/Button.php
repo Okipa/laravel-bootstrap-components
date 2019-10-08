@@ -48,9 +48,9 @@ abstract class Button extends Component
      *
      * @param string $type
      *
-     * @return \Okipa\LaravelBootstrapComponents\Button\Button
+     * @return $this
      */
-    public function type(string $type): Button
+    public function type(string $type): self
     {
         $this->type = $type;
 
@@ -63,9 +63,9 @@ abstract class Button extends Component
      *
      * @param string $url
      *
-     * @return \Okipa\LaravelBootstrapComponents\Button\Button
+     * @return $this
      */
-    public function url(string $url): Button
+    public function url(string $url): self
     {
         $this->url = $url;
 
@@ -79,9 +79,9 @@ abstract class Button extends Component
      * @param string $route
      * @param array $params
      *
-     * @return \Okipa\LaravelBootstrapComponents\Button\Button
+     * @return $this
      */
-    public function route(string $route, array $params = []): Button
+    public function route(string $route, array $params = []): self
     {
         $this->url = route($route, $params);
 
@@ -93,9 +93,9 @@ abstract class Button extends Component
      *
      * @param string|null $html
      *
-     * @return \Okipa\LaravelBootstrapComponents\Button\Button
+     * @return $this
      */
-    public function prepend(?string $html): Button
+    public function prepend(?string $html): self
     {
         $this->prepend = $html;
 
@@ -107,9 +107,9 @@ abstract class Button extends Component
      *
      * @param string|null $html
      *
-     * @return \Okipa\LaravelBootstrapComponents\Button\Button
+     * @return $this
      */
-    public function append(?string $html): Button
+    public function append(?string $html): self
     {
         $this->append = $html;
 
@@ -121,9 +121,9 @@ abstract class Button extends Component
      *
      * @param string|null $label
      *
-     * @return \Okipa\LaravelBootstrapComponents\Button\Button
+     * @return $this
      */
-    public function label(?string $label): Button
+    public function label(?string $label): self
     {
         $this->label = $label;
 

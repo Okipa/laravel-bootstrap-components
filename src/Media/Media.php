@@ -18,9 +18,9 @@ abstract class Media extends Component
      *
      * @param string $src
      *
-     * @return \Okipa\LaravelBootstrapComponents\Media\Media
+     * @return $this
      */
-    public function src(string $src): Media
+    public function src(string $src): self
     {
         $this->src = $src;
 

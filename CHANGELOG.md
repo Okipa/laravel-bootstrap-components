@@ -1,8 +1,12 @@
 # Changelog
 
+## [1.0.7](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/1.0.7)
+2019-10-08
+- Improved static analysis by updating return types and PHPDoc.
+
 ## [1.0.6](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/1.0.6)
 2019-10-03
-- Fixed missing translation for buttons components's titles.
+- Fixed missing translation for titles on buttons components.
 
 ## [1.0.5](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/1.0.5)
 2019-09-10
@@ -49,7 +53,7 @@
 2019-06-13  
 :warning: **Breaking changes** :warning:
 - Added the possibility to choose the label positioning (above or under the input) for the `Form` components, except `bsCheckbox()`, `bsToggle()` and `bsRadio()`.
-  - Those components label positioning is now handled with the `->labelPositionedAbove(bool $positionedAbove = true): Input` method.
+  - Those components label positioning is now handled with the `->labelPositionedAbove(bool $positionedAbove = true): self` method.
   - The default value is set here `config('bootstrap-components.[componentConfigKey].labelPositionedAbove')`.
   - This feature has been added in order to facilitate the Bootstrap 4 floating label implementation : https://getbootstrap.com/docs/4.3/examples/floating-labels.
   - Each concerned `Form` component has now the following added config values (add it in your published `config/bootstrap-components.php` file) :

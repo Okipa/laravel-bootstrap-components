@@ -64,9 +64,9 @@ class Select extends Input
      * @param string $optionValueField
      * @param string $optionLabelField
      *
-     * @return \Okipa\LaravelBootstrapComponents\Form\Select
+     * @return $this
      */
-    public function options(iterable $optionsList, string $optionValueField, string $optionLabelField): Select
+    public function options(iterable $optionsList, string $optionValueField, string $optionLabelField): self
     {
         $this->options = json_decode(json_encode($optionsList), true);
         $this->optionValueField = $optionValueField;
@@ -81,9 +81,9 @@ class Select extends Input
      * @param string $fieldToCompare
      * @param int|string|array $valueToCompare
      *
-     * @return \Okipa\LaravelBootstrapComponents\Form\Select
+     * @return $this
      */
-    public function selected(string $fieldToCompare, $valueToCompare): Select
+    public function selected(string $fieldToCompare, $valueToCompare): self
     {
         $this->selectedFieldToCompare = $fieldToCompare;
         $this->selectedValueToCompare = $valueToCompare;
@@ -96,9 +96,9 @@ class Select extends Input
      *
      * @param bool $multiple
      *
-     * @return \Okipa\LaravelBootstrapComponents\Form\Select
+     * @return $this
      */
-    public function multiple(bool $multiple = true): Select
+    public function multiple(bool $multiple = true): self
     {
         $this->multiple = $multiple;
 
@@ -152,7 +152,7 @@ class Select extends Input
      *
      * @return array|null
      */
-    protected function getMultipleSelectedOptions()
+    protected function getMultipleSelectedOptions(): ?array
     {
         $oldValueMultipleSelectedOptions = $this->searchMultipleSelectedOptionFromOldValue();
         if ($oldValueMultipleSelectedOptions) {
@@ -175,7 +175,7 @@ class Select extends Input
      *
      * @return array|null
      */
-    protected function searchMultipleSelectedOptionFromOldValue()
+    protected function searchMultipleSelectedOptionFromOldValue(): ?array
     {
         $oldValue = old($this->name);
         if ($oldValue) {
@@ -195,7 +195,7 @@ class Select extends Input
      *
      * @return array|null
      */
-    protected function searchMultipleSelectedOptionsFromSelectedMethod()
+    protected function searchMultipleSelectedOptionsFromSelectedMethod(): ?array
     {
         if (isset($this->selectedFieldToCompare) && isset($this->selectedValueToCompare)) {
             $selectedMultipleOptions = Arr::where($this->options, function ($option) {
@@ -214,7 +214,7 @@ class Select extends Input
      *
      * @return array|null
      */
-    protected function searchMultipleSelectedOptionsFromModel()
+    protected function searchMultipleSelectedOptionsFromModel(): ?array
     {
         if ($this->model && $this->model->{$this->name}) {
             $multipleSelectedOptions = Arr::where($this->options, function ($option) {
@@ -236,7 +236,7 @@ class Select extends Input
      *
      * @return array|null
      */
-    protected function getSelectedOption()
+    protected function getSelectedOption(): ?array
     {
         $oldValueSelectedOption = $this->searchSelectedOptionFromOldValue();
         if ($oldValueSelectedOption) {
@@ -259,7 +259,7 @@ class Select extends Input
      *
      * @return array|null
      */
-    protected function searchSelectedOptionFromOldValue()
+    protected function searchSelectedOptionFromOldValue(): ?array
     {
         $oldValue = old($this->name);
         if ($oldValue) {
@@ -279,7 +279,7 @@ class Select extends Input
      *
      * @return array|null
      */
-    protected function searchSelectedOptionFromSelectedMethod()
+    protected function searchSelectedOptionFromSelectedMethod(): ?array
     {
         if (isset($this->selectedFieldToCompare) && isset($this->selectedValueToCompare)) {
             $selectedOption = Arr::where($this->options, function ($option) {
@@ -298,7 +298,7 @@ class Select extends Input
      *
      * @return array|null
      */
-    protected function searchSelectedOptionFromModel()
+    protected function searchSelectedOptionFromModel(): ?array
     {
         if ($this->model) {
             $selectedOption = Arr::where($this->options, function ($option) {

@@ -8,13 +8,6 @@ use Exception;
 trait DatetimeValidityChecks
 {
     /**
-     * Set the datetime default format
-     *
-     * @return string
-     */
-    abstract protected function defaultFormat(): string;
-
-    /**
      * Check the component values validity
      *
      * @return void
@@ -41,4 +34,11 @@ trait DatetimeValidityChecks
             }
         }
     }
+
+    /**
+     * Set the datetime default format
+     *
+     * @return string
+     */
+    abstract protected function defaultFormat(): string;
 }

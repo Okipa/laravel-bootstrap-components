@@ -32,9 +32,9 @@ class Datetime extends Input
      *
      * @param string $format
      *
-     * @return \Okipa\LaravelBootstrapComponents\Form\Input
+     * @return $this
      */
-    public function format(string $format): Input
+    public function format(string $format): self
     {
         $this->format = $format;
 

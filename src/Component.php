@@ -60,9 +60,9 @@ abstract class Component implements Htmlable
      *
      * @param string $componentId
      *
-     * @return \Okipa\LaravelBootstrapComponents\Component
+     * @return $this
      */
-    public function componentId(string $componentId): Component
+    public function componentId(string $componentId): self
     {
         $this->componentId = $componentId;
 
@@ -74,9 +74,9 @@ abstract class Component implements Htmlable
      *
      * @param array $componentClasses
      *
-     * @return \Okipa\LaravelBootstrapComponents\Component
+     * @return $this
      */
-    public function componentClasses(array $componentClasses): Component
+    public function componentClasses(array $componentClasses): self
     {
         $this->componentClasses = $componentClasses;
 
@@ -88,9 +88,9 @@ abstract class Component implements Htmlable
      *
      * @param string $containerId
      *
-     * @return \Okipa\LaravelBootstrapComponents\Component
+     * @return $this
      */
-    public function containerId(string $containerId): Component
+    public function containerId(string $containerId): self
     {
         $this->containerId = $containerId;
 
@@ -102,9 +102,9 @@ abstract class Component implements Htmlable
      *
      * @param array $containerClasses
      *
-     * @return \Okipa\LaravelBootstrapComponents\Component
+     * @return $this
      */
-    public function containerClasses(array $containerClasses): Component
+    public function containerClasses(array $containerClasses): self
     {
         $this->containerClasses = $containerClasses;
 
@@ -116,9 +116,9 @@ abstract class Component implements Htmlable
      *
      * @param array $componentHtmlAttributes
      *
-     * @return \Okipa\LaravelBootstrapComponents\Component
+     * @return $this
      */
-    public function componentHtmlAttributes(array $componentHtmlAttributes): Component
+    public function componentHtmlAttributes(array $componentHtmlAttributes): self
     {
         $this->componentHtmlAttributes = $componentHtmlAttributes;
 
@@ -130,9 +130,9 @@ abstract class Component implements Htmlable
      *
      * @param array $containerHtmlAttributes
      *
-     * @return \Okipa\LaravelBootstrapComponents\Component
+     * @return $this
      */
-    public function containerHtmlAttributes(array $containerHtmlAttributes): Component
+    public function containerHtmlAttributes(array $containerHtmlAttributes): self
     {
         $this->containerHtmlAttributes = $containerHtmlAttributes;
 

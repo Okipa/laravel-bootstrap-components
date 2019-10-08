@@ -8,16 +8,10 @@ use Exception;
 trait TimeValidityChecks
 {
     /**
-     * Set the datetime default format
-     *
-     * @return string
-     */
-    abstract protected function defaultFormat(): string;
-    /**
      * Check the component values validity
      *
-     * @throws \Exception
      * @return void
+     * @throws \Exception
      */
     protected function checkValuesValidity(): void
     {
@@ -40,4 +34,11 @@ trait TimeValidityChecks
             }
         }
     }
+
+    /**
+     * Set the datetime default format
+     *
+     * @return string
+     */
+    abstract protected function defaultFormat(): string;
 }

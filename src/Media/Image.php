@@ -58,9 +58,9 @@ class Image extends Media
      *
      * @param string $linkId
      *
-     * @return \Okipa\LaravelBootstrapComponents\Media\Image
+     * @return $this
      */
-    public function linkId(string $linkId): Image
+    public function linkId(string $linkId): self
     {
         $this->linkId = $linkId;
 
@@ -72,9 +72,9 @@ class Image extends Media
      *
      * @param string $linkUrl
      *
-     * @return \Okipa\LaravelBootstrapComponents\Media\Image
+     * @return $this
      */
-    public function linkUrl(string $linkUrl): Image
+    public function linkUrl(string $linkUrl): self
     {
         $this->linkUrl = $linkUrl;
 
@@ -86,9 +86,9 @@ class Image extends Media
      *
      * @param string $alt
      *
-     * @return \Okipa\LaravelBootstrapComponents\Media\Image
+     * @return $this
      */
-    public function alt(string $alt): Image
+    public function alt(string $alt): self
     {
         $this->alt = $alt;
 
@@ -100,9 +100,9 @@ class Image extends Media
      *
      * @param int $width
      *
-     * @return \Okipa\LaravelBootstrapComponents\Media\Image
+     * @return $this
      */
-    public function width(int $width): Image
+    public function width(int $width): self
     {
         $this->width = $width;
 
@@ -114,9 +114,9 @@ class Image extends Media
      *
      * @param int $height
      *
-     * @return \Okipa\LaravelBootstrapComponents\Media\Image
+     * @return $this
      */
-    public function height(int $height): Image
+    public function height(int $height): self
     {
         $this->height = $height;
 
@@ -130,7 +130,7 @@ class Image extends Media
      *
      * @return $this
      */
-    public function linkClasses(array $linkClasses): Image
+    public function linkClasses(array $linkClasses): self
     {
         $this->linkClasses = $linkClasses;
 
@@ -142,9 +142,9 @@ class Image extends Media
      *
      * @param array $linkHtmlAttributes
      *
-     * @return \Okipa\LaravelBootstrapComponents\Media\Image
+     * @return $this
      */
-    public function linkHtmlAttributes(array $linkHtmlAttributes): Image
+    public function linkHtmlAttributes(array $linkHtmlAttributes): self
     {
         $this->linkHtmlAttributes = $linkHtmlAttributes;
 

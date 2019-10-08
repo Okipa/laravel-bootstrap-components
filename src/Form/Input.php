@@ -94,9 +94,9 @@ abstract class Input extends Component
      *
      * @param \Illuminate\Database\Eloquent\Model $model
      *
-     * @return \Okipa\LaravelBootstrapComponents\Form\Input
+     * @return $this
      */
-    public function model(Model $model = null): Input
+    public function model(Model $model = null): self
     {
         $this->model = $model;
 
@@ -108,9 +108,9 @@ abstract class Input extends Component
      *
      * @param string $name
      *
-     * @return \Okipa\LaravelBootstrapComponents\Form\Input
+     * @return $this
      */
-    public function name(string $name): Input
+    public function name(string $name): self
     {
         $this->name = $name;
 
@@ -122,9 +122,9 @@ abstract class Input extends Component
      *
      * @param string|null $html
      *
-     * @return \Okipa\LaravelBootstrapComponents\Form\Input
+     * @return $this
      */
-    public function prepend(?string $html): Input
+    public function prepend(?string $html): self
     {
         $this->prepend = $html;
 
@@ -136,9 +136,9 @@ abstract class Input extends Component
      *
      * @param string|null $html
      *
-     * @return \Okipa\LaravelBootstrapComponents\Form\Input
+     * @return $this
      */
-    public function append(?string $html): Input
+    public function append(?string $html): self
     {
         $this->append = $html;
 
@@ -150,9 +150,9 @@ abstract class Input extends Component
      *
      * @param string|null $legend
      *
-     * @return \Okipa\LaravelBootstrapComponents\Form\Input
+     * @return $this
      */
-    public function legend(?string $legend): Input
+    public function legend(?string $legend): self
     {
         $this->legend = $legend;
 
@@ -164,9 +164,9 @@ abstract class Input extends Component
      *
      * @param string|null $placeholder
      *
-     * @return \Okipa\LaravelBootstrapComponents\Form\Input
+     * @return $this
      */
-    public function placeholder(?string $placeholder): Input
+    public function placeholder(?string $placeholder): self
     {
         $this->placeholder = $placeholder;
 
@@ -178,9 +178,9 @@ abstract class Input extends Component
      *
      * @param mixed $value
      *
-     * @return \Okipa\LaravelBootstrapComponents\Form\Input
+     * @return $this
      */
-    public function value($value): Input
+    public function value($value): self
     {
         $this->value = $value;
 
@@ -192,9 +192,9 @@ abstract class Input extends Component
      *
      * @param string|null $label
      *
-     * @return \Okipa\LaravelBootstrapComponents\Form\Input
+     * @return $this
      */
-    public function label(?string $label): Input
+    public function label(?string $label): self
     {
         $this->label = $label;
 
@@ -207,9 +207,9 @@ abstract class Input extends Component
      *
      * @param bool $positionedAbove
      *
-     * @return \Okipa\LaravelBootstrapComponents\Form\Input
+     * @return $this
      */
-    public function labelPositionedAbove(bool $positionedAbove = true): Input
+    public function labelPositionedAbove(bool $positionedAbove = true): self
     {
         $this->labelPositionedAbove = $positionedAbove;
 
@@ -221,9 +221,9 @@ abstract class Input extends Component
      *
      * @param bool $displaySuccess
      *
-     * @return \Okipa\LaravelBootstrapComponents\Form\Input
+     * @return $this
      */
-    public function displaySuccess(bool $displaySuccess): Input
+    public function displaySuccess(bool $displaySuccess): self
     {
         $this->displaySuccess = $displaySuccess;
 
@@ -235,9 +235,9 @@ abstract class Input extends Component
      *
      * @param bool $displayFailure
      *
-     * @return \Okipa\LaravelBootstrapComponents\Form\Input
+     * @return $this
      */
-    public function displayFailure(bool $displayFailure): Input
+    public function displayFailure(bool $displayFailure): self
     {
         $this->displayFailure = $displayFailure;
 

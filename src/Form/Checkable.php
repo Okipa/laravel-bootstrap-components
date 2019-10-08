@@ -16,9 +16,9 @@ abstract class Checkable extends Input
      *
      * @param bool $checked
      *
-     * @return \Okipa\LaravelBootstrapComponents\Form\Input
+     * @return $this
      */
-    public function checked(bool $checked = true): Input
+    public function checked(bool $checked = true): self
     {
         $this->checked = $checked;
 

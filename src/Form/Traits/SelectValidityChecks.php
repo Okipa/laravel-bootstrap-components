@@ -9,8 +9,8 @@ trait SelectValidityChecks
     /**
      * Check the component values validity
      *
-     * @throws \Exception
      * @return void
+     * @throws \Exception
      */
     protected function checkValuesValidity(): void
     {
@@ -29,7 +29,7 @@ trait SelectValidityChecks
             }
         }
     }
-    
+
     /**
      * Set the defined option value field.
      *

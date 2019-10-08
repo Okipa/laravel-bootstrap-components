@@ -44,9 +44,9 @@ class File extends Input
      *
      * @param \Closure $uploadedFile
      *
-     * @return \Okipa\LaravelBootstrapComponents\Form\File
+     * @return $this
      */
-    public function uploadedFile(Closure $uploadedFile): File
+    public function uploadedFile(Closure $uploadedFile): self
     {
         $this->uploadedFile = $uploadedFile;
 
@@ -59,9 +59,9 @@ class File extends Input
      * @param bool $showRemoveCheckbox
      * @param string|null $removeCheckboxLabel
      *
-     * @return \Okipa\LaravelBootstrapComponents\Form\File
+     * @return $this
      */
-    public function showRemoveCheckbox(bool $showRemoveCheckbox = true, string $removeCheckboxLabel = null): File
+    public function showRemoveCheckbox(bool $showRemoveCheckbox = true, string $removeCheckboxLabel = null): self
     {
         $this->showRemoveCheckbox = $showRemoveCheckbox;
         $this->removeCheckboxLabel = $removeCheckboxLabel;

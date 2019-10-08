@@ -9,8 +9,8 @@ trait RadioValidityChecks
     /**
      * Check the component values validity
      *
-     * @throws \Exception
      * @return void
+     * @throws \Exception
      */
     protected function checkValuesValidity(): void
     {
