@@ -3,6 +3,8 @@
 ## [1.0.7](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/1.0.7)
 2019-10-08
 - Improved static analysis by updating return types and PHPDoc.
+- Transferred phpunit builds from Scrutinizer to Travis CI.
+- Transferred code coverage from Scrutinizer to Coveralls.
 
 ## [1.0.6](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/1.0.6)
 2019-10-03
