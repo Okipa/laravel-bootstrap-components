@@ -4,8 +4,8 @@
 [![Latest Version](https://img.shields.io/github/release/okipa/laravel-bootstrap-components.svg?style=flat-square)](https://github.com/Okipa/laravel-bootstrap-components/releases)
 [![Total Downloads](https://img.shields.io/packagist/dt/okipa/laravel-bootstrap-components.svg?style=flat-square)](https://packagist.org/packages/okipa/laravel-bootstrap-components)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Build Status](https://scrutinizer-ci.com/g/Okipa/laravel-bootstrap-components/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Okipa/laravel-bootstrap-components/build-status/master)
-[![Code Coverage](https://scrutinizer-ci.com/g/Okipa/laravel-bootstrap-components/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Okipa/laravel-bootstrap-components/?branch=master)
+[![Build Status](https://travis-ci.org/Okipa/laravel-bootstrap-components.svg?branch=master)](https://travis-ci.org/Okipa/laravel-bootstrap-components)
+[![Coverage Status](https://coveralls.io/repos/github/Okipa/laravel-bootstrap-components/badge.svg?branch=master)](https://coveralls.io/github/Okipa/laravel-bootstrap-components?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Okipa/laravel-bootstrap-components/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Okipa/laravel-bootstrap-components/?branch=master)
 
 This package provides an extended set of ready-to-use and fully customizable bootstrap components.  
@@ -19,14 +19,13 @@ The components which have been created are use on a daily basis. You feel like t
 
 ## Usage
 
-Just call the component you need in your view.
+Just call the component you need in your view :
 
 ```blade
-// example
 {{ bsText()->name('address') }}
 ```
 
-Instead of redundantly writing / copying this html :
+Instead of redundantly writing or copying this HTML :
 
 ```blade
 <div class="text-address-container form-group">
