@@ -15,7 +15,7 @@ The components which have been created are use on a daily basis. You feel like t
 
 | Laravel version | PHP version | Bootstrap version | Package version |
 |---|---|---|---|
-| ^5.5 | ^7.0 | ^4.0 | ^1.0 |
+| ^5.5 | ^7.1 | ^4.0 | ^1.0 |
 
 ## Usage
 
