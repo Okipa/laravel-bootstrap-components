@@ -9,9 +9,21 @@ cache:
   directories:
     - $HOME/.composer/cache
 
-before_script:
+env:
+  matrix:
+    - COMPOSER_FLAGS="--prefer-lowest"
+    - COMPOSER_FLAGS=""
+
+matrix:
+  allow_failures:
+    - php: 7.3
+      env: COMPOSER_FLAGS="--prefer-lowest"
+
+before_install:
   - travis_retry composer self-update
-  - travis_retry composer install --no-progress --no-interaction --prefer-dist --no-suggest
+
+install:
+  - travis_retry composer update  --no-progress --no-interaction --no-suggest --prefer-source $COMPOSER_FLAGS
 
 script:
   - mkdir -p build/logs
