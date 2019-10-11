@@ -1,43 +1,43 @@
 language: php
 
 php:
-  - 7.1
-  - 7.2
-  - 7.3
+    - 7.1
+    - 7.2
+    - 7.3
 
 cache:
-  directories:
-    - $HOME/.composer/cache
+    directories:
+        - $HOME/.composer/cache
 
 env:
-  matrix:
-    - COMPOSER_FLAGS="--prefer-lowest"
-    - COMPOSER_FLAGS=""
+    matrix:
+        - COMPOSER_FLAGS="--prefer-lowest"
+        - COMPOSER_FLAGS=""
 
 matrix:
-  allow_failures:
-    -   php: 7.3
-        env: COMPOSER_FLAGS="--prefer-lowest"
+    allow_failures:
+        - php: 7.3
+          env: COMPOSER_FLAGS="--prefer-lowest"
 
 before_install:
-  - travis_retry composer self-update
+    - travis_retry composer self-update
 
 install:
-  - travis_retry composer update  --no-progress --no-interaction --no-suggest --prefer-source $COMPOSER_FLAGS
+    - travis_retry composer update  --no-progress --no-interaction --no-suggest --prefer-source $COMPOSER_FLAGS
 
 script:
-  - mkdir -p build/logs
-  - vendor/bin/phpcs
-  - vendor/bin/phpmd app,config,src text phpmd.xml
-  - vendor/bin/phpstan analyse
-  - vendor/bin/phpunit --debug --coverage-text --coverage-clover build/logs/clover.xml
+    - mkdir -p build/logs
+    - vendor/bin/phpcs
+    - vendor/bin/phpmd app,config,src text phpmd.xml
+    - vendor/bin/phpstan analyse
+    - vendor/bin/phpunit --debug --coverage-text --coverage-clover build/logs/clover.xml
 
 after_success:
-  - travis_retry php vendor/bin/php-coveralls -v
+    - travis_retry php vendor/bin/php-coveralls -v
 
 branches:
-  only:
-    - master
+    only:
+        - master
 
 notifications:
-  email: false
+    email: false
