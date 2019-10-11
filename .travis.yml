@@ -27,6 +27,10 @@ script:
   - vendor/bin/phpstan analyse
   - vendor/bin/phpunit --debug --coverage-text --coverage-clover build/logs/clover.xml
 
+allow_failures:
+  - php: 7.3
+    env: COMPOSER_FLAGS="--prefer-lowest"
+
 after_success:
   - travis_retry php vendor/bin/php-coveralls -v
 
