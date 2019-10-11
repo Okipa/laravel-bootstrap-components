@@ -25,7 +25,7 @@ script:
   - vendor/bin/phpcs
   - vendor/bin/phpmd app,config,src text phpmd.xml
   - vendor/bin/phpstan analyse
-  - vendor/bin/phpunit --coverage-text --coverage-clover build/logs/clover.xml
+  - vendor/bin/phpunit --debug --coverage-text --coverage-clover build/logs/clover.xml
 
 after_success:
   - travis_retry php vendor/bin/php-coveralls -v
