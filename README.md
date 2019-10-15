@@ -120,6 +120,7 @@ php artisan vendor:publish --tag=bootstrap-components:config
 ## Translations
 
 To customize the existing translations, publish the packages translations files to make the wanted changes :
+
 ```
 php artisan vendor:publish --tag=bootstrap-components:translations
 ```
@@ -128,6 +129,7 @@ php artisan vendor:publish --tag=bootstrap-components:translations
 
 Customize the used templates to make this package fit to your needs.  
 Publish the views with the command :
+
 ```
 php artisan vendor:publish --tag=bootstrap-components:views
 ```
