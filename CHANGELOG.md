@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.9](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/1.0.9)
+
+2019-10-22
+
+- Form components error message can now display HTML.
+
 ## [1.0.8](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/1.0.8)
 
 2019-10-15
