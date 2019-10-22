@@ -113,6 +113,7 @@ For this, load the package `sass` file from the `[path/to/composer/vendor]/okipa
 
 Each component default view and default values, classes and attributes can be configured.  
 Publish the package configuration and override the available config values : 
+
 ```bash
 php artisan vendor:publish --tag=bootstrap-components:config
 ```
