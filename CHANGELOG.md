@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.0.10](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/1.0.10)
+
+2019-11-26
+
+- Changed signature of `->displaySuccess()` form components to `public function displaySuccess(?bool $displaySuccess = true): self`.
+- Changed signature of `->displayFailure()` form components to `public function displayFailure(?bool $displaySuccess = true): self`.
+- Calling `->displaySuccess()` does not have an incidence on the `is-valid` class application : if set to false, the `is-valid` class will not be added even if the form is in success.
+- Calling `->displayFailure()` does not have an incidence on the `is-invalid` class application : if set to false, the `is-invalid` class will not be added even if the form is in failure.
+
 ## [1.0.9](https://github.com/Okipa/laravel-bootstrap-components/releases/tag/1.0.9)
 
 2019-10-22

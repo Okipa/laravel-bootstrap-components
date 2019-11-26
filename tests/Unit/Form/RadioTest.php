@@ -4,7 +4,6 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
 use Exception;
 use Illuminate\Support\MessageBag;
-use Illuminate\Support\Str;
 use Okipa\LaravelBootstrapComponents\Form\Input;
 use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
 use Okipa\LaravelBootstrapComponents\Test\Fakers\UsersFaker;
@@ -30,6 +29,9 @@ class RadioTest extends BootstrapComponentsTestCase
         // components.form.radio.htmlAttributes
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.radio.htmlAttributes')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.radio.htmlAttributes')));
+        // components.form.radio.formValidation
+        $this->assertTrue(array_key_exists('displaySuccess', config('bootstrap-components.form.radio.formValidation')));
+        $this->assertTrue(array_key_exists('displayFailure', config('bootstrap-components.form.radio.formValidation')));
     }
 
     public function testExtendsInput()
@@ -285,8 +287,10 @@ class RadioTest extends BootstrapComponentsTestCase
     {
         $customValue = 'test-custom-value';
         config()->set('bootstrap-components.form.radio.formValidation.displaySuccess', true);
-        $messageBag = app(MessageBag::class)->add('other_name', null);
-        $html = bsRadio()->name('name')->value($customValue)->render(['errors' => $messageBag]);
+        $errors = app(MessageBag::class)->add('other_name', 'Dummy error message.');
+        session()->put('errors', $errors);
+        $html = bsRadio()->name('name')->value($customValue)->render(compact('errors'));
+        $this->assertStringContainsString('is-valid', $html);
         $this->assertStringContainsString('<div class="valid-feedback d-block">', $html);
         $this->assertStringContainsString(
             __('bootstrap-components::bootstrap-components.notification.validation.success'),
@@ -298,8 +302,10 @@ class RadioTest extends BootstrapComponentsTestCase
     {
         $customValue = 'test-custom-value';
         config()->set('bootstrap-components.form.radio.formValidation.displaySuccess', false);
-        $messageBag = app(MessageBag::class)->add('other_name', null);
-        $html = bsRadio()->name('name')->value($customValue)->render(['errors' => $messageBag]);
+        $errors = app(MessageBag::class)->add('other_name', 'Dummy error message.');
+        session()->put('errors', $errors);
+        $html = bsRadio()->name('name')->value($customValue)->render(compact('errors'));
+        $this->assertStringNotContainsString('is-valid', $html);
         $this->assertStringNotContainsString('<div class="valid-feedback d-block">', $html);
         $this->assertStringNotContainsString(
             __('bootstrap-components::bootstrap-components.notification.validation.success'),
@@ -311,8 +317,10 @@ class RadioTest extends BootstrapComponentsTestCase
     {
         $customValue = 'test-custom-value';
         config()->set('bootstrap-components.form.radio.formValidation.displaySuccess', false);
-        $messageBag = app(MessageBag::class)->add('other_name', null);
-        $html = bsRadio()->name('name')->value($customValue)->displaySuccess(true)->render(['errors' => $messageBag]);
+        $errors = app(MessageBag::class)->add('other_name', 'Dummy error message.');
+        session()->put('errors', $errors);
+        $html = bsRadio()->name('name')->value($customValue)->displaySuccess()->render(compact('errors'));
+        $this->assertStringContainsString('is-valid', $html);
         $this->assertStringContainsString('<div class="valid-feedback d-block">', $html);
         $this->assertStringContainsString(
             __('bootstrap-components::bootstrap-components.notification.validation.success'),
@@ -324,8 +332,10 @@ class RadioTest extends BootstrapComponentsTestCase
     {
         $customValue = 'test-custom-value';
         config()->set('bootstrap-components.form.radio.formValidation.displaySuccess', true);
-        $messageBag = app(MessageBag::class)->add('other_name', null);
-        $html = bsRadio()->name('name')->value($customValue)->displaySuccess(false)->render(['errors' => $messageBag]);
+        $errors = app(MessageBag::class)->add('other_name', 'Dummy error message.');
+        session()->put('errors', $errors);
+        $html = bsRadio()->name('name')->value($customValue)->displaySuccess(false)->render(compact('errors'));
+        $this->assertStringNotContainsString('is-valid', $html);
         $this->assertStringNotContainsString('<div class="valid-feedback d-block">', $html);
         $this->assertStringNotContainsString(
             __('bootstrap-components::bootstrap-components.notification.validation.success'),
@@ -337,44 +347,48 @@ class RadioTest extends BootstrapComponentsTestCase
     {
         $customValue = 'test-custom-value';
         config()->set('bootstrap-components.form.radio.formValidation.displayFailure', true);
-        $errorMessage = 'This a test error message';
-        $messageBag = app(MessageBag::class)->add('name', $errorMessage);
-        $html = bsRadio()->name('name')->value($customValue)->render(['errors' => $messageBag]);
+        $errors = app(MessageBag::class)->add('name', 'Dummy error message.');
+        session()->put('errors', $errors);
+        $html = bsRadio()->name('name')->value($customValue)->render(compact('errors'));
+        $this->assertStringContainsString('is-invalid', $html);
         $this->assertStringContainsString('<div class="invalid-feedback d-block">', $html);
-        $this->assertStringContainsString($errorMessage, $html);
+        $this->assertStringContainsString($errors->first('name'), $html);
     }
 
     public function testConfigDoNotDisplayFailure()
     {
         $customValue = 'test-custom-value';
         config()->set('bootstrap-components.form.radio.formValidation.displayFailure', false);
-        $errorMessage = 'This a test error message';
-        $messageBag = app(MessageBag::class)->add('name', $errorMessage);
-        $html = bsRadio()->name('name')->value($customValue)->render(['errors' => $messageBag]);
+        $errors = app(MessageBag::class)->add('name', 'Dummy error message.');
+        session()->put('errors', $errors);
+        $html = bsRadio()->name('name')->value($customValue)->render(compact('errors'));
+        $this->assertStringNotContainsString('is-invalid', $html);
         $this->assertStringNotContainsString('<div class="invalid-feedback d-block">', $html);
-        $this->assertStringNotContainsString($errorMessage, $html);
+        $this->assertStringNotContainsString($errors->first('name'), $html);
     }
 
     public function testDisplayFailure()
     {
         $customValue = 'test-custom-value';
         config()->set('bootstrap-components.form.radio.formValidation.displayFailure', false);
-        $errorMessage = 'This a test error message';
-        $messageBag = app(MessageBag::class)->add('name', $errorMessage);
-        $html = bsRadio()->name('name')->value($customValue)->displayFailure(true)->render(['errors' => $messageBag]);
+        $errors = app(MessageBag::class)->add('name', 'Dummy error message.');
+        session()->put('errors', $errors);
+        $html = bsRadio()->name('name')->value($customValue)->displayFailure()->render(compact('errors'));
+        $this->assertStringContainsString('is-invalid', $html);
         $this->assertStringContainsString('<div class="invalid-feedback d-block">', $html);
-        $this->assertStringContainsString($errorMessage, $html);
+        $this->assertStringContainsString($errors->first('name'), $html);
     }
 
     public function testDoNotDisplayFailure()
     {
         $customValue = 'test-custom-value';
         config()->set('bootstrap-components.form.radio.formValidation.displayFailure', true);
-        $errorMessage = 'This a test error message';
-        $messageBag = app(MessageBag::class)->add('name', $errorMessage);
-        $html = bsRadio()->name('name')->value($customValue)->displayFailure(false)->render(['errors' => $messageBag]);
+        $errors = app(MessageBag::class)->add('name', 'Dummy error message.');
+        session()->put('errors', $errors);
+        $html = bsRadio()->name('name')->value($customValue)->displayFailure(false)->render(compact('errors'));
+        $this->assertStringNotContainsString('is-invalid', $html);
         $this->assertStringNotContainsString('<div class="invalid-feedback d-block">', $html);
-        $this->assertStringNotContainsString($errorMessage, $html);
+        $this->assertStringNotContainsString($errors->first('name'), $html);
     }
 
     public function testSetNoContainerId()

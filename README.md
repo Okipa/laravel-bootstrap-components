@@ -163,8 +163,8 @@ php artisan vendor:publish --tag=bootstrap-components:views
 | placeholder(?string $placeholder): self  | No | Set the component input placeholder. Default value : `$label`. |
 | value($value): self  | No | Set the component input value. Default value : `$model->{$name}`. |
 | legend(?string $legend): self  | No | Set the component legend. Default value : `config('bootstrap-components.[componentConfigKey].legend')`. |
-| displaySuccess(boolean $display): self  | No | Set the component input validation success display status. Default value : `config('bootstrap-components.[componentConfigKey].formValidation.displaySuccess')`. |
-| displayFailure(boolean $display): self  | No | Set the component input validation failure display status.. Default value : `config('bootstrap-components.[componentConfigKey].formValidation.displayFailure')`. |
+| displaySuccess(bool $displaySuccess = true): self  | No | Set the component input validation success display status. Default value : `config('bootstrap-components.[componentConfigKey].formValidation.displaySuccess')`. |
+| displayFailure(bool $displayFailure = true): self  | No | Set the component input validation failure display status.. Default value : `config('bootstrap-components.[componentConfigKey].formValidation.displayFailure')`. |
   
 #### bsText()
 

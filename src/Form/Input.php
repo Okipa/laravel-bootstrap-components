@@ -219,11 +219,11 @@ abstract class Input extends Component
     /**
      * Set the component input validation success display status.
      *
-     * @param bool $displaySuccess
+     * @param bool|null $displaySuccess
      *
      * @return $this
      */
-    public function displaySuccess(bool $displaySuccess): self
+    public function displaySuccess(?bool $displaySuccess = true): self
     {
         $this->displaySuccess = $displaySuccess;
 
@@ -233,11 +233,11 @@ abstract class Input extends Component
     /**
      * Set the component input validation failure display status.
      *
-     * @param bool $displayFailure
+     * @param bool|null $displayFailure
      *
      * @return $this
      */
-    public function displayFailure(bool $displayFailure): self
+    public function displayFailure(?bool $displayFailure = true): self
     {
         $this->displayFailure = $displayFailure;
 
@@ -261,20 +261,35 @@ abstract class Input extends Component
      */
     protected function defineValues(): array
     {
-        return [
-            'model'                => $this->model,
-            'type'                 => $this->type,
-            'name'                 => $this->name,
-            'prepend'              => $this->prepend ?? $this->defaultPrepend(),
-            'append'               => $this->append ?? $this->defaultAppend(),
-            'legend'               => $this->legend ?? $this->defaultLegend(),
-            'label'                => $this->label ?? $this->defaultLabel(),
-            'labelPositionedAbove' => $this->labelPositionedAbove ?? $this->defaultLabelPositionedAbove(),
-            'value'                => $this->defineValue(),
-            'placeholder'          => $this->placeholder ?? ($this->label ?: $this->defaultLabel()),
-            'displaySuccess'       => $this->displaySuccess ?? $this->defaultDisplaySuccess(),
-            'displayFailure'       => $this->displayFailure ?? $this->defaultDisplayFailure(),
-        ];
+        $model = $this->model;
+        $type = $this->type;
+        $name = $this->name;
+        $prepend = $this->prepend ?? $this->defaultPrepend();
+        $append = $this->append ?? $this->defaultAppend();
+        $legend = $this->legend ?? $this->defaultLegend();
+        $label = $this->label ?? $this->defaultLabel();
+        $labelPositionedAbove = $this->labelPositionedAbove ?? $this->defaultLabelPositionedAbove();
+        $value = $this->defineValue();
+        $placeholder = $this->placeholder ?? ($this->label ?: $this->defaultLabel());
+        $displaySuccess = $this->displaySuccess ?? $this->defaultDisplaySuccess();
+        $displayFailure = $this->displayFailure ?? $this->defaultDisplayFailure();
+        $validationClass = $this->validationClass($name, $displaySuccess, $displayFailure);
+
+        return compact(
+            'model',
+            'type',
+            'name',
+            'prepend',
+            'append',
+            'legend',
+            'label',
+            'labelPositionedAbove',
+            'value',
+            'placeholder',
+            'displaySuccess',
+            'displayFailure',
+            'validationClass'
+        );
     }
 
     /**
@@ -282,7 +297,7 @@ abstract class Input extends Component
      */
     protected function defaultPrepend(): ?string
     {
-        return config('bootstrap-components.' . $this->configKey . '.prepend');
+        return $this->prepend ?? config('bootstrap-components.' . $this->configKey . '.prepend');
     }
 
     /**
@@ -341,6 +356,24 @@ abstract class Input extends Component
     protected function defaultDisplayFailure(): bool
     {
         return config('bootstrap-components.' . $this->configKey . '.formValidation.displayFailure');
+    }
+
+    /**
+     * @param string $name
+     * @param bool $displaySuccess
+     * @param bool $displayFailure
+     *
+     * @return string|null
+     */
+    protected function validationClass(string $name, bool $displaySuccess, bool $displayFailure): ?string
+    {
+        if (session()->has('errors')) {
+            return session()->get('errors')->has($name)
+                ? ($displayFailure ? 'is-invalid' : null)
+                : ($displaySuccess ? 'is-valid' : null);
+        }
+
+        return null;
     }
 
     /**
