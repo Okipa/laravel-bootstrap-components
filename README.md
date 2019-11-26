@@ -420,7 +420,7 @@ bsFile()->name('avatar') // set the input name
 | Signature | Required | Description |
 |---|---|---|
 | uploadedFile(Closure $uploadedFile): self  | No | Allows to set html or another component to render the uploaded file. |
-| showRemoveCheckbox(bool $showed = true, string $removeCheckboxLabel = null): self  | No | Show the file remove checkbox option (will appear only if an uploaded file is detected). Default value : `config('bootstrap-components.file.show_remove_checkbox')`. The remove checkbox label can be precised with the second parameter, by default, it will take the following value : `__('bootstrap-components.label.remove') . ' ' . [name]` |
+| showRemoveCheckbox(bool $showRemoveCheckbox = true, string $removeCheckboxLabel = null): self | No | Show the file remove checkbox option (will appear only if an uploaded file is detected). Default value : `config('bootstrap-components.file.show_remove_checkbox')`. The remove checkbox label can be precised with the second parameter, by default, it will take the following value : `__('bootstrap-components.label.remove') . ' ' . [name]` |
 
 #### bsTextarea()
 

@@ -601,6 +601,7 @@ class FileTest extends BootstrapComponentsTestCase
         })->toHtml();
         $this->assertStringNotContainsString('<input id="checkbox-remove-name"', $html);
         $this->assertStringNotContainsString(' name="remove_name"', $html);
+        $this->assertStringNotContainsString(' for="checkbox-remove-name"', $html);
     }
 
     public function testConfigShowRemoveCheckboxWithoutUploadedFile()
@@ -609,6 +610,7 @@ class FileTest extends BootstrapComponentsTestCase
         $html = bsFile()->name('name')->toHtml();
         $this->assertStringNotContainsString('<input id="checkbox-remove-name"', $html);
         $this->assertStringNotContainsString(' name="remove_name"', $html);
+        $this->assertStringNotContainsString(' for="checkbox-remove-name"', $html);
     }
 
     public function testConfigHideRemoveCheckboxWithUploadedFile()
@@ -619,6 +621,7 @@ class FileTest extends BootstrapComponentsTestCase
         })->toHtml();
         $this->assertStringNotContainsString('<input id="checkbox-remove-name"', $html);
         $this->assertStringNotContainsString(' name="remove_name"', $html);
+        $this->assertStringNotContainsString(' for="checkbox-remove-name"', $html);
     }
 
     public function testShowRemoveCheckboxWithUploadedFile()
@@ -626,11 +629,10 @@ class FileTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.file.show_remove_checkbox', false);
         $html = bsFile()->name('name')->uploadedFile(function () {
             return 'html';
-        })->showRemoveCheckbox(true)->toHtml();
+        })->showRemoveCheckbox()->toHtml();
         $this->assertStringContainsString('<input id="checkbox-remove-name"', $html);
-        $this->assertStringContainsString(' for="checkbox-remove-name">'
-            . __('bootstrap-components::bootstrap-components.label.remove')
-            . ' validation.attributes.name', $html);
+        $this->assertStringContainsString(' name="remove_name"', $html);
+        $this->assertStringContainsString(' for="checkbox-remove-name"', $html);
     }
 
     public function testHideRemoveCheckbox()
@@ -641,6 +643,18 @@ class FileTest extends BootstrapComponentsTestCase
         })->showRemoveCheckbox(false)->toHtml();
         $this->assertStringNotContainsString('<input id="checkbox-remove-name"', $html);
         $this->assertStringNotContainsString(' name="remove_name"', $html);
+        $this->assertStringNotContainsString(' for="checkbox-remove-name"', $html);
+    }
+
+    public function testShowRemoveCheckboxWithDefaultRemoveLabel()
+    {
+        config()->set('bootstrap-components.form.file.show_remove_checkbox', false);
+        $html = bsFile()->name('name')->uploadedFile(function () {
+            return 'html';
+        })->showRemoveCheckbox(true)->toHtml();
+        $this->assertStringContainsString(' for="checkbox-remove-name">'
+            . __('bootstrap-components::bootstrap-components.label.remove')
+            . ' validation.attributes.name', $html);
     }
 
     public function testShowRemoveCheckboxWithCustomRemoveLabel()
@@ -649,7 +663,6 @@ class FileTest extends BootstrapComponentsTestCase
         $html = bsFile()->name('name')->uploadedFile(function () {
             return 'html';
         })->showRemoveCheckbox(true, 'Test')->toHtml();
-        $this->assertStringContainsString('<input id="checkbox-remove-name"', $html);
         $this->assertStringContainsString(' for="checkbox-remove-name">Test', $html);
     }
 
@@ -659,7 +672,6 @@ class FileTest extends BootstrapComponentsTestCase
         $html = bsFile()->name('name')->uploadedFile(function () {
             return 'html';
         })->showRemoveCheckbox(true, $label)->toHtml();
-        $this->assertStringContainsString('<input id="checkbox-remove-name"', $html);
         $this->assertStringContainsString(' for="checkbox-remove-name">' . __($label), $html);
     }
 }
