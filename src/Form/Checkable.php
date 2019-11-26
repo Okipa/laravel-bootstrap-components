@@ -40,12 +40,11 @@ abstract class Checkable extends Input
         } elseif ($parentValues['value'] && ! isset($this->checked)) {
             $this->checked = true;
         }
+        $componentHtmlAttributes = array_merge(
+            $parentValues['componentHtmlAttributes'],
+            $this->checked ? ['checked' => 'checked'] : []
+        );
 
-        return array_merge($parentValues, [
-            'componentHtmlAttributes' => array_merge(
-                $parentValues['componentHtmlAttributes'],
-                $this->checked ? ['checked' => 'checked'] : []
-            ),
-        ]);
+        return array_merge($parentValues, compact('componentHtmlAttributes'));
     }
 }

@@ -33,6 +33,15 @@ class SelectTest extends BootstrapComponentsTestCase
         // components.form.select.htmlAttributes
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.select.htmlAttributes')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.select.htmlAttributes')));
+        // components.form.select.formValidation
+        $this->assertTrue(array_key_exists(
+            'displaySuccess',
+            config('bootstrap-components.form.select.formValidation')
+        ));
+        $this->assertTrue(array_key_exists(
+            'displayFailure',
+            config('bootstrap-components.form.select.formValidation')
+        ));
     }
 
     public function testExtendsInput()
@@ -741,8 +750,10 @@ class SelectTest extends BootstrapComponentsTestCase
     public function testConfigDisplaySuccess()
     {
         config()->set('bootstrap-components.form.select.formValidation.displaySuccess', true);
-        $messageBag = app(MessageBag::class)->add('other_name', null);
-        $html = bsSelect()->name('name')->render(['errors' => $messageBag]);
+        $errors = app(MessageBag::class)->add('other_name', 'Dummy error message.');
+        session()->put('errors', $errors);
+        $html = bsSelect()->name('name')->render(compact('errors'));
+        $this->assertStringContainsString('is-valid', $html);
         $this->assertStringContainsString('<div class="valid-feedback d-block">', $html);
         $this->assertStringContainsString(
             __('bootstrap-components::bootstrap-components.notification.validation.success'),
@@ -753,8 +764,10 @@ class SelectTest extends BootstrapComponentsTestCase
     public function testConfigDoNotDisplaySuccess()
     {
         config()->set('bootstrap-components.form.select.formValidation.displaySuccess', false);
-        $messageBag = app(MessageBag::class)->add('other_name', null);
-        $html = bsSelect()->name('name')->render(['errors' => $messageBag]);
+        $errors = app(MessageBag::class)->add('other_name', 'Dummy error message.');
+        session()->put('errors', $errors);
+        $html = bsSelect()->name('name')->render(compact('errors'));
+        $this->assertStringNotContainsString('is-valid', $html);
         $this->assertStringNotContainsString('<div class="valid-feedback d-block">', $html);
         $this->assertStringNotContainsString(
             __('bootstrap-components::bootstrap-components.notification.validation.success'),
@@ -765,8 +778,10 @@ class SelectTest extends BootstrapComponentsTestCase
     public function testDisplaySuccess()
     {
         config()->set('bootstrap-components.form.select.formValidation.displaySuccess', false);
-        $messageBag = app(MessageBag::class)->add('other_name', null);
-        $html = bsSelect()->name('name')->displaySuccess(true)->render(['errors' => $messageBag]);
+        $errors = app(MessageBag::class)->add('other_name', 'Dummy error message.');
+        session()->put('errors', $errors);
+        $html = bsSelect()->name('name')->displaySuccess()->render(compact('errors'));
+        $this->assertStringContainsString('is-valid', $html);
         $this->assertStringContainsString('<div class="valid-feedback d-block">', $html);
         $this->assertStringContainsString(
             __('bootstrap-components::bootstrap-components.notification.validation.success'),
@@ -777,8 +792,10 @@ class SelectTest extends BootstrapComponentsTestCase
     public function testDoNotDisplaySuccess()
     {
         config()->set('bootstrap-components.form.select.formValidation.displaySuccess', true);
-        $messageBag = app(MessageBag::class)->add('other_name', null);
-        $html = bsSelect()->name('name')->displaySuccess(false)->render(['errors' => $messageBag]);
+        $errors = app(MessageBag::class)->add('other_name', 'Dummy error message.');
+        session()->put('errors', $errors);
+        $html = bsSelect()->name('name')->displaySuccess(false)->render(compact('errors'));
+        $this->assertStringNotContainsString('is-valid', $html);
         $this->assertStringNotContainsString('<div class="valid-feedback d-block">', $html);
         $this->assertStringNotContainsString(
             __('bootstrap-components::bootstrap-components.notification.validation.success'),
@@ -789,41 +806,45 @@ class SelectTest extends BootstrapComponentsTestCase
     public function testConfigDisplayFailure()
     {
         config()->set('bootstrap-components.form.select.formValidation.displayFailure', true);
-        $errorMessage = 'This a test error message';
-        $messageBag = app(MessageBag::class)->add('name', $errorMessage);
-        $html = bsSelect()->name('name')->render(['errors' => $messageBag]);
+        $errors = app(MessageBag::class)->add('name', 'Dummy error message.');
+        session()->put('errors', $errors);
+        $html = bsSelect()->name('name')->render(compact('errors'));
+        $this->assertStringContainsString('is-invalid', $html);
         $this->assertStringContainsString('<div class="invalid-feedback d-block">', $html);
-        $this->assertStringContainsString($errorMessage, $html);
+        $this->assertStringContainsString($errors->first('name'), $html);
     }
 
     public function testConfigDoNotDisplayFailure()
     {
         config()->set('bootstrap-components.form.select.formValidation.displayFailure', false);
-        $errorMessage = 'This a test error message';
-        $messageBag = app(MessageBag::class)->add('name', $errorMessage);
-        $html = bsSelect()->name('name')->render(['errors' => $messageBag]);
+        $errors = app(MessageBag::class)->add('name', 'Dummy error message.');
+        session()->put('errors', $errors);
+        $html = bsSelect()->name('name')->render(compact('errors'));
+        $this->assertStringNotContainsString('is-invalid', $html);
         $this->assertStringNotContainsString('<div class="invalid-feedback d-block">', $html);
-        $this->assertStringNotContainsString($errorMessage, $html);
+        $this->assertStringNotContainsString($errors->first('name'), $html);
     }
 
     public function testDisplayFailure()
     {
         config()->set('bootstrap-components.form.select.formValidation.displayFailure', false);
-        $errorMessage = 'This a test error message';
-        $messageBag = app(MessageBag::class)->add('name', $errorMessage);
-        $html = bsSelect()->name('name')->displayFailure(true)->render(['errors' => $messageBag]);
+        $errors = app(MessageBag::class)->add('name', 'Dummy error message.');
+        session()->put('errors', $errors);
+        $html = bsSelect()->name('name')->displayFailure()->render(compact('errors'));
+        $this->assertStringContainsString('is-invalid', $html);
         $this->assertStringContainsString('<div class="invalid-feedback d-block">', $html);
-        $this->assertStringContainsString($errorMessage, $html);
+        $this->assertStringContainsString($errors->first('name'), $html);
     }
 
     public function testDoNotDisplayFailure()
     {
         config()->set('bootstrap-components.form.select.formValidation.displayFailure', true);
-        $errorMessage = 'This a test error message';
-        $messageBag = app(MessageBag::class)->add('name', $errorMessage);
-        $html = bsSelect()->name('name')->displayFailure(false)->render(['errors' => $messageBag]);
+        $errors = app(MessageBag::class)->add('name', 'Dummy error message.');
+        session()->put('errors', $errors);
+        $html = bsSelect()->name('name')->displayFailure(false)->render(compact('errors'));
+        $this->assertStringNotContainsString('is-invalid', $html);
         $this->assertStringNotContainsString('<div class="invalid-feedback d-block">', $html);
-        $this->assertStringNotContainsString($errorMessage, $html);
+        $this->assertStringNotContainsString($errors->first('name'), $html);
     }
 
     public function testSetNoContainerId()
