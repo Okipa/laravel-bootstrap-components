@@ -4,7 +4,7 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
 use Exception;
 use Illuminate\Support\MessageBag;
-use Okipa\LaravelBootstrapComponents\Form\Input;
+use Okipa\LaravelBootstrapComponents\Form\InputMultilingual;
 use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
 use Okipa\LaravelBootstrapComponents\Test\Fakers\UsersFaker;
 
@@ -38,7 +38,7 @@ class TextTest extends BootstrapComponentsTestCase
 
     public function testExtendsInput()
     {
-        $this->assertEquals(Input::class, get_parent_class(bsText()));
+        $this->assertEquals(InputMultilingual::class, get_parent_class(bsText()));
     }
 
     public function testName()

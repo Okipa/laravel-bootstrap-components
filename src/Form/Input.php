@@ -10,90 +10,97 @@ use Okipa\LaravelBootstrapComponents\Form\Traits\InputValidityChecks;
 abstract class Input extends Component
 {
     use InputValidityChecks;
+
     /**
      * The component config key.
      *
      * @property string $configKey
      */
     protected $configKey;
+
     /**
      * The component associated model.
      *
      * @property \Illuminate\Database\Eloquent\Model $model
      */
     protected $model;
+
     /**
      * The component input type.
      *
      * @property string $type
      */
     protected $type;
+
     /**
      * The component input name.
      *
      * @property string $name
      */
     protected $name;
+
     /**
      * The component prepended html.
      *
      * @property string|false $prepend
      */
     protected $prepend;
+
     /**
      * The component appended html.
      *
      * @property string|false $append
      */
     protected $append;
+
     /**
      * The component legend.
      *
      * @property string|false $legend
      */
     protected $legend;
+
     /**
      * The component label.
      *
      * @property string|false $label
      */
     protected $label;
+
     /**
      * The component label above-positioning status.
      *
      * @property bool $labelPositionedAbove
      */
     protected $labelPositionedAbove;
+
     /**
      * The component input value.
      *
      * @property string $value
      */
     protected $value;
+
     /**
      * The component input placeholder.
      *
      * @property string|false $placeholder
      */
     protected $placeholder;
+
     /**
      * The component form validation success display status.
      *
      * @property bool $displaySuccess
      */
     protected $displaySuccess;
+
     /**
      * The component form validation failure display status.
      *
      * @property bool $displayFailure
      */
     protected $displayFailure;
-    /**
-     * The component language locales to manage.
-     *
-     * @property array|false $locales
-     */
-    protected $locales;
 
     /**
      * Set the component associated model.
@@ -251,52 +258,6 @@ abstract class Input extends Component
     }
 
     /**
-     * Set the component input language locales to manage.
-     *
-     * @param array $locales
-     *
-     * @return $this
-     */
-    public function locales(array $locales): self
-    {
-        $this->locales = $locales;
-
-        return $this;
-    }
-
-    /**
-     * Render the component html.
-     *
-     * @param array $extraData
-     *
-     * @return string|null
-     * @throws \Throwable
-     */
-    public function render(array $extraData = []): ?string
-    {
-        $locales = $this->getLocales();
-        $this->checkValuesValidity();
-        $view = $this->getView();
-        if ($view) {
-            return ! empty($locales)
-                ? (string) trim(view('bootstrap-components::bootstrap-components.partials.multilingual', [
-                    'locales' => $locales,
-                    'view'    => $view,
-                    'values'  => array_merge($this->values(), $extraData),
-                ])->render())
-                : parent::render($extraData);
-        }
-    }
-
-    /**
-     * @return array
-     */
-    protected function getLocales(): array
-    {
-        return $this->locales ?? config('bootstrap-components.' . $this->configKey . '.locales', []);
-    }
-
-    /**
      * Set the values for the view.
      *
      * @return array
@@ -313,7 +274,6 @@ abstract class Input extends Component
      */
     protected function defineValues(): array
     {
-        $locale = null;
         $model = $this->model;
         $type = $this->type;
         $name = $this->name;
@@ -341,8 +301,7 @@ abstract class Input extends Component
             'placeholder',
             'displaySuccess',
             'displayFailure',
-            'validationClass',
-            'locale'
+            'validationClass'
         );
     }
 

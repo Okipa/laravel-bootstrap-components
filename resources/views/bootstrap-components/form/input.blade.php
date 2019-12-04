@@ -1,8 +1,9 @@
 @php
+    $locale = ! isset($locale) ? null : $locale;
     $name = $name . ($locale ? '_' . $locale : '');
     $containerId = $containerId
-        ? $containerId . ($locale ? '-' . $locale : '')
-        : ($locale ? $type . '-' . Str::slug($name) . '-container' : null);
+    ? $containerId . ($locale ? '-' . $locale : '')
+    : ($locale ? $type . '-' . Str::slug($name) . '-container' : null);
     $componentId = $componentId . ($locale ? '-' . $locale : '');
     $label = $label ? __($label) . ($locale ? ' (' . strtoupper($locale) . ')' : '' ) : null;
     $placeholder = $placeholder ? ['placeholder' => __($placeholder) . ($locale ? ' (' . strtoupper($locale) . ')' : '' )] : null;

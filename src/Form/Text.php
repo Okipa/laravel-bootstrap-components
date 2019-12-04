@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Form;
 
-class Text extends Input
+class Text extends InputMultilingual
 {
     /**
      * The component config key.

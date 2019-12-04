@@ -24,6 +24,7 @@ class TextareaTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.textarea')));
         $this->assertTrue(array_key_exists('classes', config('bootstrap-components.form.textarea')));
         $this->assertTrue(array_key_exists('htmlAttributes', config('bootstrap-components.form.textarea')));
+        $this->assertTrue(array_key_exists('locales', config('bootstrap-components.form.textarea')));
         // components.form.textarea.classes
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.textarea.classes')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.textarea.classes')));

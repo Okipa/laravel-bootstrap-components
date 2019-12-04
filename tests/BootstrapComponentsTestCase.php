@@ -5,6 +5,7 @@ namespace Okipa\LaravelBootstrapComponents\Test;
 use Faker\Factory;
 use Okipa\LaravelBootstrapComponents\ComponentServiceProvider;
 use Orchestra\Testbench\TestCase;
+use ReflectionObject;
 
 abstract class BootstrapComponentsTestCase extends TestCase
 {
