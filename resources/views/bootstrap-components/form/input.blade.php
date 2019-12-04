@@ -1,4 +1,5 @@
 @php
+    $label = $label . ($locale ? ' (' . strtoupper($locale) . ')' : '');
     $name = $name . ($locale ? '_' . $locale : '');
     $containerId = $containerId ?: ($locale ? $type . '-' . Str::slug($name) . '-container' : null);
     $componentId = $componentId . ($locale ? '-' . $locale : '');
