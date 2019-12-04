@@ -40,7 +40,7 @@ abstract class InputMultilingual extends Input
         $view = $this->getView();
         if ($view) {
             return ! empty($locales)
-                ? (string) trim(view('bootstrap-components::bootstrap-components.partials.multilingual.displayer', [
+                ? (string) trim(view('bootstrap-components::bootstrap-components.partials.multilingual', [
                     'locales' => $locales,
                     'view' => $view,
                     'values' => array_merge($this->values(), $extraData),

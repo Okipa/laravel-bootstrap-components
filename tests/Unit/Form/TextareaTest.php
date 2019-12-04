@@ -5,6 +5,7 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 use Exception;
 use Illuminate\Support\MessageBag;
 use Okipa\LaravelBootstrapComponents\Form\Input;
+use Okipa\LaravelBootstrapComponents\Form\InputMultilingual;
 use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
 use Okipa\LaravelBootstrapComponents\Test\Fakers\UsersFaker;
 
@@ -44,7 +45,7 @@ class TextareaTest extends BootstrapComponentsTestCase
 
     public function testExtendsInput()
     {
-        $this->assertEquals(Input::class, get_parent_class(bsTextarea()));
+        $this->assertEquals(InputMultilingual::class, get_parent_class(bsTextarea()));
     }
 
     public function testSetName()
@@ -573,5 +574,94 @@ class TextareaTest extends BootstrapComponentsTestCase
         $html = bsTextarea()->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
         $this->assertStringContainsString($customComponentAttributes, $html);
         $this->assertStringNotContainsString($configComponentAttributes, $html);
+    }
+
+    // *****
+
+    public function testConfigLocales()
+    {
+        $locales = ['fr', 'en'];
+        config()->set('bootstrap-components.form.textarea.locales', $locales);
+        $html = bsTextarea()->name('name')->toHtml();
+        foreach ($locales as $locale) {
+            $this->assertStringContainsString('class="textarea-name-' . $locale . '-container', $html);
+        }
+    }
+
+    public function testSetLocales()
+    {
+        $locales = ['fr', 'en'];
+        config()->set('bootstrap-components.form.textarea.locales', []);
+        $html = bsTextarea()->name('name')->locales($locales)->toHtml();
+        foreach ($locales as $locale) {
+            $this->assertStringContainsString('class="textarea-name-' . $locale . '-container', $html);
+        }
+    }
+
+    public function testLocalizedName()
+    {
+        $locales = ['fr', 'en'];
+        $html = bsTextarea()->name('name')->locales($locales)->toHtml();
+        foreach ($locales as $locale) {
+            $this->assertStringContainsString('name="name_' . $locale . '"', $html);
+        }
+    }
+
+    public function testSetLocalizedLabel()
+    {
+        $locales = ['fr', 'en'];
+        $label = 'test-custom-label';
+        $html = bsTextarea()->name('name')->label($label)->locales($locales)->toHtml();
+        foreach ($locales as $locale) {
+            $this->assertStringContainsString(
+                '<label for="textarea-name-' . $locale . '">' . $label . ' (' . strtoupper($locale) . ')</label>',
+                $html
+            );
+            $this->assertStringContainsString(' placeholder="' . $label . ' (' . strtoupper($locale) . ')"', $html);
+            $this->assertStringContainsString(' aria-label="' . $label . ' (' . strtoupper($locale) . ')"', $html);
+        }
+    }
+
+    public function testSetLocalizedPlaceholder()
+    {
+        $locales = ['fr', 'en'];
+        $placeholder = 'test-custom-placeholder';
+        $html = bsTextarea()->name('name')->placeholder($placeholder)->locales($locales)->toHtml();
+        foreach ($locales as $locale) {
+            $this->assertStringContainsString(
+                ' placeholder="' . $placeholder . ' (' . strtoupper($locale) . ')"',
+                $html
+            );
+        }
+    }
+
+    public function testSetLocalizedComponentId()
+    {
+        $locales = ['fr', 'en'];
+        $customComponentId = 'test-custom-component-id';
+        $html = bsTextarea()->name('name')->componentId($customComponentId)->locales($locales)->toHtml();
+        foreach ($locales as $locale) {
+            $this->assertStringContainsString(' for="' . $customComponentId . '-' . $locale . '"', $html);
+            $this->assertStringContainsString('<input id="' . $customComponentId . '-' . $locale . '"', $html);
+        }
+    }
+
+    public function testSetNoLocalizedContainerId()
+    {
+        $locales = ['fr', 'en'];
+        $html = bsTextarea()->name('name')->locales($locales)->toHtml();
+        foreach ($locales as $locale) {
+            $this->assertStringContainsString('<div id="textarea-name-' . $locale . '-container"', $html);
+        }
+    }
+
+    public function testSetLocalizedContainerId()
+    {
+        $locales = ['fr', 'en'];
+        $customContainerId = 'test-custom-container-id';
+        $html = bsTextarea()->name('name')->containerId($customContainerId)->locales($locales)->toHtml();
+        foreach ($locales as $locale) {
+            $this->assertStringContainsString('<div id="' . $customContainerId . '-' . $locale . '"', $html);
+        }
     }
 }
