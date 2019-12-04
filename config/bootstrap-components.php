@@ -1,26 +1,5 @@
 <?php
 
-/**
- * The components default form validation success display status.
- *
- * @property bool $displaySuccess
- */
-$displaySuccess = false;
-
-/**
- * The components default form validation failure display status.
- *
- * @property bool $displayFailure
- */
-$displayFailure = true;
-
-/**
- * The default language locales for multilingual components.
- *
- * @property array $locales
- */
-$locales = [];
-
 return [
 
     // form components *************************************************************************************************
@@ -41,10 +20,10 @@ return [
                 'component' => [],
             ],
             'formValidation' => [
-                'displaySuccess' => $displaySuccess,
-                'displayFailure' => $displayFailure,
+                'displaySuccess' => false,
+                'displayFailure' => true,
             ],
-            'locales' => $locales,
+            'locales' => [],
         ],
 
         'number' => [
@@ -62,8 +41,8 @@ return [
                 'component' => [],
             ],
             'formValidation' => [
-                'displaySuccess' => $displaySuccess,
-                'displayFailure' => $displayFailure,
+                'displaySuccess' => false,
+                'displayFailure' => true,
             ],
         ],
 
@@ -82,8 +61,8 @@ return [
                 'component' => [],
             ],
             'formValidation' => [
-                'displaySuccess' => $displaySuccess,
-                'displayFailure' => $displayFailure,
+                'displaySuccess' => false,
+                'displayFailure' => true,
             ],
         ],
 
@@ -103,8 +82,8 @@ return [
                 'component' => [],
             ],
             'formValidation' => [
-                'displaySuccess' => $displaySuccess,
-                'displayFailure' => $displayFailure,
+                'displaySuccess' => false,
+                'displayFailure' => true,
             ],
         ],
 
@@ -124,8 +103,8 @@ return [
                 'component' => [],
             ],
             'formValidation' => [
-                'displaySuccess' => $displaySuccess,
-                'displayFailure' => $displayFailure,
+                'displaySuccess' => false,
+                'displayFailure' => true,
             ],
         ],
 
@@ -145,8 +124,8 @@ return [
                 'component' => [],
             ],
             'formValidation' => [
-                'displaySuccess' => $displaySuccess,
-                'displayFailure' => $displayFailure,
+                'displaySuccess' => false,
+                'displayFailure' => true,
             ],
         ],
 
@@ -165,8 +144,8 @@ return [
                 'component' => [],
             ],
             'formValidation' => [
-                'displaySuccess' => $displaySuccess,
-                'displayFailure' => $displayFailure,
+                'displaySuccess' => false,
+                'displayFailure' => true,
             ],
         ],
 
@@ -185,8 +164,8 @@ return [
                 'component' => [],
             ],
             'formValidation' => [
-                'displaySuccess' => $displaySuccess,
-                'displayFailure' => $displayFailure,
+                'displaySuccess' => false,
+                'displayFailure' => true,
             ],
         ],
 
@@ -205,8 +184,8 @@ return [
                 'component' => [],
             ],
             'formValidation' => [
-                'displaySuccess' => $displaySuccess,
-                'displayFailure' => $displayFailure,
+                'displaySuccess' => false,
+                'displayFailure' => true,
             ],
         ],
 
@@ -225,8 +204,8 @@ return [
                 'component' => [],
             ],
             'formValidation' => [
-                'displaySuccess' => $displaySuccess,
-                'displayFailure' => $displayFailure,
+                'displaySuccess' => false,
+                'displayFailure' => true,
             ],
         ],
 
@@ -246,8 +225,8 @@ return [
                 'component' => [],
             ],
             'formValidation' => [
-                'displaySuccess' => $displaySuccess,
-                'displayFailure' => $displayFailure,
+                'displaySuccess' => false,
+                'displayFailure' => true,
             ],
         ],
 
@@ -266,10 +245,10 @@ return [
                 'component' => [],
             ],
             'formValidation' => [
-                'displaySuccess' => $displaySuccess,
-                'displayFailure' => $displayFailure,
+                'displaySuccess' => false,
+                'displayFailure' => true,
             ],
-            'locales' => $locales,
+            'locales' => [],
         ],
 
         'select' => [
@@ -287,8 +266,8 @@ return [
                 'component' => [],
             ],
             'formValidation' => [
-                'displaySuccess' => $displaySuccess,
-                'displayFailure' => $displayFailure,
+                'displaySuccess' => false,
+                'displayFailure' => true,
             ],
         ],
 
@@ -306,8 +285,8 @@ return [
                 'component' => [],
             ],
             'formValidation' => [
-                'displaySuccess' => $displaySuccess,
-                'displayFailure' => $displayFailure,
+                'displaySuccess' => false,
+                'displayFailure' => true,
             ],
         ],
 
@@ -325,8 +304,8 @@ return [
                 'component' => [],
             ],
             'formValidation' => [
-                'displaySuccess' => $displaySuccess,
-                'displayFailure' => $displayFailure,
+                'displaySuccess' => false,
+                'displayFailure' => true,
             ],
         ],
 
@@ -344,8 +323,8 @@ return [
                 'component' => [],
             ],
             'formValidation' => [
-                'displaySuccess' => $displaySuccess,
-                'displayFailure' => $displayFailure,
+                'displaySuccess' => false,
+                'displayFailure' => true,
             ],
         ],
     ],
