@@ -161,9 +161,9 @@ abstract class Component implements Htmlable
     public function render(array $data = []): ?string
     {
         $this->checkValuesValidity();
-        $view = $this->view();
+        $view = $this->getView();
         if ($view) {
-            return (string) view('bootstrap-components::' . $view, $this->values(), $data)->render();
+            return (string) trim(view('bootstrap-components::' . $view, $this->values(), $data)->render());
         }
     }
 
@@ -177,7 +177,7 @@ abstract class Component implements Htmlable
      *
      * @return string
      */
-    protected function view(): string
+    protected function getView(): string
     {
         return config('bootstrap-components.' . $this->configKey . '.view', '');
     }
@@ -189,88 +189,72 @@ abstract class Component implements Htmlable
      */
     protected function values(): array
     {
-        return [
-            'componentId'             => $this->componentId ? $this->componentId : $this->defaultComponentId(),
-            'containerId'             => $this->containerId ? $this->containerId : $this->defaultContainerId(),
-            'componentClasses'        => $this->componentClasses ? $this->componentClasses
-                : $this->defaultComponentClass(),
-            'containerClasses'        => $this->containerClasses
-                ? $this->containerClasses
-                : $this->defaultContainerClasses(),
-            'componentHtmlAttributes' => $this->componentHtmlAttributes
-                ? $this->componentHtmlAttributes
-                : $this->defaultComponentHtmlAttributes(),
-            'containerHtmlAttributes' => $this->containerHtmlAttributes
-                ? $this->containerHtmlAttributes
-                : $this->defaultContainerHtmlAttributes(),
-        ];
+        $componentId = $this->getComponentId();
+        $containerId = $this->getContainerId();
+        $componentClasses = $this->getComponentClasses();
+        $containerClasses = $this->getContainerClasses();
+        $componentHtmlAttributes = $this->getComponentHtmlAttributes();
+        $containerHtmlAttributes = $this->getContainerHtmlAttributes();
+
+        return compact(
+            'componentId',
+            'containerId',
+            'componentClasses',
+            'containerClasses',
+            'componentHtmlAttributes',
+            'containerHtmlAttributes'
+        );
     }
 
     /**
-     * Set the default component id.
-     *
      * @return string
      */
-    protected function defaultComponentId(): string
+    protected function getComponentId(): string
     {
-        return '';
+        return $this->componentId ?? '';
     }
 
     /**
-     * Set the default container id.
-     *
      * @return string
      */
-    protected function defaultContainerId(): string
+    protected function getContainerId(): string
     {
-        return '';
+        return $this->containerId ?? '';
     }
 
     /**
-     * Set the default component class.
-     *
      * @return array
      */
-    protected function defaultComponentClass(): array
+    protected function getComponentClasses(): array
     {
-        $componentClasses = config('bootstrap-components.' . $this->configKey . '.classes.component');
-
-        return $componentClasses ? $componentClasses : [];
+        return $this->componentClasses
+            ?? config('bootstrap-components.' . $this->configKey . '.classes.component', []);
     }
 
     /**
-     * Set the default container class.
-     *
      * @return array
      */
-    protected function defaultContainerClasses(): array
+    protected function getContainerClasses(): array
     {
-        $containerClasses = config('bootstrap-components.' . $this->configKey . '.classes.container');
-
-        return $containerClasses ? $containerClasses : [];
+        return $this->containerClasses
+            ?? config('bootstrap-components.' . $this->configKey . '.classes.container', []);
     }
 
     /**
-     * Set the default component html attributes.
-     *
      * @return array
      */
-    protected function defaultComponentHtmlAttributes(): array
+    protected function getComponentHtmlAttributes(): array
     {
-        $componentHtmlAttributes = config('bootstrap-components.' . $this->configKey . '.htmlAttributes.component');
-
-        return $componentHtmlAttributes ? $componentHtmlAttributes : [];
+        return $this->componentHtmlAttributes
+            ?? config('bootstrap-components.' . $this->configKey . '.htmlAttributes.component', []);
     }
 
     /**
-     * Set the default container html attributes.
-     *
      * @return array
      */
-    protected function defaultContainerHtmlAttributes(): array
+    protected function getContainerHtmlAttributes(): array
     {
-        $containerHtmlAttributes = config('bootstrap-components.' . $this->configKey . '.htmlAttributes.container');
-
-        return $containerHtmlAttributes ? $containerHtmlAttributes : [];
+        return $this->containerHtmlAttributes
+            ?? config('bootstrap-components.' . $this->configKey . '.htmlAttributes.container', []);
     }
 }

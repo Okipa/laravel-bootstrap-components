@@ -43,13 +43,11 @@ class Radio extends Input
     }
 
     /**
-     * Set the default component id.
-     *
      * @return string
      */
-    protected function defaultComponentId(): string
+    protected function getComponentId(): string
     {
-        return $this->type . '-' . Str::slug($this->name) . '-' . Str::slug($this->value);
+        return $this->componentId ?? $this->type . '-' . Str::slug($this->name) . '-' . Str::slug($this->value);
     }
 
     /**

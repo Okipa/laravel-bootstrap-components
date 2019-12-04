@@ -61,7 +61,7 @@ abstract class Input extends Component
     /**
      * The component label above-positioning status.
      *
-     * @property boolean $labelPositionedAbove
+     * @property bool $labelPositionedAbove
      */
     protected $labelPositionedAbove;
     /**
@@ -79,15 +79,21 @@ abstract class Input extends Component
     /**
      * The component form validation success display status.
      *
-     * @property boolean $displaySuccess
+     * @property bool $displaySuccess
      */
     protected $displaySuccess;
     /**
      * The component form validation failure display status.
      *
-     * @property boolean $displayFailure
+     * @property bool $displayFailure
      */
     protected $displayFailure;
+    /**
+     * The component language locales to manage.
+     *
+     * @property array|false $locales
+     */
+    protected $locales;
 
     /**
      * Set the component associated model.
@@ -245,6 +251,52 @@ abstract class Input extends Component
     }
 
     /**
+     * Set the component input language locales to manage.
+     *
+     * @param array $locales
+     *
+     * @return $this
+     */
+    public function locales(array $locales): self
+    {
+        $this->locales = $locales;
+
+        return $this;
+    }
+
+    /**
+     * Render the component html.
+     *
+     * @param array $extraData
+     *
+     * @return string|null
+     * @throws \Throwable
+     */
+    public function render(array $extraData = []): ?string
+    {
+        $locales = $this->getLocales();
+        $this->checkValuesValidity();
+        $view = $this->getView();
+        if ($view) {
+            return ! empty($locales)
+                ? (string) trim(view('bootstrap-components::bootstrap-components.partials.multilingual', [
+                    'locales' => $locales,
+                    'view'    => $view,
+                    'values'  => array_merge($this->values(), $extraData),
+                ])->render())
+                : parent::render($extraData);
+        }
+    }
+
+    /**
+     * @return array
+     */
+    protected function getLocales(): array
+    {
+        return $this->locales ?? config('bootstrap-components.' . $this->configKey . '.locales', []);
+    }
+
+    /**
      * Set the values for the view.
      *
      * @return array
@@ -261,19 +313,20 @@ abstract class Input extends Component
      */
     protected function defineValues(): array
     {
+        $locale = null;
         $model = $this->model;
         $type = $this->type;
         $name = $this->name;
-        $prepend = $this->prepend ?? $this->defaultPrepend();
-        $append = $this->append ?? $this->defaultAppend();
-        $legend = $this->legend ?? $this->defaultLegend();
-        $label = $this->label ?? $this->defaultLabel();
-        $labelPositionedAbove = $this->labelPositionedAbove ?? $this->defaultLabelPositionedAbove();
+        $prepend = $this->getPrepend();
+        $append = $this->getAppend();
+        $legend = $this->getLegend();
+        $label = $this->getLabel();
+        $labelPositionedAbove = $this->getLabelPositionedAbove();
         $value = $this->defineValue();
-        $placeholder = $this->placeholder ?? ($this->label ?: $this->defaultLabel());
-        $displaySuccess = $this->displaySuccess ?? $this->defaultDisplaySuccess();
-        $displayFailure = $this->displayFailure ?? $this->defaultDisplayFailure();
-        $validationClass = $this->validationClass($name, $displaySuccess, $displayFailure);
+        $placeholder = $this->getPlaceholder();
+        $displaySuccess = $this->getDisplaySuccess();
+        $displayFailure = $this->getDisplayFailure();
+        $validationClass = $this->getValidationClass($name, $displaySuccess, $displayFailure);
 
         return compact(
             'model',
@@ -288,14 +341,15 @@ abstract class Input extends Component
             'placeholder',
             'displaySuccess',
             'displayFailure',
-            'validationClass'
+            'validationClass',
+            'locale'
         );
     }
 
     /**
      * @return string|null
      */
-    protected function defaultPrepend(): ?string
+    protected function getPrepend(): ?string
     {
         return $this->prepend ?? config('bootstrap-components.' . $this->configKey . '.prepend');
     }
@@ -303,35 +357,41 @@ abstract class Input extends Component
     /**
      * @return string|null
      */
-    protected function defaultAppend(): ?string
+    protected function getAppend(): ?string
     {
-        return config('bootstrap-components.' . $this->configKey . '.append');
+        return $this->append ?? config('bootstrap-components.' . $this->configKey . '.append');
     }
 
     /**
      * @return string|null
      */
-    protected function defaultLegend(): ?string
+    protected function getLegend(): ?string
     {
-        $legend = config('bootstrap-components.' . $this->configKey . '.legend');
+        $configLegend = config('bootstrap-components.' . $this->configKey . '.legend');
+        $defaultLegend = $configLegend ? 'bootstrap-components::' . $configLegend : null;
 
-        return $legend ? 'bootstrap-components::' . $legend : null;
+        return $this->legend ?? $defaultLegend;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    protected function defaultLabel(): string
+    protected function getLabel(): ?string
     {
-        return 'validation.attributes.' . Str::slug($this->name, '_');
+        $label = $this->label ?? 'validation.attributes.' . Str::slug($this->name, '_');
+
+        return $label ?: null;
     }
 
     /**
      * @return bool
      */
-    protected function defaultLabelPositionedAbove(): bool
+    protected function getLabelPositionedAbove(): bool
     {
-        return config('bootstrap-components.' . $this->configKey . '.labelPositionedAbove') ?? true;
+        $labelPositionedAbove = $this->labelPositionedAbove
+            ?? config('bootstrap-components.' . $this->configKey . '.labelPositionedAbove');
+
+        return $labelPositionedAbove ?? true;
     }
 
     /**
@@ -343,19 +403,32 @@ abstract class Input extends Component
     }
 
     /**
-     * @return bool
+     * @return string|null
      */
-    protected function defaultDisplaySuccess(): bool
+    protected function getPlaceholder(): ?string
     {
-        return config('bootstrap-components.' . $this->configKey . '.formValidation.displaySuccess');
+        $placeholder = $this->placeholder ?? $this->getLabel();
+        $placeholder = $placeholder ?? 'validation.attributes.' . Str::slug($this->name, '_');
+
+        return $placeholder ?: null;
     }
 
     /**
      * @return bool
      */
-    protected function defaultDisplayFailure(): bool
+    protected function getDisplaySuccess(): bool
     {
-        return config('bootstrap-components.' . $this->configKey . '.formValidation.displayFailure');
+        return $this->displaySuccess
+            ?? config('bootstrap-components.' . $this->configKey . '.formValidation.displaySuccess');
+    }
+
+    /**
+     * @return bool
+     */
+    protected function getDisplayFailure(): bool
+    {
+        return $this->displayFailure
+            ?? config('bootstrap-components.' . $this->configKey . '.formValidation.displayFailure');
     }
 
     /**
@@ -365,7 +438,7 @@ abstract class Input extends Component
      *
      * @return string|null
      */
-    protected function validationClass(string $name, bool $displaySuccess, bool $displayFailure): ?string
+    protected function getValidationClass(string $name, bool $displaySuccess, bool $displayFailure): ?string
     {
         if (session()->has('errors')) {
             return session()->get('errors')->has($name)
@@ -377,12 +450,10 @@ abstract class Input extends Component
     }
 
     /**
-     * Set the default component id.
-     *
      * @return string
      */
-    protected function defaultComponentId(): string
+    protected function getComponentId(): string
     {
-        return $this->type . '-' . Str::slug($this->name);
+        return $this->componentId ?? $this->type . '-' . Str::slug($this->name);
     }
 }

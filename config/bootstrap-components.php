@@ -1,5 +1,26 @@
 <?php
 
+/**
+ * The components default form validation success display status.
+ *
+ * @property bool $displaySuccess
+ */
+$displaySuccess = false;
+
+/**
+ * The components default form validation failure display status.
+ *
+ * @property bool $displayFailure
+ */
+$displayFailure = true;
+
+/**
+ * The components default language locales to manage.
+ *
+ * @property array $locales
+ */
+$locales = [];
+
 return [
 
     // form components *************************************************************************************************
@@ -19,9 +40,10 @@ return [
                 'component' => [],
             ],
             'formValidation'       => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
+                'displaySuccess' => $displaySuccess,
+                'displayFailure' => $displayFailure,
             ],
+            'locales'              => $locales,
         ],
         'number'   => [
             'view'                 => 'bootstrap-components.form.input',
@@ -38,8 +60,8 @@ return [
                 'component' => [],
             ],
             'formValidation'       => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
+                'displaySuccess' => $displaySuccess,
+                'displayFailure' => $displayFailure,
             ],
         ],
         'tel'      => [
@@ -57,8 +79,8 @@ return [
                 'component' => [],
             ],
             'formValidation'       => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
+                'displaySuccess' => $displaySuccess,
+                'displayFailure' => $displayFailure,
             ],
         ],
         'datetime' => [
@@ -77,8 +99,8 @@ return [
                 'component' => [],
             ],
             'formValidation'       => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
+                'displaySuccess' => $displaySuccess,
+                'displayFailure' => $displayFailure,
             ],
         ],
         'date'     => [
@@ -97,8 +119,8 @@ return [
                 'component' => [],
             ],
             'formValidation'       => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
+                'displaySuccess' => $displaySuccess,
+                'displayFailure' => $displayFailure,
             ],
         ],
         'time'     => [
@@ -117,8 +139,8 @@ return [
                 'component' => [],
             ],
             'formValidation'       => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
+                'displaySuccess' => $displaySuccess,
+                'displayFailure' => $displayFailure,
             ],
         ],
         'url'      => [
@@ -136,8 +158,8 @@ return [
                 'component' => [],
             ],
             'formValidation'       => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
+                'displaySuccess' => $displaySuccess,
+                'displayFailure' => $displayFailure,
             ],
         ],
         'email'    => [
@@ -155,8 +177,8 @@ return [
                 'component' => [],
             ],
             'formValidation'       => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
+                'displaySuccess' => $displaySuccess,
+                'displayFailure' => $displayFailure,
             ],
         ],
         'color'    => [
@@ -174,8 +196,8 @@ return [
                 'component' => [],
             ],
             'formValidation'       => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
+                'displaySuccess' => $displaySuccess,
+                'displayFailure' => $displayFailure,
             ],
         ],
         'password' => [
@@ -193,8 +215,8 @@ return [
                 'component' => [],
             ],
             'formValidation'       => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
+                'displaySuccess' => $displaySuccess,
+                'displayFailure' => $displayFailure,
             ],
         ],
         'file'     => [
@@ -213,8 +235,8 @@ return [
                 'component' => [],
             ],
             'formValidation'       => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
+                'displaySuccess' => $displaySuccess,
+                'displayFailure' => $displayFailure,
             ],
         ],
         'textarea' => [
@@ -232,8 +254,8 @@ return [
                 'component' => [],
             ],
             'formValidation'       => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
+                'displaySuccess' => $displaySuccess,
+                'displayFailure' => $displayFailure,
             ],
         ],
         'select'   => [
@@ -251,8 +273,8 @@ return [
                 'component' => [],
             ],
             'formValidation'       => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
+                'displaySuccess' => $displaySuccess,
+                'displayFailure' => $displayFailure,
             ],
         ],
         'checkbox' => [
@@ -269,8 +291,8 @@ return [
                 'component' => [],
             ],
             'formValidation' => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
+                'displaySuccess' => $displaySuccess,
+                'displayFailure' => $displayFailure,
             ],
         ],
         'toggle'   => [
@@ -287,8 +309,8 @@ return [
                 'component' => [],
             ],
             'formValidation' => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
+                'displaySuccess' => $displaySuccess,
+                'displayFailure' => $displayFailure,
             ],
         ],
         'radio'    => [
@@ -305,8 +327,8 @@ return [
                 'component' => [],
             ],
             'formValidation' => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
+                'displaySuccess' => $displaySuccess,
+                'displayFailure' => $displayFailure,
             ],
         ],
     ],
@@ -387,7 +409,6 @@ return [
 
     // media components ************************************************************************************************
     'media'  => [
-
         'audio' => [
             'view'           => 'bootstrap-components.media.audio',
             'classes'        => [

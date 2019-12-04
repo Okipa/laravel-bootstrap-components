@@ -29,7 +29,7 @@ class File extends Input
     /**
      * The show remove file checkbox status.
      *
-     * @property boolean $showRemoveCheckbox
+     * @property bool $showRemoveCheckbox
      */
     protected $showRemoveCheckbox;
     /**

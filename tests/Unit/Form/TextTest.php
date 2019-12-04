@@ -24,6 +24,7 @@ class TextTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.text')));
         $this->assertTrue(array_key_exists('classes', config('bootstrap-components.form.text')));
         $this->assertTrue(array_key_exists('htmlAttributes', config('bootstrap-components.form.text')));
+        $this->assertTrue(array_key_exists('locales', config('bootstrap-components.form.text')));
         // components.form.text.classes
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.text.classes')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.text.classes')));
@@ -554,5 +555,33 @@ class TextTest extends BootstrapComponentsTestCase
         $html = bsText()->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
         $this->assertStringContainsString($customComponentAttributes, $html);
         $this->assertStringNotContainsString($configComponentAttributes, $html);
+    }
+
+    public function testConfigLocales()
+    {
+        $locales = ['fr', 'en'];
+        config()->set('bootstrap-components.form.text.locales', $locales);
+        $html = bsText()->name('name')->toHtml();
+        foreach ($locales as $locale) {
+            $this->assertStringContainsString('<div id="text-name-' . $locale . '-container"', $html);
+            $this->assertStringContainsString('class="text-name-' . $locale . '-container', $html);
+            $this->assertStringContainsString('<label for="text-name-' . $locale . '"', $html);
+            $this->assertStringContainsString('<input id="text-name-' . $locale . '"', $html);
+            $this->assertStringContainsString('name="name_' . $locale . '"', $html);
+        }
+    }
+
+    public function testSetLocales()
+    {
+        $locales = ['fr', 'en'];
+        config()->set('bootstrap-components.form.text.locales', []);
+        $html = bsText()->name('name')->locales($locales)->toHtml();
+        foreach ($locales as $locale) {
+            $this->assertStringContainsString('<div id="text-name-' . $locale . '-container"', $html);
+            $this->assertStringContainsString('class="text-name-' . $locale . '-container', $html);
+            $this->assertStringContainsString('<label for="text-name-' . $locale . '"', $html);
+            $this->assertStringContainsString('<input id="text-name-' . $locale . '"', $html);
+            $this->assertStringContainsString('name="name_' . $locale . '"', $html);
+        }
     }
 }
