@@ -1,3 +1,3 @@
 @if($label)
-    <label for="{{ $componentId }}">@lang($label) ({{ $locale ? strtoupper($locale) : '' }})</label>
+    <label for="{{ $componentId }}">{{ $label }}</label>
 @endif

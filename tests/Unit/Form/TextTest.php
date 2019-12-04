@@ -47,15 +47,6 @@ class TextTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString(' name="name"', $html);
     }
 
-    public function testLocalizedName()
-    {
-        $locales = ['fr', 'en'];
-        $html = bsText()->name('name')->locales($locales)->toHtml();
-        foreach ($locales as $locale) {
-            $this->assertStringContainsString('name="name_' . $locale . '"', $html);
-        }
-    }
-
     public function testType()
     {
         $html = bsText()->name('name')->toHtml();
@@ -74,8 +65,6 @@ class TextTest extends BootstrapComponentsTestCase
         $html = bsText()->model($user)->name('name')->toHtml();
         $this->assertStringContainsString(' value="' . $user->name . '"', $html);
     }
-
-    // test localized values
 
     public function testConfigPrepend()
     {
@@ -574,11 +563,7 @@ class TextTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.text.locales', $locales);
         $html = bsText()->name('name')->toHtml();
         foreach ($locales as $locale) {
-            $this->assertStringContainsString('<div id="text-name-' . $locale . '-container"', $html);
             $this->assertStringContainsString('class="text-name-' . $locale . '-container', $html);
-            $this->assertStringContainsString('<label for="text-name-' . $locale . '"', $html);
-            $this->assertStringContainsString('<input id="text-name-' . $locale . '"', $html);
-            $this->assertStringContainsString('name="name_' . $locale . '"', $html);
         }
     }
 
@@ -588,11 +573,76 @@ class TextTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.text.locales', []);
         $html = bsText()->name('name')->locales($locales)->toHtml();
         foreach ($locales as $locale) {
-            $this->assertStringContainsString('<div id="text-name-' . $locale . '-container"', $html);
             $this->assertStringContainsString('class="text-name-' . $locale . '-container', $html);
-            $this->assertStringContainsString('<label for="text-name-' . $locale . '"', $html);
-            $this->assertStringContainsString('<input id="text-name-' . $locale . '"', $html);
+        }
+    }
+
+    public function testLocalizedName()
+    {
+        $locales = ['fr', 'en'];
+        $html = bsText()->name('name')->locales($locales)->toHtml();
+        foreach ($locales as $locale) {
             $this->assertStringContainsString('name="name_' . $locale . '"', $html);
+        }
+    }
+
+    // test localized values
+
+    public function testSetLocalizedLabel()
+    {
+        $locales = ['fr', 'en'];
+        $label = 'test-custom-label';
+        $html = bsText()->name('name')->label($label)->locales($locales)->toHtml();
+        foreach ($locales as $locale) {
+            $this->assertStringContainsString(
+                '<label for="text-name-' . $locale . '">' . $label . ' (' . strtoupper($locale) . ')</label>',
+                $html
+            );
+            $this->assertStringContainsString(' placeholder="' . $label . ' (' . strtoupper($locale) . ')"', $html);
+            $this->assertStringContainsString(' aria-label="' . $label . ' (' . strtoupper($locale) . ')"', $html);
+        }
+    }
+
+    public function testSetLocalizedPlaceholder()
+    {
+        $locales = ['fr', 'en'];
+        $placeholder = 'test-custom-placeholder';
+        $html = bsText()->name('name')->placeholder($placeholder)->locales($locales)->toHtml();
+        foreach ($locales as $locale) {
+            $this->assertStringContainsString(
+                ' placeholder="' . $placeholder . ' (' . strtoupper($locale) . ')"',
+                $html
+            );
+        }
+    }
+
+    public function testSetLocalizedComponentId()
+    {
+        $locales = ['fr', 'en'];
+        $customComponentId = 'test-custom-component-id';
+        $html = bsText()->name('name')->componentId($customComponentId)->locales($locales)->toHtml();
+        foreach ($locales as $locale) {
+            $this->assertStringContainsString(' for="' . $customComponentId . '-' . $locale . '"', $html);
+            $this->assertStringContainsString('<input id="' . $customComponentId . '-' . $locale . '"', $html);
+        }
+    }
+
+    public function testSetNoLocalizedContainerId()
+    {
+        $locales = ['fr', 'en'];
+        $html = bsText()->name('name')->locales($locales)->toHtml();
+        foreach ($locales as $locale) {
+            $this->assertStringContainsString('<div id="text-name-' . $locale . '-container"', $html);
+        }
+    }
+
+    public function testSetLocalizedContainerId()
+    {
+        $locales = ['fr', 'en'];
+        $customContainerId = 'test-custom-container-id';
+        $html = bsText()->name('name')->containerId($customContainerId)->locales($locales)->toHtml();
+        foreach ($locales as $locale) {
+            $this->assertStringContainsString('<div id="' . $customContainerId . '-' . $locale . '"', $html);
         }
     }
 }
