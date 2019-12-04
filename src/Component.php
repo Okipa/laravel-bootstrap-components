@@ -153,17 +153,20 @@ abstract class Component implements Htmlable
     /**
      * Render the component html.
      *
-     * @param array $data
+     * @param array $extraData
      *
      * @return string|null
      * @throws \Throwable
      */
-    public function render(array $data = []): ?string
+    public function render(array $extraData = []): ?string
     {
         $this->checkValuesValidity();
         $view = $this->getView();
         if ($view) {
-            return (string) trim(view('bootstrap-components::' . $view, $this->values(), $data)->render());
+            return (string) trim(view(
+                'bootstrap-components::' . $view,
+                array_merge($this->getValues(), $extraData)
+            )->render());
         }
     }
 
@@ -183,11 +186,11 @@ abstract class Component implements Htmlable
     }
 
     /**
-     * Set the component values.
+     * Get values for the view.
      *
      * @return array
      */
-    protected function values(): array
+    protected function getValues(): array
     {
         $componentId = $this->getComponentId();
         $containerId = $this->getContainerId();
@@ -207,19 +210,19 @@ abstract class Component implements Htmlable
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    protected function getComponentId(): string
+    protected function getComponentId(): ?string
     {
-        return $this->componentId ?? '';
+        return $this->componentId;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    protected function getContainerId(): string
+    protected function getContainerId(): ?string
     {
-        return $this->containerId ?? '';
+        return $this->containerId;
     }
 
     /**

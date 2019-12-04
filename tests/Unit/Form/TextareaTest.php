@@ -640,7 +640,7 @@ class TextareaTest extends BootstrapComponentsTestCase
         $html = bsTextarea()->name('name')->componentId($customComponentId)->locales($locales)->toHtml();
         foreach ($locales as $locale) {
             $this->assertStringContainsString(' for="' . $customComponentId . '-' . $locale . '"', $html);
-            $this->assertStringContainsString('<input id="' . $customComponentId . '-' . $locale . '"', $html);
+            $this->assertStringContainsString('<textarea id="' . $customComponentId . '-' . $locale . '"', $html);
         }
     }
 

@@ -32,9 +32,9 @@ abstract class Media extends Component
      *
      * @return array
      */
-    protected function values(): array
+    protected function getValues(): array
     {
-        return array_merge(parent::values(), [
+        return array_merge(parent::getValues(), [
             'src' => $this->src,
         ]);
     }

@@ -258,21 +258,21 @@ abstract class Input extends Component
     }
 
     /**
-     * Set the values for the view.
+     * Get values for the view.
      *
      * @return array
      */
-    protected function values(): array
+    protected function getValues(): array
     {
-        return array_merge(parent::values(), $this->defineValues());
+        return array_merge(parent::getValues(), $this->getParameters());
     }
 
     /**
-     * Define the component values.
+     * Define the component parameters.
      *
      * @return array
      */
-    protected function defineValues(): array
+    protected function getParameters(): array
     {
         $model = $this->model;
         $type = $this->type;
@@ -339,7 +339,7 @@ abstract class Input extends Component
     {
         $label = $this->label ?? 'validation.attributes.' . Str::slug($this->name, '_');
 
-        return $label ?: null;
+        return $label ? __($label) : null;
     }
 
     /**
@@ -369,7 +369,7 @@ abstract class Input extends Component
         $placeholder = $this->placeholder ?? $this->getLabel();
         $placeholder = $placeholder ?? 'validation.attributes.' . Str::slug($this->name, '_');
 
-        return $placeholder ?: null;
+        return $placeholder ? __($placeholder) : null;
     }
 
     /**

@@ -135,15 +135,15 @@ abstract class Button extends Component
      *
      * @return array
      */
-    protected function values(): array
+    protected function getValues(): array
     {
-        return array_merge(parent::values(), $this->defineValues());
+        return array_merge(parent::getValues(), $this->getParameters());
     }
 
     /**
      * @return array
      */
-    protected function defineValues(): array
+    protected function getParameters(): array
     {
         return [
             'type'    => $this->type,

@@ -75,12 +75,12 @@ class File extends Input
      * @return array
      * @throws \Exception
      */
-    protected function values(): array
+    protected function getValues(): array
     {
-        return array_merge(parent::values(), [
+        return array_merge(parent::getValues(), [
             'uploadedFileHtml'    => $this->getUploadedFileHtml(),
             'showRemoveCheckbox'  => $this->defineShowRemoveCheckboxStatus(),
-            'removeCheckboxLabel' => $this->defineRemoveCheckboxLabel(parent::values()['label']),
+            'removeCheckboxLabel' => $this->defineRemoveCheckboxLabel(parent::getValues()['label']),
             'placeholder'         => $this->placeholder ?? __('bootstrap-components::bootstrap-components.label.file'),
         ]);
     }

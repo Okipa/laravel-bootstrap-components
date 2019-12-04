@@ -156,9 +156,9 @@ class Image extends Media
      *
      * @return array
      */
-    protected function values(): array
+    protected function getValues(): array
     {
-        return array_merge(parent::values(), [
+        return array_merge(parent::getValues(), [
             'linkUrl'            => $this->linkUrl,
             'alt'                => $this->alt,
             'width'              => $this->width,

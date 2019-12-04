@@ -46,7 +46,7 @@ class Datetime extends Input
      *
      * @return array
      */
-    protected function values(): array
+    protected function getValues(): array
     {
         if (is_a($this->value, 'DateTime')) {
             $value = $this->value->format($this->format);
@@ -54,7 +54,7 @@ class Datetime extends Input
             $value = Carbon::parse($this->value)->format($this->format);
         }
 
-        return array_merge(parent::values(), [
+        return array_merge(parent::getValues(), [
             'value' => $value,
         ]);
     }

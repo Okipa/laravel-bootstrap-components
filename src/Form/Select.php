@@ -110,11 +110,11 @@ class Select extends Input
      *
      * @return array
      */
-    protected function values(): array
+    protected function getValues(): array
     {
         $this->setOptionsSelectedStatus();
 
-        return array_merge(parent::values(), [
+        return array_merge(parent::getValues(), [
             'options'          => $this->options ? $this->options : [],
             'optionValueField' => $this->optionValueField,
             'optionLabelField' => $this->optionLabelField,

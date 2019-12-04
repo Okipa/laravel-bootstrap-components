@@ -586,8 +586,6 @@ class TextTest extends BootstrapComponentsTestCase
         }
     }
 
-    // test localized values
-
     public function testSetLocalizedLabel()
     {
         $locales = ['fr', 'en'];

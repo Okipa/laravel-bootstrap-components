@@ -31,9 +31,9 @@ abstract class Checkable extends Input
      * @return array
      * @throws \Exception
      */
-    protected function values(): array
+    protected function getValues(): array
     {
-        $parentValues = parent::values();
+        $parentValues = parent::getValues();
         $oldValue = old($this->name);
         if (isset($oldValue)) {
             $this->checked = $oldValue;

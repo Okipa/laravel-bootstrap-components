@@ -2,6 +2,8 @@
 
 namespace Okipa\LaravelBootstrapComponents\Form;
 
+use Illuminate\Support\Str;
+
 abstract class InputMultilingual extends Input
 {
     /**
@@ -35,7 +37,6 @@ abstract class InputMultilingual extends Input
      */
     public function render(array $extraData = []): ?string
     {
-        dd('hej');
         if (count($this->getLocales())) {
             return $this->multilingualRender($extraData);
         }
@@ -62,21 +63,106 @@ abstract class InputMultilingual extends Input
         $this->checkValuesValidity();
         $view = $this->getView();
         if ($view) {
-            return (string) trim(view('bootstrap-components::bootstrap-components.partials.multilingual', [
-                'locales' => $this->getLocales(),
-                'view' => $view,
-                'values' => array_merge($this->values(), $extraData),
-            ])->render());
+            $html = '';
+            foreach ($this->getLocales() as $locale) {
+                $html .= (string) trim(view(
+                    'bootstrap-components::' . $view,
+                    array_merge($this->getLocalizedValues($locale), $extraData)
+                )->render());
+            }
+
+            return $html;
         }
     }
 
     /**
-     * Define the component values.
+     * Set the localized values for the view.
+     *
+     * @param string $locale
      *
      * @return array
      */
-    protected function defineValues(): array
+    protected function getLocalizedValues(string $locale): array
     {
-        return array_merge(parent::values(), ['locale' => null]);
+        return array_merge(parent::getValues(), $this->getLocalizedParameters($locale));
+    }
+
+    /**
+     * Define the component parameters.
+     *
+     * @param string $locale
+     *
+     * @return array
+     */
+    protected function getLocalizedParameters(string $locale): array
+    {
+        $parentParams = parent::getParameters();
+        $name = $this->getLocalizedName($locale);
+        $label = $this->getLocalizedLabel($locale);
+        $placeholder = $this->getLocalizedPlaceholder($locale);
+        $containerId = $this->getLocalizedContainerId($locale);
+        $componentId = $this->getLocalizedComponentId($locale);
+
+        return array_merge($parentParams, compact('name', 'label', 'placeholder', 'containerId', 'componentId'));
+    }
+
+    /**
+     * @param string $locale
+     *
+     * @return string
+     */
+    protected function getLocalizedName(string $locale): string
+    {
+        return $this->name . '_' . $locale;
+    }
+
+    /**
+     * @param string $locale
+     *
+     * @return string
+     */
+    protected function getLocalizedLabel(string $locale): string
+    {
+        $label = parent::getLabel();
+
+        return $label ? $label . ' (' . strtoupper($locale) . ')' : null;
+    }
+
+    /**
+     * @param string $locale
+     *
+     * @return string
+     */
+    protected function getLocalizedPlaceholder(string $locale): string
+    {
+        $placeholder = parent::getPlaceholder();
+
+        return $placeholder ? $placeholder . ' (' . strtoupper($locale) . ')' : null;
+    }
+
+    /**
+     * @param string $locale
+     *
+     * @return string
+     */
+    protected function getLocalizedContainerId(string $locale): string
+    {
+        $containerId = parent::getContainerId();
+
+        return $containerId
+            ? $containerId . '-' . $locale
+            : ($this->type . '-' . Str::slug($this->getLocalizedName($locale)) . '-container');
+    }
+
+    /**
+     * @param string $locale
+     *
+     * @return string
+     */
+    protected function getLocalizedComponentId(string $locale): string
+    {
+        $componentId = parent::getComponentId();
+
+        return $componentId ? $componentId . '-' . $locale : null;
     }
 }
