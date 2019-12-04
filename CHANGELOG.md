@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.0](https://github.com/Okipa/laravel-bootstrap-components/compare/1.0.10...1.1.0)
+
+2019-12-04
+
+- Added capacity to generate localized `bsText` and `bsTextarea` components.
+
 ## [1.0.10](https://github.com/Okipa/laravel-bootstrap-components/compare/1.0.9...1.0.10)
 
 2019-11-26
