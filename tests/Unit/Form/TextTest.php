@@ -47,6 +47,15 @@ class TextTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString(' name="name"', $html);
     }
 
+    public function testLocalizedName()
+    {
+        $locales = ['fr', 'en'];
+        $html = bsText()->name('name')->locales($locales)->toHtml();
+        foreach ($locales as $locale) {
+            $this->assertStringContainsString('name="name_' . $locale . '"', $html);
+        }
+    }
+
     public function testType()
     {
         $html = bsText()->name('name')->toHtml();
@@ -65,6 +74,8 @@ class TextTest extends BootstrapComponentsTestCase
         $html = bsText()->model($user)->name('name')->toHtml();
         $this->assertStringContainsString(' value="' . $user->name . '"', $html);
     }
+
+    // test localized values
 
     public function testConfigPrepend()
     {
