@@ -5,7 +5,6 @@ namespace Okipa\LaravelBootstrapComponents\Test;
 use Faker\Factory;
 use Okipa\LaravelBootstrapComponents\ComponentServiceProvider;
 use Orchestra\Testbench\TestCase;
-use ReflectionObject;
 
 abstract class BootstrapComponentsTestCase extends TestCase
 {
@@ -23,9 +22,9 @@ abstract class BootstrapComponentsTestCase extends TestCase
         // Setup default database to use sqlite :memory:
         $app['config']->set('database.default', 'testing');
         $app['config']->set('database.connections.testing', [
-            'driver'   => 'sqlite',
+            'driver' => 'sqlite',
             'database' => ':memory:',
-            'prefix'   => '',
+            'prefix' => '',
         ]);
     }
 

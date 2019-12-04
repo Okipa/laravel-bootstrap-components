@@ -170,6 +170,7 @@ php artisan vendor:publish --tag=bootstrap-components:views
 
 ```php
 bsText()->name('name') // set the input name
+    ->locales(['fr', 'en']) // override the default locales config value
     ->model($user) // value is automatically detected from the field name
     ->value('John Doe') // or manually set the value
     ->label('Name') // override the default __('validation.attributes.[name]') label or set `false` to hide it
@@ -187,6 +188,11 @@ bsText()->name('name') // set the input name
     ->displaySuccess(false) // // override the default form validation display success config value
     ->displayFailure(false) // // override the default form validation display failure config value
 ```
+
+**:bulb: Additional methods :**
+| Signature | Required | Description |
+|---|---|---|
+| locales(array $locales): self  | No | Set the component input language locales to handle. |
 
 #### bsNumber()
 
@@ -426,6 +432,7 @@ bsFile()->name('avatar') // set the input name
 
 ```php
 bsTextarea()->name('message') // set the input name
+    ->locales(['fr', 'en']) // override the default locales config value
     ->model($user) // value is automatically detected from the field name
     ->value('Hello, this is a message.') // or manually set the value
     ->label('Message') // override the default __('validation.attributes.[name]') label or set `false` to hide it
@@ -443,6 +450,11 @@ bsTextarea()->name('message') // set the input name
     ->displaySuccess(false) // // override the default form validation display success config value
     ->displayFailure(false) // // override the default form validation display failure config value
 ```
+
+**:bulb: Additional methods :**
+| Signature | Required | Description |
+|---|---|---|
+| locales(array $locales): self  | No | Set the component input language locales to handle. |
 
 #### bsSelect()
 

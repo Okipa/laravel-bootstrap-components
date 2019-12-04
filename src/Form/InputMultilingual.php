@@ -5,14 +5,14 @@ namespace Okipa\LaravelBootstrapComponents\Form;
 abstract class InputMultilingual extends Input
 {
     /**
-     * The component language locales to manage.
+     * The component language locales to handle.
      *
      * @property array|false $locales
      */
     protected $locales;
 
     /**
-     * Set the component input language locales to manage.
+     * Set the component input language locales to handle.
      *
      * @param array $locales
      *
@@ -35,18 +35,12 @@ abstract class InputMultilingual extends Input
      */
     public function render(array $extraData = []): ?string
     {
-        $locales = $this->getLocales();
-        $this->checkValuesValidity();
-        $view = $this->getView();
-        if ($view) {
-            return ! empty($locales)
-                ? (string) trim(view('bootstrap-components::bootstrap-components.partials.multilingual', [
-                    'locales' => $locales,
-                    'view' => $view,
-                    'values' => array_merge($this->values(), $extraData),
-                ])->render())
-                : parent::render($extraData);
+        dd('hej');
+        if (count($this->getLocales())) {
+            return $this->multilingualRender($extraData);
         }
+
+        return parent::render($extraData);
     }
 
     /**
@@ -58,14 +52,31 @@ abstract class InputMultilingual extends Input
     }
 
     /**
+     * @param array $extraData
+     *
+     * @return string|null
+     * @throws \Throwable
+     */
+    protected function multilingualRender(array $extraData = []): ?string
+    {
+        $this->checkValuesValidity();
+        $view = $this->getView();
+        if ($view) {
+            return (string) trim(view('bootstrap-components::bootstrap-components.partials.multilingual', [
+                'locales' => $this->getLocales(),
+                'view' => $view,
+                'values' => array_merge($this->values(), $extraData),
+            ])->render());
+        }
+    }
+
+    /**
      * Define the component values.
      *
      * @return array
      */
     protected function defineValues(): array
     {
-        $locale = null;
-
-        return array_merge(parent::values(), compact('locale'));
+        return array_merge(parent::values(), ['locale' => null]);
     }
 }

@@ -576,8 +576,6 @@ class TextareaTest extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString($configComponentAttributes, $html);
     }
 
-    // *****
-
     public function testConfigLocales()
     {
         $locales = ['fr', 'en'];
