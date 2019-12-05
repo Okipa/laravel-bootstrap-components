@@ -58,6 +58,7 @@ Instead of redundantly writing or copying this HTML :
 - [API](#api)
   - [Form components](#form-components)
     - [bsText()](#bstext)
+    - [bsTextarea()](#bstextarea)
     - [bsNumber()](#bsnumber)
     - [bsTel()](#bstel)
     - [bsDatetime()](#bsdatetime)
@@ -68,7 +69,6 @@ Instead of redundantly writing or copying this HTML :
     - [bsColor()](#bscolor)
     - [bsPassword()](#bspassword)
     - [bsFile()](#bsfile)
-    - [bsTextarea()](#bstextarea)
     - [bsSelect()](#bsselect)
     - [bsCheckbox()](#bscheckbox)
     - [bsToggle()](#bstoggle)
@@ -165,14 +165,14 @@ php artisan vendor:publish --tag=bootstrap-components:views
 | legend(?string $legend): self  | No | Set the component legend. Default value : `config('bootstrap-components.[componentConfigKey].legend')`. |
 | displaySuccess(?bool $displaySuccess = true): self  | No | Set the component input validation success display status. Default value : `config('bootstrap-components.[componentConfigKey].formValidation.displaySuccess')`. |
 | displayFailure(?bool $displayFailure = true): self  | No | Set the component input validation failure display status.. Default value : `config('bootstrap-components.[componentConfigKey].formValidation.displayFailure')`. |
-  
+
 #### bsText()
 
 ```php
 bsText()->name('name') // set the input name
     ->locales(['fr', 'en']) // override the default locales config value
     ->model($user) // value is automatically detected from the field name
-    ->value('John Doe') // or manually set the value
+    ->value(function($locale){ return $name[$locale]; }) // or manually set the value
     ->label('Name') // override the default __('validation.attributes.[name]') label or set `false` to hide it
     ->labelPositionedAbove() // Set the label above-position status, default value : `true`
     ->placeholder('Set your name') // override the default placeholder (label) or set `false` to hide it
@@ -193,10 +193,46 @@ bsText()->name('name') // set the input name
 | Signature | Required | Description |
 |---|---|---|
 | locales(array $locales): self  | No | Set the component input language locales to handle. |
+| value(Closure $value): self  | No | Set the component input value. The value has to be set from this closure result : ->value(function($locale){}) » Default value : `$model->{$name}[{locale}]`. |
 
 **:warning: Notes :**
-* The use of the `->locales()` method will produce a component for each locale keys you declared. For example, if you declare the `fr` and `en` locale keys for a `title` text component, you will get two `Title (FR)` and `Title (EN)` generated text components.
-* The localization treatment will only occur if you have more than one locales declared : there is not point to generate localized components with only one declared locales.
+* This component is a multilingual component :
+  * The use of the `->locales()` method will produce a component for each locale keys you declared. For example, if you declare the `fr` and `en` locale keys for a `title` text component, you will get two `Title (FR)` and `Title (EN)` generated text components.
+  * The localization treatment will only occur if you have more than one locales declared : there is not point to generate localized components with only one declared locales.
+
+#### bsTextarea()
+
+```php
+bsTextarea()->name('message') // set the input name
+    ->locales(['fr', 'en']) // override the default locales config value
+    ->model($user) // value is automatically detected from the field name
+    ->value(function($locale){ return $message[$locale]; }) // or manually set the value
+    ->label('Message') // override the default __('validation.attributes.[name]') label or set `false` to hide it
+    ->labelPositionedAbove() // Set the label above-position status, default value : `true`
+    ->placeholder('Set your message') // override the default placeholder (label) or set `false` to hide it
+    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config value or set `false` to hide it
+    ->append('<i class="fas fa-hand-pointer"></i>') // override the default append config value or set `false` to hide it
+    ->legend('Set your legend here.') // override the default legend config value or set `false` to hide it
+    ->containerId('container-id') // set the container id
+    ->componentId('component-id') // override the default component id (textarea-[name])
+    ->containerClasses(['container', 'classes']) // override the default container classes config value
+    ->componentClasses(['component', 'classes']) // override the default component classes config value
+    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default container html attributes config value
+    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
+    ->displaySuccess(false) // // override the default form validation display success config value
+    ->displayFailure(false) // // override the default form validation display failure config value
+```
+
+**:bulb: Additional / overridden methods :**
+| Signature | Required | Description |
+|---|---|---|
+| locales(array $locales): self  | No | Set the component input language locales to handle. |
+| value(Closure $value): self  | No | Set the component input value. The value has to be set from this closure result : ->value(function($locale){}) » Default value : `$model->{$name}[{locale}]`. |
+
+**:warning: Notes :**
+* This component is a multilingual component :
+  * The use of the `->locales()` method will produce a component for each locale keys you declared. For example, if you declare the `fr` and `en` locale keys for a `message` textarea component, you will get two `Message (FR)` and `Message (EN)` generated textarea components.
+  * The localization treatment will only occur if you have more than one locales declared : there is not point to generate localized components with only one declared locales.
 
 #### bsNumber()
 
@@ -431,38 +467,6 @@ bsFile()->name('avatar') // set the input name
 |---|---|---|
 | uploadedFile(Closure $uploadedFile): self  | No | Allows to set html or another component to render the uploaded file. |
 | showRemoveCheckbox(bool $showRemoveCheckbox = true, string $removeCheckboxLabel = null): self | No | Show the file remove checkbox option (will appear only if an uploaded file is detected). Default value : `config('bootstrap-components.file.show_remove_checkbox')`. The remove checkbox label can be precised with the second parameter, by default, it will take the following value : `__('bootstrap-components.label.remove') . ' ' . [name]` |
-
-#### bsTextarea()
-
-```php
-bsTextarea()->name('message') // set the input name
-    ->locales(['fr', 'en']) // override the default locales config value
-    ->model($user) // value is automatically detected from the field name
-    ->value('Hello, this is a message.') // or manually set the value
-    ->label('Message') // override the default __('validation.attributes.[name]') label or set `false` to hide it
-    ->labelPositionedAbove() // Set the label above-position status, default value : `true`
-    ->placeholder('Set your message') // override the default placeholder (label) or set `false` to hide it
-    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config value or set `false` to hide it
-    ->append('<i class="fas fa-hand-pointer"></i>') // override the default append config value or set `false` to hide it
-    ->legend('Set your legend here.') // override the default legend config value or set `false` to hide it
-    ->containerId('container-id') // set the container id
-    ->componentId('component-id') // override the default component id (textarea-[name])
-    ->containerClasses(['container', 'classes']) // override the default container classes config value
-    ->componentClasses(['component', 'classes']) // override the default component classes config value
-    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default container html attributes config value
-    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
-    ->displaySuccess(false) // // override the default form validation display success config value
-    ->displayFailure(false) // // override the default form validation display failure config value
-```
-
-**:bulb: Additional methods :**
-| Signature | Required | Description |
-|---|---|---|
-| locales(array $locales): self  | No | Set the component input language locales to handle. |
-
-**:warning: Notes :**
-* The use of the `->locales()` method will produce a component for each locale keys you declared. For example, if you declare the `fr` and `en` locale keys for a `message` textarea component, you will get two `Message (FR)` and `Message (EN)` generated textarea components.
-* The localization treatment will only occur if you have more than one locales declared : there is not point to generate localized components with only one declared locales.
 
 #### bsSelect()
 

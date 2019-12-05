@@ -4,6 +4,7 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
 use Exception;
 use Illuminate\Support\MessageBag;
+use InvalidArgumentException;
 use Okipa\LaravelBootstrapComponents\Form\InputMultilingual;
 use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
 use Okipa\LaravelBootstrapComponents\Test\Fakers\UsersFaker;
@@ -593,7 +594,58 @@ class TextTest extends BootstrapComponentsTestCase
         $locales = ['fr', 'en'];
         $html = bsText()->name('name')->locales($locales)->toHtml();
         foreach ($locales as $locale) {
-            $this->assertStringContainsString('name="name_' . $locale . '"', $html);
+            $this->assertStringContainsString('name="name[' . $locale . ']"', $html);
+        }
+    }
+
+    public function testLocalizedModelValue()
+    {
+        $locales = ['fr', 'en'];
+        $user = $this->createUniqueMultilingualUser();
+        $html = bsText()->model($user)->name('name')->locales($locales)->toHtml();
+        foreach ($locales as $locale) {
+            $this->assertStringContainsString(' value="' . $user->name[$locale] . '"', $html);
+        }
+    }
+
+    public function testSetLocalizedWrongValue()
+    {
+        $locales = ['fr', 'en'];
+        $customValue = 'test-custom-value';
+        $this->expectException(InvalidArgumentException::class);
+        bsText()->name('name')->locales($locales)->value($customValue)->toHtml();
+    }
+
+    public function testSetLocalizedValue()
+    {
+        $locales = ['fr', 'en'];
+        $customValue = 'test-custom-value';
+        $html = bsText()->name('name')->locales($locales)->value(function ($locale) use ($customValue) {
+            return $customValue . '-' . $locale;
+        })->toHtml();
+        foreach ($locales as $locale) {
+            $this->assertStringContainsString(' value="' . $customValue . '-' . $locale . '"', $html);
+        }
+    }
+
+    public function testLocalizedOldValue()
+    {
+        $locales = ['fr', 'en'];
+        $oldValue = ['fr' => 'test-old-value-fr', 'en' => 'test-old-value-en'];
+        $customValue = 'test-custom-value';
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => function () use ($oldValue) {
+                $request = request()->merge(['name' => $oldValue]);
+                $request->flash();
+            },
+        ]);
+        $this->call('GET', 'test');
+        $html = bsText()->name('name')->locales($locales)->value(function ($locale) use ($customValue) {
+            return $customValue . '-' . $locale;
+        })->toHtml();
+        foreach ($locales as $locale) {
+            $this->assertStringContainsString(' value="' . $oldValue[$locale] . '"', $html);
+            $this->assertStringNotContainsString(' value="' . $customValue . '-' . $locale . '"', $html);
         }
     }
 
@@ -636,7 +688,7 @@ class TextTest extends BootstrapComponentsTestCase
         }
     }
 
-    public function testSetNoLocalizedContainerId()
+    public function testSetLocalizedNoContainerId()
     {
         $locales = ['fr', 'en'];
         $html = bsText()->name('name')->locales($locales)->toHtml();

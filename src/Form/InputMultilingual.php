@@ -2,7 +2,8 @@
 
 namespace Okipa\LaravelBootstrapComponents\Form;
 
-use Illuminate\Support\Str;
+use Closure;
+use InvalidArgumentException;
 
 abstract class InputMultilingual extends Input
 {
@@ -12,6 +13,33 @@ abstract class InputMultilingual extends Input
      * @property array|false $locales
      */
     protected $locales;
+
+    /**
+     * Set the component input value.
+     *
+     * @param mixed $value
+     *
+     * @return $this
+     * @throws \Exception
+     */
+    public function value($value): parent
+    {
+        if (count($this->getLocales()) > 1 && ! $value instanceof Closure) {
+            throw new InvalidArgumentException('A multilingual component value has to be set from this
+            closure result : « value(function($locale){}) ».');
+        }
+        $this->value = $value;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getLocales(): array
+    {
+        return $this->locales ?? config('bootstrap-components.' . $this->configKey . '.locales', []);
+    }
 
     /**
      * Set the component input language locales to handle.
@@ -45,14 +73,6 @@ abstract class InputMultilingual extends Input
     }
 
     /**
-     * @return array
-     */
-    protected function getLocales(): array
-    {
-        return $this->locales ?? config('bootstrap-components.' . $this->configKey . '.locales', []);
-    }
-
-    /**
      * @param array $extraData
      *
      * @return string|null
@@ -65,7 +85,7 @@ abstract class InputMultilingual extends Input
         if ($view) {
             $html = '';
             foreach ($this->getLocales() as $locale) {
-                $html .= (string) trim(view(
+                $html .= (string)trim(view(
                     'bootstrap-components::' . $view,
                     array_merge($this->getLocalizedValues($locale), $extraData)
                 )->render());
@@ -99,11 +119,12 @@ abstract class InputMultilingual extends Input
         $parentParams = parent::getParameters();
         $name = $this->getLocalizedName($locale);
         $label = $this->getLocalizedLabel($locale);
+        $value = $this->getLocalizedValue($locale);
         $placeholder = $this->getLocalizedPlaceholder($locale);
         $containerId = $this->getLocalizedContainerId($locale);
         $componentId = $this->getLocalizedComponentId($locale);
 
-        return array_merge($parentParams, compact('name', 'label', 'placeholder', 'containerId', 'componentId'));
+        return array_merge($parentParams, compact('name', 'label', 'value', 'placeholder', 'containerId', 'componentId'));
     }
 
     /**
@@ -113,7 +134,7 @@ abstract class InputMultilingual extends Input
      */
     protected function getLocalizedName(string $locale): string
     {
-        return $this->name . '_' . $locale;
+        return $this->getName() . '[' . $locale . ']';
     }
 
     /**
@@ -126,6 +147,18 @@ abstract class InputMultilingual extends Input
         $label = parent::getLabel();
 
         return $label ? $label . ' (' . strtoupper($locale) . ')' : null;
+    }
+
+    /**
+     * @param string $locale
+     *
+     * @return mixed
+     */
+    protected function getLocalizedValue(string $locale)
+    {
+        $value = parent::getValue();
+
+        return $value instanceof Closure ? $value($locale) : data_get($value, $locale);
     }
 
     /**
@@ -151,7 +184,7 @@ abstract class InputMultilingual extends Input
 
         return $containerId
             ? $containerId . '-' . $locale
-            : ($this->type . '-' . Str::slug($this->getLocalizedName($locale)) . '-container');
+            : ($this->type . '-' . $this->getName() . '-' . $locale . '-container');
     }
 
     /**
