@@ -194,6 +194,10 @@ bsText()->name('name') // set the input name
 |---|---|---|
 | locales(array $locales): self  | No | Set the component input language locales to handle. |
 
+**:warning: Notes :**
+* The use of the `->locales()` method will produce a component for each locale keys you declared. For example, if you declare the `fr` and `en` locale keys for a `title` text component, you will get two `Title (FR)` and `Title (EN)` generated text components.
+* The localization treatment will only occur if you have more than one locales declared : there is not point to generate localized components with only one declared locales.
+
 #### bsNumber()
 
 ```php
@@ -455,6 +459,10 @@ bsTextarea()->name('message') // set the input name
 | Signature | Required | Description |
 |---|---|---|
 | locales(array $locales): self  | No | Set the component input language locales to handle. |
+
+**:warning: Notes :**
+* The use of the `->locales()` method will produce a component for each locale keys you declared. For example, if you declare the `fr` and `en` locale keys for a `message` textarea component, you will get two `Message (FR)` and `Message (EN)` generated textarea components.
+* The localization treatment will only occur if you have more than one locales declared : there is not point to generate localized components with only one declared locales.
 
 #### bsSelect()
 

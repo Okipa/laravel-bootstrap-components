@@ -596,6 +596,17 @@ class TextareaTest extends BootstrapComponentsTestCase
         }
     }
 
+    public function testSetSingleLocale()
+    {
+        $locales = ['fr'];
+        config()->set('bootstrap-components.form.textarea.locales', ['fr']);
+        $html = bsTextarea()->name('name')->locales($locales)->toHtml();
+        foreach ($locales as $locale) {
+            $this->assertStringContainsString('class="textarea-name-container', $html);
+            $this->assertStringNotContainsString('class="textarea-name-' . $locale . '-container', $html);
+        }
+    }
+
     public function testLocalizedName()
     {
         $locales = ['fr', 'en'];

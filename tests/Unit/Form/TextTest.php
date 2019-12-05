@@ -577,6 +577,17 @@ class TextTest extends BootstrapComponentsTestCase
         }
     }
 
+    public function testSetSingleLocale()
+    {
+        $locales = ['fr'];
+        config()->set('bootstrap-components.form.text.locales', ['fr']);
+        $html = bsText()->name('name')->locales($locales)->toHtml();
+        foreach ($locales as $locale) {
+            $this->assertStringContainsString('class="text-name-container', $html);
+            $this->assertStringNotContainsString('class="text-name-' . $locale . '-container', $html);
+        }
+    }
+
     public function testLocalizedName()
     {
         $locales = ['fr', 'en'];

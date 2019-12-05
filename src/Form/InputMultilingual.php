@@ -37,7 +37,7 @@ abstract class InputMultilingual extends Input
      */
     public function render(array $extraData = []): ?string
     {
-        if (count($this->getLocales())) {
+        if (count($this->getLocales()) > 1) {
             return $this->multilingualRender($extraData);
         }
 
