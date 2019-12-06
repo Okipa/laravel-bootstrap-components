@@ -3,6 +3,7 @@
 namespace Okipa\LaravelBootstrapComponents;
 
 use Illuminate\Contracts\Support\Htmlable;
+use Throwable;
 
 abstract class Component implements Htmlable
 {
@@ -12,6 +13,12 @@ abstract class Component implements Htmlable
      * @property string $view
      */
     protected $configKey;
+    /**
+     * The component type.
+     *
+     * @property string $type
+     */
+    protected $type;
     /**
      * The component view.
      *
@@ -143,11 +150,11 @@ abstract class Component implements Htmlable
      * Render the component html.
      *
      * @return string|null
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function toHtml(): ?string
     {
-        return (string) $this->render();
+        return (string)$this->render();
     }
 
     /**
@@ -156,14 +163,14 @@ abstract class Component implements Htmlable
      * @param array $extraData
      *
      * @return string|null
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function render(array $extraData = []): ?string
     {
         $this->checkValuesValidity();
         $view = $this->getView();
         if ($view) {
-            return (string) trim(view(
+            return (string)trim(view(
                 'bootstrap-components::' . $view,
                 array_merge($this->getValues(), $extraData)
             )->render());
@@ -192,6 +199,7 @@ abstract class Component implements Htmlable
      */
     protected function getValues(): array
     {
+        $htmlIdentifier = $this->getHtmlIdentifier();
         $componentId = $this->getComponentId();
         $containerId = $this->getContainerId();
         $componentClasses = $this->getComponentClasses();
@@ -200,6 +208,7 @@ abstract class Component implements Htmlable
         $containerHtmlAttributes = $this->getContainerHtmlAttributes();
 
         return compact(
+            'htmlIdentifier',
             'componentId',
             'containerId',
             'componentClasses',
@@ -207,6 +216,14 @@ abstract class Component implements Htmlable
             'componentHtmlAttributes',
             'containerHtmlAttributes'
         );
+    }
+
+    /**
+     * @return string
+     */
+    protected function getHtmlIdentifier(): string
+    {
+        return $this->type;
     }
 
     /**
@@ -259,5 +276,13 @@ abstract class Component implements Htmlable
     {
         return $this->containerHtmlAttributes
             ?? config('bootstrap-components.' . $this->configKey . '.htmlAttributes.container', []);
+    }
+
+    /**
+     * @return string
+     */
+    protected function getType(): string
+    {
+        return $this->type;
     }
 }

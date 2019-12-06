@@ -4,10 +4,12 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
 use Exception;
 use Illuminate\Support\MessageBag;
-use Okipa\LaravelBootstrapComponents\Form\Input;
+use InvalidArgumentException;
 use Okipa\LaravelBootstrapComponents\Form\InputMultilingual;
 use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
+use Okipa\LaravelBootstrapComponents\Test\Fakers\MultilingualResolver;
 use Okipa\LaravelBootstrapComponents\Test\Fakers\UsersFaker;
+use Okipa\LaravelBootstrapComponents\Test\Models\User;
 
 class TextareaTest extends BootstrapComponentsTestCase
 {
@@ -25,7 +27,6 @@ class TextareaTest extends BootstrapComponentsTestCase
         $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.textarea')));
         $this->assertTrue(array_key_exists('classes', config('bootstrap-components.form.textarea')));
         $this->assertTrue(array_key_exists('htmlAttributes', config('bootstrap-components.form.textarea')));
-        $this->assertTrue(array_key_exists('locales', config('bootstrap-components.form.textarea')));
         // components.form.textarea.classes
         $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.textarea.classes')));
         $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.textarea.classes')));
@@ -576,12 +577,12 @@ class TextareaTest extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString($configComponentAttributes, $html);
     }
 
-    public function testConfigLocales()
+    public function testSetDefaultLocalesFromCustomMultilingualResolver()
     {
-        $locales = ['fr', 'en'];
-        config()->set('bootstrap-components.form.textarea.locales', $locales);
+        config()->set('bootstrap-components.form.multilingual.resolver', MultilingualResolver::class);
+        $resolverLocales = (new MultilingualResolver)->getDefaultLocales();
         $html = bsTextarea()->name('name')->toHtml();
-        foreach ($locales as $locale) {
+        foreach ($resolverLocales as $locale) {
             $this->assertStringContainsString('class="textarea-name-' . $locale . '-container', $html);
         }
     }
@@ -612,7 +613,79 @@ class TextareaTest extends BootstrapComponentsTestCase
         $locales = ['fr', 'en'];
         $html = bsTextarea()->name('name')->locales($locales)->toHtml();
         foreach ($locales as $locale) {
+            $this->assertStringContainsString('name="name[' . $locale . ']"', $html);
+        }
+    }
+
+    public function testLocalizedNameFromCustomMultilingualResolver()
+    {
+        config()->set('bootstrap-components.form.multilingual.resolver', MultilingualResolver::class);
+        $resolverLocales = (new MultilingualResolver)->getDefaultLocales();
+        $html = bsTextarea()->name('name')->toHtml();
+        foreach ($resolverLocales as $locale) {
             $this->assertStringContainsString('name="name_' . $locale . '"', $html);
+        }
+    }
+
+    public function testLocalizedModelValue()
+    {
+        $locales = ['fr', 'en'];
+        $user = $this->createUniqueMultilingualUser();
+        $html = bsTextarea()->model($user)->name('name')->locales($locales)->toHtml();
+        foreach ($locales as $locale) {
+            $this->assertStringContainsString('>' . $user->name[$locale] . '</textarea>', $html);
+        }
+    }
+
+    public function testLocalizedModelValueFromCustomMultilingualResolver()
+    {
+        $user = new User(['name_fr' => $this->faker->word, 'name_en' => $this->faker->word]);
+        config()->set('bootstrap-components.form.multilingual.resolver', MultilingualResolver::class);
+        $resolverLocales = (new MultilingualResolver)->getDefaultLocales();
+        $html = bsTextarea()->model($user)->name('name')->toHtml();
+        foreach ($resolverLocales as $locale) {
+            $this->assertStringContainsString('>' . $user->{'name_' . $locale} . '</textarea>', $html);
+        }
+    }
+
+    public function testSetLocalizedWrongValue()
+    {
+        $locales = ['fr', 'en'];
+        $customValue = 'test-custom-value';
+        $this->expectException(InvalidArgumentException::class);
+        bsTextarea()->name('name')->locales($locales)->value($customValue)->toHtml();
+    }
+
+    public function testSetLocalizedValue()
+    {
+        $locales = ['fr', 'en'];
+        $customValue = 'test-custom-value';
+        $html = bsTextarea()->name('name')->locales($locales)->value(function ($locale) use ($customValue) {
+            return $customValue . '-' . $locale;
+        })->toHtml();
+        foreach ($locales as $locale) {
+            $this->assertStringContainsString('>' . $customValue . '-' . $locale . '</textarea>', $html);
+        }
+    }
+
+    public function testLocalizedOldValue()
+    {
+        $locales = ['fr', 'en'];
+        $oldValue = ['fr' => 'test-old-value-fr', 'en' => 'test-old-value-en'];
+        $customValue = 'test-custom-value';
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => function () use ($oldValue) {
+                $request = request()->merge(['name' => $oldValue]);
+                $request->flash();
+            },
+        ]);
+        $this->call('GET', 'test');
+        $html = bsTextarea()->name('name')->locales($locales)->value(function ($locale) use ($customValue) {
+            return $customValue . '-' . $locale;
+        })->toHtml();
+        foreach ($locales as $locale) {
+            $this->assertStringContainsString('>' . $oldValue[$locale] . '</textarea>', $html);
+            $this->assertStringNotContainsString('>' . $customValue . '</textarea>', $html);
         }
     }
 
@@ -655,7 +728,7 @@ class TextareaTest extends BootstrapComponentsTestCase
         }
     }
 
-    public function testSetNoLocalizedContainerId()
+    public function testSetLocalizedNoContainerId()
     {
         $locales = ['fr', 'en'];
         $html = bsTextarea()->name('name')->locales($locales)->toHtml();

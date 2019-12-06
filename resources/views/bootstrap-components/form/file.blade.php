@@ -1,4 +1,4 @@
-<div{{ htmlAttributes($containerId ? ['id' => $containerId] : null) }}{{ classTag($type . '-' . Str::slug($name) . '-container', $containerClasses) }}{{ htmlAttributes($containerHtmlAttributes) }}>
+<div{{ htmlAttributes($containerId ? ['id' => $containerId] : null) }}{{ classTag($htmlIdentifier . '-container', $containerClasses) }}{{ htmlAttributes($containerHtmlAttributes) }}>
     @if($labelPositionedAbove)
         @include('bootstrap-components::bootstrap-components.partials.label')
     @endif
@@ -13,7 +13,7 @@
     @endif
         @include('bootstrap-components::bootstrap-components.partials.prepend')
         <div class="custom-file">
-            <input id="{{ $componentId }}"{{ classTag('custom-file-input', 'form-control', $type . '-' . Str::slug($name) . '-component', $componentClasses, $validationClass) }} type="{{ $type }}" name="{{ $name }}" lang="{{ app()->getLocale() }}"{{ htmlAttributes($componentHtmlAttributes) }} aria-label="{{ __($label) }}" aria-describedby="file-{{ Str::slug($name) }}">
+            <input id="{{ $componentId }}"{{ classTag('custom-file-input', 'form-control', $htmlIdentifier . '-component', $componentClasses, $validationClass) }} type="{{ $type }}" name="{{ $name }}" lang="{{ app()->getLocale() }}"{{ htmlAttributes($componentHtmlAttributes) }} aria-label="{{ __($label) }}" aria-describedby="{{ $htmlIdentifier }}">
             @if(($value = old($name, $value)) || $placeholder)
                 <label class="custom-file-label" for="{{ $componentId }}">@empty($value){{ __($placeholder) }}@else{{ $value }}@endempty</label>
             @endif

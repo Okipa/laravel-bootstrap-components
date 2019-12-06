@@ -10,4 +10,10 @@ class Audio extends Media
      * @property string $view
      */
     protected $configKey = 'media.audio';
+    /**
+     * The button type.
+     *
+     * @property string $type
+     */
+    protected $type = 'audio';
 }

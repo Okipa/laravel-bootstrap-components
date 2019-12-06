@@ -57,22 +57,24 @@ Instead of redundantly writing or copying this HTML :
 - [Customization](#customization)
 - [API](#api)
   - [Form components](#form-components)
-    - [bsText()](#bstext)
-    - [bsTextarea()](#bstextarea)
-    - [bsNumber()](#bsnumber)
-    - [bsTel()](#bstel)
-    - [bsDatetime()](#bsdatetime)
-    - [bsDate()](#bsdate)
-    - [bsTime()](#bstime)
-    - [bsUrl()](#bsurl)
-    - [bsEmail()](#bsemail)
-    - [bsColor()](#bscolor)
-    - [bsPassword()](#bspassword)
-    - [bsFile()](#bsfile)
-    - [bsSelect()](#bsselect)
-    - [bsCheckbox()](#bscheckbox)
-    - [bsToggle()](#bstoggle)
-    - [bsRadio()](#bsradio)
+    - [Multilingual](#)
+      - [bsText()](#bstext)
+      - [bsTextarea()](#bstextarea)
+    - Standard
+      - [bsNumber()](#bsnumber)
+      - [bsTel()](#bstel)
+      - [bsDatetime()](#bsdatetime)
+      - [bsDate()](#bsdate)
+      - [bsTime()](#bstime)
+      - [bsUrl()](#bsurl)
+      - [bsEmail()](#bsemail)
+      - [bsColor()](#bscolor)
+      - [bsPassword()](#bspassword)
+      - [bsFile()](#bsfile)
+      - [bsSelect()](#bsselect)
+      - [bsCheckbox()](#bscheckbox)
+      - [bsToggle()](#bstoggle)
+      - [bsRadio()](#bsradio)
   - [Buttons components](#buttons-components)
     - [bsValidate()](#bsvalidate)
     - [bsCreate()](#bscreate)
@@ -166,7 +168,10 @@ php artisan vendor:publish --tag=bootstrap-components:views
 | displaySuccess(?bool $displaySuccess = true): self  | No | Set the component input validation success display status. Default value : `config('bootstrap-components.[componentConfigKey].formValidation.displaySuccess')`. |
 | displayFailure(?bool $displayFailure = true): self  | No | Set the component input validation failure display status.. Default value : `config('bootstrap-components.[componentConfigKey].formValidation.displayFailure')`. |
 
-#### bsText()
+#### Multilingual
+
+
+##### bsText()
 
 ```php
 bsText()->name('name') // set the input name
@@ -200,7 +205,7 @@ bsText()->name('name') // set the input name
   * The use of the `->locales()` method will produce a component for each locale keys you declared. For example, if you declare the `fr` and `en` locale keys for a `title` text component, you will get two `Title (FR)` and `Title (EN)` generated text components.
   * The localization treatment will only occur if you have more than one locales declared : there is not point to generate localized components with only one declared locales.
 
-#### bsTextarea()
+##### bsTextarea()
 
 ```php
 bsTextarea()->name('message') // set the input name
@@ -234,7 +239,9 @@ bsTextarea()->name('message') // set the input name
   * The use of the `->locales()` method will produce a component for each locale keys you declared. For example, if you declare the `fr` and `en` locale keys for a `message` textarea component, you will get two `Message (FR)` and `Message (EN)` generated textarea components.
   * The localization treatment will only occur if you have more than one locales declared : there is not point to generate localized components with only one declared locales.
 
-#### bsNumber()
+#### Standard
+
+##### bsNumber()
 
 ```php
 bsNumber()->name('amount') // set the input name
@@ -256,7 +263,7 @@ bsNumber()->name('amount') // set the input name
     ->displayFailure(false) // // override the default form validation display failure config value
 ```
 
-#### bsTel()
+##### bsTel()
 
 ```php
 bsTel()->name('phone_number') // set the input name
@@ -278,7 +285,7 @@ bsTel()->name('phone_number') // set the input name
     ->displayFailure(false) // // override the default form validation display failure config value
 ```
 
-#### bsDatetime()
+##### bsDatetime()
 
 ```php
 bsDatetime()->name('published_at') // set the input name
@@ -301,7 +308,7 @@ bsDatetime()->name('published_at') // set the input name
     ->displayFailure(false) // // override the default form validation display failure config value
 ```
 
-#### bsDate()
+##### bsDate()
 
 ```php
 bsDate()->name('birthday') // set the input name
@@ -324,7 +331,7 @@ bsDate()->name('birthday') // set the input name
     ->displayFailure(false) // // override the default form validation display failure config value
 ```
 
-#### bsTime()
+##### bsTime()
 
 ```php
 bsTime()->name('opening') // set the input name
@@ -347,7 +354,7 @@ bsTime()->name('opening') // set the input name
     ->displayFailure(false) // // override the default form validation display failure config value
 ```
 
-#### bsUrl()
+##### bsUrl()
 
 ```php
 bsUrl()->name('facebook_page') // set the input name
@@ -369,7 +376,7 @@ bsUrl()->name('facebook_page') // set the input name
     ->displayFailure(false) // // override the default form validation display failure config value
 ```
 
-#### bsEmail()
+##### bsEmail()
 
 ```php
 bsEmail()->name('email') // set the input name
@@ -391,7 +398,7 @@ bsEmail()->name('email') // set the input name
     ->displayFailure(false) // // override the default form validation display failure config value
 ```
 
-#### bsColor()
+##### bsColor()
 
 ```php
 bsColor()->name('color') // set the input name
@@ -413,7 +420,7 @@ bsColor()->name('color') // set the input name
     ->displayFailure(false) // // override the default form validation display failure config value
 ```
 
-#### bsPassword()
+##### bsPassword()
 
 ```php
 bsPassword()->name('password') // set the input name
@@ -435,7 +442,7 @@ bsPassword()->name('password') // set the input name
     ->displayFailure(false) // // override the default form validation display failure config value
 ```
 
-#### bsFile()
+##### bsFile()
 
 ```php
 bsFile()->name('avatar') // set the input name

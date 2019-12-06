@@ -275,7 +275,7 @@ abstract class Input extends Component
     protected function getParameters(): array
     {
         $model = $this->model;
-        $type = $this->type;
+        $type = $this->getType();
         $name = $this->getName();
         $prepend = $this->getPrepend();
         $append = $this->getAppend();
@@ -416,6 +416,14 @@ abstract class Input extends Component
         }
 
         return null;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getHtmlIdentifier(): string
+    {
+        return $this->type . '-' . Str::slug($this->getName());
     }
 
     /**

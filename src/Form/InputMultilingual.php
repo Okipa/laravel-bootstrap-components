@@ -3,16 +3,34 @@
 namespace Okipa\LaravelBootstrapComponents\Form;
 
 use Closure;
+use Exception;
 use InvalidArgumentException;
+use Throwable;
 
 abstract class InputMultilingual extends Input
 {
     /**
+     * The multilingual component dynamic multilingual resolver .
+     *
+     * @property MultilingualResolver $multilingualResolver
+     */
+    protected $multilingualResolver;
+
+    /**
      * The component language locales to handle.
      *
-     * @property array|false $locales
+     * @property array $locales
      */
     protected $locales;
+
+    /**
+     * InputMultilingual constructor.
+     */
+    public function __construct()
+    {
+        $this->multilingualResolver = app(config('bootstrap-components.form.multilingual.resolver'));
+        $this->locales = $this->multilingualResolver->getDefaultLocales();
+    }
 
     /**
      * Set the component input value.
@@ -20,11 +38,11 @@ abstract class InputMultilingual extends Input
      * @param mixed $value
      *
      * @return $this
-     * @throws \Exception
+     * @throws Exception
      */
     public function value($value): parent
     {
-        if (count($this->getLocales()) > 1 && ! $value instanceof Closure) {
+        if ($this->multilingualMode() && ! $value instanceof Closure) {
             throw new InvalidArgumentException('A multilingual component value has to be set from this
             closure result : « value(function($locale){}) ».');
         }
@@ -34,11 +52,11 @@ abstract class InputMultilingual extends Input
     }
 
     /**
-     * @return array
+     * @return bool
      */
-    protected function getLocales(): array
+    protected function multilingualMode(): bool
     {
-        return $this->locales ?? config('bootstrap-components.' . $this->configKey . '.locales', []);
+        return count($this->locales) > 1;
     }
 
     /**
@@ -61,11 +79,11 @@ abstract class InputMultilingual extends Input
      * @param array $extraData
      *
      * @return string|null
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function render(array $extraData = []): ?string
     {
-        if (count($this->getLocales()) > 1) {
+        if ($this->multilingualMode()) {
             return $this->multilingualRender($extraData);
         }
 
@@ -76,7 +94,7 @@ abstract class InputMultilingual extends Input
      * @param array $extraData
      *
      * @return string|null
-     * @throws \Throwable
+     * @throws Throwable
      */
     protected function multilingualRender(array $extraData = []): ?string
     {
@@ -84,7 +102,7 @@ abstract class InputMultilingual extends Input
         $view = $this->getView();
         if ($view) {
             $html = '';
-            foreach ($this->getLocales() as $locale) {
+            foreach ($this->locales as $locale) {
                 $html .= (string)trim(view(
                     'bootstrap-components::' . $view,
                     array_merge($this->getLocalizedValues($locale), $extraData)
@@ -117,6 +135,7 @@ abstract class InputMultilingual extends Input
     protected function getLocalizedParameters(string $locale): array
     {
         $parentParams = parent::getParameters();
+        $htmlIdentifier = $this->getLocalizedHtmlIdentifier($locale);
         $name = $this->getLocalizedName($locale);
         $label = $this->getLocalizedLabel($locale);
         $value = $this->getLocalizedValue($locale);
@@ -124,7 +143,20 @@ abstract class InputMultilingual extends Input
         $containerId = $this->getLocalizedContainerId($locale);
         $componentId = $this->getLocalizedComponentId($locale);
 
-        return array_merge($parentParams, compact('name', 'label', 'value', 'placeholder', 'containerId', 'componentId'));
+        return array_merge(
+            $parentParams,
+            compact('htmlIdentifier', 'name', 'label', 'value', 'placeholder', 'containerId', 'componentId')
+        );
+    }
+
+    /**
+     * @param string $locale
+     *
+     * @return string
+     */
+    protected function getLocalizedHtmlIdentifier(string $locale): string
+    {
+        return $this->multilingualResolver->resolveHtmlIdentifier($this->getType(), $this->getLocalizedName($locale));
     }
 
     /**
@@ -134,7 +166,7 @@ abstract class InputMultilingual extends Input
      */
     protected function getLocalizedName(string $locale): string
     {
-        return $this->getName() . '[' . $locale . ']';
+        return $this->multilingualResolver->resolveLocalizedName($this->getName(), $locale);
     }
 
     /**
@@ -158,7 +190,7 @@ abstract class InputMultilingual extends Input
     {
         $value = parent::getValue();
 
-        return $value instanceof Closure ? $value($locale) : data_get($value, $locale);
+        return $this->multilingualMode() && $value instanceof Closure ? $value($locale) : data_get($value, $locale);
     }
 
     /**

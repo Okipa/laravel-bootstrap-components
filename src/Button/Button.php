@@ -7,18 +7,6 @@ use Okipa\LaravelBootstrapComponents\Component;
 abstract class Button extends Component
 {
     /**
-     * The component config key.
-     *
-     * @property string $view
-     */
-    protected $configKey;
-    /**
-     * The button type.
-     *
-     * @property string $type
-     */
-    protected $type;
-    /**
      * The button url.
      *
      * @property string $url
