@@ -87,7 +87,7 @@ abstract class InputMultilingual extends Input
         $html = '';
         foreach ($this->locales as $locale) {
             $componentHtml = $view
-                ? (string) view(
+                ? (string)view(
                     'bootstrap-components::' . $view,
                     array_merge($this->getLocalizedValues($locale), $extraData)
                 )->render()
@@ -127,11 +127,18 @@ abstract class InputMultilingual extends Input
         $placeholder = $this->getLocalizedPlaceholder($locale);
         $containerId = $this->getLocalizedContainerId($locale);
         $componentId = $this->getLocalizedComponentId($locale);
+        $errorMessageBagName = $this->getLocalizedErrorMessageBagName($locale);
 
-        return array_merge(
-            $parentParams,
-            compact('htmlIdentifier', 'name', 'label', 'value', 'placeholder', 'containerId', 'componentId')
-        );
+        return array_merge($parentParams, compact(
+            'htmlIdentifier',
+            'name',
+            'label',
+            'value',
+            'placeholder',
+            'containerId',
+            'componentId',
+            'errorMessageBagName'
+        ));
     }
 
     /**
@@ -212,5 +219,14 @@ abstract class InputMultilingual extends Input
     protected function getLocalizedComponentId(string $locale): string
     {
         return parent::getComponentId() . '-' . $locale;
+    }
+
+    /**
+     * @param string $locale
+     * @return string
+     */
+    protected function getLocalizedErrorMessageBagName(string $locale): string
+    {
+        return $this->multilingualResolver->resolveErrorMessageBagName($this->getName(), $locale);
     }
 }

@@ -287,6 +287,7 @@ abstract class Input extends Component
         $displaySuccess = $this->getDisplaySuccess();
         $displayFailure = $this->getDisplayFailure();
         $validationClass = $this->getValidationClass($name, $displaySuccess, $displayFailure);
+        $errorMessageBagName = $name;
 
         return compact(
             'model',
@@ -301,7 +302,8 @@ abstract class Input extends Component
             'placeholder',
             'displaySuccess',
             'displayFailure',
-            'validationClass'
+            'validationClass',
+            'errorMessageBagName'
         );
     }
 

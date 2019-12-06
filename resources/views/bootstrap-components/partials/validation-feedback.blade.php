@@ -1,7 +1,7 @@
 @if(isset($errors) && $errors->isNotEmpty() && ($displaySuccess || $displayFailure))
-    @if($displayFailure && $errors->has($name))
+    @if($displayFailure && $errors->has($errorMessageBagName))
         <div class="invalid-feedback d-block">
-            {!! $errors->first($name) !!}
+            {!! $errors->first($errorMessageBagName) !!}
         </div>
     @elseif($displaySuccess)
         <div class="valid-feedback d-block">

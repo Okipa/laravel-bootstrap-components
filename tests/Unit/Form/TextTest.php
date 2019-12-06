@@ -733,4 +733,19 @@ class TextTest extends BootstrapComponentsTestCase
             $this->assertStringContainsString('<div id="' . $customContainerId . '-' . $locale . '"', $html);
         }
     }
+
+    public function testLocalizedErrorMessageDisplay()
+    {
+        $locales = ['fr', 'en'];
+        $errors = app(MessageBag::class);
+        foreach ($locales as $locale) {
+            $errors->add('name.' . $locale, 'Dummy ' . $locale . ' error message.');
+        }
+        session()->put('errors', $errors);
+        $html = bsText()->name('name')->locales($locales)->displayFailure()->render(compact('errors'));
+
+        foreach ($locales as $locale) {
+            $this->assertStringContainsString($errors->first('name.' . $locale), $html);
+        }
+    }
 }

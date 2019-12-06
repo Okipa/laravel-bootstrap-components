@@ -46,4 +46,17 @@ class MultilingualResolver
     {
         return $type . '-' . str_replace(['[', ']'], ['-', ''], $name);
     }
+
+    /**
+     * Resolve the multilingual component error message bag name.
+     *
+     * @param string $name
+     * @param string $locale
+     *
+     * @return string
+     */
+    public function resolveErrorMessageBagName(string $name, string $locale): string
+    {
+        return $name . '.' . $locale;
+    }
 }
