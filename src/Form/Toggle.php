@@ -10,6 +10,7 @@ class Toggle extends Checkable
      * @property string $view
      */
     protected $configKey = 'form.toggle';
+
     /**
      * The input type.
      *

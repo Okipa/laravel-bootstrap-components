@@ -217,7 +217,7 @@ abstract class InputMultilingual extends Input
 
         return $containerId
             ? $containerId . '-' . $locale
-            : ($this->type . '-' . $this->getName() . '-' . $locale . '-container');
+            : ($this->getType() . '-' . $this->getName() . '-' . $locale . '-container');
     }
 
     /**

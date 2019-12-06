@@ -10,6 +10,7 @@ class Textarea extends InputMultilingual
      * @property string $view
      */
     protected $configKey = 'form.textarea';
+
     /**
      * The input type.
      *

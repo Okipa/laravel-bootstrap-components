@@ -423,7 +423,7 @@ abstract class Input extends Component
      */
     protected function getHtmlIdentifier(): string
     {
-        return $this->type . '-' . Str::slug($this->getName());
+        return $this->getType() . '-' . Str::slug($this->getName());
     }
 
     /**
@@ -431,6 +431,6 @@ abstract class Input extends Component
      */
     protected function getComponentId(): string
     {
-        return $this->componentId ?? $this->type . '-' . Str::slug($this->getName());
+        return parent::getComponentId() ?? $this->getType() . '-' . Str::slug($this->getName());
     }
 }

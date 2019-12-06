@@ -10,6 +10,7 @@ class Email extends Input
      * @property string $view
      */
     protected $configKey = 'form.email';
+
     /**
      * The input type.
      *

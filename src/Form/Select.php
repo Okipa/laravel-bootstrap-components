@@ -8,48 +8,56 @@ use Okipa\LaravelBootstrapComponents\Form\Traits\SelectValidityChecks;
 class Select extends Input
 {
     use SelectValidityChecks;
+
     /**
      * The component config key.
      *
      * @property string $view
      */
     protected $configKey = 'form.select';
+
     /**
      * The input type.
      *
      * @property string $type
      */
     protected $type = 'select';
+
     /**
      * The select options list.
      *
      * @property iterable $options
      */
     protected $options;
+
     /**
      * The select options value field.
      *
      * @property string $optionValueField
      */
     protected $optionValueField;
+
     /**
      * The select options label field.
      *
      * @property string $optionLabelField
      */
     protected $optionLabelField;
+
     /**
      * The selected options value field.
      *
      * @property string $optionSelectedValueField
      */
     protected $selectedFieldToCompare;
+
     /**
      * The selected options value field.
      *
      * @property string $optionSelectedValueField
      */
     protected $selectedValueToCompare;
+
     /**
      * The selected options value field.
      *
@@ -115,10 +123,10 @@ class Select extends Input
         $this->setOptionsSelectedStatus();
 
         return array_merge(parent::getValues(), [
-            'options'          => $this->options ? $this->options : [],
+            'options' => $this->options ? $this->options : [],
             'optionValueField' => $this->optionValueField,
             'optionLabelField' => $this->optionLabelField,
-            'multiple'         => $this->multiple,
+            'multiple' => $this->multiple,
         ]);
     }
 
@@ -177,7 +185,7 @@ class Select extends Input
      */
     protected function searchMultipleSelectedOptionFromOldValue(): ?array
     {
-        $oldValue = old($this->name);
+        $oldValue = old($this->getName());
         if ($oldValue) {
             $selectedMultipleOptions = Arr::where($this->options, function ($option) use ($oldValue) {
                 return in_array($option[$this->optionValueField], $oldValue);
@@ -216,12 +224,9 @@ class Select extends Input
      */
     protected function searchMultipleSelectedOptionsFromModel(): ?array
     {
-        if ($this->model && $this->model->{$this->name}) {
+        if ($this->model && $this->model->{$this->getName()}) {
             $multipleSelectedOptions = Arr::where($this->options, function ($option) {
-                return in_array(
-                    $option[$this->optionValueField],
-                    $this->model->{$this->name}
-                );
+                return in_array($option[$this->optionValueField], $this->model->{$this->getName()});
             });
             if (! empty($multipleSelectedOptions)) {
                 return $multipleSelectedOptions;
@@ -261,7 +266,7 @@ class Select extends Input
      */
     protected function searchSelectedOptionFromOldValue(): ?array
     {
-        $oldValue = old($this->name);
+        $oldValue = old($this->getName());
         if ($oldValue) {
             $selectedOption = Arr::where($this->options, function ($option) use ($oldValue) {
                 return $option[$this->optionValueField] == $oldValue;
@@ -302,7 +307,7 @@ class Select extends Input
     {
         if ($this->model) {
             $selectedOption = Arr::where($this->options, function ($option) {
-                return $option[$this->optionValueField] == $this->model->{$this->name};
+                return $option[$this->optionValueField] == $this->model->{$this->getName()};
             });
             if (! empty($selectedOption)) {
                 return $selectedOption;

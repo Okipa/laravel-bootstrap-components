@@ -13,48 +13,56 @@ abstract class Component implements Htmlable
      * @property string $view
      */
     protected $configKey;
+
     /**
      * The component type.
      *
      * @property string $type
      */
     protected $type;
+
     /**
      * The component view.
      *
      * @property string $view
      */
     protected $view;
+
     /**
      * The component id.
      *
      * @property string $componentId
      */
     protected $componentId;
+
     /**
      * The component container id.
      *
      * @property array $containerId
      */
     protected $containerId;
+
     /**
      * The component class.
      *
      * @property array $componentClasses
      */
     protected $componentClasses;
+
     /**
      * The component container class.
      *
      * @property array $containerClasses
      */
     protected $containerClasses;
+
     /**
      * The component html attributes.
      *
      * @property array $componentHtmlAttributes
      */
     protected $componentHtmlAttributes;
+
     /**
      * The component container html attributes.
      *
@@ -149,12 +157,12 @@ abstract class Component implements Htmlable
     /**
      * Render the component html.
      *
-     * @return string|null
+     * @return string
      * @throws Throwable
      */
-    public function toHtml(): ?string
+    public function toHtml(): string
     {
-        return (string)$this->render();
+        return $this->render();
     }
 
     /**
@@ -222,6 +230,14 @@ abstract class Component implements Htmlable
      */
     protected function getHtmlIdentifier(): string
     {
+        return $this->getType();
+    }
+
+    /**
+     * @return string
+     */
+    protected function getType(): string
+    {
         return $this->type;
     }
 
@@ -275,13 +291,5 @@ abstract class Component implements Htmlable
     {
         return $this->containerHtmlAttributes
             ?? config('bootstrap-components.' . $this->configKey . '.htmlAttributes.container', []);
-    }
-
-    /**
-     * @return string
-     */
-    protected function getType(): string
-    {
-        return $this->type;
     }
 }

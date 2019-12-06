@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\MessageBag;
 use Okipa\LaravelBootstrapComponents\Form\Input;
+use Okipa\LaravelBootstrapComponents\Form\Temporal;
 use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
 use Okipa\LaravelBootstrapComponents\Test\Fakers\UsersFaker;
 
@@ -39,7 +40,7 @@ class TimeTest extends BootstrapComponentsTestCase
 
     public function testExtendsInput()
     {
-        $this->assertEquals(Input::class, get_parent_class(bsTime()));
+        $this->assertEquals(Temporal::class, get_parent_class(bsTime()));
     }
 
     public function testSetName()
@@ -62,9 +63,9 @@ class TimeTest extends BootstrapComponentsTestCase
 
     public function testWrongModelValue()
     {
-        $this->expectException(Exception::class);
         $user = $this->createUniqueUser();
         $user->name = 'test-custom-name';
+        $this->expectException(Exception::class);
         bsTime()->model($user)->name('name')->toHtml();
     }
 
@@ -114,10 +115,10 @@ class TimeTest extends BootstrapComponentsTestCase
 
     public function testNoFormat()
     {
-        $this->expectException(Exception::class);
         config()->set('bootstrap-components.form.time.format', null);
         $user = $this->createUniqueUser();
         $user->published_at = $this->faker->dateTime;
+        $this->expectException(Exception::class);
         bsTime()->model($user)->name('published_at')->toHtml();
     }
 
@@ -253,10 +254,9 @@ class TimeTest extends BootstrapComponentsTestCase
 
     public function testSetWrongValue()
     {
-        $this->expectException(Exception::class);
         $customValue = 'test-custom-value';
-        $html = bsTime()->name('name')->value($customValue)->toHtml();
-        $this->assertStringContainsString(' value="' . $customValue . '"', $html);
+        $this->expectException(Exception::class);
+        bsTime()->name('name')->value($customValue)->toHtml();
     }
 
     public function testSetValue()

@@ -10,6 +10,7 @@ class Color extends Input
      * @property string $view
      */
     protected $configKey = 'form.color';
+
     /**
      * The input type.
      *

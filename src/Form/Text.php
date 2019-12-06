@@ -10,6 +10,7 @@ class Text extends InputMultilingual
      * @property string $view
      */
     protected $configKey = 'form.text';
+
     /**
      * The input type.
      *

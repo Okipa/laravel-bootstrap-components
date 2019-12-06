@@ -10,6 +10,7 @@ class Url extends Input
      * @property string $view
      */
     protected $configKey = 'form.url';
+
     /**
      * The input type.
      *

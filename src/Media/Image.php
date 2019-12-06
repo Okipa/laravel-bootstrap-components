@@ -10,48 +10,56 @@ class Image extends Media
      * @property string $view
      */
     protected $configKey = 'media.image';
+
     /**
      * The button type.
      *
      * @property string $type
      */
     protected $type = 'image';
+
     /**
      * The image link url.
      *
      * @property string $linkUrl
      */
     protected $linkUrl;
+
     /**
      * The image alt.
      *
      * @property string $alt
      */
     protected $alt;
+
     /**
      * The image width.
      *
      * @property int $width
      */
     protected $width;
+
     /**
      * The image height.
      *
      * @property int $height
      */
     protected $height;
+
     /**
      * The image link id.
      *
      * @property string $linkId
      */
     protected $linkId;
+
     /**
      * The image link class.
      *
      * @property array $linkClasses
      */
     protected $linkClasses;
+
     /**
      * The image link html attributes.
      *

@@ -134,7 +134,7 @@ abstract class Button extends Component
     protected function getParameters(): array
     {
         return [
-            'type'    => $this->type,
+            'type'    => $this->getType(),
             'url'     => $this->url ?: url()->previous(),
             'prepend' => $this->prepend ?? $this->defaultPrepend(),
             'append'  => $this->append ?? $this->defaultAppend(),

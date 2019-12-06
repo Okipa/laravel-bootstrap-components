@@ -10,6 +10,7 @@ class Tel extends Input
      * @property string $view
      */
     protected $configKey = 'form.tel';
+
     /**
      * The input type.
      *

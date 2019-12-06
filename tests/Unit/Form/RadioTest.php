@@ -4,7 +4,7 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
 use Exception;
 use Illuminate\Support\MessageBag;
-use Okipa\LaravelBootstrapComponents\Form\Input;
+use Okipa\LaravelBootstrapComponents\Form\Checkable;
 use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
 use Okipa\LaravelBootstrapComponents\Test\Fakers\UsersFaker;
 
@@ -36,7 +36,7 @@ class RadioTest extends BootstrapComponentsTestCase
 
     public function testExtendsInput()
     {
-        $this->assertEquals(Input::class, get_parent_class(bsRadio()));
+        $this->assertEquals(Checkable::class, get_parent_class(bsRadio()));
     }
 
     public function testName()
@@ -146,7 +146,7 @@ class RadioTest extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString('<span class="label-append">', $html);
     }
 
-    public function testDefaultCheckStatus()
+    public function testSetValueDefaultCheckStatus()
     {
         $customValue = 'test-custom-value';
         $html = bsRadio()->name('name')->value($customValue)->toHtml();

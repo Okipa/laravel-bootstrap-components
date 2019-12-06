@@ -10,6 +10,7 @@ class Password extends Input
      * @property string $view
      */
     protected $configKey = 'form.password';
+
     /**
      * The input type.
      *

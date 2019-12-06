@@ -10,6 +10,7 @@ class Number extends Input
      * @property string $view
      */
     protected $configKey = 'form.number';
+
     /**
      * The input type.
      *

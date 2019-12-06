@@ -90,12 +90,12 @@ trait SelectValidityChecks
      */
     protected function checkMultipleModeModelAttributeType(): void
     {
-        if ($this->model && isset($this->model->{$this->name}) && ! is_array($this->model->{$this->name})) {
+        if ($this->model && isset($this->model->{$this->getName()}) && ! is_array($this->model->{$this->getName()})) {
             throw new InvalidArgumentException(
-                get_class($this) . ' : The « ' . $this->name . ' » attribute from the given « '
+                get_class($this) . ' : The « ' . $this->getName() . ' » attribute from the given « '
                 . $this->model->getMorphClass()
                 . ' » model has to be an array when the bsSelect() component is in multiple mode : « '
-                . gettype($this->model->{$this->name}) . ' » type given.'
+                . gettype($this->model->{$this->getName()}) . ' » type given.'
             );
         }
     }

@@ -26,25 +26,23 @@ abstract class Checkable extends Input
     }
 
     /**
-     * Set the input values.
-     *
      * @return array
-     * @throws \Exception
      */
-    protected function getValues(): array
+    protected function getComponentHtmlAttributes(): array
     {
-        $parentValues = parent::getValues();
-        $oldValue = old($this->name);
-        if (isset($oldValue)) {
-            $this->checked = $oldValue;
-        } elseif ($parentValues['value'] && ! isset($this->checked)) {
-            $this->checked = true;
-        }
-        $componentHtmlAttributes = array_merge(
-            $parentValues['componentHtmlAttributes'],
-            $this->checked ? ['checked' => 'checked'] : []
-        );
+        return array_merge(parent::getComponentHtmlAttributes(), $this->getChecked() ? ['checked' => 'checked'] : []);
+    }
 
-        return array_merge($parentValues, compact('componentHtmlAttributes'));
+    /**
+     * @return bool
+     */
+    protected function getChecked(): bool
+    {
+        $old = old($this->getName());
+        if (isset($old)) {
+            return $old;
+        }
+
+        return $this->checked ?? boolval(optional($this->model)->{$this->getName()} ?: $this->value);
     }
 }
