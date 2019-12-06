@@ -55,7 +55,7 @@ class MultilingualResolver
      *
      * @return string
      */
-    public function resolveErrorMessageBagName(string $name, string $locale): string
+    public function resolveErrorMessageBagKey(string $name, string $locale): string
     {
         return $name . '.' . $locale;
     }

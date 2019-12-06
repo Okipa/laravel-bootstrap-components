@@ -8,7 +8,7 @@ use Okipa\LaravelBootstrapComponents\Button\Validate as bsValidate;
 
 if (! function_exists('bsValidate')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Button\Validate
+     * @return bsValidate
      */
     function bsValidate(): bsValidate
     {
@@ -18,7 +18,7 @@ if (! function_exists('bsValidate')) {
 
 if (! function_exists('bsCreate')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Button\Create
+     * @return bsCreate
      */
     function bsCreate(): bsCreate
     {
@@ -28,7 +28,7 @@ if (! function_exists('bsCreate')) {
 
 if (! function_exists('bsUpdate')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Button\Update
+     * @return bsUpdate
      */
     function bsUpdate(): bsUpdate
     {
@@ -38,7 +38,7 @@ if (! function_exists('bsUpdate')) {
 
 if (! function_exists('bsCancel')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Button\Cancel
+     * @return bsCancel
      */
     function bsCancel(): bsCancel
     {
@@ -48,7 +48,7 @@ if (! function_exists('bsCancel')) {
 
 if (! function_exists('bsBack')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Button\Back
+     * @return bsBack
      */
     function bsBack(): bsBack
     {

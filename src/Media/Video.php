@@ -58,6 +58,6 @@ class Video extends Media
      */
     protected function getPoster(): string
     {
-        return $this->poster ?? config('bootstrap-components.' . $this->configKey . '.poster', '');
+        return $this->poster ?? (config('bootstrap-components.' . $this->configKey . '.poster') ?? '');
     }
 }

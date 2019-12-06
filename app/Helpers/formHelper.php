@@ -19,7 +19,7 @@ use Okipa\LaravelBootstrapComponents\Form\Url as UrlComponent;
 
 if (! function_exists('bsText')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Text
+     * @return TextComponent
      */
     function bsText(): TextComponent
     {
@@ -29,7 +29,7 @@ if (! function_exists('bsText')) {
 
 if (! function_exists('bsNumber')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Number
+     * @return NumberComponent
      */
     function bsNumber(): NumberComponent
     {
@@ -39,7 +39,7 @@ if (! function_exists('bsNumber')) {
 
 if (! function_exists('bsTel')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Tel
+     * @return TelComponent
      */
     function bsTel(): TelComponent
     {
@@ -49,7 +49,7 @@ if (! function_exists('bsTel')) {
 
 if (! function_exists('bsDatetime')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Datetime
+     * @return DateTimeComponent
      */
     function bsDatetime(): DateTimeComponent
     {
@@ -59,7 +59,7 @@ if (! function_exists('bsDatetime')) {
 
 if (! function_exists('bsDate')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Date
+     * @return DateComponent
      */
     function bsDate(): DateComponent
     {
@@ -69,7 +69,7 @@ if (! function_exists('bsDate')) {
 
 if (! function_exists('bsTime')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Time
+     * @return TimeComponent
      */
     function bsTime(): TimeComponent
     {
@@ -79,7 +79,7 @@ if (! function_exists('bsTime')) {
 
 if (! function_exists('bsUrl')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Url
+     * @return UrlComponent
      */
     function bsUrl(): UrlComponent
     {
@@ -89,7 +89,7 @@ if (! function_exists('bsUrl')) {
 
 if (! function_exists('bsEmail')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Email
+     * @return EmailComponent
      */
     function bsEmail(): EmailComponent
     {
@@ -99,7 +99,7 @@ if (! function_exists('bsEmail')) {
 
 if (! function_exists('bsColor')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Color
+     * @return ColorComponent
      */
     function bsColor(): ColorComponent
     {
@@ -109,7 +109,7 @@ if (! function_exists('bsColor')) {
 
 if (! function_exists('bsPassword')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Password
+     * @return PasswordComponent
      */
     function bsPassword(): PasswordComponent
     {
@@ -119,7 +119,7 @@ if (! function_exists('bsPassword')) {
 
 if (! function_exists('bsFile')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\File
+     * @return FileComponent
      */
     function bsFile(): FileComponent
     {
@@ -129,7 +129,7 @@ if (! function_exists('bsFile')) {
 
 if (! function_exists('bsTextarea')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Textarea
+     * @return TextareaComponent
      */
     function bsTextarea(): TextareaComponent
     {
@@ -139,7 +139,7 @@ if (! function_exists('bsTextarea')) {
 
 if (! function_exists('bsCheckbox')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Checkbox
+     * @return CheckboxComponent
      */
     function bsCheckbox(): CheckboxComponent
     {
@@ -149,7 +149,7 @@ if (! function_exists('bsCheckbox')) {
 
 if (! function_exists('bsToggle')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Toggle
+     * @return ToggleComponent
      */
     function bsToggle(): ToggleComponent
     {
@@ -159,7 +159,7 @@ if (! function_exists('bsToggle')) {
 
 if (! function_exists('bsRadio')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Radio
+     * @return RadioComponent
      */
     function bsRadio(): RadioComponent
     {
@@ -169,7 +169,7 @@ if (! function_exists('bsRadio')) {
 
 if (! function_exists('bsSelect')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Select
+     * @return SelectComponent
      */
     function bsSelect(): SelectComponent
     {

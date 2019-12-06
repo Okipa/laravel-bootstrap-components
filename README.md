@@ -57,10 +57,10 @@ Instead of redundantly writing or copying this HTML :
 - [Customization](#customization)
 - [API](#api)
   - [Form components](#form-components)
-    - [Multilingual](#)
+    - [Multilingual](#multilingual)
       - [bsText()](#bstext)
       - [bsTextarea()](#bstextarea)
-    - Standard
+    - [Standard](#standard)
       - [bsNumber()](#bsnumber)
       - [bsTel()](#bstel)
       - [bsDatetime()](#bsdatetime)
@@ -182,6 +182,7 @@ php artisan vendor:publish --tag=bootstrap-components:views
   * The default locales to handle.
   * The component `name` attribute format.
   * The component html identifier, used to generate the container class, the component class and the `aria-describedby` attribute values.
+  * The component error message key to generate in order to properly display input errors. 
   
 * The use of the `->locales()` method will produce a component for each locale keys you declared. For example, if you declare the `fr` and `en` locale keys for a `title` text component, you will get two `Title (FR)` and `Title (EN)` generated text components.
 * The localization treatment will only occur if you have more than one locales declared : there is not point to generate localized components with only one declared locales.

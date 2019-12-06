@@ -6,7 +6,7 @@ use Okipa\LaravelBootstrapComponents\Media\Video as VideoComponent;
 
 if (! function_exists('image')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Media\Image
+     * @return ImageComponent
      */
     function image(): ImageComponent
     {
@@ -16,7 +16,7 @@ if (! function_exists('image')) {
 
 if (! function_exists('audio')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Media\Audio
+     * @return AudioComponent
      */
     function audio(): AudioComponent
     {
@@ -26,7 +26,7 @@ if (! function_exists('audio')) {
 
 if (! function_exists('video')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Media\Video
+     * @return VideoComponent
      */
     function video(): VideoComponent
     {
