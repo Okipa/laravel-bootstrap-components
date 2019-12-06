@@ -11,6 +11,12 @@ class Video extends Media
      */
     protected $configKey = 'media.video';
     /**
+     * The button type.
+     *
+     * @property string $type
+     */
+    protected $type = 'video';
+    /**
      * The video poster.
      *
      * @property string $poster

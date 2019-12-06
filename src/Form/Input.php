@@ -347,7 +347,7 @@ abstract class Input extends Component
     {
         $label = $this->label ?? 'validation.attributes.' . $this->getName();
 
-        return $label ? __($label) : null;
+        return $label ? (string)__($label) : null;
     }
 
     /**
@@ -368,7 +368,7 @@ abstract class Input extends Component
     {
         $value = old($this->getName()) ?: $this->value;
 
-        return $value ?: ($this->model ? $this->model->{$this->getName()} : null);
+        return $value ?? ($this->model ? $this->model->{$this->getName()} : null);
     }
 
     /**
@@ -379,7 +379,7 @@ abstract class Input extends Component
         $placeholder = $this->placeholder ?? $this->getLabel();
         $placeholder = $placeholder ?? 'validation.attributes.' . $this->getName();
 
-        return $placeholder ? __($placeholder) : null;
+        return $placeholder ? (string)__($placeholder) : null;
     }
 
     /**
@@ -431,6 +431,6 @@ abstract class Input extends Component
      */
     protected function getComponentId(): string
     {
-        return $this->componentId ?? $this->type . '-' . $this->getName();
+        return $this->componentId ?? $this->type . '-' . Str::slug($this->getName());
     }
 }

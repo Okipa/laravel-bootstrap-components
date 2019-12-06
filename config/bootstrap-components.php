@@ -218,7 +218,7 @@ return [
             'append' => null,
             'labelPositionedAbove' => true,
             'legend' => null,
-            'show_remove_checkbox' => true,
+            'showRemoveCheckbox' => true,
             'classes' => [
                 'container' => ['form-group'],
                 'component' => [],

@@ -162,18 +162,17 @@ abstract class Component implements Htmlable
      *
      * @param array $extraData
      *
-     * @return string|null
+     * @return string
      * @throws Throwable
      */
-    public function render(array $extraData = []): ?string
+    public function render(array $extraData = []): string
     {
         $this->checkValuesValidity();
         $view = $this->getView();
         if ($view) {
-            return (string)trim(view(
-                'bootstrap-components::' . $view,
-                array_merge($this->getValues(), $extraData)
-            )->render());
+            $html = view('bootstrap-components::' . $view, array_merge($this->getValues(), $extraData))->render();
+
+            return is_string($html) ? trim($html) : '';
         }
     }
 

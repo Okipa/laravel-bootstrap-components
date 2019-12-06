@@ -3,6 +3,7 @@
 namespace Okipa\LaravelBootstrapComponents\Form;
 
 use Closure;
+use Exception;
 use Illuminate\Support\HtmlString;
 use Okipa\LaravelBootstrapComponents\Component;
 
@@ -14,24 +15,28 @@ class File extends Input
      * @property string $view
      */
     protected $configKey = 'form.file';
+
     /**
      * The input type.
      *
      * @property string $type
      */
     protected $type = 'file';
+
     /**
      * The uploaded file closure.
      *
-     * @property \Closure $uploadedFile
+     * @property Closure $uploadedFile
      */
     protected $uploadedFile;
+
     /**
      * The show remove file checkbox status.
      *
      * @property bool $showRemoveCheckbox
      */
     protected $showRemoveCheckbox;
+
     /**
      * The remove-file-checkbox label.
      *
@@ -42,7 +47,7 @@ class File extends Input
     /**
      * Set the uploaded file closure.
      *
-     * @param \Closure $uploadedFile
+     * @param Closure $uploadedFile
      *
      * @return $this
      */
@@ -73,22 +78,22 @@ class File extends Input
      * Set the input values.
      *
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getValues(): array
     {
         return array_merge(parent::getValues(), [
-            'uploadedFileHtml'    => $this->getUploadedFileHtml(),
-            'showRemoveCheckbox'  => $this->defineShowRemoveCheckboxStatus(),
-            'removeCheckboxLabel' => $this->defineRemoveCheckboxLabel(parent::getValues()['label']),
-            'placeholder'         => $this->placeholder ?? __('bootstrap-components::bootstrap-components.label.file'),
+            'uploadedFileHtml' => $this->getUploadedFileHtml(),
+            'showRemoveCheckbox' => $this->getShowRemoveCheckboxStatus(),
+            'removeCheckboxLabel' => $this->getRemoveCheckboxLabel(parent::getValues()['label']),
+            'placeholder' => $this->placeholder ?? __('bootstrap-components::bootstrap-components.label.file'),
         ]);
     }
 
     /**
      * Get the uploadedFile HTML.
      *
-     * @return \Illuminate\Support\HtmlString
+     * @return HtmlString
      */
     protected function getUploadedFileHtml(): HtmlString
     {
@@ -108,23 +113,10 @@ class File extends Input
     /**
      * @return bool
      */
-    protected function defineShowRemoveCheckboxStatus(): bool
+    protected function getShowRemoveCheckboxStatus(): bool
     {
-        return isset($this->showRemoveCheckbox)
-            ? $this->showRemoveCheckbox
-            : $this->defaultRemoveCheckboxShowStatus();
-    }
-
-    /**
-     * Set the file default checkbox show status
-     *
-     * @return bool
-     */
-    protected function defaultRemoveCheckboxShowStatus(): bool
-    {
-        $showRemoveCheckbox = boolval(config('bootstrap-components.' . $this->configKey . '.show_remove_checkbox'));
-
-        return $showRemoveCheckbox;
+        return $this->showRemoveCheckbox
+            ?? config('bootstrap-components.' . $this->configKey . '.showRemoveCheckbox', false);
     }
 
     /**
@@ -132,10 +124,10 @@ class File extends Input
      *
      * @return string
      */
-    protected function defineRemoveCheckboxLabel(?string $defaultLabel): string
+    protected function getRemoveCheckboxLabel(?string $defaultLabel): string
     {
         $translatedDefaultLabel = __($defaultLabel);
-        $defaultRemoveCheckboxLabel = (string) __('bootstrap-components::bootstrap-components.label.remove')
+        $defaultRemoveCheckboxLabel = (string)__('bootstrap-components::bootstrap-components.label.remove')
             . ($translatedDefaultLabel ? ' ' . strtolower($translatedDefaultLabel) : '');
 
         return $this->removeCheckboxLabel ?? $defaultRemoveCheckboxLabel;

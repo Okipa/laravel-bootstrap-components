@@ -11,6 +11,12 @@ class Image extends Media
      */
     protected $configKey = 'media.image';
     /**
+     * The button type.
+     *
+     * @property string $type
+     */
+    protected $type = 'image';
+    /**
      * The image link url.
      *
      * @property string $linkUrl

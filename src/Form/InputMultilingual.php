@@ -28,7 +28,9 @@ abstract class InputMultilingual extends Input
      */
     public function __construct()
     {
-        $this->multilingualResolver = app(config('bootstrap-components.form.multilingual.resolver'));
+        /** @var MultilingualResolver $multilingualResolver */
+        $multilingualResolver = app(config('bootstrap-components.form.multilingual.resolver'));
+        $this->multilingualResolver = $multilingualResolver;
         $this->locales = $this->multilingualResolver->getDefaultLocales();
     }
 
@@ -78,10 +80,10 @@ abstract class InputMultilingual extends Input
      *
      * @param array $extraData
      *
-     * @return string|null
+     * @return string
      * @throws Throwable
      */
-    public function render(array $extraData = []): ?string
+    public function render(array $extraData = []): string
     {
         if ($this->multilingualMode()) {
             return $this->multilingualRender($extraData);
@@ -93,20 +95,21 @@ abstract class InputMultilingual extends Input
     /**
      * @param array $extraData
      *
-     * @return string|null
+     * @return string
      * @throws Throwable
      */
-    protected function multilingualRender(array $extraData = []): ?string
+    protected function multilingualRender(array $extraData = []): string
     {
         $this->checkValuesValidity();
         $view = $this->getView();
         if ($view) {
             $html = '';
             foreach ($this->locales as $locale) {
-                $html .= (string)trim(view(
+                $componentHtml = view(
                     'bootstrap-components::' . $view,
                     array_merge($this->getLocalizedValues($locale), $extraData)
-                )->render());
+                )->render();
+                $html .= is_string($componentHtml) ? trim($componentHtml) : '';
             }
 
             return $html;
