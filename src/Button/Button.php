@@ -12,18 +12,21 @@ abstract class Button extends Component
      * @property string $url
      */
     protected $url;
+
     /**
      * The component prepended html.
      *
      * @property string|false $prepend
      */
     protected $prepend;
+
     /**
      * The component appended html.
      *
      * @property string|false $append
      */
     protected $append;
+
     /**
      * The button label.
      *
@@ -133,39 +136,47 @@ abstract class Button extends Component
      */
     protected function getParameters(): array
     {
-        return [
-            'type'    => $this->getType(),
-            'url'     => $this->url ?: url()->previous(),
-            'prepend' => $this->prepend ?? $this->defaultPrepend(),
-            'append'  => $this->append ?? $this->defaultAppend(),
-            'label'   => $this->label ?? $this->defaultLabel(),
-        ];
+        $type = $this->getType();
+        $url = $this->getUrl();
+        $prepend = $this->getPrepend();
+        $append = $this->getAppend();
+        $label = $this->getLabel();
+
+        return compact('type', 'url', 'prepend', 'append', 'label');
+    }
+
+    /**
+     * @return string
+     */
+    protected function getUrl(): string
+    {
+        return $this->url ?: url()->previous();
     }
 
     /**
      * @return string|null
      */
-    protected function defaultPrepend(): ?string
+    protected function getPrepend(): ?string
     {
-        return config('bootstrap-components.' . $this->configKey . '.prepend');
+        return $this->prepend ?? config('bootstrap-components.' . $this->configKey . '.prepend');
     }
 
     /**
      * @return string|null
      */
-    protected function defaultAppend(): ?string
+    protected function getAppend(): ?string
     {
-        return config('bootstrap-components.' . $this->configKey . '.append');
+        return $this->append ?? config('bootstrap-components.' . $this->configKey . '.append');
     }
 
     /**
      * @return string|null
      */
-    public function defaultLabel(): ?string
+    public function getLabel(): ?string
     {
-        $label = config('bootstrap-components.' . $this->configKey . '.label');
+        $configLabel = config('bootstrap-components.' . $this->configKey . '.label');
 
-        return $label ? 'bootstrap-components::' . $label : null;
+        return $this->label ?? ($configLabel ? (string) __('bootstrap-components::' . $configLabel) : null);
     }
 
     /**

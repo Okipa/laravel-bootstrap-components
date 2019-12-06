@@ -92,7 +92,7 @@ abstract class InputMultilingual extends Input
                     array_merge($this->getLocalizedValues($locale), $extraData)
                 )->render()
                 : '';
-            $html .= is_string($componentHtml) ? trim($componentHtml) : '';
+            $html .= trim($componentHtml);
         }
 
         return $html;

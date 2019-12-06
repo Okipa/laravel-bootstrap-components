@@ -181,7 +181,7 @@ abstract class Component implements Htmlable
             ? view('bootstrap-components::' . $view, array_merge($this->getValues(), $extraData))->render()
             : '';
 
-        return is_string($html) ? trim($html) : '';
+        return trim($html);
     }
 
     /**

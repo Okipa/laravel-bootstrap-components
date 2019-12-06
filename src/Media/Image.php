@@ -170,19 +170,20 @@ class Image extends Media
      *
      * @return array
      */
-    protected function getValues(): array
+    protected function getP(): array
     {
-        return array_merge(parent::getValues(), [
-            'linkUrl'            => $this->linkUrl,
-            'alt'                => $this->alt,
-            'width'              => $this->width,
-            'height'             => $this->height,
-            'linkId'             => $this->linkId ? $this->linkId : $this->defaultLinkId(),
-            'linkClasses'        => $this->linkClasses ? $this->linkClasses : $this->defaultLinkClasses(),
-            'linkHtmlAttributes' => $this->linkHtmlAttributes
-                ? $this->linkHtmlAttributes
-                : $this->defaultLinkHtmlAttributes(),
-        ]);
+        $linkUrl = $this->linkUrl;
+        $alt = $this->alt;
+        $width = $this->width;
+        $height = $this->height;
+        $linkId = $this->getLinkId();
+        $linkClasses = $this->getLinkClasses();
+        $linkHtmlAttributes = $this->defaultLinkHtmlAttributes();
+
+        return array_merge(
+            parent::getValues(),
+            compact('linkUrl', 'alt', 'width', 'height', 'linkId', 'linkClasses', 'linkHtmlAttributes')
+        );
     }
 
     /**
@@ -190,9 +191,9 @@ class Image extends Media
      *
      * @return string
      */
-    protected function defaultLinkId(): string
+    protected function getLinkId(): string
     {
-        return '';
+        return $this->linkId ?? '';
     }
 
     /**
@@ -200,11 +201,9 @@ class Image extends Media
      *
      * @return array
      */
-    protected function defaultLinkClasses(): array
+    protected function getLinkClasses(): array
     {
-        $linkClasses = config('bootstrap-components.' . $this->configKey . '.classes.link');
-
-        return $linkClasses ? $linkClasses : [];
+        return $this->linkClasses ?? config('bootstrap-components.' . $this->configKey . '.classes.link', []);
     }
 
     /**
@@ -214,8 +213,7 @@ class Image extends Media
      */
     protected function defaultLinkHtmlAttributes(): array
     {
-        $linkHtmlAttributes = config('bootstrap-components.' . $this->configKey . '.htmlAttributes.link');
-
-        return $linkHtmlAttributes ? $linkHtmlAttributes : [];
+        return $this->linkHtmlAttributes
+            ?? config('bootstrap-components.' . $this->configKey . '.htmlAttributes.link', []);
     }
 }

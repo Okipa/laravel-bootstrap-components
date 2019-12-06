@@ -46,9 +46,9 @@ class Video extends Media
      */
     protected function getValues(): array
     {
-        return array_merge(parent::getValues(), [
-            'poster' => $this->poster ? $this->poster : $this->defaultPoster(),
-        ]);
+        $poster = $this->getPoster();
+
+        return array_merge(parent::getValues(), compact('poster'));
     }
 
     /**
@@ -56,10 +56,8 @@ class Video extends Media
      *
      * @return string
      */
-    protected function defaultPoster(): string
+    protected function getPoster(): string
     {
-        $poster = config('bootstrap-components.' . $this->configKey . '.poster');
-
-        return $poster ? $poster : '';
+        return $this->poster ?? config('bootstrap-components.' . $this->configKey . '.poster', '');
     }
 }
