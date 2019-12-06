@@ -761,4 +761,19 @@ class TextareaTest extends BootstrapComponentsTestCase
             $this->assertStringContainsString($errors->first('name.' . $locale), $html);
         }
     }
+
+    public function testLocalizedErrorMessageDisplayFromCustomMultilingualResolver()
+    {
+        config()->set('bootstrap-components.form.multilingual.resolver', MultilingualResolver::class);
+        $resolverLocales = (new MultilingualResolver)->getDefaultLocales();
+        $errors = app(MessageBag::class);
+        foreach ($resolverLocales as $locale) {
+            $errors->add('name_' . $locale, 'Dummy ' . $locale . ' error message.');
+        }
+        session()->put('errors', $errors);
+        $html = bsTextarea()->name('name')->displayFailure()->render(compact('errors'));
+        foreach ($resolverLocales as $locale) {
+            $this->assertStringContainsString($errors->first('name_' . $locale), $html);
+        }
+    }
 }

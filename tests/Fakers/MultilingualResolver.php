@@ -48,4 +48,17 @@ class MultilingualResolver extends \Okipa\LaravelBootstrapComponents\Form\Multil
     {
         return $type . '-' . Str::slug($name);
     }
+
+    /**
+     * Resolve the multilingual component error message bag name.
+     *
+     * @param string $name
+     * @param string $locale
+     *
+     * @return string
+     */
+    public function resolveErrorMessageBagKey(string $name, string $locale): string
+    {
+        return $name . '_' . $locale;
+    }
 }
