@@ -9,6 +9,11 @@ use InvalidArgumentException;
 trait InputMultilingualValidityChecks
 {
     /**
+     * @return bool
+     */
+    abstract protected function multilingualMode(): bool;
+
+    /**
      * Check the component values validity
      *
      * @return void

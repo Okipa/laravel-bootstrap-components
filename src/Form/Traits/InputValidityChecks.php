@@ -7,6 +7,11 @@ use Exception;
 trait InputValidityChecks
 {
     /**
+     * @return string
+     */
+    abstract protected function getName(): string;
+
+    /**
      * Check the component values validity
      *
      * @return void
