@@ -3,7 +3,6 @@
 namespace Okipa\LaravelBootstrapComponents\Form;
 
 use Closure;
-use Exception;
 use Okipa\LaravelBootstrapComponents\Form\Traits\InputMultilingualValidityChecks;
 use Throwable;
 
@@ -34,21 +33,6 @@ abstract class InputMultilingual extends Input
         $multilingualResolver = app(config('bootstrap-components.form.multilingual.resolver'));
         $this->multilingualResolver = $multilingualResolver;
         $this->locales = $this->multilingualResolver->getDefaultLocales();
-    }
-
-    /**
-     * Set the component input value.
-     *
-     * @param mixed $value
-     *
-     * @return $this
-     * @throws Exception
-     */
-    public function value($value): self
-    {
-        $this->value = $value;
-
-        return $this;
     }
 
     /**
