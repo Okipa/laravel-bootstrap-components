@@ -114,20 +114,22 @@ class Select extends Input
     }
 
     /**
-     * Set the input values.
+     * Define the component parameters.
      *
      * @return array
      */
-    protected function getValues(): array
+    protected function getParameters(): array
     {
         $this->setOptionsSelectedStatus();
+        $options = $this->getOptions();
+        $optionValueField = $this->optionValueField;
+        $optionLabelField = $this->optionLabelField;
+        $multiple = $this->multiple;
 
-        return array_merge(parent::getValues(), [
-            'options' => $this->options ? $this->options : [],
-            'optionValueField' => $this->optionValueField,
-            'optionLabelField' => $this->optionLabelField,
-            'multiple' => $this->multiple,
-        ]);
+        return array_merge(
+            parent::getParameters(),
+            compact('options', 'optionValueField', 'optionLabelField', 'multiple')
+        );
     }
 
     /**
@@ -269,7 +271,7 @@ class Select extends Input
         $oldValue = old($this->getName());
         if ($oldValue) {
             $selectedOption = Arr::where($this->options, function ($option) use ($oldValue) {
-                return $option[$this->optionValueField] == $oldValue;
+                return $option[$this->optionValueField] === $oldValue;
             });
             if (! empty($selectedOption)) {
                 return $selectedOption;
@@ -288,7 +290,7 @@ class Select extends Input
     {
         if (isset($this->selectedFieldToCompare) && isset($this->selectedValueToCompare)) {
             $selectedOption = Arr::where($this->options, function ($option) {
-                return $option[$this->selectedFieldToCompare] == $this->selectedValueToCompare;
+                return $option[$this->selectedFieldToCompare] === $this->selectedValueToCompare;
             });
             if (! empty($selectedOption)) {
                 return $selectedOption;
@@ -307,7 +309,7 @@ class Select extends Input
     {
         if ($this->model) {
             $selectedOption = Arr::where($this->options, function ($option) {
-                return $option[$this->optionValueField] == $this->model->{$this->getName()};
+                return $option[$this->optionValueField] === $this->model->{$this->getName()};
             });
             if (! empty($selectedOption)) {
                 return $selectedOption;
@@ -315,5 +317,13 @@ class Select extends Input
         }
 
         return null;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getOptions(): array
+    {
+        return $this->options ?? [];
     }
 }

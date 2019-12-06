@@ -11,7 +11,7 @@ trait TemporalValidityChecks
      * @return string
      */
     abstract protected function getName(): string;
-    
+
     /**
      * Check the component values validity
      *
