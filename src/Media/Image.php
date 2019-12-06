@@ -170,7 +170,7 @@ class Image extends Media
      *
      * @return array
      */
-    protected function getP(): array
+    protected function getValues(): array
     {
         $linkUrl = $this->linkUrl;
         $alt = $this->alt;
