@@ -4,11 +4,13 @@ namespace Okipa\LaravelBootstrapComponents\Form;
 
 use Closure;
 use Exception;
-use InvalidArgumentException;
+use Okipa\LaravelBootstrapComponents\Form\Traits\InputMultilingualValidityChecks;
 use Throwable;
 
 abstract class InputMultilingual extends Input
 {
+    use InputMultilingualValidityChecks;
+
     /**
      * The multilingual component dynamic multilingual resolver .
      *
@@ -42,23 +44,11 @@ abstract class InputMultilingual extends Input
      * @return $this
      * @throws Exception
      */
-    public function value($value): parent
+    public function value($value): self
     {
-        if ($this->multilingualMode() && ! $value instanceof Closure) {
-            throw new InvalidArgumentException('A multilingual component value has to be set from this
-            closure result : « value(function($locale){}) ».');
-        }
         $this->value = $value;
 
         return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    protected function multilingualMode(): bool
-    {
-        return count($this->locales) > 1;
     }
 
     /**
@@ -93,6 +83,14 @@ abstract class InputMultilingual extends Input
     }
 
     /**
+     * @return bool
+     */
+    protected function multilingualMode(): bool
+    {
+        return count($this->locales) > 1;
+    }
+
+    /**
      * @param array $extraData
      *
      * @return string
@@ -102,18 +100,18 @@ abstract class InputMultilingual extends Input
     {
         $this->checkValuesValidity();
         $view = $this->getView();
-        if ($view) {
-            $html = '';
-            foreach ($this->locales as $locale) {
-                $componentHtml = view(
+        $html = '';
+        foreach ($this->locales as $locale) {
+            $componentHtml = $view
+                ? view(
                     'bootstrap-components::' . $view,
                     array_merge($this->getLocalizedValues($locale), $extraData)
-                )->render();
-                $html .= is_string($componentHtml) ? trim($componentHtml) : '';
-            }
-
-            return $html;
+                )->render()
+                : '';
+            $html .= is_string($componentHtml) ? trim($componentHtml) : '';
         }
+
+        return $html;
     }
 
     /**
@@ -175,9 +173,9 @@ abstract class InputMultilingual extends Input
     /**
      * @param string $locale
      *
-     * @return string
+     * @return string|null
      */
-    protected function getLocalizedLabel(string $locale): string
+    protected function getLocalizedLabel(string $locale): ?string
     {
         $label = parent::getLabel();
 
@@ -199,9 +197,9 @@ abstract class InputMultilingual extends Input
     /**
      * @param string $locale
      *
-     * @return string
+     * @return string|null
      */
-    protected function getLocalizedPlaceholder(string $locale): string
+    protected function getLocalizedPlaceholder(string $locale): ?string
     {
         $placeholder = parent::getPlaceholder();
 
@@ -229,8 +227,6 @@ abstract class InputMultilingual extends Input
      */
     protected function getLocalizedComponentId(string $locale): string
     {
-        $componentId = parent::getComponentId();
-
-        return $componentId ? $componentId . '-' . $locale : null;
+        return parent::getComponentId() . '-' . $locale;
     }
 }

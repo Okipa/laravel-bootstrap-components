@@ -4,7 +4,8 @@
 
 2019-12-04
 
-- Added capacity to generate localized `bsText` and `bsTextarea` components.
+- Added capacity to generate multilingual `bsText` and `bsTextarea` components.
+- :warning: Replaced snake case `show_remove_checkbox` config key to `showRemoveCheckbox`.
 
 ## [1.0.10](https://github.com/Okipa/laravel-bootstrap-components/compare/1.0.9...1.0.10)
 

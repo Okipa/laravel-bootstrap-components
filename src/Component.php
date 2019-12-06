@@ -169,11 +169,11 @@ abstract class Component implements Htmlable
     {
         $this->checkValuesValidity();
         $view = $this->getView();
-        if ($view) {
-            $html = view('bootstrap-components::' . $view, array_merge($this->getValues(), $extraData))->render();
+        $html = $view
+            ? view('bootstrap-components::' . $view, array_merge($this->getValues(), $extraData))->render()
+            : '';
 
-            return is_string($html) ? trim($html) : '';
-        }
+        return is_string($html) ? trim($html) : '';
     }
 
     /**
