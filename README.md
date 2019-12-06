@@ -163,13 +163,28 @@ php artisan vendor:publish --tag=bootstrap-components:views
 | label(?string $label): self  | No | Set the component input label. Default value : `__('validation.attributes.[name]')`. |
 | labelPositionedAbove(bool $positionedAbove = true): self  | No | Set the label above-positioning status. If not positioned above, the label will be positioned under the input. Default value : `config('bootstrap-components.[componentConfigKey].labelPositionedAbove')`. Value will set as `true` if the config value is not found. |
 | placeholder(?string $placeholder): self  | No | Set the component input placeholder. Default value : `$label`. |
-| value($value): self  | No | Set the component input value. Default value : `$model->{$name}`. |
+| value($value): self  | No | Set the component input value. |
 | legend(?string $legend): self  | No | Set the component legend. Default value : `config('bootstrap-components.[componentConfigKey].legend')`. |
 | displaySuccess(?bool $displaySuccess = true): self  | No | Set the component input validation success display status. Default value : `config('bootstrap-components.[componentConfigKey].formValidation.displaySuccess')`. |
 | displayFailure(?bool $displayFailure = true): self  | No | Set the component input validation failure display status.. Default value : `config('bootstrap-components.[componentConfigKey].formValidation.displayFailure')`. |
 
 #### Multilingual
 
+**Methods available / overridden for multilingual form components**
+
+| Signature | Required | Description |
+|---|---|---|
+| locales(array $locales): self  | No | Set the component input language locales to handle. |
+| value(Closure $value): self  | No | Set the component input value. The value has to be set from this closure result : « ->value(function($locale){}) ». |
+
+**:warning: Notes :**
+* You can use your own `MultilingualResolver` by replacing the path defined in the `config('bootstrap-components.form.multilingual.resolver')`, allowing you to define :
+  * The default locales to handle.
+  * The component `name` attribute format.
+  * The component html identifier, used to generate the container class, the component class and the `aria-describedby` attribute values.
+  
+* The use of the `->locales()` method will produce a component for each locale keys you declared. For example, if you declare the `fr` and `en` locale keys for a `title` text component, you will get two `Title (FR)` and `Title (EN)` generated text components.
+* The localization treatment will only occur if you have more than one locales declared : there is not point to generate localized components with only one declared locales.
 
 ##### bsText()
 
@@ -194,17 +209,6 @@ bsText()->name('name') // set the input name
     ->displayFailure(false) // // override the default form validation display failure config value
 ```
 
-**:bulb: Additional methods :**
-| Signature | Required | Description |
-|---|---|---|
-| locales(array $locales): self  | No | Set the component input language locales to handle. |
-| value(Closure $value): self  | No | Set the component input value. The value has to be set from this closure result : ->value(function($locale){}) » Default value : `$model->{$name}[{locale}]`. |
-
-**:warning: Notes :**
-* This component is a multilingual component :
-  * The use of the `->locales()` method will produce a component for each locale keys you declared. For example, if you declare the `fr` and `en` locale keys for a `title` text component, you will get two `Title (FR)` and `Title (EN)` generated text components.
-  * The localization treatment will only occur if you have more than one locales declared : there is not point to generate localized components with only one declared locales.
-
 ##### bsTextarea()
 
 ```php
@@ -227,17 +231,6 @@ bsTextarea()->name('message') // set the input name
     ->displaySuccess(false) // // override the default form validation display success config value
     ->displayFailure(false) // // override the default form validation display failure config value
 ```
-
-**:bulb: Additional / overridden methods :**
-| Signature | Required | Description |
-|---|---|---|
-| locales(array $locales): self  | No | Set the component input language locales to handle. |
-| value(Closure $value): self  | No | Set the component input value. The value has to be set from this closure result : ->value(function($locale){}) » Default value : `$model->{$name}[{locale}]`. |
-
-**:warning: Notes :**
-* This component is a multilingual component :
-  * The use of the `->locales()` method will produce a component for each locale keys you declared. For example, if you declare the `fr` and `en` locale keys for a `message` textarea component, you will get two `Message (FR)` and `Message (EN)` generated textarea components.
-  * The localization treatment will only occur if you have more than one locales declared : there is not point to generate localized components with only one declared locales.
 
 #### Standard
 
