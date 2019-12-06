@@ -178,7 +178,7 @@ abstract class Component implements Htmlable
         $this->checkValuesValidity();
         $view = $this->getView();
         $html = $view
-            ? view('bootstrap-components::' . $view, array_merge($this->getValues(), $extraData))->render()
+            ? (string) view('bootstrap-components::' . $view, array_merge($this->getValues(), $extraData))->render()
             : '';
 
         return trim($html);

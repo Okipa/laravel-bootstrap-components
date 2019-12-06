@@ -87,7 +87,7 @@ abstract class InputMultilingual extends Input
         $html = '';
         foreach ($this->locales as $locale) {
             $componentHtml = $view
-                ? view(
+                ? (string) view(
                     'bootstrap-components::' . $view,
                     array_merge($this->getLocalizedValues($locale), $extraData)
                 )->render()
