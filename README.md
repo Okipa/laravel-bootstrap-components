@@ -179,10 +179,10 @@ php artisan vendor:publish --tag=bootstrap-components:views
 
 **:warning: Notes :**
 * You can use your own `MultilingualResolver` by replacing the path defined in the `config('bootstrap-components.form.multilingual.resolver')`, allowing you to define :
-  * The default locales to handle.
-  * The component `name` attribute format.
-  * The component html identifier, used to generate the container class, the component class and the `aria-describedby` attribute values.
-  * The component error message key to generate in order to properly display input errors. 
+  * The default locales to handle (by default `[]`).
+  * The component localized `name` attribute format (by default `<name>[<locale>]`.
+  * The component error message extraction, in order to correctly display the localized attribute name (by default, transform `Dummy __('validation.attributes.name.en) error message` into `Dummy __('validation.attributes.name) (EN) error message.`.
+  * The component html identifier, used to generate the container class, the component class and the `aria-describedby` attribute values (by default `<type>-<name>-<locale>`.
   
 * The use of the `->locales()` method will produce a component for each locale keys you declared. For example, if you declare the `fr` and `en` locale keys for a `title` text component, you will get two `Title (FR)` and `Title (EN)` generated text components.
 * The localization treatment will only occur if you have more than one locales declared : there is not point to generate localized components with only one declared locales.
