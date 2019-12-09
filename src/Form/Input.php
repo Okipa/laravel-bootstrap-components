@@ -21,7 +21,7 @@ abstract class Input extends Component
     /**
      * The component associated model.
      *
-     * @property Model $model
+     * @property Model|null $model
      */
     protected $model;
 
@@ -274,7 +274,7 @@ abstract class Input extends Component
      */
     protected function getParameters(): array
     {
-        $model = $this->model;
+        $model = $this->getModel();
         $type = $this->getType();
         $name = $this->getName();
         $prepend = $this->getPrepend();
@@ -305,6 +305,14 @@ abstract class Input extends Component
             'validationClass',
             'errorMessage'
         );
+    }
+
+    /**
+     * @return Model|null
+     */
+    protected function getModel(): ?Model
+    {
+        return $this->model;
     }
 
     /**

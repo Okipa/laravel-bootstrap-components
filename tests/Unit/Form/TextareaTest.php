@@ -630,11 +630,9 @@ class TextareaTest extends BootstrapComponentsTestCase
     public function testLocalizedModelValue()
     {
         $locales = ['fr', 'en'];
-        $user = $this->createUniqueMultilingualUser();
+        $user = $this->createUniqueUser();
         $html = bsTextarea()->model($user)->name('name')->locales($locales)->toHtml();
-        foreach ($locales as $locale) {
-            $this->assertStringContainsString('>' . $user->name[$locale] . '</textarea>', $html);
-        }
+        $this->assertEquals(2, substr_count($html, '>' . $user->name . '</textarea>'));
     }
 
     public function testLocalizedModelValueFromCustomMultilingualResolver()
@@ -651,41 +649,82 @@ class TextareaTest extends BootstrapComponentsTestCase
     public function testSetLocalizedWrongValue()
     {
         $locales = ['fr', 'en'];
-        $customValue = 'test-custom-value';
+        $customValues = [];
+        foreach ($locales as $locale) {
+            $customValues['name_' . $locale] = 'test-custom-value-' . $locale;
+        }
         $this->expectException(InvalidArgumentException::class);
-        bsTextarea()->name('name')->locales($locales)->value($customValue)->toHtml();
+        bsTextarea()->name('name')->locales($locales)->value($customValues)->toHtml();
     }
 
     public function testSetLocalizedValue()
     {
         $locales = ['fr', 'en'];
-        $customValue = 'test-custom-value';
-        $html = bsTextarea()->name('name')->locales($locales)->value(function ($locale) use ($customValue) {
-            return $customValue . '-' . $locale;
+        $customValues = [];
+        foreach ($locales as $locale) {
+            $customValues[$locale] = 'test-custom-value-' . $locale;
+        }
+        $html = bsTextarea()->name('name')->locales($locales)->value(function ($locale) use ($customValues) {
+            return $customValues[$locale];
         })->toHtml();
         foreach ($locales as $locale) {
-            $this->assertStringContainsString('>' . $customValue . '-' . $locale . '</textarea>', $html);
+            $this->assertStringContainsString('>' . $customValues[$locale] . '</textarea>', $html);
         }
     }
 
     public function testLocalizedOldValue()
     {
         $locales = ['fr', 'en'];
-        $oldValue = ['fr' => 'test-old-value-fr', 'en' => 'test-old-value-en'];
-        $customValue = 'test-custom-value';
+        $oldValues = [];
+        $customValues = [];
+        foreach ($locales as $locale) {
+            $oldValues[$locale] = 'test-old-value-' . $locale;
+            $customValues[$locale] = 'test-custom-value-' . $locale;
+        }
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                $request = request()->merge(['name' => $oldValue]);
+            'middleware' => 'web', 'uses' => function () use ($oldValues) {
+                $request = request()->merge(['name' => $oldValues]);
                 $request->flash();
             },
         ]);
         $this->call('GET', 'test');
-        $html = bsTextarea()->name('name')->locales($locales)->value(function ($locale) use ($customValue) {
-            return $customValue . '-' . $locale;
+        $html = bsTextarea()->name('name')->locales($locales)->value(function ($locale) use ($customValues) {
+            return $customValues[$locale];
         })->toHtml();
         foreach ($locales as $locale) {
-            $this->assertStringContainsString('>' . $oldValue[$locale] . '</textarea>', $html);
-            $this->assertStringNotContainsString('>' . $customValue . '</textarea>', $html);
+            $this->assertStringContainsString('>' . $oldValues[$locale] . '</textarea>', $html);
+            $this->assertStringNotContainsString('>' . $customValues[$locale] . '</textarea>', $html);
+        }
+    }
+
+    public function testLocalizedOldValueFromCustomMultilingualResolver()
+    {
+        config()->set('bootstrap-components.form.multilingual.resolver', MultilingualResolver::class);
+        $resolverLocales = (new MultilingualResolver)->getDefaultLocales();
+        $oldValues = [];
+        foreach ($resolverLocales as $resolverLocale) {
+            $oldValues['name_' . $resolverLocale] = 'test-old-value-' . $resolverLocale;
+        }
+        $locales = ['fr', 'en'];
+        $customValues = [];
+        foreach ($locales as $locale) {
+            $customValues[$locale] = 'test-custom-value-' . $locale;
+        }
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => function () use ($oldValues) {
+                $request = request()->merge($oldValues);
+                $request->flash();
+            },
+        ]);
+        $this->call('GET', 'test');
+        $html = bsTextarea()->name('name')->value(function ($locale) use ($customValues) {
+            return $customValues[$locale];
+        })->toHtml();
+        foreach ($resolverLocales as $resolverLocale) {
+            $this->assertStringContainsString('>' . $oldValues['name_' . $resolverLocale] . '</textarea>', $html);
+        }
+        foreach ($locales as $locale) {
+            $this->assertStringNotContainsString('>' . $customValues[$locale] . '</textarea>', $html);
         }
     }
 

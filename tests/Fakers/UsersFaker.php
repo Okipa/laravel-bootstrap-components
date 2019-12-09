@@ -50,33 +50,4 @@ trait UsersFaker
             'active' => true,
         ];
     }
-
-    /**
-     * @return UserMultilingual
-     */
-    public function createUniqueMultilingualUser(): UserMultilingual
-    {
-        $user = (new UserMultilingual)->create($this->generateFakeMultilingualUserData());
-
-        return (new UserMultilingual)->find($user->id);
-    }
-
-    /**
-     * @return array
-     */
-    public function generateFakeMultilingualUserData(): array
-    {
-        $this->clearPassword = $this->faker->word;
-
-        return [
-            'name' => [
-                'fr' => $this->faker->word,
-                'en' => $this->faker->word,
-            ],
-            'email' => $this->faker->email,
-            'password' => Hash::make($this->clearPassword),
-            'credit' => 50,
-            'active' => true,
-        ];
-    }
 }

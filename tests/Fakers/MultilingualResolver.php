@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Test\Fakers;
 
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
 
 class MultilingualResolver extends \Okipa\LaravelBootstrapComponents\Form\MultilingualResolver
 {
@@ -14,17 +14,7 @@ class MultilingualResolver extends \Okipa\LaravelBootstrapComponents\Form\Multil
     protected $locales = ['en', 'de'];
 
     /**
-     * Get the default language locales to handle for multilingual components.
-     *
-     * @return array
-     */
-    public function getDefaultLocales(): array
-    {
-        return $this->locales;
-    }
-
-    /**
-     * Resolve the multilingual component name.
+     * Resolve the multilingual component localized name.
      *
      * @param string $name
      * @param string $locale
@@ -37,38 +27,41 @@ class MultilingualResolver extends \Okipa\LaravelBootstrapComponents\Form\Multil
     }
 
     /**
-     * Resolve the multilingual component html identifier.
+     * Resolve the multilingual component localized old value.
      *
-     * @param string $type
      * @param string $name
-     *
-     * @param string $locale
-     * @return string
+     * @param $locale
+     * @return string|null
      */
-    public function resolveHtmlIdentifier(string $type, string $name, string $locale): string
+    public function resolveLocalizedOldValue(string $name, $locale): ?string
     {
-        return $type . '-' . $name . '-' . $locale;
+        return old($name . '_' . $locale);
     }
 
     /**
-     * Resolve the multilingual component error message.
+     * Resolve the multilingual component localized value.
+     *
+     * @param string $name
+     * @param string $locale
+     * @param Model $model |null
+     *
+     * @return string|null
+     */
+    public function resolveLocalizedValue(string $name, string $locale, ?Model $model): ?string
+    {
+        return optional($model)->{$name . '_' . $locale};
+    }
+
+    /**
+     * Get the multilingual component localized error message bag key.
      *
      * @param string $name
      * @param string $locale
      *
-     * @return string|null
+     * @return string
      */
-    public function resolveErrorMessage(string $name, string $locale): ?string
+    protected function getErrorMessageBagKey(string $name, string $locale): string
     {
-        $errorMessageBagKey = $name . '_' . $locale;
-        $errorMessage = optional(session()->get('errors'))->first($errorMessageBagKey);
-
-        return $errorMessage
-            ? str_replace(
-                $errorMessageBagKey,
-                __('validation.attributes.' . $name) . ' (' . strtoupper($locale) . ')',
-                $errorMessage
-            )
-            : null;
+        return $name . '_' . $locale;
     }
 }

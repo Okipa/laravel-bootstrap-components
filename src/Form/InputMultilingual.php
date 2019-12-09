@@ -180,9 +180,13 @@ abstract class InputMultilingual extends Input
      */
     protected function getLocalizedValue(string $locale)
     {
-        $value = parent::getValue();
+        $oldValue = $this->multilingualResolver->resolveLocalizedOldValue($this->getName(), $locale);
+        /** @var Closure|null $customValueClosure */
+        $customValueClosure = $this->multilingualMode() ? $this->value : null;
+        $modelValue = $this->multilingualResolver->resolveLocalizedValue($this->getName(), $locale, $this->getModel());
+        // dd($oldValue, $customValueClosure, $modelValue);
 
-        return $this->multilingualMode() && $value instanceof Closure ? $value($locale) : data_get($value, $locale);
+        return $oldValue ?? ($customValueClosure ? $customValueClosure($locale) : $modelValue);
     }
 
     /**

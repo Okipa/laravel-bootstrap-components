@@ -617,11 +617,9 @@ class TextTest extends BootstrapComponentsTestCase
     public function testLocalizedModelValue()
     {
         $locales = ['fr', 'en'];
-        $user = $this->createUniqueMultilingualUser();
+        $user = $this->createUniqueUser();
         $html = bsText()->model($user)->name('name')->locales($locales)->toHtml();
-        foreach ($locales as $locale) {
-            $this->assertStringContainsString(' value="' . $user->name[$locale] . '"', $html);
-        }
+        $this->assertEquals(2, substr_count($html, 'value="' . $user->name . '"'));
     }
 
     public function testLocalizedModelValueFromCustomMultilingualResolver()
@@ -631,7 +629,7 @@ class TextTest extends BootstrapComponentsTestCase
         $resolverLocales = (new MultilingualResolver)->getDefaultLocales();
         $html = bsText()->model($user)->name('name')->toHtml();
         foreach ($resolverLocales as $locale) {
-            $this->assertStringContainsString(' value="' . $user->{'name_' . $locale} . '"', $html);
+            $this->assertStringContainsString('value="' . $user->{'name_' . $locale} . '"', $html);
         }
     }
 
@@ -646,33 +644,71 @@ class TextTest extends BootstrapComponentsTestCase
     public function testSetLocalizedValue()
     {
         $locales = ['fr', 'en'];
-        $customValue = 'test-custom-value';
-        $html = bsText()->name('name')->locales($locales)->value(function ($locale) use ($customValue) {
-            return $customValue . '-' . $locale;
+        $customValues = [];
+        foreach ($locales as $locale) {
+            $customValues[$locale] = 'test-custom-value-' . $locale;
+        }
+        $html = bsText()->name('name')->locales($locales)->value(function ($locale) use ($customValues) {
+            return $customValues[$locale];
         })->toHtml();
         foreach ($locales as $locale) {
-            $this->assertStringContainsString(' value="' . $customValue . '-' . $locale . '"', $html);
+            $this->assertStringContainsString(' value="' . $customValues[$locale] . '"', $html);
         }
     }
 
     public function testLocalizedOldValue()
     {
         $locales = ['fr', 'en'];
-        $oldValue = ['fr' => 'test-old-value-fr', 'en' => 'test-old-value-en'];
-        $customValue = 'test-custom-value';
+        $oldValues = [];
+        $customValues = [];
+        foreach ($locales as $locale) {
+            $oldValues[$locale] = 'test-old-value-' . $locale;
+            $customValues[$locale] = 'test-custom-value-' . $locale;
+        }
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                $request = request()->merge(['name' => $oldValue]);
+            'middleware' => 'web', 'uses' => function () use ($oldValues) {
+                $request = request()->merge(['name' => $oldValues]);
                 $request->flash();
             },
         ]);
         $this->call('GET', 'test');
-        $html = bsText()->name('name')->locales($locales)->value(function ($locale) use ($customValue) {
-            return $customValue . '-' . $locale;
+        $html = bsText()->name('name')->locales($locales)->value(function ($locale) use ($customValues) {
+            return $customValues . '-' . $locale;
         })->toHtml();
         foreach ($locales as $locale) {
-            $this->assertStringContainsString(' value="' . $oldValue[$locale] . '"', $html);
-            $this->assertStringNotContainsString(' value="' . $customValue . '-' . $locale . '"', $html);
+            $this->assertStringContainsString(' value="' . $oldValues[$locale] . '"', $html);
+            $this->assertStringNotContainsString(' value="' . $customValues[$locale] . '"', $html);
+        }
+    }
+
+    public function testLocalizedOldValueFromCustomMultilingualResolver()
+    {
+        config()->set('bootstrap-components.form.multilingual.resolver', MultilingualResolver::class);
+        $resolverLocales = (new MultilingualResolver)->getDefaultLocales();
+        $oldValues = [];
+        foreach ($resolverLocales as $resolverLocale) {
+            $oldValues['name_' . $resolverLocale] = 'test-old-value-' . $resolverLocale;
+        }
+        $locales = ['fr', 'en'];
+        $customValues = [];
+        foreach ($locales as $locale) {
+            $customValues[$locale] = 'test-custom-value-' . $locale;
+        }
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => function () use ($oldValues) {
+                $request = request()->merge($oldValues);
+                $request->flash();
+            },
+        ]);
+        $this->call('GET', 'test');
+        $html = bsText()->name('name')->value(function ($locale) use ($customValues) {
+            return $customValues[$locale];
+        })->toHtml();
+        foreach ($resolverLocales as $locale) {
+            $this->assertStringContainsString('value="' . $oldValues['name_' . $locale] . '"', $html);
+        }
+        foreach ($locales as $locale) {
+            $this->assertStringNotContainsString('value="' . $customValues[$locale] . '"', $html);
         }
     }
 

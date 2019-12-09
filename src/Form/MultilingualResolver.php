@@ -2,6 +2,8 @@
 
 namespace Okipa\LaravelBootstrapComponents\Form;
 
+use Illuminate\Database\Eloquent\Model;
+
 class MultilingualResolver
 {
     /*
@@ -22,7 +24,7 @@ class MultilingualResolver
     }
 
     /**
-     * Resolve the multilingual component name.
+     * Resolve the multilingual component localized name.
      *
      * @param string $name
      * @param string $locale
@@ -35,7 +37,33 @@ class MultilingualResolver
     }
 
     /**
-     * Resolve the multilingual component html identifier.
+     * Resolve the multilingual component localized old value.
+     *
+     * @param string $name
+     * @param $locale
+     * @return string|null
+     */
+    public function resolveLocalizedOldValue(string $name, $locale): ?string
+    {
+        return data_get(old($name), $locale);
+    }
+
+    /**
+     * Resolve the multilingual component localized value.
+     *
+     * @param string $name
+     * @param string $locale
+     * @param Model|null $model
+     *
+     * @return string|null
+     */
+    public function resolveLocalizedValue(string $name, string $locale, ?Model $model): ?string
+    {
+        return optional($model)->{$name};
+    }
+
+    /**
+     * Resolve the multilingual component localized html identifier.
      *
      * @param string $type
      * @param string $name
@@ -49,7 +77,20 @@ class MultilingualResolver
     }
 
     /**
-     * Resolve the multilingual component error message.
+     * Get the multilingual component localized error message bag key.
+     *
+     * @param string $name
+     * @param string $locale
+     *
+     * @return string
+     */
+    protected function getErrorMessageBagKey(string $name, string $locale): string
+    {
+        return $name . '.' . $locale;
+    }
+
+    /**
+     * Resolve the multilingual component localized error message.
      *
      * @param string $name
      * @param string $locale
@@ -58,7 +99,7 @@ class MultilingualResolver
      */
     public function resolveErrorMessage(string $name, string $locale): ?string
     {
-        $errorMessageBagKey = $name . '.' . $locale;
+        $errorMessageBagKey = $this->getErrorMessageBagKey($name, $locale);
         $errorMessage = optional(session()->get('errors'))->first($errorMessageBagKey);
 
         return $errorMessage

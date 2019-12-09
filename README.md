@@ -175,14 +175,16 @@ php artisan vendor:publish --tag=bootstrap-components:views
 | Signature | Required | Description |
 |---|---|---|
 | locales(array $locales): self  | No | Set the component input language locales to handle. |
-| value(Closure $value): self  | No | Set the component input value. The value has to be set from this closure result : « ->value(function($locale){}) ». |
+| value(Closure $value): self  | No | Set the component input value. The value has to be set from this closure result : `->value(function($locale){})`. |
 
 **:warning: Notes :**
-* You can use your own `MultilingualResolver` by replacing the path defined in the `config('bootstrap-components.form.multilingual.resolver')`, allowing you to define :
+* You can use your own `MultilingualResolver` by replacing the path defined in the `config('bootstrap-components.form.multilingual.resolver')`, allowing you to customize your components localization behaviour :
   * The default locales to handle (by default `[]`).
-  * The component localized `name` attribute format (by default `<name>[<locale>]`.
-  * The component error message extraction, in order to correctly display the localized attribute name (by default, transform `Dummy __('validation.attributes.name.en) error message` into `Dummy __('validation.attributes.name) (EN) error message.`.
-  * The component html identifier, used to generate the container class, the component class and the `aria-describedby` attribute values (by default `<type>-<name>-<locale>`.
+  * The component localized `name` attribute format (default : `<name>[<locale>]`.
+  * The component localized old value in case of errors (default : `old(<name>)[<locale>]`).
+  * The component localized model value (default : `$model->{<name>}`).
+  * The component error message extraction, in order to correctly display the localized attribute name (default : transform `Dummy __('validation.attributes.name.en) error message` into `Dummy __('validation.attributes.name) (EN) error message.`.
+  * The component html identifier, used to generate the container class, the component class and the `aria-describedby` attribute values (default : `<type>-<name>-<locale>`.
   
 * The use of the `->locales()` method will produce a component for each locale keys you declared. For example, if you declare the `fr` and `en` locale keys for a `title` text component, you will get two `Title (FR)` and `Title (EN)` generated text components.
 * The localization treatment will only occur if you have more than one locales declared : there is not point to generate localized components with only one declared locales.
