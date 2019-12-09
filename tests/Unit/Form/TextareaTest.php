@@ -747,33 +747,36 @@ class TextareaTest extends BootstrapComponentsTestCase
         }
     }
 
-    public function testLocalizedErrorMessageDisplay()
+    public function testLocalizedErrorMessage()
     {
         $locales = ['fr', 'en'];
         $errors = app(MessageBag::class);
         foreach ($locales as $locale) {
-            $errors->add('name.' . $locale, 'Dummy ' . $locale . ' error message.');
+            $errors->add('name.' . $locale, 'Dummy name.' . $locale . ' error message.');
         }
         session()->put('errors', $errors);
         $html = bsTextarea()->name('name')->locales($locales)->displayFailure()->render(compact('errors'));
-
         foreach ($locales as $locale) {
-            $this->assertStringContainsString($errors->first('name.' . $locale), $html);
+            $errorMessage = 'Dummy ' . _('validation.attributes.name') . ' (' . strtoupper($locale)
+                . ') error message.';
+            $this->assertStringContainsString($errorMessage, $html);
         }
     }
 
-    public function testLocalizedErrorMessageDisplayFromCustomMultilingualResolver()
+    public function testLocalizedErrorMessageFromCustomMultilingualResolver()
     {
         config()->set('bootstrap-components.form.multilingual.resolver', MultilingualResolver::class);
         $resolverLocales = (new MultilingualResolver)->getDefaultLocales();
         $errors = app(MessageBag::class);
         foreach ($resolverLocales as $locale) {
-            $errors->add('name_' . $locale, 'Dummy ' . $locale . ' error message.');
+            $errors->add('name_' . $locale, 'Dummy name_' . $locale . ' error message.');
         }
         session()->put('errors', $errors);
         $html = bsTextarea()->name('name')->displayFailure()->render(compact('errors'));
         foreach ($resolverLocales as $locale) {
-            $this->assertStringContainsString($errors->first('name_' . $locale), $html);
+            $errorMessage = 'Dummy ' . _('validation.attributes.name') . ' (' . strtoupper($locale)
+                . ') error message.';
+            $this->assertStringContainsString($errorMessage, $html);
         }
     }
 }
