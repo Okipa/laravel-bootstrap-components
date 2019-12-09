@@ -1,4 +1,4 @@
-@if(isset($errors))
+@isset($errors)
     @if($errorMessage && $displayFailure)
         <div class="invalid-feedback d-block">
             {!! $errorMessage !!}
@@ -8,4 +8,4 @@
             @lang('bootstrap-components::bootstrap-components.notification.validation.success')
         </div>
     @endif
-@endif
+@endisset
