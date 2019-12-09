@@ -42,23 +42,33 @@ class MultilingualResolver extends \Okipa\LaravelBootstrapComponents\Form\Multil
      * @param string $type
      * @param string $name
      *
+     * @param string $locale
      * @return string
      */
-    public function resolveHtmlIdentifier(string $type, string $name): string
+    public function resolveHtmlIdentifier(string $type, string $name, string $locale): string
     {
-        return $type . '-' . Str::slug($name);
+        return $type . '-' . $name . '-' . $locale;
     }
 
     /**
-     * Resolve the multilingual component error message bag name.
+     * Resolve the multilingual component error message.
      *
      * @param string $name
      * @param string $locale
      *
-     * @return string
+     * @return string|null
      */
-    public function resolveErrorMessageBagKey(string $name, string $locale): string
+    public function resolveErrorMessage(string $name, string $locale): ?string
     {
-        return $name . '_' . $locale;
+        $errorMessageBagKey = $name . '_' . $locale;
+        $errorMessage = optional(session()->get('errors'))->first($errorMessageBagKey);
+
+        return $errorMessage
+            ? str_replace(
+                $errorMessageBagKey,
+                __('validation.attributes.' . $name) . ' (' . strtoupper($locale) . ')',
+                $errorMessage
+            )
+            : null;
     }
 }

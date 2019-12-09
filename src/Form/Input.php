@@ -286,8 +286,8 @@ abstract class Input extends Component
         $placeholder = $this->getPlaceholder();
         $displaySuccess = $this->getDisplaySuccess();
         $displayFailure = $this->getDisplayFailure();
-        $validationClass = $this->getValidationClass($name, $displaySuccess, $displayFailure);
-        $errorMessageBagKey = $name;
+        $validationClass = $this->getValidationClass();
+        $errorMessage = $this->getErrorMessage();
 
         return compact(
             'model',
@@ -303,7 +303,7 @@ abstract class Input extends Component
             'displaySuccess',
             'displayFailure',
             'validationClass',
-            'errorMessageBagKey'
+            'errorMessage'
         );
     }
 
@@ -403,18 +403,14 @@ abstract class Input extends Component
     }
 
     /**
-     * @param string $name
-     * @param bool $displaySuccess
-     * @param bool $displayFailure
-     *
      * @return string|null
      */
-    protected function getValidationClass(string $name, bool $displaySuccess, bool $displayFailure): ?string
+    protected function getValidationClass(): ?string
     {
         if (session()->has('errors')) {
-            return session()->get('errors')->has($name)
-                ? ($displayFailure ? 'is-invalid' : null)
-                : ($displaySuccess ? 'is-valid' : null);
+            return session()->get('errors')->has($this->getName())
+                ? ($this->getDisplayFailure() ? 'is-invalid' : null)
+                : ($this->getDisplaySuccess() ? 'is-valid' : null);
         }
 
         return null;
@@ -434,5 +430,13 @@ abstract class Input extends Component
     protected function getComponentId(): string
     {
         return parent::getComponentId() ?? $this->getType() . '-' . Str::slug($this->getName());
+    }
+
+    /**
+     * @return string|null
+     */
+    protected function getErrorMessage(): ?string
+    {
+        return optional(session()->get('errors'))->first($this->getName());
     }
 }
