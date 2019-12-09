@@ -1,4 +1,4 @@
-@if(isset($errors) && $errors instanceof \Illuminate\Support\MessageBag)
+@if(isset($errors))
     @if($errorMessage && $displayFailure)
         <div class="invalid-feedback d-block">
             {!! $errorMessage !!}
