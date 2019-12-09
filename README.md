@@ -185,7 +185,6 @@ php artisan vendor:publish --tag=bootstrap-components:views
   * The component localized model value (default : `$model->{<name>}`).
   * The component error message extraction, in order to correctly display the localized attribute name (default : transform `Dummy __('validation.attributes.name.en) error message` into `Dummy __('validation.attributes.name) (EN) error message.`.
   * The component html identifier, used to generate the container class, the component class and the `aria-describedby` attribute values (default : `<type>-<name>-<locale>`.
-  
 * The use of the `->locales()` method will produce a component for each locale keys you declared. For example, if you declare the `fr` and `en` locale keys for a `title` text component, you will get two `Title (FR)` and `Title (EN)` generated text components.
 * The localization treatment will only occur if you have more than one locales declared : there is not point to generate localized components with only one declared locales.
 
