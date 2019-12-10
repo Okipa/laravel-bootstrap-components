@@ -19,7 +19,7 @@ The components which have been created are use on a daily basis. You feel like t
 
 ## Usage
 
-Just call the component you need in your view and its HTML will be generated for you.
+Just call the components you need in your views and let this package take care of the HTML generation annoying part.
 
 ### Standard use case
 
