@@ -6,9 +6,11 @@
 
 - Added capacity to generate multilingual `bsText` and `bsTextarea` components.
 
-Breaking changes :
-- :warning: Replaced snake case `show_remove_checkbox` config key to `showRemoveCheckbox`.
-- Changed the way the error message is displayed for form components. 
+### :warning: Breaking changes :
+- Replaced snake case `show_remove_checkbox` config key to `showRemoveCheckbox`.
+- Changed the way the error message is displayed for form components : if you use components partials in your views, you should adapt your treatments.
+
+:point_right: [Check all changes](https://github.com/Okipa/laravel-bootstrap-components/compare/1.0.10...2.0.0)
 
 ## [1.0.10](https://github.com/Okipa/laravel-bootstrap-components/compare/1.0.9...1.0.10)
 

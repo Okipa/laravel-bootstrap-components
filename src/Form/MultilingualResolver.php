@@ -92,7 +92,7 @@ class MultilingualResolver
         return $errorMessage
             ? str_replace(
                 $errorMessageBagKey,
-                __('validation.attributes.' . $name) . ' (' . strtoupper($locale) . ')',
+                ((string) __('validation.attributes.' . $name)) . ' (' . strtoupper($locale) . ')',
                 $errorMessage
             )
             : null;
