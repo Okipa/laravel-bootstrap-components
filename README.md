@@ -184,7 +184,7 @@ php artisan vendor:publish --tag=bootstrap-components:views
   * The default locales to handle (by default `[]`).
   * The component localized `name` attribute format (default : `<name>[<locale>]`.
   * The component localized old value in case of errors (default : `old(<name>)[<locale>]`).
-  * The component localized model value (default : `$model->{<name>}`).
+  * The component localized model value (default : `$model->{<name>}[<locales>]`).
   * The component error message extraction, in order to correctly display the localized attribute name (default : transform `Dummy __('validation.attributes.name.en) error message` into `Dummy __('validation.attributes.name) (EN) error message.`.
   * The component html identifier, used to generate the container class, the component class and the `aria-describedby` attribute values (default : `<type>-<name>-<locale>`.
 

@@ -582,8 +582,8 @@ class TextareaTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.multilingual.resolver', MultilingualResolver::class);
         $resolverLocales = (new MultilingualResolver)->getDefaultLocales();
         $html = bsTextarea()->name('name')->toHtml();
-        foreach ($resolverLocales as $locale) {
-            $this->assertStringContainsString('class="textarea-name-' . $locale . '-container', $html);
+        foreach ($resolverLocales as $resolverLocale) {
+            $this->assertStringContainsString('class="textarea-name-' . $resolverLocale . '-container', $html);
         }
     }
 
@@ -622,17 +622,23 @@ class TextareaTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.multilingual.resolver', MultilingualResolver::class);
         $resolverLocales = (new MultilingualResolver)->getDefaultLocales();
         $html = bsTextarea()->name('name')->toHtml();
-        foreach ($resolverLocales as $locale) {
-            $this->assertStringContainsString('name="name_' . $locale . '"', $html);
+        foreach ($resolverLocales as $resolverLocale) {
+            $this->assertStringContainsString('name="name_' . $resolverLocale . '"', $html);
         }
     }
 
     public function testLocalizedModelValue()
     {
         $locales = ['fr', 'en'];
-        $user = $this->createUniqueUser();
+        $name = [];
+        foreach ($locales as $locale) {
+            $name[$locale] = $this->faker->word;
+        }
+        $user = new User(['name' => $name]);
         $html = bsTextarea()->model($user)->name('name')->locales($locales)->toHtml();
-        $this->assertEquals(2, substr_count($html, '>' . $user->name . '</textarea>'));
+        foreach ($locales as $locale) {
+            $this->assertStringContainsString('>' . $user->name[$locale] . '</textarea>', $html);
+        }
     }
 
     public function testLocalizedModelValueFromCustomMultilingualResolver()
@@ -641,8 +647,8 @@ class TextareaTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.multilingual.resolver', MultilingualResolver::class);
         $resolverLocales = (new MultilingualResolver)->getDefaultLocales();
         $html = bsTextarea()->model($user)->name('name')->toHtml();
-        foreach ($resolverLocales as $locale) {
-            $this->assertStringContainsString('>' . $user->{'name_' . $locale} . '</textarea>', $html);
+        foreach ($resolverLocales as $resolverLocale) {
+            $this->assertStringContainsString('>' . $user->{'name_' . $resolverLocale} . '</textarea>', $html);
         }
     }
 
@@ -807,13 +813,13 @@ class TextareaTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.multilingual.resolver', MultilingualResolver::class);
         $resolverLocales = (new MultilingualResolver)->getDefaultLocales();
         $errors = app(MessageBag::class);
-        foreach ($resolverLocales as $locale) {
-            $errors->add('name_' . $locale, 'Dummy name_' . $locale . ' error message.');
+        foreach ($resolverLocales as $resolverLocale) {
+            $errors->add('name_' . $resolverLocale, 'Dummy name_' . $resolverLocale . ' error message.');
         }
         session()->put('errors', $errors);
         $html = bsTextarea()->name('name')->displayFailure()->render(compact('errors'));
-        foreach ($resolverLocales as $locale) {
-            $errorMessage = 'Dummy ' . _('validation.attributes.name') . ' (' . strtoupper($locale)
+        foreach ($resolverLocales as $resolverLocale) {
+            $errorMessage = 'Dummy ' . _('validation.attributes.name') . ' (' . strtoupper($resolverLocale)
                 . ') error message.';
             $this->assertStringContainsString($errorMessage, $html);
         }

@@ -56,11 +56,10 @@ class MultilingualResolver
      * @param Model|null $model
      *
      * @return string|null
-     * @SuppressWarnings(PHPMD)
      */
     public function resolveLocalizedModelValue(string $name, string $locale, ?Model $model): ?string
     {
-        return optional($model)->{$name};
+        return data_get(optional($model)->{$name}, $locale);
     }
 
     /**

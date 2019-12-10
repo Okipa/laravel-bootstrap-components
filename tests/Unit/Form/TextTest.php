@@ -609,17 +609,23 @@ class TextTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.multilingual.resolver', MultilingualResolver::class);
         $resolverLocales = (new MultilingualResolver)->getDefaultLocales();
         $html = bsText()->name('name')->toHtml();
-        foreach ($resolverLocales as $locale) {
-            $this->assertStringContainsString('name="name_' . $locale . '"', $html);
+        foreach ($resolverLocales as $resolverLocale) {
+            $this->assertStringContainsString('name="name_' . $resolverLocale . '"', $html);
         }
     }
 
     public function testLocalizedModelValue()
     {
         $locales = ['fr', 'en'];
-        $user = $this->createUniqueUser();
+        $name = [];
+        foreach ($locales as $locale) {
+            $name[$locale] = $this->faker->word;
+        }
+        $user = new User(['name' => $name]);
         $html = bsText()->model($user)->name('name')->locales($locales)->toHtml();
-        $this->assertEquals(2, substr_count($html, 'value="' . $user->name . '"'));
+        foreach ($locales as $locale) {
+            $this->assertStringContainsString('value="' . $user->name[$locale] . '"', $html);
+        }
     }
 
     public function testLocalizedModelValueFromCustomMultilingualResolver()
@@ -628,8 +634,8 @@ class TextTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.multilingual.resolver', MultilingualResolver::class);
         $resolverLocales = (new MultilingualResolver)->getDefaultLocales();
         $html = bsText()->model($user)->name('name')->toHtml();
-        foreach ($resolverLocales as $locale) {
-            $this->assertStringContainsString('value="' . $user->{'name_' . $locale} . '"', $html);
+        foreach ($resolverLocales as $resolverLocale) {
+            $this->assertStringContainsString('value="' . $user->{'name_' . $resolverLocale} . '"', $html);
         }
     }
 
@@ -704,8 +710,8 @@ class TextTest extends BootstrapComponentsTestCase
         $html = bsText()->name('name')->value(function ($locale) use ($customValues) {
             return $customValues[$locale];
         })->toHtml();
-        foreach ($resolverLocales as $locale) {
-            $this->assertStringContainsString('value="' . $oldValues['name_' . $locale] . '"', $html);
+        foreach ($resolverLocales as $resolverLocale) {
+            $this->assertStringContainsString('value="' . $oldValues['name_' . $resolverLocale] . '"', $html);
         }
         foreach ($locales as $locale) {
             $this->assertStringNotContainsString('value="' . $customValues[$locale] . '"', $html);
@@ -791,13 +797,13 @@ class TextTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.multilingual.resolver', MultilingualResolver::class);
         $resolverLocales = (new MultilingualResolver)->getDefaultLocales();
         $errors = app(MessageBag::class);
-        foreach ($resolverLocales as $locale) {
-            $errors->add('name_' . $locale, 'Dummy name_' . $locale . ' error message.');
+        foreach ($resolverLocales as $resolverLocale) {
+            $errors->add('name_' . $resolverLocale, 'Dummy name_' . $resolverLocale . ' error message.');
         }
         session()->put('errors', $errors);
         $html = bsText()->name('name')->displayFailure()->render(compact('errors'));
-        foreach ($resolverLocales as $locale) {
-            $errorMessage = 'Dummy ' . _('validation.attributes.name') . ' (' . strtoupper($locale)
+        foreach ($resolverLocales as $resolverLocale) {
+            $errorMessage = 'Dummy ' . _('validation.attributes.name') . ' (' . strtoupper($resolverLocale)
                 . ') error message.';
             $this->assertStringContainsString($errorMessage, $html);
         }
