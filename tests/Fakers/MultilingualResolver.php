@@ -53,14 +53,14 @@ class MultilingualResolver extends \Okipa\LaravelBootstrapComponents\Form\Multil
     }
 
     /**
-     * Get the multilingual component localized error message bag key.
+     * Resolve the multilingual component localized error message bag key.
      *
      * @param string $name
      * @param string $locale
      *
      * @return string
      */
-    protected function getErrorMessageBagKey(string $name, string $locale): string
+    public function resolveErrorMessageBagKey(string $name, string $locale): string
     {
         return $name . '_' . $locale;
     }

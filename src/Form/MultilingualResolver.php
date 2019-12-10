@@ -86,7 +86,7 @@ class MultilingualResolver
      */
     public function resolveErrorMessage(string $name, string $locale): ?string
     {
-        $errorMessageBagKey = $this->getErrorMessageBagKey($name, $locale);
+        $errorMessageBagKey = $this->resolveErrorMessageBagKey($name, $locale);
         $errorMessage = optional(session()->get('errors'))->first($errorMessageBagKey);
 
         return $errorMessage
@@ -99,14 +99,14 @@ class MultilingualResolver
     }
 
     /**
-     * Get the multilingual component localized error message bag key.
+     * Resolve the multilingual component localized error message bag key.
      *
      * @param string $name
      * @param string $locale
      *
      * @return string
      */
-    protected function getErrorMessageBagKey(string $name, string $locale): string
+    public function resolveErrorMessageBagKey(string $name, string $locale): string
     {
         return $name . '.' . $locale;
     }

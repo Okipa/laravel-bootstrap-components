@@ -780,32 +780,31 @@ class TextTest extends BootstrapComponentsTestCase
     {
         $locales = ['fr', 'en'];
         $errors = app(MessageBag::class);
-        foreach ($locales as $locale) {
-            $errors->add('name.' . $locale, 'Dummy name.' . $locale . ' error message.');
-        }
+        $errors->add('name.fr', 'Dummy name.fr error message.');
         session()->put('errors', $errors);
         $html = bsText()->name('name')->locales($locales)->displayFailure()->render(compact('errors'));
-        foreach ($locales as $locale) {
-            $errorMessage = 'Dummy ' . _('validation.attributes.name') . ' (' . strtoupper($locale)
-                . ') error message.';
-            $this->assertStringContainsString($errorMessage, $html);
-        }
+        $this->assertStringContainsString('text-name-fr-component is-invalid', $html);
+        $this->assertStringContainsString('Dummy ' . _('validation.attributes.name') . ' (FR) error message.', $html);
+        $this->assertStringNotContainsString('text-name-en-component is-invalid', $html);
+        $this->assertStringNotContainsString(
+            'Dummy ' . _('validation.attributes.name') . ' (EN) error message.',
+            $html
+        );
     }
 
     public function testLocalizedErrorMessageFromCustomMultilingualResolver()
     {
         config()->set('bootstrap-components.form.multilingual.resolver', MultilingualResolver::class);
-        $resolverLocales = (new MultilingualResolver)->getDefaultLocales();
         $errors = app(MessageBag::class);
-        foreach ($resolverLocales as $resolverLocale) {
-            $errors->add('name_' . $resolverLocale, 'Dummy name_' . $resolverLocale . ' error message.');
-        }
+        $errors->add('name_en', 'Dummy name_en error message.');
         session()->put('errors', $errors);
         $html = bsText()->name('name')->displayFailure()->render(compact('errors'));
-        foreach ($resolverLocales as $resolverLocale) {
-            $errorMessage = 'Dummy ' . _('validation.attributes.name') . ' (' . strtoupper($resolverLocale)
-                . ') error message.';
-            $this->assertStringContainsString($errorMessage, $html);
-        }
+        $this->assertStringContainsString('text-name-en-component is-invalid', $html);
+        $this->assertStringContainsString('Dummy ' . _('validation.attributes.name') . ' (EN) error message.', $html);
+        $this->assertStringNotContainsString('text-name-de-component is-invalid', $html);
+        $this->assertStringNotContainsString(
+            'Dummy ' . _('validation.attributes.name') . ' (DE) error message.',
+            $html
+        );
     }
 }

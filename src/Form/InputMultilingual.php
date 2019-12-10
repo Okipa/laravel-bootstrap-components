@@ -127,6 +127,7 @@ abstract class InputMultilingual extends Input
         $placeholder = $this->getLocalizedPlaceholder($locale);
         $containerId = $this->getLocalizedContainerId($locale);
         $componentId = $this->getLocalizedComponentId($locale);
+        $validationClass = $this->getLocalizedValidationClass($locale);
         $errorMessage = $this->getLocalizedErrorMessage($locale);
 
         return array_merge($parentParams, compact(
@@ -137,6 +138,7 @@ abstract class InputMultilingual extends Input
             'placeholder',
             'containerId',
             'componentId',
+            'validationClass',
             'errorMessage'
         ));
     }
@@ -226,6 +228,21 @@ abstract class InputMultilingual extends Input
     protected function getLocalizedComponentId(string $locale): string
     {
         return parent::getComponentId() . '-' . $locale;
+    }
+
+    /**
+     * @return string|null
+     */
+    protected function getLocalizedValidationClass(string $locale): ?string
+    {
+        if (session()->has('errors')) {
+            $errorMessageBagKey = $this->multilingualResolver->resolveErrorMessageBagKey($this->getName(), $locale);
+            return session()->get('errors')->has($errorMessageBagKey)
+                ? ($this->getDisplayFailure() ? 'is-invalid' : null)
+                : ($this->getDisplaySuccess() ? 'is-valid' : null);
+        }
+
+        return null;
     }
 
     /**
