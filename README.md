@@ -23,10 +23,15 @@ Just call the components you need in your views and let this package take care o
 
 ### Standard use case
 
+Call this component in your view :
+
 ```blade
-{{-- call this component in your view --}}
 {{ bsText()->name('name') }}
-{{-- and get this HTML generated for you --}}
+```
+
+And get this HTML generated for you :
+
+```blade
 <div class="text-name-container form-group">
     <label for="text-name"
         Name
@@ -51,10 +56,15 @@ Just call the components you need in your views and let this package take care o
 
 ### Multilingual use case
 
+Call this component in your view :
+
 ```blade
-{{-- call this component in your view --}}
 {{ bsText()->name('title')->localized(['fr', 'en']) }}
-{{-- and get this HTML generated for you --}}
+```
+
+And get this HTML generated for you :
+
+```blade
 <div id="text-title-fr-container"
     class="text-title-fr-container form-group">
     <label for="text-title-fr">
