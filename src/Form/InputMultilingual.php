@@ -183,8 +183,11 @@ abstract class InputMultilingual extends Input
         $oldValue = $this->multilingualResolver->resolveLocalizedOldValue($this->getName(), $locale);
         /** @var Closure|null $customValueClosure */
         $customValueClosure = $this->multilingualMode() ? $this->value : null;
-        $modelValue = $this->multilingualResolver->resolveLocalizedValue($this->getName(), $locale, $this->getModel());
-        // dd($oldValue, $customValueClosure, $modelValue);
+        $modelValue = $this->multilingualResolver->resolveLocalizedModelValue(
+            $this->getName(),
+            $locale,
+            $this->getModel()
+        );
 
         return $oldValue ?? ($customValueClosure ? $customValueClosure($locale) : $modelValue);
     }

@@ -30,10 +30,10 @@ class MultilingualResolver extends \Okipa\LaravelBootstrapComponents\Form\Multil
      * Resolve the multilingual component localized old value.
      *
      * @param string $name
-     * @param $locale
+     * @param string $locale
      * @return string|null
      */
-    public function resolveLocalizedOldValue(string $name, $locale): ?string
+    public function resolveLocalizedOldValue(string $name, string $locale): ?string
     {
         return old($name . '_' . $locale);
     }
@@ -47,7 +47,7 @@ class MultilingualResolver extends \Okipa\LaravelBootstrapComponents\Form\Multil
      *
      * @return string|null
      */
-    public function resolveLocalizedValue(string $name, string $locale, ?Model $model): ?string
+    public function resolveLocalizedModelValue(string $name, string $locale, ?Model $model): ?string
     {
         return optional($model)->{$name . '_' . $locale};
     }

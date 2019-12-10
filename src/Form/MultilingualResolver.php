@@ -40,24 +40,25 @@ class MultilingualResolver
      * Resolve the multilingual component localized old value.
      *
      * @param string $name
-     * @param $locale
+     * @param string $locale
      * @return string|null
      */
-    public function resolveLocalizedOldValue(string $name, $locale): ?string
+    public function resolveLocalizedOldValue(string $name, string $locale): ?string
     {
         return data_get(old($name), $locale);
     }
 
     /**
-     * Resolve the multilingual component localized value.
+     * Resolve the multilingual component localized model value.
      *
      * @param string $name
      * @param string $locale
      * @param Model|null $model
      *
      * @return string|null
+     * @SuppressWarnings(PHPMD)
      */
-    public function resolveLocalizedValue(string $name, string $locale, ?Model $model): ?string
+    public function resolveLocalizedModelValue(string $name, string $locale, ?Model $model): ?string
     {
         return optional($model)->{$name};
     }
@@ -74,19 +75,6 @@ class MultilingualResolver
     public function resolveHtmlIdentifier(string $type, string $name, string $locale): string
     {
         return $type . '-' . $name . '-' . $locale;
-    }
-
-    /**
-     * Get the multilingual component localized error message bag key.
-     *
-     * @param string $name
-     * @param string $locale
-     *
-     * @return string
-     */
-    protected function getErrorMessageBagKey(string $name, string $locale): string
-    {
-        return $name . '.' . $locale;
     }
 
     /**
@@ -109,5 +97,18 @@ class MultilingualResolver
                 $errorMessage
             )
             : null;
+    }
+
+    /**
+     * Get the multilingual component localized error message bag key.
+     *
+     * @param string $name
+     * @param string $locale
+     *
+     * @return string
+     */
+    protected function getErrorMessageBagKey(string $name, string $locale): string
+    {
+        return $name . '.' . $locale;
     }
 }
