@@ -19,32 +19,81 @@ The components which have been created are use on a daily basis. You feel like t
 
 ## Usage
 
-Just call the component you need in your view :
+Just call the component you need in your view and its HTML will be generated for you.
+
+### Standard use case
 
 ```blade
-{{ bsText()->name('address') }}
-```
-
-Instead of redundantly writing or copying this HTML :
-
-```blade
-<div class="text-address-container form-group">
-    <label for="text-address">
-        Adress
+{{-- call this component in your view --}}
+{{ bsText()->name('name') }}
+{{-- and get this HTML generated for you --}}
+<div class="text-name-container form-group">
+    <label for="text-name"
+        Name
     </label>
     <div class="input-group">
         <div class="input-group-prepend">
             <span class="input-group-text">
-                <i class="fas fa-map-marker"></i>
+                <i class="fas fa-font"></i>
             </span>
         </div>
-        <input id="text-address"
-            class="form-control text-address-component"
-            type="text" name="address"
+        <input id="text-name"
+            class="form-control text-name-component"
+            type="text"
+            name="name"
             value=""
-            placeholder="Adress"
-            aria-label="Adress"
-            aria-describedby="text-address">
+            placeholder="Name"
+            aria-label="Name"
+            aria-describedby="text-name">
+    </div>
+</div>
+```
+
+### Multilingual use case
+
+```blade
+{{-- call this component in your view --}}
+{{ bsText()->name('title')->localized(['fr', 'en']) }}
+{{-- and get this HTML generated for you --}}
+<div id="text-title-fr-container"
+    class="text-title-fr-container form-group">
+    <label for="text-title-fr">
+        Title (FR)
+    </label>
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text">
+                <i class="fas fa-font"></i>
+            </span>
+        </div>
+        <input id="text-title-fr"
+            class="form-control text-title-fr-component"
+            type="text"
+            name="title[fr]"
+            value=""
+            placeholder="Title (FR)"
+            aria-label="Title (FR)"
+            aria-describedby="text-title-fr">
+    </div>
+</div>
+<div id="text-title-en-container" class="text-title-en-container form-group">
+    <label for="text-title-en">
+        Title (EN)
+    </label>
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text">
+                <i class="fas fa-font"></i>
+            </span>
+        </div>
+        <input id="text-title-en"
+            class="form-control text-title-en-component"
+            type="text"
+            name="title[en]"
+            value=""
+            placeholder="Title (EN)"
+            aria-label="Title (EN)"
+            aria-describedby="text-title-en">
     </div>
 </div>
 ```
