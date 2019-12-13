@@ -125,7 +125,7 @@ abstract class InputMultilingual extends Input
         $label = $this->getLocalizedLabel($locale);
         $value = $this->getLocalizedValue($locale);
         $placeholder = $this->getLocalizedPlaceholder($locale);
-        $containerId = $this->getLocalizedContainerId($locale);
+//        $containerId = $this->getLocalizedContainerId($locale);
         $componentId = $this->getLocalizedComponentId($locale);
         $validationClass = $this->getLocalizedValidationClass($locale);
         $errorMessage = $this->getLocalizedErrorMessage($locale);
@@ -136,7 +136,7 @@ abstract class InputMultilingual extends Input
             'label',
             'value',
             'placeholder',
-            'containerId',
+//            'containerId',
             'componentId',
             'validationClass',
             'errorMessage'

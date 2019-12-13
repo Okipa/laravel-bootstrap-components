@@ -1,5 +1,5 @@
-<div{{ htmlAttributes($containerId ? ['id' => $containerId] : null) }}{{ classTag($htmlIdentifier . '-container', $containerClasses) }}{{ htmlAttributes($containerHtmlAttributes) }}>
-    <audio{{ htmlAttributes($componentId ? ['id' => $componentId] : null) }}{{ classTag($htmlIdentifier . '-component', $componentClasses) }}{{ htmlAttributes($componentHtmlAttributes) }}>
+<div{{ htmlAttributes($containerId ? ['id' => $containerId] : null) }}{{ classTag('container', $htmlIdentifier, $containerClasses) }}{{ htmlAttributes($containerHtmlAttributes) }}>
+    <audio{{ htmlAttributes($componentId ? ['id' => $componentId] : null) }}{{ classTag('component', $htmlIdentifier, $componentClasses) }}{{ htmlAttributes($componentHtmlAttributes) }}>
         <source{{ htmlAttributes($src ? 'src="'.$src.'"' : null) }}>
         @lang('bootstrap-components::bootstrap-components.notification.audio')
     </audio>
