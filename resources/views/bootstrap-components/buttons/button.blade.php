@@ -1,4 +1,4 @@
-<div{{ htmlAttributes($containerId ? ['id' => $containerId] : null) }}{{ classTag('container', $htmlIdentifier, $containerClasses) }}{{ htmlAttributes($containerHtmlAttributes) }}>
+<div{{ htmlAttributes($containerId ? ['id' => $containerId] : null) }}{{ classTag('component-container', $htmlIdentifier, $containerClasses) }}{{ htmlAttributes($containerHtmlAttributes) }}>
     {{ htmlAttributes($type === 'button' ? '<a' : '<button') }}{{ htmlAttributes($componentId ? ['id' => $componentId] : null) }}{{ htmlAttributes($type === 'button' ? 'href="' . $url . '"' : 'type="' . $type . '"') }}{{ classTag('component', $htmlIdentifier, $componentClasses) }}{{ htmlAttributes($componentHtmlAttributes) }}{{ htmlAttributes($label ? 'title="' . __($label) .'"' : null) }}>
     @if(! empty($prepend))<span class="label-prepend">{!! $prepend !!}</span>@endif
     @if($label)<span class="label">@lang($label)</span>@endif
