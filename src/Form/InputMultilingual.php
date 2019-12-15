@@ -121,23 +121,25 @@ abstract class InputMultilingual extends Input
     {
         $parentParams = parent::getParameters();
         $htmlIdentifier = $this->getLocalizedHtmlIdentifier($locale);
+        $componentId = $this->getLocalizedComponentId($locale);
+        $containerId = $this->getLocalizedContainerId($locale);
+        $containerHtmlAttributes = $this->getLocalizedContainerHtmlAttributes($locale);
         $name = $this->getLocalizedName($locale);
         $label = $this->getLocalizedLabel($locale);
         $value = $this->getLocalizedValue($locale);
         $placeholder = $this->getLocalizedPlaceholder($locale);
-//        $containerId = $this->getLocalizedContainerId($locale);
-        $componentId = $this->getLocalizedComponentId($locale);
         $validationClass = $this->getLocalizedValidationClass($locale);
         $errorMessage = $this->getLocalizedErrorMessage($locale);
 
         return array_merge($parentParams, compact(
             'htmlIdentifier',
+            'containerId',
+            'componentId',
+            'containerHtmlAttributes',
             'name',
             'label',
             'value',
             'placeholder',
-//            'containerId',
-            'componentId',
             'validationClass',
             'errorMessage'
         ));
@@ -218,6 +220,16 @@ abstract class InputMultilingual extends Input
         return $containerId
             ? $containerId . '-' . $locale
             : ($this->getType() . '-' . $this->getName() . '-' . $locale . '-container');
+    }
+
+    /**
+     * @param string $locale
+     *
+     * @return array
+     */
+    protected function getLocalizedContainerHtmlAttributes(string $locale): array
+    {
+        return array_merge(parent::getContainerHtmlAttributes(), ['data-locale', $locale]);
     }
 
     /**
