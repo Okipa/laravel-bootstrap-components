@@ -114,6 +114,7 @@ And get this HTML generated for you :
 - [Configuration](#configuration)
 - [Translations](#translations)
 - [Customization](#customization)
+- [Targeting components](#targeting-components)
 - [API](#api)
   - [Form components](#form-components)
     - [Multilingual](#multilingual)
@@ -196,6 +197,19 @@ Publish the views with the command :
 php artisan vendor:publish --tag=bootstrap-components:views
 ```
 
+## Targeting components
+
+Each component can easily be targeted for javascript treatments :
+* Each component container provides a `component-container` class.
+// * Each component container provides a `$type . '-' . $name` class. // todo : to remove
+* Each component itself provides a `component` class.
+* Each component provides a `$type . '-' . $name` class. // to remove // todo : to remove
+
+```
+// target each text components with email name
+$('.component[type="text"][name="email"')
+```
+
 ## API
 
 **Methods available for all components**
@@ -239,6 +253,7 @@ php artisan vendor:publish --tag=bootstrap-components:views
 **:bulb: Notes :**
 * The use of the `->locales()` method will produce a component for each locale keys you declared. For example, if you declare the `fr` and `en` locale keys for a `title` text component, you will get two `Title (FR)` and `Title (EN)` generated text components.
   * The localization treatment will only occur if you have more than one locales declared : there is not point to generate localized components with only one declared locales.
+* Each multilingual component provides an extra `data-locale="<locale>"` attribute to help with eventual javascript treatments.
 * You can use your own `MultilingualResolver` by replacing the path defined in the `config('bootstrap-components.form.multilingual.resolver')`, allowing you to customize your components localization behaviour :
   * The default locales to handle (by default `[]`).
   * The component localized `name` attribute resolution (default : `$name[$locale]`.
