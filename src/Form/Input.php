@@ -427,14 +427,6 @@ abstract class Input extends Component
     /**
      * @return string
      */
-    protected function getHtmlIdentifier(): string
-    {
-        return $this->getType() . '-' . Str::slug($this->getName());
-    }
-
-    /**
-     * @return string
-     */
     protected function getComponentId(): string
     {
         return parent::getComponentId() ?? $this->getType() . '-' . Str::slug($this->getName());

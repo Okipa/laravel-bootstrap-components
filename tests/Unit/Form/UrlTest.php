@@ -224,7 +224,7 @@ class UrlTest extends BootstrapComponentsTestCase
         $html = bsUrl()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="url-name">' . $label . '</label>', $html);
         $this->assertStringContainsString(' placeholder="' . $label . '"', $html);
-        $this->assertStringContainsString(' aria-label="' . $label . '"', $html);
+        $this->assertStringContainsString(' aria-labelledby="' . $label . '"', $html);
     }
 
     public function testSetTranslatedLabel()
@@ -233,21 +233,21 @@ class UrlTest extends BootstrapComponentsTestCase
         $html = bsUrl()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="url-name">' . __($label) . '</label>', $html);
         $this->assertStringContainsString(' placeholder="' . __($label) . '"', $html);
-        $this->assertStringContainsString(' aria-label="' . __($label) . '"', $html);
+        $this->assertStringContainsString(' aria-labelledby="' . __($label) . '"', $html);
     }
 
     public function testNoLabel()
     {
         $html = bsUrl()->name('name')->toHtml();
         $this->assertStringContainsString('<label for="url-name">validation.attributes.name</label>', $html);
-        $this->assertStringContainsString(' aria-label="validation.attributes.name"', $html);
+        $this->assertStringContainsString(' aria-labelledby="validation.attributes.name"', $html);
     }
 
     public function testHideLabel()
     {
         $html = bsUrl()->name('name')->label(false)->toHtml();
         $this->assertStringNotContainsString('<label for="url-name">validation.attributes.name</label>', $html);
-        $this->assertStringNotContainsString(' aria-label="validation.attributes.name"', $html);
+        $this->assertStringNotContainsString(' aria-labelledby="validation.attributes.name"', $html);
     }
 
     public function testConfigLabelPositionedAbove()

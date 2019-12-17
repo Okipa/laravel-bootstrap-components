@@ -63,20 +63,6 @@ class MultilingualResolver
     }
 
     /**
-     * Resolve the multilingual component localized html identifier.
-     *
-     * @param string $type
-     * @param string $name
-     *
-     * @param string $locale
-     * @return string
-     */
-    public function resolveHtmlIdentifier(string $type, string $name, string $locale): string
-    {
-        return $type . '-' . $name . '-' . $locale;
-    }
-
-    /**
      * Resolve the multilingual component localized error message.
      *
      * @param string $name

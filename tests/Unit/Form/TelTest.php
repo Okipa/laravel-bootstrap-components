@@ -225,7 +225,7 @@ class TelTest extends BootstrapComponentsTestCase
         $html = bsTel()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="tel-name">' . $label . '</label>', $html);
         $this->assertStringContainsString(' placeholder="' . $label . '"', $html);
-        $this->assertStringContainsString(' aria-label="' . $label . '"', $html);
+        $this->assertStringContainsString(' aria-labelledby="' . $label . '"', $html);
     }
 
     public function testSetTranslatedLabel()
@@ -234,7 +234,7 @@ class TelTest extends BootstrapComponentsTestCase
         $html = bsTel()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="tel-name">' . __($label) . '</label>', $html);
         $this->assertStringContainsString(' placeholder="' . __($label) . '"', $html);
-        $this->assertStringContainsString(' aria-label="' . __($label) . '"', $html);
+        $this->assertStringContainsString(' aria-labelledby="' . __($label) . '"', $html);
     }
 
     public function testNoLabel()
@@ -245,7 +245,7 @@ class TelTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertStringContainsString(
-            ' aria-label="validation.attributes.name"',
+            ' aria-labelledby="validation.attributes.name"',
             $html
         );
     }
@@ -258,7 +258,7 @@ class TelTest extends BootstrapComponentsTestCase
             $html
         );
         $this->assertStringNotContainsString(
-            ' aria-label="validation.attributes.name"',
+            ' aria-labelledby="validation.attributes.name"',
             $html
         );
     }

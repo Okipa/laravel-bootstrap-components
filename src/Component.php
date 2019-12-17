@@ -206,7 +206,6 @@ abstract class Component implements Htmlable
      */
     protected function getValues(): array
     {
-        $htmlIdentifier = $this->getHtmlIdentifier();
         $componentId = $this->getComponentId();
         $containerId = $this->getContainerId();
         $componentClasses = $this->getComponentClasses();
@@ -215,7 +214,6 @@ abstract class Component implements Htmlable
         $containerHtmlAttributes = $this->getContainerHtmlAttributes();
 
         return compact(
-            'htmlIdentifier',
             'componentId',
             'containerId',
             'componentClasses',
@@ -223,14 +221,6 @@ abstract class Component implements Htmlable
             'componentHtmlAttributes',
             'containerHtmlAttributes'
         );
-    }
-
-    /**
-     * @return string
-     */
-    protected function getHtmlIdentifier(): string
-    {
-        return $this->getType();
     }
 
     /**

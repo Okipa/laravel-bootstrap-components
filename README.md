@@ -48,8 +48,7 @@ And get this HTML generated for you :
             name="name"
             value=""
             placeholder="Name"
-            aria-label="Name"
-            aria-describedby="text-name">
+            aria-labelledby="Name">
     </div>
 </div>
 ```
@@ -82,8 +81,7 @@ And get this HTML generated for you :
             name="title[fr]"
             value=""
             placeholder="Title (FR)"
-            aria-label="Title (FR)"
-            aria-describedby="text-title-fr">
+            aria-labelledby="Title (FR)">
     </div>
 </div>
 <div id="text-title-en-container" class="text-title-en-container form-group">
@@ -102,8 +100,7 @@ And get this HTML generated for you :
             name="title[en]"
             value=""
             placeholder="Title (EN)"
-            aria-label="Title (EN)"
-            aria-describedby="text-title-en">
+            aria-labelledby="Title (EN)">
     </div>
 </div>
 ```
@@ -201,12 +198,10 @@ php artisan vendor:publish --tag=bootstrap-components:views
 
 Each component can easily be targeted for javascript treatments :
 * Each component container provides a `component-container` class.
-// * Each component container provides a `$type . '-' . $name` class. // todo : to remove
 * Each component itself provides a `component` class.
-* Each component provides a `$type . '-' . $name` class. // to remove // todo : to remove
 
-```
-// target each text components with email name
+```javascript
+// easily target each text components with email name
 $('.component[type="text"][name="email"')
 ```
 
@@ -261,7 +256,6 @@ $('.component[type="text"][name="email"')
   * The component localized model value resolution (default : `$model->{$name}[$locales]`).
   * The component localized error message bag key resolution, used for the error message extraction and for the validation class generation (default : `$name . $locale`).
   * The component error message resolution, in order to correctly display the localized attribute name (default : transform `Dummy __('validation.attributes.name.en) error message` into `Dummy __('validation.attributes.name) (EN) error message.`.
-  * The component html identifier resolution, used to generate the container class, the component class and the `aria-describedby` attribute values (default : `$type . '-' . $name . '-' . $locale`.
 
 ##### bsText()
 

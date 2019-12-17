@@ -120,10 +120,7 @@ abstract class InputMultilingual extends Input
     protected function getLocalizedParameters(string $locale): array
     {
         $parentParams = parent::getParameters();
-        $htmlIdentifier = $this->getLocalizedHtmlIdentifier($locale);
         $componentId = $this->getLocalizedComponentId($locale);
-        // todo : finalize this
-        // $containerId = $this->getLocalizedContainerId($locale);
         $containerHtmlAttributes = $this->getLocalizedContainerHtmlAttributes($locale);
         $name = $this->getLocalizedName($locale);
         $label = $this->getLocalizedLabel($locale);
@@ -133,8 +130,6 @@ abstract class InputMultilingual extends Input
         $errorMessage = $this->getLocalizedErrorMessage($locale);
 
         return array_merge($parentParams, compact(
-            'htmlIdentifier',
-            //'containerId',
             'componentId',
             'containerHtmlAttributes',
             'name',
@@ -144,16 +139,6 @@ abstract class InputMultilingual extends Input
             'validationClass',
             'errorMessage'
         ));
-    }
-
-    /**
-     * @param string $locale
-     *
-     * @return string
-     */
-    protected function getLocalizedHtmlIdentifier(string $locale): string
-    {
-        return $this->multilingualResolver->resolveHtmlIdentifier($this->getType(), $this->getName(), $locale);
     }
 
     /**
@@ -212,25 +197,11 @@ abstract class InputMultilingual extends Input
     /**
      * @param string $locale
      *
-     * @return string
-     */
-    protected function getLocalizedContainerId(string $locale): string
-    {
-        $containerId = parent::getContainerId();
-
-        return $containerId
-            ? $containerId . '-' . $locale
-            : ($this->getType() . '-' . $this->getName() . '-' . $locale . '-container');
-    }
-
-    /**
-     * @param string $locale
-     *
      * @return array
      */
     protected function getLocalizedContainerHtmlAttributes(string $locale): array
     {
-        return array_merge(parent::getContainerHtmlAttributes(), ['data-locale' => $locale]);
+        return array_merge(['data-locale' => $locale], parent::getContainerHtmlAttributes());
     }
 
     /**
