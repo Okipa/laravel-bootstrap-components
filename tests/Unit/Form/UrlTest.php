@@ -455,7 +455,7 @@ class UrlTest extends BootstrapComponentsTestCase
         $configContainerClasses = 'test-config-class-container';
         config()->set('bootstrap-components.form.url.classes.container', [$configContainerClasses]);
         $html = bsUrl()->name('name')->toHtml();
-        $this->assertStringContainsString('class="url-name-container ' . $configContainerClasses . '"', $html);
+        $this->assertStringContainsString('class="component-container ' . $configContainerClasses . '"', $html);
     }
 
     public function testSetContainerClasses()
@@ -465,11 +465,11 @@ class UrlTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.url.classes.container', [$configContainerClasses]);
         $html = bsUrl()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="url-name-container ' . $customContainerClasses . '"',
+            'class="component-container ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="url-name-container ' . $configContainerClasses . '"',
+            'class="component-container ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -480,7 +480,7 @@ class UrlTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.url.classes.component', [$configComponentClasses]);
         $html = bsUrl()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="form-control url-name-component ' . $configComponentClasses . '"',
+            'class="component form-control ' . $configComponentClasses . '"',
             $html
         );
     }
@@ -492,11 +492,11 @@ class UrlTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.url.classes.component', [$customComponentClasses]);
         $html = bsUrl()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="form-control url-name-component ' . $customComponentClasses . '"',
+            'class="component form-control ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="form-control url-name-component ' . $configComponentClasses . '"',
+            'class="component form-control ' . $configComponentClasses . '"',
             $html
         );
     }

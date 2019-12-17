@@ -456,7 +456,7 @@ class ColorTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.color.classes.container', [$configContainerClasses]);
         $html = bsColor()->name('name')->toHtml();
         $this->assertStringContainsString(
-            ' class="color-name-container ' . $configContainerClasses . '"',
+            ' class="component-container ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -468,11 +468,11 @@ class ColorTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.color.classes.container', [$configContainerClasses]);
         $html = bsColor()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            ' class="color-name-container ' . $customContainerClasses . '"',
+            ' class="component-container ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            ' class="color-name-container ' . $configContainerClasses . '"',
+            ' class="component-container ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -483,7 +483,7 @@ class ColorTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.color.classes.component', [$configComponentClasses]);
         $html = bsColor()->name('name')->toHtml();
         $this->assertStringContainsString(
-            ' class="form-control color-name-component ' . $configComponentClasses . '"',
+            ' class="component form-control ' . $configComponentClasses . '"',
             $html
         );
     }
@@ -495,11 +495,11 @@ class ColorTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.color.classes.component', [$customComponentClasses]);
         $html = bsColor()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            ' class="form-control color-name-component ' . $customComponentClasses . '"',
+            ' class="component form-control ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            ' class="form-control color-name-component ' . $configComponentClasses . '"',
+            ' class="component form-control ' . $configComponentClasses . '"',
             $html
         );
     }

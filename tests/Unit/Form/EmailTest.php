@@ -461,7 +461,7 @@ class EmailTest extends BootstrapComponentsTestCase
         $configContainerClasses = 'test-config-class-container';
         config()->set('bootstrap-components.form.email.classes.container', [$configContainerClasses]);
         $html = bsEmail()->name('name')->toHtml();
-        $this->assertStringContainsString(' class="email-name-container ' . $configContainerClasses . '"', $html);
+        $this->assertStringContainsString(' class="component-container ' . $configContainerClasses . '"', $html);
     }
 
     public function testSetContainerClasses()
@@ -471,11 +471,11 @@ class EmailTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.email.classes.container', [$configContainerClasses]);
         $html = bsEmail()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            ' class="email-name-container ' . $customContainerClasses . '"',
+            ' class="component-container ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            ' class="email-name-container ' . $configContainerClasses . '"',
+            ' class="component-container ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -486,7 +486,7 @@ class EmailTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.email.classes.component', [$configComponentClasses]);
         $html = bsEmail()->name('name')->toHtml();
         $this->assertStringContainsString(
-            ' class="form-control email-name-component ' . $configComponentClasses . '"',
+            ' class="component form-control ' . $configComponentClasses . '"',
             $html
         );
     }
@@ -498,11 +498,11 @@ class EmailTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.email.classes.component', [$customComponentClasses]);
         $html = bsEmail()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            ' class="form-control email-name-component ' . $customComponentClasses . '"',
+            ' class="component form-control ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            ' class="form-control email-name-component ' . $configComponentClasses . '"',
+            ' class="component form-control ' . $configComponentClasses . '"',
             $html
         );
     }

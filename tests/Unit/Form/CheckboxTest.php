@@ -421,7 +421,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.checkbox.classes.container', [$configContainerClasses]);
         $html = bsCheckbox()->name('active')->toHtml();
         $this->assertStringContainsString(
-            ' class="checkbox-active-container custom-control custom-checkbox ' . $configContainerClasses . '"',
+            ' class="component-container custom-control custom-checkbox ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -433,11 +433,11 @@ class CheckboxTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.checkbox.classes.container', [$configContainerClasses]);
         $html = bsCheckbox()->name('active')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            ' class="checkbox-active-container custom-control custom-checkbox ' . $customContainerClasses . '"',
+            ' class="component-container custom-control custom-checkbox ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            ' class="checkbox-active-container custom-control custom-checkbox ' . $configContainerClasses . '"',
+            ' class="component-container custom-control custom-checkbox ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -448,7 +448,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.checkbox.classes.component', [$configComponentClasses]);
         $html = bsCheckbox()->name('active')->toHtml();
         $this->assertStringContainsString(
-            ' class="checkbox-active-component custom-control-input ' . $configComponentClasses . '"',
+            ' class="component custom-control-input ' . $configComponentClasses . '"',
             $html
         );
     }
@@ -460,7 +460,7 @@ class CheckboxTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.checkbox.classes.component', [$customComponentClasses]);
         $html = bsCheckbox()->name('active')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            ' class="checkbox-active-component custom-control-input ' . $customComponentClasses . '"',
+            ' class="component custom-control-input ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(

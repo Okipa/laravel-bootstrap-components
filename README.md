@@ -32,7 +32,7 @@ Call this component in your view :
 And get this HTML generated for you :
 
 ```blade
-<div class="text-name-container form-group">
+<div class="component-container form-group">
     <label for="text-name"
         Name
     </label>
@@ -43,7 +43,7 @@ And get this HTML generated for you :
             </span>
         </div>
         <input id="text-name"
-            class="form-control text-name-component"
+            class="component form-control"
             type="text"
             name="name"
             value=""

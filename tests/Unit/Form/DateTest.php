@@ -521,7 +521,7 @@ class DateTest extends BootstrapComponentsTestCase
         $configContainerClasses = 'test-config-class-container';
         config()->set('bootstrap-components.form.date.classes.container', [$configContainerClasses]);
         $html = bsDate()->name('name')->toHtml();
-        $this->assertStringContainsString('class="date-name-container ' . $configContainerClasses . '"', $html);
+        $this->assertStringContainsString('class="component-container ' . $configContainerClasses . '"', $html);
     }
 
     public function testSetContainerClasses()
@@ -530,8 +530,8 @@ class DateTest extends BootstrapComponentsTestCase
         $customContainerClasses = 'test-custom-class-container';
         config()->set('bootstrap-components.form.date.classes.container', [$configContainerClasses]);
         $html = bsDate()->name('name')->containerClasses([$customContainerClasses])->toHtml();
-        $this->assertStringContainsString('class="date-name-container ' . $customContainerClasses . '"', $html);
-        $this->assertStringNotContainsString('class="date-name-container ' . $configContainerClasses . '"', $html);
+        $this->assertStringContainsString('class="component-container ' . $customContainerClasses . '"', $html);
+        $this->assertStringNotContainsString('class="component-container ' . $configContainerClasses . '"', $html);
     }
 
     public function testConfigComponentClass()
@@ -540,7 +540,7 @@ class DateTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.date.classes.component', [$configComponentClasses]);
         $html = bsDate()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="form-control date-name-component ' . $configComponentClasses . '"',
+            'class="component form-control ' . $configComponentClasses . '"',
             $html
         );
     }
@@ -552,11 +552,11 @@ class DateTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.date.classes.component', [$customComponentClasses]);
         $html = bsDate()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="form-control date-name-component ' . $customComponentClasses . '"',
+            'class="component form-control ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="form-control date-name-component ' . $configComponentClasses . '"',
+            'class="component form-control ' . $configComponentClasses . '"',
             $html
         );
     }

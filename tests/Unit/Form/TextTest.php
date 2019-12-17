@@ -465,7 +465,7 @@ class TextTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.text.classes.container', [$configContainerClasses]);
         $html = bsText()->name('name')->toHtml();
         $this->assertStringContainsString(
-            ' class="text-name-container ' . $configContainerClasses . '"',
+            ' class="component-container ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -477,11 +477,11 @@ class TextTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.text.classes.container', [$configContainerClasses]);
         $html = bsText()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            ' class="text-name-container ' . $customContainerClasses . '"',
+            ' class="component-container ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            ' class="text-name-container ' . $configContainerClasses . '"',
+            ' class="component-container ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -492,7 +492,7 @@ class TextTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.text.classes.component', [$configComponentClasses]);
         $html = bsText()->name('name')->toHtml();
         $this->assertStringContainsString(
-            ' class="form-control text-name-component ' . $configComponentClasses . '"',
+            ' class="component form-control ' . $configComponentClasses . '"',
             $html
         );
     }
@@ -504,11 +504,11 @@ class TextTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.text.classes.component', [$customComponentClasses]);
         $html = bsText()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            ' class="form-control text-name-component ' . $customComponentClasses . '"',
+            ' class="component form-control ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            ' class="form-control text-name-component ' . $configComponentClasses . '"',
+            ' class="component form-control ' . $configComponentClasses . '"',
             $html
         );
     }
@@ -554,8 +554,8 @@ class TextTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.multilingual.resolver', MultilingualResolver::class);
         $resolverLocales = (new MultilingualResolver)->getDefaultLocales();
         $html = bsText()->name('name')->toHtml();
-        foreach ($resolverLocales as $locale) {
-            $this->assertStringContainsString('class="text-name-' . $locale . '-container', $html);
+        foreach ($resolverLocales as $resolverLocale) {
+            $this->assertStringContainsString('data-locale="' . $resolverLocale . '"', $html);
         }
     }
 
@@ -567,10 +567,10 @@ class TextTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.text.locales', []);
         $html = bsText()->name('name')->locales($locales)->toHtml();
         foreach ($locales as $locale) {
-            $this->assertStringContainsString('class="text-name-' . $locale . '-container', $html);
+            $this->assertStringContainsString('data-locale="' . $locale . '"', $html);
         }
-        foreach ($resolverLocales as $locale) {
-            $this->assertStringNotContainsString('class="text-name-' . $locale . '-container', $html);
+        foreach ($resolverLocales as $resolverLocale) {
+            $this->assertStringNotContainsString('data-locale="' . $resolverLocale . '"', $html);
         }
     }
 
@@ -580,8 +580,7 @@ class TextTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.text.locales', ['fr']);
         $html = bsText()->name('name')->locales($locales)->toHtml();
         foreach ($locales as $locale) {
-            $this->assertStringContainsString('class="text-name-container', $html);
-            $this->assertStringNotContainsString('class="text-name-' . $locale . '-container', $html);
+            $this->assertStringNotContainsString('data-locale="' . $locale . '"', $html);
         }
     }
 
@@ -746,15 +745,6 @@ class TextTest extends BootstrapComponentsTestCase
         }
     }
 
-    public function testSetLocalizedNoContainerId()
-    {
-        $locales = ['fr', 'en'];
-        $html = bsText()->name('name')->locales($locales)->toHtml();
-        foreach ($locales as $locale) {
-            $this->assertStringContainsString('<div id="text-name-' . $locale . '-container"', $html);
-        }
-    }
-
     public function testSetLocalizedContainerId()
     {
         $locales = ['fr', 'en'];
@@ -772,9 +762,9 @@ class TextTest extends BootstrapComponentsTestCase
         $errors->add('name.fr', 'Dummy name.fr error message.');
         session()->put('errors', $errors);
         $html = bsText()->name('name')->locales($locales)->displayFailure()->render(compact('errors'));
-        $this->assertStringContainsString('text-name-fr-component is-invalid', $html);
+        $this->assertStringContainsString('id="text-name-fr" class="component form-control is-invalid"', $html);
         $this->assertStringContainsString('Dummy ' . _('validation.attributes.name') . ' (FR) error message.', $html);
-        $this->assertStringNotContainsString('text-name-en-component is-invalid', $html);
+        $this->assertStringNotContainsString('id="text-name-en" class="component form-control is-invalid"', $html);
         $this->assertStringNotContainsString(
             'Dummy ' . _('validation.attributes.name') . ' (EN) error message.',
             $html
@@ -788,9 +778,9 @@ class TextTest extends BootstrapComponentsTestCase
         $errors->add('name_en', 'Dummy name_en error message.');
         session()->put('errors', $errors);
         $html = bsText()->name('name')->displayFailure()->render(compact('errors'));
-        $this->assertStringContainsString('text-name-en-component is-invalid', $html);
+        $this->assertStringContainsString('id="text-name-en" class="component form-control is-invalid"', $html);
         $this->assertStringContainsString('Dummy ' . _('validation.attributes.name') . ' (EN) error message.', $html);
-        $this->assertStringNotContainsString('text-name-de-component is-invalid', $html);
+        $this->assertStringNotContainsString('id="text-name-de" class="component form-control is-invalid"', $html);
         $this->assertStringNotContainsString(
             'Dummy ' . _('validation.attributes.name') . ' (DE) error message.',
             $html

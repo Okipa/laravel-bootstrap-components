@@ -452,7 +452,7 @@ class FileTest extends BootstrapComponentsTestCase
         $configContainerClasses = 'test-config-class-container';
         config()->set('bootstrap-components.form.file.classes.container', [$configContainerClasses]);
         $html = bsFile()->name('name')->toHtml();
-        $this->assertStringContainsString(' class="file-name-container ' . $configContainerClasses . '"', $html);
+        $this->assertStringContainsString(' class="component-container ' . $configContainerClasses . '"', $html);
     }
 
     public function testSetContainerClasses()
@@ -462,11 +462,11 @@ class FileTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.file.classes.container', [$configContainerClasses]);
         $html = bsFile()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            ' class="file-name-container ' . $customContainerClasses . '"',
+            ' class="component-container ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            ' class="file-name-container ' . $configContainerClasses . '"',
+            ' class="component-container ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -505,7 +505,7 @@ class FileTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.file.classes.component', [$configComponentClasses]);
         $html = bsFile()->name('name')->toHtml();
         $this->assertStringContainsString(
-            ' class="custom-file-input form-control file-name-component ' . $configComponentClasses . '"',
+            ' class="component custom-file-input form-control ' . $configComponentClasses . '"',
             $html
         );
     }
@@ -517,11 +517,11 @@ class FileTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.file.classes.component', [$customComponentClasses]);
         $html = bsFile()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            ' class="custom-file-input form-control file-name-component ' . $customComponentClasses . '"',
+            ' class="component custom-file-input form-control ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            ' class="custom-file-input form-control file-name-component ' . $configComponentClasses . '"',
+            ' class="component custom-file-input form-control ' . $configComponentClasses . '"',
             $html
         );
     }

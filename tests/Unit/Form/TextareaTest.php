@@ -471,7 +471,7 @@ class TextareaTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.textarea.classes.container', [$configContainerClasses]);
         $html = bsTextarea()->name('name')->toHtml();
         $this->assertStringContainsString(
-            ' class="textarea-name-container ' . $configContainerClasses . '"',
+            ' class="component-container ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -483,11 +483,11 @@ class TextareaTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.textarea.classes.container', [$configContainerClasses]);
         $html = bsTextarea()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            ' class="textarea-name-container ' . $customContainerClasses . '"',
+            ' class="component-container ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            ' class="textarea-name-container ' . $configContainerClasses . '"',
+            ' class="component-container ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -498,7 +498,7 @@ class TextareaTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.textarea.classes.component', [$configComponentClasses]);
         $html = bsTextarea()->name('name')->toHtml();
         $this->assertStringContainsString(
-            ' class="form-control textarea-name-component ' . $configComponentClasses . '"',
+            ' class="component form-control ' . $configComponentClasses . '"',
             $html
         );
     }
@@ -510,11 +510,11 @@ class TextareaTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.textarea.classes.component', [$customComponentClasses]);
         $html = bsTextarea()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            ' class="form-control textarea-name-component ' . $customComponentClasses . '"',
+            ' class="component form-control ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            ' class="form-control textarea-name-component ' . $configComponentClasses . '"',
+            ' class="component form-control ' . $configComponentClasses . '"',
             $html
         );
     }
@@ -561,17 +561,22 @@ class TextareaTest extends BootstrapComponentsTestCase
         $resolverLocales = (new MultilingualResolver)->getDefaultLocales();
         $html = bsTextarea()->name('name')->toHtml();
         foreach ($resolverLocales as $resolverLocale) {
-            $this->assertStringContainsString('class="textarea-name-' . $resolverLocale . '-container', $html);
+            $this->assertStringContainsString('data-locale="' . $resolverLocale . '"', $html);
         }
     }
 
     public function testSetLocales()
     {
-        $locales = ['fr', 'en'];
-        config()->set('bootstrap-components.form.textarea.locales', []);
+        config()->set('bootstrap-components.form.multilingual.resolver', MultilingualResolver::class);
+        $resolverLocales = (new MultilingualResolver)->getDefaultLocales();
+        $locales = ['fr', 'it', 'be'];
+        config()->set('bootstrap-components.form.text.locales', []);
         $html = bsTextarea()->name('name')->locales($locales)->toHtml();
         foreach ($locales as $locale) {
-            $this->assertStringContainsString('class="textarea-name-' . $locale . '-container', $html);
+            $this->assertStringContainsString('data-locale="' . $locale . '"', $html);
+        }
+        foreach ($resolverLocales as $resolverLocale) {
+            $this->assertStringNotContainsString('data-locale="' . $resolverLocale . '"', $html);
         }
     }
 
@@ -581,8 +586,7 @@ class TextareaTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.textarea.locales', ['fr']);
         $html = bsTextarea()->name('name')->locales($locales)->toHtml();
         foreach ($locales as $locale) {
-            $this->assertStringContainsString('class="textarea-name-container', $html);
-            $this->assertStringNotContainsString('class="textarea-name-' . $locale . '-container', $html);
+            $this->assertStringNotContainsString('data-locale="' . $locale . '"', $html);
         }
     }
 
@@ -750,15 +754,6 @@ class TextareaTest extends BootstrapComponentsTestCase
         }
     }
 
-    public function testSetLocalizedNoContainerId()
-    {
-        $locales = ['fr', 'en'];
-        $html = bsTextarea()->name('name')->locales($locales)->toHtml();
-        foreach ($locales as $locale) {
-            $this->assertStringContainsString('<div id="textarea-name-' . $locale . '-container"', $html);
-        }
-    }
-
     public function testSetLocalizedContainerId()
     {
         $locales = ['fr', 'en'];
@@ -776,9 +771,9 @@ class TextareaTest extends BootstrapComponentsTestCase
         $errors->add('name.fr', 'Dummy name.fr error message.');
         session()->put('errors', $errors);
         $html = bsTextarea()->name('name')->locales($locales)->displayFailure()->render(compact('errors'));
-        $this->assertStringContainsString('textarea-name-fr-component is-invalid', $html);
+        $this->assertStringContainsString('id="textarea-name-fr" class="component form-control is-invalid"', $html);
         $this->assertStringContainsString('Dummy ' . _('validation.attributes.name') . ' (FR) error message.', $html);
-        $this->assertStringNotContainsString('textarea-name-en-component is-invalid', $html);
+        $this->assertStringNotContainsString('id="textarea-name-en" class="component form-control is-invalid"', $html);
         $this->assertStringNotContainsString(
             'Dummy ' . _('validation.attributes.name') . ' (EN) error message.',
             $html
@@ -792,9 +787,9 @@ class TextareaTest extends BootstrapComponentsTestCase
         $errors->add('name_en', 'Dummy name_en error message.');
         session()->put('errors', $errors);
         $html = bsTextarea()->name('name')->displayFailure()->render(compact('errors'));
-        $this->assertStringContainsString('textarea-name-en-component is-invalid', $html);
+        $this->assertStringContainsString('id="textarea-name-en" class="component form-control is-invalid"', $html);
         $this->assertStringContainsString('Dummy ' . _('validation.attributes.name') . ' (EN) error message.', $html);
-        $this->assertStringNotContainsString('textarea-name-de-component is-invalid', $html);
+        $this->assertStringNotContainsString('id="textarea-name-de" class="component form-control is-invalid"', $html);
         $this->assertStringNotContainsString(
             'Dummy ' . _('validation.attributes.name') . ' (DE) error message.',
             $html

@@ -475,7 +475,7 @@ class NumberTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.number.classes.container', [$configContainerClasses]);
         $html = bsNumber()->name('credit')->toHtml();
         $this->assertStringContainsString(
-            ' class="number-credit-container ' . $configContainerClasses . '"',
+            ' class="component-container ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -487,11 +487,11 @@ class NumberTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.number.classes.container', [$configContainerClasses]);
         $html = bsNumber()->name('credit')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            ' class="number-credit-container ' . $customContainerClasses . '"',
+            ' class="component-container ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            ' class="number-credit-container ' . $configContainerClasses . '"',
+            ' class="component-container ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -502,7 +502,7 @@ class NumberTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.number.classes.component', [$configComponentClasses]);
         $html = bsNumber()->name('credit')->toHtml();
         $this->assertStringContainsString(
-            ' class="form-control number-credit-component ' . $configComponentClasses . '"',
+            ' class="component form-control ' . $configComponentClasses . '"',
             $html
         );
     }
@@ -514,11 +514,11 @@ class NumberTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.number.classes.component', [$customComponentClasses]);
         $html = bsNumber()->name('credit')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            ' class="form-control number-credit-component ' . $customComponentClasses . '"',
+            ' class="component form-control ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            ' class="form-control number-credit-component ' . $configComponentClasses . '"',
+            ' class="component form-control ' . $configComponentClasses . '"',
             $html
         );
     }

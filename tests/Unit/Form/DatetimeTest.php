@@ -535,7 +535,7 @@ class DatetimeTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.datetime.classes.container', [$configContainerClasses]);
         $html = bsDatetime()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="datetime-local-name-container ' . $configContainerClasses . '"',
+            'class="component-container ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -547,11 +547,11 @@ class DatetimeTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.datetime.classes.container', [$configContainerClasses]);
         $html = bsDatetime()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="datetime-local-name-container ' . $customContainerClasses . '"',
+            'class="component-container ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="datetime-local-name-container ' . $configContainerClasses . '"',
+            'class="component-container ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -562,7 +562,7 @@ class DatetimeTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.datetime.classes.component', [$configComponentClasses]);
         $html = bsDatetime()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="form-control datetime-local-name-component ' . $configComponentClasses . '"',
+            'class="component form-control ' . $configComponentClasses . '"',
             $html
         );
     }
@@ -574,11 +574,11 @@ class DatetimeTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.datetime.classes.component', [$customComponentClasses]);
         $html = bsDatetime()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="form-control datetime-local-name-component ' . $customComponentClasses . '"',
+            'class="component form-control ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="form-control datetime-local-name-component ' . $configComponentClasses . '"',
+            'class="component form-control ' . $configComponentClasses . '"',
             $html
         );
     }

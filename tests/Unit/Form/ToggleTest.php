@@ -401,7 +401,7 @@ class ToggleTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.toggle.classes.container', [$configContainerClasses]);
         $html = bsToggle()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="toggle-name-container switch custom-control ' . $configContainerClasses . '"',
+            'class="component-container switch custom-control ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -413,11 +413,11 @@ class ToggleTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.toggle.classes.container', [$configContainerClasses]);
         $html = bsToggle()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="toggle-name-container switch custom-control ' . $customContainerClasses . '"',
+            'class="component-container switch custom-control ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="toggle-name-container switch custom-control ' . $configContainerClasses . '"',
+            'class="component-container switch custom-control ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -428,7 +428,7 @@ class ToggleTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.toggle.classes.component', [$configComponentClasses]);
         $html = bsToggle()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="toggle-name-component custom-control-input ' . $configComponentClasses . '"',
+            'class="component custom-control-input ' . $configComponentClasses . '"',
             $html
         );
     }
@@ -440,7 +440,7 @@ class ToggleTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.toggle.classes.component', [$customComponentClasses]);
         $html = bsToggle()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            'class="toggle-name-component custom-control-input ' . $customComponentClasses . '"',
+            'class="component custom-control-input ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(

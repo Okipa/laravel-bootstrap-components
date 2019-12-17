@@ -121,6 +121,7 @@ abstract class InputMultilingual extends Input
     {
         $parentParams = parent::getParameters();
         $componentId = $this->getLocalizedComponentId($locale);
+        $containerId = $this->getLocalizedContainerId($locale);
         $containerHtmlAttributes = $this->getLocalizedContainerHtmlAttributes($locale);
         $name = $this->getLocalizedName($locale);
         $label = $this->getLocalizedLabel($locale);
@@ -131,6 +132,7 @@ abstract class InputMultilingual extends Input
 
         return array_merge($parentParams, compact(
             'componentId',
+            'containerId',
             'containerHtmlAttributes',
             'name',
             'label',
@@ -149,6 +151,16 @@ abstract class InputMultilingual extends Input
     protected function getLocalizedComponentId(string $locale): string
     {
         return parent::getComponentId() . '-' . $locale;
+    }
+
+    /**
+     * @param string $locale
+     *
+     * @return string|null
+     */
+    protected function getLocalizedContainerId(string $locale): ?string
+    {
+        return parent::getContainerId() ? parent::getContainerId() . '-' . $locale : null;
     }
 
     /**

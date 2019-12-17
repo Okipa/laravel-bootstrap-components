@@ -468,7 +468,7 @@ class PasswordTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.password.classes.container', [$configContainerClasses]);
         $html = bsPassword()->name('name')->toHtml();
         $this->assertStringContainsString(
-            ' class="password-name-container ' . $configContainerClasses . '"',
+            ' class="component-container ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -480,11 +480,11 @@ class PasswordTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.password.classes.container', [$configContainerClasses]);
         $html = bsPassword()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            ' class="password-name-container ' . $customContainerClasses . '"',
+            ' class="component-container ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            ' class="password-name-container ' . $configContainerClasses . '"',
+            ' class="component-container ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -495,7 +495,7 @@ class PasswordTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.password.classes.component', [$configComponentClasses]);
         $html = bsPassword()->name('name')->toHtml();
         $this->assertStringContainsString(
-            ' class="form-control password-name-component ' . $configComponentClasses . '"',
+            ' class="component form-control ' . $configComponentClasses . '"',
             $html
         );
     }
@@ -507,11 +507,11 @@ class PasswordTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.password.classes.component', [$customComponentClasses]);
         $html = bsPassword()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            ' class="form-control password-name-component ' . $customComponentClasses . '"',
+            ' class="component form-control ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            ' class="form-control password-name-component ' . $configComponentClasses . '"',
+            ' class="component form-control ' . $configComponentClasses . '"',
             $html
         );
     }

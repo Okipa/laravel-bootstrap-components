@@ -881,7 +881,7 @@ class SelectTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.select.classes.container', [$configContainerClasses]);
         $html = bsSelect()->name('name')->toHtml();
         $this->assertStringContainsString(
-            ' class="select-name-container ' . $configContainerClasses . '"',
+            ' class="component-container ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -893,11 +893,11 @@ class SelectTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.select.classes.container', [$configContainerClasses]);
         $html = bsSelect()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            ' class="select-name-container ' . $customContainerClasses . '"',
+            ' class="component-container ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            ' class="select-name-container ' . $configContainerClasses . '"',
+            ' class="component-container ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -908,7 +908,7 @@ class SelectTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.select.classes.component', [$configComponentClasses]);
         $html = bsSelect()->name('name')->toHtml();
         $this->assertStringContainsString(
-            ' class="select-name-component custom-select ' . $configComponentClasses . '"',
+            ' class="component custom-select ' . $configComponentClasses . '"',
             $html
         );
     }
@@ -920,7 +920,7 @@ class SelectTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.select.classes.component', [$customComponentClasses]);
         $html = bsSelect()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            ' class="select-name-component custom-select ' . $customComponentClasses . '"',
+            ' class="component custom-select ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(

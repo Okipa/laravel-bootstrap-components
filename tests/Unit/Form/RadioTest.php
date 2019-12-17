@@ -430,7 +430,7 @@ class RadioTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.radio.classes.container', [$configContainerClasses]);
         $html = bsRadio()->name('name')->value($customValue)->toHtml();
         $this->assertStringContainsString(
-            ' class="radio-name-container custom-control custom-radio ' . $configContainerClasses . '"',
+            ' class="component-container custom-control custom-radio ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -443,11 +443,11 @@ class RadioTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.radio.classes.container', [$configContainerClasses]);
         $html = bsRadio()->name('name')->value($customValue)->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
-            ' class="radio-name-container custom-control custom-radio ' . $customContainerClasses . '"',
+            ' class="component-container custom-control custom-radio ' . $customContainerClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
-            ' class="radio-name-container custom-control custom-radio ' . $configContainerClasses . '"',
+            ' class="component-container custom-control custom-radio ' . $configContainerClasses . '"',
             $html
         );
     }
@@ -459,7 +459,7 @@ class RadioTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.radio.classes.component', [$configComponentClasses]);
         $html = bsRadio()->name('name')->value($customValue)->toHtml();
         $this->assertStringContainsString(
-            ' class="radio-name-component custom-control-input ' . $configComponentClasses . '"',
+            ' class="component custom-control-input ' . $configComponentClasses . '"',
             $html
         );
     }
@@ -472,7 +472,7 @@ class RadioTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.radio.classes.component', [$customComponentClasses]);
         $html = bsRadio()->name('name')->value($customValue)->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
-            ' class="radio-name-component custom-control-input ' . $customComponentClasses . '"',
+            ' class="component custom-control-input ' . $customComponentClasses . '"',
             $html
         );
         $this->assertStringNotContainsString(
