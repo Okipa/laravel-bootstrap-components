@@ -87,7 +87,7 @@ abstract class InputMultilingual extends Input
         $html = '';
         foreach ($this->locales as $locale) {
             $componentHtml = $view
-                ? (string)view(
+                ? (string) view(
                     'bootstrap-components::' . $view,
                     array_merge($this->getLocalizedValues($locale), $extraData)
                 )->render()
@@ -146,6 +146,26 @@ abstract class InputMultilingual extends Input
      *
      * @return string
      */
+    protected function getLocalizedComponentId(string $locale): string
+    {
+        return parent::getComponentId() . '-' . $locale;
+    }
+
+    /**
+     * @param string $locale
+     *
+     * @return array
+     */
+    protected function getLocalizedContainerHtmlAttributes(string $locale): array
+    {
+        return array_merge(['data-locale' => $locale], parent::getContainerHtmlAttributes());
+    }
+
+    /**
+     * @param string $locale
+     *
+     * @return string
+     */
     protected function getLocalizedName(string $locale): string
     {
         return $this->multilingualResolver->resolveLocalizedName($this->getName(), $locale);
@@ -197,30 +217,13 @@ abstract class InputMultilingual extends Input
     /**
      * @param string $locale
      *
-     * @return array
-     */
-    protected function getLocalizedContainerHtmlAttributes(string $locale): array
-    {
-        return array_merge(['data-locale' => $locale], parent::getContainerHtmlAttributes());
-    }
-
-    /**
-     * @param string $locale
-     *
-     * @return string
-     */
-    protected function getLocalizedComponentId(string $locale): string
-    {
-        return parent::getComponentId() . '-' . $locale;
-    }
-
-    /**
      * @return string|null
      */
     protected function getLocalizedValidationClass(string $locale): ?string
     {
         if (session()->has('errors')) {
             $errorMessageBagKey = $this->multilingualResolver->resolveErrorMessageBagKey($this->getName(), $locale);
+
             return session()->get('errors')->has($errorMessageBagKey)
                 ? ($this->getDisplayFailure() ? 'is-invalid' : null)
                 : ($this->getDisplaySuccess() ? 'is-valid' : null);
@@ -231,6 +234,7 @@ abstract class InputMultilingual extends Input
 
     /**
      * @param string $locale
+     *
      * @return string|null
      */
     protected function getLocalizedErrorMessage(string $locale): ?string

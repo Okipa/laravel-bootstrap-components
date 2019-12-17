@@ -233,7 +233,6 @@ class TextareaTest extends BootstrapComponentsTestCase
         $html = bsTextarea()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="textarea-name">' . $label . '</label>', $html);
         $this->assertStringContainsString(' placeholder="' . $label . '"', $html);
-        $this->assertStringContainsString(' aria-labelledby="' . $label . '"', $html);
     }
 
     public function testSetTranslatedLabel()
@@ -242,7 +241,6 @@ class TextareaTest extends BootstrapComponentsTestCase
         $html = bsTextarea()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="textarea-name">' . __($label) . '</label>', $html);
         $this->assertStringContainsString(' placeholder="' . __($label) . '"', $html);
-        $this->assertStringContainsString(' aria-labelledby="' . __($label) . '"', $html);
     }
 
     public function testNoLabel()
@@ -252,10 +250,6 @@ class TextareaTest extends BootstrapComponentsTestCase
             '<label for="textarea-name">validation.attributes.name</label>',
             $html
         );
-        $this->assertStringContainsString(
-            ' aria-labelledby="validation.attributes.name"',
-            $html
-        );
     }
 
     public function testHideLabel()
@@ -263,10 +257,6 @@ class TextareaTest extends BootstrapComponentsTestCase
         $html = bsTextarea()->name('name')->label(false)->toHtml();
         $this->assertStringNotContainsString(
             '<label for="textarea-name">validation.attributes.name</label>',
-            $html
-        );
-        $this->assertStringNotContainsString(
-            ' aria-labelledby="validation.attributes.name"',
             $html
         );
     }
@@ -733,7 +723,6 @@ class TextareaTest extends BootstrapComponentsTestCase
                 $html
             );
             $this->assertStringContainsString(' placeholder="' . $label . ' (' . strtoupper($locale) . ')"', $html);
-            $this->assertStringContainsString(' aria-labelledby="' . $label . ' (' . strtoupper($locale) . ')"', $html);
         }
     }
 

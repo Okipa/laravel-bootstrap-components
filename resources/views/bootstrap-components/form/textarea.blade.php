@@ -6,7 +6,7 @@
         <div class="input-group">
     @endif
         @include('bootstrap-components::bootstrap-components.partials.prepend')
-        <textarea id="{{ $componentId }}" name="{{ $name }}"{{ classTag('component', 'form-control', $componentClasses, $validationClass) }}{{ htmlAttributes($placeholder ? ['placeholder' => $placeholder] : null, $componentHtmlAttributes) }} aria-labelledby="{{ $label }}">{{ old($name, $value) }}</textarea>
+        <textarea id="{{ $componentId }}" name="{{ $name }}"{{ classTag('component', 'form-control', $componentClasses, $validationClass) }}{{ htmlAttributes($placeholder ? ['placeholder' => $placeholder] : null, $componentHtmlAttributes) }}>{{ old($name, $value) }}</textarea>
         @include('bootstrap-components::bootstrap-components.partials.append')
     @if(! empty($prepend) || ! empty($append))
         </div>

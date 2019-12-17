@@ -230,7 +230,6 @@ class FileTest extends BootstrapComponentsTestCase
         $label = 'test-custom-label';
         $html = bsFile()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="file-name">' . $label . '</label>', $html);
-        $this->assertStringContainsString(' aria-labelledby="' . $label . '"', $html);
     }
 
     public function testSetTranslatedLabel()
@@ -238,7 +237,6 @@ class FileTest extends BootstrapComponentsTestCase
         $label = 'bootstrap-components::bootstrap-components.label.validate';
         $html = bsFile()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="file-name">' . __($label) . '</label>', $html);
-        $this->assertStringContainsString(' aria-labelledby="' . __($label) . '"', $html);
     }
 
     public function testNoLabel()
@@ -248,10 +246,6 @@ class FileTest extends BootstrapComponentsTestCase
             '<label for="file-name">validation.attributes.name</label>',
             $html
         );
-        $this->assertStringContainsString(
-            ' aria-labelledby="validation.attributes.name"',
-            $html
-        );
     }
 
     public function testHideLabel()
@@ -259,10 +253,6 @@ class FileTest extends BootstrapComponentsTestCase
         $html = bsFile()->name('name')->label(false)->toHtml();
         $this->assertStringNotContainsString(
             '<label for="file-name">validation.attributes.name</label>',
-            $html
-        );
-        $this->assertStringNotContainsString(
-            ' aria-labelledby="validation.attributes.name"',
             $html
         );
     }

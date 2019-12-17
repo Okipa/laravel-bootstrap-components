@@ -47,8 +47,7 @@ And get this HTML generated for you :
             type="text"
             name="name"
             value=""
-            placeholder="Name"
-            aria-labelledby="Name">
+            placeholder="Name">
     </div>
 </div>
 ```
@@ -80,8 +79,7 @@ And get this HTML generated for you :
             type="text"
             name="title[fr]"
             value=""
-            placeholder="Title (FR)"
-            aria-labelledby="Title (FR)">
+            placeholder="Title (FR)">
     </div>
 </div>
 <div id="text-title-en-container" class="text-title-en-container form-group">
@@ -99,8 +97,7 @@ And get this HTML generated for you :
             type="text"
             name="title[en]"
             value=""
-            placeholder="Title (EN)"
-            aria-labelledby="Title (EN)">
+            placeholder="Title (EN)">
     </div>
 </div>
 ```

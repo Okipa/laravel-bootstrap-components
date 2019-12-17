@@ -224,7 +224,6 @@ class EmailTest extends BootstrapComponentsTestCase
         $html = bsEmail()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="email-name">' . $label . '</label>', $html);
         $this->assertStringContainsString(' placeholder="' . $label . '"', $html);
-        $this->assertStringContainsString(' aria-labelledby="' . $label . '"', $html);
     }
 
     public function testSetTranslatedLabel()
@@ -233,7 +232,6 @@ class EmailTest extends BootstrapComponentsTestCase
         $html = bsEmail()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="email-name">' . __($label) . '</label>', $html);
         $this->assertStringContainsString(' placeholder="' . __($label) . '"', $html);
-        $this->assertStringContainsString(' aria-labelledby="' . __($label) . '"', $html);
     }
 
     public function testNoLabel()
@@ -243,7 +241,6 @@ class EmailTest extends BootstrapComponentsTestCase
             '<label for="email-name">validation.attributes.name</label>',
             $html
         );
-        $this->assertStringContainsString(' aria-labelledby="validation.attributes.name"', $html);
     }
 
     public function testHideLabel()
@@ -251,10 +248,6 @@ class EmailTest extends BootstrapComponentsTestCase
         $html = bsEmail()->name('name')->label(false)->toHtml();
         $this->assertStringNotContainsString(
             '<label for="email-name">validation.attributes.name</label>',
-            $html
-        );
-        $this->assertStringNotContainsString(
-            ' aria-labelledby="validation.attributes.name"',
             $html
         );
     }

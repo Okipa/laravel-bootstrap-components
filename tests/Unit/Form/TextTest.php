@@ -227,7 +227,6 @@ class TextTest extends BootstrapComponentsTestCase
         $html = bsText()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="text-name">' . $label . '</label>', $html);
         $this->assertStringContainsString(' placeholder="' . $label . '"', $html);
-        $this->assertStringContainsString(' aria-labelledby="' . $label . '"', $html);
     }
 
     public function testSetTranslatedLabel()
@@ -236,7 +235,6 @@ class TextTest extends BootstrapComponentsTestCase
         $html = bsText()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="text-name">' . __($label) . '</label>', $html);
         $this->assertStringContainsString(' placeholder="' . __($label) . '"', $html);
-        $this->assertStringContainsString(' aria-labelledby="' . __($label) . '"', $html);
     }
 
     public function testNoLabel()
@@ -246,10 +244,6 @@ class TextTest extends BootstrapComponentsTestCase
             '<label for="text-name">validation.attributes.name</label>',
             $html
         );
-        $this->assertStringContainsString(
-            ' aria-labelledby="validation.attributes.name"',
-            $html
-        );
     }
 
     public function testHideLabel()
@@ -257,10 +251,6 @@ class TextTest extends BootstrapComponentsTestCase
         $html = bsText()->name('name')->label(false)->toHtml();
         $this->assertStringNotContainsString(
             '<label for="text-name">validation.attributes.name</label>',
-            $html
-        );
-        $this->assertStringNotContainsString(
-            ' aria-labelledby="validation.attributes.name"',
             $html
         );
     }
@@ -729,7 +719,6 @@ class TextTest extends BootstrapComponentsTestCase
                 $html
             );
             $this->assertStringContainsString(' placeholder="' . $label . ' (' . strtoupper($locale) . ')"', $html);
-            $this->assertStringContainsString(' aria-labelledby="' . $label . ' (' . strtoupper($locale) . ')"', $html);
         }
     }
 

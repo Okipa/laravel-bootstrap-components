@@ -291,7 +291,6 @@ class TimeTest extends BootstrapComponentsTestCase
         $html = bsTime()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="time-name">' . $label . '</label>', $html);
         $this->assertStringContainsString(' placeholder="' . $label . '"', $html);
-        $this->assertStringContainsString(' aria-labelledby="' . $label . '"', $html);
     }
 
     public function testSetTranslatedLabel()
@@ -300,7 +299,6 @@ class TimeTest extends BootstrapComponentsTestCase
         $html = bsTime()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="time-name">' . __($label) . '</label>', $html);
         $this->assertStringContainsString(' placeholder="' . __($label) . '"', $html);
-        $this->assertStringContainsString(' aria-labelledby="' . __($label) . '"', $html);
     }
 
     public function testNoLabel()
@@ -310,10 +308,6 @@ class TimeTest extends BootstrapComponentsTestCase
             '<label for="time-name">validation.attributes.name</label>',
             $html
         );
-        $this->assertStringContainsString(
-            ' aria-labelledby="validation.attributes.name"',
-            $html
-        );
     }
 
     public function testHideLabel()
@@ -321,10 +315,6 @@ class TimeTest extends BootstrapComponentsTestCase
         $html = bsTime()->name('name')->label(false)->toHtml();
         $this->assertStringNotContainsString(
             '<label for="time-name">validation.attributes.name</label>',
-            $html
-        );
-        $this->assertStringNotContainsString(
-            ' aria-labelledby="validation.attributes.name"',
             $html
         );
     }

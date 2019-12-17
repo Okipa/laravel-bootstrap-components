@@ -237,7 +237,6 @@ class NumberTest extends BootstrapComponentsTestCase
         $html = bsNumber()->name('credit')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="number-credit">' . $label . '</label>', $html);
         $this->assertStringContainsString(' placeholder="' . $label . '"', $html);
-        $this->assertStringContainsString(' aria-labelledby="' . $label . '"', $html);
     }
 
     public function testSetTranslatedLabel()
@@ -246,7 +245,6 @@ class NumberTest extends BootstrapComponentsTestCase
         $html = bsNumber()->name('credit')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="number-credit">' . __($label) . '</label>', $html);
         $this->assertStringContainsString(' placeholder="' . __($label) . '"', $html);
-        $this->assertStringContainsString(' aria-labelledby="' . __($label) . '"', $html);
     }
 
     public function testNoLabel()
@@ -256,7 +254,6 @@ class NumberTest extends BootstrapComponentsTestCase
             '<label for="number-credit">validation.attributes.credit</label>',
             $html
         );
-        $this->assertStringContainsString(' aria-labelledby="validation.attributes.credit"', $html);
     }
 
     public function testHideLabel()
@@ -264,10 +261,6 @@ class NumberTest extends BootstrapComponentsTestCase
         $html = bsNumber()->name('credit')->label(false)->toHtml();
         $this->assertStringNotContainsString(
             '<label for="number-credit">validation.attributes.name</label>',
-            $html
-        );
-        $this->assertStringNotContainsString(
-            ' aria-labelledby="validation.attributes.credit"',
             $html
         );
     }
