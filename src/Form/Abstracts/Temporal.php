@@ -1,11 +1,11 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Form;
+namespace Okipa\LaravelBootstrapComponents\Form\Abstracts;
 
 use Carbon\Carbon;
 use Okipa\LaravelBootstrapComponents\Form\Traits\TemporalValidityChecks;
 
-abstract class Temporal extends Input
+abstract class Temporal extends Form
 {
     use TemporalValidityChecks;
 
@@ -25,7 +25,7 @@ abstract class Temporal extends Input
     }
 
     /**
-     * Set the default format
+     * Get the time format
      *
      * @return string
      */

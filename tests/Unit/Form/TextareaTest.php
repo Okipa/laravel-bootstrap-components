@@ -5,48 +5,16 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 use Exception;
 use Illuminate\Support\MessageBag;
 use InvalidArgumentException;
-use Okipa\LaravelBootstrapComponents\Form\InputMultilingual;
+use Okipa\LaravelBootstrapComponents\Form\Abstracts\Multilingual;
 use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
 use Okipa\LaravelBootstrapComponents\Test\Fakers\MultilingualResolver;
-use Okipa\LaravelBootstrapComponents\Test\Fakers\UsersFaker;
 use Okipa\LaravelBootstrapComponents\Test\Models\User;
 
 class TextareaTest extends BootstrapComponentsTestCase
 {
-    use UsersFaker;
-
-    public function testConfigStructure()
-    {
-        // components.form
-        $this->assertTrue(array_key_exists('textarea', config('bootstrap-components.form')));
-        // components.form.textarea
-        $this->assertTrue(array_key_exists('view', config('bootstrap-components.form.textarea')));
-        $this->assertTrue(array_key_exists('prepend', config('bootstrap-components.form.textarea')));
-        $this->assertTrue(array_key_exists('append', config('bootstrap-components.form.textarea')));
-        $this->assertTrue(array_key_exists('labelPositionedAbove', config('bootstrap-components.form.textarea')));
-        $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.textarea')));
-        $this->assertTrue(array_key_exists('classes', config('bootstrap-components.form.textarea')));
-        $this->assertTrue(array_key_exists('htmlAttributes', config('bootstrap-components.form.textarea')));
-        // components.form.textarea.classes
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.textarea.classes')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.textarea.classes')));
-        // components.form.textarea.htmlAttributes
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.textarea.htmlAttributes')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.textarea.htmlAttributes')));
-        // components.form.textarea.formValidation
-        $this->assertTrue(array_key_exists(
-            'displaySuccess',
-            config('bootstrap-components.form.textarea.formValidation')
-        ));
-        $this->assertTrue(array_key_exists(
-            'displayFailure',
-            config('bootstrap-components.form.textarea.formValidation')
-        ));
-    }
-
     public function testExtendsInput()
     {
-        $this->assertEquals(InputMultilingual::class, get_parent_class(bsTextarea()));
+        $this->assertEquals(Multilingual::class, get_parent_class(bsTextarea()));
     }
 
     public function testSetName()

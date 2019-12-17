@@ -4,201 +4,161 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
 use Exception;
 use Illuminate\Support\MessageBag;
-use Okipa\LaravelBootstrapComponents\Form\Input;
+use Okipa\LaravelBootstrapComponents\Form\Abstracts\Form;
 use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
+use Okipa\LaravelBootstrapComponents\Test\Dummy\Components\Url;
 use Okipa\LaravelBootstrapComponents\Test\Fakers\UsersFaker;
 
-class UrlTest extends BootstrapComponentsTestCase
+class InputTest extends BootstrapComponentsTestCase
 {
     use UsersFaker;
 
-    public function testConfigStructure()
-    {
-        // components.form
-        $this->assertTrue(array_key_exists('url', config('bootstrap-components.form')));
-        // components.form.url
-        $this->assertTrue(array_key_exists('view', config('bootstrap-components.form.url')));
-        $this->assertTrue(array_key_exists('prepend', config('bootstrap-components.form.url')));
-        $this->assertTrue(array_key_exists('append', config('bootstrap-components.form.url')));
-        $this->assertTrue(array_key_exists('labelPositionedAbove', config('bootstrap-components.form.url')));
-        $this->assertTrue(array_key_exists('legend', config('bootstrap-components.form.url')));
-        $this->assertTrue(array_key_exists('classes', config('bootstrap-components.form.url')));
-        $this->assertTrue(array_key_exists('htmlAttributes', config('bootstrap-components.form.url')));
-        // components.form.url.classes
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.url.classes')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.url.classes')));
-        // components.form.url.htmlAttributes
-        $this->assertTrue(array_key_exists('container', config('bootstrap-components.form.url.htmlAttributes')));
-        $this->assertTrue(array_key_exists('component', config('bootstrap-components.form.url.htmlAttributes')));
-        // components.form.url.formValidation
-        $this->assertTrue(array_key_exists('displaySuccess', config('bootstrap-components.form.url.formValidation')));
-        $this->assertTrue(array_key_exists('displayFailure', config('bootstrap-components.form.url.formValidation')));
-    }
-
     public function testExtendsInput()
     {
-        $this->assertEquals(Input::class, get_parent_class(bsUrl()));
+        $this->assertEquals(Form::class, get_parent_class(inputUrl()));
     }
 
     public function testSetName()
     {
-        $html = bsUrl()->name('name')->toHtml();
+        $html = inputUrl()->name('name')->toHtml();
         $this->assertStringContainsString(' name="name"', $html);
     }
 
     public function testType()
     {
-        $html = bsUrl()->name('name')->toHtml();
+        $html = inputUrl()->name('name')->toHtml();
         $this->assertStringContainsString(' type="url"', $html);
     }
 
     public function testInputWithoutName()
     {
         $this->expectException(Exception::class);
-        bsUrl()->toHtml();
+        inputUrl()->toHtml();
     }
 
     public function testModelValue()
     {
         $user = $this->createUniqueUser();
-        $html = bsUrl()->model($user)->name('name')->toHtml();
+        $html = inputUrl()->model($user)->name('name')->toHtml();
         $this->assertStringContainsString(' value="' . $user->name . '"', $html);
     }
 
-    public function testConfigPrepend()
+    public function testCustomPrepend()
     {
-        $configPrepend = 'test-config-prepend';
-        config()->set('bootstrap-components.form.url.prepend', $configPrepend);
-        $html = bsUrl()->name('name')->toHtml();
-        $this->assertStringContainsString('input-group-prepend', $html);
-        $this->assertStringContainsString('<span class="input-group-text">' . $configPrepend . '</span>', $html);
+        $customUrlComponent = new Class extends \Okipa\LaravelBootstrapComponents\Form\Components\Url {
+            protected function setPrepend(): ?string
+            {
+                return 'default-prepend';
+            }
+        };
+        config()->set('bootstrap-components.form.components.url', get_class($customUrlComponent));
+        $html = inputUrl()->name('name')->toHtml();
+        $this->assertStringContainsString('<span class="input-group-text">default-prepend</span>', $html);
     }
 
-    public function testSetPrepend()
+    public function testSetPrependOverridesDefault()
     {
-        $configPrepend = 'test-config-prepend';
-        $customPrepend = 'test-custom-prepend';
-        config()->set('bootstrap-components.form.url.prepend', $configPrepend);
-        $html = bsUrl()->name('name')->prepend($customPrepend)->toHtml();
-        $this->assertStringContainsString('input-group-prepend', $html);
-        $this->assertStringContainsString('<span class="input-group-text">' . $customPrepend . '</span>', $html);
-        $this->assertStringNotContainsString('<span class="input-group-text">' . $configPrepend . '</span>', $html);
-    }
-
-    public function testNoPrepend()
-    {
-        config()->set('bootstrap-components.form.url.prepend', null);
-        $html = bsUrl()->name('name')->toHtml();
-        $this->assertStringNotContainsString('input-group-prepend', $html);
+        $customUrlComponent = new Class extends \Okipa\LaravelBootstrapComponents\Form\Components\Url {
+            protected function setPrepend(): ?string
+            {
+                return 'default-prepend';
+            }
+        };
+        config()->set('bootstrap-components.form.components.url', get_class($customUrlComponent));
+        $html = inputUrl()->name('name')->prepend('custom-prepend')->toHtml();
+        $this->assertStringContainsString('<span class="input-group-text">custom-prepend</span>', $html);
+        $this->assertStringNotContainsString('<span class="input-group-text">default-prepend</span>', $html);
     }
 
     public function testHidePrepend()
     {
-        $configPrepend = 'test-config-prepend';
-        config()->set('bootstrap-components.form.url.prepend', $configPrepend);
-        $html = bsUrl()->name('name')->prepend(false)->toHtml();
-        $this->assertStringNotContainsString('input-group-prepend', $html);
+        $html = inputUrl()->name('name')->prepend(null)->toHtml();
+        $this->assertStringNotContainsString('<div class="input-group-prepend">', $html);
     }
 
-    public function testConfigAppend()
+    public function testCustomAppend()
     {
-        $configAppend = 'test-config-append';
-        config()->set('bootstrap-components.form.url.append', $configAppend);
-        $html = bsUrl()->name('name')->toHtml();
-        $this->assertStringContainsString('input-group-append', $html);
-        $this->assertStringContainsString('<span class="input-group-text">' . $configAppend . '</span>', $html);
+        $customUrlComponent = new Class extends \Okipa\LaravelBootstrapComponents\Form\Components\Url {
+            protected function setAppend(): ?string
+            {
+                return 'default-append';
+            }
+        };
+        config()->set('bootstrap-components.form.components.url', get_class($customUrlComponent));
+        $html = inputUrl()->name('name')->toHtml();
+        $this->assertStringContainsString('<span class="input-group-text">default-append</span>', $html);
     }
 
-    public function testSetAppend()
+    public function testSetAppendOverridesDefault()
     {
-        $configAppend = 'test-config-append';
-        $customAppend = 'test-custom-append';
-        config()->set('bootstrap-components.form.url.append', $configAppend);
-        $html = bsUrl()->name('name')->append($customAppend)->toHtml();
-        $this->assertStringContainsString('input-group-append', $html);
-        $this->assertStringContainsString('<span class="input-group-text">' . $customAppend . '</span>', $html);
-        $this->assertStringNotContainsString('<span class="input-group-text">' . $configAppend . '</span>', $html);
-    }
-
-    public function testNoAppend()
-    {
-        config()->set('bootstrap-components.form.url.append', null);
-        $html = bsUrl()->name('name')->toHtml();
-        $this->assertStringNotContainsString('input-group-append', $html);
+        $customUrlComponent = new Class extends \Okipa\LaravelBootstrapComponents\Form\Components\Url {
+            protected function setPrepend(): ?string
+            {
+                return 'default-append';
+            }
+        };
+        config()->set('bootstrap-components.form.components.url', get_class($customUrlComponent));
+        $html = inputUrl()->name('name')->append('custom-append')->toHtml();
+        $this->assertStringContainsString('<span class="input-group-text">custom-append</span>', $html);
+        $this->assertStringNotContainsString('<span class="input-group-text">default-append</span>', $html);
     }
 
     public function testHideAppend()
     {
-        $configAppend = 'test-config-append';
-        config()->set('bootstrap-components.form.url.append', $configAppend);
-        $html = bsUrl()->name('name')->append(false)->toHtml();
-        $this->assertStringNotContainsString('input-group-append', $html);
-    }
-
-    public function testNoPrependNoAppend()
-    {
-        config()->set('bootstrap-components.form.url.prepend', null);
-        config()->set('bootstrap-components.form.url.append', null);
-        $html = bsUrl()->name('name')->toHtml();
-        $this->assertStringNotContainsString('<div class="input-group">', $html);
+        $html = inputUrl()->name('name')->append(null)->toHtml();
+        $this->assertStringNotContainsString('<div class="input-group-append">', $html);
     }
 
     public function testHidePrependHideAppend()
     {
-        $configPrepend = 'test-config-prepend';
-        $configAppend = 'test-config-append';
-        config()->set('bootstrap-components.form.url.prepend', $configPrepend);
-        config()->set('bootstrap-components.form.url.append', $configAppend);
-        $html = bsUrl()->name('name')->prepend(false)->append(false)->toHtml();
+        $html = inputUrl()->name('name')->prepend(null)->append(null)->toHtml();
         $this->assertStringNotContainsString('<div class="input-group">', $html);
     }
 
-    public function testConfigLegend()
+    public function testCustomLegend()
     {
-        $configLegend = 'test-config-legend';
-        config()->set('bootstrap-components.form.url.legend', $configLegend);
-        $html = bsUrl()->name('name')->toHtml();
-        $this->assertStringContainsString('url-name-legend', $html);
-        $this->assertStringContainsString('bootstrap-components::' . $configLegend, $html);
+        $customUrlComponent = new Class extends \Okipa\LaravelBootstrapComponents\Form\Components\Url {
+            protected function setLegend(): ?string
+            {
+                return 'default-legend';
+            }
+        };
+        config()->set('bootstrap-components.form.components.url', get_class($customUrlComponent));
+        $html = inputUrl()->name('name')->toHtml();
+        $this->assertStringContainsString('class="legend form-text text-muted">default-legend', $html);
     }
 
-    public function testSetLegend()
+    public function testSetLegendOverridesDefault()
     {
-        $configLegend = 'test-config-legend';
-        $customLegend = 'test-custom-legend';
-        config()->set('bootstrap-components.form.url.legend', $configLegend);
-        $html = bsUrl()->name('name')->legend($customLegend)->toHtml();
-        $this->assertStringContainsString('url-name-legend', $html);
-        $this->assertStringContainsString($customLegend, $html);
-        $this->assertStringNotContainsString($configLegend, $html);
+        $customUrlComponent = new Class extends \Okipa\LaravelBootstrapComponents\Form\Components\Url {
+            protected function setLegend(): ?string
+            {
+                return 'default-legend';
+            }
+        };
+        config()->set('bootstrap-components.form.components.url', get_class($customUrlComponent));
+        $html = inputUrl()->name('name')->legend('custom-legend')->toHtml();
+        $this->assertStringContainsString('class="legend form-text text-muted">custom-legend', $html);
+        $this->assertStringNotContainsString('class="legend form-text text-muted">default-legend', $html);
     }
 
     public function testSetTranslatedLegend()
     {
         $legend = 'bootstrap-components::bootstrap-components.label.validate';
-        $html = bsUrl()->name('name')->legend($legend)->toHtml();
+        $html = inputUrl()->name('name')->legend($legend)->toHtml();
         $this->assertStringContainsString(__($legend), $html);
-    }
-
-    public function testNoLegend()
-    {
-        config()->set('bootstrap-components.form.url.legend', null);
-        $html = bsUrl()->name('name')->toHtml();
-        $this->assertStringNotContainsString('url-name-legend', $html);
     }
 
     public function testHideLegend()
     {
-        $configLegend = 'test-config-legend';
-        config()->set('bootstrap-components.form.url.legend', $configLegend);
-        $html = bsUrl()->name('name')->legend(false)->toHtml();
-        $this->assertStringNotContainsString('url-name-legend', $html);
+        $html = inputUrl()->name('name')->legend(null)->toHtml();
+        $this->assertStringNotContainsString('class="legend form-text text-muted"', $html);
     }
 
     public function testSetValue()
     {
         $customValue = 'test-custom-value';
-        $html = bsUrl()->name('name')->value($customValue)->toHtml();
+        $html = inputUrl()->name('name')->value($customValue)->toHtml();
         $this->assertStringContainsString(' value="' . $customValue . '"', $html);
     }
 
@@ -213,7 +173,7 @@ class UrlTest extends BootstrapComponentsTestCase
             },
         ]);
         $this->call('GET', 'test');
-        $html = bsUrl()->name('name')->value($customValue)->toHtml();
+        $html = inputUrl()->name('name')->value($customValue)->toHtml();
         $this->assertStringContainsString(' value="' . $oldValue . '"', $html);
         $this->assertStringNotContainsString(' value="' . $customValue . '"', $html);
     }
@@ -221,7 +181,7 @@ class UrlTest extends BootstrapComponentsTestCase
     public function testSetLabel()
     {
         $label = 'test-custom-label';
-        $html = bsUrl()->name('name')->label($label)->toHtml();
+        $html = inputUrl()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="url-name">' . $label . '</label>', $html);
         $this->assertStringContainsString(' placeholder="' . $label . '"', $html);
     }
@@ -229,27 +189,29 @@ class UrlTest extends BootstrapComponentsTestCase
     public function testSetTranslatedLabel()
     {
         $label = 'bootstrap-components::bootstrap-components.label.validate';
-        $html = bsUrl()->name('name')->label($label)->toHtml();
+        $html = inputUrl()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString('<label for="url-name">' . __($label) . '</label>', $html);
         $this->assertStringContainsString(' placeholder="' . __($label) . '"', $html);
     }
 
     public function testNoLabel()
     {
-        $html = bsUrl()->name('name')->toHtml();
+        $html = inputUrl()->name('name')->toHtml();
         $this->assertStringContainsString('<label for="url-name">validation.attributes.name</label>', $html);
     }
 
     public function testHideLabel()
     {
-        $html = bsUrl()->name('name')->label(false)->toHtml();
+        $html = inputUrl()->name('name')->label(false)->toHtml();
         $this->assertStringNotContainsString('<label for="url-name">validation.attributes.name</label>', $html);
     }
+
+    // here
 
     public function testConfigLabelPositionedAbove()
     {
         config()->set('bootstrap-components.form.url.labelPositionedAbove', true);
-        $html = bsUrl()->name('name')->toHtml();
+        $html = inputUrl()->name('name')->toHtml();
         $labelPosition = strrpos($html, '<label for="');
         $inputPosition = strrpos($html, '<input');
         $this->assertLessThan($inputPosition, $labelPosition);
@@ -258,7 +220,7 @@ class UrlTest extends BootstrapComponentsTestCase
     public function testConfigLabelPositionedUnder()
     {
         config()->set('bootstrap-components.form.url.labelPositionedAbove', false);
-        $html = bsUrl()->name('name')->toHtml();
+        $html = inputUrl()->name('name')->toHtml();
         $labelPosition = strrpos($html, '<label for="');
         $inputPosition = strrpos($html, '<input');
         $this->assertLessThan($labelPosition, $inputPosition);
@@ -267,7 +229,7 @@ class UrlTest extends BootstrapComponentsTestCase
     public function testLabelPositionedAbove()
     {
         config()->set('bootstrap-components.form.url.labelPositionedAbove', false);
-        $html = bsUrl()->name('name')->labelPositionedAbove()->toHtml();
+        $html = inputUrl()->name('name')->labelPositionedAbove()->toHtml();
         $labelPosition = strrpos($html, '<label for="');
         $inputPosition = strrpos($html, '<input');
         $this->assertLessThan($inputPosition, $labelPosition);
@@ -276,7 +238,7 @@ class UrlTest extends BootstrapComponentsTestCase
     public function testLabelPositionedUnder()
     {
         config()->set('bootstrap-components.form.url.labelPositionedAbove', true);
-        $html = bsUrl()->name('name')->labelPositionedAbove(false)->toHtml();
+        $html = inputUrl()->name('name')->labelPositionedAbove(false)->toHtml();
         $labelPosition = strrpos($html, '<label for="');
         $inputPosition = strrpos($html, '<input');
         $this->assertLessThan($labelPosition, $inputPosition);
@@ -285,14 +247,14 @@ class UrlTest extends BootstrapComponentsTestCase
     public function testSetPlaceholder()
     {
         $placeholder = 'test-custom-placeholder';
-        $html = bsUrl()->name('name')->placeholder($placeholder)->toHtml();
+        $html = inputUrl()->name('name')->placeholder($placeholder)->toHtml();
         $this->assertStringContainsString(' placeholder="' . $placeholder . '"', $html);
     }
 
     public function testSetTranslatedPlaceholder()
     {
         $placeholder = 'bootstrap-components::bootstrap-components.label.validate';
-        $html = bsUrl()->name('name')->placeholder($placeholder)->toHtml();
+        $html = inputUrl()->name('name')->placeholder($placeholder)->toHtml();
         $this->assertStringContainsString(' placeholder="' . __($placeholder) . '"', $html);
     }
 
@@ -300,25 +262,25 @@ class UrlTest extends BootstrapComponentsTestCase
     {
         $label = 'test-custom-label';
         $placeholder = 'test-custom-placeholder';
-        $html = bsUrl()->name('name')->label($label)->placeholder($placeholder)->toHtml();
+        $html = inputUrl()->name('name')->label($label)->placeholder($placeholder)->toHtml();
         $this->assertStringContainsString(' placeholder="' . $placeholder . '"', $html);
     }
 
     public function testNoPlaceholder()
     {
-        $html = bsUrl()->name('name')->toHtml();
+        $html = inputUrl()->name('name')->toHtml();
         $this->assertStringContainsString(' placeholder="validation.attributes.name"', $html);
     }
 
     public function testNoPlaceholderWithNoLabel()
     {
-        $html = bsUrl()->name('name')->label(false)->toHtml();
+        $html = inputUrl()->name('name')->label(false)->toHtml();
         $this->assertStringContainsString(' placeholder="validation.attributes.name"', $html);
     }
 
     public function testHidePlaceholder()
     {
-        $html = bsUrl()->name('name')->placeholder(false)->toHtml();
+        $html = inputUrl()->name('name')->placeholder(false)->toHtml();
         $this->assertStringNotContainsString(' placeholder="', $html);
     }
 
@@ -327,7 +289,7 @@ class UrlTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.url.formValidation.displaySuccess', true);
         $errors = app(MessageBag::class)->add('other_name', 'Dummy error message.');
         session()->put('errors', $errors);
-        $html = bsUrl()->name('name')->render(compact('errors'));
+        $html = inputUrl()->name('name')->render(compact('errors'));
         $this->assertStringContainsString('is-valid', $html);
         $this->assertStringContainsString('<div class="valid-feedback d-block">', $html);
         $this->assertStringContainsString(
@@ -341,7 +303,7 @@ class UrlTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.url.formValidation.displaySuccess', false);
         $errors = app(MessageBag::class)->add('other_name', 'Dummy error message.');
         session()->put('errors', $errors);
-        $html = bsUrl()->name('name')->render(compact('errors'));
+        $html = inputUrl()->name('name')->render(compact('errors'));
         $this->assertStringNotContainsString('is-valid', $html);
         $this->assertStringNotContainsString('<div class="valid-feedback d-block">', $html);
         $this->assertStringNotContainsString(
@@ -355,7 +317,7 @@ class UrlTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.url.formValidation.displaySuccess', false);
         $errors = app(MessageBag::class)->add('other_name', 'Dummy error message.');
         session()->put('errors', $errors);
-        $html = bsUrl()->name('name')->displaySuccess()->render(compact('errors'));
+        $html = inputUrl()->name('name')->displaySuccess()->render(compact('errors'));
         $this->assertStringContainsString('is-valid', $html);
         $this->assertStringContainsString('<div class="valid-feedback d-block">', $html);
         $this->assertStringContainsString(
@@ -369,7 +331,7 @@ class UrlTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.url.formValidation.displaySuccess', true);
         $errors = app(MessageBag::class)->add('other_name', 'Dummy error message.');
         session()->put('errors', $errors);
-        $html = bsUrl()->name('name')->displaySuccess(false)->render(compact('errors'));
+        $html = inputUrl()->name('name')->displaySuccess(false)->render(compact('errors'));
         $this->assertStringNotContainsString('is-valid', $html);
         $this->assertStringNotContainsString('<div class="valid-feedback d-block">', $html);
         $this->assertStringNotContainsString(
@@ -383,7 +345,7 @@ class UrlTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.url.formValidation.displayFailure', true);
         $errors = app(MessageBag::class)->add('name', 'Dummy error message.');
         session()->put('errors', $errors);
-        $html = bsUrl()->name('name')->render(compact('errors'));
+        $html = inputUrl()->name('name')->render(compact('errors'));
         $this->assertStringContainsString('is-invalid', $html);
         $this->assertStringContainsString('<div class="invalid-feedback d-block">', $html);
         $this->assertStringContainsString($errors->first('name'), $html);
@@ -394,7 +356,7 @@ class UrlTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.url.formValidation.displayFailure', false);
         $errors = app(MessageBag::class)->add('name', 'Dummy error message.');
         session()->put('errors', $errors);
-        $html = bsUrl()->name('name')->render(compact('errors'));
+        $html = inputUrl()->name('name')->render(compact('errors'));
         $this->assertStringNotContainsString('is-invalid', $html);
         $this->assertStringNotContainsString('<div class="invalid-feedback d-block">', $html);
         $this->assertStringNotContainsString($errors->first('name'), $html);
@@ -405,7 +367,7 @@ class UrlTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.url.formValidation.displayFailure', false);
         $errors = app(MessageBag::class)->add('name', 'Dummy error message.');
         session()->put('errors', $errors);
-        $html = bsUrl()->name('name')->displayFailure()->render(compact('errors'));
+        $html = inputUrl()->name('name')->displayFailure()->render(compact('errors'));
         $this->assertStringContainsString('is-invalid', $html);
         $this->assertStringContainsString('<div class="invalid-feedback d-block">', $html);
         $this->assertStringContainsString($errors->first('name'), $html);
@@ -416,7 +378,7 @@ class UrlTest extends BootstrapComponentsTestCase
         config()->set('bootstrap-components.form.url.formValidation.displayFailure', true);
         $errors = app(MessageBag::class)->add('name', 'Dummy error message.');
         session()->put('errors', $errors);
-        $html = bsUrl()->name('name')->displayFailure(false)->render(compact('errors'));
+        $html = inputUrl()->name('name')->displayFailure(false)->render(compact('errors'));
         $this->assertStringNotContainsString('is-invalid', $html);
         $this->assertStringNotContainsString('<div class="invalid-feedback d-block">', $html);
         $this->assertStringNotContainsString($errors->first('name'), $html);
@@ -424,20 +386,20 @@ class UrlTest extends BootstrapComponentsTestCase
 
     public function testSetNoContainerId()
     {
-        $html = bsUrl()->name('name')->toHtml();
+        $html = inputUrl()->name('name')->toHtml();
         $this->assertStringNotContainsString('<div id="', $html);
     }
 
     public function testSetContainerId()
     {
         $customContainerId = 'test-custom-container-id';
-        $html = bsUrl()->name('name')->containerId($customContainerId)->toHtml();
+        $html = inputUrl()->name('name')->containerId($customContainerId)->toHtml();
         $this->assertStringContainsString('<div id="' . $customContainerId . '"', $html);
     }
 
     public function testSetNoComponentId()
     {
-        $html = bsUrl()->name('name')->toHtml();
+        $html = inputUrl()->name('name')->toHtml();
         $this->assertStringContainsString(' for="url-name"', $html);
         $this->assertStringContainsString('<input id="url-name"', $html);
     }
@@ -445,7 +407,7 @@ class UrlTest extends BootstrapComponentsTestCase
     public function testSetComponentId()
     {
         $customComponentId = 'test-custom-component-id';
-        $html = bsUrl()->name('name')->componentId($customComponentId)->toHtml();
+        $html = inputUrl()->name('name')->componentId($customComponentId)->toHtml();
         $this->assertStringContainsString(' for="' . $customComponentId . '"', $html);
         $this->assertStringContainsString('<input id="' . $customComponentId . '"', $html);
     }
@@ -454,7 +416,7 @@ class UrlTest extends BootstrapComponentsTestCase
     {
         $configContainerClasses = 'test-config-class-container';
         config()->set('bootstrap-components.form.url.classes.container', [$configContainerClasses]);
-        $html = bsUrl()->name('name')->toHtml();
+        $html = inputUrl()->name('name')->toHtml();
         $this->assertStringContainsString('class="component-container ' . $configContainerClasses . '"', $html);
     }
 
@@ -463,7 +425,7 @@ class UrlTest extends BootstrapComponentsTestCase
         $configContainerClasses = 'test-config-class-container';
         $customContainerClasses = 'test-custom-class-container';
         config()->set('bootstrap-components.form.url.classes.container', [$configContainerClasses]);
-        $html = bsUrl()->name('name')->containerClasses([$customContainerClasses])->toHtml();
+        $html = inputUrl()->name('name')->containerClasses([$customContainerClasses])->toHtml();
         $this->assertStringContainsString(
             'class="component-container ' . $customContainerClasses . '"',
             $html
@@ -478,7 +440,7 @@ class UrlTest extends BootstrapComponentsTestCase
     {
         $configComponentClasses = 'test-config-class-component';
         config()->set('bootstrap-components.form.url.classes.component', [$configComponentClasses]);
-        $html = bsUrl()->name('name')->toHtml();
+        $html = inputUrl()->name('name')->toHtml();
         $this->assertStringContainsString(
             'class="component form-control ' . $configComponentClasses . '"',
             $html
@@ -490,7 +452,7 @@ class UrlTest extends BootstrapComponentsTestCase
         $configComponentClasses = 'test-config-class-component';
         $customComponentClasses = 'test-custom-class-component';
         config()->set('bootstrap-components.form.url.classes.component', [$customComponentClasses]);
-        $html = bsUrl()->name('name')->componentClasses([$customComponentClasses])->toHtml();
+        $html = inputUrl()->name('name')->componentClasses([$customComponentClasses])->toHtml();
         $this->assertStringContainsString(
             'class="component form-control ' . $customComponentClasses . '"',
             $html
@@ -505,7 +467,7 @@ class UrlTest extends BootstrapComponentsTestCase
     {
         $configContainerAttributes = 'test-config-attributes-container';
         config()->set('bootstrap-components.form.url.htmlAttributes.container', [$configContainerAttributes]);
-        $html = bsUrl()->name('name')->toHtml();
+        $html = inputUrl()->name('name')->toHtml();
         $this->assertStringContainsString($configContainerAttributes, $html);
     }
 
@@ -514,7 +476,7 @@ class UrlTest extends BootstrapComponentsTestCase
         $configContainerAttributes = 'test-config-attributes-container';
         $customContainerAttributes = 'test-custom-attributes-container';
         config()->set('bootstrap-components.form.url.htmlAttributes.container', [$configContainerAttributes]);
-        $html = bsUrl()->name('name')->containerHtmlAttributes([$customContainerAttributes])->toHtml();
+        $html = inputUrl()->name('name')->containerHtmlAttributes([$customContainerAttributes])->toHtml();
         $this->assertStringContainsString($customContainerAttributes, $html);
         $this->assertStringNotContainsString($configContainerAttributes, $html);
     }
@@ -523,7 +485,7 @@ class UrlTest extends BootstrapComponentsTestCase
     {
         $configComponentAttributes = 'test-config-attributes-component';
         config()->set('bootstrap-components.form.url.htmlAttributes.component', [$configComponentAttributes]);
-        $html = bsUrl()->name('name')->toHtml();
+        $html = inputUrl()->name('name')->toHtml();
         $this->assertStringContainsString($configComponentAttributes, $html);
     }
 
@@ -532,7 +494,7 @@ class UrlTest extends BootstrapComponentsTestCase
         $configComponentAttributes = 'test-config-attributes-component';
         $customComponentAttributes = 'test-custom-attributes-component';
         config()->set('bootstrap-components.form.url.htmlAttributes.component', [$configComponentAttributes]);
-        $html = bsUrl()->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
+        $html = inputUrl()->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
         $this->assertStringContainsString($customComponentAttributes, $html);
         $this->assertStringNotContainsString($configComponentAttributes, $html);
     }

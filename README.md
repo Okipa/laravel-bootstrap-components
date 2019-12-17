@@ -26,7 +26,7 @@ Just call the components you need in your views and let this package take care o
 Call this component in your view :
 
 ```blade
-{{ bsText()->name('name') }}
+{{ inputText()->name('name') }}
 ```
 
 And get this HTML generated for you :
@@ -57,7 +57,7 @@ And get this HTML generated for you :
 Call this component in your view :
 
 ```blade
-{{ bsText()->name('title')->localized(['fr', 'en']) }}
+{{ inputText()->name('title')->localized(['fr', 'en']) }}
 ```
 
 And get this HTML generated for you :
@@ -112,7 +112,7 @@ And get this HTML generated for you :
 - [API](#api)
   - [Form components](#form-components)
     - [Multilingual](#multilingual)
-      - [bsText()](#bstext)
+      - [inputText()](#bstext)
       - [bsTextarea()](#bstextarea)
     - [Standard](#standard)
       - [bsNumber()](#bsnumber)
@@ -120,7 +120,7 @@ And get this HTML generated for you :
       - [bsDatetime()](#bsdatetime)
       - [bsDate()](#bsdate)
       - [bsTime()](#bstime)
-      - [bsUrl()](#bsurl)
+      - [inputUrl()](#bsurl)
       - [bsEmail()](#bsemail)
       - [bsColor()](#bscolor)
       - [bsPassword()](#bspassword)
@@ -254,10 +254,10 @@ $('.component[type="text"][name="email"')
   * The component localized error message bag key resolution, used for the error message extraction and for the validation class generation (default : `$name . $locale`).
   * The component error message resolution, in order to correctly display the localized attribute name (default : transform `Dummy __('validation.attributes.name.en) error message` into `Dummy __('validation.attributes.name) (EN) error message.`.
 
-##### bsText()
+##### inputText()
 
 ```php
-bsText()->name('name') // set the input name
+inputText()->name('name') // set the input name
     ->locales(['fr', 'en']) // override the default locales config value
     ->model($user) // value is automatically detected from the field name
     ->value(function($locale){ return $name[$locale]; }) // or manually set the value
@@ -415,10 +415,10 @@ bsTime()->name('opening') // set the input name
     ->displayFailure(false) // // override the default form validation display failure config value
 ```
 
-##### bsUrl()
+##### inputUrl()
 
 ```php
-bsUrl()->name('facebook_page') // set the input name
+inputUrl()->name('facebook_page') // set the input name
     ->model($user) // value is automatically detected from the field name
     ->value('https://facebook.com') // or manually set the value
     ->label('Facebook page URL') // override the default __('validation.attributes.[name]') label or set `false` to hide it

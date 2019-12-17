@@ -1,19 +1,19 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Form;
+namespace Okipa\LaravelBootstrapComponents\Form\Abstracts;
 
 use Closure;
-use Okipa\LaravelBootstrapComponents\Form\Traits\InputMultilingualValidityChecks;
+use Okipa\LaravelBootstrapComponents\Form\Traits\MultilingualValidityChecks;
 use Throwable;
 
-abstract class InputMultilingual extends Input
+abstract class Multilingual extends Form
 {
-    use InputMultilingualValidityChecks;
+    use MultilingualValidityChecks;
 
     /**
      * The multilingual component dynamic multilingual resolver .
      *
-     * @property MultilingualResolver $multilingualResolver
+     * @property \Okipa\LaravelBootstrapComponents\Form\MultilingualResolver $multilingualResolver
      */
     protected $multilingualResolver;
 
@@ -29,9 +29,8 @@ abstract class InputMultilingual extends Input
      */
     public function __construct()
     {
-        /** @var MultilingualResolver $multilingualResolver */
-        $multilingualResolver = app(config('bootstrap-components.form.multilingual.resolver'));
-        $this->multilingualResolver = $multilingualResolver;
+        parent::__construct();
+        $this->multilingualResolver = app(config('bootstrap-components.form.multilingualResolver'));
         $this->locales = $this->multilingualResolver->getDefaultLocales();
     }
 

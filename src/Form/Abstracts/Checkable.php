@@ -1,8 +1,8 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Form;
+namespace Okipa\LaravelBootstrapComponents\Form\Abstracts;
 
-abstract class Checkable extends Input
+abstract class Checkable extends Form
 {
     /**
      * The input checked status.

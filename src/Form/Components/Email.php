@@ -1,8 +1,10 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Form;
+namespace Okipa\LaravelBootstrapComponents\Form\Components;
 
-class Email extends Input
+use Okipa\LaravelBootstrapComponents\Form\Abstracts\Form;
+
+class Email extends Form
 {
     /**
      * The component config key.

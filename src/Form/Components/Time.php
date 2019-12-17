@@ -1,6 +1,8 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Form;
+namespace Okipa\LaravelBootstrapComponents\Form\Components;
+
+use Okipa\LaravelBootstrapComponents\Form\Abstracts\Temporal;
 
 class Time extends Temporal
 {

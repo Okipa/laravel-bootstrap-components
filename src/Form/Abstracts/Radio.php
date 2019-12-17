@@ -1,28 +1,14 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Form;
+namespace Okipa\LaravelBootstrapComponents\Form\Abstracts;
 
 use Illuminate\Support\Str;
 use Okipa\LaravelBootstrapComponents\Form\Traits\RadioValidityChecks;
 
-class Radio extends Checkable
+abstract class Radio extends Checkable
 {
     use RadioValidityChecks;
-
-    /**
-     * The component config key.
-     *
-     * @property string $view
-     */
-    protected $configKey = 'form.radio';
-
-    /**
-     * The input type.
-     *
-     * @property string $type
-     */
-    protected $type = 'radio';
-
+    
     /**
      * @return string
      */

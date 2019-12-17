@@ -7,68 +7,42 @@ use Throwable;
 
 abstract class Component implements Htmlable
 {
-    /**
-     * The component config key.
-     *
-     * @property string $view
-     */
-    protected $configKey;
-
-    /**
-     * The component type.
-     *
-     * @property string $type
-     */
+    /** @property string $type */
     protected $type;
 
-    /**
-     * The component view.
-     *
-     * @property string $view
-     */
+    /** @property string $view */
     protected $view;
 
-    /**
-     * The component id.
-     *
-     * @property string $componentId
-     */
+    /** @property string $componentId */
     protected $componentId;
 
-    /**
-     * The component container id.
-     *
-     * @property array $containerId
-     */
+    /** @property array $containerId */
     protected $containerId;
 
-    /**
-     * The component class.
-     *
-     * @property array $componentClasses
-     */
+    /**  @property array $componentClasses */
     protected $componentClasses;
 
-    /**
-     * The component container class.
-     *
-     * @property array $containerClasses
-     */
+    /** @property array $containerClasses */
     protected $containerClasses;
 
-    /**
-     * The component html attributes.
-     *
-     * @property array $componentHtmlAttributes
-     */
+    /** @property array $componentHtmlAttributes */
     protected $componentHtmlAttributes;
 
-    /**
-     * The component container html attributes.
-     *
-     * @property array $containerHtmlAttributes
-     */
+    /** @property array $containerHtmlAttributes */
     protected $containerHtmlAttributes;
+
+    /**
+     * Component constructor.
+     */
+    public function __construct()
+    {
+        $this->type = $this->setType();
+        $this->view = $this->setView();
+        $this->componentClasses = $this->setComponentClasses();
+        $this->componentHtmlAttributes = $this->setComponentHtmlAttributes();
+        $this->containerClasses = $this->setContainerClasses();
+        $this->containerHtmlAttributes = $this->setContainerHtmlAttributes();
+    }
 
     /**
      * Set the component id.
@@ -196,8 +170,15 @@ abstract class Component implements Htmlable
      */
     protected function getView(): string
     {
-        return config('bootstrap-components.' . $this->configKey . '.view', '');
+        return $this->view;
     }
+
+    /**
+     * Set the component view path.
+     *
+     * @return string
+     */
+    abstract protected function setView(): string;
 
     /**
      * Get values for the view.
@@ -224,14 +205,6 @@ abstract class Component implements Htmlable
     }
 
     /**
-     * @return string
-     */
-    protected function getType(): string
-    {
-        return $this->type;
-    }
-
-    /**
      * @return string|null
      */
     protected function getComponentId(): ?string
@@ -252,34 +225,73 @@ abstract class Component implements Htmlable
      */
     protected function getComponentClasses(): array
     {
-        return $this->componentClasses
-            ?? config('bootstrap-components.' . $this->configKey . '.classes.component', []);
+        return $this->componentClasses;
     }
+
+    /**
+     * Set the component classes.
+     *
+     * @return array
+     */
+    abstract protected function setComponentClasses(): array;
 
     /**
      * @return array
      */
     protected function getContainerClasses(): array
     {
-        return $this->containerClasses
-            ?? config('bootstrap-components.' . $this->configKey . '.classes.container', []);
+        return $this->containerClasses;
     }
+
+    /**
+     * Set the container classes.
+     *
+     * @return array
+     */
+    abstract protected function setContainerClasses(): array;
 
     /**
      * @return array
      */
     protected function getComponentHtmlAttributes(): array
     {
-        return $this->componentHtmlAttributes
-            ?? config('bootstrap-components.' . $this->configKey . '.htmlAttributes.component', []);
+        return $this->componentHtmlAttributes;
     }
+
+    /**
+     * Set the component html attributes.
+     *
+     * @return array
+     */
+    abstract protected function setComponentHtmlAttributes(): array;
 
     /**
      * @return array
      */
     protected function getContainerHtmlAttributes(): array
     {
-        return $this->containerHtmlAttributes
-            ?? config('bootstrap-components.' . $this->configKey . '.htmlAttributes.container', []);
+        return $this->containerHtmlAttributes;
     }
+
+    /**
+     * Set the container html attributes.
+     *
+     * @return array
+     */
+    abstract protected function setContainerHtmlAttributes(): array;
+
+    /**
+     * @return string
+     */
+    protected function getType(): string
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set the component type.
+     *
+     * @return string
+     */
+    abstract protected function setType(): string;
 }

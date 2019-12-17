@@ -6,7 +6,7 @@ use Exception;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\MessageBag;
 use Okipa\LaravelBootstrapComponents\Form\Input;
-use Okipa\LaravelBootstrapComponents\Form\Temporal;
+use Okipa\LaravelBootstrapComponents\Form\TemporalComponent;
 use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
 use Okipa\LaravelBootstrapComponents\Test\Fakers\UsersFaker;
 
@@ -46,7 +46,7 @@ class DatetimeTest extends BootstrapComponentsTestCase
 
     public function testExtendsInput()
     {
-        $this->assertEquals(Temporal::class, get_parent_class(bsDatetime()));
+        $this->assertEquals(TemporalComponent::class, get_parent_class(bsDatetime()));
     }
 
     public function testSetName()

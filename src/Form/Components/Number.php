@@ -1,8 +1,10 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Form;
+namespace Okipa\LaravelBootstrapComponents\Form\Components;
 
-class Number extends Input
+use Okipa\LaravelBootstrapComponents\Form\Abstracts\Form;
+
+class Number extends Form
 {
     /**
      * The component config key.

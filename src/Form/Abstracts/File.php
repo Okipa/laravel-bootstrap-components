@@ -1,32 +1,16 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Form;
+namespace Okipa\LaravelBootstrapComponents\Form\Abstracts;
 
-use Closure;
-use Exception;
 use Illuminate\Support\HtmlString;
 use Okipa\LaravelBootstrapComponents\Component;
 
-class File extends Input
+abstract class File extends Form
 {
-    /**
-     * The component config key.
-     *
-     * @property string $view
-     */
-    protected $configKey = 'form.file';
-
-    /**
-     * The input type.
-     *
-     * @property string $type
-     */
-    protected $type = 'file';
-
     /**
      * The uploaded file closure.
      *
-     * @property Closure $uploadedFile
+     * @property callable $uploadedFile
      */
     protected $uploadedFile;
 
@@ -47,11 +31,11 @@ class File extends Input
     /**
      * Set the uploaded file closure.
      *
-     * @param Closure $uploadedFile
+     * @param callable $uploadedFile
      *
      * @return $this
      */
-    public function uploadedFile(Closure $uploadedFile): self
+    public function uploadedFile(callable $uploadedFile): self
     {
         $this->uploadedFile = $uploadedFile;
 
@@ -78,7 +62,7 @@ class File extends Input
      * Set the input values.
      *
      * @return array
-     * @throws Exception
+     * @throws \Exception
      */
     protected function getValues(): array
     {
@@ -127,7 +111,7 @@ class File extends Input
     protected function getRemoveCheckboxLabel(?string $defaultLabel): string
     {
         $translatedDefaultLabel = __($defaultLabel);
-        $defaultRemoveCheckboxLabel = (string)__('bootstrap-components::bootstrap-components.label.remove')
+        $defaultRemoveCheckboxLabel = (string) __('bootstrap-components::bootstrap-components.label.remove')
             . ($translatedDefaultLabel ? ' ' . strtolower($translatedDefaultLabel) : '');
 
         return $this->removeCheckboxLabel ?? $defaultRemoveCheckboxLabel;

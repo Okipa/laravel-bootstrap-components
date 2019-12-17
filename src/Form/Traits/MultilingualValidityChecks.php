@@ -6,7 +6,7 @@ use Closure;
 use Exception;
 use InvalidArgumentException;
 
-trait InputMultilingualValidityChecks
+trait MultilingualValidityChecks
 {
     /**
      * @return bool
@@ -22,9 +22,9 @@ trait InputMultilingualValidityChecks
     protected function checkValuesValidity(): void
     {
         parent::checkValuesValidity();
-        if ($this->multilingualMode() && $this->value && ! $this->value instanceof Closure) {
+        if ($this->multilingualMode() && $this->value && ! is_callable($this->value)) {
             throw new InvalidArgumentException('A multilingual component value has to be set from this
-            closure result : « value(function($locale){}) ».');
+            callable result : « ->value(function($locale){}) ».');
         }
     }
 }

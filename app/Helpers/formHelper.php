@@ -11,19 +11,19 @@ use Okipa\LaravelBootstrapComponents\Form\Password as PasswordComponent;
 use Okipa\LaravelBootstrapComponents\Form\Radio as RadioComponent;
 use Okipa\LaravelBootstrapComponents\Form\Select as SelectComponent;
 use Okipa\LaravelBootstrapComponents\Form\Tel as TelComponent;
-use Okipa\LaravelBootstrapComponents\Form\Text as TextComponent;
+use Okipa\LaravelBootstrapComponents\Form\Components\Text as TextComponent;
 use Okipa\LaravelBootstrapComponents\Form\Textarea as TextareaComponent;
 use Okipa\LaravelBootstrapComponents\Form\Time as TimeComponent;
 use Okipa\LaravelBootstrapComponents\Form\Toggle as ToggleComponent;
-use Okipa\LaravelBootstrapComponents\Form\Url as UrlComponent;
+use Okipa\LaravelBootstrapComponents\Form\Components\Url as UrlComponent;
 
-if (! function_exists('bsText')) {
+if (! function_exists('text')) {
     /**
      * @return TextComponent
      */
-    function bsText(): TextComponent
+    function inputText(): TextComponent
     {
-        return (new TextComponent);
+        return app(config('bootstrap-components.form.components.text'));
     }
 }
 
@@ -77,13 +77,13 @@ if (! function_exists('bsTime')) {
     }
 }
 
-if (! function_exists('bsUrl')) {
+if (! function_exists('inputUrl')) {
     /**
      * @return UrlComponent
      */
-    function bsUrl(): UrlComponent
+    function inputUrl(): UrlComponent
     {
-        return (new UrlComponent);
+        return app(config('bootstrap-components.form.components.url'));
     }
 }
 

@@ -1,8 +1,10 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Form;
+namespace Okipa\LaravelBootstrapComponents\Form\Components;
 
-class Color extends Input
+use Okipa\LaravelBootstrapComponents\Form\Abstracts\Form;
+
+class Color extends Form
 {
     /**
      * The component config key.

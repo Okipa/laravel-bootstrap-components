@@ -1,27 +1,13 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Form;
+namespace Okipa\LaravelBootstrapComponents\Form\Abstracts;
 
 use Illuminate\Support\Arr;
 use Okipa\LaravelBootstrapComponents\Form\Traits\SelectValidityChecks;
 
-class Select extends Input
+abstract class Select extends Form
 {
     use SelectValidityChecks;
-
-    /**
-     * The component config key.
-     *
-     * @property string $view
-     */
-    protected $configKey = 'form.select';
-
-    /**
-     * The input type.
-     *
-     * @property string $type
-     */
-    protected $type = 'select';
 
     /**
      * The select options list.
@@ -72,7 +58,7 @@ class Select extends Input
      * @param string $optionValueField
      * @param string $optionLabelField
      *
-     * @return $this
+     * @return \Okipa\LaravelBootstrapComponents\Form\Components\Select
      */
     public function options(iterable $optionsList, string $optionValueField, string $optionLabelField): self
     {

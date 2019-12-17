@@ -1,119 +1,61 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Form;
+namespace Okipa\LaravelBootstrapComponents\Form\Abstracts;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Okipa\LaravelBootstrapComponents\Component;
-use Okipa\LaravelBootstrapComponents\Form\Traits\InputValidityChecks;
+use Okipa\LaravelBootstrapComponents\Form\Traits\FormValidityChecks;
 
-abstract class Input extends Component
+abstract class Form extends Component
 {
-    use InputValidityChecks;
+    use FormValidityChecks;
 
-    /**
-     * The component config key.
-     *
-     * @property string $configKey
-     */
-    protected $configKey;
-
-    /**
-     * The component associated model.
-     *
-     * @property Model|null $model
-     */
+    /** @property Model|null $model */
     protected $model;
 
-    /**
-     * The component input type.
-     *
-     * @property string $type
-     */
-    protected $type;
-
-    /**
-     * The component input name.
-     *
-     * @property string $name
-     */
+    /** @property string $name */
     protected $name;
 
-    /**
-     * The component prepended html.
-     *
-     * @property string|false $prepend
-     */
+    /** @property string|null $prepend */
     protected $prepend;
 
-    /**
-     * The component appended html.
-     *
-     * @property string|false $append
-     */
+    /** @property string|null $append */
     protected $append;
 
-    /**
-     * The component legend.
-     *
-     * @property string|false $legend
-     */
+    /** @property string|null $legend */
     protected $legend;
 
-    /**
-     * The component label.
-     *
-     * @property string|false $label
-     */
+    /** @property string $label */
     protected $label;
 
-    /**
-     * The component label above-positioning status.
-     *
-     * @property bool $labelPositionedAbove
-     */
+    /** @property bool $labelPositionedAbove */
     protected $labelPositionedAbove;
 
-    /**
-     * The component input value.
-     *
-     * @property string $value
-     */
+    /** @property mixed $value */
     protected $value;
 
-    /**
-     * The component input placeholder.
-     *
-     * @property string|false $placeholder
-     */
+    /** @property string|null $placeholder */
     protected $placeholder;
 
-    /**
-     * The component form validation success display status.
-     *
-     * @property bool $displaySuccess
-     */
+    /** @property bool $displaySuccess */
     protected $displaySuccess;
 
-    /**
-     * The component form validation failure display status.
-     *
-     * @property bool $displayFailure
-     */
+    /** @property bool $displayFailure */
     protected $displayFailure;
 
     /**
-     * Set the component associated model.
-     *
-     * @param Model $model
-     *
-     * @return $this
+     * Form constructor.
      */
-    public function model(Model $model = null): self
+    public function __construct()
     {
-        $this->model = $model;
-
-        return $this;
+        parent::__construct();
+        $this->prepend = $this->setPrepend();
+        $this->append = $this->setAppend();
+        $this->labelPositionedAbove = $this->setLabelPositionedAbove();
+        $this->legend = $this->setLegend();
+        $this->displaySuccess = $this->setDisplaySuccess();
+        $this->displayFailure = $this->setDisplayFailure();
     }
 
     /**
@@ -126,6 +68,20 @@ abstract class Input extends Component
     public function name(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Set the component associated model.
+     *
+     * @param Model $model
+     *
+     * @return $this
+     */
+    public function model(Model $model = null): self
+    {
+        $this->model = $model;
 
         return $this;
     }
@@ -328,27 +284,45 @@ abstract class Input extends Component
      */
     protected function getPrepend(): ?string
     {
-        return $this->prepend ?? config('bootstrap-components.' . $this->configKey . '.prepend');
+        return $this->prepend;
     }
+
+    /**
+     * Set the component prepended html.
+     *
+     * @return string
+     */
+    abstract protected function setPrepend(): ?string;
 
     /**
      * @return string|null
      */
     protected function getAppend(): ?string
     {
-        return $this->append ?? config('bootstrap-components.' . $this->configKey . '.append');
+        return $this->append;
     }
+
+    /**
+     * Set the component appended html.
+     *
+     * @return string|null
+     */
+    abstract protected function setAppend(): ?string;
 
     /**
      * @return string|null
      */
     protected function getLegend(): ?string
     {
-        $configLegend = config('bootstrap-components.' . $this->configKey . '.legend');
-        $defaultLegend = $configLegend ? 'bootstrap-components::' . $configLegend : null;
-
-        return $this->legend ?? $defaultLegend;
+        return $this->legend ? __($this->legend) : null;
     }
+
+    /**
+     * Set the component legend.
+     *
+     * @return string|null
+     */
+    abstract protected function setLegend(): ?string;
 
     /**
      * @return string|null
@@ -365,11 +339,15 @@ abstract class Input extends Component
      */
     protected function getLabelPositionedAbove(): bool
     {
-        $labelPositionedAbove = $this->labelPositionedAbove
-            ?? config('bootstrap-components.' . $this->configKey . '.labelPositionedAbove');
-
-        return $labelPositionedAbove ?? true;
+        return $this->labelPositionedAbove;
     }
+
+    /**
+     * Set the component label above-positioning status
+     *
+     * @return bool
+     */
+    abstract protected function setLabelPositionedAbove(): bool;
 
     /**
      * @return mixed
@@ -397,18 +375,30 @@ abstract class Input extends Component
      */
     protected function getDisplaySuccess(): bool
     {
-        return $this->displaySuccess
-            ?? config('bootstrap-components.' . $this->configKey . '.formValidation.displaySuccess');
+        return $this->displaySuccess;
     }
+
+    /**
+     * Set the component input validation success display status.
+     *
+     * @return bool
+     */
+    abstract protected function setDisplaySuccess(): bool;
 
     /**
      * @return bool
      */
     protected function getDisplayFailure(): bool
     {
-        return $this->displayFailure
-            ?? config('bootstrap-components.' . $this->configKey . '.formValidation.displayFailure');
+        return $this->displayFailure;
     }
+
+    /**
+     * Set the component input validation failure display status.
+     *
+     * @return bool
+     */
+    abstract protected function setDisplayFailure(): bool;
 
     /**
      * @return string|null

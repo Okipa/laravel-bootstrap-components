@@ -5,29 +5,35 @@ return [
     // form components *************************************************************************************************
     'form' => [
 
-        'multilingual' => [
-            'resolver' => \Okipa\LaravelBootstrapComponents\Form\MultilingualResolver::class
+        /*
+         * Whether the form component label is positioned above the component itself.
+         * If not positioned above, the label will be positioned under the input
+         * (may be useful for bootstrap 4 floating labels).
+         */
+        'labelPositionedAbove' => true,
+
+        /*
+         * Whether the form component should display its success or failure status.
+         */
+        'formValidation' => [
+            'displaySuccess' => false,
+            'displayFailure' => true,
         ],
 
-        'text' => [
-            'view' => 'bootstrap-components.form.input',
-            'prepend' => '<i class="fas fa-font"></i>',
-            'append' => null,
-            'labelPositionedAbove' => true,
-            'legend' => null,
-            'classes' => [
-                'container' => ['form-group'],
-                'component' => [],
-            ],
-            'htmlAttributes' => [
-                'container' => [],
-                'component' => [],
-            ],
-            'formValidation' => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
-            ],
+        /*
+         * The fully qualified class name of the form components.
+         * Here you can override them. Make sure your custom component extends the overridden one.
+         */
+        'components' => [
+            'text' => Okipa\LaravelBootstrapComponents\Form\Components\Text::class,
+            'url' => Okipa\LaravelBootstrapComponents\Form\Components\Url::class,
         ],
+
+        /*
+         * The fully qualified class name of the multilingual resolver.
+         * You can override it. Make sure your custom resolver extends this one.
+         */
+        'multilingualResolver' => Okipa\LaravelBootstrapComponents\Form\MultilingualResolver::class,
 
         'number' => [
             'view' => 'bootstrap-components.form.input',
@@ -118,26 +124,6 @@ return [
             'format' => 'H:i:s',
             'labelPositionedAbove' => true,
             'legend' => 'bootstrap-components.legend.time',
-            'classes' => [
-                'container' => ['form-group'],
-                'component' => [],
-            ],
-            'htmlAttributes' => [
-                'container' => [],
-                'component' => [],
-            ],
-            'formValidation' => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
-            ],
-        ],
-
-        'url' => [
-            'view' => 'bootstrap-components.form.input',
-            'prepend' => '<i class="fas fa-link"></i>',
-            'append' => null,
-            'labelPositionedAbove' => true,
-            'legend' => null,
             'classes' => [
                 'container' => ['form-group'],
                 'component' => [],

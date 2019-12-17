@@ -4,7 +4,7 @@ namespace Okipa\LaravelBootstrapComponents\Form\Traits;
 
 use Exception;
 
-trait InputValidityChecks
+trait FormValidityChecks
 {
     /**
      * @return string

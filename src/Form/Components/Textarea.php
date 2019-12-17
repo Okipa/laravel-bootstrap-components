@@ -1,8 +1,10 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Form;
+namespace Okipa\LaravelBootstrapComponents\Form\Components;
 
-class Textarea extends InputMultilingual
+use Okipa\LaravelBootstrapComponents\Form\Abstracts\Multilingual;
+
+class Textarea extends Multilingual
 {
     /**
      * The component config key.
