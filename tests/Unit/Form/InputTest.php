@@ -43,7 +43,7 @@ class InputTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString(' value="' . $user->name . '"', $html);
     }
 
-    public function testCustomPrepend()
+    public function testSetCustomPrepend()
     {
         $customUrlComponent = new Class extends \Okipa\LaravelBootstrapComponents\Form\Components\Url {
             protected function setPrepend(): ?string
@@ -76,7 +76,7 @@ class InputTest extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString('<div class="input-group-prepend">', $html);
     }
 
-    public function testCustomAppend()
+    public function testSetCustomAppend()
     {
         $customUrlComponent = new Class extends \Okipa\LaravelBootstrapComponents\Form\Components\Url {
             protected function setAppend(): ?string
@@ -92,7 +92,7 @@ class InputTest extends BootstrapComponentsTestCase
     public function testSetAppendOverridesDefault()
     {
         $customUrlComponent = new Class extends \Okipa\LaravelBootstrapComponents\Form\Components\Url {
-            protected function setPrepend(): ?string
+            protected function setAppend(): ?string
             {
                 return 'default-append';
             }
@@ -115,7 +115,7 @@ class InputTest extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString('<div class="input-group">', $html);
     }
 
-    public function testCustomLegend()
+    public function testSetCustomLegend()
     {
         $customUrlComponent = new Class extends \Okipa\LaravelBootstrapComponents\Form\Components\Url {
             protected function setLegend(): ?string
@@ -167,7 +167,7 @@ class InputTest extends BootstrapComponentsTestCase
         $oldValue = 'test-old-value';
         $customValue = 'test-custom-value';
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValue) {
+            'middleware' => 'web', 'uses' => function() use ($oldValue) {
                 $request = request()->merge(['name' => $oldValue]);
                 $request->flash();
             },
@@ -206,42 +206,34 @@ class InputTest extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString('<label for="url-name">validation.attributes.name</label>', $html);
     }
 
-    // here
-
-    public function testConfigLabelPositionedAbove()
+    public function testSetCustomLabelPositionedAbove()
     {
-        config()->set('bootstrap-components.form.url.labelPositionedAbove', true);
-        $html = inputUrl()->name('name')->toHtml();
-        $labelPosition = strrpos($html, '<label for="');
-        $inputPosition = strrpos($html, '<input');
-        $this->assertLessThan($inputPosition, $labelPosition);
-    }
-
-    public function testConfigLabelPositionedUnder()
-    {
-        config()->set('bootstrap-components.form.url.labelPositionedAbove', false);
+        $customUrlComponent = new Class extends \Okipa\LaravelBootstrapComponents\Form\Components\Url {
+            protected function setLabelPositionedAbove(): bool
+            {
+                return false;
+            }
+        };
+        config()->set('bootstrap-components.form.components.url', get_class($customUrlComponent));
         $html = inputUrl()->name('name')->toHtml();
         $labelPosition = strrpos($html, '<label for="');
         $inputPosition = strrpos($html, '<input');
         $this->assertLessThan($labelPosition, $inputPosition);
     }
 
-    public function testLabelPositionedAbove()
+    public function testSetLabelPositionedAboveOverridesDefault()
     {
-        config()->set('bootstrap-components.form.url.labelPositionedAbove', false);
+        $customUrlComponent = new Class extends \Okipa\LaravelBootstrapComponents\Form\Components\Url {
+            protected function setLabelPositionedAbove(): bool
+            {
+                return false;
+            }
+        };
+        config()->set('bootstrap-components.form.components.url', get_class($customUrlComponent));
         $html = inputUrl()->name('name')->labelPositionedAbove()->toHtml();
         $labelPosition = strrpos($html, '<label for="');
         $inputPosition = strrpos($html, '<input');
         $this->assertLessThan($inputPosition, $labelPosition);
-    }
-
-    public function testLabelPositionedUnder()
-    {
-        config()->set('bootstrap-components.form.url.labelPositionedAbove', true);
-        $html = inputUrl()->name('name')->labelPositionedAbove(false)->toHtml();
-        $labelPosition = strrpos($html, '<label for="');
-        $inputPosition = strrpos($html, '<input');
-        $this->assertLessThan($labelPosition, $inputPosition);
     }
 
     public function testSetPlaceholder()
@@ -284,9 +276,15 @@ class InputTest extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString(' placeholder="', $html);
     }
 
-    public function testConfigDisplaySuccess()
+    public function testSetCustomDisplaySuccess()
     {
-        config()->set('bootstrap-components.form.url.formValidation.displaySuccess', true);
+        $customUrlComponent = new Class extends \Okipa\LaravelBootstrapComponents\Form\Components\Url {
+            protected function setDisplaySuccess(): bool
+            {
+                return true;
+            }
+        };
+        config()->set('bootstrap-components.form.components.url', get_class($customUrlComponent));
         $errors = app(MessageBag::class)->add('other_name', 'Dummy error message.');
         session()->put('errors', $errors);
         $html = inputUrl()->name('name')->render(compact('errors'));
@@ -298,37 +296,15 @@ class InputTest extends BootstrapComponentsTestCase
         );
     }
 
-    public function testConfigDoNotDisplaySuccess()
+    public function testSetDisplaySuccessOverridesDefault()
     {
-        config()->set('bootstrap-components.form.url.formValidation.displaySuccess', false);
-        $errors = app(MessageBag::class)->add('other_name', 'Dummy error message.');
-        session()->put('errors', $errors);
-        $html = inputUrl()->name('name')->render(compact('errors'));
-        $this->assertStringNotContainsString('is-valid', $html);
-        $this->assertStringNotContainsString('<div class="valid-feedback d-block">', $html);
-        $this->assertStringNotContainsString(
-            __('bootstrap-components::bootstrap-components.notification.validation.success'),
-            $html
-        );
-    }
-
-    public function testDisplaySuccess()
-    {
-        config()->set('bootstrap-components.form.url.formValidation.displaySuccess', false);
-        $errors = app(MessageBag::class)->add('other_name', 'Dummy error message.');
-        session()->put('errors', $errors);
-        $html = inputUrl()->name('name')->displaySuccess()->render(compact('errors'));
-        $this->assertStringContainsString('is-valid', $html);
-        $this->assertStringContainsString('<div class="valid-feedback d-block">', $html);
-        $this->assertStringContainsString(
-            __('bootstrap-components::bootstrap-components.notification.validation.success'),
-            $html
-        );
-    }
-
-    public function testDoNotDisplaySuccess()
-    {
-        config()->set('bootstrap-components.form.url.formValidation.displaySuccess', true);
+        $customUrlComponent = new Class extends \Okipa\LaravelBootstrapComponents\Form\Components\Url {
+            protected function setDisplaySuccess(): bool
+            {
+                return true;
+            }
+        };
+        config()->set('bootstrap-components.form.components.url', get_class($customUrlComponent));
         $errors = app(MessageBag::class)->add('other_name', 'Dummy error message.');
         session()->put('errors', $errors);
         $html = inputUrl()->name('name')->displaySuccess(false)->render(compact('errors'));
@@ -340,9 +316,15 @@ class InputTest extends BootstrapComponentsTestCase
         );
     }
 
-    public function testConfigDisplayFailure()
+    public function testSetCustomDisplayFailure()
     {
-        config()->set('bootstrap-components.form.url.formValidation.displayFailure', true);
+        $customUrlComponent = new Class extends \Okipa\LaravelBootstrapComponents\Form\Components\Url {
+            protected function setDisplayFailure(): bool
+            {
+                return true;
+            }
+        };
+        config()->set('bootstrap-components.form.components.url', get_class($customUrlComponent));
         $errors = app(MessageBag::class)->add('name', 'Dummy error message.');
         session()->put('errors', $errors);
         $html = inputUrl()->name('name')->render(compact('errors'));
@@ -351,31 +333,15 @@ class InputTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString($errors->first('name'), $html);
     }
 
-    public function testConfigDoNotDisplayFailure()
+    public function testSetDisplayFailureOverridesDefault()
     {
-        config()->set('bootstrap-components.form.url.formValidation.displayFailure', false);
-        $errors = app(MessageBag::class)->add('name', 'Dummy error message.');
-        session()->put('errors', $errors);
-        $html = inputUrl()->name('name')->render(compact('errors'));
-        $this->assertStringNotContainsString('is-invalid', $html);
-        $this->assertStringNotContainsString('<div class="invalid-feedback d-block">', $html);
-        $this->assertStringNotContainsString($errors->first('name'), $html);
-    }
-
-    public function testDisplayFailure()
-    {
-        config()->set('bootstrap-components.form.url.formValidation.displayFailure', false);
-        $errors = app(MessageBag::class)->add('name', 'Dummy error message.');
-        session()->put('errors', $errors);
-        $html = inputUrl()->name('name')->displayFailure()->render(compact('errors'));
-        $this->assertStringContainsString('is-invalid', $html);
-        $this->assertStringContainsString('<div class="invalid-feedback d-block">', $html);
-        $this->assertStringContainsString($errors->first('name'), $html);
-    }
-
-    public function testDoNotDisplayFailure()
-    {
-        config()->set('bootstrap-components.form.url.formValidation.displayFailure', true);
+        $customUrlComponent = new Class extends \Okipa\LaravelBootstrapComponents\Form\Components\Url {
+            protected function setDisplayFailure(): bool
+            {
+                return true;
+            }
+        };
+        config()->set('bootstrap-components.form.components.url', get_class($customUrlComponent));
         $errors = app(MessageBag::class)->add('name', 'Dummy error message.');
         session()->put('errors', $errors);
         $html = inputUrl()->name('name')->displayFailure(false)->render(compact('errors'));
@@ -412,90 +378,118 @@ class InputTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString('<input id="' . $customComponentId . '"', $html);
     }
 
-    public function testConfigContainerClasses()
+    public function testSetCustomContainerClasses()
     {
-        $configContainerClasses = 'test-config-class-container';
-        config()->set('bootstrap-components.form.url.classes.container', [$configContainerClasses]);
+        $customUrlComponent = new Class extends \Okipa\LaravelBootstrapComponents\Form\Components\Url {
+            protected function setContainerClasses(): array
+            {
+                return ['default', 'container', 'classes'];
+            }
+        };
+        config()->set('bootstrap-components.form.components.url', get_class($customUrlComponent));
         $html = inputUrl()->name('name')->toHtml();
-        $this->assertStringContainsString('class="component-container ' . $configContainerClasses . '"', $html);
+        $this->assertStringContainsString('class="component-container default container classes"', $html);
     }
 
-    public function testSetContainerClasses()
+    public function testSetContainerClassesOverridesDefault()
     {
-        $configContainerClasses = 'test-config-class-container';
-        $customContainerClasses = 'test-custom-class-container';
-        config()->set('bootstrap-components.form.url.classes.container', [$configContainerClasses]);
-        $html = inputUrl()->name('name')->containerClasses([$customContainerClasses])->toHtml();
+        $customUrlComponent = new Class extends \Okipa\LaravelBootstrapComponents\Form\Components\Url {
+            protected function setContainerClasses(): array
+            {
+                return ['default', 'container', 'classes'];
+            }
+        };
+        config()->set('bootstrap-components.form.components.url', get_class($customUrlComponent));
+        $html = inputUrl()->name('name')->containerClasses(['custom', 'container', 'classes'])->toHtml();
+        $this->assertStringContainsString('class="component-container custom container classes"', $html);
+        $this->assertStringNotContainsString('class="component-container default container classes"', $html);
+    }
+
+    public function testSetCustomComponentClasses()
+    {
+        $customUrlComponent = new Class extends \Okipa\LaravelBootstrapComponents\Form\Components\Url {
+            protected function setComponentClasses(): array
+            {
+                return ['default', 'component', 'classes'];
+            }
+        };
+        config()->set('bootstrap-components.form.components.url', get_class($customUrlComponent));
+        $html = inputUrl()->name('name')->toHtml();
+        $this->assertStringContainsString('class="component form-control default component classes"', $html);
+    }
+
+    public function testSetComponentClassesOverridesDefault()
+    {
+        $customUrlComponent = new Class extends \Okipa\LaravelBootstrapComponents\Form\Components\Url {
+            protected function setComponentClasses(): array
+            {
+                return ['default', 'component', 'classes'];
+            }
+        };
+        config()->set('bootstrap-components.form.components.url', get_class($customUrlComponent));
+        $html = inputUrl()->name('name')->componentClasses(['custom', 'component', 'classes'])->toHtml();
+        $this->assertStringContainsString('class="component form-control custom component classes"', $html);
+        $this->assertStringNotContainsString('class="component form-control default component classes"', $html);
+    }
+
+    public function testSetCustomContainerHtmlAttributes()
+    {
+        $customUrlComponent = new Class extends \Okipa\LaravelBootstrapComponents\Form\Components\Url {
+            protected function setContainerHtmlAttributes(): array
+            {
+                return ['default' => 'container', 'html' => 'attributes'];
+            }
+        };
+        config()->set('bootstrap-components.form.components.url', get_class($customUrlComponent));
+        $html = inputUrl()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="component-container ' . $customContainerClasses . '"',
-            $html
-        );
-        $this->assertStringNotContainsString(
-            'class="component-container ' . $configContainerClasses . '"',
+            '<div class="component-container" default="container" html="attributes">',
             $html
         );
     }
 
-    public function testConfigComponentClass()
+    public function testSetContainerHtmlAttributesOverridesDefault()
     {
-        $configComponentClasses = 'test-config-class-component';
-        config()->set('bootstrap-components.form.url.classes.component', [$configComponentClasses]);
+        $customUrlComponent = new Class extends \Okipa\LaravelBootstrapComponents\Form\Components\Url {
+            protected function setContainerHtmlAttributes(): array
+            {
+                return ['default' => 'container', 'html' => 'attributes'];
+            }
+        };
+        config()->set('bootstrap-components.form.components.url', get_class($customUrlComponent));
+        $html = inputUrl()->name('name')
+            ->containerHtmlAttributes(['custom' => 'container', 'html' => 'attributes'])
+            ->toHtml();
+        $this->assertStringContainsString('custom="container" html="attributes">', $html);
+        $this->assertStringNotContainsString('default="container" html="attributes">', $html);
+    }
+
+    public function testSetCustomComponentHtmlAttributes()
+    {
+        $customUrlComponent = new Class extends \Okipa\LaravelBootstrapComponents\Form\Components\Url {
+            protected function setComponentHtmlAttributes(): array
+            {
+                return ['default' => 'component', 'html' => 'attributes'];
+            }
+        };
+        config()->set('bootstrap-components.form.components.url', get_class($customUrlComponent));
         $html = inputUrl()->name('name')->toHtml();
-        $this->assertStringContainsString(
-            'class="component form-control ' . $configComponentClasses . '"',
-            $html
-        );
+        $this->assertStringContainsString('default="component" html="attributes">', $html);
     }
 
-    public function testSetComponentClass()
+    public function testSetComponentHtmlAttributesOverridesDefault()
     {
-        $configComponentClasses = 'test-config-class-component';
-        $customComponentClasses = 'test-custom-class-component';
-        config()->set('bootstrap-components.form.url.classes.component', [$customComponentClasses]);
-        $html = inputUrl()->name('name')->componentClasses([$customComponentClasses])->toHtml();
-        $this->assertStringContainsString(
-            'class="component form-control ' . $customComponentClasses . '"',
-            $html
-        );
-        $this->assertStringNotContainsString(
-            'class="component form-control ' . $configComponentClasses . '"',
-            $html
-        );
-    }
-
-    public function testConfigContainerHtmlAttributes()
-    {
-        $configContainerAttributes = 'test-config-attributes-container';
-        config()->set('bootstrap-components.form.url.htmlAttributes.container', [$configContainerAttributes]);
-        $html = inputUrl()->name('name')->toHtml();
-        $this->assertStringContainsString($configContainerAttributes, $html);
-    }
-
-    public function testSetContainerHtmlAttributes()
-    {
-        $configContainerAttributes = 'test-config-attributes-container';
-        $customContainerAttributes = 'test-custom-attributes-container';
-        config()->set('bootstrap-components.form.url.htmlAttributes.container', [$configContainerAttributes]);
-        $html = inputUrl()->name('name')->containerHtmlAttributes([$customContainerAttributes])->toHtml();
-        $this->assertStringContainsString($customContainerAttributes, $html);
-        $this->assertStringNotContainsString($configContainerAttributes, $html);
-    }
-
-    public function testConfigComponentHtmlAttributes()
-    {
-        $configComponentAttributes = 'test-config-attributes-component';
-        config()->set('bootstrap-components.form.url.htmlAttributes.component', [$configComponentAttributes]);
-        $html = inputUrl()->name('name')->toHtml();
-        $this->assertStringContainsString($configComponentAttributes, $html);
-    }
-
-    public function testSetComponentHtmlAttributes()
-    {
-        $configComponentAttributes = 'test-config-attributes-component';
-        $customComponentAttributes = 'test-custom-attributes-component';
-        config()->set('bootstrap-components.form.url.htmlAttributes.component', [$configComponentAttributes]);
-        $html = inputUrl()->name('name')->componentHtmlAttributes([$customComponentAttributes])->toHtml();
-        $this->assertStringContainsString($customComponentAttributes, $html);
-        $this->assertStringNotContainsString($configComponentAttributes, $html);
+        $customUrlComponent = new Class extends \Okipa\LaravelBootstrapComponents\Form\Components\Url {
+            protected function setComponentHtmlAttributes(): array
+            {
+                return ['default' => 'component', 'html' => 'attributes'];
+            }
+        };
+        config()->set('bootstrap-components.form.components.url', get_class($customUrlComponent));
+        $html = inputUrl()->name('name')
+            ->componentHtmlAttributes(['custom' => 'component', 'html' => 'attributes'])
+            ->toHtml();
+        $this->assertStringContainsString('custom="component" html="attributes">', $html);
+        $this->assertStringNotContainsString('default="component" html="attributes">', $html);
     }
 }

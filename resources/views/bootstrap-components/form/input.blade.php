@@ -6,7 +6,7 @@
     <div class="input-group">
 @endif
         @include('bootstrap-components::bootstrap-components.partials.prepend')
-        <input id="{{ $componentId }}"{{ classTag('component', 'form-control', $componentClasses, $validationClass) }} type="{{ $type }}" name="{{ $name }}" value="{{ old($name, $value) }}"{{ htmlAttributes($placeholder ? ['placeholder' => __($placeholder)] : null, $componentHtmlAttributes) }}">
+        <input id="{{ $componentId }}"{{ classTag('component', 'form-control', $componentClasses, $validationClass) }} type="{{ $type }}" name="{{ $name }}" value="{{ old($name, $value) }}"{{ htmlAttributes($placeholder ? ['placeholder' => __($placeholder)] : null, $componentHtmlAttributes) }}>
         @include('bootstrap-components::bootstrap-components.partials.append')
 @if(! empty($prepend) || ! empty($append))
     </div>
