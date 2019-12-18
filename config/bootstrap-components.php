@@ -26,7 +26,16 @@ return [
          */
         'components' => [
             'text' => Okipa\LaravelBootstrapComponents\Form\Components\Text::class,
+            'email' => Okipa\LaravelBootstrapComponents\Form\Components\Email::class,
+            'password' => Okipa\LaravelBootstrapComponents\Form\Components\Password::class,
             'url' => Okipa\LaravelBootstrapComponents\Form\Components\Url::class,
+            'tel' => Okipa\LaravelBootstrapComponents\Form\Components\Tel::class,
+            'number' => Okipa\LaravelBootstrapComponents\Form\Components\Number::class,
+            'color' => Okipa\LaravelBootstrapComponents\Form\Components\Color::class,
+            'date' => Okipa\LaravelBootstrapComponents\Form\Components\Date::class,
+            'time' => Okipa\LaravelBootstrapComponents\Form\Components\Time::class,
+            'datetime' => Okipa\LaravelBootstrapComponents\Form\Components\Datetime::class,
+            'file' => Okipa\LaravelBootstrapComponents\Form\Components\File::class,
         ],
 
         /*
@@ -34,190 +43,6 @@ return [
          * You can override it. Make sure your custom resolver extends this one.
          */
         'multilingualResolver' => Okipa\LaravelBootstrapComponents\Form\MultilingualResolver::class,
-
-        'number' => [
-            'view' => 'bootstrap-components.form.input',
-            'prepend' => '<i class="fas fa-euro-sign"></i>',
-            'append' => null,
-            'labelPositionedAbove' => true,
-            'legend' => null,
-            'classes' => [
-                'container' => ['form-group'],
-                'component' => [],
-            ],
-            'htmlAttributes' => [
-                'container' => [],
-                'component' => [],
-            ],
-            'formValidation' => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
-            ],
-        ],
-
-        'tel' => [
-            'view' => 'bootstrap-components.form.input',
-            'prepend' => '<i class="fas fa-phone"></i>',
-            'append' => null,
-            'labelPositionedAbove' => true,
-            'legend' => 'bootstrap-components.legend.tel',
-            'classes' => [
-                'container' => ['form-group'],
-                'component' => [],
-            ],
-            'htmlAttributes' => [
-                'container' => [],
-                'component' => [],
-            ],
-            'formValidation' => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
-            ],
-        ],
-
-        'datetime' => [
-            'view' => 'bootstrap-components.form.input',
-            'prepend' => '<i class="fas fa-calendar-alt"></i>',
-            'append' => null,
-            'format' => 'Y-m-d\TH:i',
-            'labelPositionedAbove' => true,
-            'legend' => 'bootstrap-components.legend.datetime',
-            'classes' => [
-                'container' => ['form-group'],
-                'component' => [],
-            ],
-            'htmlAttributes' => [
-                'container' => [],
-                'component' => [],
-            ],
-            'formValidation' => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
-            ],
-        ],
-
-        'date' => [
-            'view' => 'bootstrap-components.form.input',
-            'prepend' => '<i class="fas fa-calendar-alt"></i>',
-            'append' => null,
-            'format' => 'Y-m-d',
-            'labelPositionedAbove' => true,
-            'legend' => 'bootstrap-components.legend.date',
-            'classes' => [
-                'container' => ['form-group'],
-                'component' => [],
-            ],
-            'htmlAttributes' => [
-                'container' => [],
-                'component' => [],
-            ],
-            'formValidation' => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
-            ],
-        ],
-
-        'time' => [
-            'view' => 'bootstrap-components.form.input',
-            'prepend' => '<i class="fas fa-clock"></i>',
-            'append' => null,
-            'format' => 'H:i:s',
-            'labelPositionedAbove' => true,
-            'legend' => 'bootstrap-components.legend.time',
-            'classes' => [
-                'container' => ['form-group'],
-                'component' => [],
-            ],
-            'htmlAttributes' => [
-                'container' => [],
-                'component' => [],
-            ],
-            'formValidation' => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
-            ],
-        ],
-
-        'email' => [
-            'view' => 'bootstrap-components.form.input',
-            'prepend' => '<i class="fas fa-at"></i>',
-            'append' => null,
-            'labelPositionedAbove' => true,
-            'legend' => null,
-            'classes' => [
-                'container' => ['form-group'],
-                'component' => [],
-            ],
-            'htmlAttributes' => [
-                'container' => [],
-                'component' => [],
-            ],
-            'formValidation' => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
-            ],
-        ],
-
-        'color' => [
-            'view' => 'bootstrap-components.form.input',
-            'prepend' => '<i class="fas fa-palette"></i>',
-            'append' => null,
-            'labelPositionedAbove' => true,
-            'legend' => null,
-            'classes' => [
-                'container' => ['form-group'],
-                'component' => [],
-            ],
-            'htmlAttributes' => [
-                'container' => [],
-                'component' => [],
-            ],
-            'formValidation' => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
-            ],
-        ],
-
-        'password' => [
-            'view' => 'bootstrap-components.form.input',
-            'prepend' => '<i class="fas fa-user-secret"></i>',
-            'append' => null,
-            'labelPositionedAbove' => true,
-            'legend' => null,
-            'classes' => [
-                'container' => ['form-group'],
-                'component' => [],
-            ],
-            'htmlAttributes' => [
-                'container' => [],
-                'component' => [],
-            ],
-            'formValidation' => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
-            ],
-        ],
-
-        'file' => [
-            'view' => 'bootstrap-components.form.file',
-            'prepend' => '<i class="fas fa-upload"></i>',
-            'append' => null,
-            'labelPositionedAbove' => true,
-            'legend' => null,
-            'showRemoveCheckbox' => true,
-            'classes' => [
-                'container' => ['form-group'],
-                'component' => [],
-            ],
-            'htmlAttributes' => [
-                'container' => [],
-                'component' => [],
-            ],
-            'formValidation' => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
-            ],
-        ],
 
         'textarea' => [
             'view' => 'bootstrap-components.form.textarea',

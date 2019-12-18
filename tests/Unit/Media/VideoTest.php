@@ -1,9 +1,9 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Test\Unit\Media;
+namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Media;
 
 use Okipa\LaravelBootstrapComponents\Media\Media;
-use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
+use Okipa\LaravelBootstrapComponents\Tests\BootstrapComponentsTestCase;
 
 class VideoTest extends BootstrapComponentsTestCase
 {
@@ -49,7 +49,7 @@ class VideoTest extends BootstrapComponentsTestCase
         $html = video()->toHtml();
         $this->assertStringContainsString('poster="' . $configPoster . '"', $html);
     }
-    
+
     public function testSetPoster()
     {
         $configPoster = 'test-config-poster';
@@ -145,7 +145,7 @@ class VideoTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString($customContainerAttributes, $html);
         $this->assertStringNotContainsString($configContainerAttributes, $html);
     }
-    
+
     public function testConfigComponentHtmlAttributes()
     {
         $configComponentAttributes = 'test-config-attributes-component';

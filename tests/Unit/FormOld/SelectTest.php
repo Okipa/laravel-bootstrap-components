@@ -6,9 +6,9 @@ use Exception;
 use Illuminate\Support\MessageBag;
 use InvalidArgumentException;
 use Okipa\LaravelBootstrapComponents\Form\Input;
-use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
-use Okipa\LaravelBootstrapComponents\Test\Fakers\CompaniesFaker;
-use Okipa\LaravelBootstrapComponents\Test\Fakers\UsersFaker;
+use Okipa\LaravelBootstrapComponents\Tests\BootstrapComponentsTestCase;
+use Okipa\LaravelBootstrapComponents\Tests\Fakers\CompaniesFaker;
+use Okipa\LaravelBootstrapComponents\Tests\Fakers\UsersFaker;
 
 class SelectTest extends BootstrapComponentsTestCase
 {

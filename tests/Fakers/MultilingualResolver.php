@@ -1,6 +1,6 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Test\Fakers;
+namespace Okipa\LaravelBootstrapComponents\Tests\Fakers;
 
 use Illuminate\Database\Eloquent\Model;
 

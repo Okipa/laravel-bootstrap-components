@@ -26,7 +26,7 @@ Just call the components you need in your views and let this package take care o
 Call this component in your view :
 
 ```blade
-{{ inputText()->name('name') }}
+{{ input()->text()->name('name') }}
 ```
 
 And get this HTML generated for you :
@@ -57,7 +57,7 @@ And get this HTML generated for you :
 Call this component in your view :
 
 ```blade
-{{ inputText()->name('title')->localized(['fr', 'en']) }}
+{{ input()->text()->name('title')->localized(['fr', 'en']) }}
 ```
 
 And get this HTML generated for you :
@@ -112,7 +112,7 @@ And get this HTML generated for you :
 - [API](#api)
   - [Form components](#form-components)
     - [Multilingual](#multilingual)
-      - [inputText()](#bstext)
+      - [input()->text()](#bstext)
       - [bsTextarea()](#bstextarea)
     - [Standard](#standard)
       - [bsNumber()](#bsnumber)
@@ -246,7 +246,7 @@ $('.component[type="text"][name="email"')
 * The use of the `->locales()` method will produce a component for each locale keys you declared. For example, if you declare the `fr` and `en` locale keys for a `title` text component, you will get two `Title (FR)` and `Title (EN)` generated text components.
   * The localization treatment will only occur if you have more than one locales declared : there is not point to generate localized components with only one declared locales.
 * Each multilingual component provides an extra `data-locale="<locale>"` attribute to help with eventual javascript treatments.
-* You can use your own `MultilingualResolver` by replacing the path defined in the `config('bootstrap-components.form.multilingual.resolver')`, allowing you to customize your components localization behaviour :
+* You can use your own `MultilingualResolver` by replacing the path defined in the `config('bootstrap-components.form.multilingualResolver')`, allowing you to customize your components localization behaviour :
   * The default locales to handle (by default `[]`).
   * The component localized `name` attribute resolution (default : `$name[$locale]`.
   * The component localized old value resolution in case of errors (default : `old($name)[$locale]`).
@@ -254,10 +254,10 @@ $('.component[type="text"][name="email"')
   * The component localized error message bag key resolution, used for the error message extraction and for the validation class generation (default : `$name . $locale`).
   * The component error message resolution, in order to correctly display the localized attribute name (default : transform `Dummy __('validation.attributes.name.en) error message` into `Dummy __('validation.attributes.name) (EN) error message.`.
 
-##### inputText()
+##### input()->text()
 
 ```php
-inputText()->name('name') // set the input name
+input()->text()->name('name') // set the input name
     ->locales(['fr', 'en']) // override the default locales config value
     ->model($user) // value is automatically detected from the field name
     ->value(function($locale){ return $name[$locale]; }) // or manually set the value

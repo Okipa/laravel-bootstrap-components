@@ -59,7 +59,7 @@ class Url extends Form
      */
     protected function setComponentClasses(): array
     {
-        return ['form-group'];
+        return [];
     }
 
     /**

@@ -5,8 +5,8 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 use Exception;
 use Illuminate\Support\MessageBag;
 use Okipa\LaravelBootstrapComponents\Form\Checkable;
-use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
-use Okipa\LaravelBootstrapComponents\Test\Fakers\UsersFaker;
+use Okipa\LaravelBootstrapComponents\Tests\BootstrapComponentsTestCase;
+use Okipa\LaravelBootstrapComponents\Tests\Fakers\UsersFaker;
 
 class RadioTest extends BootstrapComponentsTestCase
 {

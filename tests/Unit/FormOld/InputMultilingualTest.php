@@ -4,17 +4,23 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
 use Illuminate\Support\MessageBag;
 use InvalidArgumentException;
-use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
-use Okipa\LaravelBootstrapComponents\Test\Fakers\MultilingualResolver;
-use Okipa\LaravelBootstrapComponents\Test\Models\User;
+use Okipa\LaravelBootstrapComponents\Form\Abstracts\Multilingual;
+use Okipa\LaravelBootstrapComponents\Tests\BootstrapComponentsTestCase;
+use Okipa\LaravelBootstrapComponents\Tests\Fakers\MultilingualResolver;
+use Okipa\LaravelBootstrapComponents\Tests\Models\User;
 
 class InputMultilingualTest extends BootstrapComponentsTestCase
 {
+    public function testMultilingualType()
+    {
+        $this->assertInstanceOf(Multilingual::class, input()->text());
+    }
+
     public function testSetDefaultLocalesFromCustomMultilingualResolver()
     {
-        config()->set('bootstrap-components.form.multilingual.resolver', MultilingualResolver::class);
+        config()->set('bootstrap-components.form.multilingualResolver', MultilingualResolver::class);
         $resolverLocales = (new MultilingualResolver)->getDefaultLocales();
-        $html = inputText()->name('name')->toHtml();
+        $html = input()->text()->name('name')->toHtml();
         foreach ($resolverLocales as $resolverLocale) {
             $this->assertStringContainsString('data-locale="' . $resolverLocale . '"', $html);
         }
@@ -22,11 +28,11 @@ class InputMultilingualTest extends BootstrapComponentsTestCase
 
     public function testSetLocales()
     {
-        config()->set('bootstrap-components.form.multilingual.resolver', MultilingualResolver::class);
+        config()->set('bootstrap-components.form.multilingualResolver', MultilingualResolver::class);
         $resolverLocales = (new MultilingualResolver)->getDefaultLocales();
         $locales = ['fr', 'it', 'be'];
         config()->set('bootstrap-components.form.text.locales', []);
-        $html = inputText()->name('name')->locales($locales)->toHtml();
+        $html = input()->text()->name('name')->locales($locales)->toHtml();
         foreach ($locales as $locale) {
             $this->assertStringContainsString('data-locale="' . $locale . '"', $html);
         }
@@ -39,7 +45,7 @@ class InputMultilingualTest extends BootstrapComponentsTestCase
     {
         $locales = ['fr'];
         config()->set('bootstrap-components.form.text.locales', ['fr']);
-        $html = inputText()->name('name')->locales($locales)->toHtml();
+        $html = input()->text()->name('name')->locales($locales)->toHtml();
         foreach ($locales as $locale) {
             $this->assertStringNotContainsString('data-locale="' . $locale . '"', $html);
         }
@@ -48,7 +54,7 @@ class InputMultilingualTest extends BootstrapComponentsTestCase
     public function testLocalizedName()
     {
         $locales = ['fr', 'en'];
-        $html = inputText()->name('name')->locales($locales)->toHtml();
+        $html = input()->text()->name('name')->locales($locales)->toHtml();
         foreach ($locales as $locale) {
             $this->assertStringContainsString('name="name[' . $locale . ']"', $html);
         }
@@ -56,9 +62,9 @@ class InputMultilingualTest extends BootstrapComponentsTestCase
 
     public function testLocalizedNameFromCustomMultilingualResolver()
     {
-        config()->set('bootstrap-components.form.multilingual.resolver', MultilingualResolver::class);
+        config()->set('bootstrap-components.form.multilingualResolver', MultilingualResolver::class);
         $resolverLocales = (new MultilingualResolver)->getDefaultLocales();
-        $html = inputText()->name('name')->toHtml();
+        $html = input()->text()->name('name')->toHtml();
         foreach ($resolverLocales as $resolverLocale) {
             $this->assertStringContainsString('name="name_' . $resolverLocale . '"', $html);
         }
@@ -72,7 +78,7 @@ class InputMultilingualTest extends BootstrapComponentsTestCase
             $name[$locale] = $this->faker->word;
         }
         $user = new User(['name' => $name]);
-        $html = inputText()->model($user)->name('name')->locales($locales)->toHtml();
+        $html = input()->text()->model($user)->name('name')->locales($locales)->toHtml();
         foreach ($locales as $locale) {
             $this->assertStringContainsString('value="' . $user->name[$locale] . '"', $html);
         }
@@ -81,9 +87,9 @@ class InputMultilingualTest extends BootstrapComponentsTestCase
     public function testLocalizedModelValueFromCustomMultilingualResolver()
     {
         $user = new User(['name_fr' => $this->faker->word, 'name_en' => $this->faker->word]);
-        config()->set('bootstrap-components.form.multilingual.resolver', MultilingualResolver::class);
+        config()->set('bootstrap-components.form.multilingualResolver', MultilingualResolver::class);
         $resolverLocales = (new MultilingualResolver)->getDefaultLocales();
-        $html = inputText()->model($user)->name('name')->toHtml();
+        $html = input()->text()->model($user)->name('name')->toHtml();
         foreach ($resolverLocales as $resolverLocale) {
             $this->assertStringContainsString('value="' . $user->{'name_' . $resolverLocale} . '"', $html);
         }
@@ -94,7 +100,7 @@ class InputMultilingualTest extends BootstrapComponentsTestCase
         $locales = ['fr', 'en'];
         $customValue = 'test-custom-value';
         $this->expectException(InvalidArgumentException::class);
-        inputText()->name('name')->locales($locales)->value($customValue)->toHtml();
+        input()->text()->name('name')->locales($locales)->value($customValue)->toHtml();
     }
 
     public function testSetLocalizedValue()
@@ -104,7 +110,7 @@ class InputMultilingualTest extends BootstrapComponentsTestCase
         foreach ($locales as $locale) {
             $customValues[$locale] = 'test-custom-value-' . $locale;
         }
-        $html = inputText()->name('name')->locales($locales)->value(function ($locale) use ($customValues) {
+        $html = input()->text()->name('name')->locales($locales)->value(function ($locale) use ($customValues) {
             return $customValues[$locale];
         })->toHtml();
         foreach ($locales as $locale) {
@@ -128,7 +134,7 @@ class InputMultilingualTest extends BootstrapComponentsTestCase
             },
         ]);
         $this->call('GET', 'test');
-        $html = inputText()->name('name')->locales($locales)->value(function ($locale) use ($customValues) {
+        $html = input()->text()->name('name')->locales($locales)->value(function ($locale) use ($customValues) {
             return $customValues . '-' . $locale;
         })->toHtml();
         foreach ($locales as $locale) {
@@ -157,7 +163,7 @@ class InputMultilingualTest extends BootstrapComponentsTestCase
             },
         ]);
         $this->call('GET', 'test');
-        $html = inputText()->name('name')->value(function ($locale) use ($customValues) {
+        $html = input()->text()->name('name')->value(function ($locale) use ($customValues) {
             return $customValues[$locale];
         })->toHtml();
         foreach ($resolverLocales as $resolverLocale) {
@@ -172,7 +178,7 @@ class InputMultilingualTest extends BootstrapComponentsTestCase
     {
         $locales = ['fr', 'en'];
         $label = 'test-custom-label';
-        $html = inputText()->name('name')->label($label)->locales($locales)->toHtml();
+        $html = input()->text()->name('name')->label($label)->locales($locales)->toHtml();
         foreach ($locales as $locale) {
             $this->assertStringContainsString(
                 '<label for="text-name-' . $locale . '">' . $label . ' (' . strtoupper($locale) . ')</label>',
@@ -186,7 +192,7 @@ class InputMultilingualTest extends BootstrapComponentsTestCase
     {
         $locales = ['fr', 'en'];
         $placeholder = 'test-custom-placeholder';
-        $html = inputText()->name('name')->placeholder($placeholder)->locales($locales)->toHtml();
+        $html = input()->text()->name('name')->placeholder($placeholder)->locales($locales)->toHtml();
         foreach ($locales as $locale) {
             $this->assertStringContainsString(
                 ' placeholder="' . $placeholder . ' (' . strtoupper($locale) . ')"',
@@ -199,7 +205,7 @@ class InputMultilingualTest extends BootstrapComponentsTestCase
     {
         $locales = ['fr', 'en'];
         $customComponentId = 'test-custom-component-id';
-        $html = inputText()->name('name')->componentId($customComponentId)->locales($locales)->toHtml();
+        $html = input()->text()->name('name')->componentId($customComponentId)->locales($locales)->toHtml();
         foreach ($locales as $locale) {
             $this->assertStringContainsString(' for="' . $customComponentId . '-' . $locale . '"', $html);
             $this->assertStringContainsString('<input id="' . $customComponentId . '-' . $locale . '"', $html);
@@ -210,7 +216,7 @@ class InputMultilingualTest extends BootstrapComponentsTestCase
     {
         $locales = ['fr', 'en'];
         $customContainerId = 'test-custom-container-id';
-        $html = inputText()->name('name')->containerId($customContainerId)->locales($locales)->toHtml();
+        $html = input()->text()->name('name')->containerId($customContainerId)->locales($locales)->toHtml();
         foreach ($locales as $locale) {
             $this->assertStringContainsString('<div id="' . $customContainerId . '-' . $locale . '"', $html);
         }
@@ -222,7 +228,7 @@ class InputMultilingualTest extends BootstrapComponentsTestCase
         $errors = app(MessageBag::class);
         $errors->add('name.fr', 'Dummy name.fr error message.');
         session()->put('errors', $errors);
-        $html = inputText()->name('name')->locales($locales)->displayFailure()->render(compact('errors'));
+        $html = input()->text()->name('name')->locales($locales)->displayFailure()->render(compact('errors'));
         $this->assertStringContainsString('id="text-name-fr" class="component form-control is-invalid"', $html);
         $this->assertStringContainsString('Dummy ' . _('validation.attributes.name') . ' (FR) error message.', $html);
         $this->assertStringNotContainsString('id="text-name-en" class="component form-control is-invalid"', $html);
@@ -238,7 +244,7 @@ class InputMultilingualTest extends BootstrapComponentsTestCase
         $errors = app(MessageBag::class);
         $errors->add('name_en', 'Dummy name_en error message.');
         session()->put('errors', $errors);
-        $html = inputText()->name('name')->displayFailure()->render(compact('errors'));
+        $html = input()->text()->name('name')->displayFailure()->render(compact('errors'));
         $this->assertStringContainsString('id="text-name-en" class="component form-control is-invalid"', $html);
         $this->assertStringContainsString('Dummy ' . _('validation.attributes.name') . ' (EN) error message.', $html);
         $this->assertStringNotContainsString('id="text-name-de" class="component form-control is-invalid"', $html);

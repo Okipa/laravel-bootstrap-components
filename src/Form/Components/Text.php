@@ -59,7 +59,7 @@ class Text extends Multilingual
      */
     protected function setComponentClasses(): array
     {
-        return ['form-group'];
+        return [];
     }
 
     /**

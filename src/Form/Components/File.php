@@ -7,16 +7,106 @@ use Okipa\LaravelBootstrapComponents\Form\Abstracts\File as AbstractFile;
 class File extends AbstractFile
 {
     /**
-     * The component config key.
-     *
-     * @property string $view
+     * @inheritDoc
      */
-    protected $configKey = 'form.file';
+    protected function setType(): string
+    {
+        return 'file';
+    }
 
     /**
-     * The input type.
-     *
-     * @property string $type
+     * @inheritDoc
      */
-    protected $type = 'file';
+    protected function setView(): string
+    {
+        return 'bootstrap-components.form.input';
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function setPrepend(): ?string
+    {
+        return '<i class="fas fa-upload"></i>';
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function setAppend(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function setLabelPositionedAbove(): bool
+    {
+        return config('bootstrap-components.form.labelPositionedAbove');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function setLegend(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function setComponentClasses(): array
+    {
+        return [];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function setContainerClasses(): array
+    {
+        return [];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function setComponentHtmlAttributes(): array
+    {
+        return [];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function setContainerHtmlAttributes(): array
+    {
+        return [];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function setDisplaySuccess(): bool
+    {
+        return config('bootstrap-components.form.formValidation.displaySuccess');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function setDisplayFailure(): bool
+    {
+        return config('bootstrap-components.form.formValidation.displayFailure');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function setShowRemoveCheckbox(): bool
+    {
+        return true;
+    }
 }

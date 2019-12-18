@@ -3,8 +3,8 @@
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Button;
 
 use Okipa\LaravelBootstrapComponents\Button\Button;
-use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
-use Okipa\LaravelBootstrapComponents\Test\Fakers\RoutesFaker;
+use Okipa\LaravelBootstrapComponents\Tests\BootstrapComponentsTestCase;
+use Okipa\LaravelBootstrapComponents\Tests\Fakers\RoutesFaker;
 
 class ValidateTest extends BootstrapComponentsTestCase
 {

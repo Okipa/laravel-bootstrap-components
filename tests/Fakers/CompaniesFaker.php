@@ -1,8 +1,8 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Test\Fakers;
+namespace Okipa\LaravelBootstrapComponents\Tests\Fakers;
 
-use Okipa\LaravelBootstrapComponents\Test\Models\Company;
+use Okipa\LaravelBootstrapComponents\Tests\Models\Company;
 
 trait CompaniesFaker
 {

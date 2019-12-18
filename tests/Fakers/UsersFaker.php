@@ -1,19 +1,20 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Test\Fakers;
+namespace Okipa\LaravelBootstrapComponents\Tests\Fakers;
 
 use Hash;
 use Illuminate\Support\Collection;
-use Okipa\LaravelBootstrapComponents\Test\Models\User;
-use Okipa\LaravelBootstrapComponents\Test\Models\UserMultilingual;
+use Okipa\LaravelBootstrapComponents\Tests\Models\User;
 
 trait UsersFaker
 {
     public $clearPassword;
+
     public $data;
 
     /**
      * @param int $count
+     *
      * @return Collection
      */
     public function createMultipleUsers(int $count = 5): Collection

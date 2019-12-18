@@ -1,6 +1,6 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Test\Models;
+namespace Okipa\LaravelBootstrapComponents\Tests\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

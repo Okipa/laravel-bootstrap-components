@@ -1,6 +1,6 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Test;
+namespace Okipa\LaravelBootstrapComponents\Tests;
 
 use Faker\Factory;
 use Okipa\LaravelBootstrapComponents\ComponentServiceProvider;

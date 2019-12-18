@@ -1,9 +1,9 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Test\Unit\Media;
+namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Media;
 
 use Okipa\LaravelBootstrapComponents\Media\Media;
-use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
+use Okipa\LaravelBootstrapComponents\Tests\BootstrapComponentsTestCase;
 
 class ImageTest extends BootstrapComponentsTestCase
 {
@@ -223,7 +223,7 @@ class ImageTest extends BootstrapComponentsTestCase
         $this->assertStringContainsString($customLinkAttributes, $html);
         $this->assertStringNotContainsString($configLinkAttributes, $html);
     }
-    
+
     public function testConfigComponentHtmlAttributes()
     {
         $configComponentAttributes = 'test-config-attributes-component';

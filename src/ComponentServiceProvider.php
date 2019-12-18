@@ -3,10 +3,14 @@
 namespace Okipa\LaravelBootstrapComponents;
 
 use Illuminate\Support\ServiceProvider;
+use Okipa\LaravelBootstrapComponents\Form\Components\Input;
 use Okipa\LaravelHtmlHelper\HtmlHelperServiceProvider;
 
 class ComponentServiceProvider extends ServiceProvider
 {
+    /**
+     * {@inheritdoc}
+     */
     public function boot()
     {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'bootstrap-components');
@@ -25,11 +29,23 @@ class ComponentServiceProvider extends ServiceProvider
         $this->app->register(HtmlHelperServiceProvider::class);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function register()
     {
         $this->mergeConfigFrom(
             __DIR__ . '/../config/bootstrap-components.php',
             'bootstrap-components'
         );
+        $this->registerFacades();
+    }
+
+    /**
+     * Register package facades.
+     */
+    protected function registerFacades(): void
+    {
+        $this->app->bind('input', Input::class);
     }
 }

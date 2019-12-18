@@ -7,8 +7,8 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\MessageBag;
 use Okipa\LaravelBootstrapComponents\Form\Input;
 use Okipa\LaravelBootstrapComponents\Form\TemporalComponent;
-use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
-use Okipa\LaravelBootstrapComponents\Test\Fakers\UsersFaker;
+use Okipa\LaravelBootstrapComponents\Tests\BootstrapComponentsTestCase;
+use Okipa\LaravelBootstrapComponents\Tests\Fakers\UsersFaker;
 
 class DatetimeTest extends BootstrapComponentsTestCase
 {

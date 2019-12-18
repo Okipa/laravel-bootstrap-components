@@ -1,9 +1,9 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Test\Unit\Media;
+namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Media;
 
 use Okipa\LaravelBootstrapComponents\Media\Media;
-use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
+use Okipa\LaravelBootstrapComponents\Tests\BootstrapComponentsTestCase;
 
 class AudioTest extends BootstrapComponentsTestCase
 {

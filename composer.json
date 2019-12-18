@@ -46,7 +46,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Okipa\\LaravelBootstrapComponents\\Test\\": "tests"
+            "Okipa\\LaravelBootstrapComponents\\Tests\\": "tests"
         }
     },
     "scripts": {

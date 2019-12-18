@@ -6,9 +6,9 @@ use Exception;
 use Illuminate\Support\MessageBag;
 use InvalidArgumentException;
 use Okipa\LaravelBootstrapComponents\Form\Abstracts\Multilingual;
-use Okipa\LaravelBootstrapComponents\Test\BootstrapComponentsTestCase;
-use Okipa\LaravelBootstrapComponents\Test\Fakers\MultilingualResolver;
-use Okipa\LaravelBootstrapComponents\Test\Models\User;
+use Okipa\LaravelBootstrapComponents\Tests\BootstrapComponentsTestCase;
+use Okipa\LaravelBootstrapComponents\Tests\Fakers\MultilingualResolver;
+use Okipa\LaravelBootstrapComponents\Tests\Models\User;
 
 class TextareaTest extends BootstrapComponentsTestCase
 {
@@ -525,7 +525,7 @@ class TextareaTest extends BootstrapComponentsTestCase
 
     public function testSetDefaultLocalesFromCustomMultilingualResolver()
     {
-        config()->set('bootstrap-components.form.multilingual.resolver', MultilingualResolver::class);
+        config()->set('bootstrap-components.form.multilingualResolver', MultilingualResolver::class);
         $resolverLocales = (new MultilingualResolver)->getDefaultLocales();
         $html = bsTextarea()->name('name')->toHtml();
         foreach ($resolverLocales as $resolverLocale) {
@@ -535,7 +535,7 @@ class TextareaTest extends BootstrapComponentsTestCase
 
     public function testSetLocales()
     {
-        config()->set('bootstrap-components.form.multilingual.resolver', MultilingualResolver::class);
+        config()->set('bootstrap-components.form.multilingualResolver', MultilingualResolver::class);
         $resolverLocales = (new MultilingualResolver)->getDefaultLocales();
         $locales = ['fr', 'it', 'be'];
         config()->set('bootstrap-components.form.text.locales', []);
@@ -569,7 +569,7 @@ class TextareaTest extends BootstrapComponentsTestCase
 
     public function testLocalizedNameFromCustomMultilingualResolver()
     {
-        config()->set('bootstrap-components.form.multilingual.resolver', MultilingualResolver::class);
+        config()->set('bootstrap-components.form.multilingualResolver', MultilingualResolver::class);
         $resolverLocales = (new MultilingualResolver)->getDefaultLocales();
         $html = bsTextarea()->name('name')->toHtml();
         foreach ($resolverLocales as $resolverLocale) {
@@ -594,7 +594,7 @@ class TextareaTest extends BootstrapComponentsTestCase
     public function testLocalizedModelValueFromCustomMultilingualResolver()
     {
         $user = new User(['name_fr' => $this->faker->word, 'name_en' => $this->faker->word]);
-        config()->set('bootstrap-components.form.multilingual.resolver', MultilingualResolver::class);
+        config()->set('bootstrap-components.form.multilingualResolver', MultilingualResolver::class);
         $resolverLocales = (new MultilingualResolver)->getDefaultLocales();
         $html = bsTextarea()->model($user)->name('name')->toHtml();
         foreach ($resolverLocales as $resolverLocale) {
@@ -655,7 +655,7 @@ class TextareaTest extends BootstrapComponentsTestCase
 
     public function testLocalizedOldValueFromCustomMultilingualResolver()
     {
-        config()->set('bootstrap-components.form.multilingual.resolver', MultilingualResolver::class);
+        config()->set('bootstrap-components.form.multilingualResolver', MultilingualResolver::class);
         $resolverLocales = (new MultilingualResolver)->getDefaultLocales();
         $oldValues = [];
         foreach ($resolverLocales as $resolverLocale) {
@@ -750,7 +750,7 @@ class TextareaTest extends BootstrapComponentsTestCase
 
     public function testLocalizedErrorMessageFromCustomMultilingualResolver()
     {
-        config()->set('bootstrap-components.form.multilingual.resolver', MultilingualResolver::class);
+        config()->set('bootstrap-components.form.multilingualResolver', MultilingualResolver::class);
         $errors = app(MessageBag::class);
         $errors->add('name_en', 'Dummy name_en error message.');
         session()->put('errors', $errors);

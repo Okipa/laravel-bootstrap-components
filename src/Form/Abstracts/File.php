@@ -29,6 +29,15 @@ abstract class File extends Form
     protected $removeCheckboxLabel;
 
     /**
+     * File constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->showRemoveCheckbox = $this->setShowRemoveCheckbox();
+    }
+
+    /**
      * Set the uploaded file closure.
      *
      * @param callable $uploadedFile
@@ -68,7 +77,7 @@ abstract class File extends Form
     {
         return array_merge(parent::getValues(), [
             'uploadedFileHtml' => $this->getUploadedFileHtml(),
-            'showRemoveCheckbox' => $this->getShowRemoveCheckboxStatus(),
+            'showRemoveCheckbox' => $this->getShowRemoveCheckbox(),
             'removeCheckboxLabel' => $this->getRemoveCheckboxLabel(parent::getValues()['label']),
             'placeholder' => $this->placeholder ?? __('bootstrap-components::bootstrap-components.label.file'),
         ]);
@@ -97,11 +106,15 @@ abstract class File extends Form
     /**
      * @return bool
      */
-    protected function getShowRemoveCheckboxStatus(): bool
+    protected function getShowRemoveCheckbox(): bool
     {
-        return $this->showRemoveCheckbox
-            ?? config('bootstrap-components.' . $this->configKey . '.showRemoveCheckbox', false);
+        return $this->showRemoveCheckbox;
     }
+
+    /**
+     * @return bool
+     */
+    abstract protected function setShowRemoveCheckbox(): bool;
 
     /**
      * @param string|null $defaultLabel

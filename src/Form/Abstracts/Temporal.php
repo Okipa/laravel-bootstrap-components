@@ -21,21 +21,29 @@ abstract class Temporal extends Form
      */
     public function __construct()
     {
-        $this->format = $this->getFormat();
+        parent::__construct();
+        $this->format = $this->setFormat();
     }
 
     /**
-     * Get the time format
+     * Set the temporal format.
+     *
+     * @return string
+     */
+    abstract protected function setFormat(): string;
+
+    /**
+     * Get the temporal format.
      *
      * @return string
      */
     protected function getFormat(): string
     {
-        return $this->format ?: (config('bootstrap-components.' . $this->configKey . '.format') ?: '');
+        return $this->format;
     }
 
     /**
-     * Set the time format.
+     * Set the temporal format.
      *
      * @param string $format
      *
