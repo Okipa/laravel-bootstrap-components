@@ -2,15 +2,10 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
-use Exception;
-use Illuminate\Support\MessageBag;
 use Okipa\LaravelBootstrapComponents\Component;
-use Okipa\LaravelBootstrapComponents\Tests\BootstrapComponentsTestCase;
-use Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents\CustomEmail;
 use Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents\CustomFile;
-use Okipa\LaravelBootstrapComponents\Tests\Fakers\UsersFaker;
 
-class InputFileTest extends FileTestAbstract
+class InputFileTest extends InputFileTestAbstract
 {
     protected function getComponent(): Component
     {

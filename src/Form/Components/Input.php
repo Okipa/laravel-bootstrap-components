@@ -95,4 +95,20 @@ class Input
     {
         return app(config('bootstrap-components.form.components.file'));
     }
+
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\Checkable
+     */
+    public function checkbox(): \Okipa\LaravelBootstrapComponents\Form\Abstracts\Checkable
+    {
+        return app(config('bootstrap-components.form.components.checkbox'));
+    }
+
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\Checkable
+     */
+    public function toggle(): \Okipa\LaravelBootstrapComponents\Form\Abstracts\Checkable
+    {
+        return app(config('bootstrap-components.form.components.toggle'));
+    }
 }

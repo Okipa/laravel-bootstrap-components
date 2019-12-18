@@ -1,10 +1,10 @@
-<div{{ htmlAttributes($containerId ? ['id' => $containerId] : null) }}{{ classTag('component-container', 'form-group' $containerClasses) }}{{ htmlAttributes($containerHtmlAttributes) }}>
+<div{{ htmlAttributes($containerId ? ['id' => $containerId] : null) }}{{ classTag('component-container', 'form-group', $containerClasses) }}{{ htmlAttributes($containerHtmlAttributes) }}>
     @if($labelPositionedAbove)
         @include('bootstrap-components::bootstrap-components.partials.label')
     @endif
     @if($uploadedFileHtml->toHtml())
         {{ $uploadedFileHtml }}
-        @if($showRemoveCheckbox){{ bsCheckbox()->name('remove_' . $name )
+        @if($showRemoveCheckbox){{ input()->checkbox()->name('remove_' . $name )
             ->label($removeCheckboxLabel)
             ->containerClasses(['mb-1']) }}@endif
     @endif
@@ -13,7 +13,7 @@
     @endif
         @include('bootstrap-components::bootstrap-components.partials.prepend')
         <div class="custom-file">
-            <input id="{{ $componentId }}"{{ classTag('component', 'custom-file-input', 'form-control', $componentClasses, $validationClass) }} type="{{ $type }}" name="{{ $name }}" lang="{{ app()->getLocale() }}"{{ htmlAttributes($componentHtmlAttributes) }}>
+            <input id="{{ $componentId }}"{{ classTag('component', 'form-control', 'custom-file-input', $componentClasses, $validationClass) }} type="{{ $type }}" name="{{ $name }}" lang="{{ app()->getLocale() }}"{{ htmlAttributes($componentHtmlAttributes) }}>
             @if(($value = old($name, $value)) || $placeholder)
                 <label class="custom-file-label" for="{{ $componentId }}">@empty($value){{ __($placeholder) }}@else{{ $value }}@endempty</label>
             @endif

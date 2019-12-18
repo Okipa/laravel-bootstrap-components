@@ -630,7 +630,7 @@ bsToggle()->name('active') // set the input name
 **:warning: Notes :**
 
 - This component is an extra component not included in bootstrap and using it demands to [load the package styles](#styles).
-- The following classes can be applied in the `containerClasses()` method in order to manage the toggle size : `switch-sm` , `switch-lg`.
+- The following classes can be applied in the `containerClasses()` method in order to manage the toggle size : `toggle-sm` , `toggle-lg`.
 - the `->labelPositionedAbove()` will have no effect in this component.
 
 #### bsRadio()

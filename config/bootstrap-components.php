@@ -36,6 +36,8 @@ return [
             'time' => Okipa\LaravelBootstrapComponents\Form\Components\Time::class,
             'datetime' => Okipa\LaravelBootstrapComponents\Form\Components\Datetime::class,
             'file' => Okipa\LaravelBootstrapComponents\Form\Components\File::class,
+            'checkbox' => Okipa\LaravelBootstrapComponents\Form\Components\Checkbox::class,
+            'toggle' => Okipa\LaravelBootstrapComponents\Form\Components\Toggle::class,
         ],
 
         /*
@@ -69,44 +71,6 @@ return [
             'prepend' => '<i class="fas fa-hand-pointer"></i>',
             'append' => null,
             'labelPositionedAbove' => true,
-            'legend' => null,
-            'classes' => [
-                'container' => ['form-group'],
-                'component' => [],
-            ],
-            'htmlAttributes' => [
-                'container' => [],
-                'component' => [],
-            ],
-            'formValidation' => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
-            ],
-        ],
-
-        'checkbox' => [
-            'view' => 'bootstrap-components.form.checkbox',
-            'prepend' => null,
-            'append' => null,
-            'legend' => null,
-            'classes' => [
-                'container' => ['form-group'],
-                'component' => [],
-            ],
-            'htmlAttributes' => [
-                'container' => [],
-                'component' => [],
-            ],
-            'formValidation' => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
-            ],
-        ],
-
-        'toggle' => [
-            'view' => 'bootstrap-components.form.toggle',
-            'prepend' => null,
-            'append' => null,
             'legend' => null,
             'classes' => [
                 'container' => ['form-group'],

@@ -1,33 +1,17 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Form\Components;
+namespace Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents;
 
-use Okipa\LaravelBootstrapComponents\Form\Abstracts\File as AbstractFile;
+use Okipa\LaravelBootstrapComponents\Form\Components\Toggle;
 
-class File extends AbstractFile
+class CustomToggle extends Toggle
 {
-    /**
-     * @inheritDoc
-     */
-    protected function setType(): string
-    {
-        return 'file';
-    }
-
-    /**
-     * @inheritDoc
-     */
-    protected function setView(): string
-    {
-        return 'bootstrap-components.form.file';
-    }
-
     /**
      * @inheritDoc
      */
     protected function setPrepend(): ?string
     {
-        return '<i class="fas fa-upload"></i>';
+        return 'default-prepend';
     }
 
     /**
@@ -35,7 +19,7 @@ class File extends AbstractFile
      */
     protected function setAppend(): ?string
     {
-        return null;
+        return 'default-append';
     }
 
     /**
@@ -43,7 +27,7 @@ class File extends AbstractFile
      */
     protected function setLabelPositionedAbove(): bool
     {
-        return config('bootstrap-components.form.labelPositionedAbove');
+        return false;
     }
 
     /**
@@ -51,7 +35,7 @@ class File extends AbstractFile
      */
     protected function setLegend(): ?string
     {
-        return null;
+        return 'default-legend';
     }
 
     /**
@@ -59,7 +43,7 @@ class File extends AbstractFile
      */
     protected function setComponentClasses(): array
     {
-        return [];
+        return ['default', 'component', 'classes'];
     }
 
     /**
@@ -67,7 +51,7 @@ class File extends AbstractFile
      */
     protected function setContainerClasses(): array
     {
-        return [];
+        return ['default', 'container', 'classes'];
     }
 
     /**
@@ -75,7 +59,7 @@ class File extends AbstractFile
      */
     protected function setComponentHtmlAttributes(): array
     {
-        return [];
+        return ['default' => 'component', 'html' => 'attributes'];
     }
 
     /**
@@ -83,7 +67,7 @@ class File extends AbstractFile
      */
     protected function setContainerHtmlAttributes(): array
     {
-        return [];
+        return ['default' => 'container', 'html' => 'attributes'];
     }
 
     /**
@@ -91,21 +75,13 @@ class File extends AbstractFile
      */
     protected function setDisplaySuccess(): bool
     {
-        return config('bootstrap-components.form.formValidation.displaySuccess');
+        return true;
     }
 
     /**
      * @inheritDoc
      */
     protected function setDisplayFailure(): bool
-    {
-        return config('bootstrap-components.form.formValidation.displayFailure');
-    }
-
-    /**
-     * @inheritDoc
-     */
-    protected function setShowRemoveCheckbox(): bool
     {
         return true;
     }

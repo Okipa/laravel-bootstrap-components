@@ -14,20 +14,20 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
 {
     use UsersFaker;
 
-    abstract protected function getComponent(): Component;
-
     abstract protected function getCustomComponent(): Component;
 
-    abstract protected function getComponentType(): string;
+    abstract protected function getComponent(): Component;
 
-    protected function getComponentKey(): string
-    {
-        return $this->getComponentType();
-    }
+    abstract protected function getComponentType(): string;
 
     public function testHelper()
     {
         $this->assertInstanceOf(get_class($this->getComponent()), input()->{$this->getComponentKey()}());
+    }
+
+    protected function getComponentKey(): string
+    {
+        return $this->getComponentType();
     }
 
     public function testFacade()
@@ -171,7 +171,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $oldValue = 'test-old-value';
         $customValue = 'test-custom-value';
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValue) {
+            'middleware' => 'web', 'uses' => function() use ($oldValue) {
                 $request = request()->merge(['name' => $oldValue]);
                 $request->flash();
             },
@@ -190,7 +190,6 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
             '<label for="' . $this->getComponentType() . '-name">' . $label . '</label>',
             $html
         );
-        $this->assertStringContainsString(' placeholder="' . $label . '"', $html);
     }
 
     public function testSetTranslatedLabel()
@@ -201,7 +200,6 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
             '<label for="' . $this->getComponentType() . '-name">' . __($label) . '</label>',
             $html
         );
-        $this->assertStringContainsString(' placeholder="' . __($label) . '"', $html);
     }
 
     public function testNoLabel()
@@ -216,7 +214,10 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
     public function testHideLabel()
     {
         $html = $this->getComponent()->name('name')->label(false)->toHtml();
-        $this->assertStringNotContainsString('<label for="text-name">validation.attributes.name</label>', $html);
+        $this->assertStringNotContainsString(
+            '<label for="' . $this->getComponentType() . '-name">validation.attributes.name</label>',
+            $html
+        );
     }
 
     public function testSetCustomLabelPositionedAbove()
@@ -263,6 +264,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $placeholder = 'test-custom-placeholder';
         $html = $this->getComponent()->name('name')->label($label)->placeholder($placeholder)->toHtml();
         $this->assertStringContainsString(' placeholder="' . $placeholder . '"', $html);
+        $this->assertStringNotContainsString(' placeholder="' . $label . '"', $html);
     }
 
     public function testNoPlaceholder()
