@@ -26,7 +26,10 @@ Just call the components you need in your views and let this package take care o
 Call this component in your view :
 
 ```blade
-{{ input()->text()->name('name') }}
+{{-- helper style --}}
+{{ inputText()->name('name') }}
+{{-- facade style --}}
+{{ InputText::name('name') }}
 ```
 
 And get this HTML generated for you :
@@ -57,7 +60,10 @@ And get this HTML generated for you :
 Call this component in your view :
 
 ```blade
-{{ input()->text()->name('title')->localized(['fr', 'en']) }}
+{{-- helper style --}}
+{{ inputText()->name('title')->localized(['fr', 'en']) }}
+{{-- facade style --}}
+{{ InputText::name('title')->localized(['fr', 'en']) }}
 ```
 
 And get this HTML generated for you :
@@ -112,7 +118,7 @@ And get this HTML generated for you :
 - [API](#api)
   - [Form components](#form-components)
     - [Multilingual](#multilingual)
-      - [input()->text()](#bstext)
+      - [inputText()](#inputtext)
       - [bsTextarea()](#bstextarea)
     - [Standard](#standard)
       - [bsNumber()](#bsnumber)
@@ -254,7 +260,7 @@ $('.component[type="text"][name="email"')
   * The component localized error message bag key resolution, used for the error message extraction and for the validation class generation (default : `$name . $locale`).
   * The component error message resolution, in order to correctly display the localized attribute name (default : transform `Dummy __('validation.attributes.name.en) error message` into `Dummy __('validation.attributes.name) (EN) error message.`.
 
-##### input()->text()
+##### inputText()
 
 ```php
 input()->text()->name('name') // set the input name

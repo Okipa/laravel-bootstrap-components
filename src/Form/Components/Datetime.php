@@ -2,9 +2,9 @@
 
 namespace Okipa\LaravelBootstrapComponents\Form\Components;
 
-use Okipa\LaravelBootstrapComponents\Form\Abstracts\Temporal;
+use Okipa\LaravelBootstrapComponents\Form\Abstracts\TemporalAbstract;
 
-class Datetime extends Temporal
+class Datetime extends TemporalAbstract
 {
     /**
      * @inheritDoc

@@ -1,27 +1,28 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
+namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
-use Okipa\LaravelBootstrapComponents\Form\Abstracts\Checkable;
+use Exception;
+use Okipa\LaravelBootstrapComponents\Form\Abstracts\RadioAbstract;
 
-abstract class InputCheckableTestAbstract extends InputTestAbstract
+abstract class InputRadioTestAbstract extends InputTestAbstract
 {
     public function testInstance()
     {
-        $this->assertInstanceOf(Checkable::class, $this->getComponent());
+        $this->assertInstanceOf(RadioAbstract::class, $this->getComponent());
     }
 
-    public function testType()
+    public function testInputWithoutValue()
     {
-        $html = $this->getComponent()->name('name')->toHtml();
-        $this->assertStringContainsString(' type="checkbox"', $html);
+        $this->expectException(Exception::class);
+        $this->getComponent()->name('name')->value(null)->toHtml();
     }
 
     public function testModelValue()
     {
         $user = $this->createUniqueUser();
-        $html = $this->getComponent()->model($user)->name('active')->toHtml();
-        $this->assertStringContainsString(' checked="checked"', $html);
+        $html = $this->getComponent()->name('name')->model($user)->value($user->name)->toHtml();
+        $this->assertStringContainsString('checked="checked"', $html);
     }
 
     public function testSetCustomPrepend()
@@ -87,79 +88,59 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
 
     public function testSetChecked()
     {
-        $user = null;
-        $html = $this->getComponent()->model($user)->name('active')->checked()->toHtml();
+        $html = $this->getComponent()->name('name')->checked()->toHtml();
         $this->assertStringContainsString('checked="checked"', $html);
     }
 
-    public function testSetCheckedOverridesModelValue()
+    public function testNotChecked()
     {
-        $user = $this->createUniqueUser();
-        $html = $this->getComponent()->model($user)->name('active')->checked(false)->toHtml();
+        $html = $this->getComponent()->name('name')->checked(false)->toHtml();
         $this->assertStringNotContainsString('checked="checked"', $html);
     }
 
-    public function testDefaultCheckStatus()
-    {
-        $html = $this->getComponent()->name('active')->toHtml();
-        $this->assertStringNotContainsString('checked="checked', $html);
-    }
-
-    public function testSetValue()
-    {
-        $html = $this->getComponent()->name('active')->value(true)->toHtml();
-        $this->assertStringContainsString('checked="checked', $html);
-    }
-
-    public function testSetValueNotChecked()
-    {
-        $html = $this->getComponent()->name('active')->value(false)->toHtml();
-        $this->assertStringNotContainsString('checked="checked', $html);
-    }
-
-    public function testSetValueOverridesModelValue()
+    public function testModelValueChecked()
     {
         $user = $this->createUniqueUser();
-        $html = $this->getComponent()->model($user)->name('active')->value(false)->toHtml();
-        $this->assertStringContainsString('checked="checked', $html);
+        $html = $this->getComponent()->name('name')->model($user)->value($user->name)->toHtml();
+        $this->assertStringContainsString('checked="checked"', $html);
     }
 
-    public function testOldValue()
+    public function testOldValueChecked()
     {
-        $oldValue = true;
-        $customValue = false;
+        $oldValue = 'test-old-value';
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                $request = request()->merge(['active' => $oldValue]);
+                $request = request()->merge(['name' => $oldValue]);
                 $request->flash();
             },
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('active')->value($customValue)->toHtml();
+        $html = $this->getComponent()->name('name')->value($oldValue)->checked(false)->toHtml();
         $this->assertStringContainsString('checked="checked', $html);
     }
 
     public function testOldValueNotChecked()
     {
-        $oldValue = false;
-        $customValue = true;
+        $oldValue = 'test-old-value';
+        $customValue = 'test-custom-value';
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                $request = request()->merge(['active' => $oldValue]);
+                $request = request()->merge(['name' => $oldValue]);
                 $request->flash();
             },
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('active')->value($customValue)->toHtml();
+        $html = $this->getComponent()->name('name')->value($customValue)->checked()->toHtml();
         $this->assertStringNotContainsString('checked="checked', $html);
     }
 
     public function testSetLabel()
     {
         $label = 'test-custom-label';
-        $html = $this->getComponent()->name('active')->label($label)->toHtml();
+        $html = $this->getComponent()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString(
-            ' for="' . $this->getComponentType() . '-active">' . $label . '</label>',
+            '<label class="custom-control-label" for="' . $this->getComponentType() . '-name-value">' . $label
+            . '</label>',
             $html
         );
     }
@@ -167,23 +148,32 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
     public function testSetTranslatedLabel()
     {
         $label = 'bootstrap-components::bootstrap-components.label.validate';
-        $html = $this->getComponent()->name('active')->label($label)->toHtml();
-        $this->assertStringContainsString(' for="' . $this->getComponentType() . '-active">' . __($label) . '</label>',
-            $html);
+        $html = $this->getComponent()->name('name')->label($label)->toHtml();
+        $this->assertStringContainsString(
+            '<label class="custom-control-label" for="' . $this->getComponentType() . '-name-value">'
+            . __($label) . '</label>',
+            $html
+        );
     }
 
     public function testNoLabel()
     {
-        $html = $this->getComponent()->name('active')->toHtml();
-        $this->assertStringContainsString(' for="' . $this->getComponentType() . '-active">'
-            . 'validation.attributes.active</label>', $html);
+        $html = $this->getComponent()->name('name')->toHtml();
+        $this->assertStringContainsString(
+            '<label class="custom-control-label" for="' . $this->getComponentType()
+            . '-name-value">validation.attributes.name</label>',
+            $html
+        );
     }
 
     public function testHideLabel()
     {
-        $html = $this->getComponent()->name('active')->label(false)->toHtml();
-        $this->assertStringNotContainsString(' for="' . $this->getComponentType() . '-active">'
-            . 'validation.attributes.active</label>', $html);
+        $html = $this->getComponent()->name('name')->label(false)->toHtml();
+        $this->assertStringNotContainsString(
+            '<label class="custom-control-label" for="' . $this->getComponentType()
+            . '-name-value">validation.attributes.name</label>',
+            $html
+        );
     }
 
     public function testSetCustomLabelPositionedAbove()
@@ -226,6 +216,13 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         //
     }
 
+    public function testSetNoComponentId()
+    {
+        $html = $this->getComponent()->name('name')->toHtml();
+        $this->assertStringContainsString('<input id="' . $this->getComponentType() . '-name-value"', $html);
+        $this->assertStringContainsString(' for="' . $this->getComponentType() . '-name-value"', $html);
+    }
+
     public function testSetCustomContainerClasses()
     {
         config()->set(
@@ -233,9 +230,10 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->toHtml();
-        $this->assertStringContainsString('class="component-container form-group custom-control custom-'
-            . $this->getComponentType() . ' default container classes"',
-            $html);
+        $this->assertStringContainsString(
+            'class="component-container form-group custom-control custom-checkbox default container classes"',
+            $html
+        );
     }
 
     public function testSetContainerClassesOverridesDefault()
@@ -245,12 +243,14 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->containerClasses(['custom', 'container', 'classes'])->toHtml();
-        $this->assertStringContainsString('class="component-container form-group custom-control custom-'
-            . $this->getComponentType() . ' custom container classes"',
-            $html);
-        $this->assertStringNotContainsString('class="component-container form-group custom-control custom-'
-            . $this->getComponentType() . ' default container classes"',
-            $html);
+        $this->assertStringContainsString(
+            'class="component-container form-group custom-control custom-checkbox custom container classes"',
+            $html
+        );
+        $this->assertStringNotContainsString(
+            'class="component-container form-group custom-control custom-checkbox default container classes"',
+            $html
+        );
     }
 
     public function testSetCustomComponentClasses()

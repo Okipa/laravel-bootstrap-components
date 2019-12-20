@@ -1,12 +1,12 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
+namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
 use Exception;
+use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\MessageBag;
-use Okipa\LaravelBootstrapComponents\Component;
-use Okipa\LaravelBootstrapComponents\Facades\Input;
-use Okipa\LaravelBootstrapComponents\Form\Abstracts\Form;
+use Okipa\LaravelBootstrapComponents\ComponentAbstract;
+use Okipa\LaravelBootstrapComponents\Form\Abstracts\FormAbstract;
 use Okipa\LaravelBootstrapComponents\Tests\BootstrapComponentsTestCase;
 use Okipa\LaravelBootstrapComponents\Tests\Fakers\UsersFaker;
 
@@ -14,30 +14,35 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
 {
     use UsersFaker;
 
-    abstract protected function getCustomComponent(): Component;
+    abstract protected function getComponent(): ComponentAbstract;
 
-    abstract protected function getComponent(): Component;
+    abstract protected function getHelper(): ComponentAbstract;
+
+    abstract protected function getFacade();
 
     abstract protected function getComponentType(): string;
 
-    public function testHelper()
-    {
-        $this->assertInstanceOf(get_class($this->getComponent()), input()->{$this->getComponentKey()}());
-    }
+    abstract protected function getCustomComponent(): ComponentAbstract;
+
 
     protected function getComponentKey(): string
     {
         return $this->getComponentType();
     }
 
+    public function testHelper()
+    {
+        $this->assertInstanceOf(get_class($this->getComponent()), $this->getHelper());
+    }
+
     public function testFacade()
     {
-        $this->assertInstanceOf(get_class($this->getComponent()), Input::{$this->getComponentKey()}());
+        $this->assertInstanceOf(get_class($this->getComponent()), $this->getFacade());
     }
 
     public function testInstance()
     {
-        $this->assertInstanceOf(Form::class, $this->getComponent());
+        $this->assertInstanceOf(FormAbstract::class, $this->getComponent());
     }
 
     public function testSetName()
@@ -171,7 +176,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $oldValue = 'test-old-value';
         $customValue = 'test-custom-value';
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function() use ($oldValue) {
+            'middleware' => 'web', 'uses' => function () use ($oldValue) {
                 $request = request()->merge(['name' => $oldValue]);
                 $request->flash();
             },
@@ -450,7 +455,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
             'bootstrap-components.form.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()->name('name')->toHtml();
+        $html = $this->getComponent()->name('name')->value(null)->toHtml();
         $this->assertStringContainsString('default="component" html="attributes">', $html);
     }
 
@@ -461,6 +466,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')
+            ->value(null)
             ->componentHtmlAttributes(['custom' => 'component', 'html' => 'attributes'])
             ->toHtml();
         $this->assertStringContainsString('custom="component" html="attributes">', $html);

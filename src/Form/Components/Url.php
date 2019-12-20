@@ -2,9 +2,9 @@
 
 namespace Okipa\LaravelBootstrapComponents\Form\Components;
 
-use Okipa\LaravelBootstrapComponents\Form\Abstracts\Form;
+use Okipa\LaravelBootstrapComponents\Form\Abstracts\FormAbstract;
 
-class Url extends Form
+class Url extends FormAbstract
 {
     /**
      * @inheritDoc

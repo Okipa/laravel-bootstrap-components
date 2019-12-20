@@ -4,7 +4,7 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Fakers;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MultilingualResolver extends \Okipa\LaravelBootstrapComponents\Form\MultilingualResolver
+class Resolver extends \Okipa\LaravelBootstrapComponents\Form\Multilingual\Resolver
 {
     /*
      * The language locales to handle for multilingual components.

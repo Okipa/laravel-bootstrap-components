@@ -2,9 +2,9 @@
 
 namespace Okipa\LaravelBootstrapComponents\Form\Components;
 
-use Okipa\LaravelBootstrapComponents\Form\Abstracts\Checkable;
+use Okipa\LaravelBootstrapComponents\Form\Abstracts\CheckableAbstract;
 
-class Checkbox extends Checkable
+class Checkbox extends CheckableAbstract
 {
     /**
      * @inheritDoc

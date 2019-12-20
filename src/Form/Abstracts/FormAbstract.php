@@ -4,10 +4,10 @@ namespace Okipa\LaravelBootstrapComponents\Form\Abstracts;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use Okipa\LaravelBootstrapComponents\Component;
+use Okipa\LaravelBootstrapComponents\ComponentAbstract;
 use Okipa\LaravelBootstrapComponents\Form\Traits\FormValidityChecks;
 
-abstract class Form extends Component
+abstract class FormAbstract extends ComponentAbstract
 {
     use FormValidityChecks;
 

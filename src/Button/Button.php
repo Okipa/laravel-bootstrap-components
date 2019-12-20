@@ -2,9 +2,9 @@
 
 namespace Okipa\LaravelBootstrapComponents\Button;
 
-use Okipa\LaravelBootstrapComponents\Component;
+use Okipa\LaravelBootstrapComponents\ComponentAbstract;
 
-abstract class Button extends Component
+abstract class Button extends ComponentAbstract
 {
     /**
      * The button url.

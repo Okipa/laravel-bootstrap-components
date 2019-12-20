@@ -6,14 +6,14 @@ use Closure;
 use Okipa\LaravelBootstrapComponents\Form\Traits\MultilingualValidityChecks;
 use Throwable;
 
-abstract class Multilingual extends Form
+abstract class MultilingualAbstract extends FormAbstract
 {
     use MultilingualValidityChecks;
 
     /**
      * The multilingual component dynamic multilingual resolver .
      *
-     * @property \Okipa\LaravelBootstrapComponents\Form\MultilingualResolver $multilingualResolver
+     * @property \Okipa\LaravelBootstrapComponents\Form\Multilingual\Resolver $multilingualResolver
      */
     protected $multilingualResolver;
 

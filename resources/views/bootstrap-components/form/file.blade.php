@@ -4,7 +4,7 @@
     @endif
     @if($uploadedFileHtml->toHtml())
         {{ $uploadedFileHtml }}
-        @if($showRemoveCheckbox){{ input()->checkbox()->name('remove_' . $name )
+        @if($showRemoveCheckbox){{ inputCheckbox()->name('remove_' . $name )
             ->label($removeCheckboxLabel)
             ->containerClasses(['mb-1']) }}@endif
     @endif

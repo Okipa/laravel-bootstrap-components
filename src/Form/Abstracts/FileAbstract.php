@@ -3,9 +3,9 @@
 namespace Okipa\LaravelBootstrapComponents\Form\Abstracts;
 
 use Illuminate\Support\HtmlString;
-use Okipa\LaravelBootstrapComponents\Component;
+use Okipa\LaravelBootstrapComponents\ComponentAbstract;
 
-abstract class File extends Form
+abstract class FileAbstract extends FormAbstract
 {
     /**
      * The uploaded file closure.
@@ -93,7 +93,7 @@ abstract class File extends Form
         $uploadedFileHtml = '';
         $uploadedFile = $this->uploadedFile;
         if ($uploadedFile) {
-            if ($uploadedFile() instanceof Component) {
+            if ($uploadedFile() instanceof ComponentAbstract) {
                 $uploadedFileHtml = $uploadedFile()->toHtml();
             } else {
                 $uploadedFileHtml = $uploadedFile();

@@ -2,23 +2,10 @@
 
 return [
 
-    // form components *************************************************************************************************
+    /*
+     * Form components configuration.
+     */
     'form' => [
-
-        /*
-         * Whether the form component label is positioned above the component itself.
-         * If not positioned above, the label will be positioned under the input
-         * (may be useful for bootstrap 4 floating labels).
-         */
-        'labelPositionedAbove' => true,
-
-        /*
-         * Whether the form component should display its success or failure status.
-         */
-        'formValidation' => [
-            'displaySuccess' => false,
-            'displayFailure' => true,
-        ],
 
         /*
          * The fully qualified class name of the form components.
@@ -38,13 +25,29 @@ return [
             'file' => Okipa\LaravelBootstrapComponents\Form\Components\File::class,
             'checkbox' => Okipa\LaravelBootstrapComponents\Form\Components\Checkbox::class,
             'toggle' => Okipa\LaravelBootstrapComponents\Form\Components\Toggle::class,
+            'radio' => Okipa\LaravelBootstrapComponents\Form\Components\Radio::class,
         ],
 
         /*
          * The fully qualified class name of the multilingual resolver.
          * You can override it. Make sure your custom resolver extends this one.
          */
-        'multilingualResolver' => Okipa\LaravelBootstrapComponents\Form\MultilingualResolver::class,
+        'multilingualResolver' => Okipa\LaravelBootstrapComponents\Form\Multilingual\Resolver::class,
+
+        /*
+         * Whether the form component label is positioned above the component itself.
+         * If not positioned above, the label will be positioned under the input
+         * (may be useful for bootstrap 4 floating labels).
+         */
+        'labelPositionedAbove' => true,
+
+        /*
+         * Whether the form component should display its success or failure status.
+         */
+        'formValidation' => [
+            'displaySuccess' => false,
+            'displayFailure' => true,
+        ],
 
         'textarea' => [
             'view' => 'bootstrap-components.form.textarea',
@@ -71,25 +74,6 @@ return [
             'prepend' => '<i class="fas fa-hand-pointer"></i>',
             'append' => null,
             'labelPositionedAbove' => true,
-            'legend' => null,
-            'classes' => [
-                'container' => ['form-group'],
-                'component' => [],
-            ],
-            'htmlAttributes' => [
-                'container' => [],
-                'component' => [],
-            ],
-            'formValidation' => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
-            ],
-        ],
-
-        'radio' => [
-            'view' => 'bootstrap-components.form.radio',
-            'prepend' => null,
-            'append' => null,
             'legend' => null,
             'classes' => [
                 'container' => ['form-group'],

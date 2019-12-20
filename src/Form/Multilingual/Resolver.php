@@ -1,10 +1,10 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Form;
+namespace Okipa\LaravelBootstrapComponents\Form\Multilingual;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MultilingualResolver
+class Resolver
 {
     /*
      * The language locales to handle for multilingual components.

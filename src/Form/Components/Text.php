@@ -2,9 +2,9 @@
 
 namespace Okipa\LaravelBootstrapComponents\Form\Components;
 
-use Okipa\LaravelBootstrapComponents\Form\Abstracts\Multilingual;
+use Okipa\LaravelBootstrapComponents\Form\Abstracts\MultilingualAbstract;
 
-class Text extends Multilingual
+class Text extends MultilingualAbstract
 {
     /**
      * @inheritDoc

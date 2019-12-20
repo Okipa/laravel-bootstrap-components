@@ -5,7 +5,7 @@ namespace Okipa\LaravelBootstrapComponents\Form\Abstracts;
 use Illuminate\Support\Arr;
 use Okipa\LaravelBootstrapComponents\Form\Traits\SelectValidityChecks;
 
-abstract class Select extends Form
+abstract class SelectAbstract extends FormAbstract
 {
     use SelectValidityChecks;
 

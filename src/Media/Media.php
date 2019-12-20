@@ -2,9 +2,9 @@
 
 namespace Okipa\LaravelBootstrapComponents\Media;
 
-use Okipa\LaravelBootstrapComponents\Component;
+use Okipa\LaravelBootstrapComponents\ComponentAbstract;
 
-abstract class Media extends Component
+abstract class Media extends ComponentAbstract
 {
     /**
      * The image src.

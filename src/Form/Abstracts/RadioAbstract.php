@@ -5,10 +5,10 @@ namespace Okipa\LaravelBootstrapComponents\Form\Abstracts;
 use Illuminate\Support\Str;
 use Okipa\LaravelBootstrapComponents\Form\Traits\RadioValidityChecks;
 
-abstract class Radio extends Checkable
+abstract class RadioAbstract extends CheckableAbstract
 {
     use RadioValidityChecks;
-    
+
     /**
      * @return string
      */

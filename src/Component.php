@@ -2,296 +2,124 @@
 
 namespace Okipa\LaravelBootstrapComponents;
 
-use Illuminate\Contracts\Support\Htmlable;
-use Throwable;
+use Okipa\LaravelBootstrapComponents\Form\Abstracts\CheckableAbstract;
+use Okipa\LaravelBootstrapComponents\Form\Abstracts\FileAbstract;
+use Okipa\LaravelBootstrapComponents\Form\Abstracts\FormAbstract;
+use Okipa\LaravelBootstrapComponents\Form\Abstracts\MultilingualAbstract;
+use Okipa\LaravelBootstrapComponents\Form\Abstracts\RadioAbstract;
+use Okipa\LaravelBootstrapComponents\Form\Abstracts\TemporalAbstract;
 
-abstract class Component implements Htmlable
+class Component
 {
-    /** @property string $type */
-    protected $type;
-
-    /** @property string $view */
-    protected $view;
-
-    /** @property string $componentId */
-    protected $componentId;
-
-    /** @property array $containerId */
-    protected $containerId;
-
-    /**  @property array $componentClasses */
-    protected $componentClasses;
-
-    /** @property array $containerClasses */
-    protected $containerClasses;
-
-    /** @property array $componentHtmlAttributes */
-    protected $componentHtmlAttributes;
-
-    /** @property array $containerHtmlAttributes */
-    protected $containerHtmlAttributes;
-
     /**
-     * Component constructor.
+     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\MultilingualAbstract
      */
-    public function __construct()
+    public function inputText(): MultilingualAbstract
     {
-        $this->type = $this->setType();
-        $this->view = $this->setView();
-        $this->componentClasses = $this->setComponentClasses();
-        $this->componentHtmlAttributes = $this->setComponentHtmlAttributes();
-        $this->containerClasses = $this->setContainerClasses();
-        $this->containerHtmlAttributes = $this->setContainerHtmlAttributes();
+        return app(config('bootstrap-components.form.components.text'));
     }
 
     /**
-     * Set the component id.
-     *
-     * @param string $componentId
-     *
-     * @return $this
+     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\FormAbstract
      */
-    public function componentId(string $componentId): self
+    public function inputEmail(): FormAbstract
     {
-        $this->componentId = $componentId;
-
-        return $this;
+        return app(config('bootstrap-components.form.components.email'));
     }
 
     /**
-     * Set the component classes.
-     *
-     * @param array $componentClasses
-     *
-     * @return $this
+     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\FormAbstract
      */
-    public function componentClasses(array $componentClasses): self
+    public function inputPassword(): FormAbstract
     {
-        $this->componentClasses = $componentClasses;
-
-        return $this;
+        return app(config('bootstrap-components.form.components.password'));
     }
 
     /**
-     * Set the component container id.
-     *
-     * @param string $containerId
-     *
-     * @return $this
+     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\FormAbstract
      */
-    public function containerId(string $containerId): self
+    public function inputUrl(): FormAbstract
     {
-        $this->containerId = $containerId;
-
-        return $this;
+        return app(config('bootstrap-components.form.components.url'));
     }
 
     /**
-     * Set the component container classes.
-     *
-     * @param array $containerClasses
-     *
-     * @return $this
+     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\FormAbstract
      */
-    public function containerClasses(array $containerClasses): self
+    public function inputTel(): FormAbstract
     {
-        $this->containerClasses = $containerClasses;
-
-        return $this;
+        return app(config('bootstrap-components.form.components.tel'));
     }
 
     /**
-     * Set the component html attributes.
-     *
-     * @param array $componentHtmlAttributes
-     *
-     * @return $this
+     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\FormAbstract
      */
-    public function componentHtmlAttributes(array $componentHtmlAttributes): self
+    public function inputNumber(): FormAbstract
     {
-        $this->componentHtmlAttributes = $componentHtmlAttributes;
-
-        return $this;
+        return app(config('bootstrap-components.form.components.number'));
     }
 
     /**
-     * Set the component container html attributes.
-     *
-     * @param array $containerHtmlAttributes
-     *
-     * @return $this
+     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\FormAbstract
      */
-    public function containerHtmlAttributes(array $containerHtmlAttributes): self
+    public function inputColor(): FormAbstract
     {
-        $this->containerHtmlAttributes = $containerHtmlAttributes;
-
-        return $this;
+        return app(config('bootstrap-components.form.components.color'));
     }
 
     /**
-     * Render the component html.
-     *
-     * @return string
-     * @throws Throwable
+     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\TemporalAbstract
      */
-    public function toHtml(): string
+    public function inputDate(): TemporalAbstract
     {
-        return $this->render();
+        return app(config('bootstrap-components.form.components.date'));
     }
 
     /**
-     * Render the component html.
-     *
-     * @param array $extraData
-     *
-     * @return string
-     * @throws Throwable
+     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\TemporalAbstract
      */
-    public function render(array $extraData = []): string
+    public function inputTime(): TemporalAbstract
     {
-        $this->checkValuesValidity();
-        $view = $this->getView();
-        $html = $view
-            ? (string) view('bootstrap-components::' . $view, array_merge($this->getValues(), $extraData))->render()
-            : '';
-
-        return trim($html);
+        return app(config('bootstrap-components.form.components.time'));
     }
 
     /**
-     * Check the component values validity
+     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\TemporalAbstract
      */
-    abstract protected function checkValuesValidity(): void;
-
-    /**
-     * Set the component view.
-     *
-     * @return string
-     */
-    protected function getView(): string
+    public function inputDatetime(): TemporalAbstract
     {
-        return $this->view;
+        return app(config('bootstrap-components.form.components.datetime'));
     }
 
     /**
-     * Set the component view path.
-     *
-     * @return string
+     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\FileAbstract
      */
-    abstract protected function setView(): string;
-
-    /**
-     * Get values for the view.
-     *
-     * @return array
-     */
-    protected function getValues(): array
+    public function inputFile(): FileAbstract
     {
-        $componentId = $this->getComponentId();
-        $containerId = $this->getContainerId();
-        $componentClasses = $this->getComponentClasses();
-        $containerClasses = $this->getContainerClasses();
-        $componentHtmlAttributes = $this->getComponentHtmlAttributes();
-        $containerHtmlAttributes = $this->getContainerHtmlAttributes();
-
-        return compact(
-            'componentId',
-            'containerId',
-            'componentClasses',
-            'containerClasses',
-            'componentHtmlAttributes',
-            'containerHtmlAttributes'
-        );
+        return app(config('bootstrap-components.form.components.file'));
     }
 
     /**
-     * @return string|null
+     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\CheckableAbstract
      */
-    protected function getComponentId(): ?string
+    public function inputCheckbox(): CheckableAbstract
     {
-        return $this->componentId;
+        return app(config('bootstrap-components.form.components.checkbox'));
     }
 
     /**
-     * @return string|null
+     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\CheckableAbstract
      */
-    protected function getContainerId(): ?string
+    public function inputToggle(): CheckableAbstract
     {
-        return $this->containerId;
+        return app(config('bootstrap-components.form.components.toggle'));
     }
 
     /**
-     * @return array
+     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\RadioAbstract
      */
-    protected function getComponentClasses(): array
+    public function inputRadio(): RadioAbstract
     {
-        return $this->componentClasses;
+        return app(config('bootstrap-components.form.components.radio'));
     }
-
-    /**
-     * Set the component classes.
-     *
-     * @return array
-     */
-    abstract protected function setComponentClasses(): array;
-
-    /**
-     * @return array
-     */
-    protected function getContainerClasses(): array
-    {
-        return $this->containerClasses;
-    }
-
-    /**
-     * Set the container classes.
-     *
-     * @return array
-     */
-    abstract protected function setContainerClasses(): array;
-
-    /**
-     * @return array
-     */
-    protected function getComponentHtmlAttributes(): array
-    {
-        return $this->componentHtmlAttributes;
-    }
-
-    /**
-     * Set the component html attributes.
-     *
-     * @return array
-     */
-    abstract protected function setComponentHtmlAttributes(): array;
-
-    /**
-     * @return array
-     */
-    protected function getContainerHtmlAttributes(): array
-    {
-        return $this->containerHtmlAttributes;
-    }
-
-    /**
-     * Set the container html attributes.
-     *
-     * @return array
-     */
-    abstract protected function setContainerHtmlAttributes(): array;
-
-    /**
-     * @return string
-     */
-    protected function getType(): string
-    {
-        return $this->type;
-    }
-
-    /**
-     * Set the component type.
-     *
-     * @return string
-     */
-    abstract protected function setType(): string;
 }

@@ -5,7 +5,7 @@ namespace Okipa\LaravelBootstrapComponents\Form\Abstracts;
 use Carbon\Carbon;
 use Okipa\LaravelBootstrapComponents\Form\Traits\TemporalValidityChecks;
 
-abstract class Temporal extends Form
+abstract class TemporalAbstract extends FormAbstract
 {
     use TemporalValidityChecks;
 

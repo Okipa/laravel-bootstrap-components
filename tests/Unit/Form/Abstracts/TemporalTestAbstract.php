@@ -1,10 +1,10 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
+namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
 use Carbon\Carbon;
 use Exception;
-use Okipa\LaravelBootstrapComponents\Form\Abstracts\Temporal;
+use Okipa\LaravelBootstrapComponents\Form\Abstracts\TemporalAbstract;
 
 abstract class TemporalTestAbstract extends InputTestAbstract
 {
@@ -12,7 +12,7 @@ abstract class TemporalTestAbstract extends InputTestAbstract
 
     public function testInstance()
     {
-        $this->assertInstanceOf(Temporal::class, $this->getComponent());
+        $this->assertInstanceOf(TemporalAbstract::class, $this->getComponent());
     }
 
     public function testModelValue()

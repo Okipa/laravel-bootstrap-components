@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Form\Components;
 
-use Okipa\LaravelBootstrapComponents\Form\Abstracts\Select as AbstractSelect;
+use Okipa\LaravelBootstrapComponents\Form\Abstracts\SelectAbstract as AbstractSelect;
 
 class Select extends AbstractSelect
 {

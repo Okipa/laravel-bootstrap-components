@@ -2,9 +2,9 @@
 
 namespace Okipa\LaravelBootstrapComponents\Form\Components;
 
-use Okipa\LaravelBootstrapComponents\Form\Abstracts\Form;
+use Okipa\LaravelBootstrapComponents\Form\Abstracts\FormAbstract;
 
-class Color extends Form
+class Color extends FormAbstract
 {
     /**
      * @inheritDoc

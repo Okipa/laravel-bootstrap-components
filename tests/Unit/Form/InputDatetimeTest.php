@@ -2,18 +2,31 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
-use Okipa\LaravelBootstrapComponents\Component;
+use Okipa\LaravelBootstrapComponents\ComponentAbstract;
+use Okipa\LaravelBootstrapComponents\Facades\InputDatetime;
+use Okipa\LaravelBootstrapComponents\Facades\InputTime;
 use Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents\CustomDatetime;
 use Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents\CustomTime;
+use Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts\TemporalTestAbstract;
 
 class InputDatetimeTest extends TemporalTestAbstract
 {
-    protected function getComponent(): Component
+    protected function getComponent(): ComponentAbstract
     {
-        return input()->datetime();
+        return app(config('bootstrap-components.form.components.datetime'));
     }
 
-    protected function getCustomComponent(): Component
+    protected function getHelper(): ComponentAbstract
+    {
+        return inputDatetime();
+    }
+
+    protected function getFacade()
+    {
+        return InputDatetime::getFacadeRoot();
+    }
+
+    protected function getCustomComponent(): ComponentAbstract
     {
         return (new CustomDatetime);
     }
@@ -23,13 +36,13 @@ class InputDatetimeTest extends TemporalTestAbstract
         return 'datetime-local';
     }
 
-    protected function getFormat(): string
-    {
-        return 'Y-m-d H:i:s';
-    }
-
     protected function getComponentKey(): string
     {
         return 'datetime';
+    }
+
+    protected function getFormat(): string
+    {
+        return 'Y-m-d H:i:s';
     }
 }
