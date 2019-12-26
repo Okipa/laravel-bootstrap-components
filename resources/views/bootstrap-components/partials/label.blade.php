@@ -1,3 +1,3 @@
 @if($label)
-    <label for="{{ $componentId }}">@lang($label)</label>
+    <label{{ htmlAttributes($componentId ? ['for' => $componentId] : null) }}>@lang($label)</label>
 @endif

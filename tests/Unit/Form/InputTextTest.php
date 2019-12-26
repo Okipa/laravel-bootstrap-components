@@ -11,7 +11,7 @@ class InputTextTest extends InputMultilingualTestAbstract
 {
     protected function getComponent(): ComponentAbstract
     {
-        return app(config('bootstrap-components.form.components.text'));
+        return app(config('bootstrap-components.components.text'));
     }
 
     protected function getHelper(): ComponentAbstract
@@ -19,7 +19,7 @@ class InputTextTest extends InputMultilingualTestAbstract
         return inputText();
     }
 
-    protected function getFacade()
+    protected function getFacade(): ComponentAbstract
     {
         return InputText::getFacadeRoot();
     }

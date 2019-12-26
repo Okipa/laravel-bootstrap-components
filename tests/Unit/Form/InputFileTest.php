@@ -11,7 +11,7 @@ class InputFileTest extends InputFileTestAbstract
 {
     protected function getComponent(): ComponentAbstract
     {
-        return app(config('bootstrap-components.form.components.file'));
+        return app(config('bootstrap-components.components.file'));
     }
 
     protected function getHelper(): ComponentAbstract
@@ -19,7 +19,7 @@ class InputFileTest extends InputFileTestAbstract
         return inputFile();
     }
 
-    protected function getFacade()
+    protected function getFacade(): ComponentAbstract
     {
         return InputFile::getFacadeRoot();
     }

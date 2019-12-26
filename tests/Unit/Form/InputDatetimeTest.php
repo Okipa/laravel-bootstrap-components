@@ -13,7 +13,7 @@ class InputDatetimeTest extends TemporalTestAbstract
 {
     protected function getComponent(): ComponentAbstract
     {
-        return app(config('bootstrap-components.form.components.datetime'));
+        return app(config('bootstrap-components.components.datetime'));
     }
 
     protected function getHelper(): ComponentAbstract
@@ -21,7 +21,7 @@ class InputDatetimeTest extends TemporalTestAbstract
         return inputDatetime();
     }
 
-    protected function getFacade()
+    protected function getFacade(): ComponentAbstract
     {
         return InputDatetime::getFacadeRoot();
     }

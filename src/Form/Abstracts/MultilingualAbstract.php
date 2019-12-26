@@ -49,12 +49,7 @@ abstract class MultilingualAbstract extends FormAbstract
     }
 
     /**
-     * Render the component html.
-     *
-     * @param array $extraData
-     *
-     * @return string
-     * @throws Throwable
+     * @inheritDoc
      */
     public function render(array $extraData = []): string
     {

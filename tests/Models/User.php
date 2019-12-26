@@ -12,6 +12,7 @@ class User extends Model
      * @var string
      */
     protected $table = 'users_test';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -20,6 +21,7 @@ class User extends Model
     protected $fillable = [
         'name', 'name_fr', 'name_en', 'email', 'password', 'active',
     ];
+
     /**
      * The attributes that should be hidden for arrays.
      *

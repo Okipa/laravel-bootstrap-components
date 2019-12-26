@@ -1,57 +1,85 @@
 <?php
 
-use Okipa\LaravelBootstrapComponents\Button\Back as bsBack;
-use Okipa\LaravelBootstrapComponents\Button\Cancel as bsCancel;
-use Okipa\LaravelBootstrapComponents\Button\Create as bsCreate;
-use Okipa\LaravelBootstrapComponents\Button\Update as bsUpdate;
-use Okipa\LaravelBootstrapComponents\Button\Validate as bsValidate;
+use Okipa\LaravelBootstrapComponents\Buttons\Abstracts\ButtonAbstract;
+use Okipa\LaravelBootstrapComponents\Buttons\Abstracts\SubmitAbstract;
+use Okipa\LaravelBootstrapComponents\Component;
 
-if (! function_exists('bsValidate')) {
+if (! function_exists('submit')) {
     /**
-     * @return bsValidate
+     * @return \Okipa\LaravelBootstrapComponents\Buttons\Abstracts\ButtonAbstract
      */
-    function bsValidate(): bsValidate
+    function submit(): SubmitAbstract
     {
-        return (new bsValidate);
+        return (new Component)->submit();
     }
 }
 
-if (! function_exists('bsCreate')) {
+if (! function_exists('submitCreate')) {
     /**
-     * @return bsCreate
+     * @return \Okipa\LaravelBootstrapComponents\Buttons\Abstracts\ButtonAbstract
      */
-    function bsCreate(): bsCreate
+    function submitCreate(): SubmitAbstract
     {
-        return (new bsCreate);
+        return (new Component)->submitCreate();
     }
 }
 
-if (! function_exists('bsUpdate')) {
+if (! function_exists('submitUpdate')) {
     /**
-     * @return bsUpdate
+     * @return \Okipa\LaravelBootstrapComponents\Buttons\Abstracts\ButtonAbstract
      */
-    function bsUpdate(): bsUpdate
+    function submitUpdate(): SubmitAbstract
     {
-        return (new bsUpdate);
+        return (new Component)->submitUpdate();
     }
 }
 
-if (! function_exists('bsCancel')) {
+if (! function_exists('submitValidate')) {
     /**
-     * @return bsCancel
+     * @return \Okipa\LaravelBootstrapComponents\Buttons\Abstracts\ButtonAbstract
      */
-    function bsCancel(): bsCancel
+    function submitValidate(): SubmitAbstract
     {
-        return (new bsCancel);
+        return (new Component)->submitValidate();
     }
 }
 
-if (! function_exists('bsBack')) {
+if (! function_exists('button')) {
     /**
-     * @return bsBack
+     * @return \Okipa\LaravelBootstrapComponents\Buttons\Abstracts\ButtonAbstract
      */
-    function bsBack(): bsBack
+    function button(): ButtonAbstract
     {
-        return (new bsBack);
+        return (new Component)->button();
+    }
+}
+
+if (! function_exists('buttonLink')) {
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Buttons\Abstracts\ButtonAbstract
+     */
+    function buttonLink(): ButtonAbstract
+    {
+        return (new Component)->buttonLink();
+    }
+}
+
+if (! function_exists('buttonBack')) {
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Buttons\Abstracts\ButtonAbstract
+     */
+    function buttonBack(): ButtonAbstract
+    {
+        return (new Component)->buttonBack();
+    }
+}
+
+if (! function_exists('buttonCancel')) {
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Buttons\Abstracts\ButtonAbstract
+     */
+    function buttonCancel(): ButtonAbstract
+    {
+        return (new Component)->buttonCancel();
     }
 }

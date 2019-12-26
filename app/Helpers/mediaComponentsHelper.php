@@ -1,35 +1,34 @@
 <?php
 
-use Okipa\LaravelBootstrapComponents\Media\Audio as AudioComponent;
-use Okipa\LaravelBootstrapComponents\Media\Image as ImageComponent;
-use Okipa\LaravelBootstrapComponents\Media\Video as VideoComponent;
+use Okipa\LaravelBootstrapComponents\Component;
+use Okipa\LaravelBootstrapComponents\Media\Abstracts\MediaAbstract;
 
 if (! function_exists('image')) {
     /**
-     * @return ImageComponent
+     * @return \Okipa\LaravelBootstrapComponents\Media\Abstracts\MediaAbstract
      */
-    function image(): ImageComponent
+    function image(): MediaAbstract
     {
-        return (new ImageComponent);
+        return (new Component)->image();
     }
 }
 
 if (! function_exists('audio')) {
     /**
-     * @return AudioComponent
+     * @return \Okipa\LaravelBootstrapComponents\Media\Abstracts\MediaAbstract
      */
-    function audio(): AudioComponent
+    function audio(): MediaAbstract
     {
-        return (new AudioComponent);
+        return (new Component)->audio();
     }
 }
 
 if (! function_exists('video')) {
     /**
-     * @return VideoComponent
+     * @return \Okipa\LaravelBootstrapComponents\Media\Abstracts\MediaAbstract
      */
-    function video(): VideoComponent
+    function video(): MediaAbstract
     {
-        return (new VideoComponent);
+        return (new Component)->video();
     }
 }

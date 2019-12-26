@@ -2,12 +2,16 @@
 
 namespace Okipa\LaravelBootstrapComponents;
 
+use Okipa\LaravelBootstrapComponents\Buttons\Abstracts\ButtonAbstract;
+use Okipa\LaravelBootstrapComponents\Buttons\Abstracts\SubmitAbstract;
 use Okipa\LaravelBootstrapComponents\Form\Abstracts\CheckableAbstract;
 use Okipa\LaravelBootstrapComponents\Form\Abstracts\FileAbstract;
 use Okipa\LaravelBootstrapComponents\Form\Abstracts\FormAbstract;
 use Okipa\LaravelBootstrapComponents\Form\Abstracts\MultilingualAbstract;
 use Okipa\LaravelBootstrapComponents\Form\Abstracts\RadioAbstract;
+use Okipa\LaravelBootstrapComponents\Form\Abstracts\SelectAbstract;
 use Okipa\LaravelBootstrapComponents\Form\Abstracts\TemporalAbstract;
+use Okipa\LaravelBootstrapComponents\Media\Abstracts\MediaAbstract;
 
 class Component
 {
@@ -16,7 +20,7 @@ class Component
      */
     public function inputText(): MultilingualAbstract
     {
-        return app(config('bootstrap-components.form.components.text'));
+        return app(config('bootstrap-components.components.text'));
     }
 
     /**
@@ -24,7 +28,7 @@ class Component
      */
     public function inputEmail(): FormAbstract
     {
-        return app(config('bootstrap-components.form.components.email'));
+        return app(config('bootstrap-components.components.email'));
     }
 
     /**
@@ -32,7 +36,7 @@ class Component
      */
     public function inputPassword(): FormAbstract
     {
-        return app(config('bootstrap-components.form.components.password'));
+        return app(config('bootstrap-components.components.password'));
     }
 
     /**
@@ -40,7 +44,7 @@ class Component
      */
     public function inputUrl(): FormAbstract
     {
-        return app(config('bootstrap-components.form.components.url'));
+        return app(config('bootstrap-components.components.url'));
     }
 
     /**
@@ -48,7 +52,7 @@ class Component
      */
     public function inputTel(): FormAbstract
     {
-        return app(config('bootstrap-components.form.components.tel'));
+        return app(config('bootstrap-components.components.tel'));
     }
 
     /**
@@ -56,7 +60,7 @@ class Component
      */
     public function inputNumber(): FormAbstract
     {
-        return app(config('bootstrap-components.form.components.number'));
+        return app(config('bootstrap-components.components.number'));
     }
 
     /**
@@ -64,7 +68,7 @@ class Component
      */
     public function inputColor(): FormAbstract
     {
-        return app(config('bootstrap-components.form.components.color'));
+        return app(config('bootstrap-components.components.color'));
     }
 
     /**
@@ -72,7 +76,7 @@ class Component
      */
     public function inputDate(): TemporalAbstract
     {
-        return app(config('bootstrap-components.form.components.date'));
+        return app(config('bootstrap-components.components.date'));
     }
 
     /**
@@ -80,7 +84,7 @@ class Component
      */
     public function inputTime(): TemporalAbstract
     {
-        return app(config('bootstrap-components.form.components.time'));
+        return app(config('bootstrap-components.components.time'));
     }
 
     /**
@@ -88,7 +92,7 @@ class Component
      */
     public function inputDatetime(): TemporalAbstract
     {
-        return app(config('bootstrap-components.form.components.datetime'));
+        return app(config('bootstrap-components.components.datetime'));
     }
 
     /**
@@ -96,7 +100,7 @@ class Component
      */
     public function inputFile(): FileAbstract
     {
-        return app(config('bootstrap-components.form.components.file'));
+        return app(config('bootstrap-components.components.file'));
     }
 
     /**
@@ -104,7 +108,7 @@ class Component
      */
     public function inputCheckbox(): CheckableAbstract
     {
-        return app(config('bootstrap-components.form.components.checkbox'));
+        return app(config('bootstrap-components.components.checkbox'));
     }
 
     /**
@@ -112,7 +116,7 @@ class Component
      */
     public function inputToggle(): CheckableAbstract
     {
-        return app(config('bootstrap-components.form.components.toggle'));
+        return app(config('bootstrap-components.components.toggle'));
     }
 
     /**
@@ -120,6 +124,110 @@ class Component
      */
     public function inputRadio(): RadioAbstract
     {
-        return app(config('bootstrap-components.form.components.radio'));
+        return app(config('bootstrap-components.components.radio'));
+    }
+
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\MultilingualAbstract
+     */
+    public function textarea(): MultilingualAbstract
+    {
+        return app(config('bootstrap-components.components.textarea'));
+    }
+
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\SelectAbstract
+     */
+    public function select(): SelectAbstract
+    {
+        return app(config('bootstrap-components.components.select'));
+    }
+
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Buttons\Abstracts\SubmitAbstract
+     */
+    public function submit(): SubmitAbstract
+    {
+        return app(config('bootstrap-components.components.submit'));
+    }
+
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Buttons\Abstracts\SubmitAbstract
+     */
+    public function submitCreate(): SubmitAbstract
+    {
+        return app(config('bootstrap-components.components.create'));
+    }
+
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Buttons\Abstracts\SubmitAbstract
+     */
+    public function submitUpdate(): SubmitAbstract
+    {
+        return app(config('bootstrap-components.components.update'));
+    }
+
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Buttons\Abstracts\SubmitAbstract
+     */
+    public function submitValidate(): SubmitAbstract
+    {
+        return app(config('bootstrap-components.components.validate'));
+    }
+
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Buttons\Abstracts\ButtonAbstract
+     */
+    public function button(): ButtonAbstract
+    {
+        return app(config('bootstrap-components.components.button'));
+    }
+
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Buttons\Abstracts\ButtonAbstract
+     */
+    public function buttonLink(): ButtonAbstract
+    {
+        return app(config('bootstrap-components.components.link'));
+    }
+
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Buttons\Abstracts\ButtonAbstract
+     */
+    public function buttonBack(): ButtonAbstract
+    {
+        return app(config('bootstrap-components.components.back'));
+    }
+
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Buttons\Abstracts\ButtonAbstract
+     */
+    public function buttonCancel(): ButtonAbstract
+    {
+        return app(config('bootstrap-components.components.cancel'));
+    }
+
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Media\Abstracts\MediaAbstract
+     */
+    public function image(): MediaAbstract
+    {
+        return app(config('bootstrap-components.components.image'));
+    }
+
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Media\Abstracts\MediaAbstract
+     */
+    public function audio(): MediaAbstract
+    {
+        return app(config('bootstrap-components.components.audio'));
+    }
+
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Media\Abstracts\MediaAbstract
+     */
+    public function video(): MediaAbstract
+    {
+        return app(config('bootstrap-components.components.video'));
     }
 }

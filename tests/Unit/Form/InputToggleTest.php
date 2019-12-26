@@ -11,7 +11,7 @@ class InputToggleTest extends InputCheckableTestAbstract
 {
     protected function getComponent(): ComponentAbstract
     {
-        return app(config('bootstrap-components.form.components.toggle'));
+        return app(config('bootstrap-components.components.toggle'));
     }
 
     protected function getHelper(): ComponentAbstract
@@ -19,7 +19,7 @@ class InputToggleTest extends InputCheckableTestAbstract
         return inputToggle();
     }
 
-    protected function getFacade()
+    protected function getFacade(): ComponentAbstract
     {
         return InputToggle::getFacadeRoot();
     }

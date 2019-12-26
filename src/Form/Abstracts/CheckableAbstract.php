@@ -26,7 +26,7 @@ abstract class CheckableAbstract extends FormAbstract
     }
 
     /**
-     * @return array
+     * @inheritDoc
      */
     protected function getComponentHtmlAttributes(): array
     {

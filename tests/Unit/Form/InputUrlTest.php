@@ -11,7 +11,7 @@ class InputUrlTest extends InputTestAbstract
 {
     protected function getComponent(): ComponentAbstract
     {
-        return app(config('bootstrap-components.form.components.url'));
+        return app(config('bootstrap-components.components.url'));
     }
 
     protected function getHelper(): ComponentAbstract
@@ -19,7 +19,7 @@ class InputUrlTest extends InputTestAbstract
         return inputUrl();
     }
 
-    protected function getFacade()
+    protected function getFacade(): ComponentAbstract
     {
         return InputUrl::getFacadeRoot();
     }

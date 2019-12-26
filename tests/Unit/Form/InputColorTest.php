@@ -11,7 +11,7 @@ class InputColorTest extends InputTestAbstract
 {
     protected function getComponent(): ComponentAbstract
     {
-        return app(config('bootstrap-components.form.components.color'));
+        return app(config('bootstrap-components.components.color'));
     }
 
     protected function getHelper(): ComponentAbstract
@@ -19,7 +19,7 @@ class InputColorTest extends InputTestAbstract
         return inputColor();
     }
 
-    protected function getFacade()
+    protected function getFacade(): ComponentAbstract
     {
         return InputColor::getFacadeRoot();
     }

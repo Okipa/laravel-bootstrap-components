@@ -10,7 +10,7 @@ abstract class RadioAbstract extends CheckableAbstract
     use RadioValidityChecks;
 
     /**
-     * @return string
+     * @inheritDoc
      */
     protected function getComponentId(): string
     {

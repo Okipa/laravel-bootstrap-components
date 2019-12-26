@@ -11,7 +11,7 @@ class InputPasswordTest extends InputTestAbstract
 {
     protected function getComponent(): ComponentAbstract
     {
-        return app(config('bootstrap-components.form.components.password'));
+        return app(config('bootstrap-components.components.password'));
     }
 
     protected function getHelper(): ComponentAbstract
@@ -19,7 +19,7 @@ class InputPasswordTest extends InputTestAbstract
         return inputPassword();
     }
 
-    protected function getFacade()
+    protected function getFacade(): ComponentAbstract
     {
         return InputPassword::getFacadeRoot();
     }

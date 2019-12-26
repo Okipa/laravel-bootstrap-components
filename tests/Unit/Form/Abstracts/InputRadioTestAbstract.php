@@ -28,7 +28,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
     public function testSetCustomPrepend()
     {
         config()->set(
-            'bootstrap-components.form.components.' . $this->getComponentKey(),
+            'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->toHtml();
@@ -38,7 +38,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
     public function testSetPrependOverridesDefault()
     {
         config()->set(
-            'bootstrap-components.form.components.' . $this->getComponentKey(),
+            'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->prepend('custom-prepend')->toHtml();
@@ -55,7 +55,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
     public function testSetCustomAppend()
     {
         config()->set(
-            'bootstrap-components.form.components.' . $this->getComponentKey(),
+            'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->toHtml();
@@ -65,7 +65,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
     public function testSetAppendOverridesDefault()
     {
         config()->set(
-            'bootstrap-components.form.components.' . $this->getComponentKey(),
+            'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->append('custom-append')->toHtml();
@@ -107,7 +107,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
 
     public function testOldValueChecked()
     {
-        $oldValue = 'test-old-value';
+        $oldValue = 'old-value';
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function () use ($oldValue) {
                 $request = request()->merge(['name' => $oldValue]);
@@ -121,8 +121,8 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
 
     public function testOldValueNotChecked()
     {
-        $oldValue = 'test-old-value';
-        $customValue = 'test-custom-value';
+        $oldValue = 'old-value';
+        $customValue = 'custom-value';
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function () use ($oldValue) {
                 $request = request()->merge(['name' => $oldValue]);
@@ -136,7 +136,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
 
     public function testSetLabel()
     {
-        $label = 'test-custom-label';
+        $label = 'custom-label';
         $html = $this->getComponent()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString(
             '<label class="custom-control-label" for="' . $this->getComponentType() . '-name-value">' . $label
@@ -226,7 +226,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
     public function testSetCustomContainerClasses()
     {
         config()->set(
-            'bootstrap-components.form.components.' . $this->getComponentKey(),
+            'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->toHtml();
@@ -239,7 +239,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
     public function testSetContainerClassesOverridesDefault()
     {
         config()->set(
-            'bootstrap-components.form.components.' . $this->getComponentKey(),
+            'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->containerClasses(['custom', 'container', 'classes'])->toHtml();
@@ -256,7 +256,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
     public function testSetCustomComponentClasses()
     {
         config()->set(
-            'bootstrap-components.form.components.' . $this->getComponentKey(),
+            'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->toHtml();
@@ -266,7 +266,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
     public function testSetComponentClassesOverridesDefault()
     {
         config()->set(
-            'bootstrap-components.form.components.' . $this->getComponentKey(),
+            'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->componentClasses(['custom', 'component', 'classes'])->toHtml();

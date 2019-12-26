@@ -11,7 +11,7 @@ class InputNumberTest extends InputTestAbstract
 {
     protected function getComponent(): ComponentAbstract
     {
-        return app(config('bootstrap-components.form.components.number'));
+        return app(config('bootstrap-components.components.number'));
     }
 
     protected function getHelper(): ComponentAbstract
@@ -19,7 +19,7 @@ class InputNumberTest extends InputTestAbstract
         return inputNumber();
     }
 
-    protected function getFacade()
+    protected function getFacade(): ComponentAbstract
     {
         return InputNumber::getFacadeRoot();
     }

@@ -3,6 +3,7 @@
 use Okipa\LaravelBootstrapComponents\Component;
 use Okipa\LaravelBootstrapComponents\Form\Abstracts\FormAbstract;
 use Okipa\LaravelBootstrapComponents\Form\Abstracts\MultilingualAbstract;
+use Okipa\LaravelBootstrapComponents\Form\Abstracts\SelectAbstract;
 
 if (! function_exists('inputText')) {
     /**
@@ -141,5 +142,25 @@ if (! function_exists('inputRadio')) {
     function inputRadio(): FormAbstract
     {
         return (new Component)->inputRadio();
+    }
+}
+
+if (! function_exists('textarea')) {
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\MultilingualAbstract
+     */
+    function textarea(): MultilingualAbstract
+    {
+        return (new Component)->textarea();
+    }
+}
+
+if (! function_exists('select')) {
+    /**
+     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\SelectAbstract
+     */
+    function select(): SelectAbstract
+    {
+        return (new Component)->select();
     }
 }

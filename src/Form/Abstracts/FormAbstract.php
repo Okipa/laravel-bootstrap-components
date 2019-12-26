@@ -23,11 +23,11 @@ abstract class FormAbstract extends ComponentAbstract
     /** @property string|null $append */
     protected $append;
 
-    /** @property string|null $legend */
-    protected $legend;
-
     /** @property string $label */
     protected $label;
+
+    /** @property string|null $legend */
+    protected $legend;
 
     /** @property bool $labelPositionedAbove */
     protected $labelPositionedAbove;
@@ -59,7 +59,7 @@ abstract class FormAbstract extends ComponentAbstract
     }
 
     /**
-     * Set the component input name tag.
+     * Set the component name attribute.
      *
      * @param string $name
      *
@@ -129,7 +129,7 @@ abstract class FormAbstract extends ComponentAbstract
     }
 
     /**
-     * Set the component input placeholder.
+     * Set the component placeholder.
      *
      * @param string|null $placeholder
      *
@@ -143,7 +143,7 @@ abstract class FormAbstract extends ComponentAbstract
     }
 
     /**
-     * Set the component input value.
+     * Set the component value.
      *
      * @param mixed $value
      *
@@ -157,7 +157,7 @@ abstract class FormAbstract extends ComponentAbstract
     }
 
     /**
-     * Set the component input label.
+     * Set the component label.
      *
      * @param string|null $label
      *
@@ -186,7 +186,7 @@ abstract class FormAbstract extends ComponentAbstract
     }
 
     /**
-     * Set the component input validation success display status.
+     * Set the component validation success display status.
      *
      * @param bool|null $displaySuccess
      *
@@ -200,7 +200,7 @@ abstract class FormAbstract extends ComponentAbstract
     }
 
     /**
-     * Set the component input validation failure display status.
+     * Set the component validation failure display status.
      *
      * @param bool|null $displayFailure
      *
@@ -214,9 +214,7 @@ abstract class FormAbstract extends ComponentAbstract
     }
 
     /**
-     * Get values for the view.
-     *
-     * @return array
+     * @inheritDoc
      */
     protected function getValues(): array
     {
@@ -264,7 +262,7 @@ abstract class FormAbstract extends ComponentAbstract
     }
 
     /**
-     * @return Model|null
+     * @return \Illuminate\Database\Eloquent\Model|null
      */
     protected function getModel(): ?Model
     {
@@ -310,11 +308,11 @@ abstract class FormAbstract extends ComponentAbstract
     abstract protected function setAppend(): ?string;
 
     /**
-     * @return string|null
+     * @return string
      */
-    protected function getLegend(): ?string
+    protected function getLegend(): string
     {
-        return $this->legend ? __($this->legend) : null;
+        return (string) __($this->legend);
     }
 
     /**
@@ -325,13 +323,11 @@ abstract class FormAbstract extends ComponentAbstract
     abstract protected function setLegend(): ?string;
 
     /**
-     * @return string|null
+     * @return string
      */
-    protected function getLabel(): ?string
+    protected function getLabel(): string
     {
-        $label = $this->label ?? 'validation.attributes.' . $this->getName();
-
-        return $label ? (string) __($label) : null;
+        return (string) __($this->label ?? 'validation.attributes.' . $this->getName());
     }
 
     /**
@@ -364,10 +360,7 @@ abstract class FormAbstract extends ComponentAbstract
      */
     protected function getPlaceholder(): ?string
     {
-        $placeholder = $this->placeholder ?? $this->getLabel();
-        $placeholder = $placeholder ?? 'validation.attributes.' . $this->getName();
-
-        return $placeholder ? (string) __($placeholder) : null;
+        return $this->placeholder ?? $this->getLabel() ?? (string) __('validation.attributes.' . $this->getName());
     }
 
     /**
@@ -423,7 +416,7 @@ abstract class FormAbstract extends ComponentAbstract
     }
 
     /**
-     * @return string
+     * @inheritDoc
      */
     protected function getComponentId(): string
     {

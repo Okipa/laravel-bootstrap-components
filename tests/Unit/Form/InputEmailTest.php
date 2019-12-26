@@ -11,7 +11,7 @@ class InputEmailTest extends InputTestAbstract
 {
     protected function getComponent(): ComponentAbstract
     {
-        return app(config('bootstrap-components.form.components.email'));
+        return app(config('bootstrap-components.components.email'));
     }
 
     protected function getHelper(): ComponentAbstract
@@ -19,7 +19,7 @@ class InputEmailTest extends InputTestAbstract
         return inputEmail();
     }
 
-    protected function getFacade()
+    protected function getFacade(): ComponentAbstract
     {
         return InputEmail::getFacadeRoot();
     }

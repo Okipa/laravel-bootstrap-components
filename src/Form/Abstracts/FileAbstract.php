@@ -68,10 +68,7 @@ abstract class FileAbstract extends FormAbstract
     }
 
     /**
-     * Set the input values.
-     *
-     * @return array
-     * @throws \Exception
+     * @inheritDoc
      */
     protected function getValues(): array
     {
@@ -79,7 +76,6 @@ abstract class FileAbstract extends FormAbstract
             'uploadedFileHtml' => $this->getUploadedFileHtml(),
             'showRemoveCheckbox' => $this->getShowRemoveCheckbox(),
             'removeCheckboxLabel' => $this->getRemoveCheckboxLabel(parent::getValues()['label']),
-            'placeholder' => $this->placeholder ?? __('bootstrap-components::bootstrap-components.label.file'),
         ]);
     }
 
@@ -117,16 +113,23 @@ abstract class FileAbstract extends FormAbstract
     abstract protected function setShowRemoveCheckbox(): bool;
 
     /**
-     * @param string|null $defaultLabel
+     * @param string|null $label
      *
      * @return string
      */
-    protected function getRemoveCheckboxLabel(?string $defaultLabel): string
+    protected function getRemoveCheckboxLabel(?string $label): string
     {
-        $translatedDefaultLabel = __($defaultLabel);
         $defaultRemoveCheckboxLabel = (string) __('bootstrap-components::bootstrap-components.label.remove')
-            . ($translatedDefaultLabel ? ' ' . strtolower($translatedDefaultLabel) : '');
+            . ($label ? ' ' . strtolower($label) : '');
 
         return $this->removeCheckboxLabel ?? $defaultRemoveCheckboxLabel;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getPlaceholder(): ?string
+    {
+        return $this->placeholder ?? __('bootstrap-components::bootstrap-components.label.file');
     }
 }

@@ -13,7 +13,7 @@ class InputRadioTest extends InputRadioTestAbstract
 {
     protected function getComponent(): ComponentAbstract
     {
-        return app(config('bootstrap-components.form.components.radio'))->value('value');
+        return app(config('bootstrap-components.components.radio'))->value('value');
     }
 
     protected function getHelper(): ComponentAbstract
@@ -21,7 +21,7 @@ class InputRadioTest extends InputRadioTestAbstract
         return inputRadio();
     }
 
-    protected function getFacade()
+    protected function getFacade(): ComponentAbstract
     {
         return InputRadio::getFacadeRoot();
     }

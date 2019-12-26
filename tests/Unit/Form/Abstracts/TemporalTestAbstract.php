@@ -34,7 +34,7 @@ abstract class TemporalTestAbstract extends InputTestAbstract
     public function testWrongModelValue()
     {
         $user = $this->createUniqueUser();
-        $user->name = 'test-custom-name';
+        $user->name = 'custom-name';
         $this->expectException(Exception::class);
         $this->getComponent()->model($user)->name('name')->toHtml();
     }
@@ -42,7 +42,7 @@ abstract class TemporalTestAbstract extends InputTestAbstract
     public function testSetCustomFormat()
     {
         config()->set(
-            'bootstrap-components.form.components.' . $this->getComponentKey(),
+            'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $user = $this->createUniqueUser();
@@ -54,7 +54,7 @@ abstract class TemporalTestAbstract extends InputTestAbstract
     public function testSetFormatOverridesDefault()
     {
         config()->set(
-            'bootstrap-components.form.components.' . $this->getComponentKey(),
+            'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $user = $this->createUniqueUser();
@@ -72,7 +72,7 @@ abstract class TemporalTestAbstract extends InputTestAbstract
 
     public function testSetWrongValue()
     {
-        $customValue = 'test-custom-value';
+        $customValue = 'custom-value';
         $this->expectException(Exception::class);
         $this->getComponent()->name('name')->value($customValue)->toHtml();
     }

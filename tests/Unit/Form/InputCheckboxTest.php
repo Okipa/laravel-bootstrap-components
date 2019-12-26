@@ -11,7 +11,7 @@ class InputCheckboxTest extends InputCheckableTestAbstract
 {
     protected function getComponent(): ComponentAbstract
     {
-        return app(config('bootstrap-components.form.components.checkbox'));
+        return app(config('bootstrap-components.components.checkbox'));
     }
 
     protected function getHelper(): ComponentAbstract
@@ -19,7 +19,7 @@ class InputCheckboxTest extends InputCheckableTestAbstract
         return inputCheckbox();
     }
 
-    protected function getFacade()
+    protected function getFacade(): ComponentAbstract
     {
         return InputCheckbox::getFacadeRoot();
     }

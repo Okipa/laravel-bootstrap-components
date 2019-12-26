@@ -2,12 +2,12 @@
 
 namespace Okipa\LaravelBootstrapComponents\Form\Traits;
 
-use Closure;
 use Exception;
 use InvalidArgumentException;
 
 trait MultilingualValidityChecks
 {
+
     /**
      * @return bool
      */
@@ -23,8 +23,8 @@ trait MultilingualValidityChecks
     {
         parent::checkValuesValidity();
         if ($this->multilingualMode() && $this->value && ! is_callable($this->value)) {
-            throw new InvalidArgumentException('A multilingual component value has to be set from this
-            callable result : « ->value(function($locale){}) ».');
+            throw new InvalidArgumentException(get_class($this) . ' : A multilingual component value has to
+            be set from this callable result : « ->value(function($locale){}) ».');
         }
     }
 }

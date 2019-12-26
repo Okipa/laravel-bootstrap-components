@@ -11,7 +11,7 @@ class InputTelTest extends InputTestAbstract
 {
     protected function getComponent(): ComponentAbstract
     {
-        return app(config('bootstrap-components.form.components.tel'));
+        return app(config('bootstrap-components.components.tel'));
     }
 
     protected function getHelper(): ComponentAbstract
@@ -19,7 +19,7 @@ class InputTelTest extends InputTestAbstract
         return inputTel();
     }
 
-    protected function getFacade()
+    protected function getFacade(): ComponentAbstract
     {
         return InputTel::getFacadeRoot();
     }

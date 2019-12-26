@@ -3,7 +3,6 @@
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
 use Exception;
-use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\MessageBag;
 use Okipa\LaravelBootstrapComponents\ComponentAbstract;
 use Okipa\LaravelBootstrapComponents\Form\Abstracts\FormAbstract;
@@ -18,12 +17,11 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
 
     abstract protected function getHelper(): ComponentAbstract;
 
-    abstract protected function getFacade();
+    abstract protected function getFacade(): ComponentAbstract;
 
     abstract protected function getComponentType(): string;
 
     abstract protected function getCustomComponent(): ComponentAbstract;
-
 
     protected function getComponentKey(): string
     {
@@ -73,7 +71,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
     public function testSetCustomPrepend()
     {
         config()->set(
-            'bootstrap-components.form.components.' . $this->getComponentKey(),
+            'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->toHtml();
@@ -83,7 +81,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
     public function testSetPrependOverridesDefault()
     {
         config()->set(
-            'bootstrap-components.form.components.' . $this->getComponentKey(),
+            'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->prepend('custom-prepend')->toHtml();
@@ -100,7 +98,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
     public function testSetCustomAppend()
     {
         config()->set(
-            'bootstrap-components.form.components.' . $this->getComponentKey(),
+            'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->toHtml();
@@ -110,7 +108,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
     public function testSetAppendOverridesDefault()
     {
         config()->set(
-            'bootstrap-components.form.components.' . $this->getComponentKey(),
+            'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->append('custom-append')->toHtml();
@@ -133,7 +131,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
     public function testSetCustomLegend()
     {
         config()->set(
-            'bootstrap-components.form.components.' . $this->getComponentKey(),
+            'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->toHtml();
@@ -143,7 +141,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
     public function testSetLegendOverridesDefault()
     {
         config()->set(
-            'bootstrap-components.form.components.' . $this->getComponentKey(),
+            'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->legend('custom-legend')->toHtml();
@@ -166,15 +164,15 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
 
     public function testSetValue()
     {
-        $customValue = 'test-custom-value';
+        $customValue = 'custom-value';
         $html = $this->getComponent()->name('name')->value($customValue)->toHtml();
         $this->assertStringContainsString(' value="' . $customValue . '"', $html);
     }
 
     public function testOldValue()
     {
-        $oldValue = 'test-old-value';
-        $customValue = 'test-custom-value';
+        $oldValue = 'old-value';
+        $customValue = 'custom-value';
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function () use ($oldValue) {
                 $request = request()->merge(['name' => $oldValue]);
@@ -189,7 +187,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
 
     public function testSetLabel()
     {
-        $label = 'test-custom-label';
+        $label = 'custom-label';
         $html = $this->getComponent()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString(
             '<label for="' . $this->getComponentType() . '-name">' . $label . '</label>',
@@ -228,7 +226,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
     public function testSetCustomLabelPositionedAbove()
     {
         config()->set(
-            'bootstrap-components.form.components.' . $this->getComponentKey(),
+            'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->toHtml();
@@ -240,7 +238,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
     public function testSetLabelPositionedAboveOverridesDefault()
     {
         config()->set(
-            'bootstrap-components.form.components.' . $this->getComponentKey(),
+            'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->labelPositionedAbove()->toHtml();
@@ -251,7 +249,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
 
     public function testSetPlaceholder()
     {
-        $placeholder = 'test-custom-placeholder';
+        $placeholder = 'custom-placeholder';
         $html = $this->getComponent()->name('name')->placeholder($placeholder)->toHtml();
         $this->assertStringContainsString(' placeholder="' . $placeholder . '"', $html);
     }
@@ -265,8 +263,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
 
     public function testSetPlaceholderWithLabel()
     {
-        $label = 'test-custom-label';
-        $placeholder = 'test-custom-placeholder';
+        $label = 'custom-label';
+        $placeholder = 'custom-placeholder';
         $html = $this->getComponent()->name('name')->label($label)->placeholder($placeholder)->toHtml();
         $this->assertStringContainsString(' placeholder="' . $placeholder . '"', $html);
         $this->assertStringNotContainsString(' placeholder="' . $label . '"', $html);
@@ -293,7 +291,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
     public function testSetCustomDisplaySuccess()
     {
         config()->set(
-            'bootstrap-components.form.components.' . $this->getComponentKey(),
+            'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $errors = app(MessageBag::class)->add('other_name', 'Dummy error message.');
@@ -310,7 +308,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
     public function testSetDisplaySuccessOverridesDefault()
     {
         config()->set(
-            'bootstrap-components.form.components.' . $this->getComponentKey(),
+            'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $errors = app(MessageBag::class)->add('other_name', 'Dummy error message.');
@@ -327,7 +325,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
     public function testSetCustomDisplayFailure()
     {
         config()->set(
-            'bootstrap-components.form.components.' . $this->getComponentKey(),
+            'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $errors = app(MessageBag::class)->add('name', 'Dummy error message.');
@@ -341,7 +339,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
     public function testSetDisplayFailureOverridesDefault()
     {
         config()->set(
-            'bootstrap-components.form.components.' . $this->getComponentKey(),
+            'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $errors = app(MessageBag::class)->add('name', 'Dummy error message.');
@@ -360,7 +358,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
 
     public function testSetContainerId()
     {
-        $customContainerId = 'test-custom-container-id';
+        $customContainerId = 'custom-container-id';
         $html = $this->getComponent()->name('name')->containerId($customContainerId)->toHtml();
         $this->assertStringContainsString('<div id="' . $customContainerId . '"', $html);
     }
@@ -374,7 +372,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
 
     public function testSetComponentId()
     {
-        $customComponentId = 'test-custom-component-id';
+        $customComponentId = 'custom-component-id';
         $html = $this->getComponent()->name('name')->componentId($customComponentId)->toHtml();
         $this->assertStringContainsString(' for="' . $customComponentId . '"', $html);
         $this->assertStringContainsString('<input id="' . $customComponentId . '"', $html);
@@ -383,7 +381,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
     public function testSetCustomContainerClasses()
     {
         config()->set(
-            'bootstrap-components.form.components.' . $this->getComponentKey(),
+            'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->toHtml();
@@ -393,7 +391,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
     public function testSetContainerClassesOverridesDefault()
     {
         config()->set(
-            'bootstrap-components.form.components.' . $this->getComponentKey(),
+            'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->containerClasses(['custom', 'container', 'classes'])->toHtml();
@@ -404,7 +402,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
     public function testSetCustomComponentClasses()
     {
         config()->set(
-            'bootstrap-components.form.components.' . $this->getComponentKey(),
+            'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->toHtml();
@@ -414,7 +412,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
     public function testSetComponentClassesOverridesDefault()
     {
         config()->set(
-            'bootstrap-components.form.components.' . $this->getComponentKey(),
+            'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->componentClasses(['custom', 'component', 'classes'])->toHtml();
@@ -425,7 +423,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
     public function testSetCustomContainerHtmlAttributes()
     {
         config()->set(
-            'bootstrap-components.form.components.' . $this->getComponentKey(),
+            'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->toHtml();
@@ -438,7 +436,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
     public function testSetContainerHtmlAttributesOverridesDefault()
     {
         config()->set(
-            'bootstrap-components.form.components.' . $this->getComponentKey(),
+            'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()
@@ -452,7 +450,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
     public function testSetCustomComponentHtmlAttributes()
     {
         config()->set(
-            'bootstrap-components.form.components.' . $this->getComponentKey(),
+            'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->value(null)->toHtml();
@@ -462,7 +460,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
     public function testSetComponentHtmlAttributesOverridesDefault()
     {
         config()->set(
-            'bootstrap-components.form.components.' . $this->getComponentKey(),
+            'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')
