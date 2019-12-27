@@ -209,12 +209,12 @@ php artisan vendor:publish --tag=bootstrap-components:views
   
 | Signature | Required | Description |
 |---|---|---|
-| containerId(string $containerId): self  | No | Set the component container id. |
-| componentId(string $componentId): self  | No | Set the component id. |
-| containerClasses(array $containerClasses): self  | No | Set the component container classes. |
-| componentClasses(array $componentClasses): self  | No | Set the component classes. |
-| containerHtmlAttributes(array $containerHtmlAttributes): self  | No | Set the component container html attributes. |
-| componentHtmlAttributes(array $componentHtmlAttributes): self  | No | Set the component html attributes. |
+| `componentId(string $componentId): self` | No | Set the component id. |
+| `containerId(string $containerId): self` | No | Set the component container id. |
+| `componentClasses(array $componentClasses): self` | No | Set the component classes. |
+| `containerClasses(array $containerClasses): self` | No | Set the component container classes. |
+| `componentHtmlAttributes(array $componentHtmlAttributes): self` | No | Set the component html attributes. |
+| `containerHtmlAttributes(array $containerHtmlAttributes): self` | No | Set the component container html attributes. |
 
 The component can be used as following :
 
