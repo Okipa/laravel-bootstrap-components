@@ -70,7 +70,7 @@ abstract class MultilingualAbstract extends FormAbstract
      * @param array $extraData
      *
      * @return string
-     * @throws Throwable
+     * @throws \Throwable
      */
     protected function multilingualRender(array $extraData = []): string
     {

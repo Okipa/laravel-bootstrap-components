@@ -132,7 +132,7 @@ abstract class ComponentAbstract implements Htmlable
      * Render the component html.
      *
      * @return string
-     * @throws Throwable
+     * @throws \Throwable
      */
     public function toHtml(): string
     {
@@ -145,7 +145,7 @@ abstract class ComponentAbstract implements Htmlable
      * @param array $extraData
      *
      * @return string
-     * @throws Throwable
+     * @throws \Throwable
      */
     public function render(array $extraData = []): string
     {
