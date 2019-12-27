@@ -23,9 +23,7 @@ You feel like there is a missing component ? Feel free to open an issue or submi
 
 ## Upgrade guide
 
-### V1 to V2
-
-See all change bt with the [comparison tool](https://github.com/Okipa/laravel-bootstrap-components/compare/1.0.10...2.0.0)
+* [Upgrade from V1 to V2](/doc/upgrade-guide/v1-to-v2.md)
 
 ## Usage
 
