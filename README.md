@@ -234,24 +234,24 @@ The component can be used as following :
 
 | Signature | Required | Description |
 |---|---|---|
-| name(string $name): self  | Yes | Set the component input name tag. |
-| model(Model $model): self  | No | Set the component associated model. |
-| prepend(?string $html): self  | No | Prepend html to the component input group. |
-| append(?string $html): self  | No | Append html to the component input group. |
-| label(?string $label): self  | No | Set the component input label. Default value : `__('validation.attributes.[name]')`. |
-| labelPositionedAbove(bool $positionedAbove = true): self  | No | Set the label above-positioning status. If not positioned above, the label will be positioned under the input (may be useful for bootstrap 4 floating labels). |
-| placeholder(?string $placeholder): self  | No | Set the component input placeholder. Default value : `$label`. |
-| value($value): self  | No | Set the component input value. |
-| legend(?string $legend): self  | No | Set the component legend. |
-| displaySuccess(?bool $displaySuccess = true): self  | No | Set the component input validation success display status. |
-| displayFailure(?bool $displayFailure = true): self  | No | Set the component input validation failure display status. |
+| `name(string $name): self` | Yes | Set the component input name tag. |
+| `model(Model $model): self` | No | Set the component associated model. |
+| `prepend(?string $html): self` | No | Prepend html to the component input group. |
+| `append(?string $html): self` | No | Append html to the component input group. |
+| `label(?string $label): self` | No | Set the component input label. Default value : `__('validation.attributes.[name]')`. |
+| `labelPositionedAbove(bool $positionedAbove = true): self` | No | Set the label above-positioning status. If not positioned above, the label will be positioned under the input (may be useful for bootstrap 4 floating labels). |
+| `placeholder(?string $placeholder): self` | No | Set the component input placeholder. Default value : `$label`. |
+| `value($value): self` | No | Set the component input value. |
+| `legend(?string $legend): self` | No | Set the component legend. |
+| `displaySuccess(?bool $displaySuccess = true): self` | No | Set the component input validation success display status. |
+| `displayFailure(?bool $displayFailure = true): self` | No | Set the component input validation failure display status. |
 
-#### Standard inputs
+#### Inputs
 
-The standard input component can be used as following :
+The input component can be used as following :
 
 ```php
-<standard-input>
+<input>
     ->name('email') // set the input name
     ->model($user) // value is automatically detected from the field name
     ->value('john.doe@domain.com') // manually set the value
