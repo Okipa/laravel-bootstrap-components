@@ -88,6 +88,7 @@ abstract class FormAbstract extends ComponentAbstract
 
     /**
      * Prepend html to the component input group.
+     * Set false to hide it.
      *
      * @param string|null $html
      *
@@ -102,6 +103,7 @@ abstract class FormAbstract extends ComponentAbstract
 
     /**
      * Append html to the component input group.
+     * Set false to hide it.
      *
      * @param string|null $html
      *

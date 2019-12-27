@@ -95,7 +95,7 @@ abstract class ImageAbstract extends MediaAbstract
     }
 
     /**
-     * Set the image component link url.
+     * Set the image component link url and title.
      *
      * @param string $linkUrl
      * @param string|null $linkTitle

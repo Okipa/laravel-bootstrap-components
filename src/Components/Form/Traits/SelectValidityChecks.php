@@ -99,7 +99,7 @@ trait SelectValidityChecks
             throw new InvalidArgumentException(
                 get_class($this) . ' : The « ' . $this->getName() . ' » attribute from the given « '
                 . $this->model->getMorphClass()
-                . ' » model has to be an array when the bsSelect() component is in multiple mode : « '
+                . ' » model has to be an array when the select() component is in multiple mode : « '
                 . gettype($this->model->{$this->getName()}) . ' » type given.'
             );
         }
@@ -115,7 +115,7 @@ trait SelectValidityChecks
         if ($this->selectedValueToCompare && ! is_array($this->selectedValueToCompare)) {
             throw new InvalidArgumentException(
                 get_class($this) . ' : Invalid selected() second $valueToCompare argument. '
-                . 'This argument has to be an array when the bsSelect() component is in multiple mode : « '
+                . 'This argument has to be an array when the select() component is in multiple mode : « '
                 . gettype($this->selectedValueToCompare) . ' » type given.'
             );
         }
@@ -133,7 +133,7 @@ trait SelectValidityChecks
             && ! is_integer($this->selectedValueToCompare)) {
             throw new InvalidArgumentException(
                 get_class($this) . ' : Invalid selected() second $valueToCompare argument. '
-                . 'This argument has to be a string or an integer when the bsSelect() component is not '
+                . 'This argument has to be a string or an integer when the select() component is not '
                 . 'in multiple mode : « ' . gettype($this->selectedValueToCompare) . ' » type given.'
             );
         }
