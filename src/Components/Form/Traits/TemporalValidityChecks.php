@@ -32,7 +32,7 @@ trait TemporalValidityChecks
     protected function checkFormat(): void
     {
         if (! $this->format) {
-            throw new Exception(get_class($this) . ' : No config or custom format given for the bs'
+            throw new Exception(get_class($this) . ' : No config or custom format given for the input'
                 . ucfirst($this->type) . ' component.');
         }
     }

@@ -1,4 +1,4 @@
-# Save time and take advantage of ready-to-use and customizable bootstrap components.
+# Ready-to-use and customizable components.
 
 [![Source Code](https://img.shields.io/badge/source-okipa/laravel--bootstrap--components-blue.svg)](https://github.com/Okipa/laravel-bootstrap-components)
 [![Latest Version](https://img.shields.io/github/release/okipa/laravel-bootstrap-components.svg?style=flat-square)](https://github.com/Okipa/laravel-bootstrap-components/releases)
@@ -8,14 +8,24 @@
 [![Coverage Status](https://coveralls.io/repos/github/Okipa/laravel-bootstrap-components/badge.svg?branch=master)](https://coveralls.io/github/Okipa/laravel-bootstrap-components?branch=master)
 [![Quality Score](https://img.shields.io/scrutinizer/g/Okipa/laravel-bootstrap-components.svg?style=flat-square)](https://scrutinizer-ci.com/g/Okipa/laravel-bootstrap-components/?branch=master)
 
-This package provides an extended set of ready-to-use and fully customizable bootstrap components.  
-The components which have been created are use on a daily basis. You feel like there is a missing component ? Feel free to open an issue or submit a fully tested and documented PR, we'll see what we can do !
+Save time and take advantage of ready-to-use and customizable bootstrap components.
+
+This package provides an extended set of ready-to-use and fully customizable bootstrap components.
+  
+You feel like there is a missing component ? Feel free to open an issue or submit a fully tested and documented PR, we'll see what we can do !
 
 ## Compatibility
 
 | Laravel version | PHP version | Bootstrap version | Package version |
 |---|---|---|---|
+| ^5.5 | ^7.1 | ^4.0 | ^2.0 |
 | ^5.5 | ^7.1 | ^4.0 | ^1.0 |
+
+## Upgrade guide
+
+### V1 to V2
+
+See all change bt with the [comparison tool](https://github.com/Okipa/laravel-bootstrap-components/compare/1.0.10...2.0.0)
 
 ## Usage
 
@@ -28,6 +38,7 @@ Call this component in your view :
 ```blade
 {{-- helper style --}}
 {{ inputText()->name('name') }}
+
 {{-- facade style --}}
 {{ InputText::name('name') }}
 ```
@@ -36,8 +47,8 @@ And get this HTML generated for you :
 
 ```blade
 <div class="component-container form-group">
-    <label for="text-name"
-        Name
+    <label for="text-name">
+        @lang('validation.attributes.name')
     </label>
     <div class="input-group">
         <div class="input-group-prepend">
@@ -50,7 +61,7 @@ And get this HTML generated for you :
             type="text"
             name="name"
             value=""
-            placeholder="Name">
+            placeholder="@lang('validation.attributes.name')">
     </div>
 </div>
 ```
@@ -62,6 +73,7 @@ Call this component in your view :
 ```blade
 {{-- helper style --}}
 {{ inputText()->name('title')->localized(['fr', 'en']) }}
+
 {{-- facade style --}}
 {{ InputText::name('title')->localized(['fr', 'en']) }}
 ```
