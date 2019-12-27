@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents;
 
-use Okipa\LaravelBootstrapComponents\Form\Components\Select;
+use Okipa\LaravelBootstrapComponents\Components\Form\Select;
 
 class CustomSelect extends Select
 {

@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents;
 
-use Okipa\LaravelBootstrapComponents\Media\Components\Image;
+use Okipa\LaravelBootstrapComponents\Components\Media\Image;
 
 class CustomImage extends Image
 {

@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
-use Okipa\LaravelBootstrapComponents\Form\Abstracts\FileAbstract;
+use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FileAbstract;
 
 abstract class InputFileTestAbstract extends InputTestAbstract
 {

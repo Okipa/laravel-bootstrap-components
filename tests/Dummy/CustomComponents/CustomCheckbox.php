@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents;
 
-use Okipa\LaravelBootstrapComponents\Form\Components\Checkbox;
+use Okipa\LaravelBootstrapComponents\Components\Form\Checkbox;
 
 class CustomCheckbox extends Checkbox
 {

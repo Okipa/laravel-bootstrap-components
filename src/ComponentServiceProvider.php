@@ -3,6 +3,7 @@
 namespace Okipa\LaravelBootstrapComponents;
 
 use Illuminate\Support\ServiceProvider;
+use Okipa\LaravelBootstrapComponents\Components\Component;
 use Okipa\LaravelHtmlHelper\HtmlHelperServiceProvider;
 
 class ComponentServiceProvider extends ServiceProvider

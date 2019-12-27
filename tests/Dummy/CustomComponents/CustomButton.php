@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents;
 
-use Okipa\LaravelBootstrapComponents\Buttons\Components\Button;
+use Okipa\LaravelBootstrapComponents\Components\Buttons\Button;
 
 class CustomButton extends Button
 {

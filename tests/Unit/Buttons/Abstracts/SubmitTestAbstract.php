@@ -2,8 +2,8 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Buttons\Abstracts;
 
-use Okipa\LaravelBootstrapComponents\Buttons\Abstracts\SubmitAbstract;
-use Okipa\LaravelBootstrapComponents\ComponentAbstract;
+use Okipa\LaravelBootstrapComponents\Components\Buttons\Abstracts\SubmitAbstract;
+use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
 use Okipa\LaravelBootstrapComponents\Tests\BootstrapComponentsTestCase;
 
 abstract class SubmitTestAbstract extends BootstrapComponentsTestCase

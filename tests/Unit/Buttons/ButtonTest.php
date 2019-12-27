@@ -2,13 +2,10 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Buttons;
 
-use Okipa\LaravelBootstrapComponents\ComponentAbstract;
+use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
 use Okipa\LaravelBootstrapComponents\Facades\Button;
-use Okipa\LaravelBootstrapComponents\Facades\Submit;
 use Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents\CustomButton;
-use Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents\CustomSubmit;
 use Okipa\LaravelBootstrapComponents\Tests\Unit\Buttons\Abstracts\ButtonTestAbstract;
-use Okipa\LaravelBootstrapComponents\Tests\Unit\Buttons\Abstracts\SubmitTestAbstract;
 
 class ButtonTest extends ButtonTestAbstract
 {

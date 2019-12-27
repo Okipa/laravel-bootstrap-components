@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
-use Okipa\LaravelBootstrapComponents\ComponentAbstract;
+use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
 use Okipa\LaravelBootstrapComponents\Facades\Textarea;
 use Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents\CustomTextarea;
 use Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts\TextareaTestAbstract;

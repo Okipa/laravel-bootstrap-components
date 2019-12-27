@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents;
 
-use Okipa\LaravelBootstrapComponents\Form\Components\File;
+use Okipa\LaravelBootstrapComponents\Components\Form\File;
 
 class CustomFile extends File
 {

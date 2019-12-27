@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents;
 
-use Okipa\LaravelBootstrapComponents\Buttons\Components\Submit;
+use Okipa\LaravelBootstrapComponents\Components\Buttons\Submit;
 
 class CustomSubmit extends Submit
 {

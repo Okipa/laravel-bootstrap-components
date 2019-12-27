@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents;
 
-use Okipa\LaravelBootstrapComponents\Form\Components\Datetime;
+use Okipa\LaravelBootstrapComponents\Components\Form\Datetime;
 
 class CustomDatetime extends Datetime
 {

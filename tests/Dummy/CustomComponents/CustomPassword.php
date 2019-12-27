@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents;
 
-use Okipa\LaravelBootstrapComponents\Form\Components\Password;
+use Okipa\LaravelBootstrapComponents\Components\Form\Password;
 
 class CustomPassword extends Password
 {

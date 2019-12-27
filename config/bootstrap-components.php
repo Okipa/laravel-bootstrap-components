@@ -8,35 +8,35 @@ return [
      */
     'components' => [
         // form
-        'text' => Okipa\LaravelBootstrapComponents\Form\Components\Text::class,
-        'email' => Okipa\LaravelBootstrapComponents\Form\Components\Email::class,
-        'password' => Okipa\LaravelBootstrapComponents\Form\Components\Password::class,
-        'url' => Okipa\LaravelBootstrapComponents\Form\Components\Url::class,
-        'tel' => Okipa\LaravelBootstrapComponents\Form\Components\Tel::class,
-        'number' => Okipa\LaravelBootstrapComponents\Form\Components\Number::class,
-        'color' => Okipa\LaravelBootstrapComponents\Form\Components\Color::class,
-        'date' => Okipa\LaravelBootstrapComponents\Form\Components\Date::class,
-        'time' => Okipa\LaravelBootstrapComponents\Form\Components\Time::class,
-        'datetime' => Okipa\LaravelBootstrapComponents\Form\Components\Datetime::class,
-        'file' => Okipa\LaravelBootstrapComponents\Form\Components\File::class,
-        'checkbox' => Okipa\LaravelBootstrapComponents\Form\Components\Checkbox::class,
-        'toggle' => Okipa\LaravelBootstrapComponents\Form\Components\Toggle::class,
-        'radio' => Okipa\LaravelBootstrapComponents\Form\Components\Radio::class,
-        'textarea' => Okipa\LaravelBootstrapComponents\Form\Components\Textarea::class,
-        'select' => Okipa\LaravelBootstrapComponents\Form\Components\Select::class,
+        'text' => Okipa\LaravelBootstrapComponents\Components\Form\Text::class,
+        'email' => Okipa\LaravelBootstrapComponents\Components\Form\Email::class,
+        'password' => Okipa\LaravelBootstrapComponents\Components\Form\Password::class,
+        'url' => Okipa\LaravelBootstrapComponents\Components\Form\Url::class,
+        'tel' => Okipa\LaravelBootstrapComponents\Components\Form\Tel::class,
+        'number' => Okipa\LaravelBootstrapComponents\Components\Form\Number::class,
+        'color' => Okipa\LaravelBootstrapComponents\Components\Form\Color::class,
+        'date' => Okipa\LaravelBootstrapComponents\Components\Form\Date::class,
+        'time' => Okipa\LaravelBootstrapComponents\Components\Form\Time::class,
+        'datetime' => Okipa\LaravelBootstrapComponents\Components\Form\Datetime::class,
+        'file' => Okipa\LaravelBootstrapComponents\Components\Form\File::class,
+        'checkbox' => Okipa\LaravelBootstrapComponents\Components\Form\Checkbox::class,
+        'toggle' => Okipa\LaravelBootstrapComponents\Components\Form\Toggle::class,
+        'radio' => Okipa\LaravelBootstrapComponents\Components\Form\Radio::class,
+        'textarea' => Okipa\LaravelBootstrapComponents\Components\Form\Textarea::class,
+        'select' => Okipa\LaravelBootstrapComponents\Components\Form\Select::class,
         // buttons
-        'submit' => Okipa\LaravelBootstrapComponents\Buttons\Components\Submit::class,
-        'create' => Okipa\LaravelBootstrapComponents\Buttons\Components\Create::class,
-        'update' => Okipa\LaravelBootstrapComponents\Buttons\Components\Update::class,
-        'validate' => Okipa\LaravelBootstrapComponents\Buttons\Components\Validate::class,
-        'button' => Okipa\LaravelBootstrapComponents\Buttons\Components\Button::class,
-        'link' => Okipa\LaravelBootstrapComponents\Buttons\Components\Link::class,
-        'back' => Okipa\LaravelBootstrapComponents\Buttons\Components\Back::class,
-        'cancel' => Okipa\LaravelBootstrapComponents\Buttons\Components\Cancel::class,
+        'submit' => Okipa\LaravelBootstrapComponents\Components\Buttons\Submit::class,
+        'create' => Okipa\LaravelBootstrapComponents\Components\Buttons\Create::class,
+        'update' => Okipa\LaravelBootstrapComponents\Components\Buttons\Update::class,
+        'validate' => Okipa\LaravelBootstrapComponents\Components\Buttons\Validate::class,
+        'button' => Okipa\LaravelBootstrapComponents\Components\Buttons\Button::class,
+        'link' => Okipa\LaravelBootstrapComponents\Components\Buttons\Link::class,
+        'back' => Okipa\LaravelBootstrapComponents\Components\Buttons\Back::class,
+        'cancel' => Okipa\LaravelBootstrapComponents\Components\Buttons\Cancel::class,
         // media
-        'image' => Okipa\LaravelBootstrapComponents\Media\Components\Image::class,
-        'audio' => Okipa\LaravelBootstrapComponents\Media\Components\Audio::class,
-        'video' => Okipa\LaravelBootstrapComponents\Media\Components\Video::class,
+        'image' => Okipa\LaravelBootstrapComponents\Components\Media\Image::class,
+        'audio' => Okipa\LaravelBootstrapComponents\Components\Media\Audio::class,
+        'video' => Okipa\LaravelBootstrapComponents\Components\Media\Video::class,
     ],
 
     /*
@@ -47,7 +47,7 @@ return [
          * The fully qualified class name of the multilingual resolver.
          * You can override it. Make sure your custom resolver extends this one.
          */
-        'multilingualResolver' => Okipa\LaravelBootstrapComponents\Form\Multilingual\Resolver::class,
+        'multilingualResolver' => Okipa\LaravelBootstrapComponents\Components\Form\Multilingual\Resolver::class,
 
         /*
          * Whether the form component label is positioned above the component itself.
@@ -64,5 +64,5 @@ return [
             'displayFailure' => true,
         ],
     ],
-    
+
 ];

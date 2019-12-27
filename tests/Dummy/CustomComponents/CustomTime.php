@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents;
 
-use Okipa\LaravelBootstrapComponents\Form\Components\Time;
+use Okipa\LaravelBootstrapComponents\Components\Form\Time;
 
 class CustomTime extends Time
 {

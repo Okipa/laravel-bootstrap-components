@@ -4,8 +4,8 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
 use Exception;
 use Illuminate\Support\MessageBag;
-use Okipa\LaravelBootstrapComponents\ComponentAbstract;
-use Okipa\LaravelBootstrapComponents\Form\Abstracts\FormAbstract;
+use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
+use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract;
 use Okipa\LaravelBootstrapComponents\Tests\BootstrapComponentsTestCase;
 use Okipa\LaravelBootstrapComponents\Tests\Fakers\UsersFaker;
 

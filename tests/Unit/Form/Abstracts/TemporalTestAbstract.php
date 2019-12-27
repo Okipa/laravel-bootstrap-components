@@ -4,7 +4,7 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
 use Carbon\Carbon;
 use Exception;
-use Okipa\LaravelBootstrapComponents\Form\Abstracts\TemporalAbstract;
+use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\TemporalAbstract;
 
 abstract class TemporalTestAbstract extends InputTestAbstract
 {

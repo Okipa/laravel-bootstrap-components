@@ -2,12 +2,12 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Media;
 
-use Okipa\LaravelBootstrapComponents\ComponentAbstract;
+use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
 use Okipa\LaravelBootstrapComponents\Facades\Image;
 use Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents\CustomImage;
-use Okipa\LaravelBootstrapComponents\Tests\Unit\Media\Abstracts\MediaTestAbstract;
+use Okipa\LaravelBootstrapComponents\Tests\Unit\Media\Abstracts\ImageTestAbstract;
 
-class ImageTest extends MediaTestAbstract
+class ImageTest extends ImageTestAbstract
 {
     protected function getComponent(): ComponentAbstract
     {

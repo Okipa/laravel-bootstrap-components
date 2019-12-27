@@ -2,8 +2,8 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Media\Abstracts;
 
-use Okipa\LaravelBootstrapComponents\ComponentAbstract;
-use Okipa\LaravelBootstrapComponents\Media\Abstracts\MediaAbstract;
+use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
+use Okipa\LaravelBootstrapComponents\Components\Media\Abstracts\MediaAbstract;
 use Okipa\LaravelBootstrapComponents\Tests\BootstrapComponentsTestCase;
 use Okipa\LaravelBootstrapComponents\Tests\Fakers\UsersFaker;
 
@@ -38,9 +38,8 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
 
     public function testSetSrc()
     {
-        $customSrc = 'custom-src';
-        $html = $this->getComponent()->src($customSrc)->toHtml();
-        $this->assertStringContainsString('<source src="' . $customSrc . '">', $html);
+        $html = $this->getComponent()->src('custom-src')->toHtml();
+        $this->assertStringContainsString('src="custom-src">', $html);
     }
 
     public function testNoSrc()
@@ -90,9 +89,8 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
 
     public function testSetLabel()
     {
-        $label = 'custom-label';
-        $html = $this->getComponent()->label($label)->toHtml();
-        $this->assertStringContainsString('<label>' . $label . '</label>', $html);
+        $html = $this->getComponent()->label('custom-label')->toHtml();
+        $this->assertStringContainsString('<label>custom-label</label>', $html);
     }
 
     public function testSetTranslatedLabel()
@@ -125,9 +123,8 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
 
     public function testSetContainerId()
     {
-        $customContainerId = 'custom-container-id';
-        $html = $this->getComponent()->containerId($customContainerId)->toHtml();
-        $this->assertStringContainsString('<div id="' . $customContainerId . '"', $html);
+        $html = $this->getComponent()->containerId('custom-container-id')->toHtml();
+        $this->assertStringContainsString('<div id="custom-container-id"', $html);
     }
 
     public function testSetNoComponentId()
@@ -138,9 +135,8 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
 
     public function testSetComponentId()
     {
-        $customComponentId = 'custom-component-id';
-        $html = $this->getComponent()->componentId($customComponentId)->toHtml();
-        $this->assertStringContainsString('<audio id="' . $customComponentId . '"', $html);
+        $html = $this->getComponent()->componentId('custom-component-id')->toHtml();
+        $this->assertStringContainsString('<audio id="custom-component-id"', $html);
     }
 
     public function testSetCustomContainerClasses()

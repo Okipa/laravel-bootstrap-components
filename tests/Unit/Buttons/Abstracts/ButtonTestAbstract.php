@@ -2,9 +2,6 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Buttons\Abstracts;
 
-use Okipa\LaravelBootstrapComponents\Buttons\Abstracts\SubmitAbstract;
-use Okipa\LaravelBootstrapComponents\ComponentAbstract;
-use Okipa\LaravelBootstrapComponents\Tests\BootstrapComponentsTestCase;
 use Okipa\LaravelBootstrapComponents\Tests\Fakers\RoutesFaker;
 
 abstract class ButtonTestAbstract extends SubmitTestAbstract

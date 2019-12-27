@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents;
 
-use Okipa\LaravelBootstrapComponents\Form\Components\Url;
+use Okipa\LaravelBootstrapComponents\Components\Form\Url;
 
 class CustomUrl extends Url
 {

@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents;
 
-use Okipa\LaravelBootstrapComponents\Form\Components\Number;
+use Okipa\LaravelBootstrapComponents\Components\Form\Number;
 
 class CustomNumber extends Number
 {

@@ -39,8 +39,7 @@ abstract class VideoTestAbstract extends MediaTestAbstract
 
     public function testSetComponentId()
     {
-        $customComponentId = 'custom-component-id';
-        $html = $this->getComponent()->componentId($customComponentId)->toHtml();
-        $this->assertStringContainsString('<video id="' . $customComponentId . '"', $html);
+        $html = $this->getComponent()->componentId('custom-component-id')->toHtml();
+        $this->assertStringContainsString('<video id="custom-component-id"', $html);
     }
 }

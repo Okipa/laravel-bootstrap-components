@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents;
 
-use Okipa\LaravelBootstrapComponents\Form\Components\Tel;
+use Okipa\LaravelBootstrapComponents\Components\Form\Tel;
 
 class CustomTel extends Tel
 {

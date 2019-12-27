@@ -3,7 +3,7 @@
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
 use Exception;
-use Okipa\LaravelBootstrapComponents\Form\Abstracts\RadioAbstract;
+use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\RadioAbstract;
 
 abstract class InputRadioTestAbstract extends InputTestAbstract
 {
@@ -178,42 +178,42 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
 
     public function testSetCustomLabelPositionedAbove()
     {
-        //
+        // irrelevant
     }
 
     public function testSetLabelPositionedAboveOverridesDefault()
     {
-        //
+        // irrelevant
     }
 
     public function testSetPlaceholder()
     {
-        //
+        // irrelevant
     }
 
     public function testSetTranslatedPlaceholder()
     {
-        //
+        // irrelevant
     }
 
     public function testSetPlaceholderWithLabel()
     {
-        //
+        // irrelevant
     }
 
     public function testNoPlaceholder()
     {
-        //
+        // irrelevant
     }
 
     public function testNoPlaceholderWithNoLabel()
     {
-        //
+        // irrelevant
     }
 
     public function testHidePlaceholder()
     {
-        //
+        // irrelevant
     }
 
     public function testSetNoComponentId()

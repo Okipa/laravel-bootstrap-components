@@ -120,7 +120,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
 
     public function testSetValue()
     {
-        //
+        // irrelevant
     }
 
     public function testSetSelectedOptionWithoutDeclaredOptions()

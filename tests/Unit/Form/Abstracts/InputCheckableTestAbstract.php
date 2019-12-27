@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
-use Okipa\LaravelBootstrapComponents\Form\Abstracts\CheckableAbstract;
+use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\CheckableAbstract;
 
 abstract class InputCheckableTestAbstract extends InputTestAbstract
 {
@@ -156,10 +156,9 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
 
     public function testSetLabel()
     {
-        $label = 'custom-label';
-        $html = $this->getComponent()->name('active')->label($label)->toHtml();
+        $html = $this->getComponent()->name('active')->label('custom-label')->toHtml();
         $this->assertStringContainsString(
-            ' for="' . $this->getComponentType() . '-active">' . $label . '</label>',
+            ' for="' . $this->getComponentType() . '-active">custom-label</label>',
             $html
         );
     }
@@ -190,42 +189,42 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
 
     public function testSetCustomLabelPositionedAbove()
     {
-        //
+        // irrelevant
     }
 
     public function testSetLabelPositionedAboveOverridesDefault()
     {
-        //
+        // irrelevant
     }
 
     public function testSetPlaceholder()
     {
-        //
+        // irrelevant
     }
 
     public function testSetTranslatedPlaceholder()
     {
-        //
+        // irrelevant
     }
 
     public function testSetPlaceholderWithLabel()
     {
-        //
+        // irrelevant
     }
 
     public function testNoPlaceholder()
     {
-        //
+        // irrelevant
     }
 
     public function testNoPlaceholderWithNoLabel()
     {
-        //
+        // irrelevant
     }
 
     public function testHidePlaceholder()
     {
-        //
+        // irrelevant
     }
 
     public function testSetCustomContainerClasses()

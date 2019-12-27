@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents;
 
-use Okipa\LaravelBootstrapComponents\Media\Components\Audio;
+use Okipa\LaravelBootstrapComponents\Components\Media\Audio;
 
 class CustomAudio extends Audio
 {

@@ -1,13 +1,13 @@
 <?php
 
-use Okipa\LaravelBootstrapComponents\Component;
-use Okipa\LaravelBootstrapComponents\Form\Abstracts\FormAbstract;
-use Okipa\LaravelBootstrapComponents\Form\Abstracts\MultilingualAbstract;
-use Okipa\LaravelBootstrapComponents\Form\Abstracts\SelectAbstract;
+use Okipa\LaravelBootstrapComponents\Components\Component;
+use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract;
+use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\MultilingualAbstract;
+use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\SelectAbstract;
 
 if (! function_exists('inputText')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\MultilingualAbstract
+     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\MultilingualAbstract
      */
     function inputText(): MultilingualAbstract
     {
@@ -17,7 +17,7 @@ if (! function_exists('inputText')) {
 
 if (! function_exists('inputEmail')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\FormAbstract
+     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract
      */
     function inputEmail(): FormAbstract
     {
@@ -27,7 +27,7 @@ if (! function_exists('inputEmail')) {
 
 if (! function_exists('inputPassword')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\FormAbstract
+     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract
      */
     function inputPassword(): FormAbstract
     {
@@ -37,7 +37,7 @@ if (! function_exists('inputPassword')) {
 
 if (! function_exists('inputUrl')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\FormAbstract
+     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract
      */
     function inputUrl(): FormAbstract
     {
@@ -47,7 +47,7 @@ if (! function_exists('inputUrl')) {
 
 if (! function_exists('inputTel')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\FormAbstract
+     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract
      */
     function inputTel(): FormAbstract
     {
@@ -57,7 +57,7 @@ if (! function_exists('inputTel')) {
 
 if (! function_exists('inputNumber')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\FormAbstract
+     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract
      */
     function inputNumber(): FormAbstract
     {
@@ -67,7 +67,7 @@ if (! function_exists('inputNumber')) {
 
 if (! function_exists('inputColor')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\FormAbstract
+     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract
      */
     function inputColor(): FormAbstract
     {
@@ -77,7 +77,7 @@ if (! function_exists('inputColor')) {
 
 if (! function_exists('inputDate')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\FormAbstract
+     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract
      */
     function inputDate(): FormAbstract
     {
@@ -87,7 +87,7 @@ if (! function_exists('inputDate')) {
 
 if (! function_exists('inputTime')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\FormAbstract
+     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract
      */
     function inputTime(): FormAbstract
     {
@@ -97,7 +97,7 @@ if (! function_exists('inputTime')) {
 
 if (! function_exists('inputDatetime')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\FormAbstract
+     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract
      */
     function inputDatetime(): FormAbstract
     {
@@ -107,7 +107,7 @@ if (! function_exists('inputDatetime')) {
 
 if (! function_exists('inputFile')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\FormAbstract
+     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract
      */
     function inputFile(): FormAbstract
     {
@@ -117,7 +117,7 @@ if (! function_exists('inputFile')) {
 
 if (! function_exists('inputCheckbox')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\FormAbstract
+     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract
      */
     function inputCheckbox(): FormAbstract
     {
@@ -127,7 +127,7 @@ if (! function_exists('inputCheckbox')) {
 
 if (! function_exists('inputToggle')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\FormAbstract
+     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract
      */
     function inputToggle(): FormAbstract
     {
@@ -137,7 +137,7 @@ if (! function_exists('inputToggle')) {
 
 if (! function_exists('inputRadio')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\FormAbstract
+     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract
      */
     function inputRadio(): FormAbstract
     {
@@ -147,7 +147,7 @@ if (! function_exists('inputRadio')) {
 
 if (! function_exists('textarea')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\MultilingualAbstract
+     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\MultilingualAbstract
      */
     function textarea(): MultilingualAbstract
     {
@@ -157,7 +157,7 @@ if (! function_exists('textarea')) {
 
 if (! function_exists('select')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Form\Abstracts\SelectAbstract
+     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\SelectAbstract
      */
     function select(): SelectAbstract
     {

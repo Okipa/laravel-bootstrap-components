@@ -6,9 +6,8 @@ abstract class ImageTestAbstract extends MediaTestAbstract
 {
     public function testSetLinkUrl()
     {
-        $customLinkUrl = 'custom-link-url';
-        $html = image()->linkUrl($customLinkUrl)->toHtml();
-        $this->assertStringContainsString('href="' . $customLinkUrl . '"', $html);
+        $html = image()->link('custom-url')->toHtml();
+        $this->assertStringContainsString('href="custom-url"', $html);
     }
 
     public function testSetNoLinkUrl()
@@ -17,51 +16,37 @@ abstract class ImageTestAbstract extends MediaTestAbstract
         $this->assertStringNotContainsString('href="', $html);
     }
 
-    public function testSetLinkTitle()
+    public function testSetNotLinkTitle()
     {
-        //
+        $html = image()->toHtml();
+        $this->assertStringNotContainsString('title="', $html);
     }
 
     public function testSetNoLinkTitleWithLabel()
     {
-        //
+        $html = image()->label('custom-label')->toHtml();
+        $this->assertStringContainsString('title="custom-label"', $html);
     }
 
     public function testSetNoLinkTitleWithAlt()
     {
-        //
+        $html = image()->alt('custom-alt')->toHtml();
+        $this->assertStringContainsString('title="custom-alt"', $html);
     }
 
     public function testSetNoLinkTitleWithLabelAndAlt()
     {
-        //
+        $html = image()->label('custom-label')->alt('custom-alt')->toHtml();
+        $this->assertStringContainsString('title="custom-label"', $html);
     }
 
-    public function testSetNotLinkTitle()
+    public function testSetLinkTitleOverridesDefault()
     {
-        //
-    }
-
-    public function testSetAlt()
-    {
-        $customAlt = 'custom-alt';
-        $html = image()->alt($customAlt)->toHtml();
-        $this->assertStringContainsString('alt="' . $customAlt . '"', $html);
-    }
-
-    public function testNoAltWithLabel()
-    {
-        //
-    }
-
-    public function testNoAltWithTitle()
-    {
-        //
-    }
-
-    public function testNoAltWithLabelAndTitle()
-    {
-        //
+        $html = image()->label('custom-label')
+            ->link('custom-url', 'custom-title')
+            ->alt('custom-alt')
+            ->toHtml();
+        $this->assertStringContainsString('title="custom-title"', $html);
     }
 
     public function testSetNoAlt()
@@ -70,11 +55,28 @@ abstract class ImageTestAbstract extends MediaTestAbstract
         $this->assertStringNotContainsString('alt="', $html);
     }
 
-    public function testSetWidth()
+    public function testNoAltWithLabel()
     {
-        $customWidth = 100;
-        $html = image()->width($customWidth)->toHtml();
-        $this->assertStringContainsString('width="' . $customWidth . '"', $html);
+        $html = image()->label('custom-label')->toHtml();
+        $this->assertStringContainsString('alt="custom-label"', $html);
+    }
+
+    public function testNoAltWithTitle()
+    {
+        $html = image()->link('custom-url', 'custom-title')->toHtml();
+        $this->assertStringContainsString('alt="custom-title"', $html);
+    }
+
+    public function testNoAltWithLabelAndTitle()
+    {
+        $html = image()->label('custom-label')->link('custom-url', 'custom-title')->toHtml();
+        $this->assertStringContainsString('alt="custom-label"', $html);
+    }
+
+    public function testSetAltOverridesDefault()
+    {
+        $html = image()->label('custom-label')->link('custom-url', 'custom-title')->alt('custom-alt')->toHtml();
+        $this->assertStringContainsString('alt="custom-alt"', $html);
     }
 
     public function testSetNoWidth()
@@ -83,17 +85,22 @@ abstract class ImageTestAbstract extends MediaTestAbstract
         $this->assertStringNotContainsString('width="', $html);
     }
 
-    public function testSetHeight()
+    public function testSetWidth()
     {
-        $customHeight = 100;
-        $html = image()->height($customHeight)->toHtml();
-        $this->assertStringContainsString('height="' . $customHeight . '"', $html);
+        $html = image()->width(100)->toHtml();
+        $this->assertStringContainsString('width="100"', $html);
     }
 
     public function testSetNoHeight()
     {
         $html = image()->toHtml();
         $this->assertStringNotContainsString('height="', $html);
+    }
+
+    public function testSetHeight()
+    {
+        $html = image()->height(150)->toHtml();
+        $this->assertStringContainsString('height="150"', $html);
     }
 
     public function testSetNoComponentId()
@@ -125,7 +132,7 @@ abstract class ImageTestAbstract extends MediaTestAbstract
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()->componentClasses(['custom', 'link', 'classes'])->toHtml();
+        $html = $this->getComponent()->linkClasses(['custom', 'link', 'classes'])->toHtml();
         $this->assertStringContainsString('class="component-link custom link classes"', $html);
         $this->assertStringNotContainsString('class="component-link default link classes"', $html);
     }
@@ -147,7 +154,7 @@ abstract class ImageTestAbstract extends MediaTestAbstract
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()
-            ->componentHtmlAttributes(['custom' => 'link', 'html' => 'attributes'])
+            ->linkHtmlAttributes(['custom' => 'link', 'html' => 'attributes'])
             ->toHtml();
         $this->assertStringContainsString('custom="link" html="attributes">', $html);
         $this->assertStringNotContainsString('default="link" html="attributes">', $html);

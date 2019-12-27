@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents;
 
-use Okipa\LaravelBootstrapComponents\Form\Components\Toggle;
+use Okipa\LaravelBootstrapComponents\Components\Form\Toggle;
 
 class CustomToggle extends Toggle
 {

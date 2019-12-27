@@ -4,7 +4,7 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Dummy;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Resolver extends \Okipa\LaravelBootstrapComponents\Form\Multilingual\Resolver
+class Resolver extends \Okipa\LaravelBootstrapComponents\Components\Form\Multilingual\Resolver
 {
     /**
      * @inheritDoc

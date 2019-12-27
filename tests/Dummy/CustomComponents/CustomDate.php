@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents;
 
-use Okipa\LaravelBootstrapComponents\Form\Components\Date;
+use Okipa\LaravelBootstrapComponents\Components\Form\Date;
 
 class CustomDate extends Date
 {

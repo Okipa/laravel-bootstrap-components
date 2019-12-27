@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents;
 
-use Okipa\LaravelBootstrapComponents\Form\Components\Textarea;
+use Okipa\LaravelBootstrapComponents\Components\Form\Textarea;
 
 class CustomTextarea extends Textarea
 {

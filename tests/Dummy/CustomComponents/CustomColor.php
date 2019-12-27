@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents;
 
-use Okipa\LaravelBootstrapComponents\Form\Components\Color;
+use Okipa\LaravelBootstrapComponents\Components\Form\Color;
 
 class CustomColor extends Color
 {

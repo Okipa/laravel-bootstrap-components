@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Media;
 
-use Okipa\LaravelBootstrapComponents\ComponentAbstract;
+use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
 use Okipa\LaravelBootstrapComponents\Facades\Audio;
 use Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents\CustomAudio;
 use Okipa\LaravelBootstrapComponents\Tests\Unit\Media\Abstracts\MediaTestAbstract;

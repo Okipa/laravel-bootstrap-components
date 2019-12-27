@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents;
 
-use Okipa\LaravelBootstrapComponents\Form\Components\Text;
+use Okipa\LaravelBootstrapComponents\Components\Form\Text;
 
 class CustomText extends Text
 {

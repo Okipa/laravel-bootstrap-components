@@ -4,7 +4,7 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
 use Illuminate\Support\MessageBag;
 use InvalidArgumentException;
-use Okipa\LaravelBootstrapComponents\Form\Abstracts\MultilingualAbstract;
+use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\MultilingualAbstract;
 use Okipa\LaravelBootstrapComponents\Tests\Dummy\Resolver;
 use Okipa\LaravelBootstrapComponents\Tests\Models\User;
 

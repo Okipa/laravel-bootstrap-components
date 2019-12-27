@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents;
 
-use Okipa\LaravelBootstrapComponents\Form\Components\Email;
+use Okipa\LaravelBootstrapComponents\Components\Form\Email;
 
 class CustomEmail extends Email
 {

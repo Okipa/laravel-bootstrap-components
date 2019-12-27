@@ -2,9 +2,8 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
-use Okipa\LaravelBootstrapComponents\ComponentAbstract;
+use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
 use Okipa\LaravelBootstrapComponents\Facades\InputDate;
-use Okipa\LaravelBootstrapComponents\Facades\InputDatetime;
 use Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents\CustomDate;
 use Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts\TemporalTestAbstract;
 
