@@ -46,7 +46,7 @@ And get this HTML generated for you :
 ```blade
 <div class="component-container form-group">
     <label for="text-name">
-        @lang('validation.attributes.name')
+        Name
     </label>
     <div class="input-group">
         <div class="input-group-prepend">
@@ -59,7 +59,7 @@ And get this HTML generated for you :
             type="text"
             name="name"
             value=""
-            placeholder="@lang('validation.attributes.name')">
+            placeholder="Name">
     </div>
 </div>
 ```
@@ -78,9 +78,8 @@ Call this component in your view :
 
 And get this HTML generated for you :
 
-```blade
-<div id="text-title-fr-container"
-    class="text-title-fr-container form-group">
+```html
+<div class="component-container form-group" data-locale="fr">
     <label for="text-title-fr">
         Title (FR)
     </label>
@@ -91,14 +90,14 @@ And get this HTML generated for you :
             </span>
         </div>
         <input id="text-title-fr"
-            class="form-control text-title-fr-component"
+            class="component form-control"
             type="text"
             name="title[fr]"
             value=""
             placeholder="Title (FR)">
     </div>
 </div>
-<div id="text-title-en-container" class="text-title-en-container form-group">
+<div class="component-container form-group" data-locale="en">
     <label for="text-title-en">
         Title (EN)
     </label>
@@ -109,7 +108,7 @@ And get this HTML generated for you :
             </span>
         </div>
         <input id="text-title-en"
-            class="form-control text-title-en-component"
+            class="component form-control"
             type="text"
             name="title[en]"
             value=""
@@ -119,72 +118,70 @@ And get this HTML generated for you :
 ```
 
 ## Table of Contents
-- [Installation](#installation)
-- [Styles](#styles)
-- [Configuration](#configuration)
-- [Translations](#translations)
-- [Customization](#customization)
-- [Targeting components](#targeting-components)
-- [API](#api)
-  - [Form components](#form-components)
-    - [Multilingual](#multilingual)
-      - [inputText()](#inputtext)
-      - [bsTextarea()](#bstextarea)
-    - [Standard](#standard)
-      - [bsNumber()](#bsnumber)
-      - [bsTel()](#bstel)
-      - [bsDatetime()](#bsdatetime)
-      - [bsDate()](#bsdate)
-      - [bsTime()](#bstime)
-      - [inputUrl()](#bsurl)
-      - [bsEmail()](#bsemail)
-      - [bsColor()](#bscolor)
-      - [bsPassword()](#bspassword)
-      - [bsFile()](#bsfile)
-      - [bsSelect()](#bsselect)
-      - [bsCheckbox()](#bscheckbox)
-      - [bsToggle()](#bstoggle)
-      - [bsRadio()](#bsradio)
-  - [Buttons components](#buttons-components)
-    - [bsValidate()](#bsvalidate)
-    - [bsCreate()](#bscreate)
-    - [bsUpdate()](#bsupdate)
-    - [bsCancel()](#bscancel)
-    - [bsBack()](#bsback)
-  - [Media components](#media-components)
-    - [image()](#image)
-    - [audio()](#audio)
-    - [video()](#video)
-- [Testing](#testing)
-- [Changelog](#changelog)
-- [Contributing](#contributing)
-- [Credits](#credits)
-- [Licence](#license)
+
+* [Installation](#installation)
+* [Styles](#styles)
+* [Configuration](#configuration)
+* [Translations](#translations)
+* [Templates](#templates)
+* [API](#api)
+  * [Form components](#form-components)
+    * [Monolingual form components](#monolingual-form-components)
+      * [inputEmail()](#inputemail)
+      * [inputPassword()](#inputpassword)
+      * [inputUrl()](#inputurl)
+      * [inputTel()](#inputtel)
+      * [inputNumber()](#inputnumber)
+      * [inputColor()](#inputcolor)
+      * [inputDate()](#inputdate)
+      * [inputTime()](#inputtime)
+      * [inputDatetime()](#inputdatetime)
+      * [inputFile()](#inputfile)
+      * [inputCheckbox()](#bscheckbox)
+      * [inputToggle()](#bstoggle)
+      * [bsRadio()](#bsradio)
+      * [bsSelect()](#bsselect)
+    * [Multilingual form components](#multilingual-form-components)
+      * [inputText()](#inputtext)
+      * [inputTextarea()](#inputtextarea)
+  * [Button components](#button-components)
+    * [submitValidate()](#submitvalidate)
+    * [submitCreate()](#submitcreate)
+    * [submitUpdate()](#submitupdate)
+    * [buttonCancel()](#buttoncancel)
+    * [buttonBack()](#buttonback)
+  * [Media components](#media-components)
+    * [image()](#image)
+    * [audio()](#audio)
+    * [video()](#video)
+* [Testing](#testing)
+* [Changelog](#changelog)
+* [Contributing](#contributing)
+* [Credits](#credits)
+* [Licence](#license)
 
 ## Installation
 
-- Install the package with composer :
+* Install the package with composer :
 ```bash
-composer require "okipa/laravel-bootstrap-components:^1.0"
-```
-
-- Laravel 5.5+ uses Package Auto-Discovery, so doesn't require you to manually add the ServiceProvider.
-If you don't use auto-discovery or if you use a Laravel 5.4- version, add the package service provider in the `register()` method from your `app/Providers/AppServiceProvider.php` :
-```php
-// laravel bootstrap components
-// https://github.com/Okipa/laravel-bootstrap-components
-$this->app->register(Okipa\LaravelBootstrapComponents\ComponentServiceProvider::class);
+composer require "okipa/laravel-bootstrap-components:^2.0"
 ```
 
 ## Styles
 
-If you use some extra components ([see API](#api)), you will have to load the package styles.  
-For this, load the package `sass` file from the `[path/to/composer/vendor]/okipa/laravel-bootstrap-components/styles/scss/bootstrap-components` directory to your project.
+You will have to load the package styles to use the following extra components (not provided by bootstrap) :
+
+* `inputToggle()`
+
+Load the package `scss` from the following path and override the declared in the `styles/scss/_variables.scss` file if needed.
+
+```scss
+@import '/path/to/composer/vendor/okipa/laravel-bootstrap-components/styles/scss/bootstrap-components';
+``` 
 
 ## Configuration
-
-Each component default view and default values, classes and attributes can be configured.  
-Publish the package configuration and override the available config values : 
+  
+Publish the package configuration file to customize it if necessary : 
 
 ```bash
 php artisan vendor:publish --tag=bootstrap-components:config
@@ -192,33 +189,21 @@ php artisan vendor:publish --tag=bootstrap-components:config
 
 ## Translations
 
-To customize the existing translations, publish the packages translations files to make the wanted changes :
+Publish the package translations files to customize them if necessary : 
 
-```
+```bash
 php artisan vendor:publish --tag=bootstrap-components:translations
 ```
 
-## Customization
+## Templates
 
-Customize the used templates to make this package fit to your needs.  
-Publish the views with the command :
+Publish the package views to customize them if necessary : 
 
-```
+```bash
 php artisan vendor:publish --tag=bootstrap-components:views
 ```
 
-## Targeting components
-
-Each component can easily be targeted for javascript treatments :
-* Each component container provides a `component-container` class.
-* Each component itself provides a `component` class.
-
-```javascript
-// easily target each text components with email name
-$('.component[type="text"][name="email"')
-```
-
-## API
+## Components
 
 **Methods available for all components**
   
@@ -226,10 +211,22 @@ $('.component[type="text"][name="email"')
 |---|---|---|
 | containerId(string $containerId): self  | No | Set the component container id. |
 | componentId(string $componentId): self  | No | Set the component id. |
-| containerClasses(array $containerClasses): self  | No | Set the component container classes. Default value : `config('bootstrap-components.[componentConfigKey].classes.container')`. |
-| componentClasses(array $componentClasses): self  | No | Set the component classes. Default value : `config('bootstrap-components.[componentConfigKey].classes.component')`. |
-| containerHtmlAttributes(array $containerHtmlAttributes): self  | No | Set the component container html attributes. Default value : `config('bootstrap-components.[componentConfigKey].htmlAttributes.container')`. |
-| componentHtmlAttributes(array $componentHtmlAttributes): self  | No | Set the component html attributes. Default value : `config('bootstrap-components.[componentConfigKey].htmlAttributes.component')`. |
+| containerClasses(array $containerClasses): self  | No | Set the component container classes. |
+| componentClasses(array $componentClasses): self  | No | Set the component classes. |
+| containerHtmlAttributes(array $containerHtmlAttributes): self  | No | Set the component container html attributes. |
+| componentHtmlAttributes(array $componentHtmlAttributes): self  | No | Set the component html attributes. |
+
+The component can be used as following :
+
+```php
+<component>
+    ->containerId('container-id') // set the container id
+    ->componentId('component-id') // override the default component id (email-[name])
+    ->containerClasses(['container', 'classes']) // override the default component container classes
+    ->componentClasses(['component', 'classes']) // override the default component classes
+    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default component container html attributes
+    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes
+```
 
 ### Form components
 
@@ -239,311 +236,111 @@ $('.component[type="text"][name="email"')
 |---|---|---|
 | name(string $name): self  | Yes | Set the component input name tag. |
 | model(Model $model): self  | No | Set the component associated model. |
-| prepend(?string $html): self  | No | Prepend html to the component input group. Default value : `config('bootstrap-components.[componentConfigKey].prepend')`. |
-| append(?string $html): self  | No | Append html to the component input group. Default value : `config('bootstrap-components.[componentConfigKey].append')`. |
+| prepend(?string $html): self  | No | Prepend html to the component input group. |
+| append(?string $html): self  | No | Append html to the component input group. |
 | label(?string $label): self  | No | Set the component input label. Default value : `__('validation.attributes.[name]')`. |
-| labelPositionedAbove(bool $positionedAbove = true): self  | No | Set the label above-positioning status. If not positioned above, the label will be positioned under the input. Default value : `config('bootstrap-components.[componentConfigKey].labelPositionedAbove')`. Value will set as `true` if the config value is not found. |
+| labelPositionedAbove(bool $positionedAbove = true): self  | No | Set the label above-positioning status. If not positioned above, the label will be positioned under the input (may be useful for bootstrap 4 floating labels). |
 | placeholder(?string $placeholder): self  | No | Set the component input placeholder. Default value : `$label`. |
 | value($value): self  | No | Set the component input value. |
-| legend(?string $legend): self  | No | Set the component legend. Default value : `config('bootstrap-components.[componentConfigKey].legend')`. |
-| displaySuccess(?bool $displaySuccess = true): self  | No | Set the component input validation success display status. Default value : `config('bootstrap-components.[componentConfigKey].formValidation.displaySuccess')`. |
-| displayFailure(?bool $displayFailure = true): self  | No | Set the component input validation failure display status.. Default value : `config('bootstrap-components.[componentConfigKey].formValidation.displayFailure')`. |
+| legend(?string $legend): self  | No | Set the component legend. |
+| displaySuccess(?bool $displaySuccess = true): self  | No | Set the component input validation success display status. |
+| displayFailure(?bool $displayFailure = true): self  | No | Set the component input validation failure display status. |
 
-#### Multilingual
+#### Standard inputs
 
-**Methods available / overridden for multilingual form components**
-
-| Signature | Required | Description |
-|---|---|---|
-| locales(array $locales): self  | No | Set the component input language locales to handle. |
-| value(Closure $value): self  | No | Set the component input value. The value has to be set from this closure result : `->value(function($locale){})`. |
-
-**:bulb: Notes :**
-* The use of the `->locales()` method will produce a component for each locale keys you declared. For example, if you declare the `fr` and `en` locale keys for a `title` text component, you will get two `Title (FR)` and `Title (EN)` generated text components.
-  * The localization treatment will only occur if you have more than one locales declared : there is not point to generate localized components with only one declared locales.
-* Each multilingual component provides an extra `data-locale="<locale>"` attribute to help with eventual javascript treatments.
-* You can use your own `MultilingualResolver` by replacing the path defined in the `config('bootstrap-components.form.multilingualResolver')`, allowing you to customize your components localization behaviour :
-  * The default locales to handle (by default `[]`).
-  * The component localized `name` attribute resolution (default : `$name[$locale]`.
-  * The component localized old value resolution in case of errors (default : `old($name)[$locale]`).
-  * The component localized model value resolution (default : `$model->{$name}[$locales]`).
-  * The component localized error message bag key resolution, used for the error message extraction and for the validation class generation (default : `$name . $locale`).
-  * The component error message resolution, in order to correctly display the localized attribute name (default : transform `Dummy __('validation.attributes.name.en) error message` into `Dummy __('validation.attributes.name) (EN) error message.`.
-
-##### inputText()
+The standard input component can be used as following :
 
 ```php
-input()->text()->name('name') // set the input name
-    ->locales(['fr', 'en']) // override the default locales config value
+<standard-input>
+    ->name('email') // set the input name
     ->model($user) // value is automatically detected from the field name
-    ->value(function($locale){ return $name[$locale]; }) // or manually set the value
-    ->label('Name') // override the default __('validation.attributes.[name]') label or set `false` to hide it
-    ->labelPositionedAbove() // Set the label above-position status, default value : `true`
-    ->placeholder('Set your name') // override the default placeholder (label) or set `false` to hide it
-    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config value or set `false` to hide it
-    ->append('<i class="fas fa-hand-pointer"></i>') // override the default append config value or set `false` to hide it
-    ->legend('Set your legend here.') // override the default legend config value or set `false` to hide it
+    ->value('john.doe@domain.com') // manually set the value
+    ->label('Email') // override the default __('validation.attributes.[name]') label or set `false` to hide it
+    ->labelPositionedAbove() // set the label above-position status, default value : `true`
+    ->placeholder('Set your e-mail') // override the default placeholder (label) or set `false` to hide it
+    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default component prepend or set `false` to hide it
+    ->append('<i class="fas fa-hand-pointer"></i>') // override the default component append or set `false` to hide it
+    ->legend('Set your legend here.') // override the default component legend or set `false` to hide it
     ->containerId('container-id') // set the container id
-    ->componentId('component-id') // override the default component id (text-[name])
-    ->containerClasses(['container', 'classes']) // override the default container classes config value
-    ->componentClasses(['component', 'classes']) // override the default component classes config value
-    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default container html attributes config value
-    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
-    ->displaySuccess(false) // // override the default form validation display success config value
-    ->displayFailure(false) // // override the default form validation display failure config value
+    ->componentId('component-id') // override the default component id (email-[name])
+    ->containerClasses(['container', 'classes']) // override the default component container classes
+    ->componentClasses(['component', 'classes']) // override the default component classes
+    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default component container html attributes
+    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes
+    ->displaySuccess(false) // override the default component form validation display success status
+    ->displayFailure(false); // override the default component form validation failure success status
 ```
 
-##### bsTextarea()
+The standard input component is shipped with the following pre-configuration :
+* Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
+* Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
-```php
-bsTextarea()->name('message') // set the input name
-    ->locales(['fr', 'en']) // override the default locales config value
-    ->model($user) // value is automatically detected from the field name
-    ->value(function($locale){ return $message[$locale]; }) // or manually set the value
-    ->label('Message') // override the default __('validation.attributes.[name]') label or set `false` to hide it
-    ->labelPositionedAbove() // Set the label above-position status, default value : `true`
-    ->placeholder('Set your message') // override the default placeholder (label) or set `false` to hide it
-    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config value or set `false` to hide it
-    ->append('<i class="fas fa-hand-pointer"></i>') // override the default append config value or set `false` to hide it
-    ->legend('Set your legend here.') // override the default legend config value or set `false` to hide it
-    ->containerId('container-id') // set the container id
-    ->componentId('component-id') // override the default component id (textarea-[name])
-    ->containerClasses(['container', 'classes']) // override the default container classes config value
-    ->componentClasses(['component', 'classes']) // override the default component classes config value
-    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default container html attributes config value
-    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
-    ->displaySuccess(false) // // override the default form validation display success config value
-    ->displayFailure(false) // // override the default form validation display failure config value
-```
+##### inputEmail()
 
-#### Standard
+This component inherits the standard input component and is shipped with the following pre-configuration :
+* Prepend : `<i class="fas fa-at"></i>`
 
-##### bsNumber()
+##### inputPassword()
 
-```php
-bsNumber()->name('amount') // set the input name
-    ->model($invoice) // value is automatically detected from the field name
-    ->value(20) // or manually set the value
-    ->label('Amount') // override the default __('validation.attributes.[name]') label or set `false` to hide it
-    ->labelPositionedAbove() // Set the label above-position status, default value : `true`
-    ->placeholder('Set the amount') // override the default placeholder (label) or set `false` to hide it
-    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config value or set `false` to hide it
-    ->append('<i class="fas fa-hand-pointer"></i>') // override the default append config value or set `false` to hide it
-    ->legend('Set your legend here.') // override the default legend config value or set `false` to hide it
-    ->containerId('container-id') // set the container id
-    ->componentId('component-id') // override the default component id (text-[name])
-    ->containerClasses(['container', 'classes']) // override the default container classes config value
-    ->componentClasses(['component', 'classes']) // override the default component classes config value
-    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default container html attributes config value
-    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
-    ->displaySuccess(false) // // override the default form validation display success config value
-    ->displayFailure(false) // // override the default form validation display failure config value
-```
-
-##### bsTel()
-
-```php
-bsTel()->name('phone_number') // set the input name
-    ->model($user) // value is automatically detected from the field name
-    ->value('+33612345678') // or manually set the value
-    ->label('Phone number') // override the default __('validation.attributes.[name]') label or set `false` to hide it
-    ->labelPositionedAbove() // Set the label above-position status, default value : `true`
-    ->placeholder('Set your phone number') // override the default placeholder (label) or set `false` to hide it
-    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config value or set `false` to hide it
-    ->append('<i class="fas fa-hand-pointer"></i>') // override the default append config value or set `false` to hide it
-    ->legend('Set your legend here.') // override the default legend config value or set `false` to hide it
-    ->containerId('container-id') // set the container id
-    ->componentId('component-id') // override the default component id (tel-[name])
-    ->containerClasses(['container', 'classes']) // override the default container classes config value
-    ->componentClasses(['component', 'classes']) // override the default component classes config value
-    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default container html attributes config value
-    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
-    ->displaySuccess(false) // // override the default form validation display success config value
-    ->displayFailure(false) // // override the default form validation display failure config value
-```
-
-##### bsDatetime()
-
-```php
-bsDatetime()->name('published_at') // set the input name
-    ->model($user) // value is automatically detected from the field name
-    ->value('2018-01-01 12:30') // or manually set the value
-    ->format('Y-m-d H:i') // override the default config format
-    ->label('Publication date') // override the default __('validation.attributes.[name]') label or set `false` to hide it
-    ->labelPositionedAbove() // Set the label above-position status, default value : `true`
-    ->placeholder('Set the publication date') // override the default placeholder (label) or set `false` to hide it
-    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config value or set `false` to hide it
-    ->append('<i class="fas fa-hand-pointer"></i>') // override the default append config value or set `false` to hide it
-    ->legend('Set your legend here.') // override the default legend config value or set `false` to hide it
-    ->containerId('container-id') // set the container id
-    ->componentId('component-id') // override the default component id (datetime-local-[name])
-    ->containerClasses(['container', 'classes']) // override the default container classes config value
-    ->componentClasses(['component', 'classes']) // override the default component classes config value
-    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default container html attributes config value
-    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
-    ->displaySuccess(false) // // override the default form validation display success config value
-    ->displayFailure(false) // // override the default form validation display failure config value
-```
-
-##### bsDate()
-
-```php
-bsDate()->name('birthday') // set the input name
-    ->model($user) // value is automatically detected from the field name
-    ->value('1985-03-24') // or manually set the value
-    ->format('Y-m-d') // override the default config format
-    ->label('Birthday') // override the default __('validation.attributes.[name]') label or set `false` to hide it
-    ->labelPositionedAbove() // Set the label above-position status, default value : `true`
-    ->placeholder('Set your birthday') // override the default placeholder (label) or set `false` to hide it
-    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config value or set `false` to hide it
-    ->append('<i class="fas fa-hand-pointer"></i>') // override the default append config value or set `false` to hide it
-    ->legend('Set your legend here.') // override the default legend config value or set `false` to hide it
-    ->containerId('container-id') // set the container id
-    ->componentId('component-id') // override the default component id (date-[name])
-    ->containerClasses(['container', 'classes']) // override the default container classes config value
-    ->componentClasses(['component', 'classes']) // override the default component classes config value
-    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default container html attributes config value
-    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
-    ->displaySuccess(false) // // override the default form validation display success config value
-    ->displayFailure(false) // // override the default form validation display failure config value
-```
-
-##### bsTime()
-
-```php
-bsTime()->name('opening') // set the input name
-    ->model($user) // value is automatically detected from the field name
-    ->value('08:30') // or manually set the value
-    ->format('H\h i\m\i\n') // override the default config format
-    ->label('Opening') // override the default __('validation.attributes.[name]') label or set `false` to hide it
-    ->labelPositionedAbove() // Set the label above-position status, default value : `true`
-    ->placeholder('Set the shop opening') // override the default placeholder (label) or set `false` to hide it
-    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config value or set `false` to hide it
-    ->append('<i class="fas fa-hand-pointer"></i>') // override the default append config value or set `false` to hide it
-    ->legend('Set your legend here.') // override the default legend config value or set `false` to hide it
-    ->containerId('container-id') // set the container id
-    ->componentId('component-id') // override the default component id (date-[name])
-    ->containerClasses(['container', 'classes']) // override the default container classes config value
-    ->componentClasses(['component', 'classes']) // override the default component classes config value
-    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default container html attributes config value
-    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
-    ->displaySuccess(false) // // override the default form validation display success config value
-    ->displayFailure(false) // // override the default form validation display failure config value
-```
+This component inherits the standard input component and is shipped with the following pre-configuration :
+* Prepend : `<i class="fas fa-user-secret"></i>`
 
 ##### inputUrl()
 
-```php
-inputUrl()->name('facebook_page') // set the input name
-    ->model($user) // value is automatically detected from the field name
-    ->value('https://facebook.com') // or manually set the value
-    ->label('Facebook page URL') // override the default __('validation.attributes.[name]') label or set `false` to hide it
-    ->labelPositionedAbove() // Set the label above-position status, default value : `true`
-    ->placeholder('Set your Facebook page URL') // override the default placeholder (label) or set `false` to hide it
-    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config value or set `false` to hide it
-    ->append('<i class="fas fa-hand-pointer"></i>') // override the default append config value or set `false` to hide it
-    ->legend('Set your legend here.') // override the default legend config value or set `false` to hide it
-    ->containerId('container-id') // set the container id
-    ->componentId('component-id') // override the default component id (url-[name])
-    ->containerClasses(['container', 'classes']) // override the default container classes config value
-    ->componentClasses(['component', 'classes']) // override the default component classes config value
-    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default container html attributes config value
-    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
-    ->displaySuccess(false) // // override the default form validation display success config value
-    ->displayFailure(false) // // override the default form validation display failure config value
-```
+This component inherits the standard input component and is shipped with the following pre-configuration :
+* Prepend : `<i class="fas fa-user-secret"></i>`
 
-##### bsEmail()
+##### inputTel()
 
-```php
-bsEmail()->name('email') // set the input name
-    ->model($user) // value is automatically detected from the field name
-    ->value('john.doe@domain.com') // or manually set the value
-    ->label('Email') // override the default __('validation.attributes.[name]') label or set `false` to hide it
-    ->labelPositionedAbove() // Set the label above-position status, default value : `true`
-    ->placeholder('Set your e-mail') // override the default placeholder (label) or set `false` to hide it
-    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config value or set `false` to hide it
-    ->append('<i class="fas fa-hand-pointer"></i>') // override the default append config value or set `false` to hide it
-    ->legend('Set your legend here.') // override the default legend config value or set `false` to hide it
-    ->containerId('container-id') // set the container id
-    ->componentId('component-id') // override the default component id (email-[name])
-    ->containerClasses(['container', 'classes']) // override the default container classes config value
-    ->componentClasses(['component', 'classes']) // override the default component classes config value
-    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default container html attributes config value
-    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
-    ->displaySuccess(false) // // override the default form validation display success config value
-    ->displayFailure(false) // // override the default form validation display failure config value
-```
+This component inherits the standard input component and is shipped with the following pre-configuration :
+* Prepend : `<i class="fas fa-phone"></i>`
 
-##### bsColor()
+##### inputNumber()
+
+This component inherits the standard input component and is shipped with the following pre-configuration :
+* Prepend : `<i class="fas fa-euro-sign"></i>`
+
+##### inputColor()
+
+This component inherits the standard input component and is shipped with the following pre-configuration :
+* Prepend : `<i class="fas fa-palette"></i>`
+
+#### Temporal input
+
+**:bulb: Additional methods :**
+
+| Signature | Required | Description |
+|---|---|---|
+| format(string $format): self  | Yes | Set the temporal format. |
+
+The temporal input component inherits the standard input component and can be used as following :
 
 ```php
-bsColor()->name('color') // set the input name
-    ->model($user) // value is automatically detected from the field name
-    ->value('#ffffff') // or manually set the value
-    ->label('Color') // override the default __('validation.attributes.[name]') label or set `false` to hide it
-    ->labelPositionedAbove() // Set the label above-position status, default value : `true`
-    ->placeholder('Choose the color") // override the default placeholder (label) or set `false` to hide it
-    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config value or set `false` to hide it
-    ->append('<i class="fas fa-hand-pointer"></i>') // override the default append config value or set `false` to hide it
-    ->legend('Set your legend here.') // override the default legend config value or set `false` to hide it
-    ->containerId('container-id') // set the container id
-    ->componentId('component-id') // override the default component id (url-[name])
-    ->containerClasses(['container', 'classes']) // override the default container classes config value
-    ->componentClasses(['component', 'classes']) // override the default component classes config value
-    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default container html attributes config value
-    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
-    ->displaySuccess(false) // // override the default form validation display success config value
-    ->displayFailure(false) // // override the default form validation display failure config value
+<temporal-input>
+    // all standard input methods are available
+    ->format('Y-m-d H:i'); // mandatorily set the format
 ```
 
-##### bsPassword()
+##### inputDate()
 
-```php
-bsPassword()->name('password') // set the input name
-    ->model($user) // value is automatically detected from the field name
-    ->value('secret') // or manually set the value
-    ->label('Password') // override the default __('validation.attributes.[name]') label or set `false` to hide it
-    ->labelPositionedAbove() // Set the label above-position status, default value : `true`
-    ->placeholder('Set your password') // override the default placeholder (label) or set `false` to hide it
-    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config value or set `false` to hide it
-    ->append('<i class="fas fa-hand-pointer"></i>') // override the default append config value or set `false` to hide it
-    ->legend('Set your legend here.') // override the default legend config value or set `false` to hide it
-    ->containerId('container-id') // set the container id
-    ->componentId('component-id') // override the default component id (password-[name])
-    ->containerClasses(['container', 'classes']) // override the default container classes config value
-    ->componentClasses(['component', 'classes']) // override the default component classes config value
-    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default container html attributes config value
-    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
-    ->displaySuccess(false) // // override the default form validation display success config value
-    ->displayFailure(false) // // override the default form validation display failure config value
-```
+This component inherits the temporal input component and is shipped with the following pre-configuration :
+* Prepend : `<i class="fas fa-calendar-alt"></i>`
+* Format : `Y-m-d`
 
-##### bsFile()
+##### inputTime()
 
-```php
-bsFile()->name('avatar') // set the input name
-    ->model($user) // value is automatically detected from the field name
-    ->value('https://website.com/storage/avatar-url.jpg') // or manually set the value
-    ->label('Avatar') // override the default __('validation.attributes.[name]') label or set `false` to hide it
-    ->labelPositionedAbove() // Set the label above-position status, default value : `true`
-    ->placeholder('Set your avatar') // override the default placeholder (label) or set `false` to hide it
-    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config value or set `false` to hide it
-    ->append('<i class="fas fa-hand-pointer"></i>') // override the default append config value or set `false` to hide it
-    ->legend('Set your legend here.') // override the default legend config value or set `false` to hide it
-    ->uploadedFile(function(){
-        return '<div>Some HTML</div>'
-    })
-    -showRemoveCheckbox(true, 'Remove this file') // override the default config show remove checkbox status and the default remove-checkbox label.
-    ->containerId('container-id') // set the container id
-    ->componentId('component-id') // override the default component id (file-[name])
-    ->containerClasses(['container', 'classes']) // override the default container classes config value
-    ->componentClasses(['component', 'classes']) // override the default component classes config value
-    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default container html attributes config value
-    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
-    ->displaySuccess(false) // // override the default form validation display success config value
-    ->displayFailure(false) // // override the default form validation display failure config value
-```
+This component inherits the temporal input component and is shipped with the following pre-configuration :
+* Prepend : `<i class="fas fa-clock"></i>`
+* Format : `H:i:s`
+
+##### inputDatetime()
+
+This component inherits the temporal input component and is shipped with the following pre-configuration :
+* Prepend : `<i class="fas fa-calendar-alt"></i>`
+* Format : `Y-m-d H:i:s`
+
+#### Uploadable inputs
 
 **:bulb: Additional methods :**
 
@@ -552,28 +349,64 @@ bsFile()->name('avatar') // set the input name
 | uploadedFile(Closure $uploadedFile): self  | No | Allows to set html or another component to render the uploaded file. |
 | showRemoveCheckbox(bool $showRemoveCheckbox = true, string $removeCheckboxLabel = null): self | No | Show the file remove checkbox option (will appear only if an uploaded file is detected). Default value : `config('bootstrap-components.file.showRemoveCheckbox')`. The remove checkbox label can be precised with the second parameter, by default, it will take the following value : `__('bootstrap-components.label.remove') . ' ' . [name]` |
 
-#### bsSelect()
+The uploadable input component inherits the standard input component and can be used as following :
 
 ```php
-bsSelect()->name('skills') // set the input name
-    ->model($user) // selected option is automatically detected
-    ->selected('id', 1) // or manually set the selected option
-    ->options($skills, 'id', 'title') // work with a models collection or an array
-    ->multiple() // activate the multiple mode, default value : `true`
-    ->label('Skills') // override the default __('validation.attributes.[name]') label or set `false` to hide it
-    ->placeholder('Select your skills') // override the default placeholder (label) or set `false` to hide it
-    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config value or set `false` to hide it
-    ->append('<i class="fas fa-hand-pointer"></i>') // override the default append config value or set `false` to hide it
-    ->legend('Set your legend here.') // override the default legend config value or set `false` to hide it
-    ->containerId('container-id') // set the container id
-    ->componentId('component-id') // override the default component id (select-[name])
-    ->containerClasses(['container', 'classes']) // override the default container classes config value
-    ->componentClasses(['component', 'classes']) // override the default component classes config value
-    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default container html attributes config value
-    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
-    ->displaySuccess(false) // // override the default form validation display success config value
-    ->displayFailure(false) // // override the default form validation display failure config value
+<uploadable-input>
+    // all standard input methods are available
+    ->uploadedFile(function(){ // insert html between the label and the input to show the uploaded file.
+        return '<div>Some HTML</div>';
+    })
+    -showRemoveCheckbox(true, 'Remove this file'); // override the default component show remove checkbox status and the default remove-checkbox label
 ```
+
+##### inputFile()
+
+This component inherits the uploadable input component.
+
+#### Checkable inputs
+
+**:bulb: Additional methods :**
+
+| Signature | Required | Description |
+|---|---|---|
+| checked(bool $checked = true): self  | No | Set the component checked status. |
+
+**:warning: Notes :**
+
+* the `->labelPositionedAbove()` will have no effect in this component.
+
+The checkable input component inherits the standard input component and can be used as following :
+
+```php
+<checkable-input>
+    // all standard input methods are available
+    ->checked(); // manually set the checked status
+```
+
+##### inputCheckbox()
+
+This component inherits the checkable input component.
+
+##### inputToggle()
+
+**:warning: Notes :**
+
+* This component is an extra component not included in bootstrap and using it demands to [load the package styles](#styles).
+* The following classes can be applied in the `containerClasses()` method in order to manage the input toggle size : `toggle-sm` , `toggle-lg`.
+
+This component inherits the checkable input component.
+
+##### bsRadio()
+
+**:warning: Notes :**
+
+* Setting the value is mandatory for this component.
+* Differently from other `Form` components, the value will not be set from the associated model. Associating a model will only detect the checked status for the radio button.
+
+This component inherits the checkable input component.
+
+#### Selectable inputs
 
 **:bulb: Additional methods :**
 
@@ -584,215 +417,186 @@ bsSelect()->name('skills') // set the input name
 | multiple(bool $multiple = true): self  | No | Set the select multiple mode. |
 
 **:warning: Notes :**
-- in `single` mode, the selected() method second attribute only accept a string or an integer.
-- in `multiple` mode, the selected() method second attribute only accept an array.
+* in `single` mode, the selected() method second attribute only accept a string or an integer.
+* in `multiple` mode, the selected() method second attribute only accept an array.
 
-#### bsCheckbox()
+The selectable input component inherits the standard input component and can be used as following :
 
 ```php
-bsCheckbox()->name('active') // set the input name
-    ->model($user) // checked status is automatically detected from the model field name
-    ->checked() // or manually set the value, default value : `true`
-    ->label('Active') // override the default __('validation.attributes.[name]') label or set `false` to hide it
-    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config value or set `false` to hide it
-    ->append('<i class="fas fa-hand-pointer"></i>') // override the default append config value or set `false` to hide it
-    ->legend('Set your legend here.') // override the default legend config value or set `false` to hide it
-    ->containerId('container-id') // set the container id
-    ->componentId('component-id') // override the default component id (checkbox-[name])
-    ->containerClasses(['container', 'classes']) // override the default container classes config value
-    ->componentClasses(['component', 'classes']) // override the default component classes config value
-    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default container html attributes config value
-    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
-    ->displaySuccess(false) // // override the default form validation display success config value
-    ->displayFailure(false) // // override the default form validation display failure config value
+<selectable-input>
+    // all standard input methods are available
+    ->options(collect([
+        ['id' => 1, 'title' => 'Item 1'],
+        ['id' => 2, 'title' => 'Item 2'],
+    ]), 'id', 'title') // work with a models collection or an array
+    ->selected('id', 1) // manually set the selected option
+    ->multiple(); // activate (or deactivate with `false`) the multiple mode
 ```
 
-**:bulb: Additional methods :**
+##### bsSelect()
+
+This component inherits the selectable input component.
+
+#### Multilingual components
+
+**:bulb: Additional/overridden methods :**
 
 | Signature | Required | Description |
 |---|---|---|
-| checked(bool $checked = true): self  | No | Set the checkable component checked status. |
+| locales(array $locales): self  | No | Set the component input language locales to handle. |
+| value(Closure $value): self  | No | Set the component input value. The value has to be set from this closure result : `->value(function($locale){})`. |
 
-**:warning: Notes :**
+**:bulb: Notes :**
 
-- the `->labelPositionedAbove()` will have no effect in this component.
+* Each multilingual form component will behave as a monolingual form component as long as the `->locales()` method is not used or as long as only one locale is declared.
+* The use of the `->locales()` method will replicate the component for each locale keys you declared.
+  * For example, if you declare the `fr` and `en` locale keys for a text input component with the `title` attribute, you will get two `Title (FR)` and `Title (EN)` generated text input components.
+* Each multilingual component provides an extra `data-locale="<locale>"` attribute to help with eventual javascript treatments.
+* You can use your own multilingual `Resolver` by replacing the path defined in the `config('bootstrap-components.form.multilingualResolver')`, allowing you to customize your multilingual form components localization behaviour :
+  * The default locales to handle (by default `[]`).
+  * The component localized `name` attribute resolution (default : `$name[$locale]`.
+  * The component localized old value resolution in case of errors (default : `old($name)[$locale]`).
+  * The component localized model value resolution (default : `$model->{$name}[$locales]`).
+  * The component localized error message bag key resolution, used for the error message extraction and for the validation class generation (default : `$name . $locale`).
+  * The component error message resolution, in order to correctly display the localized attribute name (default : transform `Dummy __('validation.attributes.name.en) error message` into `Dummy __('validation.attributes.name) (EN) error message.`.
 
-#### bsToggle()
-
-```php
-bsToggle()->name('active') // set the input name
-    ->model($user) // checked status is automatically detected from the model field name
-    ->checked() // or manually set the value, default value : `true`
-    ->label('Active') // override the default __('validation.attributes.[name]') label or set `false` to hide it
-    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config value or set `false` to hide it
-    ->append('<i class="fas fa-hand-pointer"></i>') // override the default append config value or set `false` to hide it
-    ->legend('Set your legend here.') // override the default legend config value or set `false` to hide it
-    ->containerId('container-id') // set the container id
-    ->componentId('component-id') // override the default component id (toggle-[name])
-    ->containerClasses(['container', 'classes']) // override the default container classes config value
-    ->componentClasses(['component', 'classes']) // override the default component classes config value
-    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default container html attributes config value
-    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
-    ->displaySuccess(false) // // override the default form validation display success config value
-    ->displayFailure(false) // // override the default form validation display failure config value
-```
-
-**:bulb: Additional methods :**
-
-| Signature | Required | Description |
-|---|---|---|
-| checked(bool $checked = true): self  | No | Set the checkable component check status. |
-  
-**:warning: Notes :**
-
-- This component is an extra component not included in bootstrap and using it demands to [load the package styles](#styles).
-- The following classes can be applied in the `containerClasses()` method in order to manage the toggle size : `toggle-sm` , `toggle-lg`.
-- the `->labelPositionedAbove()` will have no effect in this component.
-
-#### bsRadio()
+The select component inherits the standard input component and can be used as following :
 
 ```php
-bsRadio()->name('gender') // set the input name
-    ->value('female') // set the radio button value (mandatory, see the notice above)
-    ->model($user) // checked status is automatically detected from the model field name
-    ->checked() // or manually set the value, default value : `true`
-    ->label('Name') // override the default __('validation.attributes.[name]') label or set `false` to hide it
-    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config value or set `false` to hide it
-    ->append('<i class="fas fa-hand-pointer"></i>') // override the default append config value or set `false` to hide it
-    ->legend('Set your legend here.') // override the default legend config value or set `false` to hide it
-    ->containerId('container-id') // set the container id
-    ->componentId('component-id') // override the default component id (radio-[name]-[value])
-    ->containerClasses(['container', 'classes']) // override the default container classes config value
-    ->componentClasses(['component', 'classes']) // override the default component classes config value
-    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default container html attributes config value
-    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
-    ->displaySuccess(false) // // override the default form validation display success config value
-    ->displayFailure(false) // // override the default form validation display failure config value
+<multilingual-input>
+    // all standard input methods are available
+    ->locales(['fr', 'en']) // override the multilingual resolver default locales 
+    ->value(function($locale){ return $name[$locale]; }); // manually set the value closure
 ```
 
-**:bulb: Additional methods :**
+##### inputText()
 
-| Signature | Required | Description |
-|---|---|---|
-| checked(bool $checked = true): self  | No | Set the radio checked status. |
+This component inherits the multilingual input component and is shipped with the following pre-configuration :
+* Prepend : `<i class="fas fa-font"></i>`
 
-**:warning: Notes :**
+##### inputTextarea()
 
-- Setting the value is mandatory for this component.
-- Differently from other `Form` components, the value will not be set from the associated model. Associating a model will only detect the checked status for the radio button.
-- the `->labelPositionedAbove()` will have no effect in this component.
+This component inherits the multilingual input component and is shipped with the following pre-configuration :
+* Prepend : `<i class="fas fa-comment"></i>`
 
-### Buttons components
+### Button components
 
 **Methods available for all buttons components**
 
 | Signature | Required | Description |
 |---|---|---|
-| prepend(?string $html): Button  | No | Prepend html to the button component label. Default value : `config('bootstrap-components.button.[componentConfigKey].prepend')`. |
-| append(?string $html): Button  | No | Append html to the button component label. Default value : `config('bootstrap-components.button.[componentConfigKey].append')`. |
-| label(string $label): Button  | No | Set the button component label. Default value : `config('bootstrap-components.button.[componentConfigKey].label')`. |
-| url(string $url): Button  | No | Set the button component url. Will only be effective for « button » typed button components. Default value : `url()->previous()`. |
-| route(string $route, array $params = []): Button | No | Set the button component route. Will only be effective for « button » typed button components. |
+| prepend(?string $html): self  | No | Prepend html to the button component label. |
+| append(?string $html): self  | No | Append html to the button component label. |
+| label(string $label): self  | No | Set the button component label. |
 
-#### bsValidate()
+#### Submit button
 
-```php
-bsValidate()->label('Send') // override the default __('validation.attributes.[name]') label or set `false` to hide it
-    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config value or set `false` to hide it
-    ->append('<i class="fas fa-hand-pointer"></i>') // override the default append config value or set `false` to hide it
-    ->containerId('container-id') // set the container id
-    ->componentId('component-id') // set the component id
-    ->containerClasses(['container', 'classes']) // override the default container classes config value
-    ->componentClasses(['component', 'classes']) // override the default component classes config value
-    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default container html attributes config value
-    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
-```
-
-**:warning: Notes :**
-
-- This component is a `submit` typed button.
-
-#### bsCreate()
+The submit button can be used as following :
 
 ```php
-bsCreate()->label('Create a new user') // override the default __('validation.attributes.[name]') label or set `false` to hide it
-    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config value or set `false` to hide it
-    ->append('<i class="fas fa-hand-pointer"></i>') // override the default append config value or set `false` to hide it
+<submit-button>
+    ->label('Back to the users list') // set the button label
+    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default component prepend or set `false` to hide it
+    ->append('<i class="fas fa-hand-pointer"></i>') // override the default component append or set `false` to hide it
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // set the component id
-    ->containerClasses(['container', 'classes']) // override the default container classes config value
-    ->componentClasses(['component', 'classes']) // override the default component classes config value
-    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default container html attributes config value
-    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
+    ->containerClasses(['container', 'classes']) // override the default component container classes
+    ->componentClasses(['component', 'classes']) // override the default component classes
+    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default component container html attributes
+    ->componentHtmlAttributes(['component', 'html', 'attributes']); // override the default component html attributes
 ```
 
-**:warning: Notes :**
+##### submit()
 
-- This component is a `submit` typed button.
+This component inherit the submit button and is shipped with the following pre-configuration :
+* Component container classes : `btn-primary`.
 
-#### bsUpdate()
+##### submitValidate()
 
-```php
-bsUpdate()->label('Update this user') // override the default __('validation.attributes.[name]') label or set `false` to hide it
-    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config value or set `false` to hide it
-    ->append('<i class="fas fa-hand-pointer"></i>') // override the default append config value or set `false` to hide it
-    ->containerId('container-id') // set the container id
-    ->componentId('component-id') // set the component id
-    ->containerClasses(['container', 'classes']) // override the default container classes config value
-    ->componentClasses(['component', 'classes']) // override the default component classes config value
-    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default container html attributes config value
-    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
-```
+This component inherit the submit button and is shipped with the following pre-configuration :
+* Prepend : `<i class="fas fa-check fa-fw"></i>`
+* Label : `__('bootstrap-components::bootstrap-components.label.validate')`
 
-**:warning: Notes :**
+##### submitCreate()
 
-- This component is a `submit` typed button.
+This component inherit the submit button and is shipped with the following pre-configuration :
+* Prepend : `<i class="fas fa-plus-circle fa-fw"></i>`
+* Label : `__('bootstrap-components::bootstrap-components.label.create')`
 
-#### bsCancel()
+##### submitUpdate()
 
-```php
-bsCancel()->url('https://website.com/admin/users') // set the button url
-    ->route('users.index') // or set the route name
-    ->label('Cancel action') // override the default __('validation.attributes.[name]') label or set `false` to hide it
-    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config value or set `false` to hide it
-    ->append('<i class="fas fa-hand-pointer"></i>') // override the default append config value or set `false` to hide it
-    ->containerId('container-id') // set the container id
-    ->componentId('component-id') // set the component id
-    ->containerClasses(['container', 'classes']) // override the default container classes config value
-    ->componentClasses(['component', 'classes']) // override the default component classes config value
-    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default container html attributes config value
-    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
-```
+This component inherit the submit button and is shipped with the following pre-configuration :
+* Prepend : `<i class="fas fa-save fa-fw"></i>`
+* Label : `__('bootstrap-components::bootstrap-components.label.update')`
 
-**:warning: Notes :**
+#### Link button
 
-- This component is a `button` typed button.
-
-#### bsBack()
-
-```php
-bsBack()->url('https://website.com/admin/users') // set the button url
-    ->route('users.index') // or set the route name
-    ->label('Back to the users list') // override the default __('validation.attributes.[name]') label or set `false` to hide it
-    ->prepend('<i class="fas fa-hand-pointer"></i>') // override the default prepend config value or set `false` to hide it
-    ->append('<i class="fas fa-hand-pointer"></i>') // override the default append config value or set `false` to hide it
-    ->containerId('container-id') // set the container id
-    ->componentId('component-id') // set the component id
-    ->containerClasses(['container', 'classes']) // override the default container classes config value
-    ->componentClasses(['component', 'classes']) // override the default component classes config value
-    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default container html attributes config value
-    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
-```
-
-- This component is a `button` typed button.
-
-### Media components
-  
-**Methods available for all form components**
+**:bulb: Additional methods :**
 
 | Signature | Required | Description |
 |---|---|---|
-| src(string $src): self  | No |  |
+| url(string $url): self  | No | Set the button component url. |
+| route(string $route, array $params = []): self | No | Set the button component route. |
+
+The link button inherits the submit button and can be used as following :
+
+```php
+<button-component>
+    // all submit button methods are available
+    ->url('https://website.com/admin/users') // set the button url
+    ->route('users.index'); // set the url from the route name
+```
+
+##### button()
+
+This component inherit the link button.
+
+##### buttonLink()
+
+This component inherit the link button and is shipped with the following pre-configuration :
+* Container classes : `btn-primary btn-link`.
+
+##### buttonBack()
+
+This component inherit the link button and is shipped with the following pre-configuration :
+* Url : `url()->previous()`
+* Prepend : `<i class="fas fa-undo fa-fw"></i>`
+* Label : `__('bootstrap-components::bootstrap-components.label.back')`
+* Container classes : `btn-secondary`.
+
+##### buttonCancel()
+
+This component inherit the link button and is shipped with the following pre-configuration :
+* Url : `url()->previous()`
+* Prepend : `<i class="fas fa-ban fa-fw"></i>`
+* Label : `__('bootstrap-components::bootstrap-components.label.cancel')`
+* Container classes : `btn-secondary`.
+
+### Media components
+  
+**Methods available for all media components**
+
+| Signature | Required | Description |
+|---|---|---|
+| label(?string $label): self  | No | Set the component label. |
+| src(string $src): self  | No | Set the component src attribute. |
+| legend(?string $legend): self  | No | Set the component legend. |
+
+The media component can be used as following :
+
+```php
+<media-component>
+    ->src(https://yourapp.fr/public/media/audio.mp3)
+    ->containerId('container-id') // set the container id
+    ->componentId('component-id') // set the component id
+    ->containerClasses(['container', 'classes']) // override the default component container classes
+    ->componentClasses(['component', 'classes']) // override the default component classes
+    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default component container html attributes
+    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes
+```
+
+#### audio()
+
 
 #### image()
 
@@ -805,12 +609,12 @@ image()->src(https://yourapp.fr/public/media/image-thumb.jpg)
     ->containerId('container-id') // set the container id
     ->linkId('link-id') // set the link id
     ->componentId('component-id') // set the component id
-    ->containerClasses(['container', 'classes']) // override the default container classes config value
+    ->containerClasses(['container', 'classes']) // override the default component container classes
     ->linkComponentClasses(['link', 'component', 'classes']) // override the default config link class list
-    ->componentClasses(['component', 'classes']) // override the default component classes config value
-    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default container html attributes config value
+    ->componentClasses(['component', 'classes']) // override the default component classes
+    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default component container html attributes
     ->linkHtmlAttributes(['link', 'component', 'classes']) // override the default config link html attributes list
-    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
+    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes
 ```
 
 **:bulb: Additional methods :**
@@ -825,18 +629,6 @@ image()->src(https://yourapp.fr/public/media/image-thumb.jpg)
 | linkClasses(array $linkClasses): self  | No | Set the image component link classes. Default value : `config('bootstrap-components.media.image.classes.link')`. |
 | linkHtmlAttributes(array $linkHtmlAttributes): self  | No | Set the image component link html attributes. Default value : `config('bootstrap-components.media.image.htmlAttributes.link')`. |
 
-#### audio()
-
-```php
-audio()->src(https://yourapp.fr/public/media/audio.mp3)
-    ->containerId('container-id') // set the container id
-    ->componentId('component-id') // set the component id
-    ->containerClasses(['container', 'classes']) // override the default container classes config value
-    ->componentClasses(['component', 'classes']) // override the default component classes config value
-    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default container html attributes config value
-    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
-```
-
 #### video()
 
 ```php
@@ -844,10 +636,10 @@ audio()->src(https://yourapp.fr/public/media/video.avi)
     ->poster(https://yourapp.fr/public/media/poster.jpg)
     ->containerId('container-id') // set the container id
     ->componentId('component-id') // set the component id
-    ->containerClasses(['container', 'classes']) // override the default container classes config value
-    ->componentClasses(['component', 'classes']) // override the default component classes config value
-    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default container html attributes config value
-    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes config value
+    ->containerClasses(['container', 'classes']) // override the default component container classes
+    ->componentClasses(['component', 'classes']) // override the default component classes
+    ->containerHtmlAttributes(['container', 'html', 'attributes']) // override the default component container html attributes
+    ->componentHtmlAttributes(['component', 'html', 'attributes']) // override the default component html attributes
 ```
 
 **:bulb: Additional methods :**
@@ -872,8 +664,8 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Credits
 
-- [Arthur LORENT](https://github.com/okipa)
-- [All Contributors](../../contributors)
+* [Arthur LORENT](https://github.com/okipa)
+* [All Contributors](../../contributors)
 
 ## License
 

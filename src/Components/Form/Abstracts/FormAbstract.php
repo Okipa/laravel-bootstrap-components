@@ -172,7 +172,8 @@ abstract class FormAbstract extends ComponentAbstract
 
     /**
      * Set the label above-positioning status.
-     * If not positioned above, the label will be positioned under the input.
+     * If not positioned above, the label will be positioned under the input
+     * (may be useful for bootstrap 4 floating labels).
      *
      * @param bool $positionedAbove
      *

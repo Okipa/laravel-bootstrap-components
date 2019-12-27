@@ -41,14 +41,6 @@ class Checkbox extends CheckableAbstract
     /**
      * @inheritDoc
      */
-    protected function setLabelPositionedAbove(): bool
-    {
-        return config('bootstrap-components.form.labelPositionedAbove');
-    }
-
-    /**
-     * @inheritDoc
-     */
     protected function setLegend(): ?string
     {
         return null;

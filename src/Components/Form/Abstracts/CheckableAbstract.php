@@ -12,6 +12,14 @@ abstract class CheckableAbstract extends FormAbstract
     protected $checked;
 
     /**
+     * @inheritDoc
+     */
+    protected function setLabelPositionedAbove(): bool
+    {
+        return true; // unused
+    }
+
+    /**
      * Set the checkable component check status.
      *
      * @param bool $checked

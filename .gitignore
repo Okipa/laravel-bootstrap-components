@@ -5,3 +5,4 @@ coverage
 tests/Support/temp
 tests/temp
 .phpunit.result.cache
+.php_cs.cache

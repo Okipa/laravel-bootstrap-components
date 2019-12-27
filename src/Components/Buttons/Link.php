@@ -9,6 +9,6 @@ class Link extends Button
      */
     protected function setComponentClasses(): array
     {
-        return ['btn-link'];
+        return ['btn-primary', 'btn-link'];
     }
 }
