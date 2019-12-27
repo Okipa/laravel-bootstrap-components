@@ -12,7 +12,10 @@ trait ButtonComponentsTrait
      */
     public function submit(): SubmitAbstract
     {
-        return app(config('bootstrap-components.components.submit'));
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Buttons\Abstracts\SubmitAbstract $submit */
+        $submit = app(config('bootstrap-components.components.submit'));
+
+        return $submit;
     }
 
     /**
@@ -20,7 +23,10 @@ trait ButtonComponentsTrait
      */
     public function submitCreate(): SubmitAbstract
     {
-        return app(config('bootstrap-components.components.create'));
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Buttons\Abstracts\SubmitAbstract $submitCreate */
+        $submitCreate = app(config('bootstrap-components.components.create'));
+
+        return $submitCreate;
     }
 
     /**
@@ -28,7 +34,10 @@ trait ButtonComponentsTrait
      */
     public function submitUpdate(): SubmitAbstract
     {
-        return app(config('bootstrap-components.components.update'));
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Buttons\Abstracts\SubmitAbstract $submitUpdate */
+        $submitUpdate = app(config('bootstrap-components.components.update'));
+
+        return $submitUpdate;
     }
 
     /**
@@ -36,7 +45,10 @@ trait ButtonComponentsTrait
      */
     public function submitValidate(): SubmitAbstract
     {
-        return app(config('bootstrap-components.components.validate'));
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Buttons\Abstracts\SubmitAbstract $submitValidate */
+        $submitValidate = app(config('bootstrap-components.components.validate'));
+
+        return $submitValidate;
     }
 
     /**
@@ -44,7 +56,10 @@ trait ButtonComponentsTrait
      */
     public function button(): ButtonAbstract
     {
-        return app(config('bootstrap-components.components.button'));
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Buttons\Abstracts\ButtonAbstract $button */
+        $button = app(config('bootstrap-components.components.button'));
+
+        return $button;
     }
 
     /**
@@ -52,7 +67,10 @@ trait ButtonComponentsTrait
      */
     public function buttonLink(): ButtonAbstract
     {
-        return app(config('bootstrap-components.components.link'));
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Buttons\Abstracts\ButtonAbstract $buttonLink */
+        $buttonLink = app(config('bootstrap-components.components.link'));
+
+        return $buttonLink;
     }
 
     /**
@@ -60,7 +78,10 @@ trait ButtonComponentsTrait
      */
     public function buttonBack(): ButtonAbstract
     {
-        return app(config('bootstrap-components.components.back'));
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Buttons\Abstracts\ButtonAbstract $buttonBack */
+        $buttonBack = app(config('bootstrap-components.components.back'));
+
+        return $buttonBack;
     }
 
     /**
@@ -68,6 +89,9 @@ trait ButtonComponentsTrait
      */
     public function buttonCancel(): ButtonAbstract
     {
-        return app(config('bootstrap-components.components.cancel'));
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Buttons\Abstracts\ButtonAbstract $buttonCancel */
+        $buttonCancel = app(config('bootstrap-components.components.cancel'));
+
+        return $buttonCancel;
     }
 }

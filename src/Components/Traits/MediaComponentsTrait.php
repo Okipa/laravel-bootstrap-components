@@ -11,7 +11,10 @@ trait MediaComponentsTrait
      */
     public function image(): MediaAbstract
     {
-        return app(config('bootstrap-components.components.image'));
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Media\Abstracts\MediaAbstract $image */
+        $image = app(config('bootstrap-components.components.image'));
+
+        return $image;
     }
 
     /**
@@ -19,7 +22,10 @@ trait MediaComponentsTrait
      */
     public function audio(): MediaAbstract
     {
-        return app(config('bootstrap-components.components.audio'));
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Media\Abstracts\MediaAbstract $audio */
+        $audio = app(config('bootstrap-components.components.audio'));
+
+        return $audio;
     }
 
     /**
@@ -27,6 +33,9 @@ trait MediaComponentsTrait
      */
     public function video(): MediaAbstract
     {
-        return app(config('bootstrap-components.components.video'));
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Media\Abstracts\MediaAbstract $video */
+        $video = app(config('bootstrap-components.components.video'));
+
+        return $video;
     }
 }

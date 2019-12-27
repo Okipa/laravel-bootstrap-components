@@ -17,7 +17,10 @@ trait FormComponentsTrait
      */
     public function inputText(): MultilingualAbstract
     {
-        return app(config('bootstrap-components.components.text'));
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\MultilingualAbstract $inputText */
+        $inputText = app(config('bootstrap-components.components.text'));
+
+        return $inputText;
     }
 
     /**
@@ -25,7 +28,10 @@ trait FormComponentsTrait
      */
     public function inputEmail(): FormAbstract
     {
-        return app(config('bootstrap-components.components.email'));
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract $inputEmail */
+        $inputEmail = app(config('bootstrap-components.components.email'));
+
+        return $inputEmail;
     }
 
     /**
@@ -33,7 +39,10 @@ trait FormComponentsTrait
      */
     public function inputPassword(): FormAbstract
     {
-        return app(config('bootstrap-components.components.password'));
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract $inputPassword */
+        $inputPassword = app(config('bootstrap-components.components.password'));
+
+        return $inputPassword;
     }
 
     /**
@@ -41,7 +50,10 @@ trait FormComponentsTrait
      */
     public function inputUrl(): FormAbstract
     {
-        return app(config('bootstrap-components.components.url'));
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract $inputUrl */
+        $inputUrl = app(config('bootstrap-components.components.url'));
+
+        return $inputUrl;
     }
 
     /**
@@ -49,7 +61,10 @@ trait FormComponentsTrait
      */
     public function inputTel(): FormAbstract
     {
-        return app(config('bootstrap-components.components.tel'));
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract $inputUrl */
+        $inputUrl = app(config('bootstrap-components.components.tel'));
+
+        return $inputUrl;
     }
 
     /**
@@ -57,7 +72,10 @@ trait FormComponentsTrait
      */
     public function inputNumber(): FormAbstract
     {
-        return app(config('bootstrap-components.components.number'));
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract $inputNumber */
+        $inputNumber = app(config('bootstrap-components.components.number'));
+
+        return $inputNumber;
     }
 
     /**
@@ -65,7 +83,10 @@ trait FormComponentsTrait
      */
     public function inputColor(): FormAbstract
     {
-        return app(config('bootstrap-components.components.color'));
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract $inputColor */
+        $inputColor = app(config('bootstrap-components.components.color'));
+
+        return $inputColor;
     }
 
     /**
@@ -73,7 +94,10 @@ trait FormComponentsTrait
      */
     public function inputDate(): TemporalAbstract
     {
-        return app(config('bootstrap-components.components.date'));
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\TemporalAbstract $inputDate */
+        $inputDate = app(config('bootstrap-components.components.date'));
+
+        return $inputDate;
     }
 
     /**
@@ -81,7 +105,10 @@ trait FormComponentsTrait
      */
     public function inputTime(): TemporalAbstract
     {
-        return app(config('bootstrap-components.components.time'));
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\TemporalAbstract $inputTime */
+        $inputTime = app(config('bootstrap-components.components.time'));
+
+        return $inputTime;
     }
 
     /**
@@ -89,7 +116,10 @@ trait FormComponentsTrait
      */
     public function inputDatetime(): TemporalAbstract
     {
-        return app(config('bootstrap-components.components.datetime'));
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\TemporalAbstract $inputDatetime */
+        $inputDatetime = app(config('bootstrap-components.components.datetime'));
+
+        return $inputDatetime;
     }
 
     /**
@@ -97,7 +127,10 @@ trait FormComponentsTrait
      */
     public function inputFile(): FileAbstract
     {
-        return app(config('bootstrap-components.components.file'));
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FileAbstract $inputFile */
+        $inputFile = app(config('bootstrap-components.components.file'));
+
+        return $inputFile;
     }
 
     /**
@@ -105,7 +138,10 @@ trait FormComponentsTrait
      */
     public function inputCheckbox(): CheckableAbstract
     {
-        return app(config('bootstrap-components.components.checkbox'));
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\CheckableAbstract $inputCheckbox */
+        $inputCheckbox = app(config('bootstrap-components.components.checkbox'));
+
+        return $inputCheckbox;
     }
 
     /**
@@ -113,7 +149,10 @@ trait FormComponentsTrait
      */
     public function inputToggle(): CheckableAbstract
     {
-        return app(config('bootstrap-components.components.toggle'));
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\CheckableAbstract $inputToggle */
+        $inputToggle = app(config('bootstrap-components.components.toggle'));
+
+        return $inputToggle;
     }
 
     /**
@@ -121,7 +160,10 @@ trait FormComponentsTrait
      */
     public function inputRadio(): RadioAbstract
     {
-        return app(config('bootstrap-components.components.radio'));
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\RadioAbstract $inputRadio */
+        $inputRadio = app(config('bootstrap-components.components.radio'));
+
+        return $inputRadio;
     }
 
     /**
@@ -129,7 +171,10 @@ trait FormComponentsTrait
      */
     public function textarea(): MultilingualAbstract
     {
-        return app(config('bootstrap-components.components.textarea'));
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\MultilingualAbstract $textarea */
+        $textarea = app(config('bootstrap-components.components.textarea'));
+
+        return $textarea;
     }
 
     /**
@@ -137,6 +182,9 @@ trait FormComponentsTrait
      */
     public function select(): SelectAbstract
     {
-        return app(config('bootstrap-components.components.select'));
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\SelectAbstract $select */
+        $select = app(config('bootstrap-components.components.select'));
+
+        return $select;
     }
 }

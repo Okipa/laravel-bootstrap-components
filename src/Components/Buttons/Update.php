@@ -17,6 +17,6 @@ class Update extends Submit
      */
     protected function setLabel(): ?string
     {
-        return __('bootstrap-components::bootstrap-components.label.update');
+        return (string) __('bootstrap-components::bootstrap-components.label.update');
     }
 }

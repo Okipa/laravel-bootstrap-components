@@ -17,6 +17,6 @@ class Create extends Submit
      */
     protected function setLabel(): ?string
     {
-        return __('bootstrap-components::bootstrap-components.label.create');
+        return (string) __('bootstrap-components::bootstrap-components.label.create');
     }
 }

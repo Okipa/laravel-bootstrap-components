@@ -130,6 +130,6 @@ abstract class FileAbstract extends FormAbstract
      */
     protected function getPlaceholder(): ?string
     {
-        return $this->placeholder ?? __('bootstrap-components::bootstrap-components.label.file');
+        return $this->placeholder ?? (string) __('bootstrap-components::bootstrap-components.label.file');
     }
 }

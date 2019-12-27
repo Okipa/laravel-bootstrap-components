@@ -10,11 +10,7 @@ abstract class MultilingualAbstract extends FormAbstract
 {
     use MultilingualValidityChecks;
 
-    /**
-     * The multilingual component dynamic multilingual resolver .
-     *
-     * @property \Okipa\LaravelBootstrapComponents\Components\Form\Multilingual\Resolver $multilingualResolver
-     */
+    /** @property \Okipa\LaravelBootstrapComponents\Components\Form\Multilingual\Resolver $multilingualResolver */
     protected $multilingualResolver;
 
     /**
@@ -30,8 +26,10 @@ abstract class MultilingualAbstract extends FormAbstract
     public function __construct()
     {
         parent::__construct();
-        $this->multilingualResolver = app(config('bootstrap-components.form.multilingualResolver'));
-        $this->locales = $this->multilingualResolver->getDefaultLocales();
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Multilingual\Resolver $multilingualResolver */
+        $multilingualResolver = app(config('bootstrap-components.form.multilingualResolver'));
+        $this->locales = $multilingualResolver->getDefaultLocales();
+        $this->multilingualResolver = $multilingualResolver;
     }
 
     /**

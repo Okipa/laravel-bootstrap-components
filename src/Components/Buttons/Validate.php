@@ -17,6 +17,6 @@ class Validate extends Submit
      */
     protected function setLabel(): ?string
     {
-        return __('bootstrap-components::bootstrap-components.label.validate');
+        return (string) __('bootstrap-components::bootstrap-components.label.validate');
     }
 }
