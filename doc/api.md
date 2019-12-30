@@ -41,20 +41,20 @@
     * [Video](#video)
       
 
-# Components
+# Base component
 
-**Methods available for all components**
+**Methods**
   
 | Signature | Required | Description |
 |---|---|---|
-| componentId(string $componentId): self | No | Set the component id. |
 | containerId(string $containerId): self | No | Set the component container id. |
-| componentClasses(array $componentClasses): self | No | Set the component classes. |
+| componentId(string $componentId): self | No | Set the component id. |
 | containerClasses(array $containerClasses): self | No | Set the component container classes. |
-| componentHtmlAttributes(array $componentHtmlAttributes): self | No | Set the component html attributes. |
+| componentClasses(array $componentClasses): self | No | Set the component classes. |
 | containerHtmlAttributes(array $containerHtmlAttributes): self | No | Set the component container html attributes. |
+| componentHtmlAttributes(array $componentHtmlAttributes): self | No | Set the component html attributes. |
 
-The component can be used as following :
+**Usage**
 
 ```php
 <component>
@@ -66,9 +66,11 @@ The component can be used as following :
     ->componentHtmlAttributes(['component', 'html', 'attributes']);
 ```
 
-## Forms
+## Form component
 
-**Methods available for all form components**
+**Inheritance** : `Base component`.
+
+**Methods**
 
 | Signature | Required | Description |
 |---|---|---|
@@ -84,7 +86,7 @@ The component can be used as following :
 | displaySuccess(?bool $displaySuccess = true): self | No | Set the component input validation success display status. |
 | displayFailure(?bool $displayFailure = true): self | No | Set the component input validation failure display status. |
 
-The form component inherits the component and can be used as following :
+**Usage**
 
 ```php
 <component>
@@ -102,7 +104,8 @@ The form component inherits the component and can be used as following :
     ->displayFailure(false);
 ```
 
-The form component is shipped with the following pre-configuration :
+**Pre-configuration**
+
 * Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
@@ -111,7 +114,12 @@ The form component is shipped with the following pre-configuration :
 
 #### inputEmail()
 
+**Inheritance** : `Form component`.
+
 This component inherits the input component and is shipped with the following pre-configuration :
+
+**Pre-configuration**
+
 * Prepend : `<i class="fas fa-at"></i>`
 
 #### inputPassword()
