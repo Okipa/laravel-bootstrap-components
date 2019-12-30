@@ -2,9 +2,9 @@
 
 namespace Okipa\LaravelBootstrapComponents\Components\Form;
 
-use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\SelectAbstract;
+use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\SelectableAbstract;
 
-class Select extends SelectAbstract
+class Select extends SelectableAbstract
 {
     /**
      * @inheritDoc

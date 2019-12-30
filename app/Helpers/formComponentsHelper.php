@@ -3,7 +3,7 @@
 use Okipa\LaravelBootstrapComponents\Components\Component;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\MultilingualAbstract;
-use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\SelectAbstract;
+use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\SelectableAbstract;
 
 if (! function_exists('inputText')) {
     /**
@@ -157,9 +157,9 @@ if (! function_exists('textarea')) {
 
 if (! function_exists('select')) {
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\SelectAbstract
+     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\SelectableAbstract
      */
-    function select(): SelectAbstract
+    function select(): SelectableAbstract
     {
         return (new Component)->select();
     }

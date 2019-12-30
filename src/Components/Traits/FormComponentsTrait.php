@@ -3,11 +3,11 @@
 namespace Okipa\LaravelBootstrapComponents\Components\Traits;
 
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\CheckableAbstract;
-use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FileAbstract;
+use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\UploadableAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\MultilingualAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\RadioAbstract;
-use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\SelectAbstract;
+use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\SelectableAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\TemporalAbstract;
 
 trait FormComponentsTrait
@@ -123,11 +123,11 @@ trait FormComponentsTrait
     }
 
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FileAbstract
+     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\UploadableAbstract
      */
-    public function inputFile(): FileAbstract
+    public function inputFile(): UploadableAbstract
     {
-        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FileAbstract $inputFile */
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\UploadableAbstract $inputFile */
         $inputFile = app(config('bootstrap-components.components.file'));
 
         return $inputFile;
@@ -178,11 +178,11 @@ trait FormComponentsTrait
     }
 
     /**
-     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\SelectAbstract
+     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\SelectableAbstract
      */
-    public function select(): SelectAbstract
+    public function select(): SelectableAbstract
     {
-        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\SelectAbstract $select */
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\SelectableAbstract $select */
         $select = app(config('bootstrap-components.components.select'));
 
         return $select;

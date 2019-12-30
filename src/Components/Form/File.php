@@ -2,9 +2,9 @@
 
 namespace Okipa\LaravelBootstrapComponents\Components\Form;
 
-use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FileAbstract;
+use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\UploadableAbstract;
 
-class File extends FileAbstract
+class File extends UploadableAbstract
 {
     /**
      * @inheritDoc

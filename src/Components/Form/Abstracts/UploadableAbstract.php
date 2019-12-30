@@ -5,7 +5,7 @@ namespace Okipa\LaravelBootstrapComponents\Components\Form\Abstracts;
 use Illuminate\Support\HtmlString;
 use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
 
-abstract class FileAbstract extends FormAbstract
+abstract class UploadableAbstract extends FormAbstract
 {
     /**
      * The uploaded file closure.

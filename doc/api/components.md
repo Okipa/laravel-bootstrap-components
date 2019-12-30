@@ -1,126 +1,73 @@
-# Components API documentation
+# Components list
 
-* [Components](#components)
-  * [Forms](#forms)
-    * [Inputs](#inputs)
-      * [inputEmail()](#inputemail)
-      * [inputPassword()](#inputpassword)
-      * [inputUrl()](#inputurl)
-      * [inputTel()](#inputtel)
-      * [inputNumber()](#inputnumber)
-      * [inputColor()](#inputcolor)
-    * [Multilinguals](#multilinguals)
-      * [inputText()](#inputtext)
-      * [textarea()](#textarea)
-    * [Temporals](#temporals)
-      * [inputDate()](#inputdate)
-      * [inputTime()](#inputtime)
-      * [inputDatetime()](#inputdatetime)
-    * [Uploadables](#uploadables)
-      * [inputFile()](#inputfile)
-    * [Checkable](#checkables)
-      * [inputCheckbox()](#inputcheckbox)
-      * [inputToggle()](#inputtoggle)
-      * [inputRadio()](#inputradio)
-    * [Selectables](#selectable)
-      * [select()](#select)
-  * [Buttons](#buttons)
-    * [Submits](#submits)
-      * [submit()](#submit)
-      * [submitValidate()](#submitvalidate)
-      * [submitCreate()](#submitcreate)
-      * [submitUpdate()](#submitupdate)
-    * [Links](#links)
-      * [button()](#button)
-      * [buttonLink()](#buttonlink)
-      * [buttonBack()](#buttonback)
-      * [buttonCancel()](#buttoncancel)
-  * [Media](#media)
-    * [Image](#image)
-    * [Audio](#audio)
-    * [Video](#video)
-      
+* [Form](#form)
+  * [Input text](#input-text)
+  * [Input e-mail](#input-e-mail)
+  * [inputPassword()](#inputpassword)
+  * [inputUrl()](#inputurl)
+  * [inputTel()](#inputtel)
+  * [inputNumber()](#inputnumber)
+  * [inputColor()](#inputcolor)
+  * [inputDate()](#inputdate)
+  * [inputTime()](#inputtime)
+  * [inputDatetime()](#inputdatetime)
+  * [inputFile()](#inputfile)
+  * [inputCheckbox()](#inputcheckbox)
+  * [inputToggle()](#inputtoggle)
+  * [inputRadio()](#inputradio)
+  * [textarea()](#textarea)
+  * [select()](#select)
+* [Buttons](#buttons)
+  * [submit()](#submit)
+  * [submitValidate()](#submitvalidate)
+  * [submitCreate()](#submitcreate)
+  * [submitUpdate()](#submitupdate)
+  * [button()](#button)
+  * [buttonLink()](#buttonlink)
+  * [buttonBack()](#buttonback)
+  * [buttonCancel()](#buttoncancel)
+* [Media](#media)
+  * [image()](#image)
+  * [audio()](#audio)
+  * [video()](#video)
 
-# Base component
+# Form
 
-**Methods**
-  
-| Signature | Required | Description |
-|---|---|---|
-| containerId(string $containerId): self | No | Set the component container id. |
-| componentId(string $componentId): self | No | Set the component id. |
-| containerClasses(array $containerClasses): self | No | Set the component container classes. |
-| componentClasses(array $componentClasses): self | No | Set the component classes. |
-| containerHtmlAttributes(array $containerHtmlAttributes): self | No | Set the component container html attributes. |
-| componentHtmlAttributes(array $componentHtmlAttributes): self | No | Set the component html attributes. |
+## Input text
 
-**Usage**
+**Type**
 
-```php
-<component>
-    ->containerId('container-id')
-    ->componentId('component-id')
-    ->containerClasses(['container', 'classes'])
-    ->componentClasses(['component', 'classes'])
-    ->containerHtmlAttributes(['container', 'html', 'attributes'])
-    ->componentHtmlAttributes(['component', 'html', 'attributes']);
-```
+* [FormAbstract](./types.md#formabstract)
 
-## Form component
+**Exposure**
 
-**Inheritance** : `Base component`.
-
-**Methods**
-
-| Signature | Required | Description |
-|---|---|---|
-| name(string $name): self | Yes | Set the component input name tag. |
-| model(Model $model): self | No | Set the component associated model. |
-| value($value): self | No | Set the component input value. |
-| prepend(?string $html): self | No | Prepend html to the component input group. Set false to hide it. |
-| append(?string $html): self | No | Append html to the component input group. Set false to hide it. |
-| label(?string $label): self | No | Set the component input label. Default value : `__('validation.attributes.[name]')`. |
-| labelPositionedAbove(bool $positionedAbove = true): self | No | Set the label above-positioning status. If not positioned above, the label will be positioned under the input (may be useful for bootstrap 4 floating labels). |
-| placeholder(?string $placeholder): self | No | Set the component input placeholder. Default value : `$label`. |
-| legend(?string $legend): self | No | Set the component legend. |
-| displaySuccess(?bool $displaySuccess = true): self | No | Set the component input validation success display status. |
-| displayFailure(?bool $displayFailure = true): self | No | Set the component input validation failure display status. |
-
-**Usage**
-
-```php
-<component>
-    // all component methods available
-    ->name('email')
-    ->model($user)
-    ->value('john.doe@domain.com')
-    ->prepend('<i class="fas fa-hand-pointer"></i>')
-    ->append('<i class="fas fa-hand-pointer"></i>')
-    ->label('Email')
-    ->labelPositionedAbove()
-    ->placeholder('Set your e-mail')
-    ->legend('Set your legend here.')
-    ->displaySuccess(false)
-    ->displayFailure(false);
-```
+* helper : `inputText()`
+* facade : `InputText`
 
 **Pre-configuration**
 
+* Prepend : `<i class="fas fa-font"></i>`
 * Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
-### Inputs
+## Input e-mail
 
-#### inputEmail()
+**Type**
 
-**Inheritance** : `Form component`.
+* [FormAbstract](./types.md#formabstract)
 
-This component inherits the input component and is shipped with the following pre-configuration :
+**Exposition**
+
+* helper : `inputEmail()`
+* facade : `InputEmail`
 
 **Pre-configuration**
 
 * Prepend : `<i class="fas fa-at"></i>`
+* Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
+* Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
 #### inputPassword()
 
@@ -146,43 +93,6 @@ This component inherits the input component and is shipped with the following pr
 
 This component inherits the input component and is shipped with the following pre-configuration :
 * Prepend : `<i class="fas fa-palette"></i>`
-
-### Multilinguals
-
-**:bulb: Additional/overridden methods :**
-
-| Signature | Required | Description |
-|---|---|---|
-| locales(array $locales): self | No | Set the component input language locales to handle. |
-| value(Closure $value): self | No | Set the component input value. The value has to be set from this closure result : `->value(function($locale){})`. |
-
-**:bulb: Notes :**
-
-* Each multilingual form component will behave as a monolingual form component as long as the `->locales()` method is not used or as long as only one locale is declared.
-* The use of the `->locales()` method will replicate the component for each locale keys you declared.
-  * For example, if you declare the `fr` and `en` locale keys for a text input component with the `title` attribute, you will get two `Title (FR)` and `Title (EN)` generated text input components.
-* Each multilingual component provides an extra `data-locale="<locale>"` attribute to help with eventual javascript treatments.
-* You can use your own multilingual `Resolver` by replacing the path defined in the `config('bootstrap-components.form.multilingualResolver')`, allowing you to customize your multilingual form components localization behaviour :
-  * The default locales to handle (by default `[]`).
-  * The component localized `name` attribute resolution (default : `$name[$locale]`.
-  * The component localized old value resolution in case of errors (default : `old($name)[$locale]`).
-  * The component localized model value resolution (default : `$model->{$name}[$locales]`).
-  * The component localized error message bag key resolution, used for the error message extraction and for the validation class generation (default : `$name . $locale`).
-  * The component error message resolution, in order to correctly display the localized attribute name (default : transform `Dummy __('validation.attributes.name.en) error message` into `Dummy __('validation.attributes.name) (EN) error message.`.
-
-The multilingual component inherits the input component and can be used as following :
-
-```php
-<multilingual>
-    // all input component methods available
-    ->locales(['fr', 'en']) 
-    ->value(function($locale){ return $name[$locale]; });
-```
-
-#### inputText()
-
-This component inherits the multilingual input component and is shipped with the following pre-configuration :
-* Prepend : `<i class="fas fa-font"></i>`
 
 #### textarea()
 

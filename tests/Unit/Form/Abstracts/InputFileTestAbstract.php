@@ -2,13 +2,13 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
-use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FileAbstract;
+use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\UploadableAbstract;
 
 abstract class InputFileTestAbstract extends InputTestAbstract
 {
     public function testInstance()
     {
-        $this->assertInstanceOf(FileAbstract::class, $this->getComponent());
+        $this->assertInstanceOf(UploadableAbstract::class, $this->getComponent());
     }
 
     public function testModelValue()

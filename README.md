@@ -174,7 +174,8 @@ php artisan vendor:publish --tag=bootstrap-components:views
 
 ## API documentation
 
-Read the complete [API documentation](/doc/api.md).
+* [Components list](/doc/api/components.md)
+* [Component types](/doc/api/types.md)
 
 ## Testing
 
