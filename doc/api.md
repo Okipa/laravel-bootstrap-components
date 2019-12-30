@@ -1,36 +1,36 @@
 # API documentation
 
-* [Component](#component)
-  * [Form](#form)
-    * [Input](#input)
+* [Components](#components)
+  * [Forms](#forms)
+    * [Inputs](#inputs)
       * [inputEmail()](#inputemail)
       * [inputPassword()](#inputpassword)
       * [inputUrl()](#inputurl)
       * [inputTel()](#inputtel)
       * [inputNumber()](#inputnumber)
       * [inputColor()](#inputcolor)
-    * [Multilingual](#multilingual)
+    * [Multilinguals](#multilinguals)
       * [inputText()](#inputtext)
       * [textarea()](#textarea)
-    * [Temporal](#temporal)
+    * [Temporals](#temporals)
       * [inputDate()](#inputdate)
       * [inputTime()](#inputtime)
       * [inputDatetime()](#inputdatetime)
-    * [Uploadable](#uploadable)
+    * [Uploadables](#uploadables)
       * [inputFile()](#inputfile)
-    * [Checkable](#checkable)
+    * [Checkable](#checkables)
       * [inputCheckbox()](#inputcheckbox)
       * [inputToggle()](#inputtoggle)
       * [inputRadio()](#inputradio)
-    * [Selectable](#selectable)
+    * [Selectables](#selectable)
       * [select()](#select)
-  * [Button](#button)
-    * [Submit](#submit)
+  * [Buttons](#buttons)
+    * [Submits](#submits)
       * [submit()](#submit)
       * [submitValidate()](#submitvalidate)
       * [submitCreate()](#submitcreate)
       * [submitUpdate()](#submitupdate)
-    * [Link](#link)
+    * [Links](#links)
       * [button()](#button)
       * [buttonLink()](#buttonlink)
       * [buttonBack()](#buttonback)
@@ -41,7 +41,7 @@
     * [Video](#video)
       
 
-# Component
+# Components
 
 **Methods available for all components**
   
@@ -66,7 +66,7 @@ The component can be used as following :
     ->componentHtmlAttributes(['component', 'html', 'attributes']);
 ```
 
-## Form
+## Forms
 
 **Methods available for all form components**
 
@@ -107,7 +107,7 @@ The form component is shipped with the following pre-configuration :
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
-### Input
+### Inputs
 
 #### inputEmail()
 
@@ -139,7 +139,7 @@ This component inherits the input component and is shipped with the following pr
 This component inherits the input component and is shipped with the following pre-configuration :
 * Prepend : `<i class="fas fa-palette"></i>`
 
-### Multilingual
+### Multilinguals
 
 **:bulb: Additional/overridden methods :**
 
@@ -215,7 +215,7 @@ This component inherits the temporal component and is shipped with the following
 * Prepend : `<i class="fas fa-calendar-alt"></i>`
 * Format : `Y-m-d H:i:s`
 
-### Uploadable
+### Uploadables
 
 **:bulb: Additional methods :**
 
@@ -239,7 +239,7 @@ The uploadable component inherits the input component and can be used as followi
 
 This component inherits the uploadable component.
 
-### Checkable
+### Checkables
 
 **:bulb: Additional methods :**
 
@@ -281,7 +281,7 @@ This component inherits the checkable component.
 
 This component inherits the checkable component.
 
-### Selectable
+### Selectables
 
 **:bulb: Additional methods :**
 
@@ -312,7 +312,7 @@ The selectable component inherits the input component and can be used as followi
 
 This component inherits the selectable input component.
 
-### Button
+### Buttons
 
 **Methods available for all buttons components**
 
@@ -332,7 +332,7 @@ The button component inherits the component and can be used as following :
     ->append('<i class="fas fa-hand-pointer"></i>');
 ```
 
-### Submit
+### Submits
 
 #### submit()
 
@@ -357,7 +357,7 @@ This component inherit the button component and is shipped with the following pr
 * Prepend : `<i class="fas fa-save fa-fw"></i>`
 * Label : `__('bootstrap-components::bootstrap-components.label.update')`
 
-### Link
+### Links
 
 **:bulb: Additional methods :**
 

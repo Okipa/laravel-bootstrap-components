@@ -10,7 +10,7 @@
 
 Save time and take advantage of an extended set of ready-to-use and fully customizable bootstrap components.
 
-You feel like there is a missing component ? Feel free to open an issue or submit a fully tested and documented PR, we'll see what we can do !
+You feel like there is a missing component ? Feel free to open an issue or submit a fully tested and documented PR.
 
 ## Compatibility
 
