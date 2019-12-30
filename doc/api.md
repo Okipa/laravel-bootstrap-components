@@ -1,4 +1,4 @@
-# API documentation
+# Components API documentation
 
 * [Components](#components)
   * [Forms](#forms)
