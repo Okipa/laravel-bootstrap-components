@@ -8,10 +8,8 @@
 [![Coverage Status](https://coveralls.io/repos/github/Okipa/laravel-bootstrap-components/badge.svg?branch=master)](https://coveralls.io/github/Okipa/laravel-bootstrap-components?branch=master)
 [![Quality Score](https://img.shields.io/scrutinizer/g/Okipa/laravel-bootstrap-components.svg?style=flat-square)](https://scrutinizer-ci.com/g/Okipa/laravel-bootstrap-components/?branch=master)
 
-Save time and take advantage of ready-to-use and customizable bootstrap components.
+Save time and take advantage of an extended set of ready-to-use and fully customizable bootstrap components.
 
-This package provides an extended set of ready-to-use and fully customizable bootstrap components.
-  
 You feel like there is a missing component ? Feel free to open an issue or submit a fully tested and documented PR, we'll see what we can do !
 
 ## Compatibility
