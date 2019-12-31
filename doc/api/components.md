@@ -21,7 +21,7 @@
   * [Submit](#submit)
   * [Submit validate](#submit-validate)
   * [Submit create](#submit-create)
-  * [Submit update()](#submit-update)
+  * [Submit update](#submit-update)
   * [Button](#button)
   * [Button link](#button-link)
   * [Button back](#button-back)
