@@ -40,7 +40,7 @@
 
 ### FormAbstract
 
-**Inheritance :**[ComponentAbstract](#componentabstract)
+**Inheritance :** [ComponentAbstract](#componentabstract)
 
 **Methods**
 
