@@ -38,7 +38,7 @@
     ->componentHtmlAttributes(['component', 'html', 'attributes']);
 ```
 
-### FormAbstract
+## FormAbstract
 
 **Inheritance :** [ComponentAbstract](#componentabstract)
 
@@ -85,7 +85,7 @@
 * [inputNumber()](#inputnumber)
 * [inputColor()](#inputcolor)
 
-#### MultilingualAbstract
+## MultilingualAbstract
 
 **Inheritance :** [FormAbstract](#formabstract)
 
@@ -124,7 +124,7 @@
 * [inputText()](#inputtext)
 * [textarea()](#textarea)
 
-#### TemporalAbstract
+## TemporalAbstract
 
 **Inheritance :** [FormAbstract](#formabstract)
 
@@ -148,7 +148,7 @@
 * [inputTime()](#inputtime)
 * [inputDatetime()](#inputdatetime)
 
-#### UploadableAbstract
+## UploadableAbstract
 
 **Inheritance :** [FormAbstract](#formabstract)
 
@@ -174,7 +174,7 @@
 
 * [inputFile()](#inputfile)
 
-#### CheckableAbstract
+## CheckableAbstract
 
 **Inheritance :** [FormAbstract](#formabstract)
 
@@ -202,7 +202,7 @@
 * [inputToggle()](#inputtoggle)
 * [inputRadio()](#inputradio)
 
-#### SelectableAbstract
+## SelectableAbstract
 
 **Inheritance :** [FormAbstract](#formabstract)
 
@@ -236,7 +236,7 @@
 
 * [select()](#select)
 
-### SubmitAbstract
+## SubmitAbstract
 
 **Inheritance :** [ComponentAbstract](#componentabstract)
 
@@ -265,7 +265,7 @@
 * [submitCreate()](#submitcreate)
 * [submitUpdate()](#submitupdate)
 
-#### ButtonAbstract
+## ButtonAbstract
 
 **Inheritance :** [SubmitAbstract](#submitabstract)
 
@@ -291,7 +291,7 @@
 * [buttonBack()](#buttonback)
 * [buttonCancel()](#buttoncancel)
 
-### MediaAbstract
+## MediaAbstract
 
 **Inheritance :** [ComponentAbstract](#componentabstract)
 
@@ -315,7 +315,7 @@
 
 * [image()](#image)
 
-#### ImageAbstract
+## ImageAbstract
 
 **Inheritance :** [MediaAbstract](#mediaabstract)
 
@@ -349,7 +349,7 @@
 
 * [audio()](#audio)
 
-#### VideoAbstract
+## VideoAbstract
 
 **Inheritance :** [MediaAbstract](#mediaabstract)
 
