@@ -27,8 +27,8 @@
   * [Button back](#button-back)
   * [Button cancel](#button-cancel)
 * [Media components](#media-components)
-  * [Image](#image)
   * [Audio](#audio)
+  * [Image](#image)
   * [Video](#video)
 
 # Form components

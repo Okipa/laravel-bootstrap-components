@@ -78,12 +78,12 @@
 
 **Components**
 
-* [inputEmail()](#inputemail)
-* [inputPassword()](#inputpassword)
-* [inputUrl()](#inputurl)
-* [inputTel()](#inputtel)
-* [inputNumber()](#inputnumber)
-* [inputColor()](#inputcolor)
+* [Input e-mail](./components.md#input-e-mail)
+* [Input password](./components.md#input-password)
+* [Input URL](./components.md#input-url)
+* [Input tel](./components.md#input-tel)
+* [Input number](./components.md#input-number)
+* [Input color](./components.md#input-color)
 
 ## MultilingualAbstract
 
@@ -121,8 +121,8 @@
 
 **Components**
 
-* [inputText()](#inputtext)
-* [textarea()](#textarea)
+* [Input text](./components.md#input-text)
+* [Textarea](./components.md#textarea)
 
 ## TemporalAbstract
 
@@ -144,9 +144,9 @@
 
 **Components**
 
-* [inputDate()](#inputdate)
-* [inputTime()](#inputtime)
-* [inputDatetime()](#inputdatetime)
+* [Input date](./components.md#input-date)
+* [Input time](./components.md#input-time)
+* [Input datetime](./components.md#input-datetime)
 
 ## UploadableAbstract
 
@@ -172,7 +172,7 @@
 
 **Components**
 
-* [inputFile()](#inputfile)
+* [Input file](./components.md#input-file)
 
 ## CheckableAbstract
 
@@ -198,9 +198,9 @@
 
 **Components**
 
-* [inputCheckbox()](#inputcheckbox)
-* [inputToggle()](#inputtoggle)
-* [inputRadio()](#inputradio)
+* [Input checkbox](./components.md#input-checkbox)
+* [Input toggle](./components.md#input-toggle)
+* [Input radio](./components.md#input-radio)
 
 ## SelectableAbstract
 
@@ -234,7 +234,7 @@
 
 **Components**
 
-* [select()](#select)
+* [Select](./components.md#select)
 
 ## SubmitAbstract
 
@@ -260,10 +260,10 @@
 
 **Components**
 
-* [submit()](#submit)
-* [submitValidate()](#submitvalidate)
-* [submitCreate()](#submitcreate)
-* [submitUpdate()](#submitupdate)
+* [Submit](./components.md#submit)
+* [Submit validate](./components.md#submit-validate)
+* [Submit create](./components.md#submit-create)
+* [Submit update](./components.md#submit-update)
 
 ## ButtonAbstract
 
@@ -286,10 +286,10 @@
 ```
 
 **Components**
-* [button()](#button)
-* [buttonLink()](#buttonlink)
-* [buttonBack()](#buttonback)
-* [buttonCancel()](#buttoncancel)
+* [Button](./components.md#button)
+* [Button link](./components.md#button-link)
+* [Button back](./components.md#button-back)
+* [Button cancel](./components.md#button-cancel)
 
 ## MediaAbstract
 
@@ -313,7 +313,7 @@
 
 **Components**
 
-* [image()](#image)
+* [Audio](./components.md#audio)
 
 ## ImageAbstract
 
@@ -347,7 +347,7 @@
 
 **Components**
 
-* [audio()](#audio)
+* [Image](./components.md#image)
 
 ## VideoAbstract
 
@@ -369,4 +369,4 @@
 
 **Components**
 
-* [video()](#video)
+* [Video](./components.md#video)
