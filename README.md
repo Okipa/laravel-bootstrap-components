@@ -21,7 +21,7 @@ You feel like there is a missing component ? Feel free to open an issue or submi
 
 ## Upgrade guide
 
-* [From V1 to V2](/doc/upgrade-guide/from-v1-to-v2.md)
+* [From V1 to V2](/docs/upgrade-guide/from-v1-to-v2.md)
 
 ## Usage
 
@@ -174,8 +174,8 @@ php artisan vendor:publish --tag=bootstrap-components:views
 
 ## API documentation
 
-* [Components list](/doc/api/components.md)
-* [Component types](/doc/api/types.md)
+* [Components list](/docs/api/components.md)
+* [Component types](/docs/api/types.md)
 
 ## Testing
 

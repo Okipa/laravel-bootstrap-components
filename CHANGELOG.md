@@ -11,7 +11,7 @@
 - Simplified the way to customize components.
 - Added missing button components.
 
-:point_right: [See the upgrade guide](/doc/upgrade-guide/from-v1-to-v2.md)
+:point_right: [See the upgrade guide](/docs/upgrade-guide/from-v1-to-v2.md)
 
 ## [1.0.10](https://github.com/Okipa/laravel-bootstrap-components/compare/1.0.9...1.0.10)
 
