@@ -13,7 +13,7 @@
     * [ImageAbstract](#imageabstract)
     * [VideoAbstract](#videoabstract)
 
-# ComponentAbstract
+## ComponentAbstract
 
 **Methods**
   
@@ -38,11 +38,9 @@
     ->componentHtmlAttributes(['component', 'html', 'attributes']);
 ```
 
-## FormAbstract
+### FormAbstract
 
-**Inheritance**
-
-[ComponentAbstract](#componentabstract)
+**Inheritance :**[ComponentAbstract](#componentabstract)
 
 **Methods**
 
@@ -87,11 +85,9 @@
 * [inputNumber()](#inputnumber)
 * [inputColor()](#inputcolor)
 
-### MultilingualAbstract
+#### MultilingualAbstract
 
-**Inheritance**
-
-[FormAbstract](#formabstract)
+**Inheritance :** [FormAbstract](#formabstract)
 
 **Methods**
 
@@ -128,11 +124,9 @@
 * [inputText()](#inputtext)
 * [textarea()](#textarea)
 
-### TemporalAbstract
+#### TemporalAbstract
 
-**Inheritance**
-
-[FormAbstract](#formabstract)
+**Inheritance :** [FormAbstract](#formabstract)
 
 **Methods**
 
@@ -154,11 +148,9 @@
 * [inputTime()](#inputtime)
 * [inputDatetime()](#inputdatetime)
 
-### UploadableAbstract
+#### UploadableAbstract
 
-**Inheritance**
-
-[FormAbstract](#formabstract)
+**Inheritance :** [FormAbstract](#formabstract)
 
 **Methods**
 
@@ -182,11 +174,9 @@
 
 * [inputFile()](#inputfile)
 
-### CheckableAbstract
+#### CheckableAbstract
 
-**Inheritance**
-
-[FormAbstract](#formabstract)
+**Inheritance :** [FormAbstract](#formabstract)
 
 **Methods**
 
@@ -212,11 +202,9 @@
 * [inputToggle()](#inputtoggle)
 * [inputRadio()](#inputradio)
 
-### SelectableAbstract
+#### SelectableAbstract
 
-**Inheritance**
-
-[FormAbstract](#formabstract)
+**Inheritance :** [FormAbstract](#formabstract)
 
 **Methods**
 
@@ -248,11 +236,9 @@
 
 * [select()](#select)
 
-## SubmitAbstract
+### SubmitAbstract
 
-**Inheritance**
-
-[ComponentAbstract](#componentabstract)
+**Inheritance :** [ComponentAbstract](#componentabstract)
 
 **Methods**
 
@@ -279,11 +265,9 @@
 * [submitCreate()](#submitcreate)
 * [submitUpdate()](#submitupdate)
 
-### ButtonAbstract
+#### ButtonAbstract
 
-**Inheritance**
-
-[SubmitAbstract](#submitabstract)
+**Inheritance :** [SubmitAbstract](#submitabstract)
 
 **Methods**
 
@@ -307,11 +291,9 @@
 * [buttonBack()](#buttonback)
 * [buttonCancel()](#buttoncancel)
 
-## MediaAbstract
+### MediaAbstract
 
-**Inheritance**
-
-[ComponentAbstract](#componentabstract)
+**Inheritance :** [ComponentAbstract](#componentabstract)
 
 **Methods**
 
@@ -333,11 +315,9 @@
 
 * [image()](#image)
 
-### ImageAbstract
+#### ImageAbstract
 
-**Inheritance**
-
-[MediaAbstract](#mediaabstract)
+**Inheritance :** [MediaAbstract](#mediaabstract)
 
 **Methods**
 
@@ -369,11 +349,9 @@
 
 * [audio()](#audio)
 
-### VideoAbstract
+#### VideoAbstract
 
-**Inheritance**
-
-[MediaAbstract](#mediaabstract)
+**Inheritance :** [MediaAbstract](#mediaabstract)
 
 **Methods**
 
