@@ -37,10 +37,9 @@
 
 **Type :** [FormAbstract](./types.md#formabstract)
 
-**Exposure**
+**Helper :** `inputText()`
 
-* helper : `inputText()`
-* facade : `InputText`
+**Facade :** `InputText`
 
 **Pre-configuration**
 
@@ -53,10 +52,9 @@
 
 **Type :** [FormAbstract](./types.md#formabstract)
 
-**Exposition**
+**Helper :** `inputEmail()`
 
-* helper : `inputEmail()`
-* facade : `InputEmail`
+**Facade :** `InputEmail`
 
 **Pre-configuration**
 
@@ -69,10 +67,9 @@
 
 **Type :** [FormAbstract](./types.md#formabstract)
 
-**Exposition**
+**Helper :** `inputPassword()`
 
-* helper : `inputEmail()`
-* facade : `InputEmail`
+**Facade :** `InputPassword`
 
 **Pre-configuration**
 
