@@ -1,9 +1,9 @@
 # Components list
 
-* [Form](#form)
+* [Form components](#form-components)
   * [Input text](#input-text)
   * [Input e-mail](#input-e-mail)
-  * [inputPassword()](#inputpassword)
+  * [Input password](#input-password)
   * [inputUrl()](#inputurl)
   * [inputTel()](#inputtel)
   * [inputNumber()](#inputnumber)
@@ -17,7 +17,7 @@
   * [inputRadio()](#inputradio)
   * [textarea()](#textarea)
   * [select()](#select)
-* [Buttons](#buttons)
+* [Button components](#button-components)
   * [submit()](#submit)
   * [submitValidate()](#submitvalidate)
   * [submitCreate()](#submitcreate)
@@ -26,18 +26,16 @@
   * [buttonLink()](#buttonlink)
   * [buttonBack()](#buttonback)
   * [buttonCancel()](#buttoncancel)
-* [Media](#media)
+* [Media components](#media-components)
   * [image()](#image)
   * [audio()](#audio)
   * [video()](#video)
 
-# Form
+# Form components
 
 ## Input text
 
-**Type**
-
-* [FormAbstract](./types.md#formabstract)
+**Type :** [FormAbstract](./types.md#formabstract)
 
 **Exposure**
 
@@ -53,9 +51,7 @@
 
 ## Input e-mail
 
-**Type**
-
-* [FormAbstract](./types.md#formabstract)
+**Type :** [FormAbstract](./types.md#formabstract)
 
 **Exposition**
 
@@ -69,10 +65,21 @@
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
-#### inputPassword()
+## Input password
 
-This component inherits the input component and is shipped with the following pre-configuration :
+**Type :** [FormAbstract](./types.md#formabstract)
+
+**Exposition**
+
+* helper : `inputEmail()`
+* facade : `InputEmail`
+
+**Pre-configuration**
+
 * Prepend : `<i class="fas fa-user-secret"></i>`
+* Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
+* Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
 #### inputUrl()
 
@@ -230,7 +237,7 @@ The selectable component inherits the input component and can be used as followi
 
 This component inherits the selectable input component.
 
-### Buttons
+### Button components
 
 **Methods available for all buttons components**
 
@@ -318,7 +325,7 @@ This component inherit the link component and is shipped with the following pre-
 * Label : `__('bootstrap-components::bootstrap-components.label.cancel')`
 * Container classes : `btn-secondary`.
 
-### Media
+### Media components
   
 **Methods available for all media components**
 
