@@ -50,11 +50,9 @@
 
 ## Input e-mail
 
-**Type :** [FormAbstract](./types.md#formabstract)
-
-**Helper :** `inputEmail()`
-
-**Facade :** `InputEmail`
+* Type : [FormAbstract](./types.md#formabstract)
+* Helper : `inputEmail()`
+* Facade : `InputEmail`
 
 **Pre-configuration**
 
