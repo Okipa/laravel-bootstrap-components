@@ -37,26 +37,22 @@ You will have to update the helper calls with the new helpers names.
 * `bsBack()` => `buttonBack()`
 * `bsCancel()` => `buttonCancel()`
 
-If you wish to use the new facades, please refer to [the documentation](../../README.md#table-of-contents).
+If you wish to use the new available facades, please refer to [the documentation](../../docs/api/components.md).
 
 ## Multilingual
 
 The following components are now multilingual.
 
-* `inputText()`
-* `textarea()`
-
-See [how to use them](../../README.md#multilingual) if you need to setup a multilingual app.
+* [Input text](../../docs/api/components.md#input-text)
+* [Textarea](../../docs/api/components.md#textarea)
 
 ## New components
 
 New button components are available.
 
-* `submit()`
-* `button()`
-* `buttonLink()`
-
-See [how to use them](../../README.md#button-components).
+* [Submit](../../docs/api/components.md#submit)
+* [Button](../../docs/api/components.md#button)
+* [Button link](../../docs/api/components.md#button-link)
 
 ## Configuration file
 
@@ -65,3 +61,7 @@ The configuration file has been restructured, you will have to [republish it](..
 ## See all changes
 
 See all change with the [comparison tool](https://github.com/Okipa/laravel-bootstrap-components/compare/1.0.10...2.0.0).
+
+## Undocumented changes
+
+If you see any forgotten and undocumented change, please submit a PR to add them to this upgrade guide.
