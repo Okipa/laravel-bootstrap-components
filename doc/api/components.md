@@ -4,32 +4,32 @@
   * [Input text](#input-text)
   * [Input e-mail](#input-e-mail)
   * [Input password](#input-password)
-  * [inputUrl()](#inputurl)
-  * [inputTel()](#inputtel)
-  * [inputNumber()](#inputnumber)
-  * [inputColor()](#inputcolor)
-  * [inputDate()](#inputdate)
-  * [inputTime()](#inputtime)
-  * [inputDatetime()](#inputdatetime)
-  * [inputFile()](#inputfile)
-  * [inputCheckbox()](#inputcheckbox)
-  * [inputToggle()](#inputtoggle)
-  * [inputRadio()](#inputradio)
-  * [textarea()](#textarea)
-  * [select()](#select)
+  * [Input URL](#input-url)
+  * [Input tel](#input-tel)
+  * [Input number](#input-number)
+  * [Input color](#input-color)
+  * [Input date](#input-date)
+  * [Input time](#input-time)
+  * [Input datetime](#input-datetime)
+  * [Input file](#input-file)
+  * [Input checkbox](#input-checkbox)
+  * [Input toggle](#input-toggle)
+  * [Input radio](#input-radio)
+  * [Textarea](#textarea)
+  * [Select](#select)
 * [Button components](#button-components)
-  * [submit()](#submit)
-  * [submitValidate()](#submitvalidate)
-  * [submitCreate()](#submitcreate)
-  * [submitUpdate()](#submitupdate)
-  * [button()](#button)
-  * [buttonLink()](#buttonlink)
-  * [buttonBack()](#buttonback)
-  * [buttonCancel()](#buttoncancel)
+  * [Submit](#submit)
+  * [Submit validate](#submit-validate)
+  * [Submit create](#submit-create)
+  * [Submit update()](#submit-update)
+  * [Button](#button)
+  * [Button link](#button-link)
+  * [Button back](#button-back)
+  * [Button cancel](#button-cancel)
 * [Media components](#media-components)
-  * [image()](#image)
-  * [audio()](#audio)
-  * [video()](#video)
+  * [Image](#image)
+  * [Audio](#audio)
+  * [Video](#video)
 
 # Form components
 
@@ -50,9 +50,11 @@
 
 ## Input e-mail
 
-* Type : [FormAbstract](./types.md#formabstract)
-* Helper : `inputEmail()`
-* Facade : `InputEmail`
+**Type :** [FormAbstract](./types.md#formabstract)
+
+**Helper :** `inputEmail()`
+
+**Facade :** `InputEmail`
 
 **Pre-configuration**
 
@@ -76,312 +78,347 @@
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
-#### inputUrl()
+## Input URL
 
-This component inherits the input component and is shipped with the following pre-configuration :
-* Prepend : `<i class="fas fa-user-secret"></i>`
+**Type :** [FormAbstract](./types.md#formabstract)
 
-#### inputTel()
+**Helper :** `inputUrl()`
 
-This component inherits the input component and is shipped with the following pre-configuration :
+**Facade :** `InputUrl`
+
+**Pre-configuration**
+
+* Prepend : `<i class="fas fa-link"></i>`
+* Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
+* Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
+
+## Input tel
+
+**Type :** [FormAbstract](./types.md#formabstract)
+
+**Helper :** `inputTel()`
+
+**Facade :** `InputTel`
+
+**Pre-configuration**
+
 * Prepend : `<i class="fas fa-phone"></i>`
+* Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
+* Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
-#### inputNumber()
+## Input number
 
-This component inherits the input component and is shipped with the following pre-configuration :
+**Type :** [FormAbstract](./types.md#formabstract)
+
+**Helper :** `inputNumber()`
+
+**Facade :** `InputNumber`
+
+**Pre-configuration**
+
 * Prepend : `<i class="fas fa-euro-sign"></i>`
+* Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
+* Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
-#### inputColor()
+## Input color
 
-This component inherits the input component and is shipped with the following pre-configuration :
+**Type :** [FormAbstract](./types.md#formabstract)
+
+**Helper :** `inputColor()`
+
+**Facade :** `InputColor`
+
+**Pre-configuration**
+
 * Prepend : `<i class="fas fa-palette"></i>`
+* Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
+* Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
-#### textarea()
+## Input date
 
-This component inherits the multilingual input component and is shipped with the following pre-configuration :
-* Prepend : `<i class="fas fa-comment"></i>`
+**Type :** [TemporalAbstract](./types.md#temporalabstract)
 
-### Temporal
+**Helper :** `inputDate()`
 
-**:bulb: Additional methods :**
+**Facade :** `InputDate`
 
-| Signature | Required | Description |
-|---|---|---|
-| format(string $format): self | Yes | Set the temporal format. |
+**Pre-configuration**
 
-The temporal component inherits the input component and can be used as following :
-
-```php
-<temporal>
-    // all input component methods available
-    ->format('Y-m-d H:i');
-```
-
-#### inputDate()
-
-This component inherits the temporal component and is shipped with the following pre-configuration :
 * Prepend : `<i class="fas fa-calendar-alt"></i>`
 * Format : `Y-m-d`
+* Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
+* Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
-#### inputTime()
+## Input time
 
-This component inherits the temporal component and is shipped with the following pre-configuration :
+**Type :** [TemporalAbstract](./types.md#temporalabstract)
+
+**Helper :** `inputTime()`
+
+**Facade :** `InputTime`
+
+**Pre-configuration**
+
 * Prepend : `<i class="fas fa-clock"></i>`
 * Format : `H:i:s`
+* Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
+* Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
-#### inputDatetime()
+## Input datetime
 
-This component inherits the temporal component and is shipped with the following pre-configuration :
+**Type :** [TemporalAbstract](./types.md#temporalabstract)
+
+**Helper :** `inputDatetime()`
+
+**Facade :** `InputDatetime`
+
+**Pre-configuration**
+
 * Prepend : `<i class="fas fa-calendar-alt"></i>`
 * Format : `Y-m-d H:i:s`
+* Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
+* Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
-### Uploadables
+## Input file
 
-**:bulb: Additional methods :**
+**Type :** [UploadableAbstract](./types.md#uploadableabstract)
 
-| Signature | Required | Description |
-|---|---|---|
-| uploadedFile(Closure $uploadedFile): self | No | Allows to set html or another component to render the uploaded file. |
-| showRemoveCheckbox(bool $showRemoveCheckbox = true, string $removeCheckboxLabel = null): self | No | Show the file remove checkbox option (will appear only if an uploaded file is detected). Default value : `config('bootstrap-components.file.showRemoveCheckbox')`. The remove checkbox label can be precised with the second parameter, by default, it will take the following value : `__('bootstrap-components.label.remove') . ' ' . [name]` |
+**Helper :** `inputFile()`
 
-The uploadable component inherits the input component and can be used as following :
+**Facade :** `InputFile`
 
-```php
-<uploadable>
-    // all input component methods available
-    ->uploadedFile(function(){
-        return '<div>Some HTML</div>';
-    })
-    ->showRemoveCheckbox(true, 'Remove this file');
-```
+**Pre-configuration**
 
-#### inputFile()
+* Prepend : `<i class="fas fa-upload"></i>`
+* Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
+* Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
-This component inherits the uploadable component.
+## Input checkbox
 
-### Checkables
+**Type :** [CheckableAbstract](./types.md#checkableabstract)
 
-**:bulb: Additional methods :**
+**Helper :** `inputCheckbox()`
 
-| Signature | Required | Description |
-|---|---|---|
-| checked(bool $checked = true): self | No | Set the component checked status. |
+**Facade :** `InputCheckbox`
 
-**:warning: Notes :**
+**Pre-configuration**
 
-* the `->labelPositionedAbove()` method has no effect in this component.
+* Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
+* Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
-The checkable component inherits the input component and can be used as following :
+## Input toggle
 
-```php
-<checkable>
-    // all input component methods available
-    ->checked();
-```
+**Type :** [CheckableAbstract](./types.md#checkableabstract)
 
-#### inputCheckbox()
+**Helper :** `inputToggle()`
 
-This component inherits the checkable component.
+**Facade :** `InputToggle`
 
-#### inputToggle()
-
-**:warning: Notes :**
+**Notes**
 
 * This component is an extra component not included in bootstrap and using it demands to [load the package styles](#styles).
 * The following classes can be applied in the `containerClasses()` method in order to manage the input toggle size : `toggle-sm` , `toggle-lg`.
 
-This component inherits the checkable component.
+**Pre-configuration**
 
-#### inputRadio()
+* Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
+* Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
-**:warning: Notes :**
+## input radio
+
+**Type :** [CheckableAbstract](./types.md#checkableabstract)
+
+**Helper :** `inputRadio()`
+
+**Facade :** `InputCheckbox`
+
+**Pre-configuration**
+
+* Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
+* Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
+
+**Notes**
 
 * Setting the value is mandatory for this component.
-* Differently from other `Form` components, the value will not be set from the associated model. Associating a model will only detect the checked status for the radio button.
 
-This component inherits the checkable component.
+## Textarea
 
-### Selectables
+**Type :** [MultilingualAbstract](./types.md#multilingualabstract)
 
-**:bulb: Additional methods :**
+**Helper :** `textarea()`
 
-| Signature | Required | Description |
-|---|---|---|
-| options(iterable $optionsList, string $optionValueField, string $optionLabelField): self | No | Set the options list (array or models collection) and declare which fields should be used for the options values and labels. |
-| selected(string $fieldToCompare, $valueToCompare): self | No | Choose which option should be selected, declaring the field and the value to compare with the declared options list. |
-| multiple(bool $multiple = true): self | No | Set the select multiple mode. |
+**Facade :** `Textarea`
 
-**:warning: Notes :**
+**Pre-configuration**
+
+* Prepend : `<i class="fas fa-comment"></i>`
+* Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
+* Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
+
+## Select
+
+**Type :** [Selectable](./types.md#selectableabstract)
+
+**Helper :** `select()`
+
+**Facade :** `Select`
+
+**Notes**
 * in `single` mode, the selected() method second attribute only accept a string or an integer.
 * in `multiple` mode, the selected() method second attribute only accept an array.
 
-The selectable component inherits the input component and can be used as following :
+**Pre-configuration**
 
-```php
-<selectable>
-    // all input component methods available
-    ->options(collect([
-        ['id' => 1, 'title' => 'Item 1'],
-        ['id' => 2, 'title' => 'Item 2'],
-    ]), 'id', 'title')
-    ->selected('id', 1)
-    ->multiple();
-```
+* Prepend : `<i class="fas fa-hand-pointer"></i>`
+* Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
+* Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
-#### select()
+# Button components
 
-This component inherits the selectable input component.
+## Submit
 
-### Button components
+**Type :** [SubmitAbstract](./types.md#submitabstract)
 
-**Methods available for all buttons components**
+**Helper :** `submit()`
 
-| Signature | Required | Description |
-|---|---|---|
-| prepend(?string $html): self | No | Prepend html to the button component label. Set false to hide it. |
-| append(?string $html): self | No | Append html to the button component label. Set false to hide it. |
-| label(string $label): self | No | Set the button component label. |
+**Facade :** `Submit`
 
-The button component inherits the component and can be used as following :
+**Pre-configuration**
 
-```php
-<button>
-    // all component methods available
-    ->label('Back to the users list')
-    ->prepend('<i class="fas fa-hand-pointer"></i>')
-    ->append('<i class="fas fa-hand-pointer"></i>');
-```
+* Component container classes : `btn-primary`
 
-### Submits
+## Submit validate
 
-#### submit()
+**Type :** [SubmitAbstract](./types.md#submitabstract)
 
-This component inherit the button component and is shipped with the following pre-configuration :
-* Component container classes : `btn-primary`.
+**Helper :** `submitValidate()`
 
-#### submitValidate()
+**Facade :** `SubmitValidate`
 
-This component inherit the button component and is shipped with the following pre-configuration :
+**Pre-configuration**
+
 * Prepend : `<i class="fas fa-check fa-fw"></i>`
 * Label : `__('bootstrap-components::bootstrap-components.label.validate')`
+* Component container classes : `btn-primary`
 
-#### submitCreate()
+## Submit create
 
-This component inherit the button component and is shipped with the following pre-configuration :
+**Type :** [SubmitAbstract](./types.md#submitabstract)
+
+**Helper :** `submitCreate()`
+
+**Facade :** `SubmitCreate`
+
+**Pre-configuration**
+
 * Prepend : `<i class="fas fa-plus-circle fa-fw"></i>`
 * Label : `__('bootstrap-components::bootstrap-components.label.create')`
+* Component container classes : `btn-primary`
 
-#### submitUpdate()
+## Submit update
 
-This component inherit the button component and is shipped with the following pre-configuration :
+**Type :** [SubmitAbstract](./types.md#submitabstract)
+
+**Helper :** `submitUpdate()`
+
+**Facade :** `SubmitUpdate`
+
+**Pre-configuration**
+
 * Prepend : `<i class="fas fa-save fa-fw"></i>`
 * Label : `__('bootstrap-components::bootstrap-components.label.update')`
+* Component container classes : `btn-primary`
 
-### Links
+## Button
 
-**:bulb: Additional methods :**
+**Type :** [ButtonAbstract](./types.md#buttonabstract)
 
-| Signature | Required | Description |
-|---|---|---|
-| url(string $url): self | No | Set the button component url. |
-| route(string $route, array $params = []): self | No | Set the button component route. |
+**Helper :** `button()`
 
-The link component inherits the button component and can be used as following :
+**Facade :** `Button`
 
-```php
-<link>
-    // all button component methods available
-    ->url('https://website.com/admin/users')
-    ->route('users.index');
-```
+## Button link
 
-#### button()
+**Type :** [ButtonAbstract](./types.md#buttonabstract)
 
-This component inherit the link component.
+**Helper :** `buttonLink()`
 
-##### buttonLink()
+**Facade :** `ButtonLink`
 
-This component inherit the link component and is shipped with the following pre-configuration :
+**Pre-configuration**
+
 * Container classes : `btn-primary btn-link`.
 
-##### buttonBack()
+## Button back
 
-This component inherit the link component and is shipped with the following pre-configuration :
-* Url : `url()->previous()`
+**Type :** [ButtonAbstract](./types.md#buttonabstract)
+
+**Helper :** `buttonBack()`
+
+**Facade :** `ButtonBack`
+
+**Pre-configuration**
+
+* URL : `url()->previous()`
 * Prepend : `<i class="fas fa-undo fa-fw"></i>`
 * Label : `__('bootstrap-components::bootstrap-components.label.back')`
 * Container classes : `btn-secondary`.
 
-##### buttonCancel()
+## Button cancel
 
-This component inherit the link component and is shipped with the following pre-configuration :
+**Type :** [ButtonAbstract](./types.md#buttonabstract)
+
+**Helper :** `buttonCancel()`
+
+**Facade :** `ButtonCancel`
+
+**Pre-configuration**
+
 * Url : `url()->previous()`
 * Prepend : `<i class="fas fa-ban fa-fw"></i>`
 * Label : `__('bootstrap-components::bootstrap-components.label.cancel')`
 * Container classes : `btn-secondary`.
 
-### Media components
-  
-**Methods available for all media components**
+# Media components
 
-| Signature | Required | Description |
-|---|---|---|
-| label(?string $label): self | No | Set the component label. |
-| src(string $src): self | No | Set the component src attribute. |
-| legend(?string $legend): self | No | Set the component legend. |
+## Audio
 
-The media component inherits the component and can be used as following :
+**Type :** [MediaAbstract](./types.md#mediaabstract)
 
-```php
-<media>
-    // all component methods available
-    ->src('https://yourapp.fr/public/media/audio.mp3');
-```
+**Helper :** `audio()`
 
-#### image()
+**Facade :** `Audio`
 
-**:bulb: Additional methods :**
+## Image
 
-| Signature | Required | Description |
-|---|---|---|
-| alt(string $alt): self | No | Define the image component alt html tag. |
-| width(int $width): self | No | Define the component image html tag width. |
-| height(int $height): self | No | Define the component image html tag height. |
-| link(string $linkUrl, ?string $linkTitle = null): self | No | Set the image component link url and title. |
-| linkId(string $linkId): self | No | Set the image component link id. |
-| linkClasses(array $linkClasses): self | No | Set the image component link classes. Default value : `config('bootstrap-components.media.image.classes.link')`. |
-| linkHtmlAttributes(array $linkHtmlAttributes): self | No | Set the image component link html attributes. Default value : `config('bootstrap-components.media.image.htmlAttributes.link')`. |
+**Type :** [ImageAbstract](./types.md#imageabstract)
 
-This component inherits the media component.
+**Helper :** `image()`
 
-```php
-image()
-    // all media component methods available
-    ->alt('Image')
-    ->width(250)
-    ->height(150)
-    ->link('https://yourapp.fr/public/media/image-zoom.jpg', 'Preview this image')
-    ->linkId('link-id')
-    ->linkComponentClasses(['link', 'component', 'classes'])
-    ->linkHtmlAttributes(['link', 'component', 'classes']);
-```
+**Facade :** `Image`
 
-#### audio()
+**Pre-configuration**
 
-This component inherits the media component.
+* Container HTML attributes : `controls preload="true"`.
 
-#### video()
+## Video
 
-**:bulb: Additional methods :**
+**Type :** [VideoAbstract](./types.md#videoabstract)
 
-| Signature | Required | Description |
-|---|---|---|
-| poster(string $poster): self | No | Set the video component poster. |
+**Helper :** `video()`
 
-This component inherits the media component.
+**Facade :** `Video`
 
-```php
-audio()
-    // all media component methods available
-    ->poster('https://yourapp.fr/public/media/poster.jpg');
-```
+**Pre-configuration**
+
+* Container HTML attributes : `controls preload="true"`.
