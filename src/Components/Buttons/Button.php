@@ -59,7 +59,7 @@ class Button extends ButtonAbstract
      */
     protected function setComponentClasses(): array
     {
-        return [];
+        return ['btn-primary'];
     }
 
     /**

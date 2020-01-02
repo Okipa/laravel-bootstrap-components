@@ -295,7 +295,7 @@
 
 **Pre-configuration**
 
-* Component container classes : `btn-primary`
+* Container classes : `btn-primary`
 
 ## Submit validate
 
@@ -309,7 +309,7 @@
 
 * Prepend : `<i class="fas fa-check fa-fw"></i>`
 * Label : `__('bootstrap-components::bootstrap-components.label.validate')`
-* Component container classes : `btn-primary`
+* Container classes : `btn-primary`
 
 ## Submit create
 
@@ -323,7 +323,7 @@
 
 * Prepend : `<i class="fas fa-plus-circle fa-fw"></i>`
 * Label : `__('bootstrap-components::bootstrap-components.label.create')`
-* Component container classes : `btn-primary`
+* Container classes : `btn-primary`
 
 ## Submit update
 
@@ -337,7 +337,7 @@
 
 * Prepend : `<i class="fas fa-save fa-fw"></i>`
 * Label : `__('bootstrap-components::bootstrap-components.label.update')`
-* Component container classes : `btn-primary`
+* Container classes : `btn-primary`
 
 ## Button
 
@@ -346,6 +346,10 @@
 **Helper :** `button()`
 
 **Facade :** `Button`
+
+**Pre-configuration**
+
+* Container classes : `btn-primary`.
 
 ## Button link
 
