@@ -21,7 +21,7 @@ You feel like there is a missing component ? Feel free to open an issue or submi
 
 ## Upgrade guide
 
-* [From V1 to V2](/docs/upgrade-guide/from-v1-to-v2.md)
+* [From V1 to V2](/docs/upgrade-guides/from-v1-to-v2.md)
 
 ## Usage
 
@@ -155,6 +155,11 @@ Publish the package configuration file to customize it if necessary :
 ```bash
 php artisan vendor:publish --tag=bootstrap-components:config
 ```
+
+You will be able to :
+
+* override components with your own (we would recommend you to place them in a `app/vendor/laravel-bootstrap-components/` folder).
+* customize the form components default behaviour.
 
 ## Translations
 

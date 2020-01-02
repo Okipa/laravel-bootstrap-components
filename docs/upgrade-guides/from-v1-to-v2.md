@@ -8,7 +8,7 @@ Follow the steps below to upgrade the package.
 
 Components are now exposed with renamed helpers and new facades.
 
-You will have to update the helper calls with the new helpers names.
+You will have to update the helper calls with the new helper signatures.
 
 **Form components**
 
@@ -39,24 +39,36 @@ You will have to update the helper calls with the new helpers names.
 
 If you wish to use the new available facades, please refer to [the documentation](../../docs/api/components.md).
 
+## Validation status helper removed
+   
+The `validationStatus()` helper has been removed.
+
+Check if you use it in your project and update your code accordingly.
+
+## Configuration file restructured
+
+The configuration file has been restructured, you will have to [re-publish it](../../README.md#configuration).
+
+## Templates updated
+
+The view templates provided with this package have been updated.
+
+If you have published the views in order to make some customizations, you will have to [re-publish them](../../README.md#templates) and to redo your customizations.
+
 ## Multilingual
 
-The following components are now multilingual.
+The following components are now handling multilingual features.
 
 * [Input text](../../docs/api/components.md#input-text)
 * [Textarea](../../docs/api/components.md#textarea)
 
 ## New components
 
-New button components are available.
+Missing button components are now available.
 
 * [Submit](../../docs/api/components.md#submit)
 * [Button](../../docs/api/components.md#button)
 * [Button link](../../docs/api/components.md#button-link)
-
-## Configuration file
-
-The configuration file has been restructured, you will have to [republish it](../../README.md#configuration).
 
 ## See all changes
 
