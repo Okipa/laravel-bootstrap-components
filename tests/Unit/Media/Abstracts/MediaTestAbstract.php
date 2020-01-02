@@ -90,27 +90,27 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
     public function testSetLabel()
     {
         $html = $this->getComponent()->label('custom-label')->toHtml();
-        $this->assertStringContainsString('<label>custom-label</label>', $html);
+        $this->assertStringContainsString('<label class="d-block">custom-label</label>', $html);
     }
 
     public function testSetTranslatedLabel()
     {
         $label = 'bootstrap-components::bootstrap-components.label.validate';
         $html = $this->getComponent()->label($label)->toHtml();
-        $this->assertStringContainsString('<label>' . __($label) . '</label>', $html);
+        $this->assertStringContainsString('<label class="d-block">' . __($label) . '</label>', $html);
     }
 
     public function testNoLabel()
     {
         $html = $this->getComponent()->toHtml();
-        $this->assertStringNotContainsString('<label>', $html);
+        $this->assertStringNotContainsString('<label', $html);
     }
 
     public function testHideLabel()
     {
         $html = $this->getComponent()->label(false)->toHtml();
         $this->assertStringNotContainsString(
-            '<label for="' . $this->getComponentType() . '-name">validation.attributes.name</label>',
+            '<label class="d-block" for="' . $this->getComponentType() . '-name">validation.attributes.name</label>',
             $html
         );
     }

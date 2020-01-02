@@ -5,6 +5,7 @@
 2019-12-09
 
 * Added new components exposition.
+* Changes some method signatures.
 * Removed validation status helper.
 * Restructured configuration file.
 * Updated templates.

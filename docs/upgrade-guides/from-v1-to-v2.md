@@ -39,6 +39,10 @@ You will have to update the helper calls with the new helper signatures.
 
 If you wish to use the new available facades, please refer to [the documentation](../../docs/api/components.md).
 
+## Method signature changes
+
+* The image component `linkUrl(string $linkUrl): self` method has been removed and replaced by `link(string $linkUrl, ?string $linkTitle = null): self`.
+
 ## Validation status helper removed
    
 The `validationStatus()` helper has been removed.
