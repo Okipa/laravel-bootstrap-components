@@ -6,7 +6,7 @@
         {{ $uploadedFileHtml }}
         @if($showRemoveCheckbox){{ inputCheckbox()->name('remove_' . $name )
             ->label($removeCheckboxLabel)
-            ->containerClasses(['mb-1']) }}@endif
+            ->containerClasses(['mt-1', 'mb-2']) }}@endif
     @endif
     @if(! empty($prepend) || ! empty($append))
         <div class="input-group">
