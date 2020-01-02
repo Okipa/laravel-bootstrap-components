@@ -161,6 +161,8 @@ You will be able to :
 * override components with your own (we would recommend you to place them in a `app/vendor/laravel-bootstrap-components/` folder).
 * customize the form components default behaviour.
 
+:warning You may have to run a `composer dump-autoload` after changing a component path in your configuration file.
+
 ## Translations
 
 Publish the package translations files to customize them if necessary : 
