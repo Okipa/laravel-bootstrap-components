@@ -81,6 +81,34 @@ abstract class ImageAbstract extends MediaAbstract
     }
 
     /**
+     * Set the image component link URL.
+     *
+     * @param string $linkUrl
+     *
+     * @return $this
+     */
+    public function linkUrl(string $linkUrl): self
+    {
+        $this->linkUrl = $linkUrl;
+
+        return $this;
+    }
+
+    /**
+     * Set the image component link title.
+     *
+     * @param string $linkTitle
+     *
+     * @return $this
+     */
+    public function linkTitle(string $linkTitle): self
+    {
+        $this->linkTitle = $linkTitle;
+
+        return $this;
+    }
+
+    /**
      * Set the image component link id.
      *
      * @param string $linkId
@@ -90,22 +118,6 @@ abstract class ImageAbstract extends MediaAbstract
     public function linkId(string $linkId): self
     {
         $this->linkId = $linkId;
-
-        return $this;
-    }
-
-    /**
-     * Set the image component link url and title.
-     *
-     * @param string $linkUrl
-     * @param string|null $linkTitle
-     *
-     * @return $this
-     */
-    public function link(string $linkUrl, ?string $linkTitle = null): self
-    {
-        $this->linkUrl = $linkUrl;
-        $this->linkTitle = $linkTitle;
 
         return $this;
     }

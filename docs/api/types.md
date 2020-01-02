@@ -326,7 +326,8 @@
 | alt(string $alt): self | No | Define the image component alt html tag. |
 | width(int $width): self | No | Define the component image html tag width. |
 | height(int $height): self | No | Define the component image html tag height. |
-| link(string $linkUrl, ?string $linkTitle = null): self | No | Set the image component link url and title. |
+| linkUrl(string $linkUrl): self | No | Set the image component link URL. |
+| linkTitle(string $linkTitle): self | No | Set the image component link title. |
 | linkId(string $linkId): self | No | Set the image component link id. |
 | linkClasses(array $linkClasses): self | No | Set the image component link classes. Default value : `config('bootstrap-components.media.image.classes.link')`. |
 | linkHtmlAttributes(array $linkHtmlAttributes): self | No | Set the image component link html attributes. Default value : `config('bootstrap-components.media.image.htmlAttributes.link')`. |
