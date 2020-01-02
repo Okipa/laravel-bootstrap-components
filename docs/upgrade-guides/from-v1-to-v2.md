@@ -4,7 +4,7 @@ The v2 is a major rewrite of a big part of the package.
 
 Follow the steps below to upgrade the package.
 
-## Components exposition
+## New components exposition
 
 Components are now exposed with renamed helpers and new facades.
 
@@ -55,7 +55,7 @@ The view templates provided with this package have been updated.
 
 If you have published the views in order to make some customizations, you will have to [re-publish them](../../README.md#templates) and to redo your customizations.
 
-## Multilingual
+## New multilingual features
 
 The following components are now handling multilingual features.
 
