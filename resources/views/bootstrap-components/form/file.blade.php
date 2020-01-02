@@ -3,10 +3,12 @@
         @include('bootstrap-components::bootstrap-components.partials.label')
     @endif
     @if($uploadedFileHtml->toHtml())
-        {{ $uploadedFileHtml }}
-        @if($showRemoveCheckbox){{ inputCheckbox()->name('remove_' . $name )
-            ->label($removeCheckboxLabel)
-            ->containerClasses(['mt-1', 'mb-2']) }}@endif
+        <div class="mb-2">
+            {{ $uploadedFileHtml }}
+            @if($showRemoveCheckbox){{ inputCheckbox()->name('remove_' . $name )
+                ->label($removeCheckboxLabel)
+                ->containerClasses(['mt-1']) }}@endif
+        </div>
     @endif
     @if(! empty($prepend) || ! empty($append))
         <div class="input-group">
