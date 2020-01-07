@@ -118,10 +118,10 @@ And get this HTML generated for you :
 ## Table of Contents
 
 * [Installation](#installation)
-* [Styles](#styles)
 * [Configuration](#configuration)
 * [Translations](#translations)
 * [Templates](#templates)
+* [Styles](#styles)
 * [API documentation](#api-documentation)
 * [Testing](#testing)
 * [Changelog](#changelog)
@@ -135,18 +135,6 @@ And get this HTML generated for you :
 ```bash
 composer require "okipa/laravel-bootstrap-components:^2.0"
 ```
-
-## Styles
-
-You will have to load the package styles to use the following extra components (not provided by bootstrap) :
-
-* `inputToggle()`
-
-Load the package `scss` from the following path and override the declared in the `styles/scss/_variables.scss` file if needed.
-
-```scss
-@import '/path/to/composer/vendor/okipa/laravel-bootstrap-components/styles/scss/bootstrap-components';
-``` 
 
 ## Configuration
   
@@ -179,6 +167,18 @@ Publish the package views to customize them if necessary :
 ```bash
 php artisan vendor:publish --tag=bootstrap-components:views
 ```
+
+## Styles
+
+You will have to load the package styles to use the following extra components (not provided by bootstrap) :
+
+* `inputToggle()`
+
+Load the package `scss` from the following path and override the declared in the `styles/scss/_variables.scss` file if needed.
+
+```scss
+@import '/path/to/composer/vendor/okipa/laravel-bootstrap-components/styles/scss/bootstrap-components';
+``` 
 
 ## API documentation
 
