@@ -158,10 +158,11 @@ php artisan vendor:publish --tag=bootstrap-components:config
 
 You will be able to :
 
-* override components with your own (we would recommend you to place them in a `app/vendor/laravel-bootstrap-components/` folder).
-* customize the form components default behaviour.
+* Override components with your own
+  * Recommendation : place them in a `app/vendor/laravel-bootstrap-components/` folder).
+* Customize the form components default behaviour.
 
-:warning You may have to run a `composer dump-autoload` after changing a component path in your configuration file.
+:warning: You may have to run a `composer dump-autoload` after changing a component path in your configuration file.
 
 ## Translations
 
