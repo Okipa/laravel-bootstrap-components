@@ -59,7 +59,7 @@ class Cancel extends ButtonAbstract
      */
     protected function setComponentClasses(): array
     {
-        return ['btn-secondary'];
+        return ['btn-danger'];
     }
 
     /**
