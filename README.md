@@ -14,7 +14,7 @@ You feel like there is a missing component ? Feel free to open an issue or submi
 
 ## Compatibility
 
-| Laravel version | PHP version | Bootstrap version | Package version |
+| Laravel | PHP | Bootstrap | Package |
 |---|---|---|---|
 | ^5.5 | ^7.1 | ^4.0 | ^2.0 |
 | ^5.5 | ^7.1 | ^4.0 | ^1.0 |
