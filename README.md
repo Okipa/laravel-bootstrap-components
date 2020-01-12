@@ -14,7 +14,7 @@ You feel like there is a missing component ? Feel free to open an issue or submi
 
 ## Compatibility
 
-| Laravel version | PHP version | Bootstrap version | Package version |
+| Laravel | PHP | Bootstrap | Package |
 |---|---|---|---|
 | ^5.5 | ^7.1 | ^4.0 | ^2.0 |
 | ^5.5 | ^7.1 | ^4.0 | ^1.0 |
@@ -118,10 +118,10 @@ And get this HTML generated for you :
 ## Table of Contents
 
 * [Installation](#installation)
-* [Styles](#styles)
 * [Configuration](#configuration)
 * [Translations](#translations)
 * [Templates](#templates)
+* [Styles](#styles)
 * [API documentation](#api-documentation)
 * [Testing](#testing)
 * [Changelog](#changelog)
@@ -136,18 +136,6 @@ And get this HTML generated for you :
 composer require "okipa/laravel-bootstrap-components:^2.0"
 ```
 
-## Styles
-
-You will have to load the package styles to use the following extra components (not provided by bootstrap) :
-
-* `inputToggle()`
-
-Load the package `scss` from the following path and override the declared in the `styles/scss/_variables.scss` file if needed.
-
-```scss
-@import '/path/to/composer/vendor/okipa/laravel-bootstrap-components/styles/scss/bootstrap-components';
-``` 
-
 ## Configuration
   
 Publish the package configuration file to customize it if necessary : 
@@ -158,10 +146,11 @@ php artisan vendor:publish --tag=bootstrap-components:config
 
 You will be able to :
 
-* override components with your own (we would recommend you to place them in a `app/vendor/laravel-bootstrap-components/` folder).
-* customize the form components default behaviour.
+* Override components with your own
+  * Recommendation : place them in a `app/vendor/laravel-bootstrap-components/` folder).
+* Customize the form components default behaviour.
 
-:warning You may have to run a `composer dump-autoload` after changing a component path in your configuration file.
+:warning: You may have to run a `composer dump-autoload` after changing a component path in your configuration file.
 
 ## Translations
 
@@ -178,6 +167,18 @@ Publish the package views to customize them if necessary :
 ```bash
 php artisan vendor:publish --tag=bootstrap-components:views
 ```
+
+## Styles
+
+You will have to load the package styles to use the following extra components (not provided by bootstrap) :
+
+* `inputToggle()`
+
+Load the package `scss` from the following path and override the declared in the `styles/scss/_variables.scss` file if needed.
+
+```scss
+@import '/path/to/composer/vendor/okipa/laravel-bootstrap-components/styles/scss/bootstrap-components';
+``` 
 
 ## API documentation
 

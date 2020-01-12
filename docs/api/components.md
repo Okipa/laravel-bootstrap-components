@@ -391,7 +391,7 @@
 * Url : `url()->previous()`
 * Prepend : `<i class="fas fa-ban fa-fw"></i>`
 * Label : `__('bootstrap-components::bootstrap-components.label.cancel')`
-* Container classes : `btn-secondary`.
+* Container classes : `btn-danger`.
 
 # Media components
 
