@@ -21,12 +21,12 @@
             @endif
         </div>
         @include('bootstrap-components::bootstrap-components.partials.append')
+        @include('bootstrap-components::bootstrap-components.partials.validation-feedback')
     @if(! empty($prepend) || ! empty($append))
         </div>
     @endif
     @unless($labelPositionedAbove)
         @include('bootstrap-components::bootstrap-components.partials.label')
     @endunless
-    @include('bootstrap-components::bootstrap-components.partials.validation-feedback')
     @include('bootstrap-components::bootstrap-components.partials.legend')
 </div>
