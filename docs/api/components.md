@@ -259,7 +259,7 @@
 
 **Pre-configuration**
 
-* Prepend : `<i class="fas fa-comment"></i>`
+* Prepend : `<i class="fas fa-align-left"></i>`
 * Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`

@@ -27,7 +27,7 @@ class Textarea extends MultilingualAbstract
      */
     protected function setPrepend(): ?string
     {
-        return '<i class="fas fa-comment"></i>';
+        return '<i class="fas fa-align-left"></i>';
     }
 
     /**
