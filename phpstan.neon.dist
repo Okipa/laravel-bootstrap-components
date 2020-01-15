@@ -3,6 +3,5 @@ includes:
 parameters:
     level: 5
     paths:
-        - app
         - config
         - src

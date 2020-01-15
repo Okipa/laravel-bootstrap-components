@@ -67,7 +67,7 @@ class Toggle extends CheckableAbstract
      */
     protected function setContainerClasses(): array
     {
-        return [];
+        return ['form-group'];
     }
 
     /**

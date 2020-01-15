@@ -59,7 +59,7 @@ class Time extends TemporalAbstract
      */
     protected function setComponentClasses(): array
     {
-        return [];
+        return ['form-group'];
     }
 
     /**

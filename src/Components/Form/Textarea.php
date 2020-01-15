@@ -67,7 +67,7 @@ class Textarea extends MultilingualAbstract
      */
     protected function setContainerClasses(): array
     {
-        return [];
+        return ['form-group'];
     }
 
     /**

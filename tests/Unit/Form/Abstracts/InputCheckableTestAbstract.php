@@ -235,7 +235,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         );
         $html = $this->getComponent()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="component-container form-group custom-control custom-' . $this->getComponentType()
+            'class="component-container custom-control custom-' . $this->getComponentType()
             . ' default container classes"',
             $html
         );
@@ -249,12 +249,12 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         );
         $html = $this->getComponent()->name('name')->containerClasses(['custom', 'container', 'classes'])->toHtml();
         $this->assertStringContainsString(
-            'class="component-container form-group custom-control custom-' . $this->getComponentType()
+            'class="component-container custom-control custom-' . $this->getComponentType()
             . ' custom container classes"',
             $html
         );
         $this->assertStringNotContainsString(
-            'class="component-container form-group custom-control custom-' . $this->getComponentType()
+            'class="component-container custom-control custom-' . $this->getComponentType()
             . ' default container classes"',
             $html
         );

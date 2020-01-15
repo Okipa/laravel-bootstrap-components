@@ -67,7 +67,7 @@ class Date extends TemporalAbstract
      */
     protected function setContainerClasses(): array
     {
-        return [];
+        return ['form-group'];
     }
 
     /**

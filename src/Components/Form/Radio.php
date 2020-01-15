@@ -67,7 +67,7 @@ class Radio extends RadioAbstract
      */
     protected function setContainerClasses(): array
     {
-        return [];
+        return ['form-group'];
     }
 
     /**

@@ -231,7 +231,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         );
         $html = $this->getComponent()->name('name')->toHtml();
         $this->assertStringContainsString(
-            'class="component-container form-group custom-control custom-checkbox default container classes"',
+            'class="component-container custom-control custom-checkbox default container classes"',
             $html
         );
     }
@@ -244,7 +244,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         );
         $html = $this->getComponent()->name('name')->containerClasses(['custom', 'container', 'classes'])->toHtml();
         $this->assertStringContainsString(
-            'class="component-container form-group custom-control custom-checkbox custom container classes"',
+            'class="component-container custom-control custom-checkbox custom container classes"',
             $html
         );
         $this->assertStringNotContainsString(

@@ -45,6 +45,7 @@
 
 * Prepend : `<i class="fas fa-font"></i>`
 * Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Container classes : : `form-group`
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
@@ -60,6 +61,7 @@
 
 * Prepend : `<i class="fas fa-at"></i>`
 * Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Container classes : : `form-group`
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
@@ -75,6 +77,7 @@
 
 * Prepend : `<i class="fas fa-user-secret"></i>`
 * Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Container classes : : `form-group`
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
@@ -90,6 +93,7 @@
 
 * Prepend : `<i class="fas fa-link"></i>`
 * Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Container classes : : `form-group`
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
@@ -105,6 +109,7 @@
 
 * Prepend : `<i class="fas fa-phone"></i>`
 * Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Container classes : : `form-group`
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
@@ -120,6 +125,7 @@
 
 * Prepend : `<i class="fas fa-euro-sign"></i>`
 * Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Container classes : : `form-group`
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
@@ -135,6 +141,7 @@
 
 * Prepend : `<i class="fas fa-palette"></i>`
 * Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Container classes : : `form-group`
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
@@ -151,6 +158,7 @@
 * Prepend : `<i class="fas fa-calendar-alt"></i>`
 * Format : `Y-m-d`
 * Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Container classes : : `form-group`
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
@@ -167,6 +175,7 @@
 * Prepend : `<i class="fas fa-clock"></i>`
 * Format : `H:i:s`
 * Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Container classes : : `form-group`
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
@@ -183,6 +192,7 @@
 * Prepend : `<i class="fas fa-calendar-alt"></i>`
 * Format : `Y-m-d H:i:s`
 * Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Container classes : : `form-group`
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
@@ -198,6 +208,7 @@
 
 * Prepend : `<i class="fas fa-upload"></i>`
 * Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Container classes : : `form-group`
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
@@ -211,6 +222,7 @@
 
 **Pre-configuration**
 
+* Container classes : : `form-group`
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
@@ -229,6 +241,7 @@
 
 **Pre-configuration**
 
+* Container classes : : `form-group`
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
@@ -242,6 +255,7 @@
 
 **Pre-configuration**
 
+* Container classes : : `form-group`
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
@@ -261,6 +275,7 @@
 
 * Prepend : `<i class="fas fa-align-left"></i>`
 * Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Container classes : : `form-group`
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
@@ -280,6 +295,7 @@
 
 * Prepend : `<i class="fas fa-hand-pointer"></i>`
 * Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Container classes : : `form-group`
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 

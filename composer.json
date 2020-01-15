@@ -41,7 +41,7 @@
             "Okipa\\LaravelBootstrapComponents\\": "src/"
         },
         "files": [
-            "app/Helpers/componentsHelper.php"
+            "src/Helpers/components.php"
         ]
     },
     "autoload-dev": {
@@ -53,7 +53,7 @@
         "test": [
             "vendor/bin/phpcbf",
             "vendor/bin/phpcs",
-            "vendor/bin/phpmd app,config,src text phpmd.xml",
+            "vendor/bin/phpmd config,src text phpmd.xml",
             "vendor/bin/phpstan analyse",
             "vendor/bin/phpunit"
         ]

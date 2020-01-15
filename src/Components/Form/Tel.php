@@ -67,7 +67,7 @@ class Tel extends FormAbstract
      */
     protected function setContainerClasses(): array
     {
-        return [];
+        return ['form-group'];
     }
 
     /**

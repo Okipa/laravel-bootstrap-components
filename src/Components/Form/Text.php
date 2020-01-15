@@ -67,7 +67,7 @@ class Text extends MultilingualAbstract
      */
     protected function setContainerClasses(): array
     {
-        return [];
+        return ['form-group'];
     }
 
     /**

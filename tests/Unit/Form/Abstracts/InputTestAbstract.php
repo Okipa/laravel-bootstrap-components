@@ -385,7 +385,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->toHtml();
-        $this->assertStringContainsString('class="component-container form-group default container classes"', $html);
+        $this->assertStringContainsString('class="component-container default container classes"', $html);
     }
 
     public function testSetContainerClassesOverridesDefault()
@@ -395,7 +395,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->containerClasses(['custom', 'container', 'classes'])->toHtml();
-        $this->assertStringContainsString('class="component-container form-group custom container classes"', $html);
+        $this->assertStringContainsString('class="component-container custom container classes"', $html);
         $this->assertStringNotContainsString('class="component-container form-group default container classes"', $html);
     }
 

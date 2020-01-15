@@ -67,7 +67,7 @@ class Select extends SelectableAbstract
      */
     protected function setContainerClasses(): array
     {
-        return [];
+        return ['form-group'];
     }
 
     /**
