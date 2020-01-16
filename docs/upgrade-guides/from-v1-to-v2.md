@@ -42,6 +42,7 @@ If you wish to use the new available facades, please refer to [the documentation
 ## Components behaviour updated
 
 * The `Select` component placeholder is not disabled anymore in order to allow user to disable a selection.
+* The `Image`, `Audio` and `Video` components can now display a label and a legend.
 
 ## Validation status helper removed
    
