@@ -39,6 +39,10 @@ You will have to update the helper calls with the new helper signatures.
 
 If you wish to use the new available facades, please refer to [the documentation](../../docs/api/components.md).
 
+## Components behaviour updated
+
+* The `Select` component placeholder is not disabled anymore in order to allow user to disable a selection.
+
 ## Validation status helper removed
    
 The `validationStatus()` helper has been removed.

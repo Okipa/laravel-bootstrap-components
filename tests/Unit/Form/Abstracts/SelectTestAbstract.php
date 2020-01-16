@@ -19,7 +19,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
     {
         $html = $this->getComponent()->name('id')->toHtml();
         $this->assertStringContainsString(
-            '<option value="" disabled="disabled" selected="selected">validation.attributes.id</option>',
+            '<option value="" selected="selected">validation.attributes.id</option>',
             $html
         );
     }
@@ -32,7 +32,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         ];
         $html = $this->getComponent()->name('id')->options($optionsList, 'id', 'name')->toHtml();
         $this->assertStringContainsString(
-            '<option value="" disabled="disabled" selected="selected">validation.attributes.id</option>',
+            '<option value="" selected="selected">validation.attributes.id</option>',
             $html
         );
         $this->assertStringContainsString(
@@ -71,7 +71,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $html = $this->getComponent()->name('id')->options($users, 'id', 'name')->toHtml();
         $users = $users->toArray();
         $this->assertStringContainsString(
-            '<option value="" disabled="disabled" selected="selected">validation.attributes.id</option>',
+            '<option value="" selected="selected">validation.attributes.id</option>',
             $html
         );
         $this->assertStringContainsString(
@@ -105,7 +105,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $html = $this->getComponent()->model($user)->name('id')->options($users, 'id', 'name')->toHtml();
         $users = $users->toArray();
         $this->assertStringContainsString(
-            '<option value="" disabled="disabled">validation.attributes.id</option>',
+            '<option value="">validation.attributes.id</option>',
             $html
         );
         $this->assertStringContainsString(
@@ -150,7 +150,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
             ->selected('id', $users->get(1)->id)
             ->toHtml();
         $this->assertStringContainsString(
-            '<option value="" disabled="disabled">validation.attributes.id</option>',
+            '<option value="">validation.attributes.id</option>',
             $html
         );
         $this->assertStringContainsString(
@@ -174,7 +174,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
             ->selected('name', $users->get(1)->name)
             ->toHtml();
         $this->assertStringContainsString(
-            '<option value="" disabled="disabled">validation.attributes.name</option>',
+            '<option value="">validation.attributes.name</option>',
             $html
         );
         $this->assertStringContainsString(
@@ -195,7 +195,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
             ->options($users, 'id', 'name')
             ->toHtml();
         $this->assertStringContainsString(
-            '<option value="" disabled="disabled" selected="selected">validation.attributes.id</option>',
+            '<option value="" selected="selected">validation.attributes.id</option>',
             $html
         );
         $this->assertStringContainsString(
@@ -260,7 +260,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
             ->multiple()
             ->toHtml();
         $this->assertStringContainsString(
-            '<option value="" disabled="disabled" selected="selected">validation.attributes.wrong</option>',
+            '<option value="" selected="selected">validation.attributes.wrong</option>',
             $html
         );
         foreach ($companies as $company) {
@@ -292,7 +292,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
             ->multiple()
             ->toHtml();
         $this->assertStringContainsString(
-            '<option value="" disabled="disabled" selected="selected">validation.attributes.companies</option>',
+            '<option value="" selected="selected">validation.attributes.companies</option>',
             $html
         );
         foreach ($companies as $company) {
@@ -315,7 +315,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
             ->multiple()
             ->toHtml();
         $this->assertStringContainsString(
-            '<option value="" disabled="disabled">validation.attributes.companies</option>',
+            '<option value="">validation.attributes.companies</option>',
             $html
         );
         foreach ($companies as $company) {
@@ -338,7 +338,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
             ->selected('id', [])
             ->toHtml();
         $this->assertStringContainsString(
-            '<option value="" disabled="disabled" selected="selected">validation.attributes.companies</option>',
+            '<option value="" selected="selected">validation.attributes.companies</option>',
             $html
         );
         foreach ($companies as $company) {
@@ -373,7 +373,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
             ->selected('id', $selectedCompanies)
             ->toHtml();
         $this->assertStringContainsString(
-            '<option value="" disabled="disabled">validation.attributes.companies</option>',
+            '<option value="">validation.attributes.companies</option>',
             $html
         );
         foreach ($companies as $company) {
@@ -400,7 +400,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
             ->selected('name', $selectedCompanies)
             ->toHtml();
         $this->assertStringContainsString(
-            '<option value="" disabled="disabled">validation.attributes.companies</option>',
+            '<option value="">validation.attributes.companies</option>',
             $html
         );
         foreach ($companies as $company) {
@@ -436,7 +436,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
             ->selected('id', $selectedCompanies)
             ->toHtml();
         $this->assertStringContainsString(
-            '<option value="" disabled="disabled">validation.attributes.companies</option>',
+            '<option value="">validation.attributes.companies</option>',
             $html
         );
         foreach ($companies as $company) {
@@ -479,7 +479,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $placeholder = 'custom-placeholder';
         $html = $this->getComponent()->name('name')->placeholder($placeholder)->toHtml();
         $this->assertStringContainsString(
-            '<option value="" disabled="disabled" selected="selected">' . $placeholder . '</option>',
+            '<option value="" selected="selected">' . $placeholder . '</option>',
             $html
         );
     }
@@ -489,7 +489,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $placeholder = 'bootstrap-components::bootstrap-components.label.validate';
         $html = $this->getComponent()->name('name')->placeholder($placeholder)->toHtml();
         $this->assertStringContainsString(
-            '<option value="" disabled="disabled" selected="selected">' . __($placeholder) . '</option>',
+            '<option value="" selected="selected">' . __($placeholder) . '</option>',
             $html
         );
     }
@@ -500,7 +500,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $placeholder = 'test-custom-placeholder';
         $html = $this->getComponent()->name('name')->label($label)->placeholder($placeholder)->toHtml();
         $this->assertStringContainsString(
-            '<option value="" disabled="disabled" selected="selected">' . $placeholder . '</option>',
+            '<option value="" selected="selected">' . $placeholder . '</option>',
             $html
         );
     }
@@ -509,7 +509,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
     {
         $html = $this->getComponent()->name('name')->toHtml();
         $this->assertStringContainsString(
-            '<option value="" disabled="disabled" selected="selected">validation.attributes.name</option>',
+            '<option value="" selected="selected">validation.attributes.name</option>',
             $html
         );
     }
@@ -518,7 +518,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
     {
         $html = $this->getComponent()->name('name')->label(false)->toHtml();
         $this->assertStringContainsString(
-            '<option value="" disabled="disabled" selected="selected">validation.attributes.name</option>',
+            '<option value="" selected="selected">validation.attributes.name</option>',
             $html
         );
     }
@@ -527,7 +527,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
     {
         $html = $this->getComponent()->name('name')->placeholder(false)->toHtml();
         $this->assertStringNotContainsString(
-            '<option value="" disabled="disabled" selected="selected">',
+            '<option value="" selected="selected">',
             $html
         );
     }
