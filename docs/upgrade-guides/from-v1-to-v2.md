@@ -54,6 +54,10 @@ Check if you use it in your project and update your code accordingly.
 
 The configuration file has been restructured, you will have to [re-publish it](../../README.md#configuration).
 
+## Translations
+
+The translations files have been removed. Translation has now to be handled [this way](../../README.md#translations).
+
 ## Templates updated
 
 The view templates provided with this package have been updated.
