@@ -8,6 +8,7 @@
 * Removed validation status helper.
 * Removed the validation sentence in case of correctly filled field.
 * Restructured configuration file.
+* Removed translation files.
 * Updated templates.
 * Added new multilingual features.
 * Added new components.

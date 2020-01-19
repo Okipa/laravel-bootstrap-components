@@ -56,7 +56,9 @@ The configuration file has been restructured, you will have to [re-publish it](.
 
 ## Translations
 
-The translations files have been removed. Translation has now to be handled [this way](../../README.md#translations).
+The translations files have been removed and will not be used anymore.
+
+Translations have now to be handled [this way](../../README.md#translations).
 
 ## Templates updated
 
