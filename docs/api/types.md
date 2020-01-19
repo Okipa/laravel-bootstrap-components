@@ -51,7 +51,7 @@
 | value($value): self | No | Set the component input value. |
 | prepend(?string $html): self | No | Prepend html to the component input group. Set false to hide it. |
 | append(?string $html): self | No | Append html to the component input group. Set false to hide it. |
-| label(?string $label): self | No | Set the component input label. Default value : `__('validation.attributes.[name]')`. |
+| label(?string $label): self | No | Set the component input label. Default value : `__('validation.attributes.' .$name)`. |
 | labelPositionedAbove(bool $positionedAbove = true): self | No | Set the label above-positioning status. If not positioned above, the label will be positioned under the input (may be useful for bootstrap 4 floating labels). |
 | placeholder(?string $placeholder): self | No | Set the component input placeholder. Default value : `$label`. |
 | legend(?string $legend): self | No | Set the component legend. |
@@ -157,7 +157,7 @@
 | Signature | Required | Description |
 |---|---|---|
 | uploadedFile(Closure $uploadedFile): self | No | Allows to set html or another component to render the uploaded file. |
-| showRemoveCheckbox(bool $showRemoveCheckbox = true, string $removeCheckboxLabel = null): self | No | Show the file remove checkbox option (will appear only if an uploaded file is detected). Default value : `config('bootstrap-components.file.showRemoveCheckbox')`. The remove checkbox label can be precised with the second parameter, by default, it will take the following value : `__('bootstrap-components.label.remove') . ' ' . [name]` |
+| showRemoveCheckbox(bool $showRemoveCheckbox = true, string $removeCheckboxLabel = null): self | No | Show the file remove checkbox option (will appear only if an uploaded file is detected). Default value : `config('bootstrap-components.file.showRemoveCheckbox')`. The remove checkbox label can be precised with the second parameter, by default, it will take the following value : `__('Remove') . ' ' . $name` |
 
 **Usage**
 

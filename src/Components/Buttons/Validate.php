@@ -43,7 +43,7 @@ class Validate extends SubmitAbstract
      */
     protected function setLabel(): ?string
     {
-        return (string) __('bootstrap-components::bootstrap-components.label.validate');
+        return __('Validate');
     }
 
     /**

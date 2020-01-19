@@ -6,6 +6,7 @@
 
 * Added new components exposition.
 * Removed validation status helper.
+* Removed the validation sentence in case of correctly filled field.
 * Restructured configuration file.
 * Updated templates.
 * Added new multilingual features.

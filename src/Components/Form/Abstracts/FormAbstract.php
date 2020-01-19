@@ -311,11 +311,11 @@ abstract class FormAbstract extends ComponentAbstract
     abstract protected function setAppend(): ?string;
 
     /**
-     * @return string
+     * @return string|null
      */
-    protected function getLegend(): string
+    protected function getLegend(): ?string
     {
-        return (string) __($this->legend);
+        return $this->legend;
     }
 
     /**
@@ -330,7 +330,7 @@ abstract class FormAbstract extends ComponentAbstract
      */
     protected function getLabel(): string
     {
-        return (string) __($this->label ?? 'validation.attributes.' . $this->getName());
+        return $this->label ?? (string) __('validation.attributes.' . $this->getName());
     }
 
     /**
@@ -363,8 +363,7 @@ abstract class FormAbstract extends ComponentAbstract
      */
     protected function getPlaceholder(): ?string
     {
-        return (isset($this->placeholder) ? (string) __($this->placeholder) : null)
-            ?? ($this->getLabel() ?: (string) __('validation.attributes.' . $this->getName()));
+        return $this->placeholder ?? ($this->getLabel() ?: (string) __('validation.attributes.' . $this->getName()));
     }
 
     /**

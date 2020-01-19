@@ -51,7 +51,7 @@ class Time extends TemporalAbstract
      */
     protected function setLegend(): ?string
     {
-        return null;
+        return 'Awaited format: Hour:Minutes.';
     }
 
     /**

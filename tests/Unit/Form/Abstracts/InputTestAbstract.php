@@ -149,13 +149,6 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString('class="legend form-text text-muted">default-legend', $html);
     }
 
-    public function testSetTranslatedLegend()
-    {
-        $legend = 'bootstrap-components::bootstrap-components.label.validate';
-        $html = $this->getComponent()->name('name')->legend($legend)->toHtml();
-        $this->assertStringContainsString(__($legend), $html);
-    }
-
     public function testHideLegend()
     {
         $html = $this->getComponent()->name('name')->legend(null)->toHtml();
@@ -191,16 +184,6 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $html = $this->getComponent()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString(
             '<label for="' . $this->getComponentType() . '-name">' . $label . '</label>',
-            $html
-        );
-    }
-
-    public function testSetTranslatedLabel()
-    {
-        $label = 'bootstrap-components::bootstrap-components.label.validate';
-        $html = $this->getComponent()->name('name')->label($label)->toHtml();
-        $this->assertStringContainsString(
-            '<label for="' . $this->getComponentType() . '-name">' . __($label) . '</label>',
             $html
         );
     }
@@ -254,13 +237,6 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $this->assertStringContainsString(' placeholder="' . $placeholder . '"', $html);
     }
 
-    public function testSetTranslatedPlaceholder()
-    {
-        $placeholder = 'bootstrap-components::bootstrap-components.label.validate';
-        $html = $this->getComponent()->name('name')->placeholder($placeholder)->toHtml();
-        $this->assertStringContainsString(' placeholder="' . __($placeholder) . '"', $html);
-    }
-
     public function testSetPlaceholderWithLabel()
     {
         $label = 'custom-label';
@@ -299,10 +275,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $html = $this->getComponent()->name('name')->render(compact('errors'));
         $this->assertStringContainsString('is-valid', $html);
         $this->assertStringContainsString('<div class="valid-feedback d-block">', $html);
-        $this->assertStringContainsString(
-            __('bootstrap-components::bootstrap-components.notification.validation.success'),
-            $html
-        );
+        $this->assertStringContainsString(__('Field correctly filled.'), $html);
     }
 
     public function testSetDisplaySuccessOverridesDefault()
@@ -316,10 +289,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $html = $this->getComponent()->name('name')->displaySuccess(false)->render(compact('errors'));
         $this->assertStringNotContainsString('is-valid', $html);
         $this->assertStringNotContainsString('<div class="valid-feedback d-block">', $html);
-        $this->assertStringNotContainsString(
-            __('bootstrap-components::bootstrap-components.notification.validation.success'),
-            $html
-        );
+        $this->assertStringNotContainsString(__('Field correctly filled.'), $html);
     }
 
     public function testSetCustomDisplayFailure()

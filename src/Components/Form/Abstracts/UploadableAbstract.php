@@ -119,8 +119,7 @@ abstract class UploadableAbstract extends FormAbstract
      */
     protected function getRemoveCheckboxLabel(?string $label): string
     {
-        $defaultRemoveCheckboxLabel = (string) __('bootstrap-components::bootstrap-components.label.remove')
-            . ($label ? ' ' . strtolower($label) : '');
+        $defaultRemoveCheckboxLabel = (string) __('Remove') . ($label ? ' ' . strtolower($label) : '');
 
         return $this->removeCheckboxLabel ?? $defaultRemoveCheckboxLabel;
     }
@@ -130,6 +129,6 @@ abstract class UploadableAbstract extends FormAbstract
      */
     protected function getPlaceholder(): ?string
     {
-        return $this->placeholder ?? (string) __('bootstrap-components::bootstrap-components.label.file');
+        return $this->placeholder ?? (string) __('No file selected.');
     }
 }

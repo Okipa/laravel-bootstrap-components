@@ -51,7 +51,7 @@ class Back extends ButtonAbstract
      */
     protected function setLabel(): ?string
     {
-        return (string) __('bootstrap-components::bootstrap-components.label.back');
+        return (string) __('Back');
     }
 
     /**

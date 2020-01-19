@@ -29,7 +29,7 @@ Just call the components you need in your views and let this package take care o
 
 ### Standard use case
 
-Call this component in your view :
+Call this component in your view:
 
 ```blade
 {{-- helper style --}}
@@ -39,7 +39,7 @@ Call this component in your view :
 {{ InputText::name('name') }}
 ```
 
-And get this HTML generated for you :
+And get this HTML generated for you:
 
 ```blade
 <div class="component-container form-group">
@@ -64,7 +64,7 @@ And get this HTML generated for you :
 
 ### Multilingual use case
 
-Call this component in your view :
+Call this component in your view:
 
 ```blade
 {{-- helper style --}}
@@ -74,7 +74,7 @@ Call this component in your view :
 {{ InputText::name('title')->localized(['fr', 'en']) }}
 ```
 
-And get this HTML generated for you :
+And get this HTML generated for you:
 
 ```html
 <div class="component-container form-group" data-locale="fr">
@@ -120,7 +120,7 @@ And get this HTML generated for you :
 * [Installation](#installation)
 * [Configuration](#configuration)
 * [Translations](#translations)
-* [Templates](#templates)
+* [Views](#views)
 * [Styles](#styles)
 * [API documentation](#api-documentation)
 * [Testing](#testing)
@@ -131,14 +131,14 @@ And get this HTML generated for you :
 
 ## Installation
 
-* Install the package with composer :
+* Install the package with composer:
 ```bash
 composer require "okipa/laravel-bootstrap-components:^2.0"
 ```
 
 ## Configuration
   
-Publish the package configuration file to customize it if necessary : 
+Publish the package configuration file to customize it if necessary: 
 
 ```bash
 php artisan vendor:publish --tag=bootstrap-components:config
@@ -148,15 +148,13 @@ php artisan vendor:publish --tag=bootstrap-components:config
 
 ## Translations
 
-Publish the package translations files to customize them if necessary : 
+All displayed labels or sentences are translatable.
 
-```bash
-php artisan vendor:publish --tag=bootstrap-components:translations
-```
+See how to translate them on the Laravel official documentation: https://laravel.com/docs/localization#using-translation-strings-as-keys.
 
-## Templates
+## Views
 
-Publish the package views to customize them if necessary : 
+Publish the package views to customize them if necessary: 
 
 ```bash
 php artisan vendor:publish --tag=bootstrap-components:views
@@ -164,7 +162,7 @@ php artisan vendor:publish --tag=bootstrap-components:views
 
 ## Styles
 
-You will have to load the package styles to use the following extra components (not provided by bootstrap) :
+You will have to load the package styles to use the following extra components (not provided by bootstrap):
 
 * `inputToggle()`
 

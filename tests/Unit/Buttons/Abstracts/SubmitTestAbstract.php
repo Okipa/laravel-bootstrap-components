@@ -127,13 +127,6 @@ abstract class SubmitTestAbstract extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString('<span class="label">default-label</span>', $html);
     }
 
-    public function testSetTranslatedLabel()
-    {
-        $label = 'bootstrap-components::bootstrap-components.label.validate';
-        $html = $this->getComponent()->label($label)->toHtml();
-        $this->assertStringContainsString('<span class="label">' . __($label) . '</span>', $html);
-    }
-
     public function testNoLabel()
     {
         $html = $this->getComponent()->label(null)->toHtml();

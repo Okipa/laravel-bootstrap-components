@@ -484,16 +484,6 @@ abstract class SelectTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetTranslatedPlaceholder()
-    {
-        $placeholder = 'bootstrap-components::bootstrap-components.label.validate';
-        $html = $this->getComponent()->name('name')->placeholder($placeholder)->toHtml();
-        $this->assertStringContainsString(
-            '<option value="" selected="selected">' . __($placeholder) . '</option>',
-            $html
-        );
-    }
-
     public function testSetPlaceholderWithLabel()
     {
         $label = 'custom-label';

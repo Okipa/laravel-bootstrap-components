@@ -145,17 +145,6 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetTranslatedLabel()
-    {
-        $label = 'bootstrap-components::bootstrap-components.label.validate';
-        $html = $this->getComponent()->name('name')->label($label)->toHtml();
-        $this->assertStringContainsString(
-            '<label class="custom-control-label" for="' . $this->getComponentType() . '-name-value">'
-            . __($label) . '</label>',
-            $html
-        );
-    }
-
     public function testNoLabel()
     {
         $html = $this->getComponent()->name('name')->toHtml();

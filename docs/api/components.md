@@ -158,6 +158,7 @@
 * Prepend : `<i class="fas fa-calendar-alt"></i>`
 * Format : `Y-m-d`
 * Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Legend : `__('Awaited format: Day/Month/Year.')`
 * Container classes : : `form-group`
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
@@ -175,6 +176,7 @@
 * Prepend : `<i class="fas fa-clock"></i>`
 * Format : `H:i:s`
 * Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Legend : `__('Awaited format: Hour:Minutes.')`
 * Container classes : : `form-group`
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
@@ -192,6 +194,7 @@
 * Prepend : `<i class="fas fa-calendar-alt"></i>`
 * Format : `Y-m-d H:i:s`
 * Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Legend : `__('Awaited format: Day/Month/Year Hour:Minutes.')`
 * Container classes : : `form-group`
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
@@ -324,7 +327,7 @@
 **Pre-configuration**
 
 * Prepend : `<i class="fas fa-check fa-fw"></i>`
-* Label : `__('bootstrap-components::bootstrap-components.label.validate')`
+* Label : `__('Validate')`
 * Container classes : `btn-primary`
 
 ## Submit create
@@ -338,7 +341,7 @@
 **Pre-configuration**
 
 * Prepend : `<i class="fas fa-plus-circle fa-fw"></i>`
-* Label : `__('bootstrap-components::bootstrap-components.label.create')`
+* Label : `__('Create')`
 * Container classes : `btn-primary`
 
 ## Submit update
@@ -352,7 +355,7 @@
 **Pre-configuration**
 
 * Prepend : `<i class="fas fa-save fa-fw"></i>`
-* Label : `__('bootstrap-components::bootstrap-components.label.update')`
+* Label : `__('Update')`
 * Container classes : `btn-primary`
 
 ## Button
@@ -391,7 +394,7 @@
 
 * URL : `url()->previous()`
 * Prepend : `<i class="fas fa-undo fa-fw"></i>`
-* Label : `__('bootstrap-components::bootstrap-components.label.back')`
+* Label : `__('Back')`
 * Container classes : `btn-secondary`.
 
 ## Button cancel
@@ -406,7 +409,7 @@
 
 * Url : `url()->previous()`
 * Prepend : `<i class="fas fa-ban fa-fw"></i>`
-* Label : `__('bootstrap-components::bootstrap-components.label.cancel')`
+* Label : `__('Cancel')`
 * Container classes : `btn-danger`.
 
 # Media components

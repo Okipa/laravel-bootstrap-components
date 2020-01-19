@@ -74,13 +74,6 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString('class="legend form-text text-muted">default-legend', $html);
     }
 
-    public function testSetTranslatedLegend()
-    {
-        $legend = 'bootstrap-components::bootstrap-components.label.validate';
-        $html = $this->getComponent()->legend($legend)->toHtml();
-        $this->assertStringContainsString(__($legend), $html);
-    }
-
     public function testHideLegend()
     {
         $html = $this->getComponent()->legend(null)->toHtml();
@@ -91,13 +84,6 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
     {
         $html = $this->getComponent()->label('custom-label')->toHtml();
         $this->assertStringContainsString('<label class="d-block">custom-label</label>', $html);
-    }
-
-    public function testSetTranslatedLabel()
-    {
-        $label = 'bootstrap-components::bootstrap-components.label.validate';
-        $html = $this->getComponent()->label($label)->toHtml();
-        $this->assertStringContainsString('<label class="d-block">' . __($label) . '</label>', $html);
     }
 
     public function testNoLabel()

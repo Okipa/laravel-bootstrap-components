@@ -43,7 +43,7 @@ class Create extends SubmitAbstract
      */
     protected function setLabel(): ?string
     {
-        return (string) __('bootstrap-components::bootstrap-components.label.create');
+        return (string) __('Create');
     }
 
     /**

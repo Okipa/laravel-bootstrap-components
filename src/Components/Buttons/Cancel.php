@@ -51,7 +51,7 @@ class Cancel extends ButtonAbstract
      */
     protected function setLabel(): ?string
     {
-        return (string) __('bootstrap-components::bootstrap-components.label.cancel');
+        return (string) __('Cancel');
     }
 
     /**

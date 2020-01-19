@@ -59,21 +59,13 @@ abstract class InputFileTestAbstract extends InputTestAbstract
             . '-name">' . $placeholder . '</label>', $html);
     }
 
-    public function testSetTranslatedPlaceholder()
-    {
-        $placeholder = 'bootstrap-components::bootstrap-components.label.validate';
-        $html = $this->getComponent()->name('name')->placeholder($placeholder)->toHtml();
-        $this->assertStringContainsString('<label class="custom-file-label" for="' . $this->getComponentType()
-            . '-name">' . __($placeholder) . '</label>', $html);
-    }
-
     public function testSetPlaceholderWithLabel()
     {
         $label = 'custom-label';
         $placeholder = 'custom-placeholder';
         $html = $this->getComponent()->name('name')->label($label)->placeholder($placeholder)->toHtml();
         $this->assertStringContainsString('<label class="custom-file-label" for="' . $this->getComponentType()
-            . '-name">' . __($placeholder) . '</label>', $html);
+            . '-name">' . $placeholder . '</label>', $html);
     }
 
     public function testNoPlaceholderWithNoLabel()
@@ -81,7 +73,7 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         $html = $this->getComponent()->name('name')->label(false)->toHtml();
         $this->assertStringContainsString('custom-file-label', $html);
         $this->assertStringContainsString('<label class="custom-file-label" for="' . $this->getComponentType()
-            . '-name">' . __('bootstrap-components::bootstrap-components.label.file') . '</label>', $html);
+            . '-name">' . __('No file selected.') . '</label>', $html);
     }
 
     public function testNoPlaceholder()
@@ -89,7 +81,7 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         $html = $this->getComponent()->name('name')->toHtml();
         $this->assertStringContainsString('custom-file-label', $html);
         $this->assertStringContainsString('<label class="custom-file-label" for="' . $this->getComponentType()
-            . '-name">' . __('bootstrap-components::bootstrap-components.label.file') . '</label>', $html);
+            . '-name">' . __('No file selected.') . '</label>', $html);
     }
 
     public function testHidePlaceholder()
@@ -97,7 +89,7 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         $html = $this->getComponent()->name('name')->placeholder(false)->toHtml();
         $this->assertStringNotContainsString('ustom-file-label', $html);
         $this->assertStringNotContainsString('<label class="custom-file-label" for="' . $this->getComponentType()
-            . '-name">' . __('bootstrap-components::bootstrap-components.label.file') . '</label>', $html);
+            . '-name">' . __('No file selected.') . '</label>', $html);
     }
 
     public function testSetCustomComponentClasses()
@@ -178,9 +170,10 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         $html = $this->getComponent()->name('name')->uploadedFile(function () {
             return 'html';
         })->showRemoveCheckbox()->toHtml();
-        $this->assertStringContainsString(' for="checkbox-remove-name">'
-            . __('bootstrap-components::bootstrap-components.label.remove')
-            . ' validation.attributes.name', $html);
+        $this->assertStringContainsString(
+            ' for="checkbox-remove-name">' . __('Remove') . ' validation.attributes.name',
+            $html
+        );
     }
 
     public function testSetCustomRemoveCheckboxLabel()
@@ -189,14 +182,5 @@ abstract class InputFileTestAbstract extends InputTestAbstract
             return 'html';
         })->showRemoveCheckbox(true, 'Test')->toHtml();
         $this->assertStringContainsString(' for="checkbox-remove-name">Test', $html);
-    }
-
-    public function testSetCustomRemoveCheckboxTranslatedLabel()
-    {
-        $label = 'bootstrap-components::bootstrap-components.label.validate';
-        $html = $this->getComponent()->name('name')->uploadedFile(function () {
-            return 'html';
-        })->showRemoveCheckbox(true, $label)->toHtml();
-        $this->assertStringContainsString(' for="checkbox-remove-name">' . __($label), $html);
     }
 }

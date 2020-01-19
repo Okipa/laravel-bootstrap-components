@@ -5,7 +5,7 @@
         </div>
     @elseif($displaySuccess)
         <div class="valid-feedback d-block">
-            @lang('bootstrap-components::bootstrap-components.notification.validation.success')
+            @lang('Field correctly filled.')
         </div>
     @endif
 @endisset

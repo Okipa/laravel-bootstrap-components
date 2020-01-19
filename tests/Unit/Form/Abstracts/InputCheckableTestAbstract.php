@@ -163,16 +163,6 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetTranslatedLabel()
-    {
-        $label = 'bootstrap-components::bootstrap-components.label.validate';
-        $html = $this->getComponent()->name('active')->label($label)->toHtml();
-        $this->assertStringContainsString(
-            ' for="' . $this->getComponentType() . '-active">' . __($label) . '</label>',
-            $html
-        );
-    }
-
     public function testNoLabel()
     {
         $html = $this->getComponent()->name('active')->toHtml();

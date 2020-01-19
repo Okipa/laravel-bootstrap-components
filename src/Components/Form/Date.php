@@ -51,7 +51,7 @@ class Date extends TemporalAbstract
      */
     protected function setLegend(): ?string
     {
-        return null;
+        return 'Awaited format: Day/Month/Year.';
     }
 
     /**

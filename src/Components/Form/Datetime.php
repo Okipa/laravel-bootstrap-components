@@ -51,7 +51,7 @@ class Datetime extends TemporalAbstract
      */
     protected function setLegend(): ?string
     {
-        return null;
+        return 'Awaited format: Day/Month/Year Hour:Minutes.';
     }
 
     /**
