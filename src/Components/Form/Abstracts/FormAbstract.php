@@ -26,8 +26,8 @@ abstract class FormAbstract extends ComponentAbstract
     /** @property string $label */
     protected $label;
 
-    /** @property string|null $legend */
-    protected $legend;
+    /** @property string|null $caption */
+    protected $caption;
 
     /** @property bool $labelPositionedAbove */
     protected $labelPositionedAbove;
@@ -53,7 +53,7 @@ abstract class FormAbstract extends ComponentAbstract
         $this->prepend = $this->setPrepend();
         $this->append = $this->setAppend();
         $this->labelPositionedAbove = $this->setLabelPositionedAbove();
-        $this->legend = $this->setLegend();
+        $this->caption = $this->setCaption();
         $this->displaySuccess = $this->setDisplaySuccess();
         $this->displayFailure = $this->setDisplayFailure();
     }
@@ -117,15 +117,15 @@ abstract class FormAbstract extends ComponentAbstract
     }
 
     /**
-     * Set the component legend.
+     * Set the component caption.
      *
-     * @param string|null $legend
+     * @param string|null $caption
      *
      * @return $this
      */
-    public function legend(?string $legend): self
+    public function caption(?string $caption): self
     {
-        $this->legend = $legend;
+        $this->caption = $caption;
 
         return $this;
     }
@@ -236,7 +236,7 @@ abstract class FormAbstract extends ComponentAbstract
         $name = $this->getName();
         $prepend = $this->getPrepend();
         $append = $this->getAppend();
-        $legend = $this->getLegend();
+        $caption = $this->getCaption();
         $label = $this->getLabel();
         $labelPositionedAbove = $this->getLabelPositionedAbove();
         $value = $this->getValue();
@@ -252,7 +252,7 @@ abstract class FormAbstract extends ComponentAbstract
             'name',
             'prepend',
             'append',
-            'legend',
+            'caption',
             'label',
             'labelPositionedAbove',
             'value',
@@ -313,17 +313,17 @@ abstract class FormAbstract extends ComponentAbstract
     /**
      * @return string|null
      */
-    protected function getLegend(): ?string
+    protected function getCaption(): ?string
     {
-        return $this->legend;
+        return $this->caption;
     }
 
     /**
-     * Set the component legend.
+     * Set the component caption.
      *
      * @return string|null
      */
-    abstract protected function setLegend(): ?string;
+    abstract protected function setCaption(): ?string;
 
     /**
      * @return string

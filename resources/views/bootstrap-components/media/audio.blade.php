@@ -4,5 +4,5 @@
         <source{{ htmlAttributes($src ? 'src="'.$src.'"' : null) }}>
         @lang('Your browser does not support the :tag HTML5 tag.', ['tag' => 'audio'])
     </audio>
-    @include('bootstrap-components::bootstrap-components.partials.legend')
+    @include('bootstrap-components::bootstrap-components.partials.caption')
 </div>

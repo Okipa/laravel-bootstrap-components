@@ -39,10 +39,16 @@ You will have to update the helper calls with the new helper signatures.
 
 If you wish to use the new available facades, please refer to [the documentation](../../docs/api/components.md).
 
+## Legend name replacement
+
+The `legend` handling has been replaced by `caption` for all components, in order to use a correct english (legend being rather used for mystical stories than for captions).
+
+All `->legend()` method use should be replaced by `->caption()`.
+
 ## Components behaviour updated
 
 * The `Select` component placeholder is not disabled anymore in order to allow user to disable a selection.
-* The `Image`, `Audio` and `Video` components can now display a label and a legend.
+* The `Image`, `Audio` and `Video` components can now display a label and a caption.
 
 ## Validation status helper removed
    

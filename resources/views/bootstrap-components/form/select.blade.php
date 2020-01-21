@@ -22,5 +22,5 @@
     @unless($labelPositionedAbove)
         @include('bootstrap-components::bootstrap-components.partials.label')
     @endunless
-    @include('bootstrap-components::bootstrap-components.partials.legend')
+    @include('bootstrap-components::bootstrap-components.partials.caption')
 </div>

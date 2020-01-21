@@ -49,7 +49,7 @@ class Date extends TemporalAbstract
     /**
      * @inheritDoc
      */
-    protected function setLegend(): ?string
+    protected function setCaption(): ?string
     {
         return 'Awaited format: Day/Month/Year.';
     }

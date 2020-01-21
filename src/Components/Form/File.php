@@ -49,7 +49,7 @@ class File extends UploadableAbstract
     /**
      * @inheritDoc
      */
-    protected function setLegend(): ?string
+    protected function setCaption(): ?string
     {
         return null;
     }

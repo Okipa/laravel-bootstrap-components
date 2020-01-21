@@ -158,7 +158,7 @@
 * Prepend : `<i class="fas fa-calendar-alt"></i>`
 * Format : `Y-m-d`
 * Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
-* Legend : `__('Awaited format: Day/Month/Year.')`
+* Caption : `__('Awaited format: Day/Month/Year.')`
 * Container classes : : `form-group`
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
@@ -176,7 +176,7 @@
 * Prepend : `<i class="fas fa-clock"></i>`
 * Format : `H:i:s`
 * Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
-* Legend : `__('Awaited format: Hour:Minutes.')`
+* Caption : `__('Awaited format: Hour:Minutes.')`
 * Container classes : : `form-group`
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
@@ -194,7 +194,7 @@
 * Prepend : `<i class="fas fa-calendar-alt"></i>`
 * Format : `Y-m-d H:i:s`
 * Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
-* Legend : `__('Awaited format: Day/Month/Year Hour:Minutes.')`
+* Caption : `__('Awaited format: Day/Month/Year Hour:Minutes.')`
 * Container classes : : `form-group`
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`

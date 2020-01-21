@@ -9,8 +9,8 @@ abstract class MediaAbstract extends ComponentAbstract
     /** @property string $label */
     protected $label;
 
-    /** @property string|null $legend */
-    protected $legend;
+    /** @property string|null $caption */
+    protected $caption;
 
     /** @property string $src */
     protected $src;
@@ -21,7 +21,7 @@ abstract class MediaAbstract extends ComponentAbstract
     public function __construct()
     {
         parent::__construct();
-        $this->legend = $this->setLegend();
+        $this->caption = $this->setCaption();
     }
 
     /**
@@ -53,15 +53,15 @@ abstract class MediaAbstract extends ComponentAbstract
     }
 
     /**
-     * Set the component legend.
+     * Set the component caption.
      *
-     * @param string|null $legend
+     * @param string|null $caption
      *
      * @return $this
      */
-    public function legend(?string $legend): self
+    public function caption(?string $caption): self
     {
-        $this->legend = $legend;
+        $this->caption = $caption;
 
         return $this;
     }
@@ -73,9 +73,9 @@ abstract class MediaAbstract extends ComponentAbstract
     {
         $label = $this->getLabel();
         $src = $this->getSrc();
-        $legend = $this->getLegend();
+        $caption = $this->getCaption();
 
-        return array_merge(parent::getValues(), compact('label', 'src', 'legend'));
+        return array_merge(parent::getValues(), compact('label', 'src', 'caption'));
     }
 
     /**
@@ -97,17 +97,17 @@ abstract class MediaAbstract extends ComponentAbstract
     /**
      * @return string|null
      */
-    protected function getLegend(): ?string
+    protected function getCaption(): ?string
     {
-        return (string) __($this->legend);
+        return (string) __($this->caption);
     }
 
     /**
-     * Set the component legend.
+     * Set the component caption.
      *
      * @return string|null
      */
-    abstract protected function setLegend(): ?string;
+    abstract protected function setCaption(): ?string;
 
     /**
      * @inheritDoc

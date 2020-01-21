@@ -33,9 +33,9 @@ class CustomEmail extends Email
     /**
      * @inheritDoc
      */
-    protected function setLegend(): ?string
+    protected function setCaption(): ?string
     {
-        return 'default-legend';
+        return 'default-caption';
     }
 
     /**

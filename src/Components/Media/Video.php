@@ -33,7 +33,7 @@ class Video extends VideoAbstract
     /**
      * @inheritDoc
      */
-    protected function setLegend(): ?string
+    protected function setCaption(): ?string
     {
         return null;
     }

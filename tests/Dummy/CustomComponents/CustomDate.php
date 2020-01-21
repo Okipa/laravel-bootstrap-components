@@ -33,9 +33,9 @@ class CustomDate extends Date
     /**
      * @inheritDoc
      */
-    protected function setLegend(): ?string
+    protected function setCaption(): ?string
     {
-        return 'default-legend';
+        return 'default-caption';
     }
 
     /**

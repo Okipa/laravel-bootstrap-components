@@ -49,7 +49,7 @@ class Email extends FormAbstract
     /**
      * @inheritDoc
      */
-    protected function setLegend(): ?string
+    protected function setCaption(): ?string
     {
         return null;
     }

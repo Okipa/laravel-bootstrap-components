@@ -54,7 +54,7 @@
 | label(?string $label): self | No | Set the component input label. Default value : `__('validation.attributes.' .$name)`. |
 | labelPositionedAbove(bool $positionedAbove = true): self | No | Set the label above-positioning status. If not positioned above, the label will be positioned under the input (may be useful for bootstrap 4 floating labels). |
 | placeholder(?string $placeholder): self | No | Set the component input placeholder. Default value : `$label`. |
-| legend(?string $legend): self | No | Set the component legend. |
+| caption(?string $caption): self | No | Set the component caption. |
 | displaySuccess(?bool $displaySuccess = true): self | No | Set the component input validation success display status. |
 | displayFailure(?bool $displayFailure = true): self | No | Set the component input validation failure display status. |
 
@@ -71,7 +71,7 @@
     ->label('Email')
     ->labelPositionedAbove()
     ->placeholder('Set your e-mail')
-    ->legend('Set your legend here.')
+    ->caption('Set your caption here.')
     ->displaySuccess(false)
     ->displayFailure(false);
 ```
@@ -301,7 +301,7 @@
 |---|---|---|
 | label(?string $label): self | No | Set the component label. |
 | src(string $src): self | No | Set the component src attribute. |
-| legend(?string $legend): self | No | Set the component legend. |
+| caption(?string $caption): self | No | Set the component caption. |
 
 **Usage**
 

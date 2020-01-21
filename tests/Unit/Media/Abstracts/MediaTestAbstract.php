@@ -48,14 +48,14 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString('<source src="', $html);
     }
 
-    public function testSetCustomLegend()
+    public function testSetCustomCaption()
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->toHtml();
-        $this->assertStringContainsString('class="legend form-text text-muted">default-legend', $html);
+        $this->assertStringContainsString('class="caption form-text text-muted">default-caption', $html);
     }
 
     protected function getComponentKey(): string
@@ -63,21 +63,21 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
         return $this->getComponentType();
     }
 
-    public function testSetLegendOverridesDefault()
+    public function testSetCaptionOverridesDefault()
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()->legend('custom-legend')->toHtml();
-        $this->assertStringContainsString('class="legend form-text text-muted">custom-legend', $html);
-        $this->assertStringNotContainsString('class="legend form-text text-muted">default-legend', $html);
+        $html = $this->getComponent()->caption('custom-caption')->toHtml();
+        $this->assertStringContainsString('class="caption form-text text-muted">custom-caption', $html);
+        $this->assertStringNotContainsString('class="caption form-text text-muted">default-caption', $html);
     }
 
-    public function testHideLegend()
+    public function testHideCaption()
     {
-        $html = $this->getComponent()->legend(null)->toHtml();
-        $this->assertStringNotContainsString('class="legend form-text text-muted"', $html);
+        $html = $this->getComponent()->caption(null)->toHtml();
+        $this->assertStringNotContainsString('class="caption form-text text-muted"', $html);
     }
 
     public function testSetLabel()

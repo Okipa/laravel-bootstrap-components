@@ -25,7 +25,7 @@ class Audio extends MediaAbstract
     /**
      * @inheritDoc
      */
-    protected function setLegend(): ?string
+    protected function setCaption(): ?string
     {
         return null;
     }

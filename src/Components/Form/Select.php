@@ -49,7 +49,7 @@ class Select extends SelectableAbstract
     /**
      * @inheritDoc
      */
-    protected function setLegend(): ?string
+    protected function setCaption(): ?string
     {
         return null;
     }

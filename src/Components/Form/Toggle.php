@@ -49,7 +49,7 @@ class Toggle extends CheckableAbstract
     /**
      * @inheritDoc
      */
-    protected function setLegend(): ?string
+    protected function setCaption(): ?string
     {
         return null;
     }
