@@ -59,7 +59,7 @@ class Link extends ButtonAbstract
      */
     protected function setComponentClasses(): array
     {
-        return ['btn-primary', 'btn-link'];
+        return ['btn-link'];
     }
 
     /**

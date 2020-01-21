@@ -380,7 +380,7 @@
 
 **Pre-configuration**
 
-* Container classes : `btn-primary btn-link`.
+* Container classes : `btn-link`.
 
 ## Button back
 
