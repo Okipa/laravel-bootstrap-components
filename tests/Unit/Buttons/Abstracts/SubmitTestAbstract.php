@@ -197,7 +197,7 @@ abstract class SubmitTestAbstract extends BootstrapComponentsTestCase
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->toHtml();
-        $this->assertStringContainsString('class="component form-control btn default component classes"', $html);
+        $this->assertStringContainsString('class="component btn default component classes"', $html);
     }
 
     public function testSetComponentClassesOverridesDefault()
@@ -207,8 +207,8 @@ abstract class SubmitTestAbstract extends BootstrapComponentsTestCase
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->componentClasses(['custom', 'component', 'classes'])->toHtml();
-        $this->assertStringContainsString('class="component form-control btn custom component classes"', $html);
-        $this->assertStringNotContainsString('class="component form-control btn default component classes"', $html);
+        $this->assertStringContainsString('class="component btn custom component classes"', $html);
+        $this->assertStringNotContainsString('class="component btn default component classes"', $html);
     }
 
     public function testSetCustomContainerHtmlAttributes()
