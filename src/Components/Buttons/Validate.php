@@ -43,7 +43,7 @@ class Validate extends SubmitAbstract
      */
     protected function setLabel(): ?string
     {
-        return __('Validate');
+        return (string) __('Validate');
     }
 
     /**
