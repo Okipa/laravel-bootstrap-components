@@ -114,7 +114,7 @@ abstract class MultilingualAbstract extends FormAbstract
         $parentParams = parent::getParameters();
         $componentId = $this->getLocalizedComponentId($locale);
         $containerId = $this->getLocalizedContainerId($locale);
-        $containerHtmlAttributes = $this->getLocalizedContainerHtmlAttributes($locale);
+        $componentHtmlAttributes = $this->getLocalizedComponentHtmlAttributes($locale);
         $name = $this->getLocalizedName($locale);
         $label = $this->getLocalizedLabel($locale);
         $value = $this->getLocalizedValue($locale);
@@ -125,7 +125,7 @@ abstract class MultilingualAbstract extends FormAbstract
         return array_merge($parentParams, compact(
             'componentId',
             'containerId',
-            'containerHtmlAttributes',
+            'componentHtmlAttributes',
             'name',
             'label',
             'value',
@@ -160,9 +160,9 @@ abstract class MultilingualAbstract extends FormAbstract
      *
      * @return array
      */
-    protected function getLocalizedContainerHtmlAttributes(string $locale): array
+    protected function getLocalizedComponentHtmlAttributes(string $locale): array
     {
-        return array_merge(['data-locale' => $locale], parent::getContainerHtmlAttributes());
+        return array_merge(['data-locale' => $locale], parent::getComponentHtmlAttributes());
     }
 
     /**

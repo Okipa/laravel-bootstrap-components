@@ -77,7 +77,7 @@ Call this component in your view:
 And get this HTML generated for you:
 
 ```html
-<div class="component-container form-group" data-locale="fr">
+<div class="component-container form-group">
     <label for="text-title-fr">
         Title (FR)
     </label>
@@ -92,10 +92,11 @@ And get this HTML generated for you:
             type="text"
             name="title[fr]"
             value=""
-            placeholder="Title (FR)">
+            placeholder="Title (FR)"
+            data-locale="fr">
     </div>
 </div>
-<div class="component-container form-group" data-locale="en">
+<div class="component-container form-group">
     <label for="text-title-en">
         Title (EN)
     </label>
@@ -110,7 +111,8 @@ And get this HTML generated for you:
             type="text"
             name="title[en]"
             value=""
-            placeholder="Title (EN)">
+            placeholder="Title (EN)"
+            data-locale="en">
     </div>
 </div>
 ```
