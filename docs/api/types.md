@@ -58,6 +58,10 @@
 | displaySuccess(?bool $displaySuccess = true): self | No | Set the component input validation success display status. |
 | displayFailure(?bool $displayFailure = true): self | No | Set the component input validation failure display status. |
 
+**Notes**
+
+* The method `value()` accepts a closure to define the component value. To provide a fallback in case of multilingual use, the `$locale` argument can be used, which returns the current locale in case of monolingual component.
+
 **Usage**
 
 ```php
