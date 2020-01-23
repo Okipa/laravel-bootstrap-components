@@ -8,8 +8,6 @@ use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\TemporalAbstract;
 
 abstract class TemporalTestAbstract extends InputTestAbstract
 {
-    abstract protected function getFormat(): string;
-
     public function testInstance()
     {
         $this->assertInstanceOf(TemporalAbstract::class, $this->getComponent());
@@ -30,6 +28,8 @@ abstract class TemporalTestAbstract extends InputTestAbstract
             $html
         );
     }
+
+    abstract protected function getFormat(): string;
 
     public function testWrongModelValue()
     {
@@ -81,6 +81,15 @@ abstract class TemporalTestAbstract extends InputTestAbstract
     {
         $customValue = $this->faker->dateTime;
         $html = $this->getComponent()->name('name')->value($customValue)->toHtml();
+        $this->assertStringContainsString(' value="' . $customValue->format($this->getFormat()) . '"', $html);
+    }
+
+    public function testSetValueFromClosure()
+    {
+        $customValue = $this->faker->dateTime;
+        $html = $this->getComponent()->name('name')->value(function () use ($customValue) {
+            return $customValue;
+        })->toHtml();
         $this->assertStringContainsString(' value="' . $customValue->format($this->getFormat()) . '"', $html);
     }
 

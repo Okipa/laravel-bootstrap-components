@@ -27,6 +27,14 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
         $this->assertStringContainsString($customValue . '</textarea>', $html);
     }
 
+    public function testSetValueFromClosure()
+    {
+        $html = $this->getComponent()->name('name')->value(function ($locale) {
+            return 'closure-value-' . $locale;
+        })->toHtml();
+        $this->assertStringContainsString('closure-value-' . app()->getLocale() . '</textarea>', $html);
+    }
+
     public function testOldValue()
     {
         $oldValue = 'old-value';
@@ -114,9 +122,13 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
         foreach ($locales as $locale) {
             $customValues[$locale] = 'custom-value-' . $locale;
         }
-        $html = $this->getComponent()->name('name')->locales($locales)->value(function ($locale) use ($customValues) {
-            return $customValues[$locale];
-        })->toHtml();
+        $html = $this->getComponent()
+            ->name('name')
+            ->locales($locales)
+            ->value(function ($locale) use ($customValues) {
+                return $customValues[$locale];
+            })
+            ->toHtml();
         foreach ($locales as $locale) {
             $this->assertStringContainsString($customValues[$locale] . '</textarea>', $html);
         }

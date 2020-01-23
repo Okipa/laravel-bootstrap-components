@@ -4,7 +4,6 @@ namespace Okipa\LaravelBootstrapComponents\Components\Form\Abstracts;
 
 use Closure;
 use Okipa\LaravelBootstrapComponents\Components\Form\Traits\MultilingualValidityChecks;
-use Throwable;
 
 abstract class MultilingualAbstract extends FormAbstract
 {
@@ -67,6 +66,8 @@ abstract class MultilingualAbstract extends FormAbstract
     }
 
     /**
+     * Render the multilingual component html.
+     *
      * @param array $extraData
      *
      * @return string
@@ -91,7 +92,7 @@ abstract class MultilingualAbstract extends FormAbstract
     }
 
     /**
-     * Set the localized values for the view.
+     * Get the localized values for the view.
      *
      * @param string $locale
      *

@@ -2,6 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Components\Form\Abstracts;
 
+use Closure;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
@@ -354,8 +355,10 @@ abstract class FormAbstract extends ComponentAbstract
     protected function getValue()
     {
         $value = old($this->getName()) ?: $this->value;
+        // fallback for usage of closure with non multilingual fields
+        $value = $value instanceof Closure ? $value(app()->getLocale()) : $value;
 
-        return $value ?? ($this->model ? $this->model->{$this->getName()} : null);
+        return $value ?? optional($this->getModel())->{$this->getName()};
     }
 
     /**

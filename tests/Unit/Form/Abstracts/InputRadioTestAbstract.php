@@ -167,42 +167,42 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
 
     public function testSetCustomLabelPositionedAbove()
     {
-        // irrelevant
+        $this->markTestSkipped();
     }
 
     public function testSetLabelPositionedAboveOverridesDefault()
     {
-        // irrelevant
+        $this->markTestSkipped();
     }
 
     public function testSetPlaceholder()
     {
-        // irrelevant
+        $this->markTestSkipped();
     }
 
     public function testSetTranslatedPlaceholder()
     {
-        // irrelevant
+        $this->markTestSkipped();
     }
 
     public function testSetPlaceholderWithLabel()
     {
-        // irrelevant
+        $this->markTestSkipped();
     }
 
     public function testNoPlaceholder()
     {
-        // irrelevant
+        $this->markTestSkipped();
     }
 
     public function testNoPlaceholderWithNoLabel()
     {
-        // irrelevant
+        $this->markTestSkipped();
     }
 
     public function testHidePlaceholder()
     {
-        // irrelevant
+        $this->markTestSkipped();
     }
 
     public function testSetNoComponentId()

@@ -109,9 +109,13 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         foreach ($locales as $locale) {
             $customValues[$locale] = 'custom-value-' . $locale;
         }
-        $html = $this->getComponent()->name('name')->locales($locales)->value(function ($locale) use ($customValues) {
-            return $customValues[$locale];
-        })->toHtml();
+        $html = $this->getComponent()
+            ->name('name')
+            ->locales($locales)
+            ->value(function ($locale) use ($customValues) {
+                return $customValues[$locale];
+            })
+            ->toHtml();
         foreach ($locales as $locale) {
             $this->assertStringContainsString(' value="' . $customValues[$locale] . '"', $html);
         }

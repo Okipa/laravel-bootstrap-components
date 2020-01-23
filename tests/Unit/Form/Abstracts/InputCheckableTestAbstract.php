@@ -111,6 +111,14 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         $this->assertStringContainsString('checked="checked', $html);
     }
 
+    public function testSetValueFromClosure()
+    {
+        $html = $this->getComponent()->name('name')->value(function () {
+            return true;
+        })->toHtml();
+        $this->assertStringContainsString('checked="checked', $html);
+    }
+
     public function testSetValueNotChecked()
     {
         $html = $this->getComponent()->name('active')->value(false)->toHtml();
@@ -179,42 +187,42 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
 
     public function testSetCustomLabelPositionedAbove()
     {
-        // irrelevant
+        $this->markTestSkipped();
     }
 
     public function testSetLabelPositionedAboveOverridesDefault()
     {
-        // irrelevant
+        $this->markTestSkipped();
     }
 
     public function testSetPlaceholder()
     {
-        // irrelevant
+        $this->markTestSkipped();
     }
 
     public function testSetTranslatedPlaceholder()
     {
-        // irrelevant
+        $this->markTestSkipped();
     }
 
     public function testSetPlaceholderWithLabel()
     {
-        // irrelevant
+        $this->markTestSkipped();
     }
 
     public function testNoPlaceholder()
     {
-        // irrelevant
+        $this->markTestSkipped();
     }
 
     public function testNoPlaceholderWithNoLabel()
     {
-        // irrelevant
+        $this->markTestSkipped();
     }
 
     public function testHidePlaceholder()
     {
-        // irrelevant
+        $this->markTestSkipped();
     }
 
     public function testSetCustomContainerClasses()

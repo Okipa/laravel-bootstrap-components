@@ -120,7 +120,12 @@ abstract class SelectTestAbstract extends InputTestAbstract
 
     public function testSetValue()
     {
-        // irrelevant
+        $this->markTestSkipped();
+    }
+
+    public function testSetValueFromClosure()
+    {
+        $this->markTestSkipped();
     }
 
     public function testSetSelectedOptionWithoutDeclaredOptions()

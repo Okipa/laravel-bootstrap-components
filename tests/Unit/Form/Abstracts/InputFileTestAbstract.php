@@ -32,6 +32,18 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         );
     }
 
+    public function testSetValueFromClosure()
+    {
+        $html = $this->getComponent()->name('name')->value(function ($locale) {
+            return 'closure-value-' . $locale;
+        })->toHtml();
+        $this->assertStringContainsString(
+            '<label class="custom-file-label" for="' . $this->getComponentType() . '-name">closure-value-'
+            . app()->getLocale() . '</label>',
+            $html
+        );
+    }
+
     public function testOldValue()
     {
         $oldValue = 'old-value';

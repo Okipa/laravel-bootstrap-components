@@ -13,30 +13,21 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
 {
     use UsersFaker;
 
-    abstract protected function getComponent(): ComponentAbstract;
-
-    abstract protected function getHelper(): ComponentAbstract;
-
-    abstract protected function getFacade(): ComponentAbstract;
-
-    abstract protected function getComponentType(): string;
-
-    abstract protected function getCustomComponent(): ComponentAbstract;
-
-    protected function getComponentKey(): string
-    {
-        return $this->getComponentType();
-    }
-
     public function testHelper()
     {
         $this->assertInstanceOf(get_class($this->getComponent()), $this->getHelper());
     }
 
+    abstract protected function getComponent(): ComponentAbstract;
+
+    abstract protected function getHelper(): ComponentAbstract;
+
     public function testFacade()
     {
         $this->assertInstanceOf(get_class($this->getComponent()), $this->getFacade());
     }
+
+    abstract protected function getFacade(): ComponentAbstract;
 
     public function testInstance()
     {
@@ -54,6 +45,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $html = $this->getComponent()->name('name')->toHtml();
         $this->assertStringContainsString(' type="' . $this->getComponentType() . '"', $html);
     }
+
+    abstract protected function getComponentType(): string;
 
     public function testInputWithoutName()
     {
@@ -77,6 +70,13 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $html = $this->getComponent()->name('name')->toHtml();
         $this->assertStringContainsString('<span class="input-group-text">default-prepend</span>', $html);
     }
+
+    protected function getComponentKey(): string
+    {
+        return $this->getComponentType();
+    }
+
+    abstract protected function getCustomComponent(): ComponentAbstract;
 
     public function testSetPrependOverridesDefault()
     {
@@ -160,6 +160,14 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $customValue = 'custom-value';
         $html = $this->getComponent()->name('name')->value($customValue)->toHtml();
         $this->assertStringContainsString(' value="' . $customValue . '"', $html);
+    }
+
+    public function testSetValueFromClosure()
+    {
+        $html = $this->getComponent()->name('name')->value(function ($locale) {
+            return 'closure-value-' . $locale;
+        })->toHtml();
+        $this->assertStringContainsString(' value="closure-value-' . app()->getLocale() . '"', $html);
     }
 
     public function testOldValue()
