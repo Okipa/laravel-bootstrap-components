@@ -11,8 +11,10 @@ jobs:
       fail-fast: true
       matrix:
         php: ['7.2', '7.3', '7.4']
-        laravel: ['5.8.*', '6.*']
+        laravel: ['5.8.*', '6.*', '7.*']
         include:
+          - laravel: '7.*'
+            testbench: '5.*'
           - laravel: '6.*'
             testbench: '4.*'
           - laravel: '5.8.*'
@@ -22,7 +24,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
 
       - name: Cache dependencies
         uses: actions/cache@v1
@@ -45,29 +47,30 @@ jobs:
       # lower php and laravel versions
 
       - name: PHPUnit
-        if: matrix.php != '7.4' || matrix.laravel != '6.*'
+        if: matrix.php != '7.4' || matrix.laravel != '7.*'
         run: vendor/bin/phpunit
 
       # last php and laravel versions
 
       - name: Code analysis
-        if: matrix.php == '7.4' && matrix.laravel == '6.*'
+        if: matrix.php == '7.4' && matrix.laravel == '7.*'
         run: |
           vendor/bin/phpcs
-          vendor/bin/phpmd config,src text phpmd.xml
+          vendor/bin/phpmd src text phpmd.xml
           vendor/bin/phpstan analyse
 
       - name: PHPUnit + Code coverage
-        if: matrix.php == '7.4' && matrix.laravel == '6.*'
+        if: matrix.php == '7.4' && matrix.laravel == '7.*'
         run: |
           mkdir -p build/logs
           vendor/bin/phpunit --coverage-text --coverage-clover build/logs/clover.xml
 
       - name: Code coverage upload to Coveralls
-        if: matrix.php == '7.4' && matrix.laravel == '6.*'
+        if: matrix.php == '7.4' && matrix.laravel == '7.*'
         env:
           COVERALLS_RUN_LOCALLY: 1
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
         run: |
+          echo ${GITHUB_REF##*/}
           composer require php-coveralls/php-coveralls
           vendor/bin/php-coveralls -v --coverage_clover=build/logs/clover.xml

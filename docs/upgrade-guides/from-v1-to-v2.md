@@ -87,6 +87,12 @@ Missing button components are now available.
 * [Button](../../docs/api/components.md#button)
 * [Button link](../../docs/api/components.md#button-link)
 
+## Extra components styles directory change
+
+The `styles` directory, previously available from the root of the package and containing the extra components `scss` styles, has been moved into the `resources` directory.
+
+Make sure to update your `scss` imports. 
+
 ## See all changes
 
 See all change with the [comparison tool](https://github.com/Okipa/laravel-bootstrap-components/compare/1.0.10...2.0.0).

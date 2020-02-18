@@ -13,6 +13,7 @@
 * Added new multilingual features.
 * Added new components.
 * Added php7.4 support.
+* Added Laravel 7 support.
 
 :point_right: [See the upgrade guide](/docs/upgrade-guides/from-v1-to-v2.md)
 

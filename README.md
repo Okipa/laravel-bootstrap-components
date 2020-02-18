@@ -168,10 +168,10 @@ You will have to load the package styles to use the following extra components (
 
 * `inputToggle()`
 
-Load the package `scss` from the following path and override the declared in the `styles/scss/_variables.scss` file if needed.
+Load the package `scss` from the following path and override the declared variables in the `resources/styles/scss/_variables.scss` file if needed.
 
 ```scss
-@import '/path/to/composer/vendor/okipa/laravel-bootstrap-components/styles/scss/bootstrap-components';
+@import '/path/to/composer/vendor/okipa/laravel-bootstrap-components/resources/styles/scss/bootstrap-components';
 ``` 
 
 ## API documentation
