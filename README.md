@@ -16,7 +16,7 @@ You feel like there is a missing component ? Feel free to open an issue or submi
 
 | Laravel | PHP | Bootstrap | Package |
 |---|---|---|---|
-| ^5.5 | ^7.1 | ^4.0 | ^2.0 |
+| ^5.8 | ^7.2 | ^4.0 | ^2.0 |
 | ^5.5 | ^7.1 | ^4.0 | ^1.0 |
 
 ## Upgrade guide
