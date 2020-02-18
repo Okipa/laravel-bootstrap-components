@@ -1,6 +1,6 @@
 <?php
 
-namespace Okipa\LaravelBootstrapComponents\Test\Models;
+namespace Okipa\LaravelBootstrapComponents\Tests\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,14 +12,16 @@ class User extends Model
      * @var string
      */
     protected $table = 'users_test';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'active',
+        'name', 'name_fr', 'name_en', 'email', 'password', 'active',
     ];
+
     /**
      * The attributes that should be hidden for arrays.
      *

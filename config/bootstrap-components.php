@@ -2,427 +2,66 @@
 
 return [
 
-    // form components *************************************************************************************************
-    'form'   => [
-        'text'     => [
-            'view'                 => 'bootstrap-components.form.input',
-            'prepend'              => '<i class="fas fa-font"></i>',
-            'append'               => null,
-            'labelPositionedAbove' => true,
-            'legend'               => null,
-            'classes'              => [
-                'container' => ['form-group'],
-                'component' => [],
-            ],
-            'htmlAttributes'       => [
-                'container' => [],
-                'component' => [],
-            ],
-            'formValidation'       => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
-            ],
-        ],
-        'number'   => [
-            'view'                 => 'bootstrap-components.form.input',
-            'prepend'              => '<i class="fas fa-euro-sign"></i>',
-            'append'               => null,
-            'labelPositionedAbove' => true,
-            'legend'               => null,
-            'classes'              => [
-                'container' => ['form-group'],
-                'component' => [],
-            ],
-            'htmlAttributes'       => [
-                'container' => [],
-                'component' => [],
-            ],
-            'formValidation'       => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
-            ],
-        ],
-        'tel'      => [
-            'view'                 => 'bootstrap-components.form.input',
-            'prepend'              => '<i class="fas fa-phone"></i>',
-            'append'               => null,
-            'labelPositionedAbove' => true,
-            'legend'               => 'bootstrap-components.legend.tel',
-            'classes'              => [
-                'container' => ['form-group'],
-                'component' => [],
-            ],
-            'htmlAttributes'       => [
-                'container' => [],
-                'component' => [],
-            ],
-            'formValidation'       => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
-            ],
-        ],
-        'datetime' => [
-            'view'                 => 'bootstrap-components.form.input',
-            'prepend'              => '<i class="fas fa-calendar-alt"></i>',
-            'append'               => null,
-            'format'               => 'Y-m-d\TH:i',
-            'labelPositionedAbove' => true,
-            'legend'               => 'bootstrap-components.legend.datetime',
-            'classes'              => [
-                'container' => ['form-group'],
-                'component' => [],
-            ],
-            'htmlAttributes'       => [
-                'container' => [],
-                'component' => [],
-            ],
-            'formValidation'       => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
-            ],
-        ],
-        'date'     => [
-            'view'                 => 'bootstrap-components.form.input',
-            'prepend'              => '<i class="fas fa-calendar-alt"></i>',
-            'append'               => null,
-            'format'               => 'Y-m-d',
-            'labelPositionedAbove' => true,
-            'legend'               => 'bootstrap-components.legend.date',
-            'classes'              => [
-                'container' => ['form-group'],
-                'component' => [],
-            ],
-            'htmlAttributes'       => [
-                'container' => [],
-                'component' => [],
-            ],
-            'formValidation'       => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
-            ],
-        ],
-        'time'     => [
-            'view'                 => 'bootstrap-components.form.input',
-            'prepend'              => '<i class="fas fa-clock"></i>',
-            'append'               => null,
-            'format'               => 'H:i:s',
-            'labelPositionedAbove' => true,
-            'legend'               => 'bootstrap-components.legend.time',
-            'classes'              => [
-                'container' => ['form-group'],
-                'component' => [],
-            ],
-            'htmlAttributes'       => [
-                'container' => [],
-                'component' => [],
-            ],
-            'formValidation'       => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
-            ],
-        ],
-        'url'      => [
-            'view'                 => 'bootstrap-components.form.input',
-            'prepend'              => '<i class="fas fa-link"></i>',
-            'append'               => null,
-            'labelPositionedAbove' => true,
-            'legend'               => null,
-            'classes'              => [
-                'container' => ['form-group'],
-                'component' => [],
-            ],
-            'htmlAttributes'       => [
-                'container' => [],
-                'component' => [],
-            ],
-            'formValidation'       => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
-            ],
-        ],
-        'email'    => [
-            'view'                 => 'bootstrap-components.form.input',
-            'prepend'              => '<i class="fas fa-at"></i>',
-            'append'               => null,
-            'labelPositionedAbove' => true,
-            'legend'               => null,
-            'classes'              => [
-                'container' => ['form-group'],
-                'component' => [],
-            ],
-            'htmlAttributes'       => [
-                'container' => [],
-                'component' => [],
-            ],
-            'formValidation'       => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
-            ],
-        ],
-        'color'    => [
-            'view'                 => 'bootstrap-components.form.input',
-            'prepend'              => '<i class="fas fa-palette"></i>',
-            'append'               => null,
-            'labelPositionedAbove' => true,
-            'legend'               => null,
-            'classes'              => [
-                'container' => ['form-group'],
-                'component' => [],
-            ],
-            'htmlAttributes'       => [
-                'container' => [],
-                'component' => [],
-            ],
-            'formValidation'       => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
-            ],
-        ],
-        'password' => [
-            'view'                 => 'bootstrap-components.form.input',
-            'prepend'              => '<i class="fas fa-user-secret"></i>',
-            'append'               => null,
-            'labelPositionedAbove' => true,
-            'legend'               => null,
-            'classes'              => [
-                'container' => ['form-group'],
-                'component' => [],
-            ],
-            'htmlAttributes'       => [
-                'container' => [],
-                'component' => [],
-            ],
-            'formValidation'       => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
-            ],
-        ],
-        'file'     => [
-            'view'                 => 'bootstrap-components.form.file',
-            'prepend'              => '<i class="fas fa-upload"></i>',
-            'append'               => null,
-            'labelPositionedAbove' => true,
-            'legend'               => null,
-            'show_remove_checkbox' => true,
-            'classes'              => [
-                'container' => ['form-group'],
-                'component' => [],
-            ],
-            'htmlAttributes'       => [
-                'container' => [],
-                'component' => [],
-            ],
-            'formValidation'       => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
-            ],
-        ],
-        'textarea' => [
-            'view'                 => 'bootstrap-components.form.textarea',
-            'prepend'              => '<i class="fas fa-comment"></i>',
-            'append'               => null,
-            'labelPositionedAbove' => true,
-            'legend'               => null,
-            'classes'              => [
-                'container' => ['form-group'],
-                'component' => [],
-            ],
-            'htmlAttributes'       => [
-                'container' => [],
-                'component' => [],
-            ],
-            'formValidation'       => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
-            ],
-        ],
-        'select'   => [
-            'view'                 => 'bootstrap-components.form.select',
-            'prepend'              => '<i class="fas fa-hand-pointer"></i>',
-            'append'               => null,
-            'labelPositionedAbove' => true,
-            'legend'               => null,
-            'classes'              => [
-                'container' => ['form-group'],
-                'component' => [],
-            ],
-            'htmlAttributes'       => [
-                'container' => [],
-                'component' => [],
-            ],
-            'formValidation'       => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
-            ],
-        ],
-        'checkbox' => [
-            'view'           => 'bootstrap-components.form.checkbox',
-            'prepend'        => null,
-            'append'         => null,
-            'legend'         => null,
-            'classes'        => [
-                'container' => ['form-group'],
-                'component' => [],
-            ],
-            'htmlAttributes' => [
-                'container' => [],
-                'component' => [],
-            ],
-            'formValidation' => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
-            ],
-        ],
-        'toggle'   => [
-            'view'           => 'bootstrap-components.form.toggle',
-            'prepend'        => null,
-            'append'         => null,
-            'legend'         => null,
-            'classes'        => [
-                'container' => ['form-group'],
-                'component' => [],
-            ],
-            'htmlAttributes' => [
-                'container' => [],
-                'component' => [],
-            ],
-            'formValidation' => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
-            ],
-        ],
-        'radio'    => [
-            'view'           => 'bootstrap-components.form.radio',
-            'prepend'        => null,
-            'append'         => null,
-            'legend'         => null,
-            'classes'        => [
-                'container' => ['form-group'],
-                'component' => [],
-            ],
-            'htmlAttributes' => [
-                'container' => [],
-                'component' => [],
-            ],
-            'formValidation' => [
-                'displaySuccess' => false,
-                'displayFailure' => true,
-            ],
-        ],
+    /*
+     * The fully qualified class name of the components.
+     * Here you can override them. Make sure your custom component extends the overridden one.
+     */
+    'components' => [
+        // form
+        'text' => Okipa\LaravelBootstrapComponents\Components\Form\Text::class,
+        'email' => Okipa\LaravelBootstrapComponents\Components\Form\Email::class,
+        'password' => Okipa\LaravelBootstrapComponents\Components\Form\Password::class,
+        'url' => Okipa\LaravelBootstrapComponents\Components\Form\Url::class,
+        'tel' => Okipa\LaravelBootstrapComponents\Components\Form\Tel::class,
+        'number' => Okipa\LaravelBootstrapComponents\Components\Form\Number::class,
+        'color' => Okipa\LaravelBootstrapComponents\Components\Form\Color::class,
+        'date' => Okipa\LaravelBootstrapComponents\Components\Form\Date::class,
+        'time' => Okipa\LaravelBootstrapComponents\Components\Form\Time::class,
+        'datetime' => Okipa\LaravelBootstrapComponents\Components\Form\Datetime::class,
+        'file' => Okipa\LaravelBootstrapComponents\Components\Form\File::class,
+        'checkbox' => Okipa\LaravelBootstrapComponents\Components\Form\Checkbox::class,
+        'toggle' => Okipa\LaravelBootstrapComponents\Components\Form\Toggle::class,
+        'radio' => Okipa\LaravelBootstrapComponents\Components\Form\Radio::class,
+        'textarea' => Okipa\LaravelBootstrapComponents\Components\Form\Textarea::class,
+        'select' => Okipa\LaravelBootstrapComponents\Components\Form\Select::class,
+        // buttons
+        'submit' => Okipa\LaravelBootstrapComponents\Components\Buttons\Submit::class,
+        'create' => Okipa\LaravelBootstrapComponents\Components\Buttons\Create::class,
+        'update' => Okipa\LaravelBootstrapComponents\Components\Buttons\Update::class,
+        'validate' => Okipa\LaravelBootstrapComponents\Components\Buttons\Validate::class,
+        'button' => Okipa\LaravelBootstrapComponents\Components\Buttons\Button::class,
+        'link' => Okipa\LaravelBootstrapComponents\Components\Buttons\Link::class,
+        'back' => Okipa\LaravelBootstrapComponents\Components\Buttons\Back::class,
+        'cancel' => Okipa\LaravelBootstrapComponents\Components\Buttons\Cancel::class,
+        // media
+        'image' => Okipa\LaravelBootstrapComponents\Components\Media\Image::class,
+        'audio' => Okipa\LaravelBootstrapComponents\Components\Media\Audio::class,
+        'video' => Okipa\LaravelBootstrapComponents\Components\Media\Video::class,
     ],
 
-    // buttons components **********************************************************************************************
-    'button' => [
-        'validate' => [
-            'view'           => 'bootstrap-components.buttons.button',
-            'prepend'        => '<i class="fas fa-fw fa-check"></i>',
-            'append'         => null,
-            'label'          => 'bootstrap-components.label.validate',
-            'classes'        => [
-                'container' => ['form-group'],
-                'component' => ['btn', 'btn-primary'],
-            ],
-            'htmlAttributes' => [
-                'container' => [],
-                'component' => [],
-            ],
-        ],
-        'create'   => [
-            'view'           => 'bootstrap-components.buttons.button',
-            'prepend'        => '<i class="fas fa-fw fa-plus-circle"></i>',
-            'append'         => null,
-            'label'          => 'bootstrap-components.label.create',
-            'classes'        => [
-                'container' => ['form-group'],
-                'component' => ['btn', 'btn-primary'],
-            ],
-            'htmlAttributes' => [
-                'container' => [],
-                'component' => [],
-            ],
-        ],
-        'update'   => [
-            'view'           => 'bootstrap-components.buttons.button',
-            'prepend'        => '<i class="fas fa-fw fa-save"></i>',
-            'append'         => null,
-            'label'          => 'bootstrap-components.label.update',
-            'classes'        => [
-                'container' => ['form-group'],
-                'component' => ['btn', 'btn-primary'],
-            ],
-            'htmlAttributes' => [
-                'container' => [],
-                'component' => [],
-            ],
-        ],
-        'back'     => [
-            'view'           => 'bootstrap-components.buttons.button',
-            'prepend'        => '<i class="fas fa-fw fa-undo"></i>',
-            'append'         => null,
-            'label'          => 'bootstrap-components.label.back',
-            'classes'        => [
-                'container' => ['form-group'],
-                'component' => ['btn', 'btn-light'],
-            ],
-            'htmlAttributes' => [
-                'container' => [],
-                'component' => [],
-            ],
-        ],
-        'cancel'   => [
-            'view'           => 'bootstrap-components.buttons.button',
-            'prepend'        => '<i class="fas fa-fw fa-ban"></i>',
-            'append'         => null,
-            'label'          => 'bootstrap-components.label.cancel',
-            'classes'        => [
-                'container' => ['form-group'],
-                'component' => ['btn', 'btn-danger'],
-            ],
-            'htmlAttributes' => [
-                'container' => [],
-                'component' => [],
-            ],
-        ],
-    ],
+    /*
+    * Form components specific configuration.
+    */
+    'form' => [
+        /*
+         * The fully qualified class name of the multilingual resolver.
+         * You can override it. Make sure your custom resolver extends this one.
+         */
+        'multilingualResolver' => Okipa\LaravelBootstrapComponents\Components\Form\Multilingual\Resolver::class,
 
-    // media components ************************************************************************************************
-    'media'  => [
+        /*
+         * Whether the form component label is positioned above the component itself.
+         * If not positioned above, the label will be positioned under the input
+         * (may be useful for bootstrap 4 floating labels).
+         */
+        'labelPositionedAbove' => true,
 
-        'audio' => [
-            'view'           => 'bootstrap-components.media.audio',
-            'classes'        => [
-                'container' => [],
-                'component' => [],
-            ],
-            'htmlAttributes' => [
-                'container' => [],
-                'component' => ['controls', 'preload' => true],
-            ],
-        ],
-        'image' => [
-            'view'           => 'bootstrap-components.media.image',
-            'classes'        => [
-                'container' => [],
-                'link'      => [],
-                'component' => [],
-            ],
-            'htmlAttributes' => [
-                'container' => [],
-                'link'      => [],
-                'component' => [],
-            ],
-        ],
-        'video' => [
-            'view'           => 'bootstrap-components.media.video',
-            'poster'         => null,
-            'classes'        => [
-                'container' => [],
-                'component' => [],
-            ],
-            'htmlAttributes' => [
-                'container' => [],
-                'component' => ['controls', 'preload' => true],
-            ],
+        /*
+         * Whether the form component should display its success or failure status.
+         */
+        'formValidation' => [
+            'displaySuccess' => false,
+            'displayFailure' => true,
         ],
     ],
 

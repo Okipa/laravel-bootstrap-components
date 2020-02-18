@@ -1,6 +1,6 @@
 {
     "name": "okipa/laravel-bootstrap-components",
-    "description": "Save time and take advantage of ready-to-use and customizable bootstrap components.",
+    "description": "Ready-to-use and customizable components.",
     "keywords": [
         "okipa",
         "package",
@@ -24,16 +24,14 @@
     ],
     "require": {
         "ext-json": "*",
-        "php": "^7.1",
-        "illuminate/support": "~5.5.0||~5.6.0||~5.7.0||~5.8.0||^6.0",
-        "okipa/laravel-html-helper": "^1.1.1"
+        "php": "^7.2",
+        "illuminate/support": "~5.8.0||^6.0||^7.0",
+        "okipa/laravel-html-helper": "^1.3"
     },
     "require-dev": {
-        "mockery/mockery": "^1.0",
-        "nunomaduro/larastan": "^0.4",
-        "orchestra/testbench": "~3.8.0||^4.0",
-        "php-coveralls/php-coveralls": "^2.1",
-        "phpmd/phpmd": "^2.7",
+        "nunomaduro/larastan": "^0.4.3||^0.5",
+        "orchestra/testbench": "~3.8.0||^4.0||^5.0",
+        "phpmd/phpmd": "^2.8",
         "squizlabs/php_codesniffer": "^3.5"
     },
     "autoload": {
@@ -41,19 +39,19 @@
             "Okipa\\LaravelBootstrapComponents\\": "src/"
         },
         "files": [
-            "app/Helpers/componentsHelper.php"
+            "src/Helpers/components.php"
         ]
     },
     "autoload-dev": {
         "psr-4": {
-            "Okipa\\LaravelBootstrapComponents\\Test\\": "tests"
+            "Okipa\\LaravelBootstrapComponents\\Tests\\": "tests"
         }
     },
     "scripts": {
         "test": [
             "vendor/bin/phpcbf",
             "vendor/bin/phpcs",
-            "vendor/bin/phpmd app,config,src text phpmd.xml",
+            "vendor/bin/phpmd config,src text phpmd.xml",
             "vendor/bin/phpstan analyse",
             "vendor/bin/phpunit"
         ]
@@ -62,7 +60,36 @@
         "laravel": {
             "providers": [
                 "Okipa\\LaravelBootstrapComponents\\ComponentServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "InputText": "Okipa\\LaravelBootstrapComponents\\Facades\\InputText",
+                "InputEmail": "Okipa\\LaravelBootstrapComponents\\Facades\\InputEmail",
+                "InputPassword": "Okipa\\LaravelBootstrapComponents\\Facades\\InputPassword",
+                "InputUrl": "Okipa\\LaravelBootstrapComponents\\Facades\\InputUrl",
+                "InputTel": "Okipa\\LaravelBootstrapComponents\\Facades\\InputTel",
+                "InputNumber": "Okipa\\LaravelBootstrapComponents\\Facades\\InputNumber",
+                "InputColor": "Okipa\\LaravelBootstrapComponents\\Facades\\InputColor",
+                "InputDate": "Okipa\\LaravelBootstrapComponents\\Facades\\InputDate",
+                "InputTime": "Okipa\\LaravelBootstrapComponents\\Facades\\InputTime",
+                "InputDatetime": "Okipa\\LaravelBootstrapComponents\\Facades\\InputDatetime",
+                "InputFile": "Okipa\\LaravelBootstrapComponents\\Facades\\InputFile",
+                "InputCheckbox": "Okipa\\LaravelBootstrapComponents\\Facades\\InputCheckbox",
+                "InputToggle": "Okipa\\LaravelBootstrapComponents\\Facades\\InputToggle",
+                "InputRadio": "Okipa\\LaravelBootstrapComponents\\Facades\\InputRadio",
+                "Textarea": "Okipa\\LaravelBootstrapComponents\\Facades\\Textarea",
+                "Select": "Okipa\\LaravelBootstrapComponents\\Facades\\Select",
+                "Submit": "Okipa\\LaravelBootstrapComponents\\Facades\\Submit",
+                "SubmitValidate": "Okipa\\LaravelBootstrapComponents\\Facades\\SubmitValidate",
+                "SubmitCreate": "Okipa\\LaravelBootstrapComponents\\Facades\\SubmitCreate",
+                "SubmitUpdate": "Okipa\\LaravelBootstrapComponents\\Facades\\SubmitUpdate",
+                "Button": "Okipa\\LaravelBootstrapComponents\\Facades\\Button",
+                "ButtonLink": "Okipa\\LaravelBootstrapComponents\\Facades\\ButtonLink",
+                "ButtonBack": "Okipa\\LaravelBootstrapComponents\\Facades\\ButtonBack",
+                "ButtonCancel": "Okipa\\LaravelBootstrapComponents\\Facades\\ButtonCancel",
+                "Image": "Okipa\\LaravelBootstrapComponents\\Facades\\Image",
+                "Audio": "Okipa\\LaravelBootstrapComponents\\Facades\\Audio",
+                "Video": "Okipa\\LaravelBootstrapComponents\\Facades\\Video"
+            }
         }
     },
     "config": {

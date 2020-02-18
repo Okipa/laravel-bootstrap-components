@@ -1,11 +1,11 @@
-@if(isset($errors) && $errors->isNotEmpty() && ($displaySuccess || $displayFailure))
-    @if($displayFailure && $errors->has($name))
+@isset($errors)
+    @if($errorMessage && $displayFailure)
         <div class="invalid-feedback d-block">
-            {!! $errors->first($name) !!}
+            {!! $errorMessage !!}
         </div>
     @elseif($displaySuccess)
         <div class="valid-feedback d-block">
-            @lang('bootstrap-components::bootstrap-components.notification.validation.success')
+            @lang('Field correctly filled.')
         </div>
     @endif
 @endisset

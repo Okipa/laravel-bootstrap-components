@@ -1,4 +1,4 @@
-<div{{ htmlAttributes($containerId ? ['id' => $containerId] : null) }}{{ classTag($type . '-' . Str::slug($name) . '-container', $containerClasses) }}{{ htmlAttributes($containerHtmlAttributes) }}>
+<div{{ htmlAttributes($containerId ? ['id' => $containerId] : null) }}{{ classTag('component-container', $containerClasses) }}{{ htmlAttributes($containerHtmlAttributes) }}>
     @if($labelPositionedAbove)
         @include('bootstrap-components::bootstrap-components.partials.label')
     @endif
@@ -6,14 +6,14 @@
         <div class="input-group">
     @endif
         @include('bootstrap-components::bootstrap-components.partials.prepend')
-        <textarea id="{{ $componentId }}" name="{{ $name }}"{{ classTag('form-control', $type . '-' . Str::slug($name) . '-component', $componentClasses, $validationClass) }}{{ htmlAttributes($placeholder ? ['placeholder' => __($placeholder)] : null, $componentHtmlAttributes) }} aria-label="@lang($label)" aria-describedby="{{ $type }}-{{ Str::slug($name) }}">{{ old($name, $value) }}</textarea>
+        <textarea id="{{ $componentId }}"{{ classTag('component', 'form-control', $componentClasses, $validationClass) }} name="{{ $name }}"{{ htmlAttributes($placeholder ? ['placeholder' => $placeholder] : null, $componentHtmlAttributes) }}>{{ old($name, $value) }}</textarea>
         @include('bootstrap-components::bootstrap-components.partials.append')
+        @include('bootstrap-components::bootstrap-components.partials.validation-feedback')
     @if(! empty($prepend) || ! empty($append))
         </div>
     @endif
     @unless($labelPositionedAbove)
         @include('bootstrap-components::bootstrap-components.partials.label')
     @endunless
-    @include('bootstrap-components::bootstrap-components.partials.validation-feedback')
-    @include('bootstrap-components::bootstrap-components.partials.legend')
+    @include('bootstrap-components::bootstrap-components.partials.caption')
 </div>
