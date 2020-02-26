@@ -344,10 +344,12 @@ abstract class SelectableAbstract extends FormAbstract
      */
     protected function setOptionsDisabledStatus(): void
     {
-        $disabledOptionsClosure = $this->disabledOptionsClosure;
-        foreach ($this->options as $key => $option) {
-            if ($disabledOptionsClosure($option)) {
-                $this->options[$key]['disabled'] = true;
+        if ($this->options && $this->disabledOptionsClosure) {
+            $disabledOptionsClosure = $this->disabledOptionsClosure;
+            foreach ($this->options as $key => $option) {
+                if ($disabledOptionsClosure($option)) {
+                    $this->options[$key]['disabled'] = true;
+                }
             }
         }
     }
