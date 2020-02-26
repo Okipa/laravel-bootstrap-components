@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.1.0](https://github.com/Okipa/laravel-bootstrap-components/compare/2.0.0...2.1.0)
+
+2020-02-26
+
+* Added capacity for select component to disable options.
+
 ## [2.0.0](https://github.com/Okipa/laravel-bootstrap-components/compare/1.0.10...2.0.0)
 
 2019-12-09

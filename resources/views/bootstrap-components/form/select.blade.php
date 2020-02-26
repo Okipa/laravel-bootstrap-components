@@ -11,7 +11,7 @@
                 <option value=""{{ htmlAttributes(count(array_filter(Arr::pluck($options, 'selected'))) ? null : ['selected' => 'selected']) }}>{{ $placeholder }}</option>
             @endif
             @foreach($options as $option)
-                <option value="{{ $option[$optionValueField] }}"{{ htmlAttributes(!empty($option['selected']) && $option['selected'] === true ? ['selected' => 'selected'] : null) }}>{{ $option[$optionLabelField] }}</option>
+                <option value="{{ $option[$optionValueField] }}"{{ htmlAttributes(data_get($option, 'selected') ? ['selected' => 'selected'] : null, data_get($option, 'disabled') ? ['disabled'] : null) }}>{{ $option[$optionLabelField] }}</option>
             @endforeach
         </select>
         @include('bootstrap-components::bootstrap-components.partials.append')

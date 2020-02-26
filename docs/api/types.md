@@ -98,7 +98,7 @@
 | Signature | Required | Description |
 |---|---|---|
 | locales(array $locales): self | No | Set the component input language locales to handle. |
-| value(Closure $value): self | No | Set the component input value. The value has to be set from this closure result : `->value(function($locale){})`. |
+| value(Closure $value): self | No | Set the component input value by returning it from this closure result : `->value(function(string $locale){})`. |
 
 **Notes**
 
@@ -120,7 +120,7 @@
 <MultilingualAbstract>
     // inherits FormAbstract methods
     ->locales(['fr', 'en']) 
-    ->value(function($locale){ return $name[$locale]; });
+    ->value(function(string $locale){ return $name[$locale]; });
 ```
 
 **Components**
@@ -216,6 +216,7 @@
 |---|---|---|
 | options(iterable $optionsList, string $optionValueField, string $optionLabelField): self | No | Set the options list (array or models collection) and declare which fields should be used for the options values and labels. |
 | selected(string $fieldToCompare, $valueToCompare): self | No | Choose which option should be selected, declaring the field and the value to compare with the declared options list. |
+| disabled(Closure $disabledOptions): self | No | Choose which option should be disabled by returning a boolean value from this closure result : `->disabled(function(array $option){})`. |
 | multiple(bool $multiple = true): self | No | Set the select multiple mode. |
 
 **Notes**
@@ -228,11 +229,14 @@
 <SelectableAbstract>
     // inherits FormAbstract methods
     ->options(collect([
-        ['id' => 1, 'title' => 'Item 1'],
-        ['id' => 2, 'title' => 'Item 2'],
+        ['id' => 1, 'title' => 'Item 1', 'active' => true],
+        ['id' => 2, 'title' => 'Item 2', 'active' => false],
     ]), 'id', 'title')
     ->selected('id', 1)
     // or ->selected('id', [1]) in multiple mode
+    ->disabled(function(array $option){
+        return ! $option['active'];
+    })
     ->multiple();
 ```
 

@@ -2,6 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Components\Form\Abstracts;
 
+use Closure;
 use Illuminate\Support\Arr;
 use Okipa\LaravelBootstrapComponents\Components\Form\Traits\SelectValidityChecks;
 
@@ -45,6 +46,13 @@ abstract class SelectableAbstract extends FormAbstract
     protected $selectedValueToCompare;
 
     /**
+     * The disabled options closure.
+     *
+     * @property \Closure $disabledOptionsClosure
+     */
+    protected $disabledOptionsClosure;
+
+    /**
      * The selected options value field.
      *
      * @property string $optionSelectedValueField
@@ -70,7 +78,8 @@ abstract class SelectableAbstract extends FormAbstract
     }
 
     /**
-     * Set the selected option.
+     * Choose which option should be selected,
+     * declaring the field and the value to compare with the declared options list.
      *
      * @param string $fieldToCompare
      * @param int|string|array $valueToCompare
@@ -81,6 +90,21 @@ abstract class SelectableAbstract extends FormAbstract
     {
         $this->selectedFieldToCompare = $fieldToCompare;
         $this->selectedValueToCompare = $valueToCompare;
+
+        return $this;
+    }
+
+    /**
+     * Choose which option should be disabled by returning a boolean value from this closure result :
+     * ->disabled(function(array $option){}).
+     *
+     * @param \Closure $disabledOptions
+     *
+     * @return $this
+     */
+    public function disabled(Closure $disabledOptions): self
+    {
+        $this->disabledOptionsClosure = $disabledOptions;
 
         return $this;
     }
@@ -106,16 +130,26 @@ abstract class SelectableAbstract extends FormAbstract
      */
     protected function getParameters(): array
     {
-        $this->setOptionsSelectedStatus();
         $options = $this->getOptions();
-        $optionValueField = $this->optionValueField;
-        $optionLabelField = $this->optionLabelField;
-        $multiple = $this->multiple;
+        $optionValueField = $this->getOptionValueField();
+        $optionLabelField = $this->getOptionLabelField();
+        $multiple = $this->getMultiple();
 
         return array_merge(
             parent::getParameters(),
             compact('options', 'optionValueField', 'optionLabelField', 'multiple')
         );
+    }
+
+    /**
+     * @return array
+     */
+    protected function getOptions(): array
+    {
+        $this->setOptionsSelectedStatus();
+        $this->setOptionsDisabledStatus();
+
+        return $this->options ?? [];
     }
 
     /**
@@ -306,10 +340,41 @@ abstract class SelectableAbstract extends FormAbstract
     }
 
     /**
-     * @return array
+     * @return void
      */
-    protected function getOptions(): array
+    protected function setOptionsDisabledStatus(): void
     {
-        return $this->options ?? [];
+        if ($this->options && $this->disabledOptionsClosure) {
+            $disabledOptionsClosure = $this->disabledOptionsClosure;
+            foreach ($this->options as $key => $option) {
+                if ($disabledOptionsClosure($option)) {
+                    $this->options[$key]['disabled'] = true;
+                }
+            }
+        }
+    }
+
+    /**
+     * @return string|null
+     */
+    protected function getOptionValueField(): ?string
+    {
+        return $this->optionValueField;
+    }
+
+    /**
+     * @return string|null
+     */
+    protected function getOptionLabelField(): ?string
+    {
+        return $this->optionLabelField;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function getMultiple(): bool
+    {
+        return $this->multiple;
     }
 }
