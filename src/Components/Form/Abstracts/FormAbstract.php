@@ -146,7 +146,8 @@ abstract class FormAbstract extends ComponentAbstract
     }
 
     /**
-     * Set the component value.
+     * Set the component input value by returning it from this closure result :
+     * ->value(function(string $locale){}).
      *
      * @param mixed $value
      *

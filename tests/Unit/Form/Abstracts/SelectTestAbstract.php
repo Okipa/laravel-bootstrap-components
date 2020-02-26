@@ -246,6 +246,32 @@ abstract class SelectTestAbstract extends InputTestAbstract
         );
     }
 
+    public function testSetDisabledOptions()
+    {
+        $users = $this->createMultipleUsers(3);
+        $users->first()->update(['active' => false]);
+        $html = $this->getComponent()
+            ->name('name')
+            ->options($users, 'id', 'name')
+            ->disabled(function (array $option) {
+                return ! $option['active'];
+            })
+            ->toHtml();
+        foreach ($users as $user) {
+            if ($user->active) {
+                $this->assertStringContainsString(
+                    '<option value="' . $user->id . '">' . $user->name . '</option>',
+                    $html
+                );
+            } else {
+                $this->assertStringContainsString(
+                    '<option value="' . $user->id . '" disabled>' . $user->name . '</option>',
+                    $html
+                );
+            }
+        }
+    }
+
     public function testSetMultiple()
     {
         $companies = $this->createMultipleCompanies(5);
