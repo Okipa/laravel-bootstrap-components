@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.1.1](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.0...2.1.1)
+
+2020-02-28
+
+* Removed wrong left margin on toggle component.
+
 ## [2.1.0](https://github.com/Okipa/laravel-bootstrap-components/compare/2.0.0...2.1.0)
 
 2020-02-26
