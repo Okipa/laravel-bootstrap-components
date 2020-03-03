@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.1.2](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.1...2.1.2)
+
+2020-03-03
+
+* Added testing files to .gitattributes export-ignore.
+
 ## [2.1.1](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.0...2.1.1)
 
 2020-02-28
