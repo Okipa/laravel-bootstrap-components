@@ -3,6 +3,7 @@
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
 use Exception;
+use InvalidArgumentException;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\RadioAbstract;
 
 abstract class InputRadioTestAbstract extends InputTestAbstract
@@ -84,6 +85,18 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         $html = $this->getComponent()->name('name')->prepend(null)->append(null)->toHtml();
         $this->assertStringNotContainsString('<div class="label-prepend">', $html);
         $this->assertStringNotContainsString('<div class="label-append">', $html);
+    }
+
+    public function testSetNullValue()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        parent::testSetNullValue();
+    }
+
+    public function testSetEmptyStringValue()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->getComponent()->name('name')->value('')->toHtml();
     }
 
     public function testSetChecked()

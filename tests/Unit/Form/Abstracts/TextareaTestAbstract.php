@@ -22,9 +22,20 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
 
     public function testSetValue()
     {
-        $customValue = 'custom-value';
-        $html = $this->getComponent()->name('name')->value($customValue)->toHtml();
-        $this->assertStringContainsString($customValue . '</textarea>', $html);
+        $html = $this->getComponent()->name('name')->value('custom-value')->toHtml();
+        $this->assertStringContainsString('>custom-value</textarea>', $html);
+    }
+
+    public function testSetZeroValue()
+    {
+        $html = $this->getComponent()->name('name')->value(0)->toHtml();
+        $this->assertStringContainsString('>0</textarea>', $html);
+    }
+
+    public function testSetNullValue()
+    {
+        $html = $this->getComponent()->name('name')->value(null)->toHtml();
+        $this->assertStringContainsString('></textarea>', $html);
     }
 
     public function testSetValueFromClosure()

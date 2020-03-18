@@ -79,9 +79,21 @@ abstract class TemporalTestAbstract extends InputTestAbstract
 
     public function testSetValue()
     {
-        $customValue = $this->faker->dateTime;
-        $html = $this->getComponent()->name('name')->value($customValue)->toHtml();
-        $this->assertStringContainsString(' value="' . $customValue->format($this->getFormat()) . '"', $html);
+        $value = $this->faker->dateTime;
+        $html = $this->getComponent()->name('name')->value($value)->toHtml();
+        $this->assertStringContainsString(' value="' . $value->format($this->getFormat()) . '"', $html);
+    }
+
+    public function testSetZeroValue()
+    {
+        $html = $this->getComponent()->name('name')->value(0)->toHtml();
+        $this->assertStringContainsString(' value="' . Carbon::parse(0)->format($this->getFormat()) . '"', $html);
+    }
+
+    public function testSetNullValue()
+    {
+        $html = $this->getComponent()->name('name')->value(null)->toHtml();
+        $this->assertStringContainsString(' value="' . Carbon::parse(null)->format($this->getFormat()) . '"', $html);
     }
 
     public function testSetValueFromClosure()

@@ -8,11 +8,6 @@ use Exception;
 trait TemporalValidityChecks
 {
     /**
-     * @return string
-     */
-    abstract protected function getName(): string;
-
-    /**
      * Check the component values validity
      *
      * @return void
@@ -43,15 +38,17 @@ trait TemporalValidityChecks
      */
     protected function checkValue(): void
     {
-        $this->value = $this->value ?: ($this->model ? $this->model->{$this->getName()} : null);
-        if ($this->value && is_string($this->value) && ! is_a($this->value, 'DateTime')) {
-            try {
-                Carbon::parse($this->value);
-            } catch (Exception $e) {
-                throw new Exception(get_class($this) . ' : The value for the input' . ucfirst($this->type)
-                    . ' component must be a valid DateTime object or a formatted string, « ' . $this->value
-                    . ' » given.');
-            }
+        try {
+            Carbon::parse(parent::getValue());
+        } catch (Exception $exception) {
+            throw new Exception(get_class($this) . ' : The value for the input' . ucfirst($this->type)
+                . ' component must be a valid DateTime object or a formatted string, « ' . parent::getValue()
+                . ' » given.');
         }
     }
+
+    /**
+     * @return string
+     */
+    abstract protected function getName(): string;
 }

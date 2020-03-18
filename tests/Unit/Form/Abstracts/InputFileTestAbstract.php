@@ -23,11 +23,38 @@ abstract class InputFileTestAbstract extends InputTestAbstract
 
     public function testSetValue()
     {
-        $customValue = 'custom-value';
-        $html = $this->getComponent()->name('name')->value($customValue)->toHtml();
+        $html = $this->getComponent()->name('name')->value('custom-value')->toHtml();
         $this->assertStringContainsString(
-            '<label class="custom-file-label" for="' . $this->getComponentType() . '-name">' . $customValue
-            . '</label>',
+            '<label class="custom-file-label" for="' . $this->getComponentType() . '-name">custom-value</label>',
+            $html
+        );
+    }
+
+    public function testSetZeroValue()
+    {
+        $html = $this->getComponent()->name('name')->value(0)->toHtml();
+        $this->assertStringContainsString(
+            '<label class="custom-file-label" for="' . $this->getComponentType() . '-name">0</label>',
+            $html
+        );
+    }
+
+    public function testSetEmptyStringValue()
+    {
+        $html = $this->getComponent()->name('name')->value('')->toHtml();
+        $this->assertStringContainsString(
+            '<label class="custom-file-label" for="' . $this->getComponentType() . '-name">'
+            . __('No file selected.') . '</label>',
+            $html
+        );
+    }
+
+    public function testSetNullValue()
+    {
+        $html = $this->getComponent()->name('name')->value(null)->toHtml();
+        $this->assertStringContainsString(
+            '<label class="custom-file-label" for="' . $this->getComponentType() . '-name">'
+            . __('No file selected.') . '</label>',
             $html
         );
     }

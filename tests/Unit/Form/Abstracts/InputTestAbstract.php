@@ -157,9 +157,26 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
 
     public function testSetValue()
     {
-        $customValue = 'custom-value';
-        $html = $this->getComponent()->name('name')->value($customValue)->toHtml();
-        $this->assertStringContainsString(' value="' . $customValue . '"', $html);
+        $html = $this->getComponent()->name('name')->value('custom-value')->toHtml();
+        $this->assertStringContainsString(' value="custom-value"', $html);
+    }
+
+    public function testSetZeroValue()
+    {
+        $html = $this->getComponent()->name('name')->value(0)->toHtml();
+        $this->assertStringContainsString(' value="0"', $html);
+    }
+
+    public function testSetEmptyStringValue()
+    {
+        $html = $this->getComponent()->name('name')->value('')->toHtml();
+        $this->assertStringContainsString(' value=""', $html);
+    }
+
+    public function testSetNullValue()
+    {
+        $html = $this->getComponent()->name('name')->value(null)->toHtml();
+        $this->assertStringContainsString(' value=""', $html);
     }
 
     public function testSetValueFromClosure()
