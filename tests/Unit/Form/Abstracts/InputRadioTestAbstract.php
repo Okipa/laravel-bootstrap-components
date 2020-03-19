@@ -137,7 +137,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         $oldValue = 0;
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                $request = request()->merge(['name' => $oldValue]);
+                $request = request()->merge(['name' => (string) $oldValue]);
                 $request->flash();
             },
         ]);
