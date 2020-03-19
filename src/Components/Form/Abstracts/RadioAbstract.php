@@ -22,7 +22,7 @@ abstract class RadioAbstract extends CheckableAbstract
     protected function getChecked(): bool
     {
         $old = old($this->getName());
-        if ($old) {
+        if (isset($old) && $old !== '') {
             return $old === $this->value;
         }
 

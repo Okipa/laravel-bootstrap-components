@@ -153,7 +153,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
     public function testOldValue()
     {
         $oldValue = true;
-        $customValue = false;
+        $value = false;
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function () use ($oldValue) {
                 $request = request()->merge(['active' => $oldValue]);
@@ -161,14 +161,14 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
             },
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('active')->value($customValue)->toHtml();
+        $html = $this->getComponent()->name('active')->value($value)->toHtml();
         $this->assertStringContainsString('checked="checked', $html);
     }
 
     public function testOldValueNotChecked()
     {
         $oldValue = false;
-        $customValue = true;
+        $value = true;
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function () use ($oldValue) {
                 $request = request()->merge(['active' => $oldValue]);
@@ -176,7 +176,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
             },
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('active')->value($customValue)->toHtml();
+        $html = $this->getComponent()->name('active')->value($value)->toHtml();
         $this->assertStringNotContainsString('checked="checked', $html);
     }
 

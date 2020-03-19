@@ -74,7 +74,7 @@ abstract class InputFileTestAbstract extends InputTestAbstract
     public function testOldValue()
     {
         $oldValue = 'old-value';
-        $customValue = 'custom-value';
+        $value = 'custom-value';
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function () use ($oldValue) {
                 $request = request()->merge(['name' => $oldValue]);
@@ -82,11 +82,11 @@ abstract class InputFileTestAbstract extends InputTestAbstract
             },
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('name')->value($customValue)->toHtml();
+        $html = $this->getComponent()->name('name')->value($value)->toHtml();
         $this->assertStringContainsString('<label class="custom-file-label" for="' . $this->getComponentType()
             . '-name">' . $oldValue . '</label>', $html);
         $this->assertStringNotContainsString('<label class="custom-file-label" for="' . $this->getComponentType()
-            . '-name">' . $customValue . '</label>', $html);
+            . '-name">' . $value . '</label>', $html);
     }
 
     public function testSetPlaceholder()

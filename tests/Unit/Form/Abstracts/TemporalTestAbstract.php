@@ -72,9 +72,8 @@ abstract class TemporalTestAbstract extends InputTestAbstract
 
     public function testSetWrongValue()
     {
-        $customValue = 'custom-value';
         $this->expectException(Exception::class);
-        $this->getComponent()->name('name')->value($customValue)->toHtml();
+        $this->getComponent()->name('name')->value('custom-value')->toHtml();
     }
 
     public function testSetValue()
@@ -104,17 +103,17 @@ abstract class TemporalTestAbstract extends InputTestAbstract
 
     public function testSetValueFromClosure()
     {
-        $customValue = $this->faker->dateTime;
-        $html = $this->getComponent()->name('name')->value(function () use ($customValue) {
-            return $customValue;
+        $value = $this->faker->dateTime;
+        $html = $this->getComponent()->name('name')->value(function () use ($value) {
+            return $value;
         })->toHtml();
-        $this->assertStringContainsString(' value="' . $customValue->format($this->getFormat()) . '"', $html);
+        $this->assertStringContainsString(' value="' . $value->format($this->getFormat()) . '"', $html);
     }
 
     public function testOldValue()
     {
         $oldValue = $this->faker->dateTime->format('Y-m-d');
-        $customValue = $this->faker->dateTime->format('Y-m-d');
+        $value = $this->faker->dateTime->format('Y-m-d');
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function () use ($oldValue) {
                 $request = request()->merge(['name' => $oldValue]);
@@ -122,8 +121,8 @@ abstract class TemporalTestAbstract extends InputTestAbstract
             },
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('name')->value($customValue)->toHtml();
+        $html = $this->getComponent()->name('name')->value($value)->toHtml();
         $this->assertStringContainsString(' value="' . $oldValue . '"', $html);
-        $this->assertStringNotContainsString(' value="' . $customValue . '"', $html);
+        $this->assertStringNotContainsString(' value="' . $value . '"', $html);
     }
 }

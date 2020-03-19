@@ -194,15 +194,15 @@ abstract class MultilingualAbstract extends FormAbstract
     protected function getLocalizedValue(string $locale)
     {
         $oldValue = $this->multilingualResolver->resolveLocalizedOldValue($this->getName(), $locale);
-        /** @var Closure|null $customValueClosure */
-        $customValueClosure = $this->multilingualMode() ? $this->value : null;
+        /** @var Closure|null $valueClosure */
+        $valueClosure = $this->multilingualMode() ? $this->value : null;
         $modelValue = $this->multilingualResolver->resolveLocalizedModelValue(
             $this->getName(),
             $locale,
             $this->getModel()
         );
 
-        return $oldValue ?? ($customValueClosure ? $customValueClosure($locale) : $modelValue);
+        return $oldValue ?? ($valueClosure ? $valueClosure($locale) : $modelValue);
     }
 
     /**

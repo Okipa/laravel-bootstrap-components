@@ -118,9 +118,23 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         $this->assertStringContainsString('checked="checked"', $html);
     }
 
-    public function testOldValueChecked()
+    public function testOldValue()
     {
         $oldValue = 'old-value';
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => function () use ($oldValue) {
+                $request = request()->merge(['name' => $oldValue]);
+                $request->flash();
+            },
+        ]);
+        $this->call('GET', 'test');
+        $html = $this->getComponent()->name('name')->value($oldValue)->checked(false)->toHtml();
+        $this->assertStringContainsString('checked="checked', $html);
+    }
+
+    public function testOldZeroValue()
+    {
+        $oldValue = 0;
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function () use ($oldValue) {
                 $request = request()->merge(['name' => $oldValue]);
@@ -135,7 +149,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
     public function testOldValueNotChecked()
     {
         $oldValue = 'old-value';
-        $customValue = 'custom-value';
+        $value = 'custom-value';
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function () use ($oldValue) {
                 $request = request()->merge(['name' => $oldValue]);
@@ -143,7 +157,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
             },
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('name')->value($customValue)->checked()->toHtml();
+        $html = $this->getComponent()->name('name')->value($value)->checked()->toHtml();
         $this->assertStringNotContainsString('checked="checked', $html);
     }
 
