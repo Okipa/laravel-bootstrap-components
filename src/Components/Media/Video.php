@@ -6,65 +6,49 @@ use Okipa\LaravelBootstrapComponents\Components\Media\Abstracts\VideoAbstract;
 
 class Video extends VideoAbstract
 {
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setType(): string
     {
         return 'video';
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setView(): string
     {
         return 'bootstrap-components.media.video';
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setPoster(): ?string
     {
         return null;
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setCaption(): ?string
     {
         return null;
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setComponentClasses(): array
     {
         return [];
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setContainerClasses(): array
     {
         return [];
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setComponentHtmlAttributes(): array
     {
         return ['controls', 'preload' => true];
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setContainerHtmlAttributes(): array
     {
         return [];

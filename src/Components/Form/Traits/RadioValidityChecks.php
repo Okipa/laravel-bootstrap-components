@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Components\Form\Traits;
 
-use Exception;
+use InvalidArgumentException;
 
 trait RadioValidityChecks
 {
@@ -20,8 +20,8 @@ trait RadioValidityChecks
     protected function checkValuesValidity(): void
     {
         parent::checkValuesValidity();
-        if (! $this->value) {
-            throw new Exception(
+        if (! isset($this->value) || $this->value === '') {
+            throw new InvalidArgumentException(
                 get_class($this) . ' : Missing $value property. Please use the value() method to set a value.'
             );
         }

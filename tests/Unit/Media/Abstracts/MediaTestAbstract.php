@@ -113,7 +113,7 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
         $this->assertStringContainsString('<div id="custom-container-id"', $html);
     }
 
-    public function testSetNoComponentId()
+    public function testDefaultComponentId()
     {
         $html = $this->getComponent()->toHtml();
         $this->assertStringNotContainsString('<audio id="', $html);

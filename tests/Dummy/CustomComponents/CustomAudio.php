@@ -6,41 +6,31 @@ use Okipa\LaravelBootstrapComponents\Components\Media\Audio;
 
 class CustomAudio extends Audio
 {
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setCaption(): ?string
     {
         return 'default-caption';
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setComponentClasses(): array
     {
         return ['default', 'component', 'classes'];
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setContainerClasses(): array
     {
         return ['default', 'container', 'classes'];
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setComponentHtmlAttributes(): array
     {
         return ['default' => 'component', 'html' => 'attributes'];
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setContainerHtmlAttributes(): array
     {
         return ['default' => 'container', 'html' => 'attributes'];

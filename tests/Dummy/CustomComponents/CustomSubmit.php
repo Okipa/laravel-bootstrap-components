@@ -6,57 +6,43 @@ use Okipa\LaravelBootstrapComponents\Components\Buttons\Submit;
 
 class CustomSubmit extends Submit
 {
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setPrepend(): ?string
     {
         return 'default-prepend';
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setAppend(): ?string
     {
         return 'default-append';
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setLabel(): ?string
     {
         return 'default-label';
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setComponentClasses(): array
     {
         return ['default', 'component', 'classes'];
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setContainerClasses(): array
     {
         return ['default', 'container', 'classes'];
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setComponentHtmlAttributes(): array
     {
         return ['default' => 'component', 'html' => 'attributes'];
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setContainerHtmlAttributes(): array
     {
         return ['default' => 'container', 'html' => 'attributes'];

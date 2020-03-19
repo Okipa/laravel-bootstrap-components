@@ -218,9 +218,7 @@ abstract class FormAbstract extends ComponentAbstract
         return $this;
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function getValues(): array
     {
         return array_merge(parent::getValues(), $this->getParameters());
@@ -422,9 +420,7 @@ abstract class FormAbstract extends ComponentAbstract
         return optional(session()->get('errors'))->first($this->getName());
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function getComponentId(): string
     {
         return parent::getComponentId() ?? $this->getType() . '-' . Str::slug($this->getName());

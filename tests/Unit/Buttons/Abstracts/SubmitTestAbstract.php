@@ -156,7 +156,7 @@ abstract class SubmitTestAbstract extends BootstrapComponentsTestCase
         $this->assertStringContainsString('<div id="' . $customContainerId . '"', $html);
     }
 
-    public function testSetNoComponentId()
+    public function testDefaultComponentId()
     {
         $html = $this->getComponent()->toHtml();
         $this->assertStringNotContainsString('<button id="', $html);

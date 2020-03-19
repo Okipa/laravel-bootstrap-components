@@ -22,9 +22,26 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
 
     public function testSetValue()
     {
-        $customValue = 'custom-value';
-        $html = $this->getComponent()->name('name')->value($customValue)->toHtml();
-        $this->assertStringContainsString($customValue . '</textarea>', $html);
+        $html = $this->getComponent()->name('name')->value('custom-value')->toHtml();
+        $this->assertStringContainsString('>custom-value</textarea>', $html);
+    }
+
+    public function testSetZeroValue()
+    {
+        $html = $this->getComponent()->name('name')->value(0)->toHtml();
+        $this->assertStringContainsString('>0</textarea>', $html);
+    }
+
+    public function testSetEmptyStringValue()
+    {
+        $html = $this->getComponent()->name('name')->value('')->toHtml();
+        $this->assertStringContainsString('></textarea>', $html);
+    }
+
+    public function testSetNullValue()
+    {
+        $html = $this->getComponent()->name('name')->value(null)->toHtml();
+        $this->assertStringContainsString('></textarea>', $html);
     }
 
     public function testSetValueFromClosure()
@@ -38,7 +55,7 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
     public function testOldValue()
     {
         $oldValue = 'old-value';
-        $customValue = 'custom-value';
+        $value = 'custom-value';
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function () use ($oldValue) {
                 $request = request()->merge(['name' => $oldValue]);
@@ -46,9 +63,9 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
             },
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('name')->value($customValue)->toHtml();
+        $html = $this->getComponent()->name('name')->value($value)->toHtml();
         $this->assertStringContainsString($oldValue . '</textarea>', $html);
-        $this->assertStringNotContainsString($customValue . '</textarea>', $html);
+        $this->assertStringNotContainsString($value . '</textarea>', $html);
     }
 
     public function testSetCustomLabelPositionedAbove()
@@ -75,7 +92,7 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
         $this->assertLessThan($inputPosition, $labelPosition);
     }
 
-    public function testSetNoComponentId()
+    public function testDefaultComponentId()
     {
         $html = $this->getComponent()->name('name')->toHtml();
         $this->assertStringContainsString(' for="' . $this->getComponentType() . '-name"', $html);
@@ -118,19 +135,19 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
     public function testSetLocalizedValue()
     {
         $locales = ['fr', 'en'];
-        $customValues = [];
+        $values = [];
         foreach ($locales as $locale) {
-            $customValues[$locale] = 'custom-value-' . $locale;
+            $values[$locale] = 'custom-value-' . $locale;
         }
         $html = $this->getComponent()
             ->name('name')
             ->locales($locales)
-            ->value(function ($locale) use ($customValues) {
-                return $customValues[$locale];
+            ->value(function ($locale) use ($values) {
+                return $values[$locale];
             })
             ->toHtml();
         foreach ($locales as $locale) {
-            $this->assertStringContainsString($customValues[$locale] . '</textarea>', $html);
+            $this->assertStringContainsString($values[$locale] . '</textarea>', $html);
         }
     }
 
@@ -138,10 +155,10 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
     {
         $locales = ['fr', 'en'];
         $oldValues = [];
-        $customValues = [];
+        $values = [];
         foreach ($locales as $locale) {
             $oldValues[$locale] = 'old-value-' . $locale;
-            $customValues[$locale] = 'custom-value-' . $locale;
+            $values[$locale] = 'custom-value-' . $locale;
         }
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function () use ($oldValues) {
@@ -150,12 +167,12 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
             },
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('name')->locales($locales)->value(function ($locale) use ($customValues) {
-            return $customValues . '-' . $locale;
+        $html = $this->getComponent()->name('name')->locales($locales)->value(function ($locale) use ($values) {
+            return $values . '-' . $locale;
         })->toHtml();
         foreach ($locales as $locale) {
             $this->assertStringContainsString($oldValues[$locale] . '</textarea>', $html);
-            $this->assertStringNotContainsString($customValues[$locale] . '</textarea>', $html);
+            $this->assertStringNotContainsString($values[$locale] . '</textarea>', $html);
         }
     }
 
@@ -168,9 +185,9 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
             $oldValues['name_' . $resolverLocale] = 'old-value-' . $resolverLocale;
         }
         $locales = ['fr', 'en'];
-        $customValues = [];
+        $values = [];
         foreach ($locales as $locale) {
-            $customValues[$locale] = 'test-custom-value-' . $locale;
+            $values[$locale] = 'test-custom-value-' . $locale;
         }
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function () use ($oldValues) {
@@ -179,14 +196,14 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
             },
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('name')->value(function ($locale) use ($customValues) {
-            return $customValues[$locale];
+        $html = $this->getComponent()->name('name')->value(function ($locale) use ($values) {
+            return $values[$locale];
         })->toHtml();
         foreach ($resolverLocales as $resolverLocale) {
             $this->assertStringContainsString($oldValues['name_' . $resolverLocale] . '</textarea>', $html);
         }
         foreach ($locales as $locale) {
-            $this->assertStringNotContainsString($customValues[$locale] . '</textarea>', $html);
+            $this->assertStringNotContainsString($values[$locale] . '</textarea>', $html);
         }
     }
 

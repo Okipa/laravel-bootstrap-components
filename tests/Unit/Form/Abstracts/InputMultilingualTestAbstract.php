@@ -97,27 +97,27 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
     public function testSetLocalizedWrongValue()
     {
         $locales = ['fr', 'en'];
-        $customValue = 'custom-value';
+        $value = 'custom-value';
         $this->expectException(InvalidArgumentException::class);
-        $this->getComponent()->name('name')->locales($locales)->value($customValue)->toHtml();
+        $this->getComponent()->name('name')->locales($locales)->value($value)->toHtml();
     }
 
     public function testSetLocalizedValue()
     {
         $locales = ['fr', 'en'];
-        $customValues = [];
+        $values = [];
         foreach ($locales as $locale) {
-            $customValues[$locale] = 'custom-value-' . $locale;
+            $values[$locale] = 'custom-value-' . $locale;
         }
         $html = $this->getComponent()
             ->name('name')
             ->locales($locales)
-            ->value(function ($locale) use ($customValues) {
-                return $customValues[$locale];
+            ->value(function ($locale) use ($values) {
+                return $values[$locale];
             })
             ->toHtml();
         foreach ($locales as $locale) {
-            $this->assertStringContainsString(' value="' . $customValues[$locale] . '"', $html);
+            $this->assertStringContainsString(' value="' . $values[$locale] . '"', $html);
         }
     }
 
@@ -125,10 +125,10 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
     {
         $locales = ['fr', 'en'];
         $oldValues = [];
-        $customValues = [];
+        $values = [];
         foreach ($locales as $locale) {
             $oldValues[$locale] = 'old-value-' . $locale;
-            $customValues[$locale] = 'custom-value-' . $locale;
+            $values[$locale] = 'custom-value-' . $locale;
         }
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function () use ($oldValues) {
@@ -137,12 +137,12 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
             },
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('name')->locales($locales)->value(function ($locale) use ($customValues) {
-            return $customValues . '-' . $locale;
+        $html = $this->getComponent()->name('name')->locales($locales)->value(function ($locale) use ($values) {
+            return $values . '-' . $locale;
         })->toHtml();
         foreach ($locales as $locale) {
             $this->assertStringContainsString(' value="' . $oldValues[$locale] . '"', $html);
-            $this->assertStringNotContainsString(' value="' . $customValues[$locale] . '"', $html);
+            $this->assertStringNotContainsString(' value="' . $values[$locale] . '"', $html);
         }
     }
 
@@ -155,9 +155,9 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
             $oldValues['name_' . $resolverLocale] = 'old-value-' . $resolverLocale;
         }
         $locales = ['fr', 'en'];
-        $customValues = [];
+        $values = [];
         foreach ($locales as $locale) {
-            $customValues[$locale] = 'custom-value-' . $locale;
+            $values[$locale] = 'custom-value-' . $locale;
         }
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function () use ($oldValues) {
@@ -166,14 +166,14 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
             },
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('name')->value(function ($locale) use ($customValues) {
-            return $customValues[$locale];
+        $html = $this->getComponent()->name('name')->value(function ($locale) use ($values) {
+            return $values[$locale];
         })->toHtml();
         foreach ($resolverLocales as $resolverLocale) {
             $this->assertStringContainsString('value="' . $oldValues['name_' . $resolverLocale] . '"', $html);
         }
         foreach ($locales as $locale) {
-            $this->assertStringNotContainsString('value="' . $customValues[$locale] . '"', $html);
+            $this->assertStringNotContainsString('value="' . $values[$locale] . '"', $html);
         }
     }
 

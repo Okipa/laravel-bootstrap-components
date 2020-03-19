@@ -150,9 +150,7 @@ abstract class ImageAbstract extends MediaAbstract
         return $this;
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function getValues(): array
     {
         $alt = $this->getAlt();

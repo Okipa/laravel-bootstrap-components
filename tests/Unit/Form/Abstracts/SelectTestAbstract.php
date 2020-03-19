@@ -123,6 +123,21 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $this->markTestSkipped();
     }
 
+    public function testSetZeroValue()
+    {
+        $this->markTestSkipped();
+    }
+
+    public function testSetEmptyStringValue()
+    {
+        $this->markTestSkipped();
+    }
+
+    public function testSetNullValue()
+    {
+        $this->markTestSkipped();
+    }
+
     public function testSetValueFromClosure()
     {
         $this->markTestSkipped();
@@ -553,7 +568,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetNoComponentId()
+    public function testDefaultComponentId()
     {
         $html = $this->getComponent()->name('name')->toHtml();
         $this->assertStringContainsString(' for="' . $this->getComponentType() . '-name"', $html);

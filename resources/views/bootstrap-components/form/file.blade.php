@@ -17,7 +17,7 @@
         <div class="custom-file">
             <input id="{{ $componentId }}"{{ classTag('component', 'form-control', 'custom-file-input', $componentClasses, $validationClass) }} type="{{ $type }}" name="{{ $name }}" lang="{{ app()->getLocale() }}"{{ htmlAttributes($componentHtmlAttributes) }}>
             @if(($value = old($name, $value)) || $placeholder)
-                <label class="custom-file-label" for="{{ $componentId }}">@empty($value){{ $placeholder }}@else{{ $value }}@endempty</label>
+                <label class="custom-file-label" for="{{ $componentId }}">@if(isset($value) && $value !== ''){{ $value }}@else{{ $placeholder }}@endempty</label>
             @endif
         </div>
         @include('bootstrap-components::bootstrap-components.partials.append')

@@ -87,7 +87,7 @@ abstract class ButtonTestAbstract extends SubmitTestAbstract
         $this->assertStringNotContainsString('<span class="label">default-label</span>', $html);
     }
 
-    public function testSetNoComponentId()
+    public function testDefaultComponentId()
     {
         $html = $this->getComponent()->toHtml();
         $this->assertStringNotContainsString('<a id="', $html);

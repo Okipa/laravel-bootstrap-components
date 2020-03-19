@@ -9,9 +9,7 @@ abstract class RadioAbstract extends CheckableAbstract
 {
     use RadioValidityChecks;
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function getComponentId(): string
     {
         return $this->componentId
@@ -24,8 +22,8 @@ abstract class RadioAbstract extends CheckableAbstract
     protected function getChecked(): bool
     {
         $old = old($this->getName());
-        if ($old) {
-            return $old === $this->value;
+        if (isset($old) && $old !== '') {
+            return $old === (string) $this->value;
         }
 
         return $this->checked ?? optional($this->model)->{$this->getName()} === $this->value;

@@ -11,9 +11,7 @@ abstract class CheckableAbstract extends FormAbstract
      */
     protected $checked;
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setLabelPositionedAbove(): bool
     {
         return true; // unused
@@ -33,9 +31,7 @@ abstract class CheckableAbstract extends FormAbstract
         return $this;
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function getComponentHtmlAttributes(): array
     {
         return array_merge(parent::getComponentHtmlAttributes(), $this->getChecked() ? ['checked' => 'checked'] : []);

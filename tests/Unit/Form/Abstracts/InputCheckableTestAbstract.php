@@ -111,6 +111,24 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         $this->assertStringContainsString('checked="checked', $html);
     }
 
+    public function testSetZeroValue()
+    {
+        $html = $this->getComponent()->name('name')->value(0)->toHtml();
+        $this->assertStringNotContainsString('checked="checked', $html);
+    }
+
+    public function testSetEmptyStringValue()
+    {
+        $html = $this->getComponent()->name('name')->value('')->toHtml();
+        $this->assertStringNotContainsString('checked="checked', $html);
+    }
+
+    public function testSetNullValue()
+    {
+        $html = $this->getComponent()->name('name')->value(null)->toHtml();
+        $this->assertStringNotContainsString('checked="checked', $html);
+    }
+
     public function testSetValueFromClosure()
     {
         $html = $this->getComponent()->name('name')->value(function () {
@@ -135,7 +153,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
     public function testOldValue()
     {
         $oldValue = true;
-        $customValue = false;
+        $value = false;
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function () use ($oldValue) {
                 $request = request()->merge(['active' => $oldValue]);
@@ -143,14 +161,14 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
             },
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('active')->value($customValue)->toHtml();
+        $html = $this->getComponent()->name('active')->value($value)->toHtml();
         $this->assertStringContainsString('checked="checked', $html);
     }
 
     public function testOldValueNotChecked()
     {
         $oldValue = false;
-        $customValue = true;
+        $value = true;
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function () use ($oldValue) {
                 $request = request()->merge(['active' => $oldValue]);
@@ -158,7 +176,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
             },
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('active')->value($customValue)->toHtml();
+        $html = $this->getComponent()->name('active')->value($value)->toHtml();
         $this->assertStringNotContainsString('checked="checked', $html);
     }
 

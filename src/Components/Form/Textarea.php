@@ -6,97 +6,73 @@ use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\MultilingualAbstr
 
 class Textarea extends MultilingualAbstract
 {
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setType(): string
     {
         return 'textarea';
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setView(): string
     {
         return 'bootstrap-components.form.textarea';
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setPrepend(): ?string
     {
         return '<i class="fas fa-align-left"></i>';
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setAppend(): ?string
     {
         return null;
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setLabelPositionedAbove(): bool
     {
         return config('bootstrap-components.form.labelPositionedAbove');
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setCaption(): ?string
     {
         return null;
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setComponentClasses(): array
     {
         return [];
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setContainerClasses(): array
     {
         return ['form-group'];
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setComponentHtmlAttributes(): array
     {
         return [];
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setContainerHtmlAttributes(): array
     {
         return [];
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setDisplaySuccess(): bool
     {
         return config('bootstrap-components.form.formValidation.displaySuccess');
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setDisplayFailure(): bool
     {
         return config('bootstrap-components.form.formValidation.displayFailure');

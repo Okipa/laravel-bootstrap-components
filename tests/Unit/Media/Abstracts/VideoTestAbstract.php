@@ -31,7 +31,7 @@ abstract class VideoTestAbstract extends MediaTestAbstract
         $this->assertStringNotContainsString('poster="', $html);
     }
 
-    public function testSetNoComponentId()
+    public function testDefaultComponentId()
     {
         $html = $this->getComponent()->toHtml();
         $this->assertStringNotContainsString('<video id="', $html);

@@ -3,6 +3,7 @@
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
 use Exception;
+use InvalidArgumentException;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\RadioAbstract;
 
 abstract class InputRadioTestAbstract extends InputTestAbstract
@@ -86,6 +87,18 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         $this->assertStringNotContainsString('<div class="label-append">', $html);
     }
 
+    public function testSetNullValue()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        parent::testSetNullValue();
+    }
+
+    public function testSetEmptyStringValue()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->getComponent()->name('name')->value('')->toHtml();
+    }
+
     public function testSetChecked()
     {
         $html = $this->getComponent()->name('name')->checked()->toHtml();
@@ -105,7 +118,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         $this->assertStringContainsString('checked="checked"', $html);
     }
 
-    public function testOldValueChecked()
+    public function testOldValue()
     {
         $oldValue = 'old-value';
         $this->app['router']->get('test', [
@@ -119,10 +132,25 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         $this->assertStringContainsString('checked="checked', $html);
     }
 
+    public function testOldZeroValue()
+    {
+        $oldValue = 0;
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => function () use ($oldValue) {
+                // http values are always stored as string
+                $request = request()->merge(['name' => (string) $oldValue]);
+                $request->flash();
+            },
+        ]);
+        $this->call('GET', 'test');
+        $html = $this->getComponent()->name('name')->value($oldValue)->checked(false)->toHtml();
+        $this->assertStringContainsString('checked="checked', $html);
+    }
+
     public function testOldValueNotChecked()
     {
         $oldValue = 'old-value';
-        $customValue = 'custom-value';
+        $value = 'custom-value';
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function () use ($oldValue) {
                 $request = request()->merge(['name' => $oldValue]);
@@ -130,7 +158,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
             },
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('name')->value($customValue)->checked()->toHtml();
+        $html = $this->getComponent()->name('name')->value($value)->checked()->toHtml();
         $this->assertStringNotContainsString('checked="checked', $html);
     }
 
@@ -205,7 +233,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         $this->markTestSkipped();
     }
 
-    public function testSetNoComponentId()
+    public function testDefaultComponentId()
     {
         $html = $this->getComponent()->name('name')->toHtml();
         $this->assertStringContainsString('<input id="' . $this->getComponentType() . '-name-value"', $html);

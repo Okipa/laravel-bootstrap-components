@@ -6,97 +6,73 @@ use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract;
 
 class Url extends FormAbstract
 {
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setType(): string
     {
         return 'url';
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setView(): string
     {
         return 'bootstrap-components.form.input';
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setPrepend(): ?string
     {
         return '<i class="fas fa-link"></i>';
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setAppend(): ?string
     {
         return null;
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setLabelPositionedAbove(): bool
     {
         return config('bootstrap-components.form.labelPositionedAbove');
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setCaption(): ?string
     {
         return null;
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setComponentClasses(): array
     {
         return [];
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setContainerClasses(): array
     {
         return ['form-group'];
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setComponentHtmlAttributes(): array
     {
         return [];
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setContainerHtmlAttributes(): array
     {
         return [];
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setDisplaySuccess(): bool
     {
         return config('bootstrap-components.form.formValidation.displaySuccess');
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setDisplayFailure(): bool
     {
         return config('bootstrap-components.form.formValidation.displayFailure');
