@@ -4,7 +4,7 @@
 
 2020-03-19
 
-* Fixed a form components behavior issue when zero, null or empty strings values were provided (tests added).
+* Fixed a form components behavior issue when some zero, null or empty strings values were provided.
 
 ## [2.1.2](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.1...2.1.2)
 
