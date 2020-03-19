@@ -23,7 +23,7 @@ abstract class RadioAbstract extends CheckableAbstract
     {
         $old = old($this->getName());
         if (isset($old) && $old !== '') {
-            return $old === $this->value;
+            return $old === (string) $this->value;
         }
 
         return $this->checked ?? optional($this->model)->{$this->getName()} === $this->value;
