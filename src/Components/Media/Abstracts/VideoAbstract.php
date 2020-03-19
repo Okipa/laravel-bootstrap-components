@@ -30,9 +30,7 @@ abstract class VideoAbstract extends MediaAbstract
         return $this;
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function getValues(): array
     {
         $poster = $this->getPoster();

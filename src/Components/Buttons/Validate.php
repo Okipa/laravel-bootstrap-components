@@ -6,73 +6,55 @@ use Okipa\LaravelBootstrapComponents\Components\Buttons\Abstracts\SubmitAbstract
 
 class Validate extends SubmitAbstract
 {
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setType(): string
     {
         return 'submit';
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setView(): string
     {
         return 'bootstrap-components.buttons.button';
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setPrepend(): ?string
     {
         return '<i class="fas fa-check fa-fw"></i>';
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setAppend(): ?string
     {
         return null;
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setLabel(): ?string
     {
         return (string) __('Validate');
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setComponentClasses(): array
     {
         return ['btn-primary'];
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setContainerClasses(): array
     {
         return [];
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setComponentHtmlAttributes(): array
     {
         return [];
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setContainerHtmlAttributes(): array
     {
         return [];

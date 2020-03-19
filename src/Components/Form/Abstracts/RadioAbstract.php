@@ -9,9 +9,7 @@ abstract class RadioAbstract extends CheckableAbstract
 {
     use RadioValidityChecks;
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function getComponentId(): string
     {
         return $this->componentId

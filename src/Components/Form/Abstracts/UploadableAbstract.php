@@ -67,9 +67,7 @@ abstract class UploadableAbstract extends FormAbstract
         return $this;
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function getValues(): array
     {
         return array_merge(parent::getValues(), [
@@ -124,9 +122,7 @@ abstract class UploadableAbstract extends FormAbstract
         return $this->removeCheckboxLabel ?? $defaultRemoveCheckboxLabel;
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function getPlaceholder(): ?string
     {
         return $this->placeholder ?? (string) __('No file selected.');

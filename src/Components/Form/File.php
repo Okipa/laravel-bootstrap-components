@@ -6,105 +6,79 @@ use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\UploadableAbstrac
 
 class File extends UploadableAbstract
 {
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setType(): string
     {
         return 'file';
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setView(): string
     {
         return 'bootstrap-components.form.file';
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setPrepend(): ?string
     {
         return '<i class="fas fa-upload"></i>';
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setAppend(): ?string
     {
         return null;
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setLabelPositionedAbove(): bool
     {
         return config('bootstrap-components.form.labelPositionedAbove');
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setCaption(): ?string
     {
         return null;
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setComponentClasses(): array
     {
         return [];
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setContainerClasses(): array
     {
         return ['form-group'];
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setComponentHtmlAttributes(): array
     {
         return [];
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setContainerHtmlAttributes(): array
     {
         return [];
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setDisplaySuccess(): bool
     {
         return config('bootstrap-components.form.formValidation.displaySuccess');
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setDisplayFailure(): bool
     {
         return config('bootstrap-components.form.formValidation.displayFailure');
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function setShowRemoveCheckbox(): bool
     {
         return true;

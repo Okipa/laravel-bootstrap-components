@@ -45,9 +45,7 @@ abstract class MultilingualAbstract extends FormAbstract
         return $this;
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function render(array $extraData = []): string
     {
         if ($this->multilingualMode()) {

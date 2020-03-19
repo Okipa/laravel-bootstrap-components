@@ -66,9 +66,7 @@ abstract class MediaAbstract extends ComponentAbstract
         return $this;
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function getValues(): array
     {
         $label = $this->getLabel();
@@ -109,9 +107,7 @@ abstract class MediaAbstract extends ComponentAbstract
      */
     abstract protected function setCaption(): ?string;
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function checkValuesValidity(): void
     {
         return;

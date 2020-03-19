@@ -70,9 +70,7 @@ abstract class SubmitAbstract extends ComponentAbstract
         return $this;
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     protected function getValues(): array
     {
         return array_merge(parent::getValues(), $this->getParameters());
