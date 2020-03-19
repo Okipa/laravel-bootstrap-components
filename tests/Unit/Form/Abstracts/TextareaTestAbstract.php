@@ -32,6 +32,12 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
         $this->assertStringContainsString('>0</textarea>', $html);
     }
 
+    public function testSetEmptyStringValue()
+    {
+        $html = $this->getComponent()->name('name')->value('')->toHtml();
+        $this->assertStringContainsString('></textarea>', $html);
+    }
+
     public function testSetNullValue()
     {
         $html = $this->getComponent()->name('name')->value(null)->toHtml();

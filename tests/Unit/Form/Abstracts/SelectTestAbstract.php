@@ -123,6 +123,21 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $this->markTestSkipped();
     }
 
+    public function testSetZeroValue()
+    {
+        $this->markTestSkipped();
+    }
+
+    public function testSetEmptyStringValue()
+    {
+        $this->markTestSkipped();
+    }
+
+    public function testSetNullValue()
+    {
+        $this->markTestSkipped();
+    }
+
     public function testSetValueFromClosure()
     {
         $this->markTestSkipped();

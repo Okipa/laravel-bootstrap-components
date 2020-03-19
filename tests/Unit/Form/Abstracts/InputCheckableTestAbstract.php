@@ -117,6 +117,12 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         $this->assertStringNotContainsString('checked="checked', $html);
     }
 
+    public function testSetEmptyStringValue()
+    {
+        $html = $this->getComponent()->name('name')->value('')->toHtml();
+        $this->assertStringNotContainsString('checked="checked', $html);
+    }
+
     public function testSetNullValue()
     {
         $html = $this->getComponent()->name('name')->value(null)->toHtml();

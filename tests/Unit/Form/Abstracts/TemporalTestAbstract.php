@@ -90,6 +90,12 @@ abstract class TemporalTestAbstract extends InputTestAbstract
         $this->assertStringContainsString(' value="' . Carbon::parse(0)->format($this->getFormat()) . '"', $html);
     }
 
+    public function testSetEmptyStringValue()
+    {
+        $html = $this->getComponent()->name('name')->value('')->toHtml();
+        $this->assertStringContainsString(' value="' . Carbon::parse('')->format($this->getFormat()) . '"', $html);
+    }
+
     public function testSetNullValue()
     {
         $html = $this->getComponent()->name('name')->value(null)->toHtml();
