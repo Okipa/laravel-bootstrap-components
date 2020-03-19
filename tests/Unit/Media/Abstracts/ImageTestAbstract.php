@@ -103,7 +103,7 @@ abstract class ImageTestAbstract extends MediaTestAbstract
         $this->assertStringContainsString('height="150"', $html);
     }
 
-    public function testSetNoComponentId()
+    public function testDefaultComponentId()
     {
         $html = $this->getComponent()->toHtml();
         $this->assertStringNotContainsString('<img id="', $html);

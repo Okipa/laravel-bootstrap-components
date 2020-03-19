@@ -218,7 +218,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         $this->markTestSkipped();
     }
 
-    public function testSetNoComponentId()
+    public function testDefaultComponentId()
     {
         $html = $this->getComponent()->name('name')->toHtml();
         $this->assertStringContainsString('<input id="' . $this->getComponentType() . '-name-value"', $html);

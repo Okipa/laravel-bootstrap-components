@@ -92,7 +92,7 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
         $this->assertLessThan($inputPosition, $labelPosition);
     }
 
-    public function testSetNoComponentId()
+    public function testDefaultComponentId()
     {
         $html = $this->getComponent()->name('name')->toHtml();
         $this->assertStringContainsString(' for="' . $this->getComponentType() . '-name"', $html);

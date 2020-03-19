@@ -358,9 +358,9 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $this->assertStringContainsString('<div id="' . $customContainerId . '"', $html);
     }
 
-    public function testSetNoComponentId()
+    public function testDefaultComponentId()
     {
-        $html = $this->getComponent()->name('name')->toHtml();
+        $html = $this->getComponent()->name('name')->value(0)->toHtml();
         $this->assertStringContainsString(' for="' . $this->getComponentType() . '-name"', $html);
         $this->assertStringContainsString('<input id="' . $this->getComponentType() . '-name"', $html);
     }

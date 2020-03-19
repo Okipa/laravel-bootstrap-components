@@ -568,7 +568,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetNoComponentId()
+    public function testDefaultComponentId()
     {
         $html = $this->getComponent()->name('name')->toHtml();
         $this->assertStringContainsString(' for="' . $this->getComponentType() . '-name"', $html);
