@@ -360,7 +360,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
 
     public function testDefaultComponentId()
     {
-        $html = $this->getComponent()->name('name')->value(0)->toHtml();
+        $html = $this->getComponent()->name('name')->toHtml();
         $this->assertStringContainsString(' for="' . $this->getComponentType() . '-name"', $html);
         $this->assertStringContainsString('<input id="' . $this->getComponentType() . '-name"', $html);
     }
