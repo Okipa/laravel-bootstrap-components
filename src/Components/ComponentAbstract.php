@@ -3,7 +3,6 @@
 namespace Okipa\LaravelBootstrapComponents\Components;
 
 use Illuminate\Contracts\Support\Htmlable;
-use Throwable;
 
 abstract class ComponentAbstract implements Htmlable
 {
@@ -19,7 +18,7 @@ abstract class ComponentAbstract implements Htmlable
     /** @property array $containerId */
     protected $containerId;
 
-    /**  @property array $componentClasses */
+    /** @property array $componentClasses */
     protected $componentClasses;
 
     /** @property array $containerClasses */

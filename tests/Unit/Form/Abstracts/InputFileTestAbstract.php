@@ -161,12 +161,21 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetUploadedfile()
+    public function testSetUploadedFile()
     {
         $html = $this->getComponent()->name('name')->uploadedFile(function () {
             return 'Uploaded file !';
         })->toHtml();
+        $this->assertStringContainsString('id="uploaded-file-name"', $html);
         $this->assertStringContainsString('Uploaded file !', $html);
+    }
+
+    public function testSetNoUploadedFile()
+    {
+        $html = $this->getComponent()->name('name')->uploadedFile(function () {
+            return null;
+        })->toHtml();
+        $this->assertStringNotContainsString('id="uploaded-file-name"', $html);
     }
 
     public function testCustomShowRemoveCheckbox()
