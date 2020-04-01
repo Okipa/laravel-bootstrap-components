@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.1.4](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.3...2.1.4)
+
+2020-04-01
+
+* Input file component : added an id based on the component id to make easier the css and js targeting.
+
 ## [2.1.3](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.2...2.1.3)
 
 2020-03-19
