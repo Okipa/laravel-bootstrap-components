@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.1.5](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.3...2.1.5)
+
+2020-04-01
+
+* Small adjustments for previous release.
+
 ## [2.1.4](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.3...2.1.4)
 
 2020-04-01
