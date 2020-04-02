@@ -4,26 +4,9 @@ namespace Okipa\LaravelBootstrapComponents\Components\Form\Abstracts;
 
 abstract class CheckableAbstract extends FormAbstract
 {
-    /**
-     * The input checked status.
-     *
-     * @property bool $checked
-     */
+    /** @property bool $checked */
     protected $checked;
 
-    /** @inheritDoc */
-    protected function setLabelPositionedAbove(): bool
-    {
-        return true; // unused
-    }
-
-    /**
-     * Set the checkable component check status.
-     *
-     * @param bool $checked
-     *
-     * @return $this
-     */
     public function checked(bool $checked = true): self
     {
         $this->checked = $checked;
@@ -31,15 +14,16 @@ abstract class CheckableAbstract extends FormAbstract
         return $this;
     }
 
-    /** @inheritDoc */
+    protected function setLabelPositionedAbove(): bool
+    {
+        return true; // unused
+    }
+
     protected function getComponentHtmlAttributes(): array
     {
         return array_merge(parent::getComponentHtmlAttributes(), $this->getChecked() ? ['checked' => 'checked'] : []);
     }
 
-    /**
-     * @return bool
-     */
     protected function getChecked(): bool
     {
         $old = old($this->getName());
