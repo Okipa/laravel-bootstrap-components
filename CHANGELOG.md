@@ -1,6 +1,13 @@
 # Changelog
 
-## [2.1.5](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.3...2.1.5)
+## [2.1.6](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.5...2.1.6)
+
+2020-04-02
+
+* Fixed a bug preventing the form components to display errors on input with array name (eg. `name[0]`).
+* Fixed a wrong default id generation for the for the form components on inputs with array name (`text-name0` will now be correctly displayed `text-name-0`).
+
+## [2.1.5](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.4...2.1.5)
 
 2020-04-01
 
