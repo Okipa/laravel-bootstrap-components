@@ -404,7 +404,7 @@ abstract class FormAbstract extends ComponentAbstract
     protected function getValidationClass(): ?string
     {
         if (session()->has('errors')) {
-            return session()->get('errors')->has($this->getName())
+            return session()->get('errors')->has($this->convertArrayNameInNotation())
                 ? ($this->getDisplayFailure() ? 'is-invalid' : null)
                 : ($this->getDisplaySuccess() ? 'is-valid' : null);
         }
@@ -412,17 +412,22 @@ abstract class FormAbstract extends ComponentAbstract
         return null;
     }
 
+    protected function convertArrayNameInNotation(string $notation = '.'): string
+    {
+        return str_replace(['[', ']'], [$notation, ''], $this->getName());
+    }
+
     /**
      * @return string|null
      */
     protected function getErrorMessage(): ?string
     {
-        return optional(session()->get('errors'))->first($this->getName());
+        return optional(session()->get('errors'))->first($this->convertArrayNameInNotation());
     }
 
     /** @inheritDoc */
     protected function getComponentId(): string
     {
-        return parent::getComponentId() ?? $this->getType() . '-' . Str::slug($this->getName());
+        return parent::getComponentId() ?? $this->getType() . '-' . Str::slug($this->convertArrayNameInNotation('-'));
     }
 }

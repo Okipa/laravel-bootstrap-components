@@ -345,6 +345,16 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString($errors->first('name'), $html);
     }
 
+    public function testDisplayFailureWithArrayName()
+    {
+        $errors = app(MessageBag::class)->add('name.0', 'Dummy error message.');
+        session()->put('errors', $errors);
+        $html = $this->getComponent()->name('name[0]')->render(compact('errors'));
+        $this->assertStringContainsString('is-invalid', $html);
+        $this->assertStringContainsString('<div class="invalid-feedback d-block">', $html);
+        $this->assertStringContainsString($errors->first('name'), $html);
+    }
+
     public function testSetNoContainerId()
     {
         $html = $this->getComponent()->name('name')->toHtml();
@@ -363,6 +373,13 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $html = $this->getComponent()->name('name')->toHtml();
         $this->assertStringContainsString(' for="' . $this->getComponentType() . '-name"', $html);
         $this->assertStringContainsString('<input id="' . $this->getComponentType() . '-name"', $html);
+    }
+
+    public function testDefaultComponentIdWithArrayName()
+    {
+        $html = $this->getComponent()->name('name[0]')->toHtml();
+        $this->assertStringContainsString(' for="' . $this->getComponentType() . '-name-0"', $html);
+        $this->assertStringContainsString('<input id="' . $this->getComponentType() . '-name-0"', $html);
     }
 
     public function testSetComponentId()
