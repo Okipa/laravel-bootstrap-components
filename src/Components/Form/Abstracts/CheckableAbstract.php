@@ -26,7 +26,7 @@ abstract class CheckableAbstract extends FormAbstract
 
     protected function getChecked(): bool
     {
-        $old = old($this->getName());
+        $old = old($this->convertArrayNameInNotation());
         if (isset($old)) {
             return $old;
         }

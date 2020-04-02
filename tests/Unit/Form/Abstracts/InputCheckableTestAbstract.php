@@ -165,6 +165,21 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         $this->assertStringContainsString('checked="checked', $html);
     }
 
+    public function testOldArrayValue()
+    {
+        $oldValue = true;
+        $value = false;
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => function () use ($oldValue) {
+                $request = request()->merge(['active' => [0 => $oldValue]]);
+                $request->flash();
+            },
+        ]);
+        $this->call('GET', 'test');
+        $html = $this->getComponent()->name('active[0]')->value($value)->toHtml();
+        $this->assertStringContainsString('checked="checked', $html);
+    }
+
     public function testOldValueNotChecked()
     {
         $oldValue = false;
@@ -213,6 +228,16 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         $this->markTestSkipped();
     }
 
+    public function testDefaultPlaceholder()
+    {
+        $this->markTestSkipped();
+    }
+
+    public function testDefaultPlaceholderWithArrayName()
+    {
+        $this->markTestSkipped();
+    }
+
     public function testSetPlaceholder()
     {
         $this->markTestSkipped();
@@ -228,7 +253,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         $this->markTestSkipped();
     }
 
-    public function testNoPlaceholder()
+    public function testNoPlaceholderWithLabel()
     {
         $this->markTestSkipped();
     }

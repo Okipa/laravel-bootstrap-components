@@ -203,6 +203,16 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         $this->markTestSkipped();
     }
 
+    public function testDefaultPlaceholder()
+    {
+        $this->markTestSkipped();
+    }
+
+    public function testDefaultPlaceholderWithArrayName()
+    {
+        $this->markTestSkipped();
+    }
+
     public function testSetPlaceholder()
     {
         $this->markTestSkipped();
@@ -218,7 +228,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         $this->markTestSkipped();
     }
 
-    public function testNoPlaceholder()
+    public function testNoPlaceholderWithLabel()
     {
         $this->markTestSkipped();
     }

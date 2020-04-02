@@ -45,9 +45,6 @@ abstract class FormAbstract extends ComponentAbstract
     /** @property bool $displayFailure */
     protected $displayFailure;
 
-    /**
-     * Form constructor.
-     */
     public function __construct()
     {
         parent::__construct();
@@ -218,7 +215,6 @@ abstract class FormAbstract extends ComponentAbstract
         return $this;
     }
 
-    /** @inheritDoc */
     protected function getValues(): array
     {
         return array_merge(parent::getValues(), $this->getParameters());
@@ -264,25 +260,16 @@ abstract class FormAbstract extends ComponentAbstract
         );
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Model|null
-     */
     protected function getModel(): ?Model
     {
         return $this->model;
     }
 
-    /**
-     * @return string
-     */
     protected function getName(): string
     {
         return Str::snake($this->name);
     }
 
-    /**
-     * @return string|null
-     */
     protected function getPrepend(): ?string
     {
         return $this->prepend;
@@ -295,9 +282,6 @@ abstract class FormAbstract extends ComponentAbstract
      */
     abstract protected function setPrepend(): ?string;
 
-    /**
-     * @return string|null
-     */
     protected function getAppend(): ?string
     {
         return $this->append;
@@ -310,9 +294,6 @@ abstract class FormAbstract extends ComponentAbstract
      */
     abstract protected function setAppend(): ?string;
 
-    /**
-     * @return string|null
-     */
     protected function getCaption(): ?string
     {
         return $this->caption;
@@ -325,17 +306,11 @@ abstract class FormAbstract extends ComponentAbstract
      */
     abstract protected function setCaption(): ?string;
 
-    /**
-     * @return string
-     */
     protected function getLabel(): string
     {
-        return $this->label ?? (string) __('validation.attributes.' . $this->getName());
+        return $this->label ?? (string) __('validation.attributes.' . $this->removeArrayCharactersFromName());
     }
 
-    /**
-     * @return bool
-     */
     protected function getLabelPositionedAbove(): bool
     {
         return $this->labelPositionedAbove;
@@ -353,24 +328,29 @@ abstract class FormAbstract extends ComponentAbstract
      */
     protected function getValue()
     {
-        $value = old($this->getName()) ?: $this->value;
+        $value = old($this->convertArrayNameInNotation()) ?: $this->value;
         // fallback for usage of closure with non multilingual fields
         $value = $value instanceof Closure ? $value(app()->getLocale()) : $value;
 
-        return $value ?? optional($this->getModel())->{$this->getName()};
+        return $value ?? optional($this->getModel())->{$this->convertArrayNameInNotation()};
     }
 
-    /**
-     * @return string|null
-     */
+    protected function convertArrayNameInNotation(string $notation = '.'): string
+    {
+        return str_replace(['[', ']'], [$notation, ''], $this->getName());
+    }
+
     protected function getPlaceholder(): ?string
     {
-        return $this->placeholder ?? ($this->getLabel() ?: (string) __('validation.attributes.' . $this->getName()));
+        return $this->placeholder
+            ?? ($this->getLabel() ?: (string) __('validation.attributes.' . $this->removeArrayCharactersFromName()));
     }
 
-    /**
-     * @return bool
-     */
+    protected function removeArrayCharactersFromName(): string
+    {
+        return strstr($this->getName(), '[', true) ?: $this->getName();
+    }
+
     protected function getDisplaySuccess(): bool
     {
         return $this->displaySuccess;
@@ -383,9 +363,6 @@ abstract class FormAbstract extends ComponentAbstract
      */
     abstract protected function setDisplaySuccess(): bool;
 
-    /**
-     * @return bool
-     */
     protected function getDisplayFailure(): bool
     {
         return $this->displayFailure;
@@ -398,9 +375,6 @@ abstract class FormAbstract extends ComponentAbstract
      */
     abstract protected function setDisplayFailure(): bool;
 
-    /**
-     * @return string|null
-     */
     protected function getValidationClass(): ?string
     {
         if (session()->has('errors')) {
@@ -412,20 +386,11 @@ abstract class FormAbstract extends ComponentAbstract
         return null;
     }
 
-    protected function convertArrayNameInNotation(string $notation = '.'): string
-    {
-        return str_replace(['[', ']'], [$notation, ''], $this->getName());
-    }
-
-    /**
-     * @return string|null
-     */
     protected function getErrorMessage(): ?string
     {
         return optional(session()->get('errors'))->first($this->convertArrayNameInNotation());
     }
 
-    /** @inheritDoc */
     protected function getComponentId(): string
     {
         return parent::getComponentId() ?? $this->getType() . '-' . Str::slug($this->convertArrayNameInNotation('-'));

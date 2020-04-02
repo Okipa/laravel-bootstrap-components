@@ -207,7 +207,7 @@ abstract class SelectableAbstract extends FormAbstract
      */
     protected function searchMultipleSelectedOptionFromOldValue(): ?array
     {
-        $oldValue = old($this->getName());
+        $oldValue = old($this->convertArrayNameInNotation());
         if ($oldValue) {
             $selectedMultipleOptions = Arr::where($this->options, function ($option) use ($oldValue) {
                 return in_array($option[$this->optionValueField], $oldValue);
@@ -288,7 +288,7 @@ abstract class SelectableAbstract extends FormAbstract
      */
     protected function searchSelectedOptionFromOldValue(): ?array
     {
-        $oldValue = old($this->getName());
+        $oldValue = old($this->convertArrayNameInNotation());
         if ($oldValue) {
             $selectedOption = Arr::where($this->options, function ($option) use ($oldValue) {
                 return $option[$this->optionValueField] === $oldValue;

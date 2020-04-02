@@ -28,9 +28,6 @@ abstract class UploadableAbstract extends FormAbstract
      */
     protected $removeCheckboxLabel;
 
-    /**
-     * File constructor.
-     */
     public function __construct()
     {
         parent::__construct();
@@ -67,7 +64,6 @@ abstract class UploadableAbstract extends FormAbstract
         return $this;
     }
 
-    /** @inheritDoc */
     protected function getValues(): array
     {
         return array_merge(parent::getValues(), [
@@ -77,11 +73,6 @@ abstract class UploadableAbstract extends FormAbstract
         ]);
     }
 
-    /**
-     * Get the uploadedFile HTML.
-     *
-     * @return HtmlString
-     */
     protected function getUploadedFileHtml(): HtmlString
     {
         $uploadedFileHtml = '';
@@ -97,24 +88,13 @@ abstract class UploadableAbstract extends FormAbstract
         return new HtmlString($uploadedFileHtml);
     }
 
-    /**
-     * @return bool
-     */
     protected function getShowRemoveCheckbox(): bool
     {
         return $this->showRemoveCheckbox;
     }
 
-    /**
-     * @return bool
-     */
     abstract protected function setShowRemoveCheckbox(): bool;
 
-    /**
-     * @param string|null $label
-     *
-     * @return string
-     */
     protected function getRemoveCheckboxLabel(?string $label): string
     {
         $defaultRemoveCheckboxLabel = ((string) __('Remove')) . ($label ? ' ' . strtolower($label) : '');
@@ -122,7 +102,6 @@ abstract class UploadableAbstract extends FormAbstract
         return $this->removeCheckboxLabel ?? $defaultRemoveCheckboxLabel;
     }
 
-    /** @inheritDoc */
     protected function getPlaceholder(): ?string
     {
         return $this->placeholder ?? (string) __('No file selected.');

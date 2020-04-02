@@ -121,8 +121,8 @@ abstract class TemporalTestAbstract extends InputTestAbstract
 
     public function testOldValue()
     {
-        $oldValue = $this->faker->dateTime->format('Y-m-d');
-        $value = $this->faker->dateTime->format('Y-m-d');
+        $oldValue = $this->faker->dateTime->format($this->getFormat());
+        $value = $this->faker->dateTime->format($this->getFormat());
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function () use ($oldValue) {
                 $request = request()->merge(['name' => $oldValue]);
@@ -131,6 +131,22 @@ abstract class TemporalTestAbstract extends InputTestAbstract
         ]);
         $this->call('GET', 'test');
         $html = $this->getComponent()->name('name')->value($value)->toHtml();
+        $this->assertStringContainsString(' value="' . $oldValue . '"', $html);
+        $this->assertStringNotContainsString(' value="' . $value . '"', $html);
+    }
+
+    public function testOldArrayValue()
+    {
+        $oldValue = $this->faker->dateTime->format($this->getFormat());
+        $value = $this->faker->dateTime->format($this->getFormat());
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => function () use ($oldValue) {
+                $request = request()->merge(['name' => [0 => $oldValue]]);
+                $request->flash();
+            },
+        ]);
+        $this->call('GET', 'test');
+        $html = $this->getComponent()->name('name[0]')->value($value)->toHtml();
         $this->assertStringContainsString(' value="' . $oldValue . '"', $html);
         $this->assertStringNotContainsString(' value="' . $value . '"', $html);
     }

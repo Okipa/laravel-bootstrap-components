@@ -261,6 +261,39 @@ abstract class SelectTestAbstract extends InputTestAbstract
         );
     }
 
+    public function testOldArrayValue()
+    {
+        $users = $this->createMultipleUsers(3);
+        $custom = $users->get(0);
+        $model = $users->get(1);
+        $old = $users->get(2);
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => function () use ($old) {
+                $request = request()->merge(['name' => [0 => $old->id]]);
+                $request->flash();
+            },
+        ]);
+        $this->call('GET', 'test');
+        $html = $this->getComponent()
+            ->model($model)
+            ->name('name[0]')
+            ->selected('id', $custom->id)
+            ->options($users, 'id', 'name')
+            ->toHtml();
+        $this->assertStringContainsString(
+            '<option value="' . $custom->id . '">' . $custom->name . '</option>',
+            $html
+        );
+        $this->assertStringContainsString(
+            '<option value="' . $model->id . '">' . $model->name . '</option>',
+            $html
+        );
+        $this->assertStringContainsString(
+            '<option value="' . $old->id . '" selected="selected">' . $old->name . '</option>',
+            $html
+        );
+    }
+
     public function testSetDisabledOptions()
     {
         $users = $this->createMultipleUsers(3);
@@ -496,6 +529,42 @@ abstract class SelectTestAbstract extends InputTestAbstract
         }
     }
 
+    public function testOldMultipleArrayValue()
+    {
+        $user = $this->createUniqueUser();
+        $companies = $this->createMultipleCompanies(6);
+        $chunk = $companies->pluck('id')->chunk(2)->toArray();
+        $user->companies = $chunk[0];
+        $selectedCompanies = $chunk[1];
+        $oldCompanies = $chunk[2];
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => function () use ($oldCompanies) {
+                $request = request()->merge(['companies' => [0 => $oldCompanies]]);
+                $request->flash();
+            },
+        ]);
+        $this->call('GET', 'test');
+        $html = $this->getComponent()->name('companies[0]')
+            ->model($user)
+            ->options($companies, 'id', 'name')
+            ->multiple()
+            ->selected('id', $selectedCompanies)
+            ->toHtml();
+        $this->assertStringContainsString(
+            '<option value="">validation.attributes.companies</option>',
+            $html
+        );
+        foreach ($companies as $company) {
+            $this->assertStringContainsString(
+                '<option value="' . $company->id . '"'
+                . (in_array($company->id, $oldCompanies) ? ' selected="selected"' : '') . '>'
+                . $company->name
+                . '</option>',
+                $html
+            );
+        }
+    }
+
     public function testSetCustomLabelPositionedAbove()
     {
         config()->set(
@@ -520,6 +589,24 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $this->assertLessThan($inputPosition, $labelPosition);
     }
 
+    public function testDefaultPlaceholder()
+    {
+        $html = $this->getComponent()->name('name')->toHtml();
+        $this->assertStringContainsString(
+            '<option value="" selected="selected">validation.attributes.name</option>',
+            $html
+        );
+    }
+
+    public function testDefaultPlaceholderWithArrayName()
+    {
+        $html = $this->getComponent()->name('name[0]')->toHtml();
+        $this->assertStringContainsString(
+            '<option value="" selected="selected">validation.attributes.name</option>',
+            $html
+        );
+    }
+
     public function testSetPlaceholder()
     {
         $placeholder = 'custom-placeholder';
@@ -541,10 +628,15 @@ abstract class SelectTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testNoPlaceholder()
+    public function testNoPlaceholderWithLabel()
     {
-        $html = $this->getComponent()->name('name')->toHtml();
+        $label = 'custom-label';
+        $html = $this->getComponent()->name('name')->label($label)->toHtml();
         $this->assertStringContainsString(
+            '<option value="" selected="selected">' . $label . '</option>',
+            $html
+        );
+        $this->assertStringNotContainsString(
             '<option value="" selected="selected">validation.attributes.name</option>',
             $html
         );

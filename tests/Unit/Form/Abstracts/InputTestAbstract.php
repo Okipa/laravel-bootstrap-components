@@ -203,6 +203,22 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString(' value="' . $value . '"', $html);
     }
 
+    public function testOldArrayValue()
+    {
+        $oldValue = 'old-value';
+        $value = 'custom-value';
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => function () use ($oldValue) {
+                $request = request()->merge(['name' => [0 => $oldValue]]);
+                $request->flash();
+            },
+        ]);
+        $this->call('GET', 'test');
+        $html = $this->getComponent()->name('name[0]')->value($value)->toHtml();
+        $this->assertStringContainsString(' value="' . $oldValue . '"', $html);
+        $this->assertStringNotContainsString(' value="' . $value . '"', $html);
+    }
+
     public function testSetLabel()
     {
         $label = 'custom-label';
@@ -255,6 +271,18 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $this->assertLessThan($inputPosition, $labelPosition);
     }
 
+    public function testDefaultPlaceholder()
+    {
+        $html = $this->getComponent()->name('name')->toHtml();
+        $this->assertStringContainsString(' placeholder="validation.attributes.name"', $html);
+    }
+
+    public function testDefaultPlaceholderWithArrayName()
+    {
+        $html = $this->getComponent()->name('name[0]')->toHtml();
+        $this->assertStringContainsString(' placeholder="validation.attributes.name"', $html);
+    }
+
     public function testSetPlaceholder()
     {
         $placeholder = 'custom-placeholder';
@@ -271,10 +299,12 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString(' placeholder="' . $label . '"', $html);
     }
 
-    public function testNoPlaceholder()
+    public function testNoPlaceholderWithLabel()
     {
-        $html = $this->getComponent()->name('name')->toHtml();
-        $this->assertStringContainsString(' placeholder="validation.attributes.name"', $html);
+        $label = 'custom-label';
+        $html = $this->getComponent()->name('name')->label($label)->toHtml();
+        $this->assertStringContainsString(' placeholder="' . $label . '"', $html);
+        $this->assertStringNotContainsString(' placeholder="validation.attributes.name"', $html);
     }
 
     public function testNoPlaceholderWithNoLabel()
