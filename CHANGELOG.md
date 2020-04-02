@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.7](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.6...2.1.7)
+
+2020-04-02
+
+* Fixed the form components pre-filling when defining an array name (eg. `name[0]`).
+* Fixed the placeholder generation when defining an array name (eg. `name[0]`).
+
 ## [2.1.6](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.5...2.1.6)
 
 2020-04-02

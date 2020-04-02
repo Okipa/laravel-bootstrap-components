@@ -68,6 +68,22 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
         $this->assertStringNotContainsString($value . '</textarea>', $html);
     }
 
+    public function testOldArrayValue()
+    {
+        $oldValue = 'old-value';
+        $value = 'custom-value';
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => function () use ($oldValue) {
+                $request = request()->merge(['name' => [0 => $oldValue]]);
+                $request->flash();
+            },
+        ]);
+        $this->call('GET', 'test');
+        $html = $this->getComponent()->name('name[0]')->value($value)->toHtml();
+        $this->assertStringContainsString($oldValue . '</textarea>', $html);
+        $this->assertStringNotContainsString($value . '</textarea>', $html);
+    }
+
     public function testSetCustomLabelPositionedAbove()
     {
         config()->set(

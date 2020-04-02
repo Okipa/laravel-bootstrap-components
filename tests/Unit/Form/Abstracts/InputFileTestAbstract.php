@@ -89,6 +89,40 @@ abstract class InputFileTestAbstract extends InputTestAbstract
             . '-name">' . $value . '</label>', $html);
     }
 
+    public function testOldArrayValue()
+    {
+        $oldValue = 'old-value';
+        $value = 'custom-value';
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => function () use ($oldValue) {
+                $request = request()->merge(['name' => [0 => $oldValue]]);
+                $request->flash();
+            },
+        ]);
+        $this->call('GET', 'test');
+        $html = $this->getComponent()->name('name[0]')->value($value)->toHtml();
+        $this->assertStringContainsString('<label class="custom-file-label" for="' . $this->getComponentType()
+            . '-name-0">' . $oldValue . '</label>', $html);
+        $this->assertStringNotContainsString('<label class="custom-file-label" for="' . $this->getComponentType()
+            . '-name-0">' . $value . '</label>', $html);
+    }
+
+    public function testDefaultPlaceholder()
+    {
+        $html = $this->getComponent()->name('name')->toHtml();
+        $this->assertStringContainsString('custom-file-label', $html);
+        $this->assertStringContainsString('<label class="custom-file-label" for="' . $this->getComponentType()
+            . '-name">' . __('No file selected.') . '</label>', $html);
+    }
+
+    public function testDefaultPlaceholderWithArrayName()
+    {
+        $html = $this->getComponent()->name('name[0]')->toHtml();
+        $this->assertStringContainsString('custom-file-label', $html);
+        $this->assertStringContainsString('<label class="custom-file-label" for="' . $this->getComponentType()
+            . '-name-0">' . __('No file selected.') . '</label>', $html);
+    }
+
     public function testSetPlaceholder()
     {
         $placeholder = 'custom-placeholder';
@@ -107,6 +141,16 @@ abstract class InputFileTestAbstract extends InputTestAbstract
             . '-name">' . $placeholder . '</label>', $html);
     }
 
+    public function testNoPlaceholderWithLabel()
+    {
+        $label = 'custom-label';
+        $html = $this->getComponent()->name('name')->label($label)->toHtml();
+        $this->assertStringContainsString('<label class="custom-file-label" for="' . $this->getComponentType()
+            . '-name">' . __('No file selected.') . '</label>', $html);
+        $this->assertStringNotContainsString('<label class="custom-file-label" for="' . $this->getComponentType()
+            . '-name">' . $label . '</label>', $html);
+    }
+
     public function testNoPlaceholderWithNoLabel()
     {
         $html = $this->getComponent()->name('name')->label(false)->toHtml();
@@ -115,13 +159,6 @@ abstract class InputFileTestAbstract extends InputTestAbstract
             . '-name">' . __('No file selected.') . '</label>', $html);
     }
 
-    public function testNoPlaceholder()
-    {
-        $html = $this->getComponent()->name('name')->toHtml();
-        $this->assertStringContainsString('custom-file-label', $html);
-        $this->assertStringContainsString('<label class="custom-file-label" for="' . $this->getComponentType()
-            . '-name">' . __('No file selected.') . '</label>', $html);
-    }
 
     public function testHidePlaceholder()
     {
