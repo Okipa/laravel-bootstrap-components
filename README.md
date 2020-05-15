@@ -154,6 +154,23 @@ All displayed labels or sentences are translatable.
 
 See how to translate them on the Laravel official documentation: https://laravel.com/docs/localization#using-translation-strings-as-keys.
 
+Here is the list of the sentences available for translation:
+
+* `Create`
+* `Update`
+* `Validate`
+* `Back`
+* `Cancel`
+* `Remove`
+* `No file selected.`
+* `Awaited format: Day/Month/Year.`
+* `Awaited format: Hour:Minutes.`
+* `Awaited format: Day/Month/Year Hour:Minutes.`
+* `Your browser does not support the :tag HTML5 tag.`
+* `Field correctly filled.`
+
+You will also have to define each attribute you define in the `->name()` method in the `validation` (`attributes` key) translation file.
+
 ## Views
 
 Publish the package views to customize them if necessary: 
