@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.8](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.7...2.1.8)
+
+2020-05-15
+
+* Fixed `inputDatetime` component default format from `Y-m-d H:i:s` to `Y-m-d\TH:i`
+  * now fits with the HTML `datetime-local` awaited format to display the value.
+  * provides a better fit for most of the use cases (seconds are often not being used).
+
 ## [2.1.7](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.6...2.1.7)
 
 2020-04-02

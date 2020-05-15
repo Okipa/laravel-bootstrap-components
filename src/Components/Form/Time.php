@@ -39,7 +39,7 @@ class Time extends TemporalAbstract
     /** @inheritDoc */
     protected function setCaption(): ?string
     {
-        return __('Awaited format: Hour:Minutes.');
+        return (string) __('Awaited format: Hour:Minutes.');
     }
 
     /** @inheritDoc */

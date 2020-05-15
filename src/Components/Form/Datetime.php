@@ -39,7 +39,7 @@ class Datetime extends TemporalAbstract
     /** @inheritDoc */
     protected function setCaption(): ?string
     {
-        return __('Awaited format: Day/Month/Year Hour:Minutes.');
+        return (string) __('Awaited format: Day/Month/Year Hour:Minutes.');
     }
 
     /** @inheritDoc */

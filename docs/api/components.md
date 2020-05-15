@@ -192,7 +192,7 @@
 **Pre-configuration**
 
 * Prepend : `<i class="fas fa-calendar-alt"></i>`
-* Format : `Y-m-d H:i:s`
+* Format : `Y-m-d\TH:i`
 * Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
 * Caption : `__('Awaited format: Day/Month/Year Hour:Minutes.')`
 * Container classes : : `form-group`
