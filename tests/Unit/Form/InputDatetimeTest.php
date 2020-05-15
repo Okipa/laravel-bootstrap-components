@@ -41,6 +41,6 @@ class InputDatetimeTest extends TemporalTestAbstract
 
     protected function getFormat(): string
     {
-        return 'Y-m-d H:i:s';
+        return 'Y-m-d\TH:i';
     }
 }

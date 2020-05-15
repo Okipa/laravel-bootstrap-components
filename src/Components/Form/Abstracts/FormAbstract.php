@@ -311,6 +311,11 @@ abstract class FormAbstract extends ComponentAbstract
         return $this->label ?? (string) __('validation.attributes.' . $this->removeArrayCharactersFromName());
     }
 
+    protected function removeArrayCharactersFromName(): string
+    {
+        return strstr($this->getName(), '[', true) ?: $this->getName();
+    }
+
     protected function getLabelPositionedAbove(): bool
     {
         return $this->labelPositionedAbove;
@@ -344,11 +349,6 @@ abstract class FormAbstract extends ComponentAbstract
     {
         return $this->placeholder
             ?? ($this->getLabel() ?: (string) __('validation.attributes.' . $this->removeArrayCharactersFromName()));
-    }
-
-    protected function removeArrayCharactersFromName(): string
-    {
-        return strstr($this->getName(), '[', true) ?: $this->getName();
     }
 
     protected function getDisplaySuccess(): bool

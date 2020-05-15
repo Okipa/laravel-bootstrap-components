@@ -28,9 +28,29 @@ abstract class TemporalAbstract extends FormAbstract
     /**
      * Set the temporal format.
      *
-     * @return string
+     * @param string $format
+     *
+     * @return $this
      */
-    abstract protected function setFormat(): string;
+    public function format(string $format): self
+    {
+        $this->format = $format;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed|string
+     * @throws \Exception
+     */
+    protected function getValue()
+    {
+        $value = parent::getValue();
+
+        return is_a($value, 'DateTime')
+            ? $value->format($this->getFormat())
+            : Carbon::parse($value)->format($this->getFormat());
+    }
 
     /**
      * Get the temporal format.
@@ -45,26 +65,7 @@ abstract class TemporalAbstract extends FormAbstract
     /**
      * Set the temporal format.
      *
-     * @param string $format
-     *
-     * @return $this
+     * @return string
      */
-    public function format(string $format): self
-    {
-        $this->format = $format;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    protected function getValue()
-    {
-        $value = parent::getValue();
-
-        return is_a($value, 'DateTime')
-            ? $value->format($this->getFormat())
-            : Carbon::parse($value)->format($this->getFormat());
-    }
+    abstract protected function setFormat(): string;
 }
