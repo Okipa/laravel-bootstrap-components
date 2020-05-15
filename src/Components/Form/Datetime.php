@@ -39,7 +39,7 @@ class Datetime extends TemporalAbstract
     /** @inheritDoc */
     protected function setCaption(): ?string
     {
-        return 'Awaited format: Day/Month/Year Hour:Minutes.';
+        return __('Awaited format: Day/Month/Year Hour:Minutes.');
     }
 
     /** @inheritDoc */
@@ -81,6 +81,6 @@ class Datetime extends TemporalAbstract
     /** @inheritDoc */
     protected function setFormat(): string
     {
-        return 'Y-m-d H:i:s';
+        return 'Y-m-d\TH:i';
     }
 }

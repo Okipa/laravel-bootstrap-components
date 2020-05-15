@@ -39,7 +39,7 @@ class Date extends TemporalAbstract
     /** @inheritDoc */
     protected function setCaption(): ?string
     {
-        return 'Awaited format: Day/Month/Year.';
+        return __('Awaited format: Day/Month/Year.');
     }
 
     /** @inheritDoc */
