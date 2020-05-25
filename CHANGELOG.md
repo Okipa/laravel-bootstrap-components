@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.1.9](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.8...2.1.9)
+
+2020-05-25
+
+* Fixed the `Select` component old value analysis: the select value compared against the old one is now being converted to string during the process in order to get a correct comparison with values transmitted from the HTTP request (which are always strings).
+
 ## [2.1.8](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.7...2.1.8)
 
 2020-05-15

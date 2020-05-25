@@ -291,7 +291,7 @@ abstract class SelectableAbstract extends FormAbstract
         $oldValue = old($this->convertArrayNameInNotation());
         if ($oldValue) {
             $selectedOption = Arr::where($this->options, function ($option) use ($oldValue) {
-                return $option[$this->optionValueField] === $oldValue;
+                return (string) $option[$this->optionValueField] === $oldValue;
             });
             if (! empty($selectedOption)) {
                 return $selectedOption;

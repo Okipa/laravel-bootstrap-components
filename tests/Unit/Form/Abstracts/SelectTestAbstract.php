@@ -236,7 +236,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $old = $users->get(2);
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function () use ($old) {
-                $request = request()->merge(['name' => $old->id]);
+                $request = request()->merge(['name' => (string) $old->id]);
                 $request->flash();
             },
         ]);
@@ -269,7 +269,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $old = $users->get(2);
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function () use ($old) {
-                $request = request()->merge(['name' => [0 => $old->id]]);
+                $request = request()->merge(['name' => [0 => (string) $old->id]]);
                 $request->flash();
             },
         ]);
@@ -497,7 +497,9 @@ abstract class SelectTestAbstract extends InputTestAbstract
     {
         $user = $this->createUniqueUser();
         $companies = $this->createMultipleCompanies(6);
-        $chunk = $companies->pluck('id')->chunk(2)->toArray();
+        $chunk = $companies->pluck('id')->map(function ($id) {
+            return (string) $id;
+        })->chunk(2)->toArray();
         $user->companies = $chunk[0];
         $selectedCompanies = $chunk[1];
         $oldCompanies = $chunk[2];
@@ -533,7 +535,9 @@ abstract class SelectTestAbstract extends InputTestAbstract
     {
         $user = $this->createUniqueUser();
         $companies = $this->createMultipleCompanies(6);
-        $chunk = $companies->pluck('id')->chunk(2)->toArray();
+        $chunk = $companies->pluck('id')->map(function ($id) {
+            return (string) $id;
+        })->chunk(2)->toArray();
         $user->companies = $chunk[0];
         $selectedCompanies = $chunk[1];
         $oldCompanies = $chunk[2];
