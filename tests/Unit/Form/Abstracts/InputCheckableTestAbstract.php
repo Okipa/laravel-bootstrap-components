@@ -156,7 +156,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         $value = false;
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                $request = request()->merge(['active' => $oldValue]);
+                $request = request()->merge(['active' => (string) $oldValue]);
                 $request->flash();
             },
         ]);
@@ -171,7 +171,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         $value = false;
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                $request = request()->merge(['active' => [0 => $oldValue]]);
+                $request = request()->merge(['active' => [0 => (string) $oldValue]]);
                 $request->flash();
             },
         ]);
@@ -186,7 +186,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         $value = true;
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                $request = request()->merge(['active' => $oldValue]);
+                $request = request()->merge(['active' => (string) $oldValue]);
                 $request->flash();
             },
         ]);
