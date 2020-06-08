@@ -154,7 +154,7 @@ All displayed labels or sentences are translatable.
 
 See how to translate them on the Laravel official documentation: https://laravel.com/docs/localization#using-translation-strings-as-keys.
 
-Here is the list of the sentences available for translation:
+Here is the list of the words and sentences available for translation:
 
 * `Create`
 * `Update`
