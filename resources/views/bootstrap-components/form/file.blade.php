@@ -5,7 +5,7 @@
     @if($uploadedFileHtml->toHtml())
         <div class="mb-2">
             <div id="uploaded-{{ $componentId }}">{{ $uploadedFileHtml }}</div>
-            @if($showRemoveCheckbox){{ inputCheckbox()->name('remove_' . $name )->label($removeCheckboxLabel)->containerClasses(['mt-1']) }}@endif
+            @if($showRemoveCheckbox){{ inputCheckbox()->name($removeCheckboxName)->label($removeCheckboxLabel)->containerClasses(['mt-1']) }}@endif
         </div>
     @endif
     @if(! empty($prepend) || ! empty($append))

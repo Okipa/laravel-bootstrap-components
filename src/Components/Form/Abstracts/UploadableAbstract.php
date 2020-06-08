@@ -70,6 +70,7 @@ abstract class UploadableAbstract extends FormAbstract
             'uploadedFileHtml' => $this->getUploadedFileHtml(),
             'showRemoveCheckbox' => $this->getShowRemoveCheckbox(),
             'removeCheckboxLabel' => $this->getRemoveCheckboxLabel(parent::getValues()['label']),
+            'removeCheckboxName' => $this->getShowRemoveCheckboxName(),
         ]);
     }
 
@@ -100,6 +101,11 @@ abstract class UploadableAbstract extends FormAbstract
         $defaultRemoveCheckboxLabel = ((string) __('Remove')) . ($label ? ' ' . strtolower($label) : '');
 
         return $this->removeCheckboxLabel ?? $defaultRemoveCheckboxLabel;
+    }
+
+    protected function getShowRemoveCheckboxName(): string
+    {
+        return 'remove_' . $this->getName();
     }
 
     protected function getPlaceholder(): ?string

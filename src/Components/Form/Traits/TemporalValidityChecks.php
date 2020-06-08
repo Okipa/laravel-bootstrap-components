@@ -46,9 +46,4 @@ trait TemporalValidityChecks
                 . ' » given.');
         }
     }
-
-    /**
-     * @return string
-     */
-    abstract protected function getName(): string;
 }

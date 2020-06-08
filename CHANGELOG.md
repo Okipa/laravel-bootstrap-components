@@ -4,7 +4,14 @@
 
 2020-06-08
 
-* Fixed wrong behaviour for temporal components (date, time, datetime), for which the current date was being set when the value was equal to null, zero or empty string.
+* Fixed wrong behaviour for temporal components (date, time, datetime), for which the current date was set when the value was equal to null, zero or empty string.
+
+## [2.1.10](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.9...2.1.10)
+
+2020-06-08
+
+* We have softened the rules for the form component name attribute definition : the name attribute is not automatically kebab cased anymore in order to give more usage flexibility.
+  * Note that the default id of the form components, which is automatically generated from the name attribute, is still formatted in kebab case.
 
 ## [2.1.9](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.8...2.1.9)
 
