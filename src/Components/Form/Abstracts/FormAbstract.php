@@ -15,7 +15,7 @@ abstract class FormAbstract extends ComponentAbstract
     /** @property Model|null $model */
     protected $model;
 
-    /** @property string|null $name */
+    /** @property string $name */
     protected $name;
 
     /** @property string|null $prepend */
@@ -265,9 +265,9 @@ abstract class FormAbstract extends ComponentAbstract
         return $this->model;
     }
 
-    protected function getName(): ?string
+    protected function getName(): string
     {
-        return $this->name;
+        return $this->name ?? '';
     }
 
     protected function getPrepend(): ?string
