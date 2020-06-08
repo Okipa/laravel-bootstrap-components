@@ -46,6 +46,9 @@ abstract class TemporalAbstract extends FormAbstract
     protected function getValue()
     {
         $value = parent::getValue();
+        if (! $value) {
+            return null;
+        }
 
         return is_a($value, 'DateTime')
             ? $value->format($this->getFormat())

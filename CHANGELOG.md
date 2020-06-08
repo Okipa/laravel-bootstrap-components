@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.1.11](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.10...2.1.11)
+
+2020-06-08
+
+* Fixed wrong behaviour for temporal components (date, time, datetime), for which the current date was set when the value was equal to null, zero or empty string.
+
 ## [2.1.10](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.9...2.1.10)
 
 2020-06-08
