@@ -122,6 +122,13 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
         $this->assertStringContainsString('<textarea id="' . $this->getComponentType() . '-name-0"', $html);
     }
 
+    public function testDefaultComponentIdFormatting()
+    {
+        $html = $this->getComponent()->name('camelCaseName')->toHtml();
+        $this->assertStringContainsString(' for="' . $this->getComponentType() . '-camel-case-name"', $html);
+        $this->assertStringContainsString('<textarea id="' . $this->getComponentType() . '-camel-case-name"', $html);
+    }
+
     public function testSetComponentId()
     {
         $customComponentId = 'custom-component-id';

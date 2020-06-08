@@ -267,7 +267,7 @@ abstract class FormAbstract extends ComponentAbstract
 
     protected function getName(): string
     {
-        return Str::snake($this->name);
+        return $this->name ?? '';
     }
 
     protected function getPrepend(): ?string
@@ -393,6 +393,7 @@ abstract class FormAbstract extends ComponentAbstract
 
     protected function getComponentId(): string
     {
-        return parent::getComponentId() ?? $this->getType() . '-' . Str::slug($this->convertArrayNameInNotation('-'));
+        return parent::getComponentId()
+            ?? $this->getType() . '-' . Str::slug(Str::snake($this->convertArrayNameInNotation('-'), '-'));
     }
 }
