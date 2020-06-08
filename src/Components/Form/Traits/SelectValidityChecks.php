@@ -8,11 +8,6 @@ use InvalidArgumentException;
 trait SelectValidityChecks
 {
     /**
-     * @return string|null
-     */
-    abstract protected function getName(): ?string;
-
-    /**
      * Check the component values validity
      *
      * @return void

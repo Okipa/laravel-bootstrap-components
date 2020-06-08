@@ -7,12 +7,6 @@ use InvalidArgumentException;
 
 trait MultilingualValidityChecks
 {
-
-    /**
-     * @return bool
-     */
-    abstract protected function multilingualMode(): bool;
-
     /**
      * Check the component values validity
      *
