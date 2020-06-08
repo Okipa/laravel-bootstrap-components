@@ -7,9 +7,9 @@ use Exception;
 trait FormValidityChecks
 {
     /**
-     * @return string
+     * @return string|null
      */
-    abstract protected function getName(): string;
+    abstract protected function getName(): ?string;
 
     /**
      * Check the component values validity

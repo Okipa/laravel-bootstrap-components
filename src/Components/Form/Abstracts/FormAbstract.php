@@ -15,7 +15,7 @@ abstract class FormAbstract extends ComponentAbstract
     /** @property Model|null $model */
     protected $model;
 
-    /** @property string $name */
+    /** @property string|null $name */
     protected $name;
 
     /** @property string|null $prepend */
@@ -265,9 +265,9 @@ abstract class FormAbstract extends ComponentAbstract
         return $this->model;
     }
 
-    protected function getName(): string
+    protected function getName(): ?string
     {
-        return Str::snake($this->name);
+        return $this->name;
     }
 
     protected function getPrepend(): ?string
@@ -393,6 +393,7 @@ abstract class FormAbstract extends ComponentAbstract
 
     protected function getComponentId(): string
     {
-        return parent::getComponentId() ?? $this->getType() . '-' . Str::slug($this->convertArrayNameInNotation('-'));
+        return parent::getComponentId()
+            ?? $this->getType() . '-' . Str::slug(Str::snake($this->convertArrayNameInNotation('-'), '-'));
     }
 }

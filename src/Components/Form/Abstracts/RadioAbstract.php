@@ -12,8 +12,8 @@ abstract class RadioAbstract extends CheckableAbstract
     protected function getComponentId(): string
     {
         return $this->componentId
-            ?? $this->getType() . '-' . Str::slug($this->convertArrayNameInNotation('-')) . '-'
-            . Str::slug($this->getValue());
+            ?? $this->getType() . '-' . Str::slug(Str::snake($this->convertArrayNameInNotation('-'), '-')
+                . '-' . Str::snake($this->getValue(), '-'));
     }
 
     protected function getChecked(): bool

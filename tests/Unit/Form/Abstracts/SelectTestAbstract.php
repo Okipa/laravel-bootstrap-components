@@ -678,6 +678,13 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $this->assertStringContainsString('<select id="' . $this->getComponentType() . '-name-0"', $html);
     }
 
+    public function testDefaultComponentIdFormatting()
+    {
+        $html = $this->getComponent()->name('camelCaseName')->toHtml();
+        $this->assertStringContainsString(' for="' . $this->getComponentType() . '-camel-case-name"', $html);
+        $this->assertStringContainsString('<select id="' . $this->getComponentType() . '-camel-case-name"', $html);
+    }
+
     public function testSetComponentId()
     {
         $customComponentId = 'test-custom-component-id';

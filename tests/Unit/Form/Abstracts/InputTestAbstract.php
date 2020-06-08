@@ -40,6 +40,12 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $this->assertStringContainsString(' name="name"', $html);
     }
 
+    public function testSetCamelCaseName()
+    {
+        $html = $this->getComponent()->name('camelCaseName')->toHtml();
+        $this->assertStringContainsString(' name="camelCaseName"', $html);
+    }
+
     public function testType()
     {
         $html = $this->getComponent()->name('name')->toHtml();
@@ -410,6 +416,13 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $html = $this->getComponent()->name('name[0]')->toHtml();
         $this->assertStringContainsString(' for="' . $this->getComponentType() . '-name-0"', $html);
         $this->assertStringContainsString('<input id="' . $this->getComponentType() . '-name-0"', $html);
+    }
+
+    public function testDefaultComponentIdFormatting()
+    {
+        $html = $this->getComponent()->name('camelCaseName')->toHtml();
+        $this->assertStringContainsString(' for="' . $this->getComponentType() . '-camel-case-name"', $html);
+        $this->assertStringContainsString('<input id="' . $this->getComponentType() . '-camel-case-name"', $html);
     }
 
     public function testSetComponentId()

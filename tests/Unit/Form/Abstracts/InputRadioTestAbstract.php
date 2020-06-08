@@ -257,6 +257,16 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         $this->assertStringContainsString('<input id="' . $this->getComponentType() . '-name-0-value"', $html);
     }
 
+    public function testDefaultComponentIdFormatting()
+    {
+        $html = $this->getComponent()->name('camelCaseName')->toHtml();
+        $this->assertStringContainsString(' for="' . $this->getComponentType() . '-camel-case-name-value"', $html);
+        $this->assertStringContainsString(
+            '<input id="' . $this->getComponentType() . '-camel-case-name-value"',
+            $html
+        );
+    }
+
     public function testSetCustomContainerClasses()
     {
         config()->set(
