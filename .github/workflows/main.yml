@@ -1,6 +1,10 @@
 name: CI
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 0 * * *'
 
 jobs:
   build:
@@ -41,6 +45,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          composer config -g repo.packagist composer https://packagist.phpcomposer.com
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
           composer update --prefer-dist --no-interaction --no-suggest
 
