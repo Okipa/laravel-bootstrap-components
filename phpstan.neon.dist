@@ -11,7 +11,7 @@ parameters:
     level: 5
 
     ignoreErrors:
-        - '#Unsafe usage of new static#'
+        #- '#Unsafe usage of new static#'
 
     excludes_analyse:
         - ./*/*/FileToBeExcluded.php

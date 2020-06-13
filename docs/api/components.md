@@ -254,7 +254,7 @@
 
 **Helper :** `inputRadio()`
 
-**Facade :** `InputCheckbox`
+**Facade :** `InputRadio`
 
 **Pre-configuration**
 
