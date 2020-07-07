@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.12](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.11...2.1.12)
+
+2020-07-07
+
+* Fixed wrong error message formatting for multilingual components when an input name contains several words.
+  * Eg. with a `last_name` input name => The error `The last name.en field is required.` will now display like following: `The Last name (EN) field is required.` (supposing you have translated the `last_name` field in the `validation.attributes`).
+
 ## [2.1.11](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.10...2.1.11)
 
 2020-06-08

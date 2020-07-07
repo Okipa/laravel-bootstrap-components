@@ -183,7 +183,7 @@ abstract class MultilingualAbstract extends FormAbstract
     {
         $label = parent::getLabel();
 
-        return $label ? $label . ' (' . strtoupper($locale) . ')' : null;
+        return $label ? $label . ' (' . mb_strtoupper($locale) . ')' : null;
     }
 
     /**
@@ -214,7 +214,7 @@ abstract class MultilingualAbstract extends FormAbstract
     {
         $placeholder = parent::getPlaceholder();
 
-        return $placeholder ? $placeholder . ' (' . strtoupper($locale) . ')' : null;
+        return $placeholder ? $placeholder . ' (' . mb_strtoupper($locale) . ')' : null;
     }
 
     /**

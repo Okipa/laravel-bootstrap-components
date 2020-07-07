@@ -185,10 +185,10 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         foreach ($locales as $locale) {
             $this->assertStringContainsString(
                 '<label for="' . $this->getComponentType() . '-name-' . $locale . '">' . $label . ' ('
-                . strtoupper($locale) . ')</label>',
+                . mb_strtoupper($locale) . ')</label>',
                 $html
             );
-            $this->assertStringContainsString(' placeholder="' . $label . ' (' . strtoupper($locale) . ')"', $html);
+            $this->assertStringContainsString(' placeholder="' . $label . ' (' . mb_strtoupper($locale) . ')"', $html);
         }
     }
 
@@ -199,7 +199,7 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         $html = $this->getComponent()->name('name')->placeholder($placeholder)->locales($locales)->toHtml();
         foreach ($locales as $locale) {
             $this->assertStringContainsString(
-                ' placeholder="' . $placeholder . ' (' . strtoupper($locale) . ')"',
+                ' placeholder="' . $placeholder . ' (' . mb_strtoupper($locale) . ')"',
                 $html
             );
         }
@@ -244,6 +244,65 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         );
         $this->assertStringNotContainsString(
             'Dummy ' . _('validation.attributes.name') . ' (EN) error message.',
+            $html
+        );
+    }
+
+    public function testLocalizedErrorMessageWithSeveralWords()
+    {
+        $locales = ['fr', 'en'];
+        $errors = app(MessageBag::class);
+        $errors->add('last_name.fr', 'Dummy last name.fr error message.');
+        session()->put('errors', $errors);
+        $html = $this->getComponent()
+            ->name('last_name')
+            ->locales($locales)
+            ->displayFailure()
+            ->render(compact('errors'));
+        $this->assertStringContainsString(
+            'id="' . $this->getComponentType() . '-last-name-fr" class="component form-control is-invalid"',
+            $html
+        );
+        $this->assertStringContainsString(
+            'Dummy ' . _('validation.attributes.last_name') . ' (FR) error message.',
+            $html
+        );
+        $this->assertStringNotContainsString(
+            'id="' . $this->getComponentType() . '-last-name-en" class="component form-control is-invalid"',
+            $html
+        );
+        $this->assertStringNotContainsString(
+            'Dummy ' . _('validation.attributes.last_name') . ' (EN) error message.',
+            $html
+        );
+    }
+
+    public function testLocalizedErrorMessageWithSeveralWordsAndCustomMultilingualResolver()
+    {
+        config()->set('bootstrap-components.form.multilingualResolver', Resolver::class);
+        $locales = ['fr', 'en'];
+        $errors = app(MessageBag::class);
+        $errors->add('last_name_fr', 'Dummy last name fr error message.');
+        session()->put('errors', $errors);
+        $html = $this->getComponent()
+            ->name('last_name')
+            ->locales($locales)
+            ->displayFailure()
+            ->render(compact('errors'));
+        $this->assertStringContainsString(
+            'id="' . $this->getComponentType() . '-last-name-fr" class="component form-control is-invalid"',
+            $html
+        );
+        $this->assertStringContainsString(
+            'Dummy ' . _('validation.attributes.last_name') . ' (FR) error message.',
+            $html
+        );
+        $this->assertStringNotContainsString(
+            'id="' . $this->getComponentType() . '-last-name-en" class="component form-control is-invalid"',
+            $html
+        );
+        $this->assertStringNotContainsString(
+            'Dummy ' . _('validation.attributes.last_name') . ' (EN) error message.',
             $html
         );
     }

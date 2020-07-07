@@ -52,7 +52,7 @@
             "vendor/bin/phpcbf",
             "vendor/bin/phpcs",
             "vendor/bin/phpmd config,src text phpmd.xml",
-            "vendor/bin/phpstan analyse",
+            "vendor/bin/phpstan analyse --error-format=table --memory-limit=2048M",
             "vendor/bin/phpunit"
         ]
     },
