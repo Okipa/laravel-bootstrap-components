@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.1.12](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.11...2.1.12)
+
+2020-07-07
+
+* Fixed wrong error message formatting for multilingual components when an input name contains several words (eg. `last_name`).
+
 ## [2.1.11](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.10...2.1.11)
 
 2020-06-08

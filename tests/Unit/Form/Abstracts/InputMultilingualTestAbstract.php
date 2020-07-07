@@ -248,6 +248,35 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         );
     }
 
+    public function testLocalizedErrorMessageWithSeveralWords()
+    {
+        $locales = ['fr', 'en'];
+        $errors = app(MessageBag::class);
+        $errors->add('last_name.fr', 'Dummy last name.fr error message.');
+        session()->put('errors', $errors);
+        $html = $this->getComponent()
+            ->name('last_name')
+            ->locales($locales)
+            ->displayFailure()
+            ->render(compact('errors'));
+        $this->assertStringContainsString(
+            'id="' . $this->getComponentType() . '-last-name-fr" class="component form-control is-invalid"',
+            $html
+        );
+        $this->assertStringContainsString(
+            'Dummy ' . _('validation.attributes.last_name') . ' (FR) error message.',
+            $html
+        );
+        $this->assertStringNotContainsString(
+            'id="' . $this->getComponentType() . '-last-name-en" class="component form-control is-invalid"',
+            $html
+        );
+        $this->assertStringNotContainsString(
+            'Dummy ' . _('validation.attributes.last_name') . ' (EN) error message.',
+            $html
+        );
+    }
+
     public function testLocalizedErrorMessageFromCustomMultilingualResolver()
     {
         config()->set('bootstrap-components.form.multilingualResolver', Resolver::class);

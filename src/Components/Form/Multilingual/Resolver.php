@@ -41,6 +41,7 @@ class Resolver
      *
      * @param string $name
      * @param string $locale
+     *
      * @return string|null
      */
     public function resolveLocalizedOldValue(string $name, string $locale): ?string
@@ -74,6 +75,7 @@ class Resolver
     {
         $errorMessageBagKey = $this->resolveErrorMessageBagKey($name, $locale);
         $errorMessage = optional(session()->get('errors'))->first($errorMessageBagKey);
+        $errorMessage = $this->undoInputNameLaravelUnderscoreRemovalInErrorMessage($name, $errorMessage);
 
         return $errorMessage
             ? str_replace(
@@ -95,5 +97,15 @@ class Resolver
     public function resolveErrorMessageBagKey(string $name, string $locale): string
     {
         return $name . '.' . $locale;
+    }
+
+    protected function undoInputNameLaravelUnderscoreRemovalInErrorMessage(string $name, ?string $errorMessage): ?string
+    {
+        if (! $errorMessage) {
+            return null;
+        }
+        $inputNameWithoutUnderscore = str_replace('_', ' ', $name);
+
+        return str_replace($inputNameWithoutUnderscore, $name, $errorMessage);
     }
 }
