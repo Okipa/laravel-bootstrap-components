@@ -98,7 +98,7 @@ abstract class UploadableAbstract extends FormAbstract
 
     protected function getRemoveCheckboxLabel(?string $label): string
     {
-        $defaultRemoveCheckboxLabel = ((string) __('Remove')) . ($label ? ' ' . strtolower($label) : '');
+        $defaultRemoveCheckboxLabel = ((string) __('Remove')) . ($label ? ' ' . mb_strtolower($label) : '');
 
         return $this->removeCheckboxLabel ?? $defaultRemoveCheckboxLabel;
     }

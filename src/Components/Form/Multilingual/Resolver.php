@@ -75,7 +75,7 @@ class Resolver
     {
         $errorMessageBagKey = $this->resolveErrorMessageBagKey($name, $locale);
         $errorMessage = optional(session()->get('errors'))->first($errorMessageBagKey);
-        $errorMessage = $this->undoInputNameLaravelUnderscoreRemovalInErrorMessage($name, $errorMessage);
+        $errorMessage = $this->undoInputNameLaravelUnderscoreRemovalInErrorMessage($name, $locale, $errorMessage);
 
         return $errorMessage
             ? str_replace(
@@ -99,8 +99,19 @@ class Resolver
         return $name . '.' . $locale;
     }
 
-    protected function undoInputNameLaravelUnderscoreRemovalInErrorMessage(string $name, ?string $errorMessage): ?string
-    {
+    /**
+     * @param string $name
+     * @param string $locale
+     * @param string|null $errorMessage
+     *
+     * @return string|null
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
+    protected function undoInputNameLaravelUnderscoreRemovalInErrorMessage(
+        string $name,
+        string $locale,
+        ?string $errorMessage
+    ): ?string {
         if (! $errorMessage) {
             return null;
         }
