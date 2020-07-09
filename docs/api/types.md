@@ -48,9 +48,9 @@
 |---|---|---|
 | name(string $name): self | Yes | Set the component input name tag. |
 | model(Model $model): self | No | Set the component associated model. |
-| value($value): self | No | Set the component input value. |
-| prepend(?string $html): self | No | Prepend html to the component input group. Set false to hide it. |
-| append(?string $html): self | No | Append html to the component input group. Set false to hide it. |
+| value(mixed $value): self | No | Set the component input value. |
+| prepend(string|\Closure|string $prepend): self | No | Prepend html to the component input group. Set false to hide it. |
+| append(string|\Closure|null $html): self | No | Append html to the component input group. Set false to hide it. |
 | label(?string $label): self | No | Set the component input label. Default value : `__('validation.attributes.' .$name)`. |
 | labelPositionedAbove(bool $positionedAbove = true): self | No | Set the label above-positioning status. If not positioned above, the label will be positioned under the input (may be useful for bootstrap 4 floating labels). |
 | placeholder(?string $placeholder): self | No | Set the component input placeholder. Default value : `$label`. |
@@ -60,7 +60,7 @@
 
 **Notes**
 
-* The method `value()` accepts a closure to define the component value. To provide a fallback in case of multilingual use, the `$locale` argument can be used, which returns the current locale in case of monolingual component.
+* The `value()`, `prepend()` and `append()` methods are accepting a closure as param. To provide a fallback in case of multilingual use, this closure provides a `string $locale` argument, which is the current locale in case of monolingual component.
 
 **Usage**
 
@@ -99,6 +99,8 @@
 |---|---|---|
 | locales(array $locales): self | No | Set the component input language locales to handle. |
 | value(Closure $value): self | No | Set the component input value by returning it from this closure result : `->value(function(string $locale){})`. |
+| prepend(Closure $value): self | No | Set the component prepend value by returning it from this closure result : `->value(function(string $locale){})`. |
+| append(Closure $value): self | No | Set the component input value by returning it from this closure result : `->value(function(string $locale){})`. |
 
 **Notes**
 

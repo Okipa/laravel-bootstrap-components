@@ -5,6 +5,7 @@ namespace Okipa\LaravelBootstrapComponents\Components\Form\Abstracts;
 use Closure;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use InvalidArgumentException;
 use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Traits\FormValidityChecks;
 
@@ -18,10 +19,10 @@ abstract class FormAbstract extends ComponentAbstract
     /** @property string $name */
     protected $name;
 
-    /** @property string|null $prepend */
+    /** @property string|Closure|null $prepend */
     protected $prepend;
 
-    /** @property string|null $append */
+    /** @property string|Closure|null $append */
     protected $append;
 
     /** @property string $label */
@@ -86,30 +87,38 @@ abstract class FormAbstract extends ComponentAbstract
 
     /**
      * Prepend html to the component input group.
-     * Set false to hide it.
+     * Set null to hide it.
      *
-     * @param string|null $html
+     * @param string|Closure|null $prepend
      *
      * @return $this
      */
-    public function prepend(?string $html): self
+    public function prepend($prepend): self
     {
-        $this->prepend = $html;
+        if (! is_null($prepend) && ! is_string($prepend) && ! $prepend instanceof Closure) {
+            throw new InvalidArgumentException('Invalid $prepend argument provided: null, string or \Closure value awaited. '
+                . gettype($prepend) . ' given.');
+        }
+        $this->prepend = $prepend;
 
         return $this;
     }
 
     /**
      * Append html to the component input group.
-     * Set false to hide it.
+     * Set null to hide it.
      *
-     * @param string|null $html
+     * @param string|Closure|null $append
      *
      * @return $this
      */
-    public function append(?string $html): self
+    public function append($append): self
     {
-        $this->append = $html;
+        if (! is_null($append) && ! is_string($append) && ! $append instanceof Closure) {
+            throw new InvalidArgumentException('Invalid $append argument provided: null, string or \Closure value awaited. '
+                . gettype($append) . ' given.');
+        }
+        $this->append = $append;
 
         return $this;
     }
@@ -272,7 +281,10 @@ abstract class FormAbstract extends ComponentAbstract
 
     protected function getPrepend(): ?string
     {
-        return $this->prepend;
+        $prepend = $this->prepend;
+
+        // fallback for usage of closure with multilingual disabled
+        return $prepend instanceof Closure ? $prepend(app()->getLocale()) : $prepend;
     }
 
     /**
@@ -284,7 +296,10 @@ abstract class FormAbstract extends ComponentAbstract
 
     protected function getAppend(): ?string
     {
-        return $this->append;
+        $append = $this->append;
+
+        // fallback for usage of closure with multilingual disabled
+        return $append instanceof Closure ? $append(app()->getLocale()) : $append;
     }
 
     /**
@@ -334,7 +349,7 @@ abstract class FormAbstract extends ComponentAbstract
     protected function getValue()
     {
         $value = old($this->convertArrayNameInNotation()) ?: $this->value;
-        // fallback for usage of closure with non multilingual fields
+        // fallback for usage of closure with multilingual disabled
         $value = $value instanceof Closure ? $value(app()->getLocale()) : $value;
 
         return $value ?? optional($this->getModel())->{$this->convertArrayNameInNotation()};

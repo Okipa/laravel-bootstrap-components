@@ -101,7 +101,7 @@ abstract class TemporalTestAbstract extends InputTestAbstract
         $this->assertStringContainsString(' value=""', $html);
     }
 
-    public function testSetValueFromClosure()
+    public function testSetValueFromClosureWithDisabledMultilingual()
     {
         $value = $this->faker->dateTime;
         $html = $this->getComponent()->name('name')->value(function () use ($value) {

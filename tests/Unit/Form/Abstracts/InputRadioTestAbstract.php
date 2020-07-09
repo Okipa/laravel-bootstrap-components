@@ -47,6 +47,14 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         $this->assertStringNotContainsString('<span class="label-prepend">default-prepend</span>', $html);
     }
 
+    public function testSetPrependFromClosureWithDisabledMultilingual()
+    {
+        $html = $this->getComponent()->name('name')->prepend(function ($locale) {
+            return 'prepend-' . $locale;
+        })->toHtml();
+        $this->assertStringContainsString('<span class="label-prepend">prepend-en</span>', $html);
+    }
+
     public function testHidePrepend()
     {
         $html = $this->getComponent()->name('name')->prepend(null)->toHtml();
@@ -72,6 +80,14 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         $html = $this->getComponent()->name('name')->append('custom-append')->toHtml();
         $this->assertStringContainsString('<span class="label-append">custom-append</span>', $html);
         $this->assertStringNotContainsString('<span class="label-append">default-append</span>', $html);
+    }
+
+    public function testSetAppendFromClosureWithDisabledMultilingual()
+    {
+        $html = $this->getComponent()->name('name')->append(function ($locale) {
+            return 'append-' . $locale;
+        })->toHtml();
+        $this->assertStringContainsString('<span class="label-append">append-en</span>', $html);
     }
 
     public function testHideAppend()

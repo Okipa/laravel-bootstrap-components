@@ -177,6 +177,36 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         }
     }
 
+    public function testSetLocalizedPrepend()
+    {
+        $locales = ['fr', 'en'];
+        $html = $this->getComponent()
+            ->name('name')
+            ->locales($locales)
+            ->prepend(function ($locale) {
+                return 'prepend-' . $locale;
+            })
+            ->toHtml();
+        foreach ($locales as $locale) {
+            $this->assertStringContainsString('<span class="input-group-text">prepend-' . $locale . '</span>', $html);
+        }
+    }
+
+    public function testSetLocalizedAppend()
+    {
+        $locales = ['fr', 'en'];
+        $html = $this->getComponent()
+            ->name('name')
+            ->locales($locales)
+            ->append(function ($locale) {
+                return 'append-' . $locale;
+            })
+            ->toHtml();
+        foreach ($locales as $locale) {
+            $this->assertStringContainsString('<span class="input-group-text">append-' . $locale . '</span>', $html);
+        }
+    }
+
     public function testSetLocalizedLabel()
     {
         $locales = ['fr', 'en'];
