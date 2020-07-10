@@ -94,14 +94,14 @@
 | Signature | Required | Description |
 |---|---|---|
 | locales(array $locales): self | No | Set the component input language locales to handle. |
+| value(Closure $value): self | No | Set the component input value by returning it from this closure result : `->value(function(string $locale){})`. |
 | prepend(Closure $prepend): self | No | Set the component prepended HTML by returning it from this closure result : `->prepend(function(string $locale){})`. |
 | append(Closure $append): self | No | Set the component appended HTML by returning it from this closure result : `->append(function(string $locale){})`. |
-| value(Closure $value): self | No | Set the component input value by returning it from this closure result : `->value(function(string $locale){})`. |
 
 **Notes**
 
-* You will still be able to use the `prepend`, `append` and `value` methods as for a simple `FormAbstract` component if you wish to. Closure usage is an extra behaviour, which is here to allow you to display translated content.
-* A security fallback has been implemented in order to allow you to keep the Closure behaviour for the `prepend`, `append` and `value` methods, even if your component is not multilingual anymore. The `$locale` attribute will take the value of the current locale.
+* You will still be able to use the `value`, `prepend` and `append` methods as for a simple `FormAbstract` component if you wish to. Closure usage is an extra behaviour, which is here to allow you to display translated content.
+* A security fallback has been implemented in order to allow you to keep the Closure behaviour for the `value`, `prepend` and `append` methods, even if your component is not multilingual anymore. The `$locale` attribute will take the value of the current locale.
 * Each multilingual form component will behave as a monolingual form component as long as the `->locales()` method is not being used or as long as only one locale is declared.
 * The use of the `->locales()` method will replicate the component for each locale keys you declared.
   * For example, if you declare the `fr` and `en` locale keys for a text input component with the `title` attribute, you will get two `Title (FR)` and `Title (EN)` generated text input components.
@@ -120,15 +120,15 @@
 <MultilingualAbstract>
     // inherits FormAbstract methods
     ->locales(['fr', 'en'])
+    ->value(function(string $locale){
+        return $name[$locale];
+    });
     ->prepend(function(string $locale){
         return 'prepend-' . $locale;
     })
     ->append(function(string $locale){
         return 'append-' . $locale;
     }) 
-    ->value(function(string $locale){
-        return $name[$locale];
-    });
 ```
 
 **Components**
