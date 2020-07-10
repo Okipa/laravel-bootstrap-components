@@ -4,6 +4,7 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
 use Exception;
 use Illuminate\Support\MessageBag;
+use InvalidArgumentException;
 use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract;
 use Okipa\LaravelBootstrapComponents\Tests\BootstrapComponentsTestCase;
@@ -84,6 +85,12 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
 
     abstract protected function getCustomComponent(): ComponentAbstract;
 
+    public function testSetWrongPrepend()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->getComponent()->name('name')->prepend(1)->toHtml();
+    }
+
     public function testSetPrependOverridesDefault()
     {
         config()->set(
@@ -93,6 +100,14 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $html = $this->getComponent()->name('name')->prepend('custom-prepend')->toHtml();
         $this->assertStringContainsString('<span class="input-group-text">custom-prepend</span>', $html);
         $this->assertStringNotContainsString('<span class="input-group-text">default-prepend</span>', $html);
+    }
+
+    public function testSetPrependFromClosureWithDisabledMultilingual()
+    {
+        $html = $this->getComponent()->name('name')->prepend(function ($locale) {
+            return 'prepend-' . $locale;
+        })->toHtml();
+        $this->assertStringContainsString('<span class="input-group-text">prepend-en</span>', $html);
     }
 
     public function testHidePrepend()
@@ -111,6 +126,12 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $this->assertStringContainsString('<span class="input-group-text">default-append</span>', $html);
     }
 
+    public function testSetWrongAppend()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->getComponent()->name('name')->append(1)->toHtml();
+    }
+
     public function testSetAppendOverridesDefault()
     {
         config()->set(
@@ -120,6 +141,14 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $html = $this->getComponent()->name('name')->append('custom-append')->toHtml();
         $this->assertStringContainsString('<span class="input-group-text">custom-append</span>', $html);
         $this->assertStringNotContainsString('<span class="input-group-text">default-append</span>', $html);
+    }
+
+    public function testSetAppendFromClosureWithDisabledMultilingual()
+    {
+        $html = $this->getComponent()->name('name')->append(function ($locale) {
+            return 'append-' . $locale;
+        })->toHtml();
+        $this->assertStringContainsString('<span class="input-group-text">append-en</span>', $html);
     }
 
     public function testHideAppend()
@@ -185,7 +214,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $this->assertStringContainsString(' value=""', $html);
     }
 
-    public function testSetValueFromClosure()
+    public function testSetValueFromClosureWithDisabledMultilingual()
     {
         $html = $this->getComponent()->name('name')->value(function ($locale) {
             return 'closure-value-' . $locale;

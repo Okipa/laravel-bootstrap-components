@@ -138,7 +138,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $this->markTestSkipped();
     }
 
-    public function testSetValueFromClosure()
+    public function testSetValueFromClosureWithDisabledMultilingual()
     {
         $this->markTestSkipped();
     }

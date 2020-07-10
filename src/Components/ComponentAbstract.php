@@ -100,7 +100,7 @@ abstract class ComponentAbstract implements Htmlable
     }
 
     /**
-     * Set the component html attributes.
+     * Set the component HTML attributes.
      *
      * @param array $componentHtmlAttributes
      *
@@ -114,7 +114,7 @@ abstract class ComponentAbstract implements Htmlable
     }
 
     /**
-     * Set the component container html attributes.
+     * Set the component container HTML attributes.
      *
      * @param array $containerHtmlAttributes
      *
@@ -128,7 +128,7 @@ abstract class ComponentAbstract implements Htmlable
     }
 
     /**
-     * Render the component html.
+     * Render the component HTML.
      *
      * @return string
      * @throws \Throwable
@@ -139,7 +139,7 @@ abstract class ComponentAbstract implements Htmlable
     }
 
     /**
-     * Render the component html.
+     * Render the component HTML.
      *
      * @param array $extraData
      *
@@ -258,7 +258,7 @@ abstract class ComponentAbstract implements Htmlable
     }
 
     /**
-     * Set the component html attributes.
+     * Set the component HTML attributes.
      *
      * @return array
      */
@@ -273,7 +273,7 @@ abstract class ComponentAbstract implements Htmlable
     }
 
     /**
-     * Set the container html attributes.
+     * Set the container HTML attributes.
      *
      * @return array
      */

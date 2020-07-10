@@ -59,7 +59,7 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetValueFromClosure()
+    public function testSetValueFromClosureWithDisabledMultilingual()
     {
         $html = $this->getComponent()->name('name')->value(function ($locale) {
             return 'closure-value-' . $locale;

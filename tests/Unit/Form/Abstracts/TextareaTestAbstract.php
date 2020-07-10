@@ -44,7 +44,7 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
         $this->assertStringContainsString('></textarea>', $html);
     }
 
-    public function testSetValueFromClosure()
+    public function testSetValueFromClosureWithDisabledMultilingual()
     {
         $html = $this->getComponent()->name('name')->value(function ($locale) {
             return 'closure-value-' . $locale;

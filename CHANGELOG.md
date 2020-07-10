@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.2.0](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.12...2.2.0)
+
+2020-07-10
+
+* Added the possibility to use a closure as argument for the `prepend` and `append` methods of the [multilingual components](docs/api/types.md#multilingualabstract), in order to translate rendered prepended or appended HTML.
+
 ## [2.1.12](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.11...2.1.12)
 
 2020-07-07

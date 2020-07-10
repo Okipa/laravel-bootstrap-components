@@ -64,7 +64,7 @@ abstract class MultilingualAbstract extends FormAbstract
     }
 
     /**
-     * Render the multilingual component html.
+     * Render the multilingual component HTML.
      *
      * @param array $extraData
      *
@@ -115,6 +115,8 @@ abstract class MultilingualAbstract extends FormAbstract
         $containerId = $this->getLocalizedContainerId($locale);
         $componentHtmlAttributes = $this->getLocalizedComponentHtmlAttributes($locale);
         $name = $this->getLocalizedName($locale);
+        $prepend = $this->getLocalizedPrepend($locale);
+        $append = $this->getLocalizedAppend($locale);
         $label = $this->getLocalizedLabel($locale);
         $value = $this->getLocalizedValue($locale);
         $placeholder = $this->getLocalizedPlaceholder($locale);
@@ -126,6 +128,8 @@ abstract class MultilingualAbstract extends FormAbstract
             'containerId',
             'componentHtmlAttributes',
             'name',
+            'prepend',
+            'append',
             'label',
             'value',
             'placeholder',
@@ -172,6 +176,22 @@ abstract class MultilingualAbstract extends FormAbstract
     protected function getLocalizedName(string $locale): string
     {
         return $this->multilingualResolver->resolveLocalizedName($this->getName(), $locale);
+    }
+
+    protected function getLocalizedPrepend(string $locale): ?string
+    {
+        $prepend = $this->prepend;
+
+        // fallback for usage of closure with multilingual disabled
+        return $prepend instanceof Closure ? $prepend($locale) : $prepend;
+    }
+
+    protected function getLocalizedAppend(string $locale): ?string
+    {
+        $append = $this->append;
+
+        // fallback for usage of closure with multilingual disabled
+        return $append instanceof Closure ? $append($locale) : $append;
     }
 
     /**
