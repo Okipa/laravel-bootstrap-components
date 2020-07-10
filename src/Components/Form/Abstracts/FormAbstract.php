@@ -96,8 +96,8 @@ abstract class FormAbstract extends ComponentAbstract
     public function prepend($prepend): self
     {
         if (! is_null($prepend) && ! is_string($prepend) && ! $prepend instanceof Closure) {
-            throw new InvalidArgumentException('Invalid $prepend argument provided: null, string or \Closure value awaited. '
-                . gettype($prepend) . ' given.');
+            throw new InvalidArgumentException('Invalid $prepend argument provided: null, string or ' .
+                '\Closure value awaited. ' . gettype($prepend) . ' given.');
         }
         $this->prepend = $prepend;
 
@@ -115,8 +115,8 @@ abstract class FormAbstract extends ComponentAbstract
     public function append($append): self
     {
         if (! is_null($append) && ! is_string($append) && ! $append instanceof Closure) {
-            throw new InvalidArgumentException('Invalid $append argument provided: null, string or \Closure value awaited. '
-                . gettype($append) . ' given.');
+            throw new InvalidArgumentException('Invalid $append argument provided: null, string or '
+                . '\Closure value awaited. ' . gettype($append) . ' given.');
         }
         $this->append = $append;
 
