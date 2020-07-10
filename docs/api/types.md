@@ -119,8 +119,16 @@
 ```php
 <MultilingualAbstract>
     // inherits FormAbstract methods
-    ->locales(['fr', 'en']) 
-    ->value(function(string $locale){ return $name[$locale]; });
+    ->locales(['fr', 'en'])
+    ->prepend(function(string $locale){
+        return 'prepend-' . $locale;
+    })
+    ->append(function(string $locale){
+        return 'append-' . $locale;
+    }) 
+    ->value(function(string $locale){
+        return $name[$locale];
+    });
 ```
 
 **Components**
@@ -252,8 +260,8 @@
 
 | Signature | Required | Description |
 |---|---|---|
-| prepend(?string $html): self | No | Prepend HTML to the button component label. Set false to hide it. |
-| append(?string $html): self | No | Append HTML to the button component label. Set false to hide it. |
+| prepend(?string $html): self | No | Prepend HTML to the button component label. Set null to hide it. |
+| append(?string $html): self | No | Append HTML to the button component label. Set null to hide it. |
 | label(string $label): self | No | Set the button component label. |
 
 **Usage**
