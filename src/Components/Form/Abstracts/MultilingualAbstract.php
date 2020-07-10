@@ -64,7 +64,7 @@ abstract class MultilingualAbstract extends FormAbstract
     }
 
     /**
-     * Render the multilingual component html.
+     * Render the multilingual component HTML.
      *
      * @param array $extraData
      *

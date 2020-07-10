@@ -23,8 +23,8 @@
 | componentId(string $componentId): self | No | Set the component id. |
 | containerClasses(array $containerClasses): self | No | Set the component container classes. |
 | componentClasses(array $componentClasses): self | No | Set the component classes. |
-| containerHtmlAttributes(array $containerHtmlAttributes): self | No | Set the component container html attributes. |
-| componentHtmlAttributes(array $componentHtmlAttributes): self | No | Set the component html attributes. |
+| containerHtmlAttributes(array $containerHtmlAttributes): self | No | Set the component container HTML attributes. |
+| componentHtmlAttributes(array $componentHtmlAttributes): self | No | Set the component HTML attributes. |
 
 **Usage**
 
@@ -49,18 +49,14 @@
 | name(string $name): self | Yes | Set the component input name tag. |
 | model(Model $model): self | No | Set the component associated model. |
 | value(mixed $value): self | No | Set the component input value. |
-| prepend(string|\Closure|string $prepend): self | No | Prepend html to the component input group. Set false to hide it. |
-| append(string|\Closure|null $html): self | No | Append html to the component input group. Set false to hide it. |
+| prepend(?string $prepend): self | No | Prepend HTML to the component input group. Set null to hide it. |
+| append(?string $html): self | No | Append HTML to the component input group. Set null to hide it. |
 | label(?string $label): self | No | Set the component input label. Default value : `__('validation.attributes.' .$name)`. |
 | labelPositionedAbove(bool $positionedAbove = true): self | No | Set the label above-positioning status. If not positioned above, the label will be positioned under the input (may be useful for bootstrap 4 floating labels). |
 | placeholder(?string $placeholder): self | No | Set the component input placeholder. Default value : `$label`. |
 | caption(?string $caption): self | No | Set the component caption. |
 | displaySuccess(?bool $displaySuccess = true): self | No | Set the component input validation success display status. |
 | displayFailure(?bool $displayFailure = true): self | No | Set the component input validation failure display status. |
-
-**Notes**
-
-* The `value()`, `prepend()` and `append()` methods are accepting a closure as param. To provide a fallback in case of multilingual use, this closure provides a `string $locale` argument, which is the current locale in case of monolingual component.
 
 **Usage**
 
@@ -98,20 +94,22 @@
 | Signature | Required | Description |
 |---|---|---|
 | locales(array $locales): self | No | Set the component input language locales to handle. |
+| prepend(Closure $prepend): self | No | Set the component prepended HTML by returning it from this closure result : `->prepend(function(string $locale){})`. |
+| append(Closure $append): self | No | Set the component appended HTML by returning it from this closure result : `->append(function(string $locale){})`. |
 | value(Closure $value): self | No | Set the component input value by returning it from this closure result : `->value(function(string $locale){})`. |
-| prepend(Closure $value): self | No | Set the component prepend value by returning it from this closure result : `->value(function(string $locale){})`. |
-| append(Closure $value): self | No | Set the component input value by returning it from this closure result : `->value(function(string $locale){})`. |
 
 **Notes**
 
-* Each multilingual form component will behave as a monolingual form component as long as the `->locales()` method is not used or as long as only one locale is declared.
+* You will still be able to use the `prepend`, `append` and `value` methods as for a simple `FormAbstract` component if you wish to. Closure usage is an extra behaviour, which is here to allow you to display translated content.
+* A security fallback has been implemented in order to allow you to keep the Closure behaviour for the `prepend`, `append` and `value` methods, even if your component is not multilingual anymore. The `$locale` attribute will take the value of the current locale.
+* Each multilingual form component will behave as a monolingual form component as long as the `->locales()` method is not being used or as long as only one locale is declared.
 * The use of the `->locales()` method will replicate the component for each locale keys you declared.
   * For example, if you declare the `fr` and `en` locale keys for a text input component with the `title` attribute, you will get two `Title (FR)` and `Title (EN)` generated text input components.
 * Each multilingual component provides an extra `data-locale="<locale>"` attribute to help with eventual javascript treatments.
 * You can use your own multilingual `Resolver` by replacing the path defined in the `config('bootstrap-components.form.multilingualResolver')`, allowing you to customize your multilingual form components localization behaviour :
-  * The default locales to handle (by default `[]`).
+  * The default locales to handle (default: `[]`).
   * The component localized `name` attribute resolution (default : `$name[$locale]`.
-  * The component localized old value resolution in case of errors (default : `old($name)[$locale]`).
+  * The component localized old value resolution in case of validation errors (default : `old($name)[$locale]`).
   * The component localized model value resolution (default : `$model->{$name}[$locales]`).
   * The component localized error message bag key resolution, used for the error message extraction and for the validation class generation (default : `$name . $locale`).
   * The component error message resolution, in order to correctly display the localized attribute name (default : transform `Dummy __('validation.attributes.name.en) error message` into `Dummy __('validation.attributes.name) (EN) error message.`.
@@ -162,7 +160,7 @@
 
 | Signature | Required | Description |
 |---|---|---|
-| uploadedFile(Closure $uploadedFile): self | No | Allows to set html or another component to render the uploaded file. |
+| uploadedFile(Closure $uploadedFile): self | No | Allows to set HTML or another component to render the uploaded file. |
 | showRemoveCheckbox(bool $showRemoveCheckbox = true, string $removeCheckboxLabel = null): self | No | Show the file remove checkbox option (will appear only if an uploaded file is detected). Default value : `config('bootstrap-components.file.showRemoveCheckbox')`. The remove checkbox label can be precised with the second parameter, by default, it will take the following value : `__('Remove') . ' ' . $name` |
 
 **Usage**
@@ -254,8 +252,8 @@
 
 | Signature | Required | Description |
 |---|---|---|
-| prepend(?string $html): self | No | Prepend html to the button component label. Set false to hide it. |
-| append(?string $html): self | No | Append html to the button component label. Set false to hide it. |
+| prepend(?string $html): self | No | Prepend HTML to the button component label. Set false to hide it. |
+| append(?string $html): self | No | Append HTML to the button component label. Set false to hide it. |
 | label(string $label): self | No | Set the button component label. |
 
 **Usage**
@@ -333,14 +331,14 @@
 
 | Signature | Required | Description |
 |---|---|---|
-| alt(string $alt): self | No | Define the image component alt html tag. |
-| width(int $width): self | No | Define the component image html tag width. |
-| height(int $height): self | No | Define the component image html tag height. |
+| alt(string $alt): self | No | Define the image component alt HTML tag. |
+| width(int $width): self | No | Define the component image HTML tag width. |
+| height(int $height): self | No | Define the component image HTML tag height. |
 | linkUrl(string $linkUrl): self | No | Set the image component link URL. |
 | linkTitle(string $linkTitle): self | No | Set the image component link title. |
 | linkId(string $linkId): self | No | Set the image component link id. |
 | linkClasses(array $linkClasses): self | No | Set the image component link classes. Default value : `config('bootstrap-components.media.image.classes.link')`. |
-| linkHtmlAttributes(array $linkHtmlAttributes): self | No | Set the image component link html attributes. Default value : `config('bootstrap-components.media.image.htmlAttributes.link')`. |
+| linkHtmlAttributes(array $linkHtmlAttributes): self | No | Set the image component link HTML attributes. Default value : `config('bootstrap-components.media.image.htmlAttributes.link')`. |
 
 **Usage**
 

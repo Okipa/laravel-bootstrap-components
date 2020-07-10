@@ -27,7 +27,7 @@ abstract class SubmitAbstract extends ComponentAbstract
     }
 
     /**
-     * Prepend html to the button component label.
+     * Prepend HTML to the button component label.
      * Set false to hide it.
      *
      * @param string|null $html
@@ -42,7 +42,7 @@ abstract class SubmitAbstract extends ComponentAbstract
     }
 
     /**
-     * Append html to the button component label.
+     * Append HTML to the button component label.
      * Set false to hide it.
      *
      * @param string|null $html
@@ -99,7 +99,7 @@ abstract class SubmitAbstract extends ComponentAbstract
     }
 
     /**
-     * Set the component prepended html.
+     * Set the component prepended HTML.
      *
      * @return string
      */
@@ -114,7 +114,7 @@ abstract class SubmitAbstract extends ComponentAbstract
     }
 
     /**
-     * Set the component appended html.
+     * Set the component appended HTML.
      *
      * @return string|null
      */

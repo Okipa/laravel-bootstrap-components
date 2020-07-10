@@ -39,7 +39,7 @@ abstract class ImageAbstract extends MediaAbstract
     }
 
     /**
-     * Define the image component alt html tag.
+     * Define the image component alt HTML tag.
      *
      * @param string $alt
      *
@@ -53,7 +53,7 @@ abstract class ImageAbstract extends MediaAbstract
     }
 
     /**
-     * Define the component image html tag width.
+     * Define the component image HTML tag width.
      *
      * @param int $width
      *
@@ -67,7 +67,7 @@ abstract class ImageAbstract extends MediaAbstract
     }
 
     /**
-     * Define the component image html tag height.
+     * Define the component image HTML tag height.
      *
      * @param int $height
      *
@@ -137,7 +137,7 @@ abstract class ImageAbstract extends MediaAbstract
     }
 
     /**
-     * Set the image component link html attributes.
+     * Set the image component link HTML attributes.
      *
      * @param array $linkHtmlAttributes
      *
@@ -246,7 +246,7 @@ abstract class ImageAbstract extends MediaAbstract
     }
 
     /**
-     * Set the default component html attributes.
+     * Set the default component HTML attributes.
      *
      * @return array
      */
@@ -256,7 +256,7 @@ abstract class ImageAbstract extends MediaAbstract
     }
 
     /**
-     * Set the image component link html attributes.
+     * Set the image component link HTML attributes.
      *
      * @return array
      */

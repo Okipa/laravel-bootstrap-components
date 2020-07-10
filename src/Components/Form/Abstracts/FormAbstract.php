@@ -86,7 +86,7 @@ abstract class FormAbstract extends ComponentAbstract
     }
 
     /**
-     * Prepend html to the component input group.
+     * Prepend HTML to the component input group.
      * Set null to hide it.
      *
      * @param string|Closure|null $prepend
@@ -105,7 +105,7 @@ abstract class FormAbstract extends ComponentAbstract
     }
 
     /**
-     * Append html to the component input group.
+     * Append HTML to the component input group.
      * Set null to hide it.
      *
      * @param string|Closure|null $append
@@ -288,7 +288,7 @@ abstract class FormAbstract extends ComponentAbstract
     }
 
     /**
-     * Set the component prepended html.
+     * Set the component prepended HTML.
      *
      * @return string
      */
@@ -303,7 +303,7 @@ abstract class FormAbstract extends ComponentAbstract
     }
 
     /**
-     * Set the component appended html.
+     * Set the component appended HTML.
      *
      * @return string|null
      */

@@ -20,7 +20,7 @@ class ComponentServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../resources/views' => resource_path('views/vendor/bootstrap-components'),
         ], 'bootstrap-components:views');
-        // we load the laravel html helper package
+        // we load the laravel HTML helper package
         // https://github.com/Okipa/laravel-html-helper
         $this->app->register(HtmlHelperServiceProvider::class);
     }
