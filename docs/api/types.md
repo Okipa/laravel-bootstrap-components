@@ -102,7 +102,7 @@
 
 * You will still be able to use the `value`, `prepend` and `append` methods as for a simple `FormAbstract` component if you wish to. Closure usage is an extra behaviour, which is here to allow you to display translated content.
 * A security fallback has been implemented in order to allow you to keep the Closure behaviour for the `value`, `prepend` and `append` methods, even if your component is not multilingual anymore. The `$locale` attribute will take the value of the current locale.
-* Each multilingual form component will behave as a monolingual form component as long as the `->locales()` method is not being used or as long as only one locale is declared.
+* Each multilingual form component will behave as a monolingual form component as long as the `->locales()` method is not being used or as long as only one locale is being declared.
 * The use of the `->locales()` method will replicate the component for each locale keys you declared.
   * For example, if you declare the `fr` and `en` locale keys for a text input component with the `title` attribute, you will get two `Title (FR)` and `Title (EN)` generated text input components.
 * Each multilingual component provides an extra `data-locale="<locale>"` attribute to help with eventual javascript treatments.
