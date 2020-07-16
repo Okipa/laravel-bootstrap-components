@@ -7,9 +7,6 @@ use Okipa\LaravelBootstrapComponents\Components\Buttons\Abstracts\SubmitAbstract
 
 trait ButtonComponentsTrait
 {
-    /**
-     * @return \Okipa\LaravelBootstrapComponents\Components\Buttons\Abstracts\SubmitAbstract
-     */
     public function submit(): SubmitAbstract
     {
         /** @var \Okipa\LaravelBootstrapComponents\Components\Buttons\Abstracts\SubmitAbstract $submit */
@@ -18,9 +15,6 @@ trait ButtonComponentsTrait
         return $submit;
     }
 
-    /**
-     * @return \Okipa\LaravelBootstrapComponents\Components\Buttons\Abstracts\SubmitAbstract
-     */
     public function submitCreate(): SubmitAbstract
     {
         /** @var \Okipa\LaravelBootstrapComponents\Components\Buttons\Abstracts\SubmitAbstract $submitCreate */
@@ -29,9 +23,6 @@ trait ButtonComponentsTrait
         return $submitCreate;
     }
 
-    /**
-     * @return \Okipa\LaravelBootstrapComponents\Components\Buttons\Abstracts\SubmitAbstract
-     */
     public function submitUpdate(): SubmitAbstract
     {
         /** @var \Okipa\LaravelBootstrapComponents\Components\Buttons\Abstracts\SubmitAbstract $submitUpdate */
@@ -40,9 +31,6 @@ trait ButtonComponentsTrait
         return $submitUpdate;
     }
 
-    /**
-     * @return \Okipa\LaravelBootstrapComponents\Components\Buttons\Abstracts\SubmitAbstract
-     */
     public function submitValidate(): SubmitAbstract
     {
         /** @var \Okipa\LaravelBootstrapComponents\Components\Buttons\Abstracts\SubmitAbstract $submitValidate */
@@ -51,9 +39,6 @@ trait ButtonComponentsTrait
         return $submitValidate;
     }
 
-    /**
-     * @return \Okipa\LaravelBootstrapComponents\Components\Buttons\Abstracts\ButtonAbstract
-     */
     public function button(): ButtonAbstract
     {
         /** @var \Okipa\LaravelBootstrapComponents\Components\Buttons\Abstracts\ButtonAbstract $button */
@@ -62,9 +47,6 @@ trait ButtonComponentsTrait
         return $button;
     }
 
-    /**
-     * @return \Okipa\LaravelBootstrapComponents\Components\Buttons\Abstracts\ButtonAbstract
-     */
     public function buttonLink(): ButtonAbstract
     {
         /** @var \Okipa\LaravelBootstrapComponents\Components\Buttons\Abstracts\ButtonAbstract $buttonLink */
@@ -73,9 +55,6 @@ trait ButtonComponentsTrait
         return $buttonLink;
     }
 
-    /**
-     * @return \Okipa\LaravelBootstrapComponents\Components\Buttons\Abstracts\ButtonAbstract
-     */
     public function buttonBack(): ButtonAbstract
     {
         /** @var \Okipa\LaravelBootstrapComponents\Components\Buttons\Abstracts\ButtonAbstract $buttonBack */
@@ -84,9 +63,6 @@ trait ButtonComponentsTrait
         return $buttonBack;
     }
 
-    /**
-     * @return \Okipa\LaravelBootstrapComponents\Components\Buttons\Abstracts\ButtonAbstract
-     */
     public function buttonCancel(): ButtonAbstract
     {
         /** @var \Okipa\LaravelBootstrapComponents\Components\Buttons\Abstracts\ButtonAbstract $buttonCancel */
