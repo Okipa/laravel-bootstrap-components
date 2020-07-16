@@ -229,7 +229,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
 
     public function testHideLabel()
     {
-        $html = $this->getComponent()->name('active')->label(false)->toHtml();
+        $html = $this->getComponent()->name('active')->label(null)->toHtml();
         $this->assertStringNotContainsString(' for="' . $this->getComponentType() . '-active">'
             . 'validation.attributes.active</label>', $html);
     }

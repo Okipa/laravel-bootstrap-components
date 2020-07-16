@@ -28,6 +28,9 @@ abstract class FormAbstract extends ComponentAbstract
     /** @property string $label */
     protected $label;
 
+    /** @property bool $label */
+    protected $hideLabel;
+
     /** @property string|null $caption */
     protected $caption;
 
@@ -89,16 +92,12 @@ abstract class FormAbstract extends ComponentAbstract
      * Prepend HTML to the component input group.
      * Set null to hide it.
      *
-     * @param string|Closure|null $prepend
+     * @param mixed $prepend
      *
      * @return $this
      */
     public function prepend($prepend): self
     {
-        if (! is_null($prepend) && ! is_string($prepend) && ! $prepend instanceof Closure) {
-            throw new InvalidArgumentException('Invalid $prepend argument provided: null, string or ' .
-                '\Closure value awaited. ' . gettype($prepend) . ' given.');
-        }
         $this->prepend = $prepend;
 
         return $this;
@@ -108,16 +107,12 @@ abstract class FormAbstract extends ComponentAbstract
      * Append HTML to the component input group.
      * Set null to hide it.
      *
-     * @param string|Closure|null $append
+     * @param mixed $append
      *
      * @return $this
      */
     public function append($append): self
     {
-        if (! is_null($append) && ! is_string($append) && ! $append instanceof Closure) {
-            throw new InvalidArgumentException('Invalid $append argument provided: null, string or '
-                . '\Closure value awaited. ' . gettype($append) . ' given.');
-        }
         $this->append = $append;
 
         return $this;
@@ -168,6 +163,7 @@ abstract class FormAbstract extends ComponentAbstract
 
     /**
      * Set the component label.
+     * Set null to hide it.
      *
      * @param string|null $label
      *
@@ -175,6 +171,7 @@ abstract class FormAbstract extends ComponentAbstract
      */
     public function label(?string $label): self
     {
+        $this->hideLabel = ! $label;
         $this->label = $label;
 
         return $this;
@@ -321,9 +318,11 @@ abstract class FormAbstract extends ComponentAbstract
      */
     abstract protected function setCaption(): ?string;
 
-    protected function getLabel(): string
+    protected function getLabel(): ?string
     {
-        return $this->label ?? (string) __('validation.attributes.' . $this->removeArrayCharactersFromName());
+        $label = $this->label ?: (string) __('validation.attributes.' . $this->removeArrayCharactersFromName());
+
+        return $this->hideLabel ? null : $label;
     }
 
     protected function removeArrayCharactersFromName(): string

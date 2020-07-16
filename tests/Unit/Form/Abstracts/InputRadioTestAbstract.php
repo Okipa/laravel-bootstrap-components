@@ -201,7 +201,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
 
     public function testHideLabel()
     {
-        $html = $this->getComponent()->name('name')->label(false)->toHtml();
+        $html = $this->getComponent()->name('name')->label(null)->toHtml();
         $this->assertStringNotContainsString(
             '<label class="custom-control-label" for="' . $this->getComponentType()
             . '-name-value">validation.attributes.name</label>',

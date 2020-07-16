@@ -51,7 +51,7 @@
 | value(mixed $value): self | No | Set the component input value. |
 | prepend(?string $prepend): self | No | Prepend HTML to the component input group. Set null to hide it. |
 | append(?string $html): self | No | Append HTML to the component input group. Set null to hide it. |
-| label(?string $label): self | No | Set the component input label. Default value : `__('validation.attributes.' .$name)`. |
+| label(?string $label): self | No | Set the component input label. Default value : `__('validation.attributes.' .$name)`. Set null to hide it. |
 | labelPositionedAbove(bool $positionedAbove = true): self | No | Set the label above-positioning status. If not positioned above, the label will be positioned under the input (may be useful for bootstrap 4 floating labels). |
 | placeholder(?string $placeholder): self | No | Set the component input placeholder. Default value : `$label`. |
 | caption(?string $caption): self | No | Set the component caption. |

@@ -153,7 +153,7 @@ abstract class InputFileTestAbstract extends InputTestAbstract
 
     public function testNoPlaceholderWithNoLabel()
     {
-        $html = $this->getComponent()->name('name')->label(false)->toHtml();
+        $html = $this->getComponent()->name('name')->label(null)->toHtml();
         $this->assertStringContainsString('custom-file-label', $html);
         $this->assertStringContainsString('<label class="custom-file-label" for="' . $this->getComponentType()
             . '-name">' . __('No file selected.') . '</label>', $html);
