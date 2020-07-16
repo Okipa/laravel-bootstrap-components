@@ -1,10 +1,11 @@
 # Changelog
 
+## [2.2.2](https://github.com/Okipa/laravel-bootstrap-components/compare/2.2.1...2.2.2)
 ## [2.2.1](https://github.com/Okipa/laravel-bootstrap-components/compare/2.2.0...2.2.1)
 
 2020-07-16
 
-* Fixed media components output types for static analysis.
+* Fixed components output types for static analysis.
 
 ## [2.2.0](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.12...2.2.0)
 
