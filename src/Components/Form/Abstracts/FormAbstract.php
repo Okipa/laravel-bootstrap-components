@@ -5,7 +5,6 @@ namespace Okipa\LaravelBootstrapComponents\Components\Form\Abstracts;
 use Closure;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use InvalidArgumentException;
 use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Traits\FormValidityChecks;
 
@@ -13,11 +12,9 @@ abstract class FormAbstract extends ComponentAbstract
 {
     use FormValidityChecks;
 
-    /** @property Model|null $model */
-    protected $model;
+    protected ?Model $model = null;
 
-    /** @property string $name */
-    protected $name;
+    protected string $name;
 
     /** @property string|Closure|null $prepend */
     protected $prepend;
@@ -25,29 +22,22 @@ abstract class FormAbstract extends ComponentAbstract
     /** @property string|Closure|null $append */
     protected $append;
 
-    /** @property string $label */
-    protected $label;
+    protected ?string $label = null;
 
-    /** @property bool $label */
-    protected $hideLabel;
+    protected ?string $caption;
 
-    /** @property string|null $caption */
-    protected $caption;
+    protected bool $hideLabel = false;
 
-    /** @property bool $labelPositionedAbove */
-    protected $labelPositionedAbove;
+    protected bool $labelPositionedAbove;
 
     /** @property mixed $value */
     protected $value;
 
-    /** @property string|null $placeholder */
-    protected $placeholder;
+    protected ?string $placeholder;
 
-    /** @property bool $displaySuccess */
-    protected $displaySuccess;
+    protected bool $displaySuccess;
 
-    /** @property bool $displayFailure */
-    protected $displayFailure;
+    protected bool $displayFailure;
 
     public function __construct()
     {
@@ -60,13 +50,6 @@ abstract class FormAbstract extends ComponentAbstract
         $this->displayFailure = $this->setDisplayFailure();
     }
 
-    /**
-     * Set the component name attribute.
-     *
-     * @param string $name
-     *
-     * @return $this
-     */
     public function name(string $name): self
     {
         $this->name = $name;
@@ -74,14 +57,7 @@ abstract class FormAbstract extends ComponentAbstract
         return $this;
     }
 
-    /**
-     * Set the component associated model.
-     *
-     * @param Model $model
-     *
-     * @return $this
-     */
-    public function model(Model $model = null): self
+    public function model(?Model $model): self
     {
         $this->model = $model;
 
@@ -89,10 +65,7 @@ abstract class FormAbstract extends ComponentAbstract
     }
 
     /**
-     * Prepend HTML to the component input group.
-     * Set null to hide it.
-     *
-     * @param mixed $prepend
+     * @param string|Closure|null $prepend
      *
      * @return $this
      */
@@ -104,10 +77,7 @@ abstract class FormAbstract extends ComponentAbstract
     }
 
     /**
-     * Append HTML to the component input group.
-     * Set null to hide it.
-     *
-     * @param mixed $append
+     * @param string|Closure|null $append
      *
      * @return $this
      */
@@ -118,13 +88,6 @@ abstract class FormAbstract extends ComponentAbstract
         return $this;
     }
 
-    /**
-     * Set the component caption.
-     *
-     * @param string|null $caption
-     *
-     * @return $this
-     */
     public function caption(?string $caption): self
     {
         $this->caption = $caption;
@@ -132,13 +95,6 @@ abstract class FormAbstract extends ComponentAbstract
         return $this;
     }
 
-    /**
-     * Set the component placeholder.
-     *
-     * @param string|null $placeholder
-     *
-     * @return $this
-     */
     public function placeholder(?string $placeholder): self
     {
         $this->placeholder = $placeholder;
@@ -146,14 +102,6 @@ abstract class FormAbstract extends ComponentAbstract
         return $this;
     }
 
-    /**
-     * Set the component input value by returning it from this closure result :
-     * ->value(function(string $locale){}).
-     *
-     * @param mixed $value
-     *
-     * @return $this
-     */
     public function value($value): self
     {
         $this->value = $value;
@@ -161,14 +109,6 @@ abstract class FormAbstract extends ComponentAbstract
         return $this;
     }
 
-    /**
-     * Set the component label.
-     * Set null to hide it.
-     *
-     * @param string|null $label
-     *
-     * @return $this
-     */
     public function label(?string $label): self
     {
         $this->hideLabel = ! $label;
@@ -177,15 +117,6 @@ abstract class FormAbstract extends ComponentAbstract
         return $this;
     }
 
-    /**
-     * Set the label above-positioning status.
-     * If not positioned above, the label will be positioned under the input
-     * (may be useful for bootstrap 4 floating labels).
-     *
-     * @param bool $positionedAbove
-     *
-     * @return $this
-     */
     public function labelPositionedAbove(bool $positionedAbove = true): self
     {
         $this->labelPositionedAbove = $positionedAbove;
@@ -193,28 +124,14 @@ abstract class FormAbstract extends ComponentAbstract
         return $this;
     }
 
-    /**
-     * Set the component validation success display status.
-     *
-     * @param bool|null $displaySuccess
-     *
-     * @return $this
-     */
-    public function displaySuccess(?bool $displaySuccess = true): self
+    public function displaySuccess(bool $displaySuccess = true): self
     {
         $this->displaySuccess = $displaySuccess;
 
         return $this;
     }
 
-    /**
-     * Set the component validation failure display status.
-     *
-     * @param bool|null $displayFailure
-     *
-     * @return $this
-     */
-    public function displayFailure(?bool $displayFailure = true): self
+    public function displayFailure(bool $displayFailure = true): self
     {
         $this->displayFailure = $displayFailure;
 
@@ -284,11 +201,6 @@ abstract class FormAbstract extends ComponentAbstract
         return $prepend instanceof Closure ? $prepend(app()->getLocale()) : $prepend;
     }
 
-    /**
-     * Set the component prepended HTML.
-     *
-     * @return string
-     */
     abstract protected function setPrepend(): ?string;
 
     protected function getAppend(): ?string
@@ -299,11 +211,6 @@ abstract class FormAbstract extends ComponentAbstract
         return $append instanceof Closure ? $append(app()->getLocale()) : $append;
     }
 
-    /**
-     * Set the component appended HTML.
-     *
-     * @return string|null
-     */
     abstract protected function setAppend(): ?string;
 
     protected function getCaption(): ?string
@@ -311,11 +218,6 @@ abstract class FormAbstract extends ComponentAbstract
         return $this->caption;
     }
 
-    /**
-     * Set the component caption.
-     *
-     * @return string|null
-     */
     abstract protected function setCaption(): ?string;
 
     protected function getLabel(): ?string
@@ -335,16 +237,8 @@ abstract class FormAbstract extends ComponentAbstract
         return $this->labelPositionedAbove;
     }
 
-    /**
-     * Set the component label above-positioning status
-     *
-     * @return bool
-     */
     abstract protected function setLabelPositionedAbove(): bool;
 
-    /**
-     * @return mixed
-     */
     protected function getValue()
     {
         $value = old($this->convertArrayNameInNotation()) ?: $this->value;
@@ -370,11 +264,6 @@ abstract class FormAbstract extends ComponentAbstract
         return $this->displaySuccess;
     }
 
-    /**
-     * Set the component input validation success display status.
-     *
-     * @return bool
-     */
     abstract protected function setDisplaySuccess(): bool;
 
     protected function getDisplayFailure(): bool
@@ -382,11 +271,6 @@ abstract class FormAbstract extends ComponentAbstract
         return $this->displayFailure;
     }
 
-    /**
-     * Set the component input validation failure display status.
-     *
-     * @return bool
-     */
     abstract protected function setDisplayFailure(): bool;
 
     protected function getValidationClass(): ?string

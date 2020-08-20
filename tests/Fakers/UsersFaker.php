@@ -2,21 +2,16 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Fakers;
 
-use Hash;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Hash;
 use Okipa\LaravelBootstrapComponents\Tests\Models\User;
 
 trait UsersFaker
 {
-    public $clearPassword;
+    public string $clearPassword;
 
-    public $data;
+    public array $data;
 
-    /**
-     * @param int $count
-     *
-     * @return Collection
-     */
     public function createMultipleUsers(int $count = 5): Collection
     {
         for ($ii = 0; $ii < $count; $ii++) {
@@ -26,9 +21,6 @@ trait UsersFaker
         return (new User)->all();
     }
 
-    /**
-     * @return User
-     */
     public function createUniqueUser(): User
     {
         $user = (new User)->create($this->generateFakeUserData());
@@ -36,9 +28,6 @@ trait UsersFaker
         return (new User)->find($user->id);
     }
 
-    /**
-     * @return array
-     */
     public function generateFakeUserData(): array
     {
         $this->clearPassword = $this->faker->word;

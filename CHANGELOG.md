@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.0.0](https://github.com/Okipa/laravel-bootstrap-components/compare/2.2.3...3.0.0)
+
+2020-08-20
+
+* Added Laravel 8 support.
+* Dropped Laravel 5.8 and 6.0 support.
+* Dropped PHP 7.2 and 7.3 support.
+
 ## [2.2.3](https://github.com/Okipa/laravel-bootstrap-components/compare/2.2.2...2.2.3)
 
 2020-07-16

@@ -7,10 +7,8 @@ use InvalidArgumentException;
 trait RadioValidityChecks
 {
     /**
-     * Check the component values validity
-     *
-     * @return void
      * @throws \Exception
+     * @throws \InvalidArgumentException
      */
     protected function checkValuesValidity(): void
     {

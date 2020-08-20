@@ -2,16 +2,13 @@
 
 namespace Okipa\LaravelBootstrapComponents\Components\Form\Traits;
 
-use Exception;
 use InvalidArgumentException;
 
 trait MultilingualValidityChecks
 {
     /**
-     * Check the component values validity
-     *
-     * @return void
      * @throws \Exception
+     * @throws \InvalidArgumentException
      */
     protected function checkValuesValidity(): void
     {

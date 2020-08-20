@@ -3,25 +3,17 @@
 namespace Okipa\LaravelBootstrapComponents\Components\Form\Abstracts;
 
 use Closure;
+use Okipa\LaravelBootstrapComponents\Components\Form\Multilingual\Resolver;
 use Okipa\LaravelBootstrapComponents\Components\Form\Traits\MultilingualValidityChecks;
 
 abstract class MultilingualAbstract extends FormAbstract
 {
     use MultilingualValidityChecks;
 
-    /** @property \Okipa\LaravelBootstrapComponents\Components\Form\Multilingual\Resolver $multilingualResolver */
-    protected $multilingualResolver;
+    protected Resolver $multilingualResolver;
 
-    /**
-     * The component language locales to handle.
-     *
-     * @property array $locales
-     */
-    protected $locales;
+    protected array $locales;
 
-    /**
-     * InputMultilingual constructor.
-     */
     public function __construct()
     {
         parent::__construct();
@@ -31,13 +23,6 @@ abstract class MultilingualAbstract extends FormAbstract
         $this->multilingualResolver = $multilingualResolver;
     }
 
-    /**
-     * Set the component input language locales to handle.
-     *
-     * @param array $locales
-     *
-     * @return $this
-     */
     public function locales(array $locales): self
     {
         $this->locales = $locales;
@@ -45,7 +30,6 @@ abstract class MultilingualAbstract extends FormAbstract
         return $this;
     }
 
-    /** @inheritDoc */
     public function render(array $extraData = []): string
     {
         if ($this->multilingualMode()) {
@@ -55,17 +39,12 @@ abstract class MultilingualAbstract extends FormAbstract
         return parent::render($extraData);
     }
 
-    /**
-     * @return bool
-     */
     protected function multilingualMode(): bool
     {
         return count($this->locales) > 1;
     }
 
     /**
-     * Render the multilingual component HTML.
-     *
      * @param array $extraData
      *
      * @return string
@@ -89,25 +68,11 @@ abstract class MultilingualAbstract extends FormAbstract
         return $html;
     }
 
-    /**
-     * Get the localized values for the view.
-     *
-     * @param string $locale
-     *
-     * @return array
-     */
     protected function getLocalizedValues(string $locale): array
     {
         return array_merge(parent::getValues(), $this->getLocalizedParameters($locale));
     }
 
-    /**
-     * Define the component parameters.
-     *
-     * @param string $locale
-     *
-     * @return array
-     */
     protected function getLocalizedParameters(string $locale): array
     {
         $parentParams = parent::getParameters();
@@ -138,41 +103,21 @@ abstract class MultilingualAbstract extends FormAbstract
         ));
     }
 
-    /**
-     * @param string $locale
-     *
-     * @return string
-     */
     protected function getLocalizedComponentId(string $locale): string
     {
         return parent::getComponentId() . '-' . $locale;
     }
 
-    /**
-     * @param string $locale
-     *
-     * @return string|null
-     */
     protected function getLocalizedContainerId(string $locale): ?string
     {
         return parent::getContainerId() ? parent::getContainerId() . '-' . $locale : null;
     }
 
-    /**
-     * @param string $locale
-     *
-     * @return array
-     */
     protected function getLocalizedComponentHtmlAttributes(string $locale): array
     {
         return array_merge(['data-locale' => $locale], parent::getComponentHtmlAttributes());
     }
 
-    /**
-     * @param string $locale
-     *
-     * @return string
-     */
     protected function getLocalizedName(string $locale): string
     {
         return $this->multilingualResolver->resolveLocalizedName($this->getName(), $locale);
@@ -194,11 +139,6 @@ abstract class MultilingualAbstract extends FormAbstract
         return $append instanceof Closure ? $append($locale) : $append;
     }
 
-    /**
-     * @param string $locale
-     *
-     * @return string|null
-     */
     protected function getLocalizedLabel(string $locale): ?string
     {
         $label = parent::getLabel();
@@ -206,11 +146,6 @@ abstract class MultilingualAbstract extends FormAbstract
         return $label ? $label . ' (' . mb_strtoupper($locale) . ')' : null;
     }
 
-    /**
-     * @param string $locale
-     *
-     * @return mixed
-     */
     protected function getLocalizedValue(string $locale)
     {
         $oldValue = $this->multilingualResolver->resolveLocalizedOldValue($this->getName(), $locale);
@@ -225,11 +160,6 @@ abstract class MultilingualAbstract extends FormAbstract
         return $oldValue ?? ($valueClosure ? $valueClosure($locale) : $modelValue);
     }
 
-    /**
-     * @param string $locale
-     *
-     * @return string|null
-     */
     protected function getLocalizedPlaceholder(string $locale): ?string
     {
         $placeholder = parent::getPlaceholder();
@@ -237,11 +167,6 @@ abstract class MultilingualAbstract extends FormAbstract
         return $placeholder ? $placeholder . ' (' . mb_strtoupper($locale) . ')' : null;
     }
 
-    /**
-     * @param string $locale
-     *
-     * @return string|null
-     */
     protected function getLocalizedValidationClass(string $locale): ?string
     {
         if (session()->has('errors')) {
@@ -255,11 +180,6 @@ abstract class MultilingualAbstract extends FormAbstract
         return null;
     }
 
-    /**
-     * @param string $locale
-     *
-     * @return string|null
-     */
     protected function getLocalizedErrorMessage(string $locale): ?string
     {
         return $this->multilingualResolver->resolveErrorMessage(parent::getName(), $locale);

@@ -6,10 +6,7 @@ use Illuminate\Support\Facades\Facade;
 
 class InputTime extends Facade
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected static function getFacadeAccessor()
+    protected static function getFacadeAccessor(): string
     {
         return 'InputTime';
     }

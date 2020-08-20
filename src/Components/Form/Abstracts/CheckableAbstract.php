@@ -4,8 +4,7 @@ namespace Okipa\LaravelBootstrapComponents\Components\Form\Abstracts;
 
 abstract class CheckableAbstract extends FormAbstract
 {
-    /** @property bool $checked */
-    protected $checked;
+    protected bool $checked;
 
     public function checked(bool $checked = true): self
     {
@@ -16,7 +15,7 @@ abstract class CheckableAbstract extends FormAbstract
 
     protected function setLabelPositionedAbove(): bool
     {
-        return true; // unused
+        return true; // unused for checkable components
     }
 
     protected function getComponentHtmlAttributes(): array

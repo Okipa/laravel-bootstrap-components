@@ -2,16 +2,13 @@
 
 namespace Okipa\LaravelBootstrapComponents\Components\Form\Traits;
 
-use Exception;
 use InvalidArgumentException;
 
 trait SelectValidityChecks
 {
     /**
-     * Check the component values validity
-     *
-     * @return void
      * @throws \Exception
+     * @throws \InvalidArgumentException
      */
     protected function checkValuesValidity(): void
     {
@@ -32,11 +29,9 @@ trait SelectValidityChecks
     }
 
     /**
-     * Set the defined option value field.
-     *
      * @param array $option
      *
-     * @return void
+     * @throws \InvalidArgumentException
      */
     protected function checkOptionValueFieldExistence(array $option): void
     {
@@ -49,11 +44,9 @@ trait SelectValidityChecks
     }
 
     /**
-     * Set the defined option label field.
-     *
      * @param array $option
      *
-     * @return void
+     * @throws \InvalidArgumentException
      */
     protected function checkOptionLabelFieldExistence(array $option): void
     {
@@ -66,11 +59,9 @@ trait SelectValidityChecks
     }
 
     /**
-     * Check the defined selected field to compare existence in option.
-     *
      * @param array $option
      *
-     * @return void
+     * @throws \InvalidArgumentException
      */
     protected function checkSelectedFieldToCompareExistenceInOption(array $option): void
     {
@@ -83,11 +74,7 @@ trait SelectValidityChecks
         }
     }
 
-    /**
-     * Check the model attribute type on multiple mode.
-     *
-     * @return void
-     */
+    /** @throws \InvalidArgumentException */
     protected function checkMultipleModeModelAttributeType(): void
     {
         if ($this->model && isset($this->model->{$this->getName()}) && ! is_array($this->model->{$this->getName()})) {
@@ -100,11 +87,7 @@ trait SelectValidityChecks
         }
     }
 
-    /**
-     * Check the selected value to compare type on multiple mode.
-     *
-     * @return void
-     */
+    /** @throws \InvalidArgumentException */
     protected function checkMultipleModeSelectedValueToCompareType(): void
     {
         if ($this->selectedValueToCompare && ! is_array($this->selectedValueToCompare)) {
@@ -116,11 +99,7 @@ trait SelectValidityChecks
         }
     }
 
-    /**
-     * Check the selected value to compare type on single mode.
-     *
-     * @return void
-     */
+    /** @throws \InvalidArgumentException */
     protected function checkSingleModeSelectedValueToCompareType(): void
     {
         if ($this->selectedValueToCompare

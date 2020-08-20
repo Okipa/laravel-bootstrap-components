@@ -9,29 +9,14 @@ abstract class TemporalAbstract extends FormAbstract
 {
     use TemporalValidityChecks;
 
-    /**
-     * The temporal format.
-     *
-     * @property string $format
-     */
-    protected $format;
+    protected string $format;
 
-    /**
-     * Temporal constructor.
-     */
     public function __construct()
     {
         parent::__construct();
         $this->format = $this->setFormat();
     }
 
-    /**
-     * Set the temporal format.
-     *
-     * @param string $format
-     *
-     * @return $this
-     */
     public function format(string $format): self
     {
         $this->format = $format;
@@ -39,11 +24,7 @@ abstract class TemporalAbstract extends FormAbstract
         return $this;
     }
 
-    /**
-     * @return mixed|string
-     * @throws \Exception
-     */
-    protected function getValue()
+    protected function getValue(): ?string
     {
         $value = parent::getValue();
         if (! $value) {
@@ -55,20 +36,10 @@ abstract class TemporalAbstract extends FormAbstract
             : Carbon::parse($value)->format($this->getFormat());
     }
 
-    /**
-     * Get the temporal format.
-     *
-     * @return string
-     */
     protected function getFormat(): string
     {
         return $this->format;
     }
 
-    /**
-     * Set the temporal format.
-     *
-     * @return string
-     */
     abstract protected function setFormat(): string;
 }

@@ -3,12 +3,12 @@
 namespace Okipa\LaravelBootstrapComponents\Components\Traits;
 
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\CheckableAbstract;
-use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\UploadableAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\MultilingualAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\RadioAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\SelectableAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\TemporalAbstract;
+use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\UploadableAbstract;
 
 trait FormComponentsTrait
 {

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Resolver extends \Okipa\LaravelBootstrapComponents\Components\Form\Multilingual\Resolver
 {
-    protected $locales = ['en', 'de'];
+    protected array $locales = ['en', 'de'];
 
     public function resolveLocalizedOldValue(string $name, string $locale): ?string
     {

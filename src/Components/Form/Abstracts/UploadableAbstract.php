@@ -2,31 +2,17 @@
 
 namespace Okipa\LaravelBootstrapComponents\Components\Form\Abstracts;
 
+use Closure;
 use Illuminate\Support\HtmlString;
 use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
 
 abstract class UploadableAbstract extends FormAbstract
 {
-    /**
-     * The uploaded file closure.
-     *
-     * @property callable $uploadedFile
-     */
-    protected $uploadedFile;
+    protected ?Closure $uploadedFile = null;
 
-    /**
-     * The show remove file checkbox status.
-     *
-     * @property bool $showRemoveCheckbox
-     */
-    protected $showRemoveCheckbox;
+    protected bool $showRemoveCheckbox;
 
-    /**
-     * The remove-file-checkbox label.
-     *
-     * @property string $removeCheckboxLabel
-     */
-    protected $removeCheckboxLabel;
+    protected ?string $removeCheckboxLabel;
 
     public function __construct()
     {
@@ -34,29 +20,14 @@ abstract class UploadableAbstract extends FormAbstract
         $this->showRemoveCheckbox = $this->setShowRemoveCheckbox();
     }
 
-    /**
-     * Set the uploaded file closure.
-     *
-     * @param callable $uploadedFile
-     *
-     * @return $this
-     */
-    public function uploadedFile(callable $uploadedFile): self
+    public function uploadedFile(Closure $uploadedFile): self
     {
         $this->uploadedFile = $uploadedFile;
 
         return $this;
     }
 
-    /**
-     * Show the remove checkbox.
-     *
-     * @param bool $showRemoveCheckbox
-     * @param string|null $removeCheckboxLabel
-     *
-     * @return $this
-     */
-    public function showRemoveCheckbox(bool $showRemoveCheckbox = true, string $removeCheckboxLabel = null): self
+    public function showRemoveCheckbox(bool $showRemoveCheckbox = true, ?string $removeCheckboxLabel = null): self
     {
         $this->showRemoveCheckbox = $showRemoveCheckbox;
         $this->removeCheckboxLabel = $removeCheckboxLabel;

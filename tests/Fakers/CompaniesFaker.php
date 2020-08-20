@@ -2,16 +2,17 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Fakers;
 
+use Illuminate\Support\Collection;
 use Okipa\LaravelBootstrapComponents\Tests\Models\Company;
 
 trait CompaniesFaker
 {
-    public function createUniqueCompany()
+    public function createUniqueCompany(): Company
     {
         return app(Company::class)->create($this->generateFakeCompanyData());
     }
 
-    public function createMultipleCompanies(int $count)
+    public function createMultipleCompanies(int $count): Collection
     {
         for ($ii = 0; $ii < $count; $ii++) {
             $this->createUniqueCompany();
@@ -20,7 +21,7 @@ trait CompaniesFaker
         return app(Company::class)->all();
     }
 
-    public function generateFakeCompanyData()
+    public function generateFakeCompanyData(): array
     {
         return [
             'name' => $this->faker->word,
