@@ -2,24 +2,20 @@
 
 namespace Okipa\LaravelBootstrapComponents\Components\Traits;
 
+use Okipa\LaravelBootstrapComponents\Components\Media\Abstracts\ImageAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Media\Abstracts\MediaAbstract;
+use Okipa\LaravelBootstrapComponents\Components\Media\Abstracts\VideoAbstract;
 
 trait MediaComponentsTrait
 {
-    /**
-     * @return \Okipa\LaravelBootstrapComponents\Components\Media\Abstracts\MediaAbstract
-     */
-    public function image(): MediaAbstract
+    public function image(): ImageAbstract
     {
-        /** @var \Okipa\LaravelBootstrapComponents\Components\Media\Abstracts\MediaAbstract $image */
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Media\Abstracts\ImageAbstract $image */
         $image = app(config('bootstrap-components.components.image'));
 
         return $image;
     }
 
-    /**
-     * @return \Okipa\LaravelBootstrapComponents\Components\Media\Abstracts\MediaAbstract
-     */
     public function audio(): MediaAbstract
     {
         /** @var \Okipa\LaravelBootstrapComponents\Components\Media\Abstracts\MediaAbstract $audio */
@@ -28,12 +24,9 @@ trait MediaComponentsTrait
         return $audio;
     }
 
-    /**
-     * @return \Okipa\LaravelBootstrapComponents\Components\Media\Abstracts\MediaAbstract
-     */
-    public function video(): MediaAbstract
+    public function video(): VideoAbstract
     {
-        /** @var \Okipa\LaravelBootstrapComponents\Components\Media\Abstracts\MediaAbstract $video */
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Media\Abstracts\VideoAbstract $video */
         $video = app(config('bootstrap-components.components.video'));
 
         return $video;

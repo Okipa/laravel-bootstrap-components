@@ -10,64 +10,21 @@ abstract class SelectableAbstract extends FormAbstract
 {
     use SelectValidityChecks;
 
-    /**
-     * The select options list.
-     *
-     * @property iterable $options
-     */
-    protected $options;
+    protected array $options = [];
 
-    /**
-     * The select options value field.
-     *
-     * @property string $optionValueField
-     */
-    protected $optionValueField;
+    protected ?string $optionValueField = null;
 
-    /**
-     * The select options label field.
-     *
-     * @property string $optionLabelField
-     */
-    protected $optionLabelField;
+    protected ?string $optionLabelField = null;
 
-    /**
-     * The selected options value field.
-     *
-     * @property string $optionSelectedValueField
-     */
-    protected $selectedFieldToCompare;
+    protected ?string $selectedFieldToCompare = null;
 
-    /**
-     * The selected options value field.
-     *
-     * @property string $optionSelectedValueField
-     */
+    /** @property int|string|array $selectedValueToCompare */
     protected $selectedValueToCompare;
 
-    /**
-     * The disabled options closure.
-     *
-     * @property \Closure $disabledOptionsClosure
-     */
-    protected $disabledOptionsClosure;
+    protected ?Closure $disabledOptionsClosure = null;
 
-    /**
-     * The selected options value field.
-     *
-     * @property string $optionSelectedValueField
-     */
-    protected $multiple = false;
+    protected bool $multiple = false;
 
-    /**
-     * Set the select options and the fields that will be use for the selection comparison and for the label displaying.
-     *
-     * @param iterable $optionsList
-     * @param string $optionValueField
-     * @param string $optionLabelField
-     *
-     * @return $this
-     */
     public function options(iterable $optionsList, string $optionValueField, string $optionLabelField): self
     {
         $this->options = json_decode(json_encode($optionsList), true);
@@ -78,9 +35,6 @@ abstract class SelectableAbstract extends FormAbstract
     }
 
     /**
-     * Choose which option should be selected,
-     * declaring the field and the value to compare with the declared options list.
-     *
      * @param string $fieldToCompare
      * @param int|string|array $valueToCompare
      *
@@ -94,14 +48,6 @@ abstract class SelectableAbstract extends FormAbstract
         return $this;
     }
 
-    /**
-     * Choose which option should be disabled by returning a boolean value from this closure result :
-     * ->disabled(function(array $option){}).
-     *
-     * @param \Closure $disabledOptions
-     *
-     * @return $this
-     */
     public function disabled(Closure $disabledOptions): self
     {
         $this->disabledOptionsClosure = $disabledOptions;
@@ -109,13 +55,6 @@ abstract class SelectableAbstract extends FormAbstract
         return $this;
     }
 
-    /**
-     * Set the select multiple mode.
-     *
-     * @param bool $multiple
-     *
-     * @return $this
-     */
     public function multiple(bool $multiple = true): self
     {
         $this->multiple = $multiple;
@@ -123,11 +62,6 @@ abstract class SelectableAbstract extends FormAbstract
         return $this;
     }
 
-    /**
-     * Define the component parameters.
-     *
-     * @return array
-     */
     protected function getParameters(): array
     {
         $options = $this->getOptions();
@@ -141,9 +75,6 @@ abstract class SelectableAbstract extends FormAbstract
         );
     }
 
-    /**
-     * @return array
-     */
     protected function getOptions(): array
     {
         $this->setOptionsSelectedStatus();
@@ -152,11 +83,6 @@ abstract class SelectableAbstract extends FormAbstract
         return $this->options ?? [];
     }
 
-    /**
-     * Set selected options statuses.
-     *
-     * @return void
-     */
     protected function setOptionsSelectedStatus(): void
     {
         if ($this->options) {
@@ -177,11 +103,6 @@ abstract class SelectableAbstract extends FormAbstract
         }
     }
 
-    /**
-     * Get the multiple selected options.
-     *
-     * @return array|null
-     */
     protected function getMultipleSelectedOptions(): ?array
     {
         $oldValueMultipleSelectedOptions = $this->searchMultipleSelectedOptionFromOldValue();
@@ -200,11 +121,6 @@ abstract class SelectableAbstract extends FormAbstract
         return null;
     }
 
-    /**
-     * Search the selected multiple options from the old() request value.
-     *
-     * @return array|null
-     */
     protected function searchMultipleSelectedOptionFromOldValue(): ?array
     {
         $oldValue = old($this->convertArrayNameInNotation());
@@ -220,16 +136,16 @@ abstract class SelectableAbstract extends FormAbstract
         return null;
     }
 
-    /**
-     * Search the selected multiple options from the selected() method.
-     *
-     * @return array|null
-     */
     protected function searchMultipleSelectedOptionsFromSelectedMethod(): ?array
     {
         if (isset($this->selectedFieldToCompare) && isset($this->selectedValueToCompare)) {
-            $selectedMultipleOptions = Arr::where($this->options, function ($option) {
-                return in_array($option[$this->selectedFieldToCompare], $this->selectedValueToCompare);
+            $selectedMultipleOptions = Arr::where($this->options, function (array $option) {
+                return in_array(
+                    $option[$this->selectedFieldToCompare],
+                    is_array($this->selectedValueToCompare)
+                        ? $this->selectedValueToCompare
+                        : [$this->selectedValueToCompare]
+                );
             });
             if (! empty($selectedMultipleOptions)) {
                 return $selectedMultipleOptions;
@@ -239,11 +155,6 @@ abstract class SelectableAbstract extends FormAbstract
         return null;
     }
 
-    /**
-     * Search the selected multiple options from the model values.
-     *
-     * @return array|null
-     */
     protected function searchMultipleSelectedOptionsFromModel(): ?array
     {
         if ($this->model && $this->model->{$this->getName()}) {
@@ -258,11 +169,6 @@ abstract class SelectableAbstract extends FormAbstract
         return null;
     }
 
-    /**
-     * Get the selected option.
-     *
-     * @return array|null
-     */
     protected function getSelectedOption(): ?array
     {
         $oldValueSelectedOption = $this->searchSelectedOptionFromOldValue();
@@ -281,11 +187,6 @@ abstract class SelectableAbstract extends FormAbstract
         return null;
     }
 
-    /**
-     * Search the selected option from the old() request value.
-     *
-     * @return array|null
-     */
     protected function searchSelectedOptionFromOldValue(): ?array
     {
         $oldValue = old($this->convertArrayNameInNotation());
@@ -301,11 +202,6 @@ abstract class SelectableAbstract extends FormAbstract
         return null;
     }
 
-    /**
-     * Search the selected option from the selected() method.
-     *
-     * @return array|null
-     */
     protected function searchSelectedOptionFromSelectedMethod(): ?array
     {
         if (isset($this->selectedFieldToCompare) && isset($this->selectedValueToCompare)) {
@@ -320,11 +216,6 @@ abstract class SelectableAbstract extends FormAbstract
         return null;
     }
 
-    /**
-     * Search the selected option from the model values.
-     *
-     * @return array|null
-     */
     protected function searchSelectedOptionFromModel(): ?array
     {
         if ($this->model) {
@@ -339,9 +230,6 @@ abstract class SelectableAbstract extends FormAbstract
         return null;
     }
 
-    /**
-     * @return void
-     */
     protected function setOptionsDisabledStatus(): void
     {
         if ($this->options && $this->disabledOptionsClosure) {
@@ -354,25 +242,16 @@ abstract class SelectableAbstract extends FormAbstract
         }
     }
 
-    /**
-     * @return string|null
-     */
     protected function getOptionValueField(): ?string
     {
         return $this->optionValueField;
     }
 
-    /**
-     * @return string|null
-     */
     protected function getOptionLabelField(): ?string
     {
         return $this->optionLabelField;
     }
 
-    /**
-     * @return bool
-     */
     protected function getMultiple(): bool
     {
         return $this->multiple;

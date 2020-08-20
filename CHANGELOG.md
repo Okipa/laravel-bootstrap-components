@@ -1,12 +1,26 @@
 # Changelog
 
-## [3.0.0](https://github.com/Okipa/laravel-bootstrap-components/compare/2.2.0...3.0.0)
+## [3.0.0](https://github.com/Okipa/laravel-bootstrap-components/compare/2.2.3...3.0.0)
 
 2020-08-20
 
 * Added Laravel 8 support.
 * Dropped Laravel 5.8 and 6.0 support.
 * Dropped PHP 7.2 and 7.3 support.
+
+## [2.2.3](https://github.com/Okipa/laravel-bootstrap-components/compare/2.2.2...2.2.3)
+
+2020-07-16
+
+* Fixed form components label hiding when setting `null` or `false`.
+* Fixed form components `prepend` and `append` methods in order to let them accept `false` to hide them.
+
+## [2.2.2](https://github.com/Okipa/laravel-bootstrap-components/compare/2.2.1...2.2.2)
+## [2.2.1](https://github.com/Okipa/laravel-bootstrap-components/compare/2.2.0...2.2.1)
+
+2020-07-16
+
+* Fixed components output types for static analysis.
 
 ## [2.2.0](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.12...2.2.0)
 

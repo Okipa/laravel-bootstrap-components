@@ -4,7 +4,6 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
 use Exception;
 use Illuminate\Support\MessageBag;
-use InvalidArgumentException;
 use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract;
 use Okipa\LaravelBootstrapComponents\Tests\BootstrapComponentsTestCase;
@@ -85,12 +84,6 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
 
     abstract protected function getCustomComponent(): ComponentAbstract;
 
-    public function testSetWrongPrepend()
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->getComponent()->name('name')->prepend(1)->toHtml();
-    }
-
     public function testSetPrependOverridesDefault()
     {
         config()->set(
@@ -116,6 +109,12 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $this->assertStringNotContainsString('<div class="input-group-prepend">', $html);
     }
 
+    public function testHidePrependFallbackWithFalse()
+    {
+        $html = $this->getComponent()->name('name')->prepend(false)->toHtml();
+        $this->assertStringNotContainsString('<div class="input-group-prepend">', $html);
+    }
+
     public function testSetCustomAppend()
     {
         config()->set(
@@ -124,12 +123,6 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         );
         $html = $this->getComponent()->name('name')->toHtml();
         $this->assertStringContainsString('<span class="input-group-text">default-append</span>', $html);
-    }
-
-    public function testSetWrongAppend()
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->getComponent()->name('name')->append(1)->toHtml();
     }
 
     public function testSetAppendOverridesDefault()
@@ -154,6 +147,12 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
     public function testHideAppend()
     {
         $html = $this->getComponent()->name('name')->append(null)->toHtml();
+        $this->assertStringNotContainsString('<div class="input-group-append">', $html);
+    }
+
+    public function testHideAppendFallbackWithFalse()
+    {
+        $html = $this->getComponent()->name('name')->append(false)->toHtml();
         $this->assertStringNotContainsString('<div class="input-group-append">', $html);
     }
 
@@ -275,6 +274,15 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
 
     public function testHideLabel()
     {
+        $html = $this->getComponent()->name('name')->label(null)->toHtml();
+        $this->assertStringNotContainsString(
+            '<label for="' . $this->getComponentType() . '-name">validation.attributes.name</label>',
+            $html
+        );
+    }
+
+    public function testHideLabelFallbackWithFalse()
+    {
         $html = $this->getComponent()->name('name')->label(false)->toHtml();
         $this->assertStringNotContainsString(
             '<label for="' . $this->getComponentType() . '-name">validation.attributes.name</label>',
@@ -344,7 +352,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
 
     public function testNoPlaceholderWithNoLabel()
     {
-        $html = $this->getComponent()->name('name')->label(false)->toHtml();
+        $html = $this->getComponent()->name('name')->label(null)->toHtml();
         $this->assertStringContainsString(' placeholder="validation.attributes.name"', $html);
     }
 

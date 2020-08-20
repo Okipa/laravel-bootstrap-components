@@ -6,33 +6,22 @@ use Illuminate\Contracts\Support\Htmlable;
 
 abstract class ComponentAbstract implements Htmlable
 {
-    /** @property string $type */
-    protected $type;
+    protected string $type;
 
-    /** @property string $view */
-    protected $view;
+    protected string $view;
 
-    /** @property string $componentId */
-    protected $componentId;
+    protected string $componentId;
 
-    /** @property array $containerId */
-    protected $containerId;
+    protected string $containerId;
 
-    /** @property array $componentClasses */
-    protected $componentClasses;
+    protected array $componentClasses;
 
-    /** @property array $containerClasses */
-    protected $containerClasses;
+    protected array $containerClasses;
 
-    /** @property array $componentHtmlAttributes */
-    protected $componentHtmlAttributes;
+    protected array $componentHtmlAttributes;
 
-    /** @property array $containerHtmlAttributes */
-    protected $containerHtmlAttributes;
+    protected array $containerHtmlAttributes;
 
-    /**
-     * Component constructor.
-     */
     public function __construct()
     {
         $this->type = $this->setType();
@@ -43,13 +32,6 @@ abstract class ComponentAbstract implements Htmlable
         $this->containerHtmlAttributes = $this->setContainerHtmlAttributes();
     }
 
-    /**
-     * Set the component id.
-     *
-     * @param string $componentId
-     *
-     * @return $this
-     */
     public function componentId(string $componentId): self
     {
         $this->componentId = $componentId;
@@ -57,13 +39,6 @@ abstract class ComponentAbstract implements Htmlable
         return $this;
     }
 
-    /**
-     * Set the component classes.
-     *
-     * @param array $componentClasses
-     *
-     * @return $this
-     */
     public function componentClasses(array $componentClasses): self
     {
         $this->componentClasses = $componentClasses;
@@ -71,13 +46,6 @@ abstract class ComponentAbstract implements Htmlable
         return $this;
     }
 
-    /**
-     * Set the component container id.
-     *
-     * @param string $containerId
-     *
-     * @return $this
-     */
     public function containerId(string $containerId): self
     {
         $this->containerId = $containerId;
@@ -99,13 +67,6 @@ abstract class ComponentAbstract implements Htmlable
         return $this;
     }
 
-    /**
-     * Set the component HTML attributes.
-     *
-     * @param array $componentHtmlAttributes
-     *
-     * @return $this
-     */
     public function componentHtmlAttributes(array $componentHtmlAttributes): self
     {
         $this->componentHtmlAttributes = $componentHtmlAttributes;
@@ -113,13 +74,6 @@ abstract class ComponentAbstract implements Htmlable
         return $this;
     }
 
-    /**
-     * Set the component container HTML attributes.
-     *
-     * @param array $containerHtmlAttributes
-     *
-     * @return $this
-     */
     public function containerHtmlAttributes(array $containerHtmlAttributes): self
     {
         $this->containerHtmlAttributes = $containerHtmlAttributes;
@@ -128,8 +82,6 @@ abstract class ComponentAbstract implements Htmlable
     }
 
     /**
-     * Render the component HTML.
-     *
      * @return string
      * @throws \Throwable
      */
@@ -139,8 +91,6 @@ abstract class ComponentAbstract implements Htmlable
     }
 
     /**
-     * Render the component HTML.
-     *
      * @param array $extraData
      *
      * @return string
@@ -157,33 +107,15 @@ abstract class ComponentAbstract implements Htmlable
         return trim($html);
     }
 
-    /**
-     * Check the component values validity
-     */
     abstract protected function checkValuesValidity(): void;
 
-    /**
-     * Set the component view.
-     *
-     * @return string
-     */
     protected function getView(): string
     {
         return $this->view;
     }
 
-    /**
-     * Set the component view path.
-     *
-     * @return string
-     */
     abstract protected function setView(): string;
 
-    /**
-     * Get values for the view.
-     *
-     * @return array
-     */
     protected function getValues(): array
     {
         $componentId = $this->getComponentId();
@@ -203,94 +135,48 @@ abstract class ComponentAbstract implements Htmlable
         );
     }
 
-    /**
-     * @return string|null
-     */
     protected function getComponentId(): ?string
     {
         return $this->componentId;
     }
 
-    /**
-     * @return string|null
-     */
     protected function getContainerId(): ?string
     {
         return $this->containerId;
     }
 
-    /**
-     * @return array
-     */
     protected function getComponentClasses(): array
     {
         return $this->componentClasses;
     }
 
-    /**
-     * Set the component classes.
-     *
-     * @return array
-     */
     abstract protected function setComponentClasses(): array;
 
-    /**
-     * @return array
-     */
     protected function getContainerClasses(): array
     {
         return $this->containerClasses;
     }
 
-    /**
-     * Set the container classes.
-     *
-     * @return array
-     */
     abstract protected function setContainerClasses(): array;
 
-    /**
-     * @return array
-     */
     protected function getComponentHtmlAttributes(): array
     {
         return $this->componentHtmlAttributes;
     }
 
-    /**
-     * Set the component HTML attributes.
-     *
-     * @return array
-     */
     abstract protected function setComponentHtmlAttributes(): array;
 
-    /**
-     * @return array
-     */
     protected function getContainerHtmlAttributes(): array
     {
         return $this->containerHtmlAttributes;
     }
 
-    /**
-     * Set the container HTML attributes.
-     *
-     * @return array
-     */
     abstract protected function setContainerHtmlAttributes(): array;
 
-    /**
-     * @return string
-     */
     protected function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * Set the component type.
-     *
-     * @return string
-     */
     abstract protected function setType(): string;
 }

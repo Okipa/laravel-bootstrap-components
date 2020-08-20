@@ -6,10 +6,7 @@ use Illuminate\Support\Facades\Facade;
 
 class Audio extends Facade
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected static function getFacadeAccessor()
+    protected static function getFacadeAccessor(): string
     {
         return 'Audio';
     }

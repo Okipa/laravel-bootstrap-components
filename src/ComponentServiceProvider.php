@@ -8,10 +8,7 @@ use Okipa\LaravelHtmlHelper\HtmlHelperServiceProvider;
 
 class ComponentServiceProvider extends ServiceProvider
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function boot()
+    public function boot(): void
     {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'bootstrap-components');
         $this->publishes([
@@ -25,18 +22,12 @@ class ComponentServiceProvider extends ServiceProvider
         $this->app->register(HtmlHelperServiceProvider::class);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function register()
+    public function register(): void
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/bootstrap-components.php', 'bootstrap-components');
         $this->registerFacades();
     }
 
-    /**
-     * Register package facades.
-     */
     protected function registerFacades(): void
     {
         $this->registerFormComponentsFacades();
@@ -44,9 +35,6 @@ class ComponentServiceProvider extends ServiceProvider
         $this->registerMediaComponentsFacades();
     }
 
-    /**
-     * Register form components facades.
-     */
     protected function registerFormComponentsFacades(): void
     {
         $this->app->bind('InputText', function () {
@@ -99,9 +87,6 @@ class ComponentServiceProvider extends ServiceProvider
         });
     }
 
-    /**
-     * Register button components facades.
-     */
     protected function registerButtonComponentsFacades(): void
     {
         $this->app->bind('Submit', function () {
@@ -130,9 +115,6 @@ class ComponentServiceProvider extends ServiceProvider
         });
     }
 
-    /**
-     * Register media components facades.
-     */
     protected function registerMediaComponentsFacades(): void
     {
         $this->app->bind('Image', function () {

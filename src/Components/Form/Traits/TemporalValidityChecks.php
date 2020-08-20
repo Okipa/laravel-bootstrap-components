@@ -7,12 +7,7 @@ use Exception;
 
 trait TemporalValidityChecks
 {
-    /**
-     * Check the component values validity
-     *
-     * @return void
-     * @throws \Exception
-     */
+    /** @throws \Exception */
     protected function checkValuesValidity(): void
     {
         parent::checkValuesValidity();
@@ -20,10 +15,7 @@ trait TemporalValidityChecks
         $this->checkValue();
     }
 
-    /**
-     * @return void
-     * @throws \Exception
-     */
+    /** @throws \Exception */
     protected function checkFormat(): void
     {
         if (! $this->format) {
@@ -32,10 +24,7 @@ trait TemporalValidityChecks
         }
     }
 
-    /**
-     * @return void
-     * @throws \Exception
-     */
+    /** @throws \Exception */
     protected function checkValue(): void
     {
         try {

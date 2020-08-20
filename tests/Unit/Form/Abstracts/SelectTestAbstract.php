@@ -648,7 +648,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
 
     public function testNoPlaceholderWithNoLabel()
     {
-        $html = $this->getComponent()->name('name')->label(false)->toHtml();
+        $html = $this->getComponent()->name('name')->label(null)->toHtml();
         $this->assertStringContainsString(
             '<option value="" selected="selected">validation.attributes.name</option>',
             $html

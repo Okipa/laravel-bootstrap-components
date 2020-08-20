@@ -94,7 +94,7 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
 
     public function testHideLabel()
     {
-        $html = $this->getComponent()->label(false)->toHtml();
+        $html = $this->getComponent()->label(null)->toHtml();
         $this->assertStringNotContainsString(
             '<label class="d-block" for="' . $this->getComponentType() . '-name">validation.attributes.name</label>',
             $html

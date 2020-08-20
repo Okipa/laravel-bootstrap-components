@@ -3,18 +3,15 @@
 namespace Okipa\LaravelBootstrapComponents\Components\Traits;
 
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\CheckableAbstract;
-use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\UploadableAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\MultilingualAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\RadioAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\SelectableAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\TemporalAbstract;
+use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\UploadableAbstract;
 
 trait FormComponentsTrait
 {
-    /**
-     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\MultilingualAbstract
-     */
     public function inputText(): MultilingualAbstract
     {
         /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\MultilingualAbstract $inputText */
@@ -23,9 +20,6 @@ trait FormComponentsTrait
         return $inputText;
     }
 
-    /**
-     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract
-     */
     public function inputEmail(): FormAbstract
     {
         /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract $inputEmail */
@@ -34,9 +28,6 @@ trait FormComponentsTrait
         return $inputEmail;
     }
 
-    /**
-     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract
-     */
     public function inputPassword(): FormAbstract
     {
         /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract $inputPassword */
@@ -45,9 +36,6 @@ trait FormComponentsTrait
         return $inputPassword;
     }
 
-    /**
-     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract
-     */
     public function inputUrl(): FormAbstract
     {
         /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract $inputUrl */
@@ -56,9 +44,6 @@ trait FormComponentsTrait
         return $inputUrl;
     }
 
-    /**
-     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract
-     */
     public function inputTel(): FormAbstract
     {
         /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract $inputUrl */
@@ -67,9 +52,6 @@ trait FormComponentsTrait
         return $inputUrl;
     }
 
-    /**
-     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract
-     */
     public function inputNumber(): FormAbstract
     {
         /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract $inputNumber */
@@ -78,9 +60,6 @@ trait FormComponentsTrait
         return $inputNumber;
     }
 
-    /**
-     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract
-     */
     public function inputColor(): FormAbstract
     {
         /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract $inputColor */
@@ -89,9 +68,6 @@ trait FormComponentsTrait
         return $inputColor;
     }
 
-    /**
-     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\TemporalAbstract
-     */
     public function inputDate(): TemporalAbstract
     {
         /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\TemporalAbstract $inputDate */
@@ -100,9 +76,6 @@ trait FormComponentsTrait
         return $inputDate;
     }
 
-    /**
-     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\TemporalAbstract
-     */
     public function inputTime(): TemporalAbstract
     {
         /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\TemporalAbstract $inputTime */
@@ -111,9 +84,6 @@ trait FormComponentsTrait
         return $inputTime;
     }
 
-    /**
-     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\TemporalAbstract
-     */
     public function inputDatetime(): TemporalAbstract
     {
         /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\TemporalAbstract $inputDatetime */
@@ -122,9 +92,6 @@ trait FormComponentsTrait
         return $inputDatetime;
     }
 
-    /**
-     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\UploadableAbstract
-     */
     public function inputFile(): UploadableAbstract
     {
         /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\UploadableAbstract $inputFile */
@@ -133,9 +100,6 @@ trait FormComponentsTrait
         return $inputFile;
     }
 
-    /**
-     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\CheckableAbstract
-     */
     public function inputCheckbox(): CheckableAbstract
     {
         /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\CheckableAbstract $inputCheckbox */
@@ -144,9 +108,6 @@ trait FormComponentsTrait
         return $inputCheckbox;
     }
 
-    /**
-     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\CheckableAbstract
-     */
     public function inputToggle(): CheckableAbstract
     {
         /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\CheckableAbstract $inputToggle */
@@ -155,9 +116,6 @@ trait FormComponentsTrait
         return $inputToggle;
     }
 
-    /**
-     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\RadioAbstract
-     */
     public function inputRadio(): RadioAbstract
     {
         /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\RadioAbstract $inputRadio */
@@ -166,9 +124,6 @@ trait FormComponentsTrait
         return $inputRadio;
     }
 
-    /**
-     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\MultilingualAbstract
-     */
     public function textarea(): MultilingualAbstract
     {
         /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\MultilingualAbstract $textarea */
@@ -177,9 +132,6 @@ trait FormComponentsTrait
         return $textarea;
     }
 
-    /**
-     * @return \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\SelectableAbstract
-     */
     public function select(): SelectableAbstract
     {
         /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\SelectableAbstract $select */
