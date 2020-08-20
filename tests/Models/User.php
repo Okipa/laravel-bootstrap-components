@@ -18,16 +18,12 @@ class User extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'name_fr', 'name_en', 'email', 'password', 'active',
-    ];
+    protected $fillable = ['name', 'name_fr', 'name_en', 'email', 'password', 'active'];
 
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token'];
 }

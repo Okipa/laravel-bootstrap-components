@@ -6,36 +6,30 @@ use Okipa\LaravelBootstrapComponents\Components\Media\Video;
 
 class CustomVideo extends Video
 {
-
     protected function setPoster(): string
     {
         return 'default-poster';
     }
-
 
     protected function setCaption(): ?string
     {
         return 'default-caption';
     }
 
-
     protected function setComponentClasses(): array
     {
         return ['default', 'component', 'classes'];
     }
-
 
     protected function setContainerClasses(): array
     {
         return ['default', 'container', 'classes'];
     }
 
-
     protected function setComponentHtmlAttributes(): array
     {
         return ['default' => 'component', 'html' => 'attributes'];
     }
-
 
     protected function setContainerHtmlAttributes(): array
     {
