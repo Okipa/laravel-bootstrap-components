@@ -8,7 +8,7 @@ use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
 
 abstract class UploadableAbstract extends FormAbstract
 {
-    protected ?Closure $uploadedFile;
+    protected ?Closure $uploadedFile = null;
 
     protected bool $showRemoveCheckbox;
 

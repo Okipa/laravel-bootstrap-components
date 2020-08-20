@@ -4,21 +4,21 @@ namespace Okipa\LaravelBootstrapComponents\Components\Media\Abstracts;
 
 abstract class ImageAbstract extends MediaAbstract
 {
-    protected ?string $alt;
+    protected ?string $alt = null;
 
-    protected ?int $width;
+    protected ?int $width = null;
 
-    protected ?int $height;
+    protected ?int $height = null;
 
-    protected string $linkId;
+    protected ?string $linkId = null;
 
-    protected array $linkClasses;
+    protected array $linkClasses = [];
 
-    protected ?string $linkUrl;
+    protected ?string $linkUrl = null;
 
-    protected string $linkTitle;
+    protected ?string $linkTitle = null;
 
-    protected array $linkHtmlAttributes;
+    protected array $linkHtmlAttributes = [];
 
     public function __construct()
     {
@@ -105,12 +105,12 @@ abstract class ImageAbstract extends MediaAbstract
         return $this->alt ?: $this->getLabel() ?: $this->linkTitle;
     }
 
-    protected function getWidth(): ?string
+    protected function getWidth(): ?int
     {
         return $this->width;
     }
 
-    protected function getHeight(): ?string
+    protected function getHeight(): ?int
     {
         return $this->height;
     }

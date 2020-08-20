@@ -10,7 +10,7 @@ abstract class SubmitAbstract extends ComponentAbstract
 
     protected ?string $append;
 
-    protected ?string $label;
+    protected ?string $label = null;
 
     public function __construct()
     {

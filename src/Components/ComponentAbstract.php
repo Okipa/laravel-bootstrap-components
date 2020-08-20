@@ -10,9 +10,9 @@ abstract class ComponentAbstract implements Htmlable
 
     protected string $view;
 
-    protected string $componentId;
+    protected ?string $componentId = null;
 
-    protected string $containerId;
+    protected ?string $containerId = null;
 
     protected array $componentClasses;
 

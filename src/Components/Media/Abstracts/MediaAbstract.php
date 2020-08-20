@@ -6,11 +6,11 @@ use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
 
 abstract class MediaAbstract extends ComponentAbstract
 {
-    protected ?string $label;
+    protected ?string $label = null;
 
-    protected ?string $caption;
+    protected ?string $caption = null;
 
-    protected string $src;
+    protected ?string $src = null;
 
     public function __construct()
     {
