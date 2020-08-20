@@ -6,7 +6,6 @@ use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract;
 
 class Email extends FormAbstract
 {
-
     protected function setType(): string
     {
         return 'email';
