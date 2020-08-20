@@ -11,11 +11,9 @@ parameters:
     level: 5
 
     ignoreErrors:
-        #- '#Unsafe usage of new static#'
+        #- '#Example of error to ignore#'
 
     excludes_analyse:
         - ./*/*/FileToBeExcluded.php
 
     checkMissingIterableValueType: true
-
-    treatPhpDocTypesAsCertain: false

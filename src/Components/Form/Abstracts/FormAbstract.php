@@ -13,11 +13,9 @@ abstract class FormAbstract extends ComponentAbstract
 {
     use FormValidityChecks;
 
-    /** @property Model|null $model */
-    protected $model;
+    protected ?Model $model;
 
-    /** @property string $name */
-    protected $name;
+    protected string $name;
 
     /** @property string|Closure|null $prepend */
     protected $prepend;
@@ -25,26 +23,20 @@ abstract class FormAbstract extends ComponentAbstract
     /** @property string|Closure|null $append */
     protected $append;
 
-    /** @property string $label */
-    protected $label;
+    protected string $label;
 
-    /** @property string|null $caption */
-    protected $caption;
+    protected ?string $caption;
 
-    /** @property bool $labelPositionedAbove */
-    protected $labelPositionedAbove;
+    protected bool $labelPositionedAbove;
 
     /** @property mixed $value */
     protected $value;
 
-    /** @property string|null $placeholder */
-    protected $placeholder;
+    protected ?string $placeholder;
 
-    /** @property bool $displaySuccess */
-    protected $displaySuccess;
+    protected bool $displaySuccess;
 
-    /** @property bool $displayFailure */
-    protected $displayFailure;
+    protected bool $displayFailure;
 
     public function __construct()
     {
@@ -57,13 +49,6 @@ abstract class FormAbstract extends ComponentAbstract
         $this->displayFailure = $this->setDisplayFailure();
     }
 
-    /**
-     * Set the component name attribute.
-     *
-     * @param string $name
-     *
-     * @return $this
-     */
     public function name(string $name): self
     {
         $this->name = $name;
@@ -71,14 +56,7 @@ abstract class FormAbstract extends ComponentAbstract
         return $this;
     }
 
-    /**
-     * Set the component associated model.
-     *
-     * @param Model $model
-     *
-     * @return $this
-     */
-    public function model(Model $model = null): self
+    public function model(Model $model): self
     {
         $this->model = $model;
 
@@ -86,9 +64,6 @@ abstract class FormAbstract extends ComponentAbstract
     }
 
     /**
-     * Prepend HTML to the component input group.
-     * Set null to hide it.
-     *
      * @param string|Closure|null $prepend
      *
      * @return $this
