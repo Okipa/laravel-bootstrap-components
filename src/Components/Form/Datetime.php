@@ -6,7 +6,6 @@ use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\TemporalAbstract;
 
 class Datetime extends TemporalAbstract
 {
-
     protected function setType(): string
     {
         return 'datetime-local';
