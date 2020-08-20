@@ -6,7 +6,6 @@ use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract;
 
 class Tel extends FormAbstract
 {
-
     protected function setType(): string
     {
         return 'tel';

@@ -6,7 +6,6 @@ use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract;
 
 class Url extends FormAbstract
 {
-
     protected function setType(): string
     {
         return 'url';

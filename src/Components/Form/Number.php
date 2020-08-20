@@ -6,7 +6,6 @@ use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract;
 
 class Number extends FormAbstract
 {
-
     protected function setType(): string
     {
         return 'number';

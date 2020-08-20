@@ -6,7 +6,6 @@ use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\MultilingualAbstr
 
 class Text extends MultilingualAbstract
 {
-
     protected function setType(): string
     {
         return 'text';

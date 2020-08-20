@@ -6,7 +6,6 @@ use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\RadioAbstract;
 
 class Radio extends RadioAbstract
 {
-
     protected function setType(): string
     {
         return 'radio';

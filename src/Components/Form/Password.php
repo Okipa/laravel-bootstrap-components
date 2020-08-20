@@ -6,7 +6,6 @@ use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract;
 
 class Password extends FormAbstract
 {
-
     protected function setType(): string
     {
         return 'password';

@@ -6,7 +6,6 @@ use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\MultilingualAbstr
 
 class Textarea extends MultilingualAbstract
 {
-
     protected function setType(): string
     {
         return 'textarea';

@@ -6,7 +6,6 @@ use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\UploadableAbstrac
 
 class File extends UploadableAbstract
 {
-
     protected function setType(): string
     {
         return 'file';

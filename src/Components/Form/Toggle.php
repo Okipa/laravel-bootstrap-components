@@ -6,7 +6,6 @@ use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\CheckableAbstract
 
 class Toggle extends CheckableAbstract
 {
-
     protected function setType(): string
     {
         return 'toggle';

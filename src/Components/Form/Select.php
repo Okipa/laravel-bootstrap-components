@@ -6,7 +6,6 @@ use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\SelectableAbstrac
 
 class Select extends SelectableAbstract
 {
-
     protected function setType(): string
     {
         return 'select';

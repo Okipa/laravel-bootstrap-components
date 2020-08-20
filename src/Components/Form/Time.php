@@ -6,7 +6,6 @@ use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\TemporalAbstract;
 
 class Time extends TemporalAbstract
 {
-
     protected function setType(): string
     {
         return 'time';
