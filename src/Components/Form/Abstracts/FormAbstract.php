@@ -143,11 +143,6 @@ abstract class FormAbstract extends ComponentAbstract
         return array_merge(parent::getValues(), $this->getParameters());
     }
 
-    /**
-     * Define the component parameters.
-     *
-     * @return array
-     */
     protected function getParameters(): array
     {
         $model = $this->getModel();

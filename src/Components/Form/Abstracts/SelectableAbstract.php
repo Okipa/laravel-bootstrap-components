@@ -88,14 +88,14 @@ abstract class SelectableAbstract extends FormAbstract
         if ($this->options) {
             if ($this->multiple) {
                 $selectedOptions = $this->getMultipleSelectedOptions();
-                if ($selectedOptions) {
+                if ($selectedOptions && count($selectedOptions)) {
                     foreach ($selectedOptions as $key => $selectedOption) {
                         $this->options[$key]['selected'] = true;
                     }
                 }
             } else {
                 $selectedOption = $this->getSelectedOption();
-                if ($selectedOption) {
+                if ($selectedOption && count($selectedOption)) {
                     $selectedKey = head(array_keys($selectedOption));
                     $this->options[$selectedKey]['selected'] = true;
                 }
@@ -232,7 +232,7 @@ abstract class SelectableAbstract extends FormAbstract
 
     protected function setOptionsDisabledStatus(): void
     {
-        if ($this->options && $this->disabledOptionsClosure) {
+        if (count($this->options) && $this->disabledOptionsClosure) {
             $disabledOptionsClosure = $this->disabledOptionsClosure;
             foreach ($this->options as $key => $option) {
                 if ($disabledOptionsClosure($option)) {
