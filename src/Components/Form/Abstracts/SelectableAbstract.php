@@ -88,14 +88,14 @@ abstract class SelectableAbstract extends FormAbstract
         if ($this->options) {
             if ($this->multiple) {
                 $selectedOptions = $this->getMultipleSelectedOptions();
-                if ($selectedOptions && count($selectedOptions)) {
+                if (count($selectedOptions)) {
                     foreach ($selectedOptions as $key => $selectedOption) {
                         $this->options[$key]['selected'] = true;
                     }
                 }
             } else {
                 $selectedOption = $this->getSelectedOption();
-                if ($selectedOption && count($selectedOption)) {
+                if (count($selectedOption)) {
                     $selectedKey = head(array_keys($selectedOption));
                     $this->options[$selectedKey]['selected'] = true;
                 }
@@ -103,7 +103,7 @@ abstract class SelectableAbstract extends FormAbstract
         }
     }
 
-    protected function getMultipleSelectedOptions(): ?array
+    protected function getMultipleSelectedOptions(): array
     {
         $oldValueMultipleSelectedOptions = $this->searchMultipleSelectedOptionFromOldValue();
         if ($oldValueMultipleSelectedOptions) {
@@ -118,7 +118,7 @@ abstract class SelectableAbstract extends FormAbstract
             return $modelMultipleSelectedOptions;
         }
 
-        return null;
+        return [];
     }
 
     protected function searchMultipleSelectedOptionFromOldValue(): ?array
@@ -169,7 +169,7 @@ abstract class SelectableAbstract extends FormAbstract
         return null;
     }
 
-    protected function getSelectedOption(): ?array
+    protected function getSelectedOption(): array
     {
         $oldValueSelectedOption = $this->searchSelectedOptionFromOldValue();
         if ($oldValueSelectedOption) {
@@ -184,7 +184,7 @@ abstract class SelectableAbstract extends FormAbstract
             return $modelSelectedOption;
         }
 
-        return null;
+        return [];
     }
 
     protected function searchSelectedOptionFromOldValue(): ?array
