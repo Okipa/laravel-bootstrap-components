@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.1](https://github.com/Okipa/laravel-bootstrap-components/compare/3.0.0...3.0.1)
+
+2020-08-21
+
+* Fixed static analysis issues.
+
 ## [3.0.0](https://github.com/Okipa/laravel-bootstrap-components/compare/2.2.3...3.0.0)
 
 2020-08-20
