@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.2](https://github.com/Okipa/laravel-bootstrap-components/compare/3.0.1...3.0.2)
+
+2020-09-10
+
+* Fixed uploaded file zone wrong displaying when an empty view was being returned in the `uploadedFile` method of the input file component.
+
 ## [3.0.1](https://github.com/Okipa/laravel-bootstrap-components/compare/3.0.0...3.0.1)
 
 2020-08-21

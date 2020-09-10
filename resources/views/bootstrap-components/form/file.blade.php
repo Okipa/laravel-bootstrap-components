@@ -2,7 +2,7 @@
     @if($labelPositionedAbove)
         @include('bootstrap-components::bootstrap-components.partials.label')
     @endif
-    @if($uploadedFileHtml->toHtml())
+    @if(trim($uploadedFileHtml->toHtml()))
         <div class="mb-2">
             <div id="uploaded-{{ $componentId }}">{{ $uploadedFileHtml }}</div>
             @if($showRemoveCheckbox){{ inputCheckbox()->name($removeCheckboxName)->label($removeCheckboxLabel)->containerClasses(['mt-1']) }}@endif
