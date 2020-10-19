@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.3](https://github.com/Okipa/laravel-bootstrap-components/compare/3.0.2...3.0.3)
+
+2020-10-19
+
+* Removed wrong `lang` attribute on input file component.
+
 ## [3.0.2](https://github.com/Okipa/laravel-bootstrap-components/compare/3.0.1...3.0.2)
 
 2020-09-10
