@@ -2,7 +2,7 @@
     @if($labelPositionedAbove)
         @include('bootstrap-components::bootstrap-components.partials.label')
     @endif
-    @if($uploadedFileHtml->toHtml())
+    @if(trim($uploadedFileHtml->toHtml()))
         <div class="mb-2">
             <div id="uploaded-{{ $componentId }}">{{ $uploadedFileHtml }}</div>
             @if($showRemoveCheckbox){{ inputCheckbox()->name($removeCheckboxName)->label($removeCheckboxLabel)->containerClasses(['mt-1']) }}@endif
@@ -13,7 +13,7 @@
     @endif
         @include('bootstrap-components::bootstrap-components.partials.prepend')
         <div class="custom-file">
-            <input id="{{ $componentId }}"{{ classTag('component', 'form-control', 'custom-file-input', $componentClasses, $validationClass) }} type="{{ $type }}" name="{{ $name }}" lang="{{ app()->getLocale() }}"{{ htmlAttributes($componentHtmlAttributes) }}>
+            <input id="{{ $componentId }}"{{ classTag('component', 'form-control', 'custom-file-input', $componentClasses, $validationClass) }} type="{{ $type }}" name="{{ $name }}"{{ htmlAttributes($componentHtmlAttributes) }}>
             @if(($value = old($name, $value)) || $placeholder)
                 <label class="custom-file-label" for="{{ $componentId }}">@if(isset($value) && $value !== ''){{ $value }}@else{{ $placeholder }}@endempty</label>
             @endif

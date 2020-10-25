@@ -268,4 +268,13 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         })->showRemoveCheckbox(true, 'Test')->toHtml();
         $this->assertStringContainsString(' for="checkbox-remove-name">Test', $html);
     }
+
+    public function testUploadedZoneNotDisplayedWithEmptyView()
+    {
+        view()->addNamespace('laravel-bootstrap-components', 'tests/views');
+        $html = $this->getComponent()->name('name')->uploadedFile(function () {
+            return view('laravel-bootstrap-components::empty');
+        })->toHtml();
+        $this->assertStringNotContainsString(' id="uploaded-file-name"', $html);
+    }
 }
