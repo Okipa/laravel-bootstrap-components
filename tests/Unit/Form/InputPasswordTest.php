@@ -26,7 +26,7 @@ class InputPasswordTest extends InputTestAbstract
 
     protected function getCustomComponent(): ComponentAbstract
     {
-        return (new CustomPassword);
+        return (new CustomPassword());
     }
 
     protected function getComponentType(): string

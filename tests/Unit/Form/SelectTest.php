@@ -32,6 +32,6 @@ class SelectTest extends SelectTestAbstract
 
     protected function getCustomComponent(): ComponentAbstract
     {
-        return (new CustomSelect);
+        return (new CustomSelect());
     }
 }

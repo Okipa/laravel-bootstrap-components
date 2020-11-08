@@ -26,7 +26,7 @@ class InputTelTest extends InputTestAbstract
 
     protected function getCustomComponent(): ComponentAbstract
     {
-        return (new CustomTel);
+        return (new CustomTel());
     }
 
     protected function getComponentType(): string

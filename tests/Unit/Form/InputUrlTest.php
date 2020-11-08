@@ -26,7 +26,7 @@ class InputUrlTest extends InputTestAbstract
 
     protected function getCustomComponent(): ComponentAbstract
     {
-        return (new CustomUrl);
+        return (new CustomUrl());
     }
 
     protected function getComponentType(): string

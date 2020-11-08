@@ -26,7 +26,7 @@ class InputTextTest extends InputMultilingualTestAbstract
 
     protected function getCustomComponent(): ComponentAbstract
     {
-        return (new CustomText);
+        return (new CustomText());
     }
 
     protected function getComponentType(): string

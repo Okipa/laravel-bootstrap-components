@@ -26,7 +26,7 @@
         "ext-json": "*",
         "php": "^7.4||^8.0",
         "illuminate/support": "^7.0||^8.0",
-        "okipa/laravel-html-helper": "^1.4"
+        "okipa/laravel-html-helper": "dev-php8-support"
     },
     "require-dev": {
         "roave/security-advisories": "dev-master",
@@ -54,7 +54,7 @@
             "vendor/bin/phpcs",
             "vendor/bin/phpmd config,src text phpmd.xml",
             "vendor/bin/phpstan analyse --error-format=table --memory-limit=2048M",
-            "vendor/bin/phpunit"
+            "vendor/bin/phpunit -d memory_limit=-1 --testdox"
         ]
     },
     "extra": {

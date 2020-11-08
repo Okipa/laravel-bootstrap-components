@@ -31,6 +31,6 @@ class InputToggleTest extends InputCheckableTestAbstract
 
     protected function getCustomComponent(): ComponentAbstract
     {
-        return (new CustomToggle);
+        return (new CustomToggle());
     }
 }

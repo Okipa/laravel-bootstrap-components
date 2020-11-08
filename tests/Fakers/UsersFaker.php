@@ -18,14 +18,14 @@ trait UsersFaker
             $this->createUniqueUser();
         }
 
-        return (new User)->all();
+        return (new User())->all();
     }
 
     public function createUniqueUser(): User
     {
-        $user = (new User)->create($this->generateFakeUserData());
+        $user = (new User())->create($this->generateFakeUserData());
 
-        return (new User)->find($user->id);
+        return (new User())->find($user->id);
     }
 
     public function generateFakeUserData(): array

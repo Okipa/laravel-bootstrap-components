@@ -155,7 +155,7 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
     {
         $user = new User(['name_fr' => $this->faker->word, 'name_en' => $this->faker->word]);
         config()->set('bootstrap-components.form.multilingualResolver', Resolver::class);
-        $resolverLocales = (new Resolver)->getDefaultLocales();
+        $resolverLocales = (new Resolver())->getDefaultLocales();
         $html = $this->getComponent()->model($user)->name('name')->toHtml();
         foreach ($resolverLocales as $resolverLocale) {
             $this->assertStringContainsString($user->{'name_' . $resolverLocale} . '</textarea>', $html);
@@ -209,7 +209,7 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
     public function testLocalizedOldValueFromCustomMultilingualResolver()
     {
         config()->set('bootstrap-components.form.multilingualResolver', Resolver::class);
-        $resolverLocales = (new Resolver)->getDefaultLocales();
+        $resolverLocales = (new Resolver())->getDefaultLocales();
         $oldValues = [];
         foreach ($resolverLocales as $resolverLocale) {
             $oldValues['name_' . $resolverLocale] = 'old-value-' . $resolverLocale;

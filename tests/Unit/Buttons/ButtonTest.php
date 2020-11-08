@@ -31,6 +31,6 @@ class ButtonTest extends ButtonTestAbstract
 
     protected function getCustomComponent(): ComponentAbstract
     {
-        return (new CustomButton);
+        return (new CustomButton());
     }
 }

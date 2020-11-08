@@ -26,7 +26,7 @@ class InputFileTest extends InputFileTestAbstract
 
     protected function getCustomComponent(): ComponentAbstract
     {
-        return (new CustomFile);
+        return (new CustomFile());
     }
 
     protected function getComponentType(): string

@@ -31,6 +31,6 @@ class AudioTest extends MediaTestAbstract
 
     protected function getCustomComponent(): ComponentAbstract
     {
-        return (new CustomAudio);
+        return (new CustomAudio());
     }
 }

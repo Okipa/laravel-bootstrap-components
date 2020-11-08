@@ -12,111 +12,111 @@ use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\UploadableAbstrac
 if (! function_exists('inputText')) {
     function inputText(): MultilingualAbstract
     {
-        return (new Component)->inputText();
+        return (new Component())->inputText();
     }
 }
 
 if (! function_exists('inputEmail')) {
     function inputEmail(): FormAbstract
     {
-        return (new Component)->inputEmail();
+        return (new Component())->inputEmail();
     }
 }
 
 if (! function_exists('inputPassword')) {
     function inputPassword(): FormAbstract
     {
-        return (new Component)->inputPassword();
+        return (new Component())->inputPassword();
     }
 }
 
 if (! function_exists('inputUrl')) {
     function inputUrl(): FormAbstract
     {
-        return (new Component)->inputUrl();
+        return (new Component())->inputUrl();
     }
 }
 
 if (! function_exists('inputTel')) {
     function inputTel(): FormAbstract
     {
-        return (new Component)->inputTel();
+        return (new Component())->inputTel();
     }
 }
 
 if (! function_exists('inputNumber')) {
     function inputNumber(): FormAbstract
     {
-        return (new Component)->inputNumber();
+        return (new Component())->inputNumber();
     }
 }
 
 if (! function_exists('inputColor')) {
     function inputColor(): FormAbstract
     {
-        return (new Component)->inputColor();
+        return (new Component())->inputColor();
     }
 }
 
 if (! function_exists('inputDate')) {
     function inputDate(): TemporalAbstract
     {
-        return (new Component)->inputDate();
+        return (new Component())->inputDate();
     }
 }
 
 if (! function_exists('inputTime')) {
     function inputTime(): TemporalAbstract
     {
-        return (new Component)->inputTime();
+        return (new Component())->inputTime();
     }
 }
 
 if (! function_exists('inputDatetime')) {
     function inputDatetime(): TemporalAbstract
     {
-        return (new Component)->inputDatetime();
+        return (new Component())->inputDatetime();
     }
 }
 
 if (! function_exists('inputFile')) {
     function inputFile(): UploadableAbstract
     {
-        return (new Component)->inputFile();
+        return (new Component())->inputFile();
     }
 }
 
 if (! function_exists('inputCheckbox')) {
     function inputCheckbox(): CheckableAbstract
     {
-        return (new Component)->inputCheckbox();
+        return (new Component())->inputCheckbox();
     }
 }
 
 if (! function_exists('inputToggle')) {
     function inputToggle(): CheckableAbstract
     {
-        return (new Component)->inputToggle();
+        return (new Component())->inputToggle();
     }
 }
 
 if (! function_exists('inputRadio')) {
     function inputRadio(): RadioAbstract
     {
-        return (new Component)->inputRadio();
+        return (new Component())->inputRadio();
     }
 }
 
 if (! function_exists('textarea')) {
     function textarea(): MultilingualAbstract
     {
-        return (new Component)->textarea();
+        return (new Component())->textarea();
     }
 }
 
 if (! function_exists('select')) {
     function select(): SelectableAbstract
     {
-        return (new Component)->select();
+        return (new Component())->select();
     }
 }

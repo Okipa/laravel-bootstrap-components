@@ -26,7 +26,7 @@ class InputDatetimeTest extends TemporalTestAbstract
 
     protected function getCustomComponent(): ComponentAbstract
     {
-        return (new CustomDatetime);
+        return (new CustomDatetime());
     }
 
     protected function getComponentType(): string

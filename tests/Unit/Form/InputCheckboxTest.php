@@ -31,6 +31,6 @@ class InputCheckboxTest extends InputCheckableTestAbstract
 
     protected function getCustomComponent(): ComponentAbstract
     {
-        return (new CustomCheckbox);
+        return (new CustomCheckbox());
     }
 }

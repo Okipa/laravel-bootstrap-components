@@ -26,7 +26,7 @@ class InputEmailTest extends InputTestAbstract
 
     protected function getCustomComponent(): ComponentAbstract
     {
-        return (new CustomEmail);
+        return (new CustomEmail());
     }
 
     protected function getComponentType(): string

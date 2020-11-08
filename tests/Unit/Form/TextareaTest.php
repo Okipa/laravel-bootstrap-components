@@ -26,7 +26,7 @@ class TextareaTest extends TextareaTestAbstract
 
     protected function getCustomComponent(): ComponentAbstract
     {
-        return (new CustomTextarea);
+        return (new CustomTextarea());
     }
 
     protected function getComponentType(): string

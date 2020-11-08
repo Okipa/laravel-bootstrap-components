@@ -26,7 +26,7 @@ class InputNumberTest extends InputTestAbstract
 
     protected function getCustomComponent(): ComponentAbstract
     {
-        return (new CustomNumber);
+        return (new CustomNumber());
     }
 
     protected function getComponentType(): string

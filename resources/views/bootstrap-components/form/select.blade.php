@@ -1,4 +1,4 @@
-<div{{ htmlAttributes($containerId ? ['id' => $containerId] : null) }}{{ classTag('component-container', $containerClasses) }}{{ htmlAttributes($containerHtmlAttributes) }}>
+<div{{ html_attributes($containerId ? ['id' => $containerId] : null) }}{{ html_classes('component-container', $containerClasses) }}{{ html_attributes($containerHtmlAttributes) }}>
     @if($labelPositionedAbove)
         @include('bootstrap-components::bootstrap-components.partials.label')
     @endif
@@ -6,12 +6,12 @@
         <div class="input-group">
     @endif
         @include('bootstrap-components::bootstrap-components.partials.prepend')
-        <select id="{{ $componentId }}"{{ classTag('component', 'custom-select', $componentClasses, $validationClass) }} name="{{ $name . ($multiple ? '[]' : '') }}"{{ htmlAttributes($multiple ? 'multiple' : null, $componentHtmlAttributes) }}>
+        <select id="{{ $componentId }}"{{ html_classes('component', 'custom-select', $componentClasses, $validationClass) }} name="{{ $name . ($multiple ? '[]' : '') }}"{{ html_attributes($multiple ? 'multiple' : null, $componentHtmlAttributes) }}>
             @if($placeholder)
-                <option value=""{{ htmlAttributes(count(array_filter(Arr::pluck($options, 'selected'))) ? null : ['selected' => 'selected']) }}>{{ $placeholder }}</option>
+                <option value=""{{ html_attributes(count(array_filter(Arr::pluck($options, 'selected'))) ? null : ['selected' => 'selected']) }}>{{ $placeholder }}</option>
             @endif
             @foreach($options as $option)
-                <option value="{{ $option[$optionValueField] }}"{{ htmlAttributes(data_get($option, 'selected') ? ['selected' => 'selected'] : null, data_get($option, 'disabled') ? ['disabled'] : null) }}>{{ $option[$optionLabelField] }}</option>
+                <option value="{{ $option[$optionValueField] }}"{{ html_attributes(data_get($option, 'selected') ? ['selected' => 'selected'] : null, data_get($option, 'disabled') ? ['disabled'] : null) }}>{{ $option[$optionLabelField] }}</option>
             @endforeach
         </select>
         @include('bootstrap-components::bootstrap-components.partials.append')

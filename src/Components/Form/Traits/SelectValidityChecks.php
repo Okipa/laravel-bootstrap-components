@@ -102,9 +102,11 @@ trait SelectValidityChecks
     /** @throws \InvalidArgumentException */
     protected function checkSingleModeSelectedValueToCompareType(): void
     {
-        if ($this->selectedValueToCompare
+        if (
+            $this->selectedValueToCompare
             && ! is_string($this->selectedValueToCompare)
-            && ! is_integer($this->selectedValueToCompare)) {
+            && ! is_integer($this->selectedValueToCompare)
+        ) {
             throw new InvalidArgumentException(
                 get_class($this) . ' : Invalid selected() second $valueToCompare argument. '
                 . 'This argument has to be a string or an integer when the select() component is not '

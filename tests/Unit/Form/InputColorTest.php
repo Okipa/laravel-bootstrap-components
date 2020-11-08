@@ -26,7 +26,7 @@ class InputColorTest extends InputTestAbstract
 
     protected function getCustomComponent(): ComponentAbstract
     {
-        return (new CustomColor);
+        return (new CustomColor());
     }
 
     protected function getComponentType(): string

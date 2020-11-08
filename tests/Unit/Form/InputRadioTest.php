@@ -31,6 +31,6 @@ class InputRadioTest extends InputRadioTestAbstract
 
     protected function getCustomComponent(): ComponentAbstract
     {
-        return (new CustomCheckbox);
+        return (new CustomCheckbox());
     }
 }
