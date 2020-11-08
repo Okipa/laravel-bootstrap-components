@@ -24,7 +24,7 @@
     ],
     "require": {
         "ext-json": "*",
-        "php": "^7.4",
+        "php": "^7.4||^8.0",
         "illuminate/support": "^7.0||^8.0",
         "okipa/laravel-html-helper": "^1.4"
     },
