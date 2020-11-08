@@ -4,7 +4,7 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
 use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
 use Okipa\LaravelBootstrapComponents\Facades\InputCheckbox;
-use Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents\CustomCheckbox;
+use Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents\CustomInputCheckbox;
 use Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts\InputCheckableTestAbstract;
 
 class InputCheckboxTest extends InputCheckableTestAbstract
@@ -31,6 +31,6 @@ class InputCheckboxTest extends InputCheckableTestAbstract
 
     protected function getCustomComponent(): ComponentAbstract
     {
-        return (new CustomCheckbox());
+        return (new CustomInputCheckbox());
     }
 }

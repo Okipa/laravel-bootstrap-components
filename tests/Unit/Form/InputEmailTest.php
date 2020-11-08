@@ -4,7 +4,7 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
 use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
 use Okipa\LaravelBootstrapComponents\Facades\InputEmail;
-use Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents\CustomEmail;
+use Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents\CustomInputEmail;
 use Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts\InputTestAbstract;
 
 class InputEmailTest extends InputTestAbstract
@@ -26,7 +26,7 @@ class InputEmailTest extends InputTestAbstract
 
     protected function getCustomComponent(): ComponentAbstract
     {
-        return (new CustomEmail());
+        return (new CustomInputEmail());
     }
 
     protected function getComponentType(): string

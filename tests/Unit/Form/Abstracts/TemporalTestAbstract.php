@@ -3,7 +3,7 @@
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
 use Carbon\Carbon;
-use Exception;
+use RuntimeException;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\TemporalAbstract;
 
 abstract class TemporalTestAbstract extends InputTestAbstract
@@ -35,7 +35,7 @@ abstract class TemporalTestAbstract extends InputTestAbstract
     {
         $user = $this->createUniqueUser();
         $user->name = 'custom-name';
-        $this->expectException(Exception::class);
+        $this->expectException(RuntimeException::class);
         $this->getComponent()->model($user)->name('name')->toHtml();
     }
 
@@ -66,13 +66,13 @@ abstract class TemporalTestAbstract extends InputTestAbstract
 
     public function testSetNoFormat()
     {
-        $this->expectException(Exception::class);
+        $this->expectException(RuntimeException::class);
         $this->getComponent()->name('published_at')->format('')->toHtml();
     }
 
     public function testSetWrongValue()
     {
-        $this->expectException(Exception::class);
+        $this->expectException(RuntimeException::class);
         $this->getComponent()->name('name')->value('custom-value')->toHtml();
     }
 

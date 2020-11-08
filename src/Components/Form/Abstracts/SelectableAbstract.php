@@ -25,9 +25,17 @@ abstract class SelectableAbstract extends FormAbstract
 
     protected bool $multiple = false;
 
+    /**
+     * @param iterable $optionsList
+     * @param string $optionValueField
+     * @param string $optionLabelField
+     *
+     * @return $this
+     * @throws \JsonException
+     */
     public function options(iterable $optionsList, string $optionValueField, string $optionLabelField): self
     {
-        $this->options = json_decode(json_encode($optionsList), true);
+        $this->options = json_decode(json_encode($optionsList, JSON_THROW_ON_ERROR), true, 512, JSON_THROW_ON_ERROR);
         $this->optionValueField = $optionValueField;
         $this->optionLabelField = $optionLabelField;
 
@@ -126,7 +134,7 @@ abstract class SelectableAbstract extends FormAbstract
         $oldValue = old($this->convertArrayNameInNotation());
         if ($oldValue) {
             $selectedMultipleOptions = Arr::where($this->options, function ($option) use ($oldValue) {
-                return in_array($option[$this->optionValueField], $oldValue);
+                return in_array($option[$this->optionValueField], $oldValue, true);
             });
             if (! empty($selectedMultipleOptions)) {
                 return $selectedMultipleOptions;
@@ -138,14 +146,11 @@ abstract class SelectableAbstract extends FormAbstract
 
     protected function searchMultipleSelectedOptionsFromSelectedMethod(): ?array
     {
-        if (isset($this->selectedFieldToCompare) && isset($this->selectedValueToCompare)) {
+        if (isset($this->selectedFieldToCompare, $this->selectedValueToCompare)) {
             $selectedMultipleOptions = Arr::where($this->options, function (array $option) {
-                return in_array(
-                    $option[$this->selectedFieldToCompare],
-                    is_array($this->selectedValueToCompare)
-                        ? $this->selectedValueToCompare
-                        : [$this->selectedValueToCompare]
-                );
+                return in_array($option[$this->selectedFieldToCompare], is_array($this->selectedValueToCompare)
+                    ? $this->selectedValueToCompare
+                    : [$this->selectedValueToCompare], true);
             });
             if (! empty($selectedMultipleOptions)) {
                 return $selectedMultipleOptions;
@@ -159,7 +164,7 @@ abstract class SelectableAbstract extends FormAbstract
     {
         if ($this->model && $this->model->{$this->getName()}) {
             $multipleSelectedOptions = Arr::where($this->options, function ($option) {
-                return in_array($option[$this->optionValueField], $this->model->{$this->getName()});
+                return in_array($option[$this->optionValueField], $this->model->{$this->getName()}, true);
             });
             if (! empty($multipleSelectedOptions)) {
                 return $multipleSelectedOptions;
@@ -232,7 +237,7 @@ abstract class SelectableAbstract extends FormAbstract
 
     protected function setOptionsDisabledStatus(): void
     {
-        if (count($this->options) && $this->disabledOptionsClosure) {
+        if ($this->disabledOptionsClosure && count($this->options)) {
             $disabledOptionsClosure = $this->disabledOptionsClosure;
             foreach ($this->options as $key => $option) {
                 if ($disabledOptionsClosure($option)) {

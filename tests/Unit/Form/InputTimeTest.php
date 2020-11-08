@@ -4,7 +4,7 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
 use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
 use Okipa\LaravelBootstrapComponents\Facades\InputTime;
-use Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents\CustomTime;
+use Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents\CustomInputTime;
 use Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts\TemporalTestAbstract;
 
 class InputTimeTest extends TemporalTestAbstract
@@ -26,7 +26,7 @@ class InputTimeTest extends TemporalTestAbstract
 
     protected function getCustomComponent(): ComponentAbstract
     {
-        return (new CustomTime());
+        return (new CustomInputTime());
     }
 
     protected function getComponentType(): string

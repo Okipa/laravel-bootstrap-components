@@ -75,7 +75,7 @@
                 "InputDatetime": "Okipa\\LaravelBootstrapComponents\\Facades\\InputDatetime",
                 "InputFile": "Okipa\\LaravelBootstrapComponents\\Facades\\InputFile",
                 "InputCheckbox": "Okipa\\LaravelBootstrapComponents\\Facades\\InputCheckbox",
-                "InputToggle": "Okipa\\LaravelBootstrapComponents\\Facades\\InputToggle",
+                "InputToggle": "InputSwitch",
                 "InputRadio": "Okipa\\LaravelBootstrapComponents\\Facades\\InputRadio",
                 "Textarea": "Okipa\\LaravelBootstrapComponents\\Facades\\Textarea",
                 "Select": "Okipa\\LaravelBootstrapComponents\\Facades\\Select",

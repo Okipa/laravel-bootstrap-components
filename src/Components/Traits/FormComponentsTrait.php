@@ -108,12 +108,12 @@ trait FormComponentsTrait
         return $inputCheckbox;
     }
 
-    public function inputToggle(): CheckableAbstract
+    public function inputSwitch(): CheckableAbstract
     {
-        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\CheckableAbstract $inputToggle */
-        $inputToggle = app(config('bootstrap-components.components.toggle'));
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\CheckableAbstract $inputSwitch */
+        $inputSwitch = app(config('bootstrap-components.components.switch'));
 
-        return $inputToggle;
+        return $inputSwitch;
     }
 
     public function inputRadio(): RadioAbstract

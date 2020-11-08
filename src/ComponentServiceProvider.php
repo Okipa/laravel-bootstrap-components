@@ -4,7 +4,6 @@ namespace Okipa\LaravelBootstrapComponents;
 
 use Illuminate\Support\ServiceProvider;
 use Okipa\LaravelBootstrapComponents\Components\Component;
-use Okipa\LaravelHtmlHelper\HtmlHelperServiceProvider;
 
 class ComponentServiceProvider extends ServiceProvider
 {
@@ -70,8 +69,8 @@ class ComponentServiceProvider extends ServiceProvider
         $this->app->bind('InputCheckbox', function () {
             return (new Component())->inputCheckbox();
         });
-        $this->app->bind('InputToggle', function () {
-            return (new Component())->inputToggle();
+        $this->app->bind('InputSwitch', function () {
+            return (new Component())->inputSwitch();
         });
         $this->app->bind('InputRadio', function () {
             return (new Component())->inputRadio();

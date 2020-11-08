@@ -93,10 +93,10 @@ if (! function_exists('inputCheckbox')) {
     }
 }
 
-if (! function_exists('inputToggle')) {
-    function inputToggle(): CheckableAbstract
+if (! function_exists('inputSwitch')) {
+    function inputSwitch(): CheckableAbstract
     {
-        return (new Component())->inputToggle();
+        return (new Component())->inputSwitch();
     }
 }
 

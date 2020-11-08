@@ -6,7 +6,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Build status](https://github.com/Okipa/laravel-bootstrap-components/workflows/CI/badge.svg)](https://github.com/Okipa/laravel-bootstrap-components/actions)
 [![Coverage Status](https://coveralls.io/repos/github/Okipa/laravel-bootstrap-components/badge.svg?branch=master)](https://coveralls.io/github/Okipa/laravel-bootstrap-components?branch=master)
-[![Quality Score](https://img.shields.io/scrutinizer/g/Okipa/laravel-bootstrap-components.svg?style=flat-square)](https://scrutinizer-ci.com/g/Okipa/laravel-bootstrap-components/?branch=master)
 
 Save time and take advantage of an extended set of ready-to-use and fully customizable bootstrap components.
 
@@ -16,12 +15,14 @@ You feel like there is a missing component ? Feel free to open an issue or submi
 
 | Laravel | PHP | Bootstrap | Package |
 |---|---|---|---|
+| ^7.0 | ^7.4||^8.0 | ^4.0 | ^4.0 |
 | ^7.0 | ^7.4 | ^4.0 | ^3.0 |
 | ^5.8 | ^7.2 | ^4.0 | ^2.0 |
 | ^5.5 | ^7.1 | ^4.0 | ^1.0 |
 
 ## Upgrade guide
 
+* [From V3 to V4](/docs/upgrade-guides/from-v3-to-v4.md)
 * [From V1 to V2](/docs/upgrade-guides/from-v1-to-v2.md)
 
 ## Usage
@@ -136,7 +137,7 @@ And get this HTML generated for you:
 
 * Install the package with composer:
 ```bash
-composer require "okipa/laravel-bootstrap-components:^2.0"
+composer require okipa/laravel-bootstrap-components
 ```
 
 ## Configuration

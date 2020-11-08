@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
-use Exception;
+use RuntimeException;
 use InvalidArgumentException;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\RadioAbstract;
 
@@ -15,7 +15,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
 
     public function testInputWithoutValue()
     {
-        $this->expectException(Exception::class);
+        $this->expectException(RuntimeException::class);
         $this->getComponent()->name('name')->value(null)->toHtml();
     }
 

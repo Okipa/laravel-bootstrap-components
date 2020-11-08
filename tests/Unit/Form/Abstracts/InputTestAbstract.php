@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
-use Exception;
+use RuntimeException;
 use Illuminate\Support\MessageBag;
 use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract;
@@ -56,7 +56,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
 
     public function testInputWithoutName()
     {
-        $this->expectException(Exception::class);
+        $this->expectException(RuntimeException::class);
         $this->getComponent()->toHtml();
     }
 

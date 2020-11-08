@@ -6,10 +6,6 @@ use InvalidArgumentException;
 
 trait RadioValidityChecks
 {
-    /**
-     * @throws \Exception
-     * @throws \InvalidArgumentException
-     */
     protected function checkValuesValidity(): void
     {
         parent::checkValuesValidity();
