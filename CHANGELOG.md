@@ -7,6 +7,7 @@
 * Added PHP 8 support
 * Replaced input toggle component by Bootstrap native input switch component
 * Naming changes
+* Exceptions triggering changes
 
 :point_right: [See the upgrade guide](/docs/upgrade-guides/from-v3-to-v4.md)
 
