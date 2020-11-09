@@ -1,6 +1,4 @@
-<div{{ html_attributes($containerId
-    ? ['id' => $containerId]
-    : null) }}{{ html_classes('component-container', $containerClasses) }}{{ html_attributes($containerHtmlAttributes) }}>
+<div{{ html_attributes($containerId ? ['id' => $containerId] : null) }}{{ html_classes('component-container', $containerClasses) }}{{ html_attributes($containerHtmlAttributes) }}>
     @if($labelPositionedAbove)
         @include('bootstrap-components::bootstrap-components.partials.label')
     @endif
