@@ -20,7 +20,7 @@ return [
         'datetime' => Okipa\LaravelBootstrapComponents\Components\Form\InputDatetime::class,
         'file' => Okipa\LaravelBootstrapComponents\Components\Form\InputFile::class,
         'checkbox' => Okipa\LaravelBootstrapComponents\Components\Form\InputCheckbox::class,
-        'toggle' => Okipa\LaravelBootstrapComponents\Components\Form\InputSwitch::class,
+        'switch' => Okipa\LaravelBootstrapComponents\Components\Form\InputSwitch::class,
         'radio' => Okipa\LaravelBootstrapComponents\Components\Form\InputRadio::class,
         'textarea' => Okipa\LaravelBootstrapComponents\Components\Form\Textarea::class,
         'select' => Okipa\LaravelBootstrapComponents\Components\Form\Select::class,

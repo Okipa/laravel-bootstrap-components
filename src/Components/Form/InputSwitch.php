@@ -13,7 +13,7 @@ class InputSwitch extends CheckableAbstract
 
     protected function setView(): string
     {
-        return 'bootstrap-components.form.switch';
+        return 'bootstrap-components.form.checkbox';
     }
 
     protected function setPrepend(): ?string

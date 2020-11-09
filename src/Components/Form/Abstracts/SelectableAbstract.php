@@ -132,16 +132,14 @@ abstract class SelectableAbstract extends FormAbstract
     protected function searchMultipleSelectedOptionFromOldValue(): ?array
     {
         $oldValue = old($this->convertArrayNameInNotation());
-        if ($oldValue) {
-            $selectedMultipleOptions = Arr::where($this->options, function ($option) use ($oldValue) {
-                return in_array($option[$this->optionValueField], $oldValue, true);
-            });
-            if (! empty($selectedMultipleOptions)) {
-                return $selectedMultipleOptions;
-            }
+        if (! $oldValue) {
+            return null;
         }
+        $selectedMultipleOptions = Arr::where($this->options, function ($option) use ($oldValue) {
+            return in_array((string) $option[$this->optionValueField], $oldValue, true);
+        });
 
-        return null;
+        return $selectedMultipleOptions ?: null;
     }
 
     protected function searchMultipleSelectedOptionsFromSelectedMethod(): ?array
@@ -209,7 +207,7 @@ abstract class SelectableAbstract extends FormAbstract
 
     protected function searchSelectedOptionFromSelectedMethod(): ?array
     {
-        if (isset($this->selectedFieldToCompare) && isset($this->selectedValueToCompare)) {
+        if (isset($this->selectedFieldToCompare, $this->selectedValueToCompare)) {
             $selectedOption = Arr::where($this->options, function ($option) {
                 return $option[$this->selectedFieldToCompare] === $this->selectedValueToCompare;
             });

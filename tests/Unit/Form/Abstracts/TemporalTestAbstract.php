@@ -8,22 +8,22 @@ use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\TemporalAbstract;
 
 abstract class TemporalTestAbstract extends InputTestAbstract
 {
-    public function testInstance()
+    public function testInstance(): void
     {
-        $this->assertInstanceOf(TemporalAbstract::class, $this->getComponent());
+        self::assertInstanceOf(TemporalAbstract::class, $this->getComponent());
     }
 
-    public function testModelValue()
+    public function testModelValue(): void
     {
         $user = $this->createUniqueUser();
         // datetime object
         $user->published_at = $this->faker->dateTime;
         $html = $this->getComponent()->model($user)->name('published_at')->toHtml();
-        $this->assertStringContainsString(' value="' . $user->published_at->format($this->getFormat()) . '"', $html);
+        self::assertStringContainsString(' value="' . $user->published_at->format($this->getFormat()) . '"', $html);
         // datetime string
         $user->published_at = $this->faker->dateTime->format($this->getFormat());
         $html = $this->getComponent()->model($user)->name('published_at')->toHtml();
-        $this->assertStringContainsString(
+        self::assertStringContainsString(
             ' value="' . Carbon::parse($user->published_at)->format($this->getFormat()) . '"',
             $html
         );
@@ -31,7 +31,7 @@ abstract class TemporalTestAbstract extends InputTestAbstract
 
     abstract protected function getFormat(): string;
 
-    public function testWrongModelValue()
+    public function testWrongModelValue(): void
     {
         $user = $this->createUniqueUser();
         $user->name = 'custom-name';
@@ -39,7 +39,7 @@ abstract class TemporalTestAbstract extends InputTestAbstract
         $this->getComponent()->model($user)->name('name')->toHtml();
     }
 
-    public function testSetCustomFormat()
+    public function testSetCustomFormat(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -48,10 +48,10 @@ abstract class TemporalTestAbstract extends InputTestAbstract
         $user = $this->createUniqueUser();
         $user->published_at = $this->faker->dateTime;
         $html = $this->getComponent()->model($user)->name('published_at')->toHtml();
-        $this->assertStringContainsString($user->published_at->format('d/m/Y H-i-s'), $html);
+        self::assertStringContainsString($user->published_at->format('d/m/Y H-i-s'), $html);
     }
 
-    public function testSetFormatOverridesDefault()
+    public function testSetFormatOverridesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -60,57 +60,57 @@ abstract class TemporalTestAbstract extends InputTestAbstract
         $user = $this->createUniqueUser();
         $user->published_at = $this->faker->dateTime;
         $html = $this->getComponent()->model($user)->name('published_at')->format('Y-m-d')->toHtml();
-        $this->assertStringContainsString($user->published_at->format('Y-m-d'), $html);
-        $this->assertStringNotContainsString($user->published_at->format('d/m/Y H-i-s'), $html);
+        self::assertStringContainsString($user->published_at->format('Y-m-d'), $html);
+        self::assertStringNotContainsString($user->published_at->format('d/m/Y H-i-s'), $html);
     }
 
-    public function testSetNoFormat()
+    public function testSetNoFormat(): void
     {
         $this->expectException(RuntimeException::class);
         $this->getComponent()->name('published_at')->format('')->toHtml();
     }
 
-    public function testSetWrongValue()
+    public function testSetWrongValue(): void
     {
         $this->expectException(RuntimeException::class);
         $this->getComponent()->name('name')->value('custom-value')->toHtml();
     }
 
-    public function testSetValue()
+    public function testSetValue(): void
     {
         $value = $this->faker->dateTime;
         $html = $this->getComponent()->name('name')->value($value)->toHtml();
-        $this->assertStringContainsString(' value="' . $value->format($this->getFormat()) . '"', $html);
+        self::assertStringContainsString(' value="' . $value->format($this->getFormat()) . '"', $html);
     }
 
-    public function testSetZeroValue()
+    public function testSetZeroValue(): void
     {
         $html = $this->getComponent()->name('name')->value(0)->toHtml();
-        $this->assertStringContainsString(' value=""', $html);
+        self::assertStringContainsString(' value=""', $html);
     }
 
-    public function testSetEmptyStringValue()
+    public function testSetEmptyStringValue(): void
     {
         $html = $this->getComponent()->name('name')->value('')->toHtml();
-        $this->assertStringContainsString(' value=""', $html);
+        self::assertStringContainsString(' value=""', $html);
     }
 
-    public function testSetNullValue()
+    public function testSetNullValue(): void
     {
         $html = $this->getComponent()->name('name')->value(null)->toHtml();
-        $this->assertStringContainsString(' value=""', $html);
+        self::assertStringContainsString(' value=""', $html);
     }
 
-    public function testSetValueFromClosureWithDisabledMultilingual()
+    public function testSetValueFromClosureWithDisabledMultilingual(): void
     {
         $value = $this->faker->dateTime;
         $html = $this->getComponent()->name('name')->value(function () use ($value) {
             return $value;
         })->toHtml();
-        $this->assertStringContainsString(' value="' . $value->format($this->getFormat()) . '"', $html);
+        self::assertStringContainsString(' value="' . $value->format($this->getFormat()) . '"', $html);
     }
 
-    public function testOldValue()
+    public function testOldValue(): void
     {
         $oldValue = $this->faker->dateTime->format($this->getFormat());
         $value = $this->faker->dateTime->format($this->getFormat());
@@ -122,11 +122,11 @@ abstract class TemporalTestAbstract extends InputTestAbstract
         ]);
         $this->call('GET', 'test');
         $html = $this->getComponent()->name('name')->value($value)->toHtml();
-        $this->assertStringContainsString(' value="' . $oldValue . '"', $html);
-        $this->assertStringNotContainsString(' value="' . $value . '"', $html);
+        self::assertStringContainsString(' value="' . $oldValue . '"', $html);
+        self::assertStringNotContainsString(' value="' . $value . '"', $html);
     }
 
-    public function testOldArrayValue()
+    public function testOldArrayValue(): void
     {
         $oldValue = $this->faker->dateTime->format($this->getFormat());
         $value = $this->faker->dateTime->format($this->getFormat());
@@ -138,7 +138,7 @@ abstract class TemporalTestAbstract extends InputTestAbstract
         ]);
         $this->call('GET', 'test');
         $html = $this->getComponent()->name('name[0]')->value($value)->toHtml();
-        $this->assertStringContainsString(' value="' . $oldValue . '"', $html);
-        $this->assertStringNotContainsString(' value="' . $value . '"', $html);
+        self::assertStringContainsString(' value="' . $oldValue . '"', $html);
+        self::assertStringNotContainsString(' value="' . $value . '"', $html);
     }
 }
