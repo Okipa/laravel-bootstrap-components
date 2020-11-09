@@ -2,9 +2,9 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents;
 
-use Okipa\LaravelBootstrapComponents\Components\Form\InputNumber;
+use Okipa\LaravelBootstrapComponents\Components\Form\InputPassword;
 
-class CustomNumber extends InputNumber
+class CustomInputPassword extends InputPassword
 {
     protected function setPrepend(): ?string
     {

@@ -4,7 +4,7 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
 use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
 use Okipa\LaravelBootstrapComponents\Facades\InputNumber;
-use Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents\CustomNumber;
+use Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents\CustomInputNumber;
 use Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts\InputTestAbstract;
 
 class InputNumberTest extends InputTestAbstract
@@ -26,7 +26,7 @@ class InputNumberTest extends InputTestAbstract
 
     protected function getCustomComponent(): ComponentAbstract
     {
-        return (new CustomNumber());
+        return (new CustomInputNumber());
     }
 
     protected function getComponentType(): string
