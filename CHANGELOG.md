@@ -5,9 +5,11 @@
 2020-11-09
 
 * Added PHP 8 support
+* Upgraded https://github.com/Okipa/laravel-html-helper to v2
 * Replaced input toggle component by Bootstrap native input switch component
 * Naming changes
 * Exceptions triggering changes
+* Removed Scrutinizer analysis
 
 :point_right: [See the upgrade guide](/docs/upgrade-guides/from-v3-to-v4.md)
 

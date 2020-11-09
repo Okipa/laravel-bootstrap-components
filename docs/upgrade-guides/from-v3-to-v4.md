@@ -6,10 +6,15 @@ Follow the steps below to upgrade the package.
 
 Since switch component is now being natively handled by Bootstrap, this package custom input toggle component has been replaced and the related sass resources have been removed.
 
-As so, you'll have to make the following changes:
+As so, you'll have to report the following changes:
 * Replace occurrences of `InputToggle::` by `InputSwitch::`
 * Replace occurrences of `inputToggle(` by `inputSwitch(`
 * Remove sass import of `/vendor/okipa/laravel-bootstrap-components/resources/styles/scss/bootstrap-components` which has been removed
+* Replace `toggle` by `switch` in the config file if you have published it.
+
+## Upgraded https://github.com/Okipa/laravel-html-helper to v2
+
+If you published the package views, you will have to follow the `laravel-html-helper` package upgrade guide to report the required changes.
 
 ## Naming changes
 
