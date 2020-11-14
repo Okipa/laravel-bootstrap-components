@@ -13,7 +13,7 @@
   * [Input datetime](#input-datetime)
   * [Input file](#input-file)
   * [Input checkbox](#input-checkbox)
-  * [Input toggle](#input-toggle)
+  * [Input switch](#input-switch)
   * [Input radio](#input-radio)
   * [Textarea](#textarea)
   * [Select](#select)
@@ -229,13 +229,13 @@
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
-## Input toggle
+## Input switch
 
 **Type :** [CheckableAbstract](./types.md#checkableabstract)
 
-**Helper :** `inputToggle()`
+**Helper :** `inputSwitch()`
 
-**Facade :** `InputToggle`
+**Facade :** `InputSwitch`
 
 **Notes**
 
