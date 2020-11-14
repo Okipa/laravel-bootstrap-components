@@ -44,10 +44,10 @@ Just call the components you need in your views and let this package take care o
 Call this component in your view:
 
 ```blade
-{{-- helper style --}}
+{{-- Helper style --}}
 {{ inputText()->name('name') }}
 
-{{-- facade style --}}
+{{-- Facade style --}}
 {{ InputText::name('name') }}
 ```
 
