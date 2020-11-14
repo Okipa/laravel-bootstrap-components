@@ -7,7 +7,7 @@ return [
      * Here you can override them. Make sure your custom component extends the overridden one.
      */
     'components' => [
-        // form
+        // Form
         'text' => Okipa\LaravelBootstrapComponents\Components\Form\InputText::class,
         'email' => Okipa\LaravelBootstrapComponents\Components\Form\InputEmail::class,
         'password' => Okipa\LaravelBootstrapComponents\Components\Form\InputPassword::class,
@@ -24,7 +24,7 @@ return [
         'radio' => Okipa\LaravelBootstrapComponents\Components\Form\InputRadio::class,
         'textarea' => Okipa\LaravelBootstrapComponents\Components\Form\Textarea::class,
         'select' => Okipa\LaravelBootstrapComponents\Components\Form\Select::class,
-        // buttons
+        // Buttons
         'submit' => Okipa\LaravelBootstrapComponents\Components\Buttons\Submit::class,
         'create' => Okipa\LaravelBootstrapComponents\Components\Buttons\SubmitCreate::class,
         'update' => Okipa\LaravelBootstrapComponents\Components\Buttons\SubmitUpdate::class,
@@ -33,7 +33,7 @@ return [
         'link' => Okipa\LaravelBootstrapComponents\Components\Buttons\ButtonLink::class,
         'back' => Okipa\LaravelBootstrapComponents\Components\Buttons\ButtonBack::class,
         'cancel' => Okipa\LaravelBootstrapComponents\Components\Buttons\ButtonCancel::class,
-        // media
+        // Media
         'image' => Okipa\LaravelBootstrapComponents\Components\Media\Image::class,
         'audio' => Okipa\LaravelBootstrapComponents\Components\Media\Audio::class,
         'video' => Okipa\LaravelBootstrapComponents\Components\Media\Video::class,
