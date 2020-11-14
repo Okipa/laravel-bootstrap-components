@@ -4,7 +4,7 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
 use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
 use Okipa\LaravelBootstrapComponents\Facades\InputText;
-use Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents\CustomText;
+use Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents\CustomInputText;
 use Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts\InputMultilingualTestAbstract;
 
 class InputTextTest extends InputMultilingualTestAbstract
@@ -26,7 +26,7 @@ class InputTextTest extends InputMultilingualTestAbstract
 
     protected function getCustomComponent(): ComponentAbstract
     {
-        return (new CustomText);
+        return (new CustomInputText());
     }
 
     protected function getComponentType(): string

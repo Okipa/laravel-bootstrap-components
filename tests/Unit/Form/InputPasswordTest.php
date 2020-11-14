@@ -4,7 +4,7 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
 use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
 use Okipa\LaravelBootstrapComponents\Facades\InputPassword;
-use Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents\CustomPassword;
+use Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents\CustomInputPassword;
 use Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts\InputTestAbstract;
 
 class InputPasswordTest extends InputTestAbstract
@@ -26,7 +26,7 @@ class InputPasswordTest extends InputTestAbstract
 
     protected function getCustomComponent(): ComponentAbstract
     {
-        return (new CustomPassword);
+        return (new CustomInputPassword());
     }
 
     protected function getComponentType(): string

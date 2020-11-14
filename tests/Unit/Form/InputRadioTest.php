@@ -4,7 +4,7 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
 use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
 use Okipa\LaravelBootstrapComponents\Facades\InputRadio;
-use Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents\CustomCheckbox;
+use Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents\CustomInputCheckbox;
 use Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts\InputRadioTestAbstract;
 
 class InputRadioTest extends InputRadioTestAbstract
@@ -31,6 +31,6 @@ class InputRadioTest extends InputRadioTestAbstract
 
     protected function getCustomComponent(): ComponentAbstract
     {
-        return (new CustomCheckbox);
+        return (new CustomInputCheckbox());
     }
 }

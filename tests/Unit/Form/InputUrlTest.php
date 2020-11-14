@@ -4,7 +4,7 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
 use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
 use Okipa\LaravelBootstrapComponents\Facades\InputUrl;
-use Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents\CustomUrl;
+use Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents\CustomInputUrl;
 use Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts\InputTestAbstract;
 
 class InputUrlTest extends InputTestAbstract
@@ -26,7 +26,7 @@ class InputUrlTest extends InputTestAbstract
 
     protected function getCustomComponent(): ComponentAbstract
     {
-        return (new CustomUrl);
+        return (new CustomInputUrl());
     }
 
     protected function getComponentType(): string

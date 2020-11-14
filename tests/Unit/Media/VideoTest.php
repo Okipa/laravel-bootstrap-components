@@ -31,6 +31,6 @@ class VideoTest extends VideoTestAbstract
 
     protected function getCustomComponent(): ComponentAbstract
     {
-        return (new CustomVideo);
+        return (new CustomVideo());
     }
 }

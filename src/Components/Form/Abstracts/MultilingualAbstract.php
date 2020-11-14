@@ -70,12 +70,12 @@ abstract class MultilingualAbstract extends FormAbstract
 
     protected function getLocalizedValues(string $locale): array
     {
-        return array_merge(parent::getValues(), $this->getLocalizedParameters($locale));
+        return array_merge($this->getValues(), $this->getLocalizedParameters($locale));
     }
 
     protected function getLocalizedParameters(string $locale): array
     {
-        $parentParams = parent::getParameters();
+        $parentParams = $this->getParameters();
         $componentId = $this->getLocalizedComponentId($locale);
         $containerId = $this->getLocalizedContainerId($locale);
         $componentHtmlAttributes = $this->getLocalizedComponentHtmlAttributes($locale);
@@ -105,17 +105,17 @@ abstract class MultilingualAbstract extends FormAbstract
 
     protected function getLocalizedComponentId(string $locale): string
     {
-        return parent::getComponentId() . '-' . $locale;
+        return $this->getComponentId() . '-' . $locale;
     }
 
     protected function getLocalizedContainerId(string $locale): ?string
     {
-        return parent::getContainerId() ? parent::getContainerId() . '-' . $locale : null;
+        return $this->getContainerId() ? $this->getContainerId() . '-' . $locale : null;
     }
 
     protected function getLocalizedComponentHtmlAttributes(string $locale): array
     {
-        return array_merge(['data-locale' => $locale], parent::getComponentHtmlAttributes());
+        return array_merge(['data-locale' => $locale], $this->getComponentHtmlAttributes());
     }
 
     protected function getLocalizedName(string $locale): string
@@ -141,7 +141,7 @@ abstract class MultilingualAbstract extends FormAbstract
 
     protected function getLocalizedLabel(string $locale): ?string
     {
-        $label = parent::getLabel();
+        $label = $this->getLabel();
 
         return $label ? $label . ' (' . mb_strtoupper($locale) . ')' : null;
     }
@@ -162,7 +162,7 @@ abstract class MultilingualAbstract extends FormAbstract
 
     protected function getLocalizedPlaceholder(string $locale): ?string
     {
-        $placeholder = parent::getPlaceholder();
+        $placeholder = $this->getPlaceholder();
 
         return $placeholder ? $placeholder . ' (' . mb_strtoupper($locale) . ')' : null;
     }

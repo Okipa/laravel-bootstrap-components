@@ -23,29 +23,29 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
 
     public function testHelper()
     {
-        $this->assertInstanceOf(get_class($this->getComponent()), $this->getHelper());
+        self::assertInstanceOf(get_class($this->getComponent()), $this->getHelper());
     }
 
     public function testFacade()
     {
-        $this->assertInstanceOf(get_class($this->getComponent()), $this->getFacade());
+        self::assertInstanceOf(get_class($this->getComponent()), $this->getFacade());
     }
 
     public function testInstance()
     {
-        $this->assertInstanceOf(MediaAbstract::class, $this->getComponent());
+        self::assertInstanceOf(MediaAbstract::class, $this->getComponent());
     }
 
     public function testSetSrc()
     {
         $html = $this->getComponent()->src('custom-src')->toHtml();
-        $this->assertStringContainsString('src="custom-src">', $html);
+        self::assertStringContainsString('src="custom-src">', $html);
     }
 
     public function testNoSrc()
     {
         $html = $this->getComponent()->toHtml();
-        $this->assertStringNotContainsString('<source src="', $html);
+        self::assertStringNotContainsString('<source src="', $html);
     }
 
     public function testSetCustomCaption()
@@ -55,7 +55,7 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->toHtml();
-        $this->assertStringContainsString('class="caption form-text text-muted">default-caption', $html);
+        self::assertStringContainsString('class="caption form-text text-muted">default-caption', $html);
     }
 
     protected function getComponentKey(): string
@@ -70,32 +70,32 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->caption('custom-caption')->toHtml();
-        $this->assertStringContainsString('class="caption form-text text-muted">custom-caption', $html);
-        $this->assertStringNotContainsString('class="caption form-text text-muted">default-caption', $html);
+        self::assertStringContainsString('class="caption form-text text-muted">custom-caption', $html);
+        self::assertStringNotContainsString('class="caption form-text text-muted">default-caption', $html);
     }
 
     public function testHideCaption()
     {
         $html = $this->getComponent()->caption(null)->toHtml();
-        $this->assertStringNotContainsString('class="caption form-text text-muted"', $html);
+        self::assertStringNotContainsString('class="caption form-text text-muted"', $html);
     }
 
     public function testSetLabel()
     {
         $html = $this->getComponent()->label('custom-label')->toHtml();
-        $this->assertStringContainsString('<label class="d-block">custom-label</label>', $html);
+        self::assertStringContainsString('<label class="d-block">custom-label</label>', $html);
     }
 
     public function testNoLabel()
     {
         $html = $this->getComponent()->toHtml();
-        $this->assertStringNotContainsString('<label', $html);
+        self::assertStringNotContainsString('<label', $html);
     }
 
     public function testHideLabel()
     {
         $html = $this->getComponent()->label(null)->toHtml();
-        $this->assertStringNotContainsString(
+        self::assertStringNotContainsString(
             '<label class="d-block" for="' . $this->getComponentType() . '-name">validation.attributes.name</label>',
             $html
         );
@@ -104,25 +104,25 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
     public function testSetNoContainerId()
     {
         $html = $this->getComponent()->toHtml();
-        $this->assertStringNotContainsString('<div id="', $html);
+        self::assertStringNotContainsString('<div id="', $html);
     }
 
     public function testSetContainerId()
     {
         $html = $this->getComponent()->containerId('custom-container-id')->toHtml();
-        $this->assertStringContainsString('<div id="custom-container-id"', $html);
+        self::assertStringContainsString('<div id="custom-container-id"', $html);
     }
 
     public function testDefaultComponentId()
     {
         $html = $this->getComponent()->toHtml();
-        $this->assertStringNotContainsString('<audio id="', $html);
+        self::assertStringNotContainsString('<audio id="', $html);
     }
 
     public function testSetComponentId()
     {
         $html = $this->getComponent()->componentId('custom-component-id')->toHtml();
-        $this->assertStringContainsString('<audio id="custom-component-id"', $html);
+        self::assertStringContainsString('<audio id="custom-component-id"', $html);
     }
 
     public function testSetCustomContainerClasses()
@@ -132,7 +132,7 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->toHtml();
-        $this->assertStringContainsString('class="component-container default container classes"', $html);
+        self::assertStringContainsString('class="component-container default container classes"', $html);
     }
 
     public function testSetContainerClassesOverridesDefault()
@@ -142,8 +142,8 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->containerClasses(['custom', 'container', 'classes'])->toHtml();
-        $this->assertStringContainsString('class="component-container custom container classes"', $html);
-        $this->assertStringNotContainsString('class="component-container default container classes"', $html);
+        self::assertStringContainsString('class="component-container custom container classes"', $html);
+        self::assertStringNotContainsString('class="component-container default container classes"', $html);
     }
 
     public function testSetCustomComponentClasses()
@@ -153,7 +153,7 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->toHtml();
-        $this->assertStringContainsString('class="component default component classes"', $html);
+        self::assertStringContainsString('class="component default component classes"', $html);
     }
 
     public function testSetComponentClassesOverridesDefault()
@@ -163,8 +163,8 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->componentClasses(['custom', 'component', 'classes'])->toHtml();
-        $this->assertStringContainsString('class="component custom component classes"', $html);
-        $this->assertStringNotContainsString('class="component default component classes"', $html);
+        self::assertStringContainsString('class="component custom component classes"', $html);
+        self::assertStringNotContainsString('class="component default component classes"', $html);
     }
 
     public function testSetCustomContainerHtmlAttributes()
@@ -174,7 +174,7 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->toHtml();
-        $this->assertStringContainsString(
+        self::assertStringContainsString(
             'default="container" html="attributes">',
             $html
         );
@@ -189,8 +189,8 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
         $html = $this->getComponent()
             ->containerHtmlAttributes(['custom' => 'container', 'html' => 'attributes'])
             ->toHtml();
-        $this->assertStringContainsString('custom="container" html="attributes">', $html);
-        $this->assertStringNotContainsString('default="container" html="attributes">', $html);
+        self::assertStringContainsString('custom="container" html="attributes">', $html);
+        self::assertStringNotContainsString('default="container" html="attributes">', $html);
     }
 
     public function testSetCustomComponentHtmlAttributes()
@@ -200,7 +200,7 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->toHtml();
-        $this->assertStringContainsString('default="component" html="attributes">', $html);
+        self::assertStringContainsString('default="component" html="attributes">', $html);
     }
 
     public function testSetComponentHtmlAttributesOverridesDefault()
@@ -212,7 +212,7 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
         $html = $this->getComponent()
             ->componentHtmlAttributes(['custom' => 'component', 'html' => 'attributes'])
             ->toHtml();
-        $this->assertStringContainsString('custom="component" html="attributes">', $html);
-        $this->assertStringNotContainsString('default="component" html="attributes">', $html);
+        self::assertStringContainsString('custom="component" html="attributes">', $html);
+        self::assertStringNotContainsString('default="component" html="attributes">', $html);
     }
 }

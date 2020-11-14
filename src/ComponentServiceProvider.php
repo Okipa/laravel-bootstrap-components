@@ -4,7 +4,6 @@ namespace Okipa\LaravelBootstrapComponents;
 
 use Illuminate\Support\ServiceProvider;
 use Okipa\LaravelBootstrapComponents\Components\Component;
-use Okipa\LaravelHtmlHelper\HtmlHelperServiceProvider;
 
 class ComponentServiceProvider extends ServiceProvider
 {
@@ -17,9 +16,6 @@ class ComponentServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../resources/views' => resource_path('views/vendor/bootstrap-components'),
         ], 'bootstrap-components:views');
-        // we load the laravel HTML helper package
-        // https://github.com/Okipa/laravel-html-helper
-        $this->app->register(HtmlHelperServiceProvider::class);
     }
 
     public function register(): void
@@ -38,93 +34,93 @@ class ComponentServiceProvider extends ServiceProvider
     protected function registerFormComponentsFacades(): void
     {
         $this->app->bind('InputText', function () {
-            return (new Component)->inputText();
+            return (new Component())->inputText();
         });
         $this->app->bind('InputEmail', function () {
-            return (new Component)->inputEmail();
+            return (new Component())->inputEmail();
         });
         $this->app->bind('InputPassword', function () {
-            return (new Component)->inputPassword();
+            return (new Component())->inputPassword();
         });
         $this->app->bind('InputUrl', function () {
-            return (new Component)->inputUrl();
+            return (new Component())->inputUrl();
         });
         $this->app->bind('InputTel', function () {
-            return (new Component)->inputTel();
+            return (new Component())->inputTel();
         });
         $this->app->bind('InputNumber', function () {
-            return (new Component)->inputNumber();
+            return (new Component())->inputNumber();
         });
         $this->app->bind('InputColor', function () {
-            return (new Component)->inputColor();
+            return (new Component())->inputColor();
         });
         $this->app->bind('InputDate', function () {
-            return (new Component)->inputDate();
+            return (new Component())->inputDate();
         });
         $this->app->bind('InputTime', function () {
-            return (new Component)->inputTime();
+            return (new Component())->inputTime();
         });
         $this->app->bind('InputDatetime', function () {
-            return (new Component)->inputDatetime();
+            return (new Component())->inputDatetime();
         });
         $this->app->bind('InputFile', function () {
-            return (new Component)->inputFile();
+            return (new Component())->inputFile();
         });
         $this->app->bind('InputCheckbox', function () {
-            return (new Component)->inputCheckbox();
+            return (new Component())->inputCheckbox();
         });
-        $this->app->bind('InputToggle', function () {
-            return (new Component)->inputToggle();
+        $this->app->bind('InputSwitch', function () {
+            return (new Component())->inputSwitch();
         });
         $this->app->bind('InputRadio', function () {
-            return (new Component)->inputRadio();
+            return (new Component())->inputRadio();
         });
         $this->app->bind('Textarea', function () {
-            return (new Component)->textarea();
+            return (new Component())->textarea();
         });
         $this->app->bind('Select', function () {
-            return (new Component)->select();
+            return (new Component())->select();
         });
     }
 
     protected function registerButtonComponentsFacades(): void
     {
         $this->app->bind('Submit', function () {
-            return (new Component)->submit();
+            return (new Component())->submit();
         });
         $this->app->bind('SubmitCreate', function () {
-            return (new Component)->submitCreate();
+            return (new Component())->submitCreate();
         });
         $this->app->bind('SubmitUpdate', function () {
-            return (new Component)->submitUpdate();
+            return (new Component())->submitUpdate();
         });
         $this->app->bind('SubmitValidate', function () {
-            return (new Component)->submitValidate();
+            return (new Component())->submitValidate();
         });
         $this->app->bind('Button', function () {
-            return (new Component)->button();
+            return (new Component())->button();
         });
         $this->app->bind('ButtonLink', function () {
-            return (new Component)->buttonLink();
+            return (new Component())->buttonLink();
         });
         $this->app->bind('ButtonBack', function () {
-            return (new Component)->buttonBack();
+            return (new Component())->buttonBack();
         });
         $this->app->bind('ButtonCancel', function () {
-            return (new Component)->buttonCancel();
+            return (new Component())->buttonCancel();
         });
     }
 
     protected function registerMediaComponentsFacades(): void
     {
         $this->app->bind('Image', function () {
-            return (new Component)->image();
+            return (new Component())->image();
         });
         $this->app->bind('Audio', function () {
-            return (new Component)->audio();
+            return (new Component())->audio();
         });
         $this->app->bind('Video', function () {
-            return (new Component)->video();
+            return (new Component())->video();
         });
     }
 }

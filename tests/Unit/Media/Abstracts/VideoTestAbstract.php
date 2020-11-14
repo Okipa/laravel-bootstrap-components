@@ -11,7 +11,7 @@ abstract class VideoTestAbstract extends MediaTestAbstract
             get_class($this->getCustomComponent())
         );
         $html = video()->toHtml();
-        $this->assertStringContainsString('poster="default-poster"', $html);
+        self::assertStringContainsString('poster="default-poster"', $html);
     }
 
     public function testSetPosterOverridesDefault()
@@ -21,25 +21,25 @@ abstract class VideoTestAbstract extends MediaTestAbstract
             get_class($this->getCustomComponent())
         );
         $html = video()->poster('custom-poster')->toHtml();
-        $this->assertStringContainsString('poster="custom-poster"', $html);
-        $this->assertStringNotContainsString('poster="default-poster"', $html);
+        self::assertStringContainsString('poster="custom-poster"', $html);
+        self::assertStringNotContainsString('poster="default-poster"', $html);
     }
 
     public function testNoPoster()
     {
         $html = video()->toHtml();
-        $this->assertStringNotContainsString('poster="', $html);
+        self::assertStringNotContainsString('poster="', $html);
     }
 
     public function testDefaultComponentId()
     {
         $html = $this->getComponent()->toHtml();
-        $this->assertStringNotContainsString('<video id="', $html);
+        self::assertStringNotContainsString('<video id="', $html);
     }
 
     public function testSetComponentId()
     {
         $html = $this->getComponent()->componentId('custom-component-id')->toHtml();
-        $this->assertStringContainsString('<video id="custom-component-id"', $html);
+        self::assertStringContainsString('<video id="custom-component-id"', $html);
     }
 }

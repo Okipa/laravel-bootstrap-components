@@ -7,52 +7,52 @@ use Okipa\LaravelBootstrapComponents\Tests\Models\User;
 
 abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
 {
-    public function testType()
+    public function testType(): void
     {
         $html = $this->getComponent()->name('name')->toHtml();
-        $this->assertStringContainsString('<textarea', $html);
+        self::assertStringContainsString('<textarea', $html);
     }
 
-    public function testModelValue()
+    public function testModelValue(): void
     {
         $user = $this->createUniqueUser();
         $html = $this->getComponent()->model($user)->name('name')->toHtml();
-        $this->assertStringContainsString($user->name . '</textarea>', $html);
+        self::assertStringContainsString($user->name . '</textarea>', $html);
     }
 
-    public function testSetValue()
+    public function testSetValue(): void
     {
         $html = $this->getComponent()->name('name')->value('custom-value')->toHtml();
-        $this->assertStringContainsString('>custom-value</textarea>', $html);
+        self::assertStringContainsString('>custom-value</textarea>', $html);
     }
 
-    public function testSetZeroValue()
+    public function testSetZeroValue(): void
     {
         $html = $this->getComponent()->name('name')->value(0)->toHtml();
-        $this->assertStringContainsString('>0</textarea>', $html);
+        self::assertStringContainsString('>0</textarea>', $html);
     }
 
-    public function testSetEmptyStringValue()
+    public function testSetEmptyStringValue(): void
     {
         $html = $this->getComponent()->name('name')->value('')->toHtml();
-        $this->assertStringContainsString('></textarea>', $html);
+        self::assertStringContainsString('></textarea>', $html);
     }
 
-    public function testSetNullValue()
+    public function testSetNullValue(): void
     {
         $html = $this->getComponent()->name('name')->value(null)->toHtml();
-        $this->assertStringContainsString('></textarea>', $html);
+        self::assertStringContainsString('></textarea>', $html);
     }
 
-    public function testSetValueFromClosureWithDisabledMultilingual()
+    public function testSetValueFromClosureWithDisabledMultilingual(): void
     {
         $html = $this->getComponent()->name('name')->value(function ($locale) {
             return 'closure-value-' . $locale;
         })->toHtml();
-        $this->assertStringContainsString('closure-value-' . app()->getLocale() . '</textarea>', $html);
+        self::assertStringContainsString('closure-value-' . app()->getLocale() . '</textarea>', $html);
     }
 
-    public function testOldValue()
+    public function testOldValue(): void
     {
         $oldValue = 'old-value';
         $value = 'custom-value';
@@ -64,11 +64,11 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
         ]);
         $this->call('GET', 'test');
         $html = $this->getComponent()->name('name')->value($value)->toHtml();
-        $this->assertStringContainsString($oldValue . '</textarea>', $html);
-        $this->assertStringNotContainsString($value . '</textarea>', $html);
+        self::assertStringContainsString($oldValue . '</textarea>', $html);
+        self::assertStringNotContainsString($value . '</textarea>', $html);
     }
 
-    public function testOldArrayValue()
+    public function testOldArrayValue(): void
     {
         $oldValue = 'old-value';
         $value = 'custom-value';
@@ -80,11 +80,11 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
         ]);
         $this->call('GET', 'test');
         $html = $this->getComponent()->name('name[0]')->value($value)->toHtml();
-        $this->assertStringContainsString($oldValue . '</textarea>', $html);
-        $this->assertStringNotContainsString($value . '</textarea>', $html);
+        self::assertStringContainsString($oldValue . '</textarea>', $html);
+        self::assertStringNotContainsString($value . '</textarea>', $html);
     }
 
-    public function testSetCustomLabelPositionedAbove()
+    public function testSetCustomLabelPositionedAbove(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -93,10 +93,10 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
         $html = $this->getComponent()->name('name')->toHtml();
         $labelPosition = strrpos($html, '<label for="');
         $inputPosition = strrpos($html, '<textarea');
-        $this->assertLessThan($labelPosition, $inputPosition);
+        self::assertLessThan($labelPosition, $inputPosition);
     }
 
-    public function testSetLabelPositionedAboveOverridesDefault()
+    public function testSetLabelPositionedAboveOverridesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -105,39 +105,39 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
         $html = $this->getComponent()->name('name')->labelPositionedAbove()->toHtml();
         $labelPosition = strrpos($html, '<label for="');
         $inputPosition = strrpos($html, '<textarea');
-        $this->assertLessThan($inputPosition, $labelPosition);
+        self::assertLessThan($inputPosition, $labelPosition);
     }
 
-    public function testDefaultComponentId()
+    public function testDefaultComponentId(): void
     {
         $html = $this->getComponent()->name('name')->toHtml();
-        $this->assertStringContainsString(' for="' . $this->getComponentType() . '-name"', $html);
-        $this->assertStringContainsString('<textarea id="' . $this->getComponentType() . '-name"', $html);
+        self::assertStringContainsString(' for="' . $this->getComponentType() . '-name"', $html);
+        self::assertStringContainsString('<textarea id="' . $this->getComponentType() . '-name"', $html);
     }
 
-    public function testDefaultComponentIdWithArrayName()
+    public function testDefaultComponentIdWithArrayName(): void
     {
         $html = $this->getComponent()->name('name[0]')->toHtml();
-        $this->assertStringContainsString(' for="' . $this->getComponentType() . '-name-0"', $html);
-        $this->assertStringContainsString('<textarea id="' . $this->getComponentType() . '-name-0"', $html);
+        self::assertStringContainsString(' for="' . $this->getComponentType() . '-name-0"', $html);
+        self::assertStringContainsString('<textarea id="' . $this->getComponentType() . '-name-0"', $html);
     }
 
-    public function testDefaultComponentIdFormatting()
+    public function testDefaultComponentIdFormatting(): void
     {
         $html = $this->getComponent()->name('camelCaseName')->toHtml();
-        $this->assertStringContainsString(' for="' . $this->getComponentType() . '-camel-case-name"', $html);
-        $this->assertStringContainsString('<textarea id="' . $this->getComponentType() . '-camel-case-name"', $html);
+        self::assertStringContainsString(' for="' . $this->getComponentType() . '-camel-case-name"', $html);
+        self::assertStringContainsString('<textarea id="' . $this->getComponentType() . '-camel-case-name"', $html);
     }
 
-    public function testSetComponentId()
+    public function testSetComponentId(): void
     {
         $customComponentId = 'custom-component-id';
         $html = $this->getComponent()->name('name')->componentId($customComponentId)->toHtml();
-        $this->assertStringContainsString(' for="' . $customComponentId . '"', $html);
-        $this->assertStringContainsString('<textarea id="' . $customComponentId . '"', $html);
+        self::assertStringContainsString(' for="' . $customComponentId . '"', $html);
+        self::assertStringContainsString('<textarea id="' . $customComponentId . '"', $html);
     }
 
-    public function testLocalizedModelValue()
+    public function testLocalizedModelValue(): void
     {
         $locales = ['fr', 'en'];
         $name = [];
@@ -147,22 +147,22 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
         $user = new User(['name' => $name]);
         $html = $this->getComponent()->model($user)->name('name')->locales($locales)->toHtml();
         foreach ($locales as $locale) {
-            $this->assertStringContainsString($user->name[$locale] . '</textarea>', $html);
+            self::assertStringContainsString($user->name[$locale] . '</textarea>', $html);
         }
     }
 
-    public function testLocalizedModelValueFromCustomMultilingualResolver()
+    public function testLocalizedModelValueFromCustomMultilingualResolver(): void
     {
         $user = new User(['name_fr' => $this->faker->word, 'name_en' => $this->faker->word]);
         config()->set('bootstrap-components.form.multilingualResolver', Resolver::class);
-        $resolverLocales = (new Resolver)->getDefaultLocales();
+        $resolverLocales = (new Resolver())->getDefaultLocales();
         $html = $this->getComponent()->model($user)->name('name')->toHtml();
         foreach ($resolverLocales as $resolverLocale) {
-            $this->assertStringContainsString($user->{'name_' . $resolverLocale} . '</textarea>', $html);
+            self::assertStringContainsString($user->{'name_' . $resolverLocale} . '</textarea>', $html);
         }
     }
 
-    public function testSetLocalizedValue()
+    public function testSetLocalizedValue(): void
     {
         $locales = ['fr', 'en'];
         $values = [];
@@ -177,11 +177,11 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
             })
             ->toHtml();
         foreach ($locales as $locale) {
-            $this->assertStringContainsString($values[$locale] . '</textarea>', $html);
+            self::assertStringContainsString($values[$locale] . '</textarea>', $html);
         }
     }
 
-    public function testLocalizedOldValue()
+    public function testLocalizedOldValue(): void
     {
         $locales = ['fr', 'en'];
         $oldValues = [];
@@ -201,15 +201,15 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
             return $values . '-' . $locale;
         })->toHtml();
         foreach ($locales as $locale) {
-            $this->assertStringContainsString($oldValues[$locale] . '</textarea>', $html);
-            $this->assertStringNotContainsString($values[$locale] . '</textarea>', $html);
+            self::assertStringContainsString($oldValues[$locale] . '</textarea>', $html);
+            self::assertStringNotContainsString($values[$locale] . '</textarea>', $html);
         }
     }
 
-    public function testLocalizedOldValueFromCustomMultilingualResolver()
+    public function testLocalizedOldValueFromCustomMultilingualResolver(): void
     {
         config()->set('bootstrap-components.form.multilingualResolver', Resolver::class);
-        $resolverLocales = (new Resolver)->getDefaultLocales();
+        $resolverLocales = (new Resolver())->getDefaultLocales();
         $oldValues = [];
         foreach ($resolverLocales as $resolverLocale) {
             $oldValues['name_' . $resolverLocale] = 'old-value-' . $resolverLocale;
@@ -230,21 +230,21 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
             return $values[$locale];
         })->toHtml();
         foreach ($resolverLocales as $resolverLocale) {
-            $this->assertStringContainsString($oldValues['name_' . $resolverLocale] . '</textarea>', $html);
+            self::assertStringContainsString($oldValues['name_' . $resolverLocale] . '</textarea>', $html);
         }
         foreach ($locales as $locale) {
-            $this->assertStringNotContainsString($values[$locale] . '</textarea>', $html);
+            self::assertStringNotContainsString($values[$locale] . '</textarea>', $html);
         }
     }
 
-    public function testSetLocalizedComponentId()
+    public function testSetLocalizedComponentId(): void
     {
         $locales = ['fr', 'en'];
         $customComponentId = 'test-custom-component-id';
         $html = $this->getComponent()->name('name')->componentId($customComponentId)->locales($locales)->toHtml();
         foreach ($locales as $locale) {
-            $this->assertStringContainsString(' for="' . $customComponentId . '-' . $locale . '"', $html);
-            $this->assertStringContainsString('<textarea id="' . $customComponentId . '-' . $locale . '"', $html);
+            self::assertStringContainsString(' for="' . $customComponentId . '-' . $locale . '"', $html);
+            self::assertStringContainsString('<textarea id="' . $customComponentId . '-' . $locale . '"', $html);
         }
     }
 }

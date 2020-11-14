@@ -1,4 +1,4 @@
-<div{{ htmlAttributes($containerId ? ['id' => $containerId] : null) }}{{ classTag('component-container', $containerClasses) }}{{ htmlAttributes($containerHtmlAttributes) }}>
+<div{{ html_attributes($containerId ? ['id' => $containerId] : null) }}{{ html_classes('component-container', $containerClasses) }}{{ html_attributes($containerHtmlAttributes) }}>
 @if($labelPositionedAbove)
     @include('bootstrap-components::bootstrap-components.partials.label')
 @endif
@@ -6,7 +6,7 @@
     <div class="input-group">
 @endif
         @include('bootstrap-components::bootstrap-components.partials.prepend')
-        <input id="{{ $componentId }}"{{ classTag('component', 'form-control', $componentClasses, $validationClass) }} type="{{ $type }}" name="{{ $name }}" value="{{ old($name, $value) }}"{{ htmlAttributes($placeholder ? ['placeholder' => $placeholder] : null, $componentHtmlAttributes) }}>
+        <input id="{{ $componentId }}"{{ html_classes('component', 'form-control', $componentClasses, $validationClass) }} type="{{ $type }}" name="{{ $name }}" value="{{ old($name, $value) }}"{{ html_attributes($placeholder ? ['placeholder' => $placeholder] : null, $componentHtmlAttributes) }}>
         @include('bootstrap-components::bootstrap-components.partials.append')
         @include('bootstrap-components::bootstrap-components.partials.validation-feedback')
 @if(! empty($prepend) || ! empty($append))

@@ -4,7 +4,7 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
 use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
 use Okipa\LaravelBootstrapComponents\Facades\InputFile;
-use Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents\CustomFile;
+use Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents\CustomInputFile;
 use Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts\InputFileTestAbstract;
 
 class InputFileTest extends InputFileTestAbstract
@@ -26,7 +26,7 @@ class InputFileTest extends InputFileTestAbstract
 
     protected function getCustomComponent(): ComponentAbstract
     {
-        return (new CustomFile);
+        return (new CustomInputFile());
     }
 
     protected function getComponentType(): string

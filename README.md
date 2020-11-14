@@ -1,14 +1,23 @@
-# Ready-to-use and customizable components.
+![Laravel Bootstrap Components](/docs/laravel-bootstrap-components.png)
+<p align="center">
+    <a href="https://github.com/Okipa/laravel-bootstrap-components/releases" title="Latest Stable Version">
+        <img src="https://img.shields.io/github/release/Okipa/laravel-bootstrap-components.svg?style=flat-square" alt="Latest Stable Version">
+    </a>
+    <a href="https://packagist.org/packages/Okipa/laravel-bootstrap-components" title="Total Downloads">
+        <img src="https://img.shields.io/packagist/dt/okipa/laravel-bootstrap-components.svg?style=flat-square" alt="Total Downloads">
+    </a>
+    <a href="https://github.com/Okipa/laravel-bootstrap-components/actions" title="Build Status">
+        <img src="https://github.com/Okipa/laravel-bootstrap-components/workflows/CI/badge.svg" alt="Build Status">
+    </a>
+    <a href="https://coveralls.io/github/Okipa/laravel-bootstrap-components?branch=master" title="Coverage Status">
+        <img src="https://coveralls.io/repos/github/Okipa/laravel-bootstrap-components/badge.svg?branch=master" alt="Coverage Status">
+    </a>
+    <a href="https://img.shields.io/badge/License-MIT-blue.svg" title="License: MIT">
+        <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT">
+    </a>
+</p>
 
-[![Source Code](https://img.shields.io/badge/source-okipa/laravel--bootstrap--components-blue.svg)](https://github.com/Okipa/laravel-bootstrap-components)
-[![Latest Version](https://img.shields.io/github/release/okipa/laravel-bootstrap-components.svg?style=flat-square)](https://github.com/Okipa/laravel-bootstrap-components/releases)
-[![Total Downloads](https://img.shields.io/packagist/dt/okipa/laravel-bootstrap-components.svg?style=flat-square)](https://packagist.org/packages/okipa/laravel-bootstrap-components)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Build status](https://github.com/Okipa/laravel-bootstrap-components/workflows/CI/badge.svg)](https://github.com/Okipa/laravel-bootstrap-components/actions)
-[![Coverage Status](https://coveralls.io/repos/github/Okipa/laravel-bootstrap-components/badge.svg?branch=master)](https://coveralls.io/github/Okipa/laravel-bootstrap-components?branch=master)
-[![Quality Score](https://img.shields.io/scrutinizer/g/Okipa/laravel-bootstrap-components.svg?style=flat-square)](https://scrutinizer-ci.com/g/Okipa/laravel-bootstrap-components/?branch=master)
-
-Save time and take advantage of an extended set of ready-to-use and fully customizable bootstrap components.
+Save time and take advantage of an extended set of ready-to-use and fully customizable bootstrap form components.
 
 You feel like there is a missing component ? Feel free to open an issue or submit a fully tested and documented PR.
 
@@ -16,12 +25,14 @@ You feel like there is a missing component ? Feel free to open an issue or submi
 
 | Laravel | PHP | Bootstrap | Package |
 |---|---|---|---|
+| ^7.0 | ^7.4 | ^4.0 | ^4.0 |
 | ^7.0 | ^7.4 | ^4.0 | ^3.0 |
 | ^5.8 | ^7.2 | ^4.0 | ^2.0 |
 | ^5.5 | ^7.1 | ^4.0 | ^1.0 |
 
 ## Upgrade guide
 
+* [From V3 to V4](/docs/upgrade-guides/from-v3-to-v4.md)
 * [From V1 to V2](/docs/upgrade-guides/from-v1-to-v2.md)
 
 ## Usage
@@ -33,10 +44,10 @@ Just call the components you need in your views and let this package take care o
 Call this component in your view:
 
 ```blade
-{{-- helper style --}}
+{{-- Helper style --}}
 {{ inputText()->name('name') }}
 
-{{-- facade style --}}
+{{-- Facade style --}}
 {{ InputText::name('name') }}
 ```
 
@@ -124,7 +135,6 @@ And get this HTML generated for you:
 * [Configuration](#configuration)
 * [Translations](#translations)
 * [Views](#views)
-* [Styles](#styles)
 * [API documentation](#api-documentation)
 * [Testing](#testing)
 * [Changelog](#changelog)
@@ -136,7 +146,7 @@ And get this HTML generated for you:
 
 * Install the package with composer:
 ```bash
-composer require "okipa/laravel-bootstrap-components:^2.0"
+composer require okipa/laravel-bootstrap-components
 ```
 
 ## Configuration
@@ -179,18 +189,6 @@ Publish the package views to customize them if necessary:
 ```bash
 php artisan vendor:publish --tag=bootstrap-components:views
 ```
-
-## Styles
-
-You will have to load the package styles to use the following extra components (not provided by bootstrap):
-
-* `inputToggle()`
-
-Load the package `scss` from the following path and override the declared variables in the `resources/styles/scss/_variables.scss` file if needed.
-
-```scss
-@import '/path/to/composer/vendor/okipa/laravel-bootstrap-components/resources/styles/scss/bootstrap-components';
-``` 
 
 ## API documentation
 

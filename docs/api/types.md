@@ -211,7 +211,7 @@
 **Components**
 
 * [Input checkbox](./components.md#input-checkbox)
-* [Input toggle](./components.md#input-toggle)
+* [Input switch](./components.md#input-switch)
 * [Input radio](./components.md#input-radio)
 
 ## SelectableAbstract

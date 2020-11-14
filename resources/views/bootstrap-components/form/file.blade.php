@@ -1,4 +1,4 @@
-<div{{ htmlAttributes($containerId ? ['id' => $containerId] : null) }}{{ classTag('component-container', $containerClasses) }}{{ htmlAttributes($containerHtmlAttributes) }}>
+<div{{ html_attributes($containerId ? ['id' => $containerId] : null) }}{{ html_classes('component-container', $containerClasses) }}{{ html_attributes($containerHtmlAttributes) }}>
     @if($labelPositionedAbove)
         @include('bootstrap-components::bootstrap-components.partials.label')
     @endif
@@ -13,7 +13,7 @@
     @endif
         @include('bootstrap-components::bootstrap-components.partials.prepend')
         <div class="custom-file">
-            <input id="{{ $componentId }}"{{ classTag('component', 'form-control', 'custom-file-input', $componentClasses, $validationClass) }} type="{{ $type }}" name="{{ $name }}"{{ htmlAttributes($componentHtmlAttributes) }}>
+            <input id="{{ $componentId }}"{{ html_classes('component', 'form-control', 'custom-file-input', $componentClasses, $validationClass) }} type="{{ $type }}" name="{{ $name }}"{{ html_attributes($componentHtmlAttributes) }}>
             @if(($value = old($name, $value)) || $placeholder)
                 <label class="custom-file-label" for="{{ $componentId }}">@if(isset($value) && $value !== ''){{ $value }}@else{{ $placeholder }}@endempty</label>
             @endif

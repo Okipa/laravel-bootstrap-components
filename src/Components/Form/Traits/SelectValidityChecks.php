@@ -6,10 +6,6 @@ use InvalidArgumentException;
 
 trait SelectValidityChecks
 {
-    /**
-     * @throws \Exception
-     * @throws \InvalidArgumentException
-     */
     protected function checkValuesValidity(): void
     {
         parent::checkValuesValidity();
@@ -28,11 +24,6 @@ trait SelectValidityChecks
         }
     }
 
-    /**
-     * @param array $option
-     *
-     * @throws \InvalidArgumentException
-     */
     protected function checkOptionValueFieldExistence(array $option): void
     {
         if (empty($option[$this->optionValueField])) {
@@ -43,11 +34,6 @@ trait SelectValidityChecks
         }
     }
 
-    /**
-     * @param array $option
-     *
-     * @throws \InvalidArgumentException
-     */
     protected function checkOptionLabelFieldExistence(array $option): void
     {
         if (empty($option[$this->optionLabelField])) {
@@ -58,11 +44,6 @@ trait SelectValidityChecks
         }
     }
 
-    /**
-     * @param array $option
-     *
-     * @throws \InvalidArgumentException
-     */
     protected function checkSelectedFieldToCompareExistenceInOption(array $option): void
     {
         if ($this->selectedFieldToCompare && empty($option[$this->selectedFieldToCompare])) {
@@ -74,7 +55,6 @@ trait SelectValidityChecks
         }
     }
 
-    /** @throws \InvalidArgumentException */
     protected function checkMultipleModeModelAttributeType(): void
     {
         if ($this->model && isset($this->model->{$this->getName()}) && ! is_array($this->model->{$this->getName()})) {
@@ -87,7 +67,6 @@ trait SelectValidityChecks
         }
     }
 
-    /** @throws \InvalidArgumentException */
     protected function checkMultipleModeSelectedValueToCompareType(): void
     {
         if ($this->selectedValueToCompare && ! is_array($this->selectedValueToCompare)) {
@@ -99,12 +78,13 @@ trait SelectValidityChecks
         }
     }
 
-    /** @throws \InvalidArgumentException */
     protected function checkSingleModeSelectedValueToCompareType(): void
     {
-        if ($this->selectedValueToCompare
+        if (
+            $this->selectedValueToCompare
             && ! is_string($this->selectedValueToCompare)
-            && ! is_integer($this->selectedValueToCompare)) {
+            && ! is_integer($this->selectedValueToCompare)
+        ) {
             throw new InvalidArgumentException(
                 get_class($this) . ' : Invalid selected() second $valueToCompare argument. '
                 . 'This argument has to be a string or an integer when the select() component is not '

@@ -15,7 +15,7 @@ abstract class CheckableAbstract extends FormAbstract
 
     protected function setLabelPositionedAbove(): bool
     {
-        return true; // unused for checkable components
+        return true; // Unused for checkable components.
     }
 
     protected function getComponentHtmlAttributes(): array
@@ -26,10 +26,7 @@ abstract class CheckableAbstract extends FormAbstract
     protected function getChecked(): bool
     {
         $old = old($this->convertArrayNameInNotation());
-        if (isset($old)) {
-            return $old;
-        }
 
-        return $this->checked ?? boolval(optional($this->model)->{$this->getName()} ?: $this->value);
+        return $old ?? $this->checked ?? (bool) (optional($this->model)->{$this->getName()} ?: $this->value);
     }
 }

@@ -4,7 +4,7 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form;
 
 use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
 use Okipa\LaravelBootstrapComponents\Facades\InputTel;
-use Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents\CustomTel;
+use Okipa\LaravelBootstrapComponents\Tests\Dummy\CustomComponents\CustomInputTel;
 use Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts\InputTestAbstract;
 
 class InputTelTest extends InputTestAbstract
@@ -26,7 +26,7 @@ class InputTelTest extends InputTestAbstract
 
     protected function getCustomComponent(): ComponentAbstract
     {
-        return (new CustomTel);
+        return (new CustomInputTel());
     }
 
     protected function getComponentType(): string

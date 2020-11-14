@@ -6,167 +6,167 @@ use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\CheckableAbstract
 
 abstract class InputCheckableTestAbstract extends InputTestAbstract
 {
-    public function testInstance()
+    public function testInstance(): void
     {
-        $this->assertInstanceOf(CheckableAbstract::class, $this->getComponent());
+        self::assertInstanceOf(CheckableAbstract::class, $this->getComponent());
     }
 
-    public function testType()
+    public function testType(): void
     {
         $html = $this->getComponent()->name('name')->toHtml();
-        $this->assertStringContainsString(' type="checkbox"', $html);
+        self::assertStringContainsString(' type="checkbox"', $html);
     }
 
-    public function testModelValue()
+    public function testModelValue(): void
     {
         $user = $this->createUniqueUser();
         $html = $this->getComponent()->model($user)->name('active')->toHtml();
-        $this->assertStringContainsString(' checked="checked"', $html);
+        self::assertStringContainsString(' checked="checked"', $html);
     }
 
-    public function testSetCustomPrepend()
+    public function testSetCustomPrepend(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->toHtml();
-        $this->assertStringContainsString('<span class="label-prepend">default-prepend</span>', $html);
+        self::assertStringContainsString('<span class="label-prepend">default-prepend</span>', $html);
     }
 
-    public function testSetPrependOverridesDefault()
+    public function testSetPrependOverridesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->prepend('custom-prepend')->toHtml();
-        $this->assertStringContainsString('<span class="label-prepend">custom-prepend</span>', $html);
-        $this->assertStringNotContainsString('<span class="label-prepend">default-prepend</span>', $html);
+        self::assertStringContainsString('<span class="label-prepend">custom-prepend</span>', $html);
+        self::assertStringNotContainsString('<span class="label-prepend">default-prepend</span>', $html);
     }
 
-    public function testSetPrependFromClosureWithDisabledMultilingual()
+    public function testSetPrependFromClosureWithDisabledMultilingual(): void
     {
         $html = $this->getComponent()->name('name')->prepend(function ($locale) {
             return 'prepend-' . $locale;
         })->toHtml();
-        $this->assertStringContainsString('<span class="label-prepend">prepend-en</span>', $html);
+        self::assertStringContainsString('<span class="label-prepend">prepend-en</span>', $html);
     }
 
-    public function testHidePrepend()
+    public function testHidePrepend(): void
     {
         $html = $this->getComponent()->name('name')->prepend(null)->toHtml();
-        $this->assertStringNotContainsString('<div class="label-prepend">', $html);
+        self::assertStringNotContainsString('<div class="label-prepend">', $html);
     }
 
-    public function testSetCustomAppend()
+    public function testSetCustomAppend(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->toHtml();
-        $this->assertStringContainsString('<span class="label-append">default-append</span>', $html);
+        self::assertStringContainsString('<span class="label-append">default-append</span>', $html);
     }
 
-    public function testSetAppendOverridesDefault()
+    public function testSetAppendOverridesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->append('custom-append')->toHtml();
-        $this->assertStringContainsString('<span class="label-append">custom-append</span>', $html);
-        $this->assertStringNotContainsString('<span class="label-append">default-append</span>', $html);
+        self::assertStringContainsString('<span class="label-append">custom-append</span>', $html);
+        self::assertStringNotContainsString('<span class="label-append">default-append</span>', $html);
     }
 
-    public function testSetAppendFromClosureWithDisabledMultilingual()
+    public function testSetAppendFromClosureWithDisabledMultilingual(): void
     {
         $html = $this->getComponent()->name('name')->append(function ($locale) {
             return 'append-' . $locale;
         })->toHtml();
-        $this->assertStringContainsString('<span class="label-append">append-en</span>', $html);
+        self::assertStringContainsString('<span class="label-append">append-en</span>', $html);
     }
 
-    public function testHideAppend()
+    public function testHideAppend(): void
     {
         $html = $this->getComponent()->name('name')->append(null)->toHtml();
-        $this->assertStringNotContainsString('<div class="label-append">', $html);
+        self::assertStringNotContainsString('<div class="label-append">', $html);
     }
 
-    public function testHidePrependHideAppend()
+    public function testHidePrependHideAppend(): void
     {
         $html = $this->getComponent()->name('name')->prepend(null)->append(null)->toHtml();
-        $this->assertStringNotContainsString('<div class="label-prepend">', $html);
-        $this->assertStringNotContainsString('<div class="label-append">', $html);
+        self::assertStringNotContainsString('<div class="label-prepend">', $html);
+        self::assertStringNotContainsString('<div class="label-append">', $html);
     }
 
-    public function testSetChecked()
+    public function testSetChecked(): void
     {
         $user = null;
         $html = $this->getComponent()->model($user)->name('active')->checked()->toHtml();
-        $this->assertStringContainsString('checked="checked"', $html);
+        self::assertStringContainsString('checked="checked"', $html);
     }
 
-    public function testSetCheckedOverridesModelValue()
+    public function testSetCheckedOverridesModelValue(): void
     {
         $user = $this->createUniqueUser();
         $html = $this->getComponent()->model($user)->name('active')->checked(false)->toHtml();
-        $this->assertStringNotContainsString('checked="checked"', $html);
+        self::assertStringNotContainsString('checked="checked"', $html);
     }
 
-    public function testDefaultCheckStatus()
+    public function testDefaultCheckStatus(): void
     {
         $html = $this->getComponent()->name('active')->toHtml();
-        $this->assertStringNotContainsString('checked="checked', $html);
+        self::assertStringNotContainsString('checked="checked', $html);
     }
 
-    public function testSetValue()
+    public function testSetValue(): void
     {
         $html = $this->getComponent()->name('active')->value(true)->toHtml();
-        $this->assertStringContainsString('checked="checked', $html);
+        self::assertStringContainsString('checked="checked', $html);
     }
 
-    public function testSetZeroValue()
+    public function testSetZeroValue(): void
     {
         $html = $this->getComponent()->name('name')->value(0)->toHtml();
-        $this->assertStringNotContainsString('checked="checked', $html);
+        self::assertStringNotContainsString('checked="checked', $html);
     }
 
-    public function testSetEmptyStringValue()
+    public function testSetEmptyStringValue(): void
     {
         $html = $this->getComponent()->name('name')->value('')->toHtml();
-        $this->assertStringNotContainsString('checked="checked', $html);
+        self::assertStringNotContainsString('checked="checked', $html);
     }
 
-    public function testSetNullValue()
+    public function testSetNullValue(): void
     {
         $html = $this->getComponent()->name('name')->value(null)->toHtml();
-        $this->assertStringNotContainsString('checked="checked', $html);
+        self::assertStringNotContainsString('checked="checked', $html);
     }
 
-    public function testSetValueFromClosureWithDisabledMultilingual()
+    public function testSetValueFromClosureWithDisabledMultilingual(): void
     {
         $html = $this->getComponent()->name('name')->value(function () {
             return true;
         })->toHtml();
-        $this->assertStringContainsString('checked="checked', $html);
+        self::assertStringContainsString('checked="checked', $html);
     }
 
-    public function testSetValueNotChecked()
+    public function testSetValueNotChecked(): void
     {
         $html = $this->getComponent()->name('active')->value(false)->toHtml();
-        $this->assertStringNotContainsString('checked="checked', $html);
+        self::assertStringNotContainsString('checked="checked', $html);
     }
 
-    public function testSetValueOverridesModelValue()
+    public function testSetValueOverridesModelValue(): void
     {
         $user = $this->createUniqueUser();
         $html = $this->getComponent()->model($user)->name('active')->value(false)->toHtml();
-        $this->assertStringContainsString('checked="checked', $html);
+        self::assertStringContainsString('checked="checked', $html);
     }
 
-    public function testOldValue()
+    public function testOldValue(): void
     {
         $oldValue = true;
         $value = false;
@@ -178,10 +178,10 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         ]);
         $this->call('GET', 'test');
         $html = $this->getComponent()->name('active')->value($value)->toHtml();
-        $this->assertStringContainsString('checked="checked', $html);
+        self::assertStringContainsString('checked="checked', $html);
     }
 
-    public function testOldArrayValue()
+    public function testOldArrayValue(): void
     {
         $oldValue = true;
         $value = false;
@@ -193,10 +193,10 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         ]);
         $this->call('GET', 'test');
         $html = $this->getComponent()->name('active[0]')->value($value)->toHtml();
-        $this->assertStringContainsString('checked="checked', $html);
+        self::assertStringContainsString('checked="checked', $html);
     }
 
-    public function testOldValueNotChecked()
+    public function testOldValueNotChecked(): void
     {
         $oldValue = false;
         $value = true;
@@ -208,133 +208,133 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         ]);
         $this->call('GET', 'test');
         $html = $this->getComponent()->name('active')->value($value)->toHtml();
-        $this->assertStringNotContainsString('checked="checked', $html);
+        self::assertStringNotContainsString('checked="checked', $html);
     }
 
-    public function testSetLabel()
+    public function testSetLabel(): void
     {
         $html = $this->getComponent()->name('active')->label('custom-label')->toHtml();
-        $this->assertStringContainsString(
+        self::assertStringContainsString(
             ' for="' . $this->getComponentType() . '-active">custom-label</label>',
             $html
         );
     }
 
-    public function testNoLabel()
+    public function testNoLabel(): void
     {
         $html = $this->getComponent()->name('active')->toHtml();
-        $this->assertStringContainsString(' for="' . $this->getComponentType() . '-active">'
+        self::assertStringContainsString(' for="' . $this->getComponentType() . '-active">'
             . 'validation.attributes.active</label>', $html);
     }
 
-    public function testHideLabel()
+    public function testHideLabel(): void
     {
         $html = $this->getComponent()->name('active')->label(null)->toHtml();
-        $this->assertStringNotContainsString(' for="' . $this->getComponentType() . '-active">'
+        self::assertStringNotContainsString(' for="' . $this->getComponentType() . '-active">'
             . 'validation.attributes.active</label>', $html);
     }
 
-    public function testSetCustomLabelPositionedAbove()
+    public function testSetCustomLabelPositionedAbove(): void
     {
-        $this->markTestSkipped();
+        self::markTestSkipped();
     }
 
-    public function testSetLabelPositionedAboveOverridesDefault()
+    public function testSetLabelPositionedAboveOverridesDefault(): void
     {
-        $this->markTestSkipped();
+        self::markTestSkipped();
     }
 
-    public function testDefaultPlaceholder()
+    public function testDefaultPlaceholder(): void
     {
-        $this->markTestSkipped();
+        self::markTestSkipped();
     }
 
-    public function testDefaultPlaceholderWithArrayName()
+    public function testDefaultPlaceholderWithArrayName(): void
     {
-        $this->markTestSkipped();
+        self::markTestSkipped();
     }
 
-    public function testSetPlaceholder()
+    public function testSetPlaceholder(): void
     {
-        $this->markTestSkipped();
+        self::markTestSkipped();
     }
 
-    public function testSetTranslatedPlaceholder()
+    public function testSetTranslatedPlaceholder(): void
     {
-        $this->markTestSkipped();
+        self::markTestSkipped();
     }
 
-    public function testSetPlaceholderWithLabel()
+    public function testSetPlaceholderWithLabel(): void
     {
-        $this->markTestSkipped();
+        self::markTestSkipped();
     }
 
-    public function testNoPlaceholderWithLabel()
+    public function testNoPlaceholderWithLabel(): void
     {
-        $this->markTestSkipped();
+        self::markTestSkipped();
     }
 
-    public function testNoPlaceholderWithNoLabel()
+    public function testNoPlaceholderWithNoLabel(): void
     {
-        $this->markTestSkipped();
+        self::markTestSkipped();
     }
 
-    public function testHidePlaceholder()
+    public function testHidePlaceholder(): void
     {
-        $this->markTestSkipped();
+        self::markTestSkipped();
     }
 
-    public function testSetCustomContainerClasses()
+    public function testSetCustomContainerClasses(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->toHtml();
-        $this->assertStringContainsString(
+        self::assertStringContainsString(
             'class="component-container custom-control custom-' . $this->getComponentType()
             . ' default container classes"',
             $html
         );
     }
 
-    public function testSetContainerClassesOverridesDefault()
+    public function testSetContainerClassesOverridesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->containerClasses(['custom', 'container', 'classes'])->toHtml();
-        $this->assertStringContainsString(
+        self::assertStringContainsString(
             'class="component-container custom-control custom-' . $this->getComponentType()
             . ' custom container classes"',
             $html
         );
-        $this->assertStringNotContainsString(
+        self::assertStringNotContainsString(
             'class="component-container custom-control custom-' . $this->getComponentType()
             . ' default container classes"',
             $html
         );
     }
 
-    public function testSetCustomComponentClasses()
+    public function testSetCustomComponentClasses(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->toHtml();
-        $this->assertStringContainsString('class="component custom-control-input default component classes"', $html);
+        self::assertStringContainsString('class="component custom-control-input default component classes"', $html);
     }
 
-    public function testSetComponentClassesOverridesDefault()
+    public function testSetComponentClassesOverridesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->componentClasses(['custom', 'component', 'classes'])->toHtml();
-        $this->assertStringContainsString('class="component custom-control-input custom component classes"', $html);
-        $this->assertStringNotContainsString('class="component custom-control-input default component classes"', $html);
+        self::assertStringContainsString('class="component custom-control-input custom component classes"', $html);
+        self::assertStringNotContainsString('class="component custom-control-input default component classes"', $html);
     }
 }

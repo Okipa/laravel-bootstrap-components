@@ -36,6 +36,6 @@ class ValidateTest extends SubmitTestAbstract
 
     protected function getCustomComponent(): ComponentAbstract
     {
-        return (new CustomSubmit);
+        return (new CustomSubmit());
     }
 }

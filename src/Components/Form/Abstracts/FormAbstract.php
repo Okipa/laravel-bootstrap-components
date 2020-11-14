@@ -192,7 +192,7 @@ abstract class FormAbstract extends ComponentAbstract
     {
         $prepend = $this->prepend;
 
-        // fallback for usage of closure with multilingual disabled
+        // Fallback for usage of closure with multilingual disabled.
         return $prepend instanceof Closure ? $prepend(app()->getLocale()) : $prepend;
     }
 
@@ -202,7 +202,7 @@ abstract class FormAbstract extends ComponentAbstract
     {
         $append = $this->append;
 
-        // fallback for usage of closure with multilingual disabled
+        // Fallback for usage of closure with multilingual disabled.
         return $append instanceof Closure ? $append(app()->getLocale()) : $append;
     }
 
@@ -237,7 +237,7 @@ abstract class FormAbstract extends ComponentAbstract
     protected function getValue()
     {
         $value = old($this->convertArrayNameInNotation()) ?: $this->value;
-        // fallback for usage of closure with multilingual disabled
+        // Fallback for usage of closure with multilingual disabled.
         $value = $value instanceof Closure ? $value(app()->getLocale()) : $value;
 
         return $value ?? optional($this->getModel())->{$this->convertArrayNameInNotation()};

@@ -31,6 +31,6 @@ class ImageTest extends ImageTestAbstract
 
     protected function getCustomComponent(): ComponentAbstract
     {
-        return (new CustomImage);
+        return (new CustomImage());
     }
 }
