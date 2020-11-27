@@ -12,14 +12,17 @@
     <a href="https://coveralls.io/github/Okipa/laravel-bootstrap-components?branch=master" title="Coverage Status">
         <img src="https://coveralls.io/repos/github/Okipa/laravel-bootstrap-components/badge.svg?branch=master" alt="Coverage Status">
     </a>
-    <a href="https://img.shields.io/badge/License-MIT-blue.svg" title="License: MIT">
+    <a href="/LICENSE.md" title="License: MIT">
         <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT">
     </a>
 </p>
 
 Save time and take advantage of an extended set of ready-to-use and fully customizable bootstrap form components.
 
-You feel like there is a missing component ? Feel free to open an issue or submit a fully tested and documented PR.
+Found this package helpful? Please consider supporting my work!
+
+[![Donate](https://img.shields.io/badge/Buy_me_a-Ko--fi-ff5f5f.svg)](https://ko-fi.com/arthurlorent)
+[![Donate](https://img.shields.io/badge/Donate_on-PayPal-green.svg)](https://paypal.me/arthurlorent)
 
 ## Compatibility
 
