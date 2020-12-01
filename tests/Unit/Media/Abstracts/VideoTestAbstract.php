@@ -14,7 +14,7 @@ abstract class VideoTestAbstract extends MediaTestAbstract
         self::assertStringContainsString('poster="default-poster"', $html);
     }
 
-    public function testSetPosterOverridesDefault()
+    public function testSetPosterReplacesDefault()
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),

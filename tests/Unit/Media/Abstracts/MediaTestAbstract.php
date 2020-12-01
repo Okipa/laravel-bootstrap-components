@@ -63,7 +63,7 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
         return $this->getComponentType();
     }
 
-    public function testSetCaptionOverridesDefault()
+    public function testSetCaptionReplacesDefault()
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -135,7 +135,7 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('class="component-container default container classes"', $html);
     }
 
-    public function testSetContainerClassesOverridesDefault()
+    public function testSetContainerClassesReplacesDefault()
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -156,7 +156,7 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('class="component default component classes"', $html);
     }
 
-    public function testSetComponentClassesOverridesDefault()
+    public function testSetComponentClassesReplacesDefault()
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -180,7 +180,7 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
         );
     }
 
-    public function testSetContainerHtmlAttributesOverridesDefault()
+    public function testSetContainerHtmlAttributesReplacesDefault()
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -203,7 +203,7 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('default="component" html="attributes">', $html);
     }
 
-    public function testSetComponentHtmlAttributesOverridesDefault()
+    public function testSetComponentHtmlAttributesReplacesDefault()
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),

@@ -578,7 +578,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         self::assertLessThan($labelPosition, $inputPosition);
     }
 
-    public function testSetLabelPositionedAboveOverridesDefault(): void
+    public function testSetLabelPositionedAboveReplacesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -700,14 +700,29 @@ abstract class SelectTestAbstract extends InputTestAbstract
         self::assertStringContainsString('class="component custom-select default component classes"', $html);
     }
 
-    public function testSetComponentClassesOverridesDefault(): void
+    public function testSetComponentClassesMergedToDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()->name('name')->componentClasses(['custom', 'component', 'classes'])->toHtml();
+        $html = $this->getComponent()->name('name')->componentClasses(['with', 'merged'])->toHtml();
+        self::assertStringContainsString(
+            'class="component custom-select default component classes with merged"',
+            $html
+        );
+    }
+
+    public function testSetComponentClassesReplacesDefault(): void
+    {
+        config()->set(
+            'bootstrap-components.components.' . $this->getComponentKey(),
+            get_class($this->getCustomComponent())
+        );
+        $html = $this->getComponent()
+            ->name('name')
+            ->componentClasses(['custom', 'component', 'classes'], true)
+            ->toHtml();
         self::assertStringContainsString('class="component custom-select custom component classes"', $html);
-        self::assertStringNotContainsString('class="component custom-select default component classes"', $html);
     }
 }

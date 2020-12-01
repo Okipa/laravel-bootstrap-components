@@ -27,23 +27,9 @@ abstract class ComponentAbstract implements Htmlable
         $this->type = $this->setType();
         $this->view = $this->setView();
         $this->componentClasses = $this->setComponentClasses();
-        $this->componentHtmlAttributes = $this->setComponentHtmlAttributes();
         $this->containerClasses = $this->setContainerClasses();
+        $this->componentHtmlAttributes = $this->setComponentHtmlAttributes();
         $this->containerHtmlAttributes = $this->setContainerHtmlAttributes();
-    }
-
-    public function componentId(string $componentId): self
-    {
-        $this->componentId = $componentId;
-
-        return $this;
-    }
-
-    public function componentClasses(array $componentClasses): self
-    {
-        $this->componentClasses = $componentClasses;
-
-        return $this;
     }
 
     public function containerId(string $containerId): self
@@ -53,30 +39,45 @@ abstract class ComponentAbstract implements Htmlable
         return $this;
     }
 
-    /**
-     * Set the component container classes.
-     *
-     * @param array $containerClasses
-     *
-     * @return $this
-     */
-    public function containerClasses(array $containerClasses): self
+    public function componentId(string $componentId): self
     {
-        $this->containerClasses = $containerClasses;
+        $this->componentId = $componentId;
 
         return $this;
     }
 
-    public function componentHtmlAttributes(array $componentHtmlAttributes): self
+    public function componentClasses(array $componentClasses, bool $replace = false): self
     {
-        $this->componentHtmlAttributes = $componentHtmlAttributes;
+        $this->componentClasses = $replace
+            ? $componentClasses
+            : array_merge($this->componentClasses, $componentClasses);
 
         return $this;
     }
 
-    public function containerHtmlAttributes(array $containerHtmlAttributes): self
+    public function containerClasses(array $containerClasses, bool $replace = false): self
     {
-        $this->containerHtmlAttributes = $containerHtmlAttributes;
+        $this->containerClasses = $replace
+            ? $containerClasses
+            : array_merge($this->containerClasses, $containerClasses);
+
+        return $this;
+    }
+
+    public function componentHtmlAttributes(array $componentHtmlAttributes, bool $replace = false): self
+    {
+        $this->componentHtmlAttributes = $replace
+            ? $componentHtmlAttributes
+            : array_merge($this->componentHtmlAttributes, $componentHtmlAttributes);
+
+        return $this;
+    }
+
+    public function containerHtmlAttributes(array $containerHtmlAttributes, bool $replace = false): self
+    {
+        $this->containerHtmlAttributes = $replace
+            ? $containerHtmlAttributes
+            : array_merge($this->containerHtmlAttributes, $containerHtmlAttributes);
 
         return $this;
     }

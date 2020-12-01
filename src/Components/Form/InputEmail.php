@@ -48,7 +48,7 @@ class InputEmail extends FormAbstract
 
     protected function setComponentHtmlAttributes(): array
     {
-        return [];
+        return ['autocomplete' => 'on'];
     }
 
     protected function setContainerHtmlAttributes(): array

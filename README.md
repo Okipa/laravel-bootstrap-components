@@ -17,7 +17,7 @@
     </a>
 </p>
 
-Save time and take advantage of an extended set of ready-to-use and fully customizable bootstrap form components.
+Save time and take advantage of a set of dynamical, ready-to-use and fully customizable bootstrap form components.
 
 Found this package helpful? Please consider supporting my work!
 
@@ -82,10 +82,10 @@ And get this HTML generated for you:
 Call this component in your view:
 
 ```blade
-{{-- helper style --}}
+{{-- Helper style --}}
 {{ inputText()->name('title')->localized(['fr', 'en']) }}
 
-{{-- facade style --}}
+{{-- Facade style --}}
 {{ InputText::name('title')->localized(['fr', 'en']) }}
 ```
 

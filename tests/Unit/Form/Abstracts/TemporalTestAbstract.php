@@ -51,7 +51,7 @@ abstract class TemporalTestAbstract extends InputTestAbstract
         self::assertStringContainsString($user->published_at->format('d/m/Y H-i-s'), $html);
     }
 
-    public function testSetFormatOverridesDefault(): void
+    public function testSetFormatReplacesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),

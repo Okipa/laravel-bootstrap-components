@@ -54,7 +54,7 @@ abstract class SubmitTestAbstract extends BootstrapComponentsTestCase
         return $this->getComponentType();
     }
 
-    public function testSetPrependOverridesDefault()
+    public function testSetPrependReplacesDefault()
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -81,7 +81,7 @@ abstract class SubmitTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('<span class="label-append">default-append</span>', $html);
     }
 
-    public function testSetAppendOverridesDefault()
+    public function testSetAppendReplacesDefault()
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -115,7 +115,7 @@ abstract class SubmitTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('<span class="label">default-label</span>', $html);
     }
 
-    public function testSetLabelOverridesDefault()
+    public function testSetLabelReplacesDefault()
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -179,7 +179,7 @@ abstract class SubmitTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('class="component-container default container classes"', $html);
     }
 
-    public function testSetContainerClassesOverridesDefault()
+    public function testSetContainerClassesReplacesDefault()
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -200,7 +200,7 @@ abstract class SubmitTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('class="component btn default component classes"', $html);
     }
 
-    public function testSetComponentClassesOverridesDefault()
+    public function testSetComponentClassesReplacesDefault()
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -224,7 +224,7 @@ abstract class SubmitTestAbstract extends BootstrapComponentsTestCase
         );
     }
 
-    public function testSetContainerHtmlAttributesOverridesDefault()
+    public function testSetContainerHtmlAttributesReplacesDefault()
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -247,7 +247,7 @@ abstract class SubmitTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('default="component" html="attributes">', $html);
     }
 
-    public function testSetComponentHtmlAttributesOverridesDefault()
+    public function testSetComponentHtmlAttributesReplacesDefault()
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),

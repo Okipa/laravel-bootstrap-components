@@ -40,7 +40,7 @@ abstract class ImageTestAbstract extends MediaTestAbstract
         self::assertStringContainsString('title="custom-label"', $html);
     }
 
-    public function testSetLinkTitleOverridesDefault()
+    public function testSetLinkTitleReplacesDefault()
     {
         $html = image()->label('custom-label')
             ->linkTitle('custom-title')
@@ -73,7 +73,7 @@ abstract class ImageTestAbstract extends MediaTestAbstract
         self::assertStringContainsString('alt="custom-label"', $html);
     }
 
-    public function testSetAltOverridesDefault()
+    public function testSetAltReplacesDefault()
     {
         $html = image()->label('custom-label')->linkTitle('custom-title')->alt('custom-alt')->toHtml();
         self::assertStringContainsString('alt="custom-alt"', $html);
@@ -126,7 +126,7 @@ abstract class ImageTestAbstract extends MediaTestAbstract
         self::assertStringContainsString('class="component-link default link classes"', $html);
     }
 
-    public function testSetLinkClassesOverridesDefault()
+    public function testSetLinkClassesReplacesDefault()
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -147,7 +147,7 @@ abstract class ImageTestAbstract extends MediaTestAbstract
         self::assertStringContainsString('default="link" html="attributes">', $html);
     }
 
-    public function testSetLinkHtmlAttributesOverridesDefault()
+    public function testSetLinkHtmlAttributesReplacesDefault()
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),

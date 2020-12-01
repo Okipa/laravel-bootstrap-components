@@ -61,6 +61,7 @@
 
 * Prepend : `<i class="fas fa-at"></i>`
 * Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Component HTML attributes: `autocomplete="on"`
 * Container classes : : `form-group`
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
@@ -77,6 +78,7 @@
 
 * Prepend : `<i class="fas fa-user-secret"></i>`
 * Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Component HTML attributes: `autocomplete="on"`
 * Container classes : : `form-group`
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
@@ -109,6 +111,7 @@
 
 * Prepend : `<i class="fas fa-phone"></i>`
 * Label positioned above : `config('bootstrap-components.form.labelPositionedAbove')`
+* Component HTML attributes: `autocomplete="on"`
 * Container classes : : `form-group`
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`

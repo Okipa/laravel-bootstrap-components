@@ -24,7 +24,7 @@ abstract class ButtonTestAbstract extends SubmitTestAbstract
         self::assertStringContainsString('href="default-url"', $html);
     }
 
-    public function testSetUrlOverridesDefault()
+    public function testSetUrlReplacesDefault()
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -55,7 +55,7 @@ abstract class ButtonTestAbstract extends SubmitTestAbstract
         self::assertStringContainsString('<span class="label">default-label</span>', $html);
     }
 
-    public function testSetLabelOverridesDefault()
+    public function testSetLabelReplacesDefault()
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -110,7 +110,7 @@ abstract class ButtonTestAbstract extends SubmitTestAbstract
         self::assertStringContainsString('class="component-container default container classes"', $html);
     }
 
-    public function testSetContainerClassesOverridesDefault()
+    public function testSetContainerClassesReplacesDefault()
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -131,7 +131,7 @@ abstract class ButtonTestAbstract extends SubmitTestAbstract
         self::assertStringContainsString('class="component btn default component classes"', $html);
     }
 
-    public function testSetComponentClassesOverridesDefault()
+    public function testSetComponentClassesReplacesDefault()
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),

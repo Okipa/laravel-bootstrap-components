@@ -21,21 +21,21 @@
 |---|---|---|
 | containerId(string $containerId): self | No | Set the component container id. |
 | componentId(string $componentId): self | No | Set the component id. |
-| containerClasses(array $containerClasses): self | No | Set the component container classes. |
-| componentClasses(array $componentClasses): self | No | Set the component classes. |
-| containerHtmlAttributes(array $containerHtmlAttributes): self | No | Set the component container HTML attributes. |
-| componentHtmlAttributes(array $componentHtmlAttributes): self | No | Set the component HTML attributes. |
+| componentClasses(array $componentClasses): self | No | Set the component classes. The given classes will be merged to component default ones. You can activate the replacing mode by setting the second argument to `true`. |
+| containerClasses(array $containerClasses): self | No | Set the component container classes. The given classes will be merged to component default ones. You can activate the replacing mode by setting the second argument to `true`. |
+| componentHtmlAttributes(array $componentHtmlAttributes): self | No | Set the component HTML attributes. The given HTML attributes will be merged to component default ones. You can activate the replacing mode by setting the second argument to `true`. |
+| containerHtmlAttributes(array $containerHtmlAttributes): self | No | Set the component container HTML attributes. The given HTML attributes will be merged to component default ones. You can activate the replacing mode by setting the second argument to `true`. |
 
 **Usage**
 
 ```php
 <ComponentAbstract>
-    ->containerId('container-id')
     ->componentId('component-id')
-    ->containerClasses(['container', 'classes'])
+    ->containerId('container-id')
     ->componentClasses(['component', 'classes'])
-    ->containerHtmlAttributes(['container', 'html', 'attributes'])
+    ->containerClasses(['container', 'classes'])
     ->componentHtmlAttributes(['component', 'html', 'attributes']);
+    ->containerHtmlAttributes(['container', 'html', 'attributes'])
 ```
 
 ## FormAbstract

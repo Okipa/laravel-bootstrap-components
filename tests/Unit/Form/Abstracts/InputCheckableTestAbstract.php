@@ -34,7 +34,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         self::assertStringContainsString('<span class="label-prepend">default-prepend</span>', $html);
     }
 
-    public function testSetPrependOverridesDefault(): void
+    public function testSetPrependReplacesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -69,7 +69,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         self::assertStringContainsString('<span class="label-append">default-append</span>', $html);
     }
 
-    public function testSetAppendOverridesDefault(): void
+    public function testSetAppendReplacesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -239,7 +239,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         self::markTestSkipped();
     }
 
-    public function testSetLabelPositionedAboveOverridesDefault(): void
+    public function testSetLabelPositionedAboveReplacesDefault(): void
     {
         self::markTestSkipped();
     }
@@ -298,21 +298,33 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetContainerClassesOverridesDefault(): void
+    public function testSetContainerClassesMergedToDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()->name('name')->containerClasses(['custom', 'container', 'classes'])->toHtml();
+        $html = $this->getComponent()->name('name')->containerClasses(['with', 'merged'])->toHtml();
+        self::assertStringContainsString(
+            'class="component-container custom-control custom-' . $this->getComponentType()
+            . ' default container classes with merged"',
+            $html
+        );
+    }
+
+    public function testSetContainerClassesReplacesDefault(): void
+    {
+        config()->set(
+            'bootstrap-components.components.' . $this->getComponentKey(),
+            get_class($this->getCustomComponent())
+        );
+        $html = $this->getComponent()
+            ->name('name')
+            ->containerClasses(['custom', 'container', 'classes'], true)
+            ->toHtml();
         self::assertStringContainsString(
             'class="component-container custom-control custom-' . $this->getComponentType()
             . ' custom container classes"',
-            $html
-        );
-        self::assertStringNotContainsString(
-            'class="component-container custom-control custom-' . $this->getComponentType()
-            . ' default container classes"',
             $html
         );
     }
@@ -327,14 +339,29 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         self::assertStringContainsString('class="component custom-control-input default component classes"', $html);
     }
 
-    public function testSetComponentClassesOverridesDefault(): void
+    public function testSetComponentClassesMergedToDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()->name('name')->componentClasses(['custom', 'component', 'classes'])->toHtml();
+        $html = $this->getComponent()->name('name')->componentClasses(['with', 'merged'])->toHtml();
+        self::assertStringContainsString(
+            'class="component custom-control-input default component classes with merged"',
+            $html
+        );
+    }
+
+    public function testSetComponentClassesReplacesDefault(): void
+    {
+        config()->set(
+            'bootstrap-components.components.' . $this->getComponentKey(),
+            get_class($this->getCustomComponent())
+        );
+        $html = $this->getComponent()
+            ->name('name')
+            ->componentClasses(['custom', 'component', 'classes'], true)
+            ->toHtml();
         self::assertStringContainsString('class="component custom-control-input custom component classes"', $html);
-        self::assertStringNotContainsString('class="component custom-control-input default component classes"', $html);
     }
 }

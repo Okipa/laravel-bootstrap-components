@@ -2,12 +2,12 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
-use RuntimeException;
 use Illuminate\Support\MessageBag;
 use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract;
 use Okipa\LaravelBootstrapComponents\Tests\BootstrapComponentsTestCase;
 use Okipa\LaravelBootstrapComponents\Tests\Fakers\UsersFaker;
+use RuntimeException;
 
 abstract class InputTestAbstract extends BootstrapComponentsTestCase
 {
@@ -84,7 +84,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
 
     abstract protected function getCustomComponent(): ComponentAbstract;
 
-    public function testSetPrependOverridesDefault(): void
+    public function testSetPrependReplacesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -125,7 +125,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('<span class="input-group-text">default-append</span>', $html);
     }
 
-    public function testSetAppendOverridesDefault(): void
+    public function testSetAppendReplacesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -172,7 +172,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('class="caption form-text text-muted">default-caption', $html);
     }
 
-    public function testSetCaptionOverridesDefault(): void
+    public function testSetCaptionReplacesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -302,7 +302,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertLessThan($labelPosition, $inputPosition);
     }
 
-    public function testSetLabelPositionedAboveOverridesDefault(): void
+    public function testSetLabelPositionedAboveReplacesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -376,7 +376,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString(__('Field correctly filled.'), $html);
     }
 
-    public function testSetDisplaySuccessOverridesDefault(): void
+    public function testSetDisplaySuccessReplacesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -404,7 +404,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString($errors->first('name'), $html);
     }
 
-    public function testSetDisplayFailureOverridesDefault(): void
+    public function testSetDisplayFailureReplacesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -480,15 +480,31 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('class="component-container default container classes"', $html);
     }
 
-    public function testSetContainerClassesOverridesDefault(): void
+    public function testSetContainerClassesMergedToDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()->name('name')->containerClasses(['custom', 'container', 'classes'])->toHtml();
+        $html = $this->getComponent()->name('name')->containerClasses(['with', 'merged'])->toHtml();
+        self::assertStringContainsString(
+            'class="component-container default container classes with merged"',
+            $html
+        );
+        self::assertStringNotContainsString('class="component-container default container classes"', $html);
+    }
+
+    public function testSetContainerClassesReplacesDefault(): void
+    {
+        config()->set(
+            'bootstrap-components.components.' . $this->getComponentKey(),
+            get_class($this->getCustomComponent())
+        );
+        $html = $this->getComponent()
+            ->name('name')
+            ->containerClasses(['custom', 'container', 'classes'], true)
+            ->toHtml();
         self::assertStringContainsString('class="component-container custom container classes"', $html);
-        self::assertStringNotContainsString('class="component-container form-group default container classes"', $html);
     }
 
     public function testSetCustomComponentClasses(): void
@@ -501,15 +517,27 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('class="component form-control default component classes"', $html);
     }
 
-    public function testSetComponentClassesOverridesDefault(): void
+    public function testSetComponentClassesMergedToDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()->name('name')->componentClasses(['custom', 'component', 'classes'])->toHtml();
+        $html = $this->getComponent()->name('name')->componentClasses(['with', 'merged'])->toHtml();
+        self::assertStringContainsString('class="component form-control default component classes with merged"', $html);
+    }
+
+    public function testSetComponentClassesReplacesDefault(): void
+    {
+        config()->set(
+            'bootstrap-components.components.' . $this->getComponentKey(),
+            get_class($this->getCustomComponent())
+        );
+        $html = $this->getComponent()
+            ->name('name')
+            ->componentClasses(['custom', 'component', 'classes'], true)
+            ->toHtml();
         self::assertStringContainsString('class="component form-control custom component classes"', $html);
-        self::assertStringNotContainsString('class="component form-control default component classes"', $html);
     }
 
     public function testSetCustomContainerHtmlAttributes(): void
@@ -519,13 +547,10 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->name('name')->toHtml();
-        self::assertStringContainsString(
-            'default="container" html="attributes">',
-            $html
-        );
+        self::assertStringContainsString('default="container" html="attributes">', $html);
     }
 
-    public function testSetContainerHtmlAttributesOverridesDefault(): void
+    public function testSetContainerHtmlAttributesMergedToDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -533,10 +558,22 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         );
         $html = $this->getComponent()
             ->name('name')
-            ->containerHtmlAttributes(['custom' => 'container', 'html' => 'attributes'])
+            ->containerHtmlAttributes(['with' => 'merged'])
+            ->toHtml();
+        self::assertStringContainsString('default="container" html="attributes" with="merged">', $html);
+    }
+
+    public function testSetContainerHtmlAttributesReplacesDefault(): void
+    {
+        config()->set(
+            'bootstrap-components.components.' . $this->getComponentKey(),
+            get_class($this->getCustomComponent())
+        );
+        $html = $this->getComponent()
+            ->name('name')
+            ->containerHtmlAttributes(['custom' => 'container', 'html' => 'attributes'], true)
             ->toHtml();
         self::assertStringContainsString('custom="container" html="attributes">', $html);
-        self::assertStringNotContainsString('default="container" html="attributes">', $html);
     }
 
     public function testSetCustomComponentHtmlAttributes(): void
@@ -549,7 +586,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('default="component" html="attributes">', $html);
     }
 
-    public function testSetComponentHtmlAttributesOverridesDefault(): void
+    public function testSetComponentHtmlAttributesMergedToDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -557,9 +594,21 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         );
         $html = $this->getComponent()->name('name')
             ->value(null)
-            ->componentHtmlAttributes(['custom' => 'component', 'html' => 'attributes'])
+            ->componentHtmlAttributes(['with' => 'merged'])
+            ->toHtml();
+        self::assertStringContainsString('default="component" html="attributes" with="merged">', $html);
+    }
+
+    public function testSetComponentHtmlAttributesReplacesDefault(): void
+    {
+        config()->set(
+            'bootstrap-components.components.' . $this->getComponentKey(),
+            get_class($this->getCustomComponent())
+        );
+        $html = $this->getComponent()->name('name')
+            ->value(null)
+            ->componentHtmlAttributes(['custom' => 'component', 'html' => 'attributes'], true)
             ->toHtml();
         self::assertStringContainsString('custom="component" html="attributes">', $html);
-        self::assertStringNotContainsString('default="component" html="attributes">', $html);
     }
 }

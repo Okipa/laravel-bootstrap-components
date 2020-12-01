@@ -181,19 +181,31 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetComponentClassesOverridesDefault(): void
+    public function testSetComponentClassesMergedToDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()->name('name')->componentClasses(['custom', 'component', 'classes'])->toHtml();
+        $html = $this->getComponent()->name('name')->componentClasses(['with', 'merged'])->toHtml();
         self::assertStringContainsString(
-            'class="component form-control custom-file-input custom component classes"',
+            'class="component form-control custom-file-input default component classes with merged"',
             $html
         );
-        self::assertStringNotContainsString(
-            'class="component form-control custom-file-input default component classes"',
+    }
+
+    public function testSetComponentClassesReplacesDefault(): void
+    {
+        config()->set(
+            'bootstrap-components.components.' . $this->getComponentKey(),
+            get_class($this->getCustomComponent())
+        );
+        $html = $this->getComponent()
+            ->name('name')
+            ->componentClasses(['custom', 'component', 'classes'], true)
+            ->toHtml();
+        self::assertStringContainsString(
+            'class="component form-control custom-file-input custom component classes"',
             $html
         );
     }
@@ -228,7 +240,7 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         self::assertStringContainsString(' name="remove_name"', $html);
     }
 
-    public function testSetShowRemoveCheckboxOverridesDefault(): void
+    public function testSetShowRemoveCheckboxReplacesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
