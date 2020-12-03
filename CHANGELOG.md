@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.0.0](https://github.com/Okipa/laravel-bootstrap-components/compare/4.0.0...5.0.0)
+
+2020-12-02
+
+* Method signature changes
+
+:point_right: [See the upgrade guide](/docs/upgrade-guides/from-v4-to-v5.md)
+
 ## [4.0.0](https://github.com/Okipa/laravel-bootstrap-components/compare/3.0.3...4.0.0)
 
 2020-11-14
@@ -39,6 +47,8 @@
 * Added Laravel 8 support
 * Dropped Laravel 5.8 and 6.0 support
 * Dropped PHP 7.2 and 7.3 support
+
+:point_right: [See the upgrade guide](/docs/upgrade-guides/from-v2-to-v3.md)
 
 ## [2.2.3](https://github.com/Okipa/laravel-bootstrap-components/compare/2.2.2...2.2.3)
 

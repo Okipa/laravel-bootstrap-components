@@ -35,7 +35,9 @@ Found this package helpful? Please consider supporting my work!
 
 ## Upgrade guide
 
+* [From V4 to V5](/docs/upgrade-guides/from-v4-to-v5.md)
 * [From V3 to V4](/docs/upgrade-guides/from-v3-to-v4.md)
+* [From V2 to V3](/docs/upgrade-guides/from-v2-to-v3.md)
 * [From V1 to V2](/docs/upgrade-guides/from-v1-to-v2.md)
 
 ## Usage

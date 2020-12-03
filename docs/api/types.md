@@ -21,10 +21,10 @@
 |---|---|---|
 | containerId(string $containerId): self | No | Set the component container id. |
 | componentId(string $componentId): self | No | Set the component id. |
-| componentClasses(array $componentClasses): self | No | Set the component classes. The given classes will be merged to component default ones. You can activate the replacing mode by setting the second argument to `true`. |
-| containerClasses(array $containerClasses): self | No | Set the component container classes. The given classes will be merged to component default ones. You can activate the replacing mode by setting the second argument to `true`. |
-| componentHtmlAttributes(array $componentHtmlAttributes): self | No | Set the component HTML attributes. The given HTML attributes will be merged to component default ones. You can activate the replacing mode by setting the second argument to `true`. |
-| containerHtmlAttributes(array $containerHtmlAttributes): self | No | Set the component container HTML attributes. The given HTML attributes will be merged to component default ones. You can activate the replacing mode by setting the second argument to `true`. |
+| componentClasses(array $componentClasses): self | No | The given HTML classes will replace the component default ones. You can activate the merge mode in order to add the given classes to the default ones by setting the second argument to `true`. |
+| containerClasses(array $containerClasses): self | No | The given HTML classes will replace the component default ones. You can activate the merge mode in order to add the given classes to the default ones by setting the second argument to `true`. |
+| componentHtmlAttributes(array $componentHtmlAttributes): self | No | The given HTML attributes will replace the component default ones. You can activate the merge mode in order to add the given attributes to the default ones by setting the second argument to `true`. |
+| containerHtmlAttributes(array $containerHtmlAttributes): self | No | The given HTML attributes will replace the component default ones. You can activate the merge mode in order to add the given attributes to the default ones by setting the second argument to `true`. |
 
 **Usage**
 

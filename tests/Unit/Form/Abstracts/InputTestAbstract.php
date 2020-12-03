@@ -486,12 +486,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()->name('name')->containerClasses(['with', 'merged'])->toHtml();
-        self::assertStringContainsString(
-            'class="component-container default container classes with merged"',
-            $html
-        );
-        self::assertStringNotContainsString('class="component-container default container classes"', $html);
+        $html = $this->getComponent()->name('name')->containerClasses(['merged'], true)->toHtml();
+        self::assertStringContainsString('class="component-container default container classes merged"', $html);
     }
 
     public function testSetContainerClassesReplacesDefault(): void
@@ -500,11 +496,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()
-            ->name('name')
-            ->containerClasses(['custom', 'container', 'classes'], true)
-            ->toHtml();
-        self::assertStringContainsString('class="component-container custom container classes"', $html);
+        $html = $this->getComponent()->name('name')->containerClasses(['replaced'])->toHtml();
+        self::assertStringContainsString('class="component-container replaced"', $html);
     }
 
     public function testSetCustomComponentClasses(): void
@@ -523,8 +516,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()->name('name')->componentClasses(['with', 'merged'])->toHtml();
-        self::assertStringContainsString('class="component form-control default component classes with merged"', $html);
+        $html = $this->getComponent()->name('name')->componentClasses(['merged'], true)->toHtml();
+        self::assertStringContainsString('class="component form-control default component classes merged"', $html);
     }
 
     public function testSetComponentClassesReplacesDefault(): void
@@ -533,11 +526,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()
-            ->name('name')
-            ->componentClasses(['custom', 'component', 'classes'], true)
-            ->toHtml();
-        self::assertStringContainsString('class="component form-control custom component classes"', $html);
+        $html = $this->getComponent()->name('name')->componentClasses(['replaced'])->toHtml();
+        self::assertStringContainsString('class="component form-control replaced"', $html);
     }
 
     public function testSetCustomContainerHtmlAttributes(): void
@@ -556,10 +546,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()
-            ->name('name')
-            ->containerHtmlAttributes(['with' => 'merged'])
-            ->toHtml();
+        $html = $this->getComponent()->name('name')->containerHtmlAttributes(['with' => 'merged'], true)->toHtml();
         self::assertStringContainsString('default="container" html="attributes" with="merged">', $html);
     }
 
@@ -569,11 +556,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()
-            ->name('name')
-            ->containerHtmlAttributes(['custom' => 'container', 'html' => 'attributes'], true)
-            ->toHtml();
-        self::assertStringContainsString('custom="container" html="attributes">', $html);
+        $html = $this->getComponent()->name('name')->containerHtmlAttributes(['replaces' => 'default'])->toHtml();
+        self::assertStringContainsString('replaces="default">', $html);
     }
 
     public function testSetCustomComponentHtmlAttributes(): void
@@ -592,9 +576,10 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()->name('name')
+        $html = $this->getComponent()
+            ->name('name')
             ->value(null)
-            ->componentHtmlAttributes(['with' => 'merged'])
+            ->componentHtmlAttributes(['with' => 'merged'], true)
             ->toHtml();
         self::assertStringContainsString('default="component" html="attributes" with="merged">', $html);
     }
@@ -605,10 +590,11 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()->name('name')
+        $html = $this->getComponent()
+            ->name('name')
             ->value(null)
-            ->componentHtmlAttributes(['custom' => 'component', 'html' => 'attributes'], true)
+            ->componentHtmlAttributes(['replaces' => 'default'])
             ->toHtml();
-        self::assertStringContainsString('custom="component" html="attributes">', $html);
+        self::assertStringContainsString('replaces="default">', $html);
     }
 }

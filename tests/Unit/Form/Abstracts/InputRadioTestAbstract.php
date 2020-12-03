@@ -277,10 +277,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
     {
         $html = $this->getComponent()->name('camelCaseName')->toHtml();
         self::assertStringContainsString(' for="' . $this->getComponentType() . '-camel-case-name-value"', $html);
-        self::assertStringContainsString(
-            '<input id="' . $this->getComponentType() . '-camel-case-name-value"',
-            $html
-        );
+        self::assertStringContainsString('<input id="' . $this->getComponentType() . '-camel-case-name-value"', $html);
     }
 
     public function testSetCustomContainerClasses(): void
@@ -302,9 +299,9 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()->name('name')->containerClasses(['with', 'merged'])->toHtml();
+        $html = $this->getComponent()->name('name')->containerClasses(['merged'], true)->toHtml();
         self::assertStringContainsString(
-            'class="component-container custom-control custom-checkbox default container classes with merged"',
+            'class="component-container custom-control custom-checkbox default container classes merged"',
             $html
         );
     }
@@ -315,14 +312,8 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()
-            ->name('name')
-            ->containerClasses(['custom', 'container', 'classes'], true)
-            ->toHtml();
-        self::assertStringContainsString(
-            'class="component-container custom-control custom-checkbox custom container classes"',
-            $html
-        );
+        $html = $this->getComponent()->name('name')->containerClasses(['replaced'])->toHtml();
+        self::assertStringContainsString('class="component-container custom-control custom-checkbox replaced"', $html);
     }
 
     public function testSetCustomComponentClasses(): void
@@ -341,9 +332,9 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()->name('name')->componentClasses(['with', 'merged'])->toHtml();
+        $html = $this->getComponent()->name('name')->componentClasses(['merged'], true)->toHtml();
         self::assertStringContainsString(
-            'class="component custom-control-input default component classes with merged"',
+            'class="component custom-control-input default component classes merged"',
             $html
         );
     }
@@ -354,10 +345,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()
-            ->name('name')
-            ->componentClasses(['custom', 'component', 'classes'], true)
-            ->toHtml();
-        self::assertStringContainsString('class="component custom-control-input custom component classes"', $html);
+        $html = $this->getComponent()->name('name')->componentClasses(['replaced'])->toHtml();
+        self::assertStringContainsString('class="component custom-control-input replaced"', $html);
     }
 }

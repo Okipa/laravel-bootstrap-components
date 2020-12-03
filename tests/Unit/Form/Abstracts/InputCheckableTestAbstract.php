@@ -304,10 +304,10 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()->name('name')->containerClasses(['with', 'merged'])->toHtml();
+        $html = $this->getComponent()->name('name')->containerClasses(['merged'], true)->toHtml();
         self::assertStringContainsString(
             'class="component-container custom-control custom-' . $this->getComponentType()
-            . ' default container classes with merged"',
+            . ' default container classes merged"',
             $html
         );
     }
@@ -318,13 +318,9 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()
-            ->name('name')
-            ->containerClasses(['custom', 'container', 'classes'], true)
-            ->toHtml();
+        $html = $this->getComponent()->name('name')->containerClasses(['replaced'])->toHtml();
         self::assertStringContainsString(
-            'class="component-container custom-control custom-' . $this->getComponentType()
-            . ' custom container classes"',
+            'class="component-container custom-control custom-' . $this->getComponentType() . ' replaced"',
             $html
         );
     }
@@ -345,9 +341,9 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()->name('name')->componentClasses(['with', 'merged'])->toHtml();
+        $html = $this->getComponent()->name('name')->componentClasses(['merged'], true)->toHtml();
         self::assertStringContainsString(
-            'class="component custom-control-input default component classes with merged"',
+            'class="component custom-control-input default component classes merged"',
             $html
         );
     }
@@ -358,10 +354,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()
-            ->name('name')
-            ->componentClasses(['custom', 'component', 'classes'], true)
-            ->toHtml();
-        self::assertStringContainsString('class="component custom-control-input custom component classes"', $html);
+        $html = $this->getComponent()->name('name')->componentClasses(['replaced'])->toHtml();
+        self::assertStringContainsString('class="component custom-control-input replaced"', $html);
     }
 }

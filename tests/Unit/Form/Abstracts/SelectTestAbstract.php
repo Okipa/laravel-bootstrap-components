@@ -706,11 +706,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()->name('name')->componentClasses(['with', 'merged'])->toHtml();
-        self::assertStringContainsString(
-            'class="component custom-select default component classes with merged"',
-            $html
-        );
+        $html = $this->getComponent()->name('name')->componentClasses(['merged'], true)->toHtml();
+        self::assertStringContainsString('class="component custom-select default component classes merged"', $html);
     }
 
     public function testSetComponentClassesReplacesDefault(): void
@@ -719,10 +716,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()
-            ->name('name')
-            ->componentClasses(['custom', 'component', 'classes'], true)
-            ->toHtml();
-        self::assertStringContainsString('class="component custom-select custom component classes"', $html);
+        $html = $this->getComponent()->name('name')->componentClasses(['replaced'])->toHtml();
+        self::assertStringContainsString('class="component custom-select replaced"', $html);
     }
 }

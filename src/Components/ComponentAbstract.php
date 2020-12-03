@@ -46,38 +46,38 @@ abstract class ComponentAbstract implements Htmlable
         return $this;
     }
 
-    public function componentClasses(array $componentClasses, bool $replace = false): self
+    public function componentClasses(array $componentClasses, bool $mergeMode = false): self
     {
-        $this->componentClasses = $replace
-            ? $componentClasses
-            : array_merge($this->componentClasses, $componentClasses);
+        $this->componentClasses = $mergeMode
+            ? array_merge($this->componentClasses, $componentClasses)
+            : $componentClasses;
 
         return $this;
     }
 
-    public function containerClasses(array $containerClasses, bool $replace = false): self
+    public function containerClasses(array $containerClasses, bool $mergeMode = false): self
     {
-        $this->containerClasses = $replace
-            ? $containerClasses
-            : array_merge($this->containerClasses, $containerClasses);
+        $this->containerClasses = $mergeMode
+            ? array_merge($this->containerClasses, $containerClasses)
+            : $containerClasses;
 
         return $this;
     }
 
-    public function componentHtmlAttributes(array $componentHtmlAttributes, bool $replace = false): self
+    public function componentHtmlAttributes(array $componentHtmlAttributes, bool $mergeMode = false): self
     {
-        $this->componentHtmlAttributes = $replace
-            ? $componentHtmlAttributes
-            : array_merge($this->componentHtmlAttributes, $componentHtmlAttributes);
+        $this->componentHtmlAttributes = $mergeMode
+            ? array_merge($this->componentHtmlAttributes, $componentHtmlAttributes)
+            : $componentHtmlAttributes;
 
         return $this;
     }
 
-    public function containerHtmlAttributes(array $containerHtmlAttributes, bool $replace = false): self
+    public function containerHtmlAttributes(array $containerHtmlAttributes, bool $mergeMode = false): self
     {
-        $this->containerHtmlAttributes = $replace
-            ? $containerHtmlAttributes
-            : array_merge($this->containerHtmlAttributes, $containerHtmlAttributes);
+        $this->containerHtmlAttributes = $mergeMode
+            ? array_merge($this->containerHtmlAttributes, $containerHtmlAttributes)
+            : $containerHtmlAttributes;
 
         return $this;
     }

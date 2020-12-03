@@ -187,9 +187,9 @@ abstract class InputFileTestAbstract extends InputTestAbstract
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()->name('name')->componentClasses(['with', 'merged'])->toHtml();
+        $html = $this->getComponent()->name('name')->componentClasses(['merged'], true)->toHtml();
         self::assertStringContainsString(
-            'class="component form-control custom-file-input default component classes with merged"',
+            'class="component form-control custom-file-input default component classes merged"',
             $html
         );
     }
@@ -200,14 +200,8 @@ abstract class InputFileTestAbstract extends InputTestAbstract
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()
-            ->name('name')
-            ->componentClasses(['custom', 'component', 'classes'], true)
-            ->toHtml();
-        self::assertStringContainsString(
-            'class="component form-control custom-file-input custom component classes"',
-            $html
-        );
+        $html = $this->getComponent()->name('name')->componentClasses(['replaced'])->toHtml();
+        self::assertStringContainsString('class="component form-control custom-file-input replaced"', $html);
     }
 
     public function testSetUploadedFile(): void
