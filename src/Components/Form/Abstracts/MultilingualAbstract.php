@@ -3,13 +3,11 @@
 namespace Okipa\LaravelBootstrapComponents\Components\Form\Abstracts;
 
 use Closure;
+use Illuminate\Support\ViewErrorBag;
 use Okipa\LaravelBootstrapComponents\Components\Form\Multilingual\Resolver;
-use Okipa\LaravelBootstrapComponents\Components\Form\Traits\MultilingualValidityChecks;
 
 abstract class MultilingualAbstract extends FormAbstract
 {
-    use MultilingualValidityChecks;
-
     protected Resolver $multilingualResolver;
 
     protected array $locales;
@@ -59,7 +57,7 @@ abstract class MultilingualAbstract extends FormAbstract
             $componentHtml = $view
                 ? (string) view(
                     'bootstrap-components::' . $view,
-                    array_merge($this->getLocalizedValues($locale), $extraData)
+                    array_merge($this->getLocalizedViewParams($locale), $extraData)
                 )->render()
                 : '';
             $html .= trim($componentHtml);
@@ -68,44 +66,36 @@ abstract class MultilingualAbstract extends FormAbstract
         return $html;
     }
 
-    protected function getLocalizedValues(string $locale): array
+    protected function getLocalizedViewParams(string $locale): array
     {
-        return array_merge($this->getValues(), $this->getLocalizedParameters($locale));
-    }
-
-    protected function getLocalizedParameters(string $locale): array
-    {
-        $parentParams = $this->getParameters();
-        $componentId = $this->getLocalizedComponentId($locale);
-        $containerId = $this->getLocalizedContainerId($locale);
-        $componentHtmlAttributes = $this->getLocalizedComponentHtmlAttributes($locale);
-        $name = $this->getLocalizedName($locale);
-        $prepend = $this->getLocalizedPrepend($locale);
-        $append = $this->getLocalizedAppend($locale);
-        $label = $this->getLocalizedLabel($locale);
-        $value = $this->getLocalizedValue($locale);
-        $placeholder = $this->getLocalizedPlaceholder($locale);
-        $validationClass = $this->getLocalizedValidationClass($locale);
-        $errorMessage = $this->getLocalizedErrorMessage($locale);
-
-        return array_merge($parentParams, compact(
-            'componentId',
-            'containerId',
-            'componentHtmlAttributes',
-            'name',
-            'prepend',
-            'append',
-            'label',
-            'value',
-            'placeholder',
-            'validationClass',
-            'errorMessage'
-        ));
-    }
-
-    protected function getLocalizedComponentId(string $locale): string
-    {
-        return $this->getComponentId() . '-' . $locale;
+        return [
+            'component' => $this,
+            'locale' => $locale,
+            'containerId' => $this->getLocalizedContainerId($locale),
+            'containerClasses' => $this->getContainerClasses(),
+            'containerHtmlAttributes' => $this->getContainerHtmlAttributes(),
+            'componentId' => $this->getLocalizedComponentId($locale),
+            'componentClasses' => $this->getComponentClasses(),
+            'componentHtmlAttributes' => $this->getLocalizedComponentHtmlAttributes($locale),
+            'validationClass' => fn(
+                ?ViewErrorBag $errors,
+                ?string $locale
+            ) => $this->getLocalizedValidationClass($errors, $locale),
+            'errorMessage' => fn(
+                ?ViewErrorBag $errors,
+                ?string $locale
+            ) => $this->getLocalizedErrorMessage($errors, $locale),
+            'successMessage' => fn() => $this->getSuccessMessage(),
+            'labelPositionedAbove' => $this->getLabelPositionedAbove(),
+            'label' => $this->getLocalizedLabel($locale),
+            'type' => $this->getType(),
+            'name' => $this->getLocalizedName($locale),
+            'value' => $this->getLocalizedValue($locale),
+            'placeholder' => $this->getLocalizedPlaceholder($locale),
+            'prepend' => $this->getLocalizedPrepend($locale),
+            'append' => $this->getLocalizedAppend($locale),
+            'caption' => $this->getCaption(),
+        ];
     }
 
     protected function getLocalizedContainerId(string $locale): ?string
@@ -113,30 +103,42 @@ abstract class MultilingualAbstract extends FormAbstract
         return $this->getContainerId() ? $this->getContainerId() . '-' . $locale : null;
     }
 
+    protected function getLocalizedComponentId(string $locale): string
+    {
+        return $this->getComponentId() . '-' . $locale;
+    }
+
     protected function getLocalizedComponentHtmlAttributes(string $locale): array
     {
         return array_merge(['data-locale' => $locale], $this->getComponentHtmlAttributes());
     }
 
-    protected function getLocalizedName(string $locale): string
+    protected function getLocalizedValidationClass(?ViewErrorBag $errors, string $locale): ?string
     {
-        return $this->multilingualResolver->resolveLocalizedName($this->getName(), $locale);
+        if (! $errors) {
+            return null;
+        }
+        if ($errors->isEmpty()) {
+            return null;
+        }
+        if ($errors->has($this->multilingualResolver->resolveErrorMessageBagKey($this->getName(), $locale))) {
+            return $this->getDisplayFailure() ? 'is-invalid' : null;
+        }
+
+        // Only highlight valid fields if there are invalid fields.
+        return $this->getDisplaySuccess() ? 'is-valid' : null;
     }
 
-    protected function getLocalizedPrepend(string $locale): ?string
+    protected function getLocalizedErrorMessage(?ViewErrorBag $errors, string $locale): ?string
     {
-        $prepend = $this->prepend;
+        if (! $errors) {
+            return null;
+        }
+        if (! $this->getDisplayFailure()) {
+            return null;
+        }
 
-        // fallback for usage of closure with multilingual disabled
-        return $prepend instanceof Closure ? $prepend($locale) : $prepend;
-    }
-
-    protected function getLocalizedAppend(string $locale): ?string
-    {
-        $append = $this->append;
-
-        // fallback for usage of closure with multilingual disabled
-        return $append instanceof Closure ? $append($locale) : $append;
+        return $this->multilingualResolver->resolveErrorMessage($this->getName(), $errors, $locale);
     }
 
     protected function getLocalizedLabel(string $locale): ?string
@@ -146,18 +148,30 @@ abstract class MultilingualAbstract extends FormAbstract
         return $label ? $label . ' (' . mb_strtoupper($locale) . ')' : null;
     }
 
+    protected function getLocalizedName(string $locale): string
+    {
+        return $this->multilingualResolver->resolveLocalizedName($this->getName(), $locale);
+    }
+
     protected function getLocalizedValue(string $locale)
     {
-        $oldValue = $this->multilingualResolver->resolveLocalizedOldValue($this->getName(), $locale);
-        /** @var Closure|null $valueClosure */
-        $valueClosure = $this->multilingualMode() ? $this->value : null;
-        $modelValue = $this->multilingualResolver->resolveLocalizedModelValue(
+        $oldLocalizedValue = $this->multilingualResolver->resolveLocalizedOldValue($this->getName(), $locale);
+        if ($oldLocalizedValue) {
+            return $oldLocalizedValue;
+        }
+        if ($this->value instanceof Closure) {
+            return ($this->value)($locale);
+        }
+        $localizedValue = $this->multilingualResolver->resolveLocalizedModelValue(
             $this->getName(),
             $locale,
             $this->getModel()
         );
+        if ($localizedValue) {
+            return $localizedValue;
+        }
 
-        return $oldValue ?? ($valueClosure ? $valueClosure($locale) : $modelValue);
+        return $this->getValue();
     }
 
     protected function getLocalizedPlaceholder(string $locale): ?string
@@ -167,21 +181,21 @@ abstract class MultilingualAbstract extends FormAbstract
         return $placeholder ? $placeholder . ' (' . mb_strtoupper($locale) . ')' : null;
     }
 
-    protected function getLocalizedValidationClass(string $locale): ?string
+    protected function getLocalizedPrepend(string $locale): ?string
     {
-        if (session()->has('errors')) {
-            $errorMessageBagKey = $this->multilingualResolver->resolveErrorMessageBagKey($this->getName(), $locale);
-
-            return session()->get('errors')->has($errorMessageBagKey)
-                ? ($this->getDisplayFailure() ? 'is-invalid' : null)
-                : ($this->getDisplaySuccess() ? 'is-valid' : null);
+        if ($this->prepend instanceof Closure) {
+            return ($this->prepend)($locale);
         }
 
-        return null;
+        return $this->getPrepend();
     }
 
-    protected function getLocalizedErrorMessage(string $locale): ?string
+    protected function getLocalizedAppend(string $locale): ?string
     {
-        return $this->multilingualResolver->resolveErrorMessage(parent::getName(), $locale);
+        if ($this->append instanceof Closure) {
+            return ($this->append)($locale);
+        }
+
+        return $this->getAppend();
     }
 }

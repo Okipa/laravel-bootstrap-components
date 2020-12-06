@@ -73,38 +73,28 @@ abstract class InputFileTestAbstract extends InputTestAbstract
 
     public function testOldValue(): void
     {
-        $oldValue = 'old-value';
-        $value = 'custom-value';
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                $request = request()->merge(['name' => $oldValue]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => 'old-value'])->flash(),
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('name')->value($value)->toHtml();
+        $html = $this->getComponent()->name('name')->value('custom-value')->toHtml();
         self::assertStringContainsString('<label class="custom-file-label" for="' . $this->getComponentType()
-            . '-name">' . $oldValue . '</label>', $html);
+            . '-name">old-value</label>', $html);
         self::assertStringNotContainsString('<label class="custom-file-label" for="' . $this->getComponentType()
-            . '-name">' . $value . '</label>', $html);
+            . '-name">custom-value</label>', $html);
     }
 
     public function testOldArrayValue(): void
     {
-        $oldValue = 'old-value';
-        $value = 'custom-value';
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                $request = request()->merge(['name' => [0 => $oldValue]]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => [0 => 'old-value']])->flash(),
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('name[0]')->value($value)->toHtml();
+        $html = $this->getComponent()->name('name[0]')->value('custom-value')->toHtml();
         self::assertStringContainsString('<label class="custom-file-label" for="' . $this->getComponentType()
-            . '-name-0">' . $oldValue . '</label>', $html);
+            . '-name-0">old-value</label>', $html);
         self::assertStringNotContainsString('<label class="custom-file-label" for="' . $this->getComponentType()
-            . '-name-0">' . $value . '</label>', $html);
+            . '-name-0">custom-value</label>', $html);
     }
 
     public function testDefaultPlaceholder(): void
@@ -158,7 +148,6 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         self::assertStringContainsString('<label class="custom-file-label" for="' . $this->getComponentType()
             . '-name">' . __('No file selected.') . '</label>', $html);
     }
-
 
     public function testHidePlaceholder(): void
     {

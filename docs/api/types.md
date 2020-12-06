@@ -120,15 +120,9 @@
 <MultilingualAbstract>
     // inherits FormAbstract methods
     ->locales(['fr', 'en'])
-    ->value(function(string $locale){
-        return $name[$locale];
-    });
-    ->prepend(function(string $locale){
-        return 'prepend-' . $locale;
-    })
-    ->append(function(string $locale){
-        return 'append-' . $locale;
-    }) 
+    ->value(fn(string $locale) => $name[$locale]);
+    ->prepend(fn(string $locale) => 'prepend-' . $locale)
+    ->append(fn(string $locale) => 'append-' . $locale) 
 ```
 
 **Components**
@@ -176,9 +170,7 @@
 ```php
 <UploadableAbstract>
     // inherits FormAbstract methods
-    ->uploadedFile(function(){
-        return '<div>Some HTML</div>';
-    })
+    ->uploadedFile(fn() => '<div>Some HTML</div>')
     ->showRemoveCheckbox(true, 'Remove this file');
 ```
 
@@ -242,9 +234,7 @@
     ]), 'id', 'title')
     ->selected('id', 1)
     // or ->selected('id', [1]) in multiple mode
-    ->disabled(function(array $option){
-        return ! $option['active'];
-    })
+    ->disabled(fn(array $option) => ! $option['active'])
     ->multiple();
 ```
 

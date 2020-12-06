@@ -35,12 +35,12 @@ abstract class UploadableAbstract extends FormAbstract
         return $this;
     }
 
-    protected function getValues(): array
+    protected function getViewParams(): array
     {
-        return array_merge(parent::getValues(), [
+        return array_merge(parent::getViewParams(), [
             'uploadedFileHtml' => $this->getUploadedFileHtml(),
             'showRemoveCheckbox' => $this->getShowRemoveCheckbox(),
-            'removeCheckboxLabel' => $this->getRemoveCheckboxLabel(parent::getValues()['label']),
+            'removeCheckboxLabel' => $this->getRemoveCheckboxLabel(parent::getViewParams()['label']),
             'removeCheckboxName' => $this->getShowRemoveCheckboxName(),
         ]);
     }

@@ -3,8 +3,8 @@
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
 use Carbon\Carbon;
-use RuntimeException;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\TemporalAbstract;
+use RuntimeException;
 
 abstract class TemporalTestAbstract extends InputTestAbstract
 {
@@ -115,10 +115,7 @@ abstract class TemporalTestAbstract extends InputTestAbstract
         $oldValue = $this->faker->dateTime->format($this->getFormat());
         $value = $this->faker->dateTime->format($this->getFormat());
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                $request = request()->merge(['name' => $oldValue]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => $oldValue])->flash(),
         ]);
         $this->call('GET', 'test');
         $html = $this->getComponent()->name('name')->value($value)->toHtml();
@@ -131,10 +128,7 @@ abstract class TemporalTestAbstract extends InputTestAbstract
         $oldValue = $this->faker->dateTime->format($this->getFormat());
         $value = $this->faker->dateTime->format($this->getFormat());
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                $request = request()->merge(['name' => [0 => $oldValue]]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => [0 => $oldValue]])->flash(),
         ]);
         $this->call('GET', 'test');
         $html = $this->getComponent()->name('name[0]')->value($value)->toHtml();

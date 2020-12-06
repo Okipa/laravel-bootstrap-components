@@ -3,6 +3,7 @@
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
 use Illuminate\Support\MessageBag;
+use Illuminate\Support\ViewErrorBag;
 use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract;
 use Okipa\LaravelBootstrapComponents\Tests\BootstrapComponentsTestCase;
@@ -223,34 +224,24 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
 
     public function testOldValue(): void
     {
-        $oldValue = 'old-value';
-        $value = 'custom-value';
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                $request = request()->merge(['name' => $oldValue]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => 'old-value'])->flash(),
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('name')->value($value)->toHtml();
-        self::assertStringContainsString(' value="' . $oldValue . '"', $html);
-        self::assertStringNotContainsString(' value="' . $value . '"', $html);
+        $html = $this->getComponent()->name('name')->value('custom-value')->toHtml();
+        self::assertStringContainsString(' value="old-value"', $html);
+        self::assertStringNotContainsString(' value="custom-value"', $html);
     }
 
     public function testOldArrayValue(): void
     {
-        $oldValue = 'old-value';
-        $value = 'custom-value';
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                $request = request()->merge(['name' => [0 => $oldValue]]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => ['old-value']])->flash(),
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('name[0]')->value($value)->toHtml();
-        self::assertStringContainsString(' value="' . $oldValue . '"', $html);
-        self::assertStringNotContainsString(' value="' . $value . '"', $html);
+        $html = $this->getComponent()->name('name[0]')->value('custom-value')->toHtml();
+        self::assertStringContainsString(' value="old-value"', $html);
+        self::assertStringNotContainsString(' value="custom-value"', $html);
     }
 
     public function testSetLabel(): void
@@ -368,8 +359,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $errors = app(MessageBag::class)->add('other_name', 'Dummy error message.');
-        session()->put('errors', $errors);
+        $messageBag = app(MessageBag::class)->add('other_name', 'Dummy error message.');
+        $errors = app(ViewErrorBag::class)->put('default', $messageBag);
         $html = $this->getComponent()->name('name')->render(compact('errors'));
         self::assertStringContainsString('is-valid', $html);
         self::assertStringContainsString('<div class="valid-feedback d-block">', $html);
@@ -382,8 +373,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $errors = app(MessageBag::class)->add('other_name', 'Dummy error message.');
-        session()->put('errors', $errors);
+        $messageBag = app(MessageBag::class)->add('other_name', 'Dummy error message.');
+        $errors = app(ViewErrorBag::class)->put('default', $messageBag);
         $html = $this->getComponent()->name('name')->displaySuccess(false)->render(compact('errors'));
         self::assertStringNotContainsString('is-valid', $html);
         self::assertStringNotContainsString('<div class="valid-feedback d-block">', $html);
@@ -396,8 +387,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $errors = app(MessageBag::class)->add('name', 'Dummy error message.');
-        session()->put('errors', $errors);
+        $messageBag = app(MessageBag::class)->add('name', 'Dummy error message.');
+        $errors = app(ViewErrorBag::class)->put('default', $messageBag);
         $html = $this->getComponent()->name('name')->render(compact('errors'));
         self::assertStringContainsString('is-invalid', $html);
         self::assertStringContainsString('<div class="invalid-feedback d-block">', $html);
@@ -410,8 +401,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $errors = app(MessageBag::class)->add('name', 'Dummy error message.');
-        session()->put('errors', $errors);
+        $messageBag = app(MessageBag::class)->add('name', 'Dummy error message.');
+        $errors = app(ViewErrorBag::class)->put('default', $messageBag);
         $html = $this->getComponent()->name('name')->displayFailure(false)->render(compact('errors'));
         self::assertStringNotContainsString('is-invalid', $html);
         self::assertStringNotContainsString('<div class="invalid-feedback d-block">', $html);
@@ -420,8 +411,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
 
     public function testDisplayFailureWithArrayName(): void
     {
-        $errors = app(MessageBag::class)->add('name.0', 'Dummy error message.');
-        session()->put('errors', $errors);
+        $messageBag = app(MessageBag::class)->add('name.0', 'Dummy error message.');
+        $errors = app(ViewErrorBag::class)->put('default', $messageBag);
         $html = $this->getComponent()->name('name[0]')->render(compact('errors'));
         self::assertStringContainsString('is-invalid', $html);
         self::assertStringContainsString('<div class="invalid-feedback d-block">', $html);

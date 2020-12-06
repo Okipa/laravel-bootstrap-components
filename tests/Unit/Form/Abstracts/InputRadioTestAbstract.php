@@ -2,7 +2,6 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
-use RuntimeException;
 use InvalidArgumentException;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\RadioAbstract;
 
@@ -136,55 +135,39 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
 
     public function testOldValue(): void
     {
-        $oldValue = 'old-value';
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                $request = request()->merge(['name' => $oldValue]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => 'old-value'])->flash(),
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('name')->value($oldValue)->checked(false)->toHtml();
+        $html = $this->getComponent()->name('name')->value('old-value')->checked(false)->toHtml();
         self::assertStringContainsString('checked="checked', $html);
     }
 
     public function testOldZeroValue(): void
     {
-        $oldValue = 0;
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                // http values are always stored as string
-                $request = request()->merge(['name' => (string) $oldValue]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => '0'])->flash(),
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('name')->value($oldValue)->checked(false)->toHtml();
+        $html = $this->getComponent()->name('name')->value(0)->checked(false)->toHtml();
         self::assertStringContainsString('checked="checked', $html);
     }
 
     public function testOldValueNotChecked(): void
     {
-        $oldValue = 'old-value';
-        $value = 'custom-value';
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                $request = request()->merge(['name' => $oldValue]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => 'old-value'])->flash(),
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('name')->value($value)->checked()->toHtml();
+        $html = $this->getComponent()->name('name')->value('custom-value')->checked()->toHtml();
         self::assertStringNotContainsString('checked="checked', $html);
     }
 
     public function testSetLabel(): void
     {
-        $label = 'custom-label';
-        $html = $this->getComponent()->name('name')->label($label)->toHtml();
+        $html = $this->getComponent()->name('name')->label('custom-label')->toHtml();
         self::assertStringContainsString(
-            '<label class="custom-control-label" for="' . $this->getComponentType() . '-name-value">' . $label
-            . '</label>',
+            '<label class="custom-control-label" for="' . $this->getComponentType() . '-name-value">custom-label</label>',
             $html
         );
     }

@@ -19,11 +19,9 @@ abstract class VideoAbstract extends MediaAbstract
         return $this;
     }
 
-    protected function getValues(): array
+    protected function getViewParams(): array
     {
-        $poster = $this->getPoster();
-
-        return array_merge(parent::getValues(), compact('poster'));
+        return array_merge(parent::getViewParams(), ['poster' => $this->getPoster()]);
     }
 
     protected function getPoster(): ?string

@@ -147,9 +147,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
 
     public function testSetValueFromClosureWithDisabledMultilingual(): void
     {
-        $html = $this->getComponent()->name('name')->value(function () {
-            return true;
-        })->toHtml();
+        $html = $this->getComponent()->name('name')->value(fn() => true)->toHtml();
         self::assertStringContainsString('checked="checked', $html);
     }
 
@@ -163,51 +161,36 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
     {
         $user = $this->createUniqueUser();
         $html = $this->getComponent()->model($user)->name('active')->value(false)->toHtml();
-        self::assertStringContainsString('checked="checked', $html);
+        self::assertStringNotContainsString('checked="checked', $html);
     }
 
     public function testOldValue(): void
     {
-        $oldValue = true;
-        $value = false;
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                $request = request()->merge(['active' => (string) $oldValue]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['active' => '1'])->flash(),
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('active')->value($value)->toHtml();
+        $html = $this->getComponent()->name('active')->checked(false)->toHtml();
         self::assertStringContainsString('checked="checked', $html);
     }
 
     public function testOldArrayValue(): void
     {
-        $oldValue = true;
-        $value = false;
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                $request = request()->merge(['active' => [0 => (string) $oldValue]]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['active' => ['1']])->flash(),
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('active[0]')->value($value)->toHtml();
+        $html = $this->getComponent()->name('active[0]')->checked(false)->toHtml();
         self::assertStringContainsString('checked="checked', $html);
     }
 
     public function testOldValueNotChecked(): void
     {
-        $oldValue = false;
-        $value = true;
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                $request = request()->merge(['active' => (string) $oldValue]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['active' => '0'])->flash(),
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('active')->value($value)->toHtml();
+        $html = $this->getComponent()->name('active')->checked(true)->toHtml();
         self::assertStringNotContainsString('checked="checked', $html);
     }
 

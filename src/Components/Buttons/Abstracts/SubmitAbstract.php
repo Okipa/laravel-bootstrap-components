@@ -41,20 +41,15 @@ abstract class SubmitAbstract extends ComponentAbstract
         return $this;
     }
 
-    protected function getValues(): array
+    protected function getViewParams(): array
     {
-        return array_merge(parent::getValues(), $this->getParameters());
-    }
-
-    protected function getParameters(): array
-    {
-        $type = $this->getType();
-        $url = null;
-        $prepend = $this->getPrepend();
-        $append = $this->getAppend();
-        $label = $this->getLabel();
-
-        return compact('type', 'url', 'prepend', 'append', 'label');
+        return array_merge(parent::getViewParams(), [
+            'type' => $this->getType(),
+            'url' => $this->getType(),
+            'prepend' => $this->getPrepend(),
+            'append' => $this->getAppend(),
+            'label' => $this->getLabel(),
+        ]);
     }
 
     protected function getPrepend(): ?string

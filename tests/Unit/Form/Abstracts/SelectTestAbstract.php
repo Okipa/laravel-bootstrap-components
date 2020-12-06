@@ -235,10 +235,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $model = $users->get(1);
         $old = $users->get(2);
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($old) {
-                $request = request()->merge(['name' => (string) $old->id]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => (string) $old->id])->flash(),
         ]);
         $this->call('GET', 'test');
         $html = $this->getComponent()
@@ -268,10 +265,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $model = $users->get(1);
         $old = $users->get(2);
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($old) {
-                $request = request()->merge(['name' => [0 => (string) $old->id]]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => [0 => (string) $old->id]])->flash(),
         ]);
         $this->call('GET', 'test');
         $html = $this->getComponent()
@@ -503,10 +497,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $selectedCompanies = $chunk[1];
         $oldCompanies = array_map(static fn($id) => (string) $id, $chunk[2]);
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldCompanies) {
-                $request = request()->merge(['companies' => $oldCompanies]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['companies' => $oldCompanies])->flash(),
         ]);
         $this->call('GET', 'test');
         $html = $this->getComponent()->name('companies')
@@ -539,10 +530,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $selectedCompanies = $chunk[1];
         $oldCompanies = array_map(static fn($id) => (string) $id, $chunk[2]);
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldCompanies) {
-                $request = request()->merge(['companies' => [0 => $oldCompanies]]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['companies' => [0 => $oldCompanies]])->flash(),
         ]);
         $this->call('GET', 'test');
         $html = $this->getComponent()->name('companies[0]')

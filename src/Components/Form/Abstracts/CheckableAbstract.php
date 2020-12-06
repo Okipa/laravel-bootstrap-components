@@ -15,18 +15,28 @@ abstract class CheckableAbstract extends FormAbstract
 
     protected function setLabelPositionedAbove(): bool
     {
-        return true; // Unused for checkable components.
+        // Setting `true` but this property will not be used for checkable components.
+        return true;
     }
 
     protected function getComponentHtmlAttributes(): array
     {
-        return array_merge(parent::getComponentHtmlAttributes(), $this->getChecked() ? ['checked' => 'checked'] : []);
+        return array_merge($this->componentHtmlAttributes, $this->getChecked() ? ['checked' => 'checked'] : []);
     }
 
     protected function getChecked(): bool
     {
-        $old = old($this->convertArrayNameInNotation());
+        $oldChecked = old($this->convertArrayNameInNotation());
+        if (isset($oldChecked)) {
+            return $oldChecked;
+        }
+        if (isset($this->checked)) {
+            return $this->checked;
+        }
+        if (isset($this->value)) {
+            return (bool) $this->value;
+        }
 
-        return $old ?? $this->checked ?? (bool) (optional($this->model)->{$this->getName()} ?: $this->value);
+        return (bool) optional($this->model)->{$this->getName()};
     }
 }

@@ -83,26 +83,31 @@ abstract class ImageAbstract extends MediaAbstract
         return $this;
     }
 
-    protected function getValues(): array
+    protected function getViewParams(): array
     {
-        $alt = $this->getAlt();
-        $width = $this->getWidth();
-        $height = $this->getHeight();
-        $linkId = $this->getLinkId();
-        $linkClasses = $this->getLinkClasses();
-        $linkUrl = $this->getLinkUrl();
-        $linkTitle = $this->getLinkTitle();
-        $linkHtmlAttributes = $this->getLinkHtmlAttributes();
-
-        return array_merge(
-            parent::getValues(),
-            compact('alt', 'width', 'height', 'linkId', 'linkClasses', 'linkUrl', 'linkTitle', 'linkHtmlAttributes')
-        );
+        return array_merge(parent::getViewParams(), [
+            'alt' => $this->getAlt(),
+            'width' => $this->getWidth(),
+            'height' => $this->getHeight(),
+            'linkId' => $this->getLinkId(),
+            'linkClasses' => $this->getLinkClasses(),
+            'linkUrl' => $this->getLinkUrl(),
+            'linkTitle' => $this->getLinkTitle(),
+            'linkHtmlAttributes' => $this->getLinkHtmlAttributes(),
+        ]);
     }
 
     protected function getAlt(): ?string
     {
-        return $this->alt ?: $this->getLabel() ?: $this->linkTitle;
+        if ($this->alt) {
+            return $this->alt;
+        }
+        $label = $this->getLabel();
+        if ($label) {
+            return $label;
+        }
+
+        return $this->linkTitle;
     }
 
     protected function getWidth(): ?int
@@ -134,7 +139,15 @@ abstract class ImageAbstract extends MediaAbstract
 
     protected function getLinkTitle(): ?string
     {
-        return $this->linkTitle ?: $this->getLabel() ?: $this->alt;
+        if ($this->linkTitle) {
+            return $this->linkTitle;
+        }
+        $label = $this->getLabel();
+        if ($label) {
+            return $label;
+        }
+
+        return $this->alt;
     }
 
     protected function getLinkHtmlAttributes(): array

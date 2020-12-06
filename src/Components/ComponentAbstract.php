@@ -32,6 +32,91 @@ abstract class ComponentAbstract implements Htmlable
         $this->containerHtmlAttributes = $this->setContainerHtmlAttributes();
     }
 
+    /**
+     * @return string
+     * @throws \Throwable
+     */
+    public function toHtml(): string
+    {
+        return $this->render();
+    }
+
+    /**
+     * @param array $extraData
+     *
+     * @return string
+     * @throws \Throwable
+     */
+    public function render(array $extraData = []): string
+    {
+        $this->checkValuesValidity();
+        $view = $this->getView();
+        $html = $view
+            ? (string) view('bootstrap-components::' . $view, array_merge($this->getViewParams(), $extraData))->render()
+            : '';
+
+        return trim($html);
+    }
+
+    abstract protected function checkValuesValidity(): void;
+
+    protected function getView(): string
+    {
+        return $this->view;
+    }
+
+    abstract protected function setView(): string;
+
+    protected function getViewParams(): array
+    {
+        return [
+            'containerId' => $this->getContainerId(),
+            'containerClasses' => $this->getContainerClasses(),
+            'containerHtmlAttributes' => $this->getContainerHtmlAttributes(),
+            'componentId' => $this->getComponentId(),
+            'componentClasses' => $this->getComponentClasses(),
+            'componentHtmlAttributes' => $this->getComponentHtmlAttributes(),
+        ];
+    }
+
+    protected function getContainerId(): ?string
+    {
+        return $this->containerId;
+    }
+
+    protected function getComponentId(): ?string
+    {
+        return $this->componentId;
+    }
+
+    protected function getContainerClasses(): array
+    {
+        return $this->containerClasses;
+    }
+
+    abstract protected function setContainerClasses(): array;
+
+    protected function getComponentClasses(): array
+    {
+        return $this->componentClasses;
+    }
+
+    abstract protected function setComponentClasses(): array;
+
+    protected function getContainerHtmlAttributes(): array
+    {
+        return $this->containerHtmlAttributes;
+    }
+
+    abstract protected function setContainerHtmlAttributes(): array;
+
+    protected function getComponentHtmlAttributes(): array
+    {
+        return $this->componentHtmlAttributes;
+    }
+
+    abstract protected function setComponentHtmlAttributes(): array;
+
     public function containerId(string $containerId): self
     {
         $this->containerId = $containerId;
@@ -81,98 +166,6 @@ abstract class ComponentAbstract implements Htmlable
 
         return $this;
     }
-
-    /**
-     * @return string
-     * @throws \Throwable
-     */
-    public function toHtml(): string
-    {
-        return $this->render();
-    }
-
-    /**
-     * @param array $extraData
-     *
-     * @return string
-     * @throws \Throwable
-     */
-    public function render(array $extraData = []): string
-    {
-        $this->checkValuesValidity();
-        $view = $this->getView();
-        $html = $view
-            ? (string) view('bootstrap-components::' . $view, array_merge($this->getValues(), $extraData))->render()
-            : '';
-
-        return trim($html);
-    }
-
-    abstract protected function checkValuesValidity(): void;
-
-    protected function getView(): string
-    {
-        return $this->view;
-    }
-
-    abstract protected function setView(): string;
-
-    protected function getValues(): array
-    {
-        $componentId = $this->getComponentId();
-        $containerId = $this->getContainerId();
-        $componentClasses = $this->getComponentClasses();
-        $containerClasses = $this->getContainerClasses();
-        $componentHtmlAttributes = $this->getComponentHtmlAttributes();
-        $containerHtmlAttributes = $this->getContainerHtmlAttributes();
-
-        return compact(
-            'componentId',
-            'containerId',
-            'componentClasses',
-            'containerClasses',
-            'componentHtmlAttributes',
-            'containerHtmlAttributes'
-        );
-    }
-
-    protected function getComponentId(): ?string
-    {
-        return $this->componentId;
-    }
-
-    protected function getContainerId(): ?string
-    {
-        return $this->containerId;
-    }
-
-    protected function getComponentClasses(): array
-    {
-        return $this->componentClasses;
-    }
-
-    abstract protected function setComponentClasses(): array;
-
-    protected function getContainerClasses(): array
-    {
-        return $this->containerClasses;
-    }
-
-    abstract protected function setContainerClasses(): array;
-
-    protected function getComponentHtmlAttributes(): array
-    {
-        return $this->componentHtmlAttributes;
-    }
-
-    abstract protected function setComponentHtmlAttributes(): array;
-
-    protected function getContainerHtmlAttributes(): array
-    {
-        return $this->containerHtmlAttributes;
-    }
-
-    abstract protected function setContainerHtmlAttributes(): array;
 
     protected function getType(): string
     {

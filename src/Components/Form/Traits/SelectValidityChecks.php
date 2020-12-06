@@ -57,12 +57,12 @@ trait SelectValidityChecks
 
     protected function checkMultipleModeModelAttributeType(): void
     {
-        if ($this->model && isset($this->model->{$this->getName()}) && ! is_array($this->model->{$this->getName()})) {
+        if ($this->getModel() && $this->getModel()->{$this->getName()} && ! is_array($this->getModel()->{$this->getName()})) {
             throw new InvalidArgumentException(
                 get_class($this) . ' : The « ' . $this->getName() . ' » attribute from the given « '
-                . $this->model->getMorphClass()
+                . $this->getModel()->getMorphClass()
                 . ' » model has to be an array when the select() component is in multiple mode : « '
-                . gettype($this->model->{$this->getName()}) . ' » type given.'
+                . gettype($this->getModel()->{$this->getName()}) . ' » type given.'
             );
         }
     }
@@ -83,7 +83,7 @@ trait SelectValidityChecks
         if (
             $this->selectedValueToCompare
             && ! is_string($this->selectedValueToCompare)
-            && ! is_integer($this->selectedValueToCompare)
+            && ! is_int($this->selectedValueToCompare)
         ) {
             throw new InvalidArgumentException(
                 get_class($this) . ' : Invalid selected() second $valueToCompare argument. '
