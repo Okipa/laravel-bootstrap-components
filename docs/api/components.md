@@ -2,7 +2,7 @@
 
 * [Form components](#form-components)
   * [Input text](#input-text)
-  * [Input e-mail](#input-e-mail)
+  * [Input email](#input-email)
   * [Input password](#input-password)
   * [Input URL](#input-url)
   * [Input tel](#input-tel)
@@ -49,7 +49,7 @@
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
-## Input e-mail
+## Input email
 
 **Type :** [FormAbstract](./types.md#formabstract)
 

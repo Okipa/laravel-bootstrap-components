@@ -71,15 +71,16 @@
     ->append('<i class="fas fa-hand-pointer"></i>')
     ->label('Email')
     ->labelPositionedAbove()
-    ->placeholder('Set your e-mail')
-    ->caption('Set your caption here.')
+    ->placeholder('Set your email')
+    ->caption('Your email will tested against to RFC, DNS and spoof checks.')
     ->displaySuccess(false)
-    ->displayFailure(false);
+    ->displayFailure(false)
+    ->errorBag('profileUpdate');
 ```
 
 **Components**
 
-* [Input e-mail](./components.md#input-e-mail)
+* [Input email](./components.md#input-email)
 * [Input password](./components.md#input-password)
 * [Input URL](./components.md#input-url)
 * [Input tel](./components.md#input-tel)
