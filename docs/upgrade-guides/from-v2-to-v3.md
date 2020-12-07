@@ -8,7 +8,7 @@ Whereas Laravel 8 is now supported by this package, support for any version befo
 
 Support for any version before PHP 7.4 has also been dropped.
 
-As so, you should upgrade your Laravel and PHP versions in order upgrade to V2.
+As so, you should upgrade your Laravel and PHP versions in order upgrade to V3.
 
 ## See all changes
 
