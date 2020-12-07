@@ -30,12 +30,12 @@
 
 ```php
 <ComponentAbstract>
-    ->componentId('component-id')
     ->containerId('container-id')
-    ->componentClasses(['component', 'classes'])
     ->containerClasses(['container', 'classes'])
-    ->componentHtmlAttributes(['component', 'html', 'attributes']);
     ->containerHtmlAttributes(['container', 'html', 'attributes'])
+    ->componentId('component-id')
+    ->componentClasses(['component', 'classes'])
+    ->componentHtmlAttributes(['component', 'html', 'attributes']);
 ```
 
 ## FormAbstract
