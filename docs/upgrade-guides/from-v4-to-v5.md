@@ -10,7 +10,7 @@ This was related to the fact the session was used to detect errors, which can't 
 
 This has been fixed and the error message + the validation class are now generated from the `$errors` variable given in the view instead of the session.
 
-## Templates updated
+## Templates update
 
 Related to the previous point (Livewire support added), the view templates provided with this package have been updated.
 
