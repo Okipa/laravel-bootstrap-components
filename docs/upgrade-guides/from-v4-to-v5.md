@@ -31,7 +31,7 @@ For example, using `inputText()->name('name')->componentClasses(['merged', 'clas
 
 ## Components default config update
 
-The `autocomplete="on"` HTML attribute has been added in the default configuration of the following components:
+The `autocomplete="on"` HTML attribute has been added in the default configuration of the following components, in order to improve the default behavior (see https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete):
 
 * Input email
 * Input password
