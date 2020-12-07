@@ -28,6 +28,7 @@ Found this package helpful? Please consider supporting my work!
 
 | Laravel | PHP | Bootstrap | Package |
 |---|---|---|---|
+| ^7.0 | ^7.4 | ^4.0 | ^5.0 |
 | ^7.0 | ^7.4 | ^4.0 | ^4.0 |
 | ^7.0 | ^7.4 | ^4.0 | ^3.0 |
 | ^5.8 | ^7.2 | ^4.0 | ^2.0 |
