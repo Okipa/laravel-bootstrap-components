@@ -20,6 +20,21 @@ If you have published the views in order to make some customizations, you will h
 
 All form components can now correctly display validation class and error message when using a named validation bag.
 
+If you validate an email this way:
+
+```php
+Validator::make(
+    ['email' => 'spoof@email.test']
+    ['email' => ['required', 'string', 'email:rfc,dns,spoof']],
+])->validateWithBag('profileUpdate');
+```
+
+The `is-invalid` validation class and the input related error message will correctly will be displayed when the form will be submitted with:
+
+```blade
+{{ inputEmail()->name('email')->errorBag('profileUpdate') }}
+```
+
 ## Methods signature update
 
 The following methods have gained the ability to merge given HTML classes or HTML attributes to the component default ones instead of replacing them.
