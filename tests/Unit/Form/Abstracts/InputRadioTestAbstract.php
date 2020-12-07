@@ -167,7 +167,8 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
     {
         $html = $this->getComponent()->name('name')->label('custom-label')->toHtml();
         self::assertStringContainsString(
-            '<label class="custom-control-label" for="' . $this->getComponentType() . '-name-value">custom-label</label>',
+            '<label class="custom-control-label" for="' . $this->getComponentType()
+            . '-name-value">custom-label</label>',
             $html
         );
     }

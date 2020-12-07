@@ -57,7 +57,11 @@ trait SelectValidityChecks
 
     protected function checkMultipleModeModelAttributeType(): void
     {
-        if ($this->getModel() && $this->getModel()->{$this->getName()} && ! is_array($this->getModel()->{$this->getName()})) {
+        if (
+            $this->getModel()
+            && $this->getModel()->{$this->getName()}
+            && ! is_array($this->getModel()->{$this->getName()})
+        ) {
             throw new InvalidArgumentException(
                 get_class($this) . ' : The « ' . $this->getName() . ' » attribute from the given « '
                 . $this->getModel()->getMorphClass()

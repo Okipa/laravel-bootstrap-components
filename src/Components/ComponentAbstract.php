@@ -58,6 +58,56 @@ abstract class ComponentAbstract implements Htmlable
         return trim($html);
     }
 
+    public function containerId(string $containerId): self
+    {
+        $this->containerId = $containerId;
+
+        return $this;
+    }
+
+    public function componentId(string $componentId): self
+    {
+        $this->componentId = $componentId;
+
+        return $this;
+    }
+
+    public function componentClasses(array $componentClasses, bool $mergeMode = false): self
+    {
+        $this->componentClasses = $mergeMode
+            ? array_merge($this->componentClasses, $componentClasses)
+            : $componentClasses;
+
+        return $this;
+    }
+
+    public function containerClasses(array $containerClasses, bool $mergeMode = false): self
+    {
+        $this->containerClasses = $mergeMode
+            ? array_merge($this->containerClasses, $containerClasses)
+            : $containerClasses;
+
+        return $this;
+    }
+
+    public function componentHtmlAttributes(array $componentHtmlAttributes, bool $mergeMode = false): self
+    {
+        $this->componentHtmlAttributes = $mergeMode
+            ? array_merge($this->componentHtmlAttributes, $componentHtmlAttributes)
+            : $componentHtmlAttributes;
+
+        return $this;
+    }
+
+    public function containerHtmlAttributes(array $containerHtmlAttributes, bool $mergeMode = false): self
+    {
+        $this->containerHtmlAttributes = $mergeMode
+            ? array_merge($this->containerHtmlAttributes, $containerHtmlAttributes)
+            : $containerHtmlAttributes;
+
+        return $this;
+    }
+
     abstract protected function checkValuesValidity(): void;
 
     protected function getView(): string
@@ -116,56 +166,6 @@ abstract class ComponentAbstract implements Htmlable
     }
 
     abstract protected function setComponentHtmlAttributes(): array;
-
-    public function containerId(string $containerId): self
-    {
-        $this->containerId = $containerId;
-
-        return $this;
-    }
-
-    public function componentId(string $componentId): self
-    {
-        $this->componentId = $componentId;
-
-        return $this;
-    }
-
-    public function componentClasses(array $componentClasses, bool $mergeMode = false): self
-    {
-        $this->componentClasses = $mergeMode
-            ? array_merge($this->componentClasses, $componentClasses)
-            : $componentClasses;
-
-        return $this;
-    }
-
-    public function containerClasses(array $containerClasses, bool $mergeMode = false): self
-    {
-        $this->containerClasses = $mergeMode
-            ? array_merge($this->containerClasses, $containerClasses)
-            : $containerClasses;
-
-        return $this;
-    }
-
-    public function componentHtmlAttributes(array $componentHtmlAttributes, bool $mergeMode = false): self
-    {
-        $this->componentHtmlAttributes = $mergeMode
-            ? array_merge($this->componentHtmlAttributes, $componentHtmlAttributes)
-            : $componentHtmlAttributes;
-
-        return $this;
-    }
-
-    public function containerHtmlAttributes(array $containerHtmlAttributes, bool $mergeMode = false): self
-    {
-        $this->containerHtmlAttributes = $mergeMode
-            ? array_merge($this->containerHtmlAttributes, $containerHtmlAttributes)
-            : $containerHtmlAttributes;
-
-        return $this;
-    }
 
     protected function getType(): string
     {
