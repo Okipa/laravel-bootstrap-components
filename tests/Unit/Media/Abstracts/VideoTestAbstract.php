@@ -4,7 +4,7 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Media\Abstracts;
 
 abstract class VideoTestAbstract extends MediaTestAbstract
 {
-    public function testSetCustomPoster()
+    public function testSetCustomPoster(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -14,7 +14,7 @@ abstract class VideoTestAbstract extends MediaTestAbstract
         self::assertStringContainsString('poster="default-poster"', $html);
     }
 
-    public function testSetPosterReplacesDefault()
+    public function testSetPosterReplacesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -25,19 +25,19 @@ abstract class VideoTestAbstract extends MediaTestAbstract
         self::assertStringNotContainsString('poster="default-poster"', $html);
     }
 
-    public function testNoPoster()
+    public function testNoPoster(): void
     {
         $html = video()->toHtml();
         self::assertStringNotContainsString('poster="', $html);
     }
 
-    public function testDefaultComponentId()
+    public function testDefaultComponentId(): void
     {
         $html = $this->getComponent()->toHtml();
         self::assertStringNotContainsString('<video id="', $html);
     }
 
-    public function testSetComponentId()
+    public function testSetComponentId(): void
     {
         $html = $this->getComponent()->componentId('custom-component-id')->toHtml();
         self::assertStringContainsString('<video id="custom-component-id"', $html);

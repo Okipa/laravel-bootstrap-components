@@ -8,13 +8,13 @@ abstract class ButtonTestAbstract extends SubmitTestAbstract
 {
     use RoutesFaker;
 
-    public function testType()
+    public function testType(): void
     {
         $html = $this->getComponent()->toHtml();
         self::assertStringContainsString('<a', $html);
     }
 
-    public function setCustomUrl()
+    public function setCustomUrl(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -24,7 +24,7 @@ abstract class ButtonTestAbstract extends SubmitTestAbstract
         self::assertStringContainsString('href="default-url"', $html);
     }
 
-    public function testSetUrlReplacesDefault()
+    public function testSetUrlReplacesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -36,7 +36,7 @@ abstract class ButtonTestAbstract extends SubmitTestAbstract
         self::assertStringNotContainsString('href="default-url"', $html);
     }
 
-    public function testSetRoute()
+    public function testSetRoute(): void
     {
         $this->setRoutes();
         $customRoute = 'users.index';
@@ -44,7 +44,7 @@ abstract class ButtonTestAbstract extends SubmitTestAbstract
         self::assertStringContainsString('href="' . route($customRoute) . '"', $html);
     }
 
-    public function testSetCustomLabel()
+    public function testSetCustomLabel(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -55,7 +55,7 @@ abstract class ButtonTestAbstract extends SubmitTestAbstract
         self::assertStringContainsString('<span class="label">default-label</span>', $html);
     }
 
-    public function testSetLabelReplacesDefault()
+    public function testSetLabelReplacesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -69,14 +69,14 @@ abstract class ButtonTestAbstract extends SubmitTestAbstract
         self::assertStringNotContainsString('<span class="label">default-label</span>', $html);
     }
 
-    public function testNoLabel()
+    public function testNoLabel(): void
     {
         $html = $this->getComponent()->label(null)->toHtml();
         self::assertStringNotContainsString('title="', $html);
         self::assertStringNotContainsString('<span class="label">', $html);
     }
 
-    public function testHideLabel()
+    public function testHideLabel(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -87,58 +87,16 @@ abstract class ButtonTestAbstract extends SubmitTestAbstract
         self::assertStringNotContainsString('<span class="label">default-label</span>', $html);
     }
 
-    public function testDefaultComponentId()
+    public function testDefaultComponentId(): void
     {
         $html = $this->getComponent()->toHtml();
         self::assertStringNotContainsString('<a id="', $html);
     }
 
-    public function testSetComponentId()
+    public function testSetComponentId(): void
     {
         $customComponentId = 'custom-component-id';
         $html = $this->getComponent()->componentId($customComponentId)->toHtml();
         self::assertStringContainsString('<a id="' . $customComponentId . '"', $html);
-    }
-
-    public function testSetCustomContainerClasses()
-    {
-        config()->set(
-            'bootstrap-components.components.' . $this->getComponentKey(),
-            get_class($this->getCustomComponent())
-        );
-        $html = $this->getComponent()->toHtml();
-        self::assertStringContainsString('class="component-container default container classes"', $html);
-    }
-
-    public function testSetContainerClassesReplacesDefault()
-    {
-        config()->set(
-            'bootstrap-components.components.' . $this->getComponentKey(),
-            get_class($this->getCustomComponent())
-        );
-        $html = $this->getComponent()->containerClasses(['custom', 'container', 'classes'])->toHtml();
-        self::assertStringContainsString('class="component-container custom container classes"', $html);
-        self::assertStringNotContainsString('class="component-container default container classes"', $html);
-    }
-
-    public function testSetCustomComponentClasses()
-    {
-        config()->set(
-            'bootstrap-components.components.' . $this->getComponentKey(),
-            get_class($this->getCustomComponent())
-        );
-        $html = $this->getComponent()->toHtml();
-        self::assertStringContainsString('class="component btn default component classes"', $html);
-    }
-
-    public function testSetComponentClassesReplacesDefault()
-    {
-        config()->set(
-            'bootstrap-components.components.' . $this->getComponentKey(),
-            get_class($this->getCustomComponent())
-        );
-        $html = $this->getComponent()->componentClasses(['custom', 'component', 'classes'])->toHtml();
-        self::assertStringContainsString('class="component btn custom component classes"', $html);
-        self::assertStringNotContainsString('class="component btn default component classes"', $html);
     }
 }

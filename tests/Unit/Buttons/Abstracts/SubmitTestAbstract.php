@@ -18,28 +18,28 @@ abstract class SubmitTestAbstract extends BootstrapComponentsTestCase
 
     abstract protected function getCustomComponent(): ComponentAbstract;
 
-    public function testHelper()
+    public function testHelper(): void
     {
         self::assertInstanceOf(get_class($this->getComponent()), $this->getHelper());
     }
 
-    public function testFacade()
+    public function testFacade(): void
     {
         self::assertInstanceOf(get_class($this->getComponent()), $this->getFacade());
     }
 
-    public function testInstance()
+    public function testInstance(): void
     {
         self::assertInstanceOf(SubmitAbstract::class, $this->getComponent());
     }
 
-    public function testType()
+    public function testType(): void
     {
         $html = $this->getComponent()->toHtml();
         self::assertStringContainsString(' <button type="' . $this->getComponentType() . '"', $html);
     }
 
-    public function testSetCustomPrepend()
+    public function testSetCustomPrepend(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -54,7 +54,7 @@ abstract class SubmitTestAbstract extends BootstrapComponentsTestCase
         return $this->getComponentType();
     }
 
-    public function testSetPrependReplacesDefault()
+    public function testSetPrependReplacesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -65,13 +65,13 @@ abstract class SubmitTestAbstract extends BootstrapComponentsTestCase
         self::assertStringNotContainsString('<span class="label-prepend">default-prepend</span>', $html);
     }
 
-    public function testHidePrepend()
+    public function testHidePrepend(): void
     {
         $html = $this->getComponent()->prepend(null)->toHtml();
         self::assertStringNotContainsString('<span class="label-prepend">', $html);
     }
 
-    public function testSetCustomAppend()
+    public function testSetCustomAppend(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -81,7 +81,7 @@ abstract class SubmitTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('<span class="label-append">default-append</span>', $html);
     }
 
-    public function testSetAppendReplacesDefault()
+    public function testSetAppendReplacesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -92,20 +92,20 @@ abstract class SubmitTestAbstract extends BootstrapComponentsTestCase
         self::assertStringNotContainsString('<span class="label-append">default-append</span>', $html);
     }
 
-    public function testHideAppend()
+    public function testHideAppend(): void
     {
         $html = $this->getComponent()->append(null)->toHtml();
         self::assertStringNotContainsString('<span class="label-append">', $html);
     }
 
-    public function testHidePrependHideAppend()
+    public function testHidePrependHideAppend(): void
     {
         $html = $this->getComponent()->prepend(null)->append(null)->toHtml();
         self::assertStringNotContainsString('<span class="label-prepend">', $html);
         self::assertStringNotContainsString('<span class="label-append">', $html);
     }
 
-    public function testSetCustomLabel()
+    public function testSetCustomLabel(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -115,7 +115,7 @@ abstract class SubmitTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('<span class="label">default-label</span>', $html);
     }
 
-    public function testSetLabelReplacesDefault()
+    public function testSetLabelReplacesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -127,13 +127,13 @@ abstract class SubmitTestAbstract extends BootstrapComponentsTestCase
         self::assertStringNotContainsString('<span class="label">default-label</span>', $html);
     }
 
-    public function testNoLabel()
+    public function testNoLabel(): void
     {
         $html = $this->getComponent()->label(null)->toHtml();
         self::assertStringNotContainsString('<span class="label">', $html);
     }
 
-    public function testHideLabel()
+    public function testHideLabel(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -143,33 +143,33 @@ abstract class SubmitTestAbstract extends BootstrapComponentsTestCase
         self::assertStringNotContainsString('<span class="label">default-label</span>', $html);
     }
 
-    public function testSetNoContainerId()
+    public function testSetNoContainerId(): void
     {
         $html = $this->getComponent()->toHtml();
         self::assertStringNotContainsString('<div id="', $html);
     }
 
-    public function testSetContainerId()
+    public function testSetContainerId(): void
     {
         $customContainerId = 'custom-container-id';
         $html = $this->getComponent()->containerId($customContainerId)->toHtml();
         self::assertStringContainsString('<div id="' . $customContainerId . '"', $html);
     }
 
-    public function testDefaultComponentId()
+    public function testDefaultComponentId(): void
     {
         $html = $this->getComponent()->toHtml();
         self::assertStringNotContainsString('<button id="', $html);
     }
 
-    public function testSetComponentId()
+    public function testSetComponentId(): void
     {
         $customComponentId = 'custom-component-id';
         $html = $this->getComponent()->componentId($customComponentId)->toHtml();
         self::assertStringContainsString('<button id="' . $customComponentId . '"', $html);
     }
 
-    public function testSetCustomContainerClasses()
+    public function testSetCustomContainerClasses(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -179,18 +179,27 @@ abstract class SubmitTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('class="component-container default container classes"', $html);
     }
 
-    public function testSetContainerClassesReplacesDefault()
+    public function testSetContainerClassesMergedToDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()->containerClasses(['custom', 'container', 'classes'])->toHtml();
-        self::assertStringContainsString('class="component-container custom container classes"', $html);
-        self::assertStringNotContainsString('class="component-container default container classes"', $html);
+        $html = $this->getComponent()->containerClasses(['with', 'merged'], true)->toHtml();
+        self::assertStringContainsString('class="component-container default container classes with merged"', $html);
     }
 
-    public function testSetCustomComponentClasses()
+    public function testSetContainerClassesReplacesDefault(): void
+    {
+        config()->set(
+            'bootstrap-components.components.' . $this->getComponentKey(),
+            get_class($this->getCustomComponent())
+        );
+        $html = $this->getComponent()->containerClasses(['replaces', 'default'])->toHtml();
+        self::assertStringContainsString('class="component-container replaces default"', $html);
+    }
+
+    public function testSetCustomComponentClasses(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -200,44 +209,57 @@ abstract class SubmitTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('class="component btn default component classes"', $html);
     }
 
-    public function testSetComponentClassesReplacesDefault()
+    public function testSetComponentClassesMergedToDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()->componentClasses(['custom', 'component', 'classes'])->toHtml();
-        self::assertStringContainsString('class="component btn custom component classes"', $html);
-        self::assertStringNotContainsString('class="component btn default component classes"', $html);
+        $html = $this->getComponent()->componentClasses(['with', 'merged'], true)->toHtml();
+        self::assertStringContainsString('class="component btn default component classes with merged"', $html);
     }
 
-    public function testSetCustomContainerHtmlAttributes()
+    public function testSetComponentClassesReplacesDefault(): void
+    {
+        config()->set(
+            'bootstrap-components.components.' . $this->getComponentKey(),
+            get_class($this->getCustomComponent())
+        );
+        $html = $this->getComponent()->componentClasses(['replaces', 'default'])->toHtml();
+        self::assertStringContainsString('class="component btn replaces default"', $html);
+    }
+
+    public function testSetCustomContainerHtmlAttributes(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()->toHtml();
-        self::assertStringContainsString(
-            'default="container" html="attributes">',
-            $html
-        );
+        self::assertStringContainsString('default="container" html="attributes">', $html);
     }
 
-    public function testSetContainerHtmlAttributesReplacesDefault()
+    public function testSetContainerHtmlAttributesMergedToDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()
-            ->containerHtmlAttributes(['custom' => 'container', 'html' => 'attributes'])
-            ->toHtml();
-        self::assertStringContainsString('custom="container" html="attributes">', $html);
-        self::assertStringNotContainsString('default="container" html="attributes">', $html);
+        $html = $this->getComponent()->containerHtmlAttributes(['with' => 'merged'], true)->toHtml();
+        self::assertStringContainsString('default="container" html="attributes" with="merged">', $html);
     }
 
-    public function testSetCustomComponentHtmlAttributes()
+    public function testSetContainerHtmlAttributesReplacesDefault(): void
+    {
+        config()->set(
+            'bootstrap-components.components.' . $this->getComponentKey(),
+            get_class($this->getCustomComponent())
+        );
+        $html = $this->getComponent()->containerHtmlAttributes(['replaces' => 'default'])->toHtml();
+        self::assertStringContainsString('replaces="default">', $html);
+    }
+
+    public function testSetCustomComponentHtmlAttributes(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -247,16 +269,23 @@ abstract class SubmitTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('default="component" html="attributes">', $html);
     }
 
-    public function testSetComponentHtmlAttributesReplacesDefault()
+    public function testSetComponentHtmlAttributesMergedToDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()
-            ->componentHtmlAttributes(['custom' => 'component', 'html' => 'attributes'])
-            ->toHtml();
-        self::assertStringContainsString('custom="component" html="attributes">', $html);
-        self::assertStringNotContainsString('default="component" html="attributes">', $html);
+        $html = $this->getComponent()->componentHtmlAttributes(['with' => 'merged'], true)->toHtml();
+        self::assertStringContainsString('default="component" html="attributes" with="merged">', $html);
+    }
+
+    public function testSetComponentHtmlAttributesReplacesDefault(): void
+    {
+        config()->set(
+            'bootstrap-components.components.' . $this->getComponentKey(),
+            get_class($this->getCustomComponent())
+        );
+        $html = $this->getComponent()->componentHtmlAttributes(['replaced' => 'default'])->toHtml();
+        self::assertStringContainsString('replaced="default">', $html);
     }
 }

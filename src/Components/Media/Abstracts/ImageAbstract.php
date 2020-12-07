@@ -69,16 +69,20 @@ abstract class ImageAbstract extends MediaAbstract
         return $this;
     }
 
-    public function linkClasses(array $linkClasses): self
+    public function linkClasses(array $linkClasses, bool $mergeMode = false): self
     {
-        $this->linkClasses = $linkClasses;
+        $this->linkClasses = $mergeMode
+            ? array_merge($this->linkClasses, $linkClasses)
+            : $linkClasses;
 
         return $this;
     }
 
-    public function linkHtmlAttributes(array $linkHtmlAttributes): self
+    public function linkHtmlAttributes(array $linkHtmlAttributes, bool $mergeMode = false): self
     {
-        $this->linkHtmlAttributes = $linkHtmlAttributes;
+        $this->linkHtmlAttributes = $mergeMode
+            ? array_merge($this->linkHtmlAttributes, $linkHtmlAttributes)
+            : $linkHtmlAttributes;
 
         return $this;
     }

@@ -4,43 +4,43 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Media\Abstracts;
 
 abstract class ImageTestAbstract extends MediaTestAbstract
 {
-    public function testSetLinkUrl()
+    public function testSetLinkUrl(): void
     {
         $html = image()->linkUrl('custom-url')->toHtml();
         self::assertStringContainsString('href="custom-url"', $html);
     }
 
-    public function testSetNoLinkUrl()
+    public function testSetNoLinkUrl(): void
     {
         $html = image()->toHtml();
         self::assertStringNotContainsString('href="', $html);
     }
 
-    public function testSetNotLinkTitle()
+    public function testSetNotLinkTitle(): void
     {
         $html = image()->toHtml();
         self::assertStringNotContainsString('title="', $html);
     }
 
-    public function testSetNoLinkTitleWithLabel()
+    public function testSetNoLinkTitleWithLabel(): void
     {
         $html = image()->label('custom-label')->toHtml();
         self::assertStringContainsString('title="custom-label"', $html);
     }
 
-    public function testSetNoLinkTitleWithAlt()
+    public function testSetNoLinkTitleWithAlt(): void
     {
         $html = image()->alt('custom-alt')->toHtml();
         self::assertStringContainsString('title="custom-alt"', $html);
     }
 
-    public function testSetNoLinkTitleWithLabelAndAlt()
+    public function testSetNoLinkTitleWithLabelAndAlt(): void
     {
         $html = image()->label('custom-label')->alt('custom-alt')->toHtml();
         self::assertStringContainsString('title="custom-label"', $html);
     }
 
-    public function testSetLinkTitleReplacesDefault()
+    public function testSetLinkTitleReplacesDefault(): void
     {
         $html = image()->label('custom-label')
             ->linkTitle('custom-title')
@@ -49,74 +49,74 @@ abstract class ImageTestAbstract extends MediaTestAbstract
         self::assertStringContainsString('title="custom-title"', $html);
     }
 
-    public function testSetNoAlt()
+    public function testSetNoAlt(): void
     {
         $html = image()->toHtml();
         self::assertStringNotContainsString('alt="', $html);
     }
 
-    public function testNoAltWithLabel()
+    public function testNoAltWithLabel(): void
     {
         $html = image()->label('custom-label')->toHtml();
         self::assertStringContainsString('alt="custom-label"', $html);
     }
 
-    public function testNoAltWithLinkTitle()
+    public function testNoAltWithLinkTitle(): void
     {
         $html = image()->linkTitle('custom-title')->toHtml();
         self::assertStringContainsString('alt="custom-title"', $html);
     }
 
-    public function testNoAltWithLabelAndLinkTitle()
+    public function testNoAltWithLabelAndLinkTitle(): void
     {
         $html = image()->label('custom-label')->linkTitle('custom-title')->toHtml();
         self::assertStringContainsString('alt="custom-label"', $html);
     }
 
-    public function testSetAltReplacesDefault()
+    public function testSetAltReplacesDefault(): void
     {
         $html = image()->label('custom-label')->linkTitle('custom-title')->alt('custom-alt')->toHtml();
         self::assertStringContainsString('alt="custom-alt"', $html);
     }
 
-    public function testSetNoWidth()
+    public function testSetNoWidth(): void
     {
         $html = image()->toHtml();
         self::assertStringNotContainsString('width="', $html);
     }
 
-    public function testSetWidth()
+    public function testSetWidth(): void
     {
         $html = image()->width(100)->toHtml();
         self::assertStringContainsString('width="100"', $html);
     }
 
-    public function testSetNoHeight()
+    public function testSetNoHeight(): void
     {
         $html = image()->toHtml();
         self::assertStringNotContainsString('height="', $html);
     }
 
-    public function testSetHeight()
+    public function testSetHeight(): void
     {
         $html = image()->height(150)->toHtml();
         self::assertStringContainsString('height="150"', $html);
     }
 
-    public function testDefaultComponentId()
+    public function testDefaultComponentId(): void
     {
         $html = $this->getComponent()->toHtml();
         self::assertStringNotContainsString('<img id="', $html);
     }
 
-    public function testSetComponentId()
+    public function testSetComponentId(): void
     {
         $customComponentId = 'custom-component-id';
         $html = $this->getComponent()->componentId($customComponentId)->toHtml();
         self::assertStringContainsString('<img id="' . $customComponentId . '"', $html);
     }
 
-    public function testSetCustomLinkClasses()
+    public function testSetCustomLinkClasses(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -126,18 +126,27 @@ abstract class ImageTestAbstract extends MediaTestAbstract
         self::assertStringContainsString('class="component-link default link classes"', $html);
     }
 
-    public function testSetLinkClassesReplacesDefault()
+    public function testSetLinkClassesMergedToDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()->linkClasses(['custom', 'link', 'classes'])->toHtml();
-        self::assertStringContainsString('class="component-link custom link classes"', $html);
-        self::assertStringNotContainsString('class="component-link default link classes"', $html);
+        $html = $this->getComponent()->linkClasses(['with', 'merged'], true)->toHtml();
+        self::assertStringContainsString('class="component-link default link classes with merged"', $html);
     }
 
-    public function testSetCustomLinkHtmlAttributes()
+    public function testSetLinkClassesReplacesDefault(): void
+    {
+        config()->set(
+            'bootstrap-components.components.' . $this->getComponentKey(),
+            get_class($this->getCustomComponent())
+        );
+        $html = $this->getComponent()->linkClasses(['replaces', 'default'])->toHtml();
+        self::assertStringContainsString('class="component-link replaces default"', $html);
+    }
+
+    public function testSetCustomLinkHtmlAttributes(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -147,16 +156,27 @@ abstract class ImageTestAbstract extends MediaTestAbstract
         self::assertStringContainsString('default="link" html="attributes">', $html);
     }
 
-    public function testSetLinkHtmlAttributesReplacesDefault()
+    public function testSetLinkHtmlAttributesMergedToDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
         $html = $this->getComponent()
-            ->linkHtmlAttributes(['custom' => 'link', 'html' => 'attributes'])
+            ->linkHtmlAttributes(['with' => 'merged'], true)
             ->toHtml();
-        self::assertStringContainsString('custom="link" html="attributes">', $html);
-        self::assertStringNotContainsString('default="link" html="attributes">', $html);
+        self::assertStringContainsString('default="link" html="attributes" with="merged">', $html);
+    }
+
+    public function testSetLinkHtmlAttributesReplacesDefault(): void
+    {
+        config()->set(
+            'bootstrap-components.components.' . $this->getComponentKey(),
+            get_class($this->getCustomComponent())
+        );
+        $html = $this->getComponent()
+            ->linkHtmlAttributes(['replaces' => 'default'])
+            ->toHtml();
+        self::assertStringContainsString('replaces="default">', $html);
     }
 }

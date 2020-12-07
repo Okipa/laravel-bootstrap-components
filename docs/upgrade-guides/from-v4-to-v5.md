@@ -22,12 +22,14 @@ The following methods have gained the ability to merge given HTML classes or HTM
 
 To use this new behaviour, you'll just have to set the second `$mergeMode` boolean attribute to `true`.
 
-* `componentClasses`
-* `containerClasses`
-* `componentHtmlAttributes`
-* `containerHtmlAttributes`
+* All components: `componentClasses`
+* All components: `containerClasses`
+* All components: `componentHtmlAttributes`
+* All components: `containerHtmlAttributes`
+* Image component: `linkClasses`
+* Image component: `linkHtmlAttributes`
 
-For example, using `inputText()->name('name')->componentClasses(['merged', 'classes'], true)` will merge the `merged classes` classes to the ones defined by default on the input text component.
+For example, using `inputText()->name('name')->componentClasses(['merged', 'classes'], true)` will append the `merged classes` classes to the ones defined by default on the input text component.
 
 ## Components default config update
 
