@@ -4,7 +4,10 @@
 
 2020-12-02
 
-* Method signature changes
+* Added Livewire support
+* Templates updated
+* Methods signature update
+* Components default config update
 
 :point_right: [See the upgrade guide](/docs/upgrade-guides/from-v4-to-v5.md)
 

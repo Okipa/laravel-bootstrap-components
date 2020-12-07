@@ -47,7 +47,6 @@ abstract class FormAbstract extends ComponentAbstract
         $this->append = $this->setAppend();
         $this->labelPositionedAbove = $this->setLabelPositionedAbove();
         $this->caption = $this->setCaption();
-        $this->errors = new ViewErrorBag();
         $this->displaySuccess = $this->setDisplaySuccess();
         $this->displayFailure = $this->setDisplayFailure();
     }

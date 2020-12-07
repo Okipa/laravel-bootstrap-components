@@ -2,16 +2,40 @@
 
 Follow the steps below to upgrade the package.
 
-## Method signature changes
+## Livewire support
 
-The behaviour of the following methods have gained the ability to merge given HTML classes or HTML attributes to the component default ones instead of replacing them.
+There was an issue preventing the error message and the validation class to be displayed on form components when they were used into a livewire component.
 
-To trigger this new behaviour, you'll just have to set the second boolean `$mergeMode` attribute to `false`.
+This was related to the fact the session was used to detect errors, which can't work with livewire as the `$errors` variable is passed in the blade view on re-rendering.
+
+This has been fixed and the error message + the validation class are now generated from the `$errors` variable given in the view instead of the session.
+
+## Templates updated
+
+Related to the previous point (Livewire support added), the view templates provided with this package have been updated.
+
+If you have published the views in order to make some customizations, you will have to [re-publish them](../../README.md#templates) and to redo your customizations.
+
+## Methods signature update
+
+The following methods have gained the ability to merge given HTML classes or HTML attributes to the component default ones instead of replacing them.
+
+To use this new behaviour, you'll just have to set the second `$mergeMode` boolean attribute to `true`.
 
 * `componentClasses`
 * `containerClasses`
 * `componentHtmlAttributes`
 * `containerHtmlAttributes`
+
+For example, using `inputText()->name('name')->componentClasses(['merged', 'classes'], true)` will merge the `merged classes` classes to the ones defined by default on the input text component.
+
+## Components default config update
+
+The `autocomplete="on"` HTML attribute has been added in the default configuration of the following components:
+
+* Input email
+* Input password
+* Input url
 
 ## See all changes
 

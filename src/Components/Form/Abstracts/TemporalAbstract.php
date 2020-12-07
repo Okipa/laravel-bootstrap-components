@@ -9,7 +9,7 @@ abstract class TemporalAbstract extends FormAbstract
 {
     use TemporalValidityChecks;
 
-    private string $format;
+    protected string $format;
 
     public function __construct()
     {
