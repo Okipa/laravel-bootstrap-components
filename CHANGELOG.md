@@ -5,6 +5,7 @@
 2020-12-02
 
 * Added Livewire support
+* Added named validation bag support
 * Templates updated
 * Methods signature update
 * Components default config update

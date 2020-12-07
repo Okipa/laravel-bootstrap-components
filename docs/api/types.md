@@ -57,6 +57,7 @@
 | caption(?string $caption): self | No | Set the component caption. |
 | displaySuccess(?bool $displaySuccess = true): self | No | Set the component input validation success display status. |
 | displayFailure(?bool $displayFailure = true): self | No | Set the component input validation failure display status. |
+| errorBag(string $errorBag): self | No | Define the name of the error bag that will contain the error related to this input. By default, the Laravel error bag is `default`. |
 
 **Usage**
 

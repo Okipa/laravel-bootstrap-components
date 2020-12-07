@@ -16,6 +16,10 @@ Related to the previous point (Livewire support added), the view templates provi
 
 If you have published the views in order to make some customizations, you will have to [re-publish them](../../README.md#templates) and to redo your customizations.
 
+## Named validation bag support
+
+All form components can now correctly display validation class and error message when using a named validation bag.
+
 ## Methods signature update
 
 The following methods have gained the ability to merge given HTML classes or HTML attributes to the component default ones instead of replacing them.

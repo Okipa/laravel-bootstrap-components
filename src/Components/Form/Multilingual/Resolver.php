@@ -3,7 +3,7 @@
 namespace Okipa\LaravelBootstrapComponents\Components\Form\Multilingual;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\ViewErrorBag;
+use Illuminate\Support\MessageBag;
 
 class Resolver
 {
@@ -29,7 +29,7 @@ class Resolver
         return data_get($model, "$name.$locale");
     }
 
-    public function resolveErrorMessage(string $name, ViewErrorBag $errors, string $locale): ?string
+    public function resolveErrorMessage(string $name, MessageBag $errors, string $locale): ?string
     {
         $errorMessageBagKey = $this->resolveErrorMessageBagKey($name, $locale);
         $errorMessage = $errors->first($errorMessageBagKey);

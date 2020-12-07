@@ -118,10 +118,15 @@ abstract class MultilingualAbstract extends FormAbstract
         if (! $errors) {
             return null;
         }
-        if ($errors->isEmpty()) {
+        if ($this->getErrorMessageBag($errors)->isEmpty()) {
             return null;
         }
-        if ($errors->has($this->multilingualResolver->resolveErrorMessageBagKey($this->getName(), $locale))) {
+        if (
+            $this->getErrorMessageBag($errors)->has($this->multilingualResolver->resolveErrorMessageBagKey(
+                $this->getName(),
+                $locale
+            ))
+        ) {
             return $this->getDisplayFailure() ? 'is-invalid' : null;
         }
 
@@ -138,7 +143,11 @@ abstract class MultilingualAbstract extends FormAbstract
             return null;
         }
 
-        return $this->multilingualResolver->resolveErrorMessage($this->getName(), $errors, $locale);
+        return $this->multilingualResolver->resolveErrorMessage(
+            $this->getName(),
+            $this->getErrorMessageBag($errors),
+            $locale
+        );
     }
 
     protected function getLocalizedLabel(string $locale): ?string

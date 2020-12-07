@@ -395,6 +395,20 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString($errors->first('name'), $html);
     }
 
+    public function testDisplayFailureWithSpecificErrorBag(): void
+    {
+        config()->set(
+            'bootstrap-components.components.' . $this->getComponentKey(),
+            get_class($this->getCustomComponent())
+        );
+        $messageBag = app(MessageBag::class)->add('name', 'Dummy error message.');
+        $errors = app(ViewErrorBag::class)->put('test', $messageBag);
+        $html = $this->getComponent()->name('name')->displayFailure(true)->errorBag('test')->render(compact('errors'));
+        self::assertStringContainsString('is-invalid', $html);
+        self::assertStringContainsString('<div class="invalid-feedback d-block">', $html);
+        self::assertStringContainsString($errors->test->first('name'), $html);
+    }
+
     public function testSetDisplayFailureReplacesDefault(): void
     {
         config()->set(

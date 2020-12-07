@@ -4,6 +4,7 @@ namespace Okipa\LaravelBootstrapComponents\Components\Form\Abstracts;
 
 use Closure;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
 use Illuminate\Support\ViewErrorBag;
 use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
@@ -39,6 +40,8 @@ abstract class FormAbstract extends ComponentAbstract
     protected bool $displaySuccess;
 
     protected bool $displayFailure;
+
+    protected string $errorBag = 'default';
 
     public function __construct()
     {
@@ -144,20 +147,50 @@ abstract class FormAbstract extends ComponentAbstract
         return $this;
     }
 
+    public function errorBag(string $errorBag): self
+    {
+        $this->errorBag = $errorBag;
+
+        return $this;
+    }
+
+    protected function getViewParams(): array
+    {
+        return array_merge(parent::getViewParams(), [
+            'validationClass' => fn(?ViewErrorBag $errors) => $this->getValidationClass($errors),
+            'errorMessage' => fn(?ViewErrorBag $errors) => $this->getErrorMessage($errors),
+            'successMessage' => fn() => $this->getSuccessMessage(),
+            'labelPositionedAbove' => $this->getLabelPositionedAbove(),
+            'label' => $this->getLabel(),
+            'type' => $this->getType(),
+            'name' => $this->getName(),
+            'value' => $this->getValue(),
+            'placeholder' => $this->getPlaceholder(),
+            'prepend' => $this->getPrepend(),
+            'append' => $this->getAppend(),
+            'caption' => $this->getCaption(),
+        ]);
+    }
+
     protected function getValidationClass(?ViewErrorBag $errors): ?string
     {
         if (! $errors) {
             return null;
         }
-        if ($errors->isEmpty()) {
+        if ($this->getErrorMessageBag($errors)->isEmpty()) {
             return null;
         }
-        if ($errors->has($this->convertArrayNameInNotation())) {
+        if ($this->getErrorMessageBag($errors)->has($this->convertArrayNameInNotation())) {
             return $this->getDisplayFailure() ? 'is-invalid' : null;
         }
 
         // Only highlight valid fields if there are invalid fields.
         return $this->getDisplaySuccess() ? 'is-valid' : null;
+    }
+
+    protected function getErrorMessageBag(ViewErrorBag $errors): MessageBag
+    {
+        return $errors->{$this->errorBag};
     }
 
     protected function convertArrayNameInNotation(string $notation = '.'): string
@@ -193,7 +226,7 @@ abstract class FormAbstract extends ComponentAbstract
             return null;
         }
 
-        return $errors->first($this->convertArrayNameInNotation());
+        return $this->getErrorMessageBag($errors)->first($this->convertArrayNameInNotation());
     }
 
     protected function getSuccessMessage(): ?string
@@ -203,33 +236,6 @@ abstract class FormAbstract extends ComponentAbstract
         }
 
         return null;
-    }
-
-    protected function getViewParams(): array
-    {
-        return array_merge(parent::getViewParams(), [
-            'validationClass' => fn(?ViewErrorBag $errors) => $this->getValidationClass($errors),
-            'errorMessage' => fn(?ViewErrorBag $errors) => $this->getErrorMessage($errors),
-            'successMessage' => fn() => $this->getSuccessMessage(),
-            'labelPositionedAbove' => $this->getLabelPositionedAbove(),
-            'label' => $this->getLabel(),
-            'type' => $this->getType(),
-            'name' => $this->getName(),
-            'value' => $this->getValue(),
-            'placeholder' => $this->getPlaceholder(),
-            'prepend' => $this->getPrepend(),
-            'append' => $this->getAppend(),
-            'caption' => $this->getCaption(),
-        ]);
-    }
-
-    protected function getComponentId(): string
-    {
-        if ($this->componentId) {
-            return $this->componentId;
-        }
-
-        return $this->getType() . '-' . Str::slug(Str::snake($this->convertArrayNameInNotation('-'), '-'));
     }
 
     protected function getLabelPositionedAbove(): bool
@@ -317,6 +323,15 @@ abstract class FormAbstract extends ComponentAbstract
     }
 
     abstract protected function setCaption(): ?string;
+
+    protected function getComponentId(): string
+    {
+        if ($this->componentId) {
+            return $this->componentId;
+        }
+
+        return $this->getType() . '-' . Str::slug(Str::snake($this->convertArrayNameInNotation('-'), '-'));
+    }
 
     protected function getModel(): ?Model
     {
