@@ -26,10 +26,10 @@ abstract class ComponentAbstract implements Htmlable
     {
         $this->type = $this->setType();
         $this->view = $this->setView();
-        $this->componentClasses = $this->setComponentClasses();
         $this->containerClasses = $this->setContainerClasses();
-        $this->componentHtmlAttributes = $this->setComponentHtmlAttributes();
         $this->containerHtmlAttributes = $this->setContainerHtmlAttributes();
+        $this->componentClasses = $this->setComponentClasses();
+        $this->componentHtmlAttributes = $this->setComponentHtmlAttributes();
     }
 
     /**
