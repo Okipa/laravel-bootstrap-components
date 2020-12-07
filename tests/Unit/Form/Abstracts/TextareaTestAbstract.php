@@ -54,34 +54,24 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
 
     public function testOldValue(): void
     {
-        $oldValue = 'old-value';
-        $value = 'custom-value';
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                $request = request()->merge(['name' => $oldValue]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => 'old-value'])->flash(),
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('name')->value($value)->toHtml();
-        self::assertStringContainsString($oldValue . '</textarea>', $html);
-        self::assertStringNotContainsString($value . '</textarea>', $html);
+        $html = $this->getComponent()->name('name')->value('custom-value')->toHtml();
+        self::assertStringContainsString('old-value</textarea>', $html);
+        self::assertStringNotContainsString('custom-value</textarea>', $html);
     }
 
     public function testOldArrayValue(): void
     {
-        $oldValue = 'old-value';
-        $value = 'custom-value';
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                $request = request()->merge(['name' => [0 => $oldValue]]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => ['old-value']])->flash(),
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('name[0]')->value($value)->toHtml();
-        self::assertStringContainsString($oldValue . '</textarea>', $html);
-        self::assertStringNotContainsString($value . '</textarea>', $html);
+        $html = $this->getComponent()->name('name[0]')->value('custom-value')->toHtml();
+        self::assertStringContainsString('old-value</textarea>', $html);
+        self::assertStringNotContainsString('custom-value</textarea>', $html);
     }
 
     public function testSetCustomLabelPositionedAbove(): void
@@ -96,7 +86,7 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
         self::assertLessThan($labelPosition, $inputPosition);
     }
 
-    public function testSetLabelPositionedAboveOverridesDefault(): void
+    public function testSetLabelPositionedAboveReplacesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -191,15 +181,14 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
             $values[$locale] = 'custom-value-' . $locale;
         }
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValues) {
-                $request = request()->merge(['name' => $oldValues]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => $oldValues])->flash(),
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('name')->locales($locales)->value(function ($locale) use ($values) {
-            return $values . '-' . $locale;
-        })->toHtml();
+        $html = $this->getComponent()
+            ->name('name')
+            ->locales($locales)
+            ->value(fn($locale) => $values . '-' . $locale)
+            ->toHtml();
         foreach ($locales as $locale) {
             self::assertStringContainsString($oldValues[$locale] . '</textarea>', $html);
             self::assertStringNotContainsString($values[$locale] . '</textarea>', $html);
@@ -220,15 +209,10 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
             $values[$locale] = 'test-custom-value-' . $locale;
         }
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValues) {
-                $request = request()->merge($oldValues);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge($oldValues)->flash(),
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('name')->value(function ($locale) use ($values) {
-            return $values[$locale];
-        })->toHtml();
+        $html = $this->getComponent()->name('name')->value(fn($locale) => $values[$locale])->toHtml();
         foreach ($resolverLocales as $resolverLocale) {
             self::assertStringContainsString($oldValues['name_' . $resolverLocale] . '</textarea>', $html);
         }

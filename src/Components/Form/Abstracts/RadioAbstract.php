@@ -11,8 +11,11 @@ abstract class RadioAbstract extends CheckableAbstract
 
     protected function getComponentId(): string
     {
-        return $this->componentId
-            ?? $this->getType() . '-' . Str::slug(Str::snake($this->convertArrayNameInNotation('-'), '-')
+        if ($this->componentId) {
+            return $this->componentId;
+        }
+
+        return $this->getType() . '-' . Str::slug(Str::snake($this->convertArrayNameInNotation('-'), '-')
                 . '-' . Str::snake($this->getValue(), '-'));
     }
 
@@ -22,7 +25,10 @@ abstract class RadioAbstract extends CheckableAbstract
         if (isset($old) && $old !== '') {
             return $old === (string) $this->value;
         }
+        if (isset($this->checked)) {
+            return $this->checked;
+        }
 
-        return $this->checked ?? optional($this->model)->{$this->getName()} === $this->value;
+        return optional($this->model)->{$this->getName()} === $this->value;
     }
 }

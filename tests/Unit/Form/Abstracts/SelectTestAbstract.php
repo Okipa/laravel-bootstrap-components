@@ -235,10 +235,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $model = $users->get(1);
         $old = $users->get(2);
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($old) {
-                $request = request()->merge(['name' => (string) $old->id]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => (string) $old->id])->flash(),
         ]);
         $this->call('GET', 'test');
         $html = $this->getComponent()
@@ -268,10 +265,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $model = $users->get(1);
         $old = $users->get(2);
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($old) {
-                $request = request()->merge(['name' => [0 => (string) $old->id]]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => [0 => (string) $old->id]])->flash(),
         ]);
         $this->call('GET', 'test');
         $html = $this->getComponent()
@@ -503,10 +497,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $selectedCompanies = $chunk[1];
         $oldCompanies = array_map(static fn($id) => (string) $id, $chunk[2]);
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldCompanies) {
-                $request = request()->merge(['companies' => $oldCompanies]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['companies' => $oldCompanies])->flash(),
         ]);
         $this->call('GET', 'test');
         $html = $this->getComponent()->name('companies')
@@ -539,10 +530,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $selectedCompanies = $chunk[1];
         $oldCompanies = array_map(static fn($id) => (string) $id, $chunk[2]);
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldCompanies) {
-                $request = request()->merge(['companies' => [0 => $oldCompanies]]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['companies' => [0 => $oldCompanies]])->flash(),
         ]);
         $this->call('GET', 'test');
         $html = $this->getComponent()->name('companies[0]')
@@ -578,7 +566,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         self::assertLessThan($labelPosition, $inputPosition);
     }
 
-    public function testSetLabelPositionedAboveOverridesDefault(): void
+    public function testSetLabelPositionedAboveReplacesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -700,14 +688,23 @@ abstract class SelectTestAbstract extends InputTestAbstract
         self::assertStringContainsString('class="component custom-select default component classes"', $html);
     }
 
-    public function testSetComponentClassesOverridesDefault(): void
+    public function testSetComponentClassesMergedToDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()->name('name')->componentClasses(['custom', 'component', 'classes'])->toHtml();
-        self::assertStringContainsString('class="component custom-select custom component classes"', $html);
-        self::assertStringNotContainsString('class="component custom-select default component classes"', $html);
+        $html = $this->getComponent()->name('name')->componentClasses(['merged'], true)->toHtml();
+        self::assertStringContainsString('class="component custom-select default component classes merged"', $html);
+    }
+
+    public function testSetComponentClassesReplacesDefault(): void
+    {
+        config()->set(
+            'bootstrap-components.components.' . $this->getComponentKey(),
+            get_class($this->getCustomComponent())
+        );
+        $html = $this->getComponent()->name('name')->componentClasses(['replaced'])->toHtml();
+        self::assertStringContainsString('class="component custom-select replaced"', $html);
     }
 }

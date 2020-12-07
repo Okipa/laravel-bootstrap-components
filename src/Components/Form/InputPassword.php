@@ -53,7 +53,7 @@ class InputPassword extends FormAbstract
 
     protected function setContainerHtmlAttributes(): array
     {
-        return [];
+        return ['autocomplete' => 'on'];
     }
 
     protected function setDisplaySuccess(): bool

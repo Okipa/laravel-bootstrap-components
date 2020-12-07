@@ -2,7 +2,6 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
-use RuntimeException;
 use InvalidArgumentException;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\RadioAbstract;
 
@@ -36,7 +35,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         self::assertStringContainsString('<span class="label-prepend">default-prepend</span>', $html);
     }
 
-    public function testSetPrependOverridesDefault(): void
+    public function testSetPrependReplacesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -71,7 +70,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         self::assertStringContainsString('<span class="label-append">default-append</span>', $html);
     }
 
-    public function testSetAppendOverridesDefault(): void
+    public function testSetAppendReplacesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -136,55 +135,40 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
 
     public function testOldValue(): void
     {
-        $oldValue = 'old-value';
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                $request = request()->merge(['name' => $oldValue]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => 'old-value'])->flash(),
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('name')->value($oldValue)->checked(false)->toHtml();
+        $html = $this->getComponent()->name('name')->value('old-value')->checked(false)->toHtml();
         self::assertStringContainsString('checked="checked', $html);
     }
 
     public function testOldZeroValue(): void
     {
-        $oldValue = 0;
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                // http values are always stored as string
-                $request = request()->merge(['name' => (string) $oldValue]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => '0'])->flash(),
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('name')->value($oldValue)->checked(false)->toHtml();
+        $html = $this->getComponent()->name('name')->value(0)->checked(false)->toHtml();
         self::assertStringContainsString('checked="checked', $html);
     }
 
     public function testOldValueNotChecked(): void
     {
-        $oldValue = 'old-value';
-        $value = 'custom-value';
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                $request = request()->merge(['name' => $oldValue]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => 'old-value'])->flash(),
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('name')->value($value)->checked()->toHtml();
+        $html = $this->getComponent()->name('name')->value('custom-value')->checked()->toHtml();
         self::assertStringNotContainsString('checked="checked', $html);
     }
 
     public function testSetLabel(): void
     {
-        $label = 'custom-label';
-        $html = $this->getComponent()->name('name')->label($label)->toHtml();
+        $html = $this->getComponent()->name('name')->label('custom-label')->toHtml();
         self::assertStringContainsString(
-            '<label class="custom-control-label" for="' . $this->getComponentType() . '-name-value">' . $label
-            . '</label>',
+            '<label class="custom-control-label" for="' . $this->getComponentType()
+            . '-name-value">custom-label</label>',
             $html
         );
     }
@@ -214,7 +198,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         self::markTestSkipped();
     }
 
-    public function testSetLabelPositionedAboveOverridesDefault(): void
+    public function testSetLabelPositionedAboveReplacesDefault(): void
     {
         self::markTestSkipped();
     }
@@ -277,10 +261,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
     {
         $html = $this->getComponent()->name('camelCaseName')->toHtml();
         self::assertStringContainsString(' for="' . $this->getComponentType() . '-camel-case-name-value"', $html);
-        self::assertStringContainsString(
-            '<input id="' . $this->getComponentType() . '-camel-case-name-value"',
-            $html
-        );
+        self::assertStringContainsString('<input id="' . $this->getComponentType() . '-camel-case-name-value"', $html);
     }
 
     public function testSetCustomContainerClasses(): void
@@ -296,21 +277,27 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetContainerClassesOverridesDefault(): void
+    public function testSetContainerClassesMergedToDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()->name('name')->containerClasses(['custom', 'container', 'classes'])->toHtml();
+        $html = $this->getComponent()->name('name')->containerClasses(['merged'], true)->toHtml();
         self::assertStringContainsString(
-            'class="component-container custom-control custom-checkbox custom container classes"',
+            'class="component-container custom-control custom-checkbox default container classes merged"',
             $html
         );
-        self::assertStringNotContainsString(
-            'class="component-container form-group custom-control custom-checkbox default container classes"',
-            $html
+    }
+
+    public function testSetContainerClassesReplacesDefault(): void
+    {
+        config()->set(
+            'bootstrap-components.components.' . $this->getComponentKey(),
+            get_class($this->getCustomComponent())
         );
+        $html = $this->getComponent()->name('name')->containerClasses(['replaced'])->toHtml();
+        self::assertStringContainsString('class="component-container custom-control custom-checkbox replaced"', $html);
     }
 
     public function testSetCustomComponentClasses(): void
@@ -323,14 +310,26 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         self::assertStringContainsString('class="component custom-control-input default component classes"', $html);
     }
 
-    public function testSetComponentClassesOverridesDefault(): void
+    public function testSetComponentClassesMergedToDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()->name('name')->componentClasses(['custom', 'component', 'classes'])->toHtml();
-        self::assertStringContainsString('class="component custom-control-input custom component classes"', $html);
-        self::assertStringNotContainsString('class="component custom-control-input default component classes"', $html);
+        $html = $this->getComponent()->name('name')->componentClasses(['merged'], true)->toHtml();
+        self::assertStringContainsString(
+            'class="component custom-control-input default component classes merged"',
+            $html
+        );
+    }
+
+    public function testSetComponentClassesReplacesDefault(): void
+    {
+        config()->set(
+            'bootstrap-components.components.' . $this->getComponentKey(),
+            get_class($this->getCustomComponent())
+        );
+        $html = $this->getComponent()->name('name')->componentClasses(['replaced'])->toHtml();
+        self::assertStringContainsString('class="component custom-control-input replaced"', $html);
     }
 }

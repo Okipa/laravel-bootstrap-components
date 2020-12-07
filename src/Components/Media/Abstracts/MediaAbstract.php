@@ -39,13 +39,13 @@ abstract class MediaAbstract extends ComponentAbstract
         return $this;
     }
 
-    protected function getValues(): array
+    protected function getViewParams(): array
     {
-        $label = $this->getLabel();
-        $src = $this->getSrc();
-        $caption = $this->getCaption();
-
-        return array_merge(parent::getValues(), compact('label', 'src', 'caption'));
+        return array_merge(parent::getViewParams(), [
+            'label' => $this->getLabel(),
+            'src' => $this->getSrc(),
+            'caption' => $this->getCaption(),
+        ]);
     }
 
     protected function getLabel(): ?string

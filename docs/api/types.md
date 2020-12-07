@@ -21,20 +21,20 @@
 |---|---|---|
 | containerId(string $containerId): self | No | Set the component container id. |
 | componentId(string $componentId): self | No | Set the component id. |
-| containerClasses(array $containerClasses): self | No | Set the component container classes. |
-| componentClasses(array $componentClasses): self | No | Set the component classes. |
-| containerHtmlAttributes(array $containerHtmlAttributes): self | No | Set the component container HTML attributes. |
-| componentHtmlAttributes(array $componentHtmlAttributes): self | No | Set the component HTML attributes. |
+| componentClasses(array $componentClasses): self | No | The given HTML classes will replace the component default ones. You can activate the merge mode in order to add the given classes to the default ones by setting the second argument to `true`. |
+| containerClasses(array $containerClasses): self | No | The given HTML classes will replace the component default ones. You can activate the merge mode in order to add the given classes to the default ones by setting the second argument to `true`. |
+| componentHtmlAttributes(array $componentHtmlAttributes): self | No | The given HTML attributes will replace the component default ones. You can activate the merge mode in order to add the given attributes to the default ones by setting the second argument to `true`. |
+| containerHtmlAttributes(array $containerHtmlAttributes): self | No | The given HTML attributes will replace the component default ones. You can activate the merge mode in order to add the given attributes to the default ones by setting the second argument to `true`. |
 
 **Usage**
 
 ```php
 <ComponentAbstract>
     ->containerId('container-id')
-    ->componentId('component-id')
     ->containerClasses(['container', 'classes'])
-    ->componentClasses(['component', 'classes'])
     ->containerHtmlAttributes(['container', 'html', 'attributes'])
+    ->componentId('component-id')
+    ->componentClasses(['component', 'classes'])
     ->componentHtmlAttributes(['component', 'html', 'attributes']);
 ```
 
@@ -57,6 +57,7 @@
 | caption(?string $caption): self | No | Set the component caption. |
 | displaySuccess(?bool $displaySuccess = true): self | No | Set the component input validation success display status. |
 | displayFailure(?bool $displayFailure = true): self | No | Set the component input validation failure display status. |
+| errorBag(string $errorBag): self | No | Define the name of the error bag that will contain the error related to this input. By default, the Laravel error bag is `default`. |
 
 **Usage**
 
@@ -70,15 +71,16 @@
     ->append('<i class="fas fa-hand-pointer"></i>')
     ->label('Email')
     ->labelPositionedAbove()
-    ->placeholder('Set your e-mail')
-    ->caption('Set your caption here.')
+    ->placeholder('Set your email')
+    ->caption('Your email will tested against to RFC, DNS and spoof checks.')
     ->displaySuccess(false)
-    ->displayFailure(false);
+    ->displayFailure(false)
+    ->errorBag('profileUpdate');
 ```
 
 **Components**
 
-* [Input e-mail](./components.md#input-e-mail)
+* [Input email](./components.md#input-email)
 * [Input password](./components.md#input-password)
 * [Input URL](./components.md#input-url)
 * [Input tel](./components.md#input-tel)
@@ -120,15 +122,9 @@
 <MultilingualAbstract>
     // inherits FormAbstract methods
     ->locales(['fr', 'en'])
-    ->value(function(string $locale){
-        return $name[$locale];
-    });
-    ->prepend(function(string $locale){
-        return 'prepend-' . $locale;
-    })
-    ->append(function(string $locale){
-        return 'append-' . $locale;
-    }) 
+    ->value(fn(string $locale) => $name[$locale]);
+    ->prepend(fn(string $locale) => 'prepend-' . $locale)
+    ->append(fn(string $locale) => 'append-' . $locale) 
 ```
 
 **Components**
@@ -176,9 +172,7 @@
 ```php
 <UploadableAbstract>
     // inherits FormAbstract methods
-    ->uploadedFile(function(){
-        return '<div>Some HTML</div>';
-    })
+    ->uploadedFile(fn() => '<div>Some HTML</div>')
     ->showRemoveCheckbox(true, 'Remove this file');
 ```
 
@@ -242,9 +236,7 @@
     ]), 'id', 'title')
     ->selected('id', 1)
     // or ->selected('id', [1]) in multiple mode
-    ->disabled(function(array $option){
-        return ! $option['active'];
-    })
+    ->disabled(fn(array $option) => ! $option['active'])
     ->multiple();
 ```
 

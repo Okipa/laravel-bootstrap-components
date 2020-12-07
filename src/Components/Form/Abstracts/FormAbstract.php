@@ -4,13 +4,18 @@ namespace Okipa\LaravelBootstrapComponents\Components\Form\Abstracts;
 
 use Closure;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
+use Illuminate\Support\ViewErrorBag;
 use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Traits\FormValidityChecks;
 
 abstract class FormAbstract extends ComponentAbstract
 {
     use FormValidityChecks;
+
+    /** @property mixed $value */
+    protected $value;
 
     protected ?Model $model = null;
 
@@ -30,14 +35,13 @@ abstract class FormAbstract extends ComponentAbstract
 
     protected bool $labelPositionedAbove;
 
-    /** @property mixed $value */
-    protected $value;
-
-    protected ?string $placeholder;
+    protected ?string $placeholder = null;
 
     protected bool $displaySuccess;
 
     protected bool $displayFailure;
+
+    protected string $errorBag = 'default';
 
     public function __construct()
     {
@@ -102,6 +106,11 @@ abstract class FormAbstract extends ComponentAbstract
         return $this;
     }
 
+    /**
+     * @param mixed $value
+     *
+     * @return $this
+     */
     public function value($value): self
     {
         $this->value = $value;
@@ -138,49 +147,55 @@ abstract class FormAbstract extends ComponentAbstract
         return $this;
     }
 
-    protected function getValues(): array
+    public function errorBag(string $errorBag): self
     {
-        return array_merge(parent::getValues(), $this->getParameters());
+        $this->errorBag = $errorBag;
+
+        return $this;
     }
 
-    protected function getParameters(): array
+    protected function getViewParams(): array
     {
-        $model = $this->getModel();
-        $type = $this->getType();
-        $name = $this->getName();
-        $prepend = $this->getPrepend();
-        $append = $this->getAppend();
-        $caption = $this->getCaption();
-        $label = $this->getLabel();
-        $labelPositionedAbove = $this->getLabelPositionedAbove();
-        $value = $this->getValue();
-        $placeholder = $this->getPlaceholder();
-        $displaySuccess = $this->getDisplaySuccess();
-        $displayFailure = $this->getDisplayFailure();
-        $validationClass = $this->getValidationClass();
-        $errorMessage = $this->getErrorMessage();
-
-        return compact(
-            'model',
-            'type',
-            'name',
-            'prepend',
-            'append',
-            'caption',
-            'label',
-            'labelPositionedAbove',
-            'value',
-            'placeholder',
-            'displaySuccess',
-            'displayFailure',
-            'validationClass',
-            'errorMessage'
-        );
+        return array_merge(parent::getViewParams(), [
+            'validationClass' => fn(?ViewErrorBag $errors) => $this->getValidationClass($errors),
+            'errorMessage' => fn(?ViewErrorBag $errors) => $this->getErrorMessage($errors),
+            'successMessage' => fn() => $this->getSuccessMessage(),
+            'labelPositionedAbove' => $this->getLabelPositionedAbove(),
+            'label' => $this->getLabel(),
+            'type' => $this->getType(),
+            'name' => $this->getName(),
+            'value' => $this->getValue(),
+            'placeholder' => $this->getPlaceholder(),
+            'prepend' => $this->getPrepend(),
+            'append' => $this->getAppend(),
+            'caption' => $this->getCaption(),
+        ]);
     }
 
-    protected function getModel(): ?Model
+    protected function getValidationClass(?ViewErrorBag $errors): ?string
     {
-        return $this->model;
+        if (! $errors) {
+            return null;
+        }
+        if ($this->getErrorMessageBag($errors)->isEmpty()) {
+            return null;
+        }
+        if ($this->getErrorMessageBag($errors)->has($this->convertArrayNameInNotation())) {
+            return $this->getDisplayFailure() ? 'is-invalid' : null;
+        }
+
+        // Only highlight valid fields if there are invalid fields.
+        return $this->getDisplaySuccess() ? 'is-valid' : null;
+    }
+
+    protected function getErrorMessageBag(ViewErrorBag $errors): MessageBag
+    {
+        return $errors->{$this->errorBag};
+    }
+
+    protected function convertArrayNameInNotation(string $notation = '.'): string
+    {
+        return str_replace(['[', ']'], [$notation, ''], $this->getName());
     }
 
     protected function getName(): string
@@ -188,22 +203,116 @@ abstract class FormAbstract extends ComponentAbstract
         return $this->name ?? '';
     }
 
+    protected function getDisplayFailure(): bool
+    {
+        return $this->displayFailure;
+    }
+
+    abstract protected function setDisplayFailure(): bool;
+
+    protected function getDisplaySuccess(): bool
+    {
+        return $this->displaySuccess;
+    }
+
+    abstract protected function setDisplaySuccess(): bool;
+
+    protected function getErrorMessage(?ViewErrorBag $errors): ?string
+    {
+        if (! $errors) {
+            return null;
+        }
+        if (! $this->getDisplayFailure()) {
+            return null;
+        }
+
+        return $this->getErrorMessageBag($errors)->first($this->convertArrayNameInNotation());
+    }
+
+    protected function getSuccessMessage(): ?string
+    {
+        if ($this->getDisplaySuccess()) {
+            return (string) __('Field correctly filled.');
+        }
+
+        return null;
+    }
+
+    protected function getLabelPositionedAbove(): bool
+    {
+        return $this->labelPositionedAbove;
+    }
+
+    abstract protected function setLabelPositionedAbove(): bool;
+
+    protected function getLabel(): ?string
+    {
+        if ($this->hideLabel) {
+            return null;
+        }
+        if ($this->label) {
+            return $this->label;
+        }
+
+        return (string) __('validation.attributes.' . $this->removeArrayCharactersFromName());
+    }
+
+    protected function removeArrayCharactersFromName(): string
+    {
+        return strstr($this->getName(), '[', true) ?: $this->getName();
+    }
+
+    /** @return mixed */
+    protected function getValue()
+    {
+        $oldValue = old($this->convertArrayNameInNotation());
+        if ($oldValue) {
+            return $oldValue;
+        }
+        // Fallback for usage of closure with multilingual disabled.
+        if ($this->value instanceof Closure) {
+            return ($this->value)(app()->getLocale());
+        }
+        if (isset($this->value)) {
+            return $this->value;
+        }
+
+        return optional($this->model)->{$this->convertArrayNameInNotation()};
+    }
+
+    protected function getPlaceholder(): ?string
+    {
+        if (isset($this->placeholder)) {
+            return $this->placeholder;
+        }
+        $label = $this->getLabel();
+        if ($label) {
+            return $label;
+        }
+
+        return (string) __('validation.attributes.' . $this->removeArrayCharactersFromName());
+    }
+
     protected function getPrepend(): ?string
     {
-        $prepend = $this->prepend;
-
         // Fallback for usage of closure with multilingual disabled.
-        return $prepend instanceof Closure ? $prepend(app()->getLocale()) : $prepend;
+        if ($this->prepend instanceof Closure) {
+            return ($this->prepend)(app()->getLocale());
+        }
+
+        return $this->prepend;
     }
 
     abstract protected function setPrepend(): ?string;
 
     protected function getAppend(): ?string
     {
-        $append = $this->append;
-
         // Fallback for usage of closure with multilingual disabled.
-        return $append instanceof Closure ? $append(app()->getLocale()) : $append;
+        if ($this->append instanceof Closure) {
+            return ($this->append)(app()->getLocale());
+        }
+
+        return $this->append;
     }
 
     abstract protected function setAppend(): ?string;
@@ -215,78 +324,17 @@ abstract class FormAbstract extends ComponentAbstract
 
     abstract protected function setCaption(): ?string;
 
-    protected function getLabel(): ?string
-    {
-        $label = $this->label ?: (string) __('validation.attributes.' . $this->removeArrayCharactersFromName());
-
-        return $this->hideLabel ? null : $label;
-    }
-
-    protected function removeArrayCharactersFromName(): string
-    {
-        return strstr($this->getName(), '[', true) ?: $this->getName();
-    }
-
-    protected function getLabelPositionedAbove(): bool
-    {
-        return $this->labelPositionedAbove;
-    }
-
-    abstract protected function setLabelPositionedAbove(): bool;
-
-    protected function getValue()
-    {
-        $value = old($this->convertArrayNameInNotation()) ?: $this->value;
-        // Fallback for usage of closure with multilingual disabled.
-        $value = $value instanceof Closure ? $value(app()->getLocale()) : $value;
-
-        return $value ?? optional($this->getModel())->{$this->convertArrayNameInNotation()};
-    }
-
-    protected function convertArrayNameInNotation(string $notation = '.'): string
-    {
-        return str_replace(['[', ']'], [$notation, ''], $this->getName());
-    }
-
-    protected function getPlaceholder(): ?string
-    {
-        return $this->placeholder
-            ?? ($this->getLabel() ?: (string) __('validation.attributes.' . $this->removeArrayCharactersFromName()));
-    }
-
-    protected function getDisplaySuccess(): bool
-    {
-        return $this->displaySuccess;
-    }
-
-    abstract protected function setDisplaySuccess(): bool;
-
-    protected function getDisplayFailure(): bool
-    {
-        return $this->displayFailure;
-    }
-
-    abstract protected function setDisplayFailure(): bool;
-
-    protected function getValidationClass(): ?string
-    {
-        if (session()->has('errors')) {
-            return session()->get('errors')->has($this->convertArrayNameInNotation())
-                ? ($this->getDisplayFailure() ? 'is-invalid' : null)
-                : ($this->getDisplaySuccess() ? 'is-valid' : null);
-        }
-
-        return null;
-    }
-
-    protected function getErrorMessage(): ?string
-    {
-        return optional(session()->get('errors'))->first($this->convertArrayNameInNotation());
-    }
-
     protected function getComponentId(): string
     {
-        return parent::getComponentId()
-            ?? $this->getType() . '-' . Str::slug(Str::snake($this->convertArrayNameInNotation('-'), '-'));
+        if ($this->componentId) {
+            return $this->componentId;
+        }
+
+        return $this->getType() . '-' . Str::slug(Str::snake($this->convertArrayNameInNotation('-'), '-'));
+    }
+
+    protected function getModel(): ?Model
+    {
+        return $this->model;
     }
 }

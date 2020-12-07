@@ -3,6 +3,7 @@
 namespace Okipa\LaravelBootstrapComponents\Components\Form\Multilingual;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\MessageBag;
 
 class Resolver
 {
@@ -25,19 +26,19 @@ class Resolver
 
     public function resolveLocalizedModelValue(string $name, string $locale, ?Model $model): ?string
     {
-        return data_get(optional($model)->{$name}, $locale);
+        return data_get($model, "$name.$locale");
     }
 
-    public function resolveErrorMessage(string $name, string $locale): ?string
+    public function resolveErrorMessage(string $name, MessageBag $errors, string $locale): ?string
     {
         $errorMessageBagKey = $this->resolveErrorMessageBagKey($name, $locale);
-        $errorMessage = optional(session()->get('errors'))->first($errorMessageBagKey);
+        $errorMessage = $errors->first($errorMessageBagKey);
         $errorMessage = $this->undoInputNameLaravelUnderscoreRemovalInErrorMessage($name, $locale, $errorMessage);
 
         return $errorMessage
             ? str_replace(
                 $errorMessageBagKey,
-                ((string) __('validation.attributes.' . $name)) . ' (' . strtoupper($locale) . ')',
+                __('validation.attributes.' . $name) . ' (' . strtoupper($locale) . ')',
                 $errorMessage
             )
             : null;

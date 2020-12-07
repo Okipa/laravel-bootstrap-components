@@ -3,6 +3,7 @@
 namespace Okipa\LaravelBootstrapComponents\Components\Form\Abstracts;
 
 use Carbon\Carbon;
+use DateTime;
 use Okipa\LaravelBootstrapComponents\Components\Form\Traits\TemporalValidityChecks;
 
 abstract class TemporalAbstract extends FormAbstract
@@ -31,7 +32,7 @@ abstract class TemporalAbstract extends FormAbstract
             return null;
         }
 
-        return is_a($value, 'DateTime')
+        return $value instanceof DateTime
             ? $value->format($this->getFormat())
             : Carbon::parse($value)->format($this->getFormat());
     }

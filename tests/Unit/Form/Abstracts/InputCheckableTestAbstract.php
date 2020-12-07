@@ -34,7 +34,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         self::assertStringContainsString('<span class="label-prepend">default-prepend</span>', $html);
     }
 
-    public function testSetPrependOverridesDefault(): void
+    public function testSetPrependReplacesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -69,7 +69,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         self::assertStringContainsString('<span class="label-append">default-append</span>', $html);
     }
 
-    public function testSetAppendOverridesDefault(): void
+    public function testSetAppendReplacesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -147,9 +147,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
 
     public function testSetValueFromClosureWithDisabledMultilingual(): void
     {
-        $html = $this->getComponent()->name('name')->value(function () {
-            return true;
-        })->toHtml();
+        $html = $this->getComponent()->name('name')->value(fn() => true)->toHtml();
         self::assertStringContainsString('checked="checked', $html);
     }
 
@@ -163,51 +161,36 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
     {
         $user = $this->createUniqueUser();
         $html = $this->getComponent()->model($user)->name('active')->value(false)->toHtml();
-        self::assertStringContainsString('checked="checked', $html);
+        self::assertStringNotContainsString('checked="checked', $html);
     }
 
     public function testOldValue(): void
     {
-        $oldValue = true;
-        $value = false;
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                $request = request()->merge(['active' => (string) $oldValue]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['active' => '1'])->flash(),
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('active')->value($value)->toHtml();
+        $html = $this->getComponent()->name('active')->checked(false)->toHtml();
         self::assertStringContainsString('checked="checked', $html);
     }
 
     public function testOldArrayValue(): void
     {
-        $oldValue = true;
-        $value = false;
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                $request = request()->merge(['active' => [0 => (string) $oldValue]]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['active' => ['1']])->flash(),
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('active[0]')->value($value)->toHtml();
+        $html = $this->getComponent()->name('active[0]')->checked(false)->toHtml();
         self::assertStringContainsString('checked="checked', $html);
     }
 
     public function testOldValueNotChecked(): void
     {
-        $oldValue = false;
-        $value = true;
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                $request = request()->merge(['active' => (string) $oldValue]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['active' => '0'])->flash(),
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('active')->value($value)->toHtml();
+        $html = $this->getComponent()->name('active')->checked(true)->toHtml();
         self::assertStringNotContainsString('checked="checked', $html);
     }
 
@@ -239,7 +222,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         self::markTestSkipped();
     }
 
-    public function testSetLabelPositionedAboveOverridesDefault(): void
+    public function testSetLabelPositionedAboveReplacesDefault(): void
     {
         self::markTestSkipped();
     }
@@ -298,21 +281,29 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetContainerClassesOverridesDefault(): void
+    public function testSetContainerClassesMergedToDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()->name('name')->containerClasses(['custom', 'container', 'classes'])->toHtml();
+        $html = $this->getComponent()->name('name')->containerClasses(['merged'], true)->toHtml();
         self::assertStringContainsString(
             'class="component-container custom-control custom-' . $this->getComponentType()
-            . ' custom container classes"',
+            . ' default container classes merged"',
             $html
         );
-        self::assertStringNotContainsString(
-            'class="component-container custom-control custom-' . $this->getComponentType()
-            . ' default container classes"',
+    }
+
+    public function testSetContainerClassesReplacesDefault(): void
+    {
+        config()->set(
+            'bootstrap-components.components.' . $this->getComponentKey(),
+            get_class($this->getCustomComponent())
+        );
+        $html = $this->getComponent()->name('name')->containerClasses(['replaced'])->toHtml();
+        self::assertStringContainsString(
+            'class="component-container custom-control custom-' . $this->getComponentType() . ' replaced"',
             $html
         );
     }
@@ -327,14 +318,26 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         self::assertStringContainsString('class="component custom-control-input default component classes"', $html);
     }
 
-    public function testSetComponentClassesOverridesDefault(): void
+    public function testSetComponentClassesMergedToDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()->name('name')->componentClasses(['custom', 'component', 'classes'])->toHtml();
-        self::assertStringContainsString('class="component custom-control-input custom component classes"', $html);
-        self::assertStringNotContainsString('class="component custom-control-input default component classes"', $html);
+        $html = $this->getComponent()->name('name')->componentClasses(['merged'], true)->toHtml();
+        self::assertStringContainsString(
+            'class="component custom-control-input default component classes merged"',
+            $html
+        );
+    }
+
+    public function testSetComponentClassesReplacesDefault(): void
+    {
+        config()->set(
+            'bootstrap-components.components.' . $this->getComponentKey(),
+            get_class($this->getCustomComponent())
+        );
+        $html = $this->getComponent()->name('name')->componentClasses(['replaced'])->toHtml();
+        self::assertStringContainsString('class="component custom-control-input replaced"', $html);
     }
 }

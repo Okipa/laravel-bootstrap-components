@@ -3,7 +3,7 @@
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
 use Illuminate\Support\MessageBag;
-use InvalidArgumentException;
+use Illuminate\Support\ViewErrorBag;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\MultilingualAbstract;
 use Okipa\LaravelBootstrapComponents\Tests\Dummy\Resolver;
 use Okipa\LaravelBootstrapComponents\Tests\Models\User;
@@ -94,14 +94,6 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testSetLocalizedWrongValue(): void
-    {
-        $locales = ['fr', 'en'];
-        $value = 'custom-value';
-        $this->expectException(InvalidArgumentException::class);
-        $this->getComponent()->name('name')->locales($locales)->value($value)->toHtml();
-    }
-
     public function testSetLocalizedValue(): void
     {
         $locales = ['fr', 'en'];
@@ -112,9 +104,7 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         $html = $this->getComponent()
             ->name('name')
             ->locales($locales)
-            ->value(function ($locale) use ($values) {
-                return $values[$locale];
-            })
+            ->value(fn($locale) => $values[$locale])
             ->toHtml();
         foreach ($locales as $locale) {
             self::assertStringContainsString(' value="' . $values[$locale] . '"', $html);
@@ -131,10 +121,7 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
             $values[$locale] = 'custom-value-' . $locale;
         }
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValues) {
-                $request = request()->merge(['name' => $oldValues]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => $oldValues])->flash(),
         ]);
         $this->call('GET', 'test');
         $html = $this->getComponent()->name('name')->locales($locales)->value(function ($locale) use ($values) {
@@ -160,15 +147,10 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
             $values[$locale] = 'custom-value-' . $locale;
         }
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValues) {
-                $request = request()->merge($oldValues);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge($oldValues)->flash(),
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('name')->value(function ($locale) use ($values) {
-            return $values[$locale];
-        })->toHtml();
+        $html = $this->getComponent()->name('name')->value(fn($locale) => $values[$locale])->toHtml();
         foreach ($resolverLocales as $resolverLocale) {
             self::assertStringContainsString('value="' . $oldValues['name_' . $resolverLocale] . '"', $html);
         }
@@ -183,9 +165,7 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         $html = $this->getComponent()
             ->name('name')
             ->locales($locales)
-            ->prepend(function ($locale) {
-                return 'prepend-' . $locale;
-            })
+            ->prepend(fn($locale) => 'prepend-' . $locale)
             ->toHtml();
         foreach ($locales as $locale) {
             self::assertStringContainsString('<span class="input-group-text">prepend-' . $locale . '</span>', $html);
@@ -259,9 +239,8 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
     public function testLocalizedErrorMessage(): void
     {
         $locales = ['fr', 'en'];
-        $errors = app(MessageBag::class);
-        $errors->add('name.fr', 'Dummy name.fr error message.');
-        session()->put('errors', $errors);
+        $messageBag = app(MessageBag::class)->add('name.fr', 'Dummy name.fr error message.');
+        $errors = app(ViewErrorBag::class)->put('default', $messageBag);
         $html = $this->getComponent()->name('name')->locales($locales)->displayFailure()->render(compact('errors'));
         self::assertStringContainsString(
             'id="' . $this->getComponentType() . '-name-fr" class="component form-control is-invalid"',
@@ -281,9 +260,8 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
     public function testLocalizedErrorMessageWithSeveralWords(): void
     {
         $locales = ['fr', 'en'];
-        $errors = app(MessageBag::class);
-        $errors->add('last_name.fr', 'Dummy last name.fr error message.');
-        session()->put('errors', $errors);
+        $messageBag = app(MessageBag::class)->add('last_name.fr', 'Dummy last name.fr error message.');
+        $errors = app(ViewErrorBag::class)->put('default', $messageBag);
         $html = $this->getComponent()
             ->name('last_name')
             ->locales($locales)
@@ -311,9 +289,8 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
     {
         config()->set('bootstrap-components.form.multilingualResolver', Resolver::class);
         $locales = ['fr', 'en'];
-        $errors = app(MessageBag::class);
-        $errors->add('last_name_fr', 'Dummy last name fr error message.');
-        session()->put('errors', $errors);
+        $messageBag = app(MessageBag::class)->add('last_name_fr', 'Dummy last name fr error message.');
+        $errors = app(ViewErrorBag::class)->put('default', $messageBag);
         $html = $this->getComponent()
             ->name('last_name')
             ->locales($locales)
@@ -340,9 +317,8 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
     public function testLocalizedErrorMessageFromCustomMultilingualResolver(): void
     {
         config()->set('bootstrap-components.form.multilingualResolver', Resolver::class);
-        $errors = app(MessageBag::class);
-        $errors->add('name_en', 'Dummy name_en error message.');
-        session()->put('errors', $errors);
+        $messageBag = app(MessageBag::class)->add('name_en', 'Dummy name_en error message.');
+        $errors = app(ViewErrorBag::class)->put('default', $messageBag);
         $html = $this->getComponent()->name('name')->displayFailure()->render(compact('errors'));
         self::assertStringContainsString(
             'id="' . $this->getComponentType() . '-name-en" class="component form-control is-invalid"',

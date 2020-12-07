@@ -26,11 +26,9 @@ abstract class ButtonAbstract extends SubmitAbstract
         return $this;
     }
 
-    protected function getParameters(): array
+    protected function getViewParams(): array
     {
-        $url = $this->getUrl();
-
-        return array_merge(parent::getParameters(), compact('url'));
+        return array_merge(parent::getViewParams(), ['url' => $this->getUrl()]);
     }
 
     protected function getUrl(): ?string

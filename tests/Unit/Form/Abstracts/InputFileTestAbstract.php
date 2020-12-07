@@ -73,38 +73,28 @@ abstract class InputFileTestAbstract extends InputTestAbstract
 
     public function testOldValue(): void
     {
-        $oldValue = 'old-value';
-        $value = 'custom-value';
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                $request = request()->merge(['name' => $oldValue]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => 'old-value'])->flash(),
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('name')->value($value)->toHtml();
+        $html = $this->getComponent()->name('name')->value('custom-value')->toHtml();
         self::assertStringContainsString('<label class="custom-file-label" for="' . $this->getComponentType()
-            . '-name">' . $oldValue . '</label>', $html);
+            . '-name">old-value</label>', $html);
         self::assertStringNotContainsString('<label class="custom-file-label" for="' . $this->getComponentType()
-            . '-name">' . $value . '</label>', $html);
+            . '-name">custom-value</label>', $html);
     }
 
     public function testOldArrayValue(): void
     {
-        $oldValue = 'old-value';
-        $value = 'custom-value';
         $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => function () use ($oldValue) {
-                $request = request()->merge(['name' => [0 => $oldValue]]);
-                $request->flash();
-            },
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => [0 => 'old-value']])->flash(),
         ]);
         $this->call('GET', 'test');
-        $html = $this->getComponent()->name('name[0]')->value($value)->toHtml();
+        $html = $this->getComponent()->name('name[0]')->value('custom-value')->toHtml();
         self::assertStringContainsString('<label class="custom-file-label" for="' . $this->getComponentType()
-            . '-name-0">' . $oldValue . '</label>', $html);
+            . '-name-0">old-value</label>', $html);
         self::assertStringNotContainsString('<label class="custom-file-label" for="' . $this->getComponentType()
-            . '-name-0">' . $value . '</label>', $html);
+            . '-name-0">custom-value</label>', $html);
     }
 
     public function testDefaultPlaceholder(): void
@@ -159,7 +149,6 @@ abstract class InputFileTestAbstract extends InputTestAbstract
             . '-name">' . __('No file selected.') . '</label>', $html);
     }
 
-
     public function testHidePlaceholder(): void
     {
         $html = $this->getComponent()->name('name')->placeholder(false)->toHtml();
@@ -181,21 +170,27 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetComponentClassesOverridesDefault(): void
+    public function testSetComponentClassesMergedToDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $html = $this->getComponent()->name('name')->componentClasses(['custom', 'component', 'classes'])->toHtml();
+        $html = $this->getComponent()->name('name')->componentClasses(['merged'], true)->toHtml();
         self::assertStringContainsString(
-            'class="component form-control custom-file-input custom component classes"',
+            'class="component form-control custom-file-input default component classes merged"',
             $html
         );
-        self::assertStringNotContainsString(
-            'class="component form-control custom-file-input default component classes"',
-            $html
+    }
+
+    public function testSetComponentClassesReplacesDefault(): void
+    {
+        config()->set(
+            'bootstrap-components.components.' . $this->getComponentKey(),
+            get_class($this->getCustomComponent())
         );
+        $html = $this->getComponent()->name('name')->componentClasses(['replaced'])->toHtml();
+        self::assertStringContainsString('class="component form-control custom-file-input replaced"', $html);
     }
 
     public function testSetUploadedFile(): void
@@ -228,7 +223,7 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         self::assertStringContainsString(' name="remove_name"', $html);
     }
 
-    public function testSetShowRemoveCheckboxOverridesDefault(): void
+    public function testSetShowRemoveCheckboxReplacesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),

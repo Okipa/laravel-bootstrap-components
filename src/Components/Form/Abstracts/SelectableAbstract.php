@@ -70,17 +70,14 @@ abstract class SelectableAbstract extends FormAbstract
         return $this;
     }
 
-    protected function getParameters(): array
+    protected function getViewParams(): array
     {
-        $options = $this->getOptions();
-        $optionValueField = $this->getOptionValueField();
-        $optionLabelField = $this->getOptionLabelField();
-        $multiple = $this->getMultiple();
-
-        return array_merge(
-            parent::getParameters(),
-            compact('options', 'optionValueField', 'optionLabelField', 'multiple')
-        );
+        return array_merge(parent::getViewParams(), [
+            'options' => $this->getOptions(),
+            'optionValueField' => $this->getOptionValueField(),
+            'optionLabelField' => $this->getOptionLabelField(),
+            'multiple' => $this->getMultiple(),
+        ]);
     }
 
     protected function getOptions(): array
