@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.0.1](https://github.com/Okipa/laravel-bootstrap-components/compare/5.0.0...5.0.1)
+
+2020-12-11
+
+* The `Field correctly filled.` validation feedback sentence has been removed. The `is-valid` class is enough to highlight valid fields and this will avoid forms overloading.
+* The `bootstrap-components.form.formValidation.displaySuccess` config value is now set to `true` by default, in order to highlight valid fields when some of them are in error.
+* In relation with the 2 points above, you're advised to pass the `bootstrap-components.form.formValidation.displaySuccess` config value to `true` if you published the package configuration file, in order to improve the ergonomics of your forms.
+
 ## [5.0.0](https://github.com/Okipa/laravel-bootstrap-components/compare/4.0.0...5.0.0)
 
 2020-12-02

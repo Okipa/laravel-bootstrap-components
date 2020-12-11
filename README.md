@@ -184,7 +184,6 @@ Here is the list of the words and sentences available for translation:
 * `Awaited format: Hour:Minutes.`
 * `Awaited format: Day/Month/Year Hour:Minutes.`
 * `Your browser does not support the :tag HTML5 tag.`
-* `Field correctly filled.`
 
 You will also have to define each attribute you define in the `->name()` method in the `validation` (`attributes` key) translation file.
 

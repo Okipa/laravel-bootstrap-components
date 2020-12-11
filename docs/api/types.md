@@ -55,8 +55,8 @@
 | labelPositionedAbove(bool $positionedAbove = true): self | No | Set the label above-positioning status. If not positioned above, the label will be positioned under the input (may be useful for bootstrap 4 floating labels). |
 | placeholder(?string $placeholder): self | No | Set the component input placeholder. Default value : `$label`. |
 | caption(?string $caption): self | No | Set the component caption. |
-| displaySuccess(?bool $displaySuccess = true): self | No | Set the component input validation success display status. |
-| displayFailure(?bool $displayFailure = true): self | No | Set the component input validation failure display status. |
+| displaySuccess(?bool $displaySuccess = true): self | No | Override the component default input validation success display status. Valid fields will only be highlighted as valid if other are in error. |
+| displayFailure(?bool $displayFailure = true): self | No | Override the component default input validation failure display status. Invalid fields will only be highlighted if the `$errors` blade variable contains an error related to the component input name. |
 | errorBag(string $errorBag): self | No | Define the name of the error bag that will contain the error related to this input. By default, the Laravel error bag is `default`. |
 
 **Usage**

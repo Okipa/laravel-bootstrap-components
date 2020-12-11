@@ -363,11 +363,9 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $errors = app(ViewErrorBag::class)->put('default', $messageBag);
         $html = $this->getComponent()->name('name')->render(compact('errors'));
         self::assertStringContainsString('is-valid', $html);
-        self::assertStringContainsString('<div class="valid-feedback d-block">', $html);
-        self::assertStringContainsString(__('Field correctly filled.'), $html);
     }
 
-    public function testSetDisplaySuccessReplacesDefault(): void
+    public function testSetDisplaySuccessOverridesDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -377,8 +375,6 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $errors = app(ViewErrorBag::class)->put('default', $messageBag);
         $html = $this->getComponent()->name('name')->displaySuccess(false)->render(compact('errors'));
         self::assertStringNotContainsString('is-valid', $html);
-        self::assertStringNotContainsString('<div class="valid-feedback d-block">', $html);
-        self::assertStringNotContainsString(__('Field correctly filled.'), $html);
     }
 
     public function testSetCustomDisplayFailure(): void

@@ -85,7 +85,6 @@ abstract class MultilingualAbstract extends FormAbstract
                 ?ViewErrorBag $errors,
                 ?string $locale
             ) => $this->getLocalizedErrorMessage($errors, $locale),
-            'successMessage' => fn() => $this->getSuccessMessage(),
             'labelPositionedAbove' => $this->getLabelPositionedAbove(),
             'label' => $this->getLocalizedLabel($locale),
             'type' => $this->getType(),
