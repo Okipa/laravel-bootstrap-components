@@ -159,7 +159,6 @@ abstract class FormAbstract extends ComponentAbstract
         return array_merge(parent::getViewParams(), [
             'validationClass' => fn(?ViewErrorBag $errors) => $this->getValidationClass($errors),
             'errorMessage' => fn(?ViewErrorBag $errors) => $this->getErrorMessage($errors),
-            'successMessage' => fn() => $this->getSuccessMessage(),
             'labelPositionedAbove' => $this->getLabelPositionedAbove(),
             'label' => $this->getLabel(),
             'type' => $this->getType(),
@@ -227,15 +226,6 @@ abstract class FormAbstract extends ComponentAbstract
         }
 
         return $this->getErrorMessageBag($errors)->first($this->convertArrayNameInNotation());
-    }
-
-    protected function getSuccessMessage(): ?string
-    {
-        if ($this->getDisplaySuccess()) {
-            return (string) __('Field correctly filled.');
-        }
-
-        return null;
     }
 
     protected function getLabelPositionedAbove(): bool

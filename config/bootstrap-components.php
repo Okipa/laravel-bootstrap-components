@@ -2,12 +2,12 @@
 
 return [
 
-    /*
+    /**
      * The fully qualified class name of the components.
      * Here you can override them. Make sure your custom component extends the overridden one.
      */
     'components' => [
-        // Form
+        // Form components
         'text' => Okipa\LaravelBootstrapComponents\Components\Form\InputText::class,
         'email' => Okipa\LaravelBootstrapComponents\Components\Form\InputEmail::class,
         'password' => Okipa\LaravelBootstrapComponents\Components\Form\InputPassword::class,
@@ -24,7 +24,7 @@ return [
         'radio' => Okipa\LaravelBootstrapComponents\Components\Form\InputRadio::class,
         'textarea' => Okipa\LaravelBootstrapComponents\Components\Form\Textarea::class,
         'select' => Okipa\LaravelBootstrapComponents\Components\Form\Select::class,
-        // Buttons
+        // Buttons components
         'submit' => Okipa\LaravelBootstrapComponents\Components\Buttons\Submit::class,
         'create' => Okipa\LaravelBootstrapComponents\Components\Buttons\SubmitCreate::class,
         'update' => Okipa\LaravelBootstrapComponents\Components\Buttons\SubmitUpdate::class,
@@ -33,34 +33,30 @@ return [
         'link' => Okipa\LaravelBootstrapComponents\Components\Buttons\ButtonLink::class,
         'back' => Okipa\LaravelBootstrapComponents\Components\Buttons\ButtonBack::class,
         'cancel' => Okipa\LaravelBootstrapComponents\Components\Buttons\ButtonCancel::class,
-        // Media
+        // Media components
         'image' => Okipa\LaravelBootstrapComponents\Components\Media\Image::class,
         'audio' => Okipa\LaravelBootstrapComponents\Components\Media\Audio::class,
         'video' => Okipa\LaravelBootstrapComponents\Components\Media\Video::class,
     ],
 
-    /*
-    * Form components specific configuration.
-    */
+    /** Form components specific configuration. */
     'form' => [
-        /*
+        /**
          * The fully qualified class name of the multilingual resolver.
          * You can override it. Make sure your custom resolver extends this one.
          */
         'multilingualResolver' => Okipa\LaravelBootstrapComponents\Components\Form\Multilingual\Resolver::class,
 
-        /*
+        /**
          * Whether the form component label is positioned above the component itself.
          * If not positioned above, the label will be positioned under the input
          * (may be useful for bootstrap 4 floating labels).
          */
         'labelPositionedAbove' => true,
 
-        /*
-         * Whether the form component should display its success or failure status.
-         */
+        /** Whether the form component should display its success or failure status. */
         'formValidation' => [
-            'displaySuccess' => false,
+            'displaySuccess' => true,
             'displayFailure' => true,
         ],
     ],
