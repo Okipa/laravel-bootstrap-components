@@ -46,17 +46,18 @@
 
 | Signature | Required | Description |
 |---|---|---|
-| name(string $name): self | Yes | Set the component input name tag. |
-| model(Model $model): self | No | Set the component associated model. |
-| value(mixed $value): self | No | Set the component input value. |
-| prepend(?string $prepend): self | No | Prepend HTML to the component input group. Set null to hide it. |
-| append(?string $html): self | No | Append HTML to the component input group. Set null to hide it. |
-| label(?string $label): self | No | Set the component input label. Default value : `__('validation.attributes.' .$name)`. Set null to hide it. |
+| name(string $name): self | Yes | Set the input name. |
+| model(Model $model): self | No | Set the associated model. |
+| value(mixed $value): self | No | Set the input value. |
+| wire(?string $option = '', string $model = null): self | No | Bind the input to a Livewire component. It automatically generates the `wire:model.$option="$model.$name>"` HTML attribute from the input `$name` and `$model` properties and from the method attributes. |
+| prepend(?string $prepend): self | No | Prepend HTML to the input group. Set `null` to hide it. |
+| append(?string $html): self | No | Append HTML to the input group. Set `null` to hide it. |
+| label(?string $label): self | No | Set the label. Default value : `__('validation.attributes.' . $name)`. Set `null` to hide it. |
 | labelPositionedAbove(bool $positionedAbove = true): self | No | Set the label above-positioning status. If not positioned above, the label will be positioned under the input (may be useful for bootstrap 4 floating labels). |
-| placeholder(?string $placeholder): self | No | Set the component input placeholder. Default value : `$label`. |
-| caption(?string $caption): self | No | Set the component caption. |
-| displaySuccess(?bool $displaySuccess = true): self | No | Override the component default input validation success display status. Valid fields will only be highlighted as valid if other are in error. |
-| displayFailure(?bool $displayFailure = true): self | No | Override the component default input validation failure display status. Invalid fields will only be highlighted if the `$errors` blade variable contains an error related to the component input name. |
+| placeholder(?string $placeholder): self | No | Set the input placeholder. Default value : `$label`. |
+| caption(?string $caption): self | No | Set the input caption. |
+| displaySuccess(?bool $displaySuccess = true): self | No | Override the input default input validation success display status. Valid fields will only be highlighted as valid if other are in error. |
+| displayFailure(?bool $displayFailure = true): self | No | Override the input default input validation failure display status. Invalid fields will only be highlighted if the `$errors` blade variable contains an error related to the input name. |
 | errorBag(string $errorBag): self | No | Define the name of the error bag that will contain the error related to this input. By default, the Laravel error bag is `default`. |
 
 **Usage**
@@ -67,6 +68,7 @@
     ->name('email')
     ->model($user)
     ->value('john.doe@domain.com')
+    ->wire('lazy', 'custom') // Generates input `wire:model.lazy="custom.email"` HTML attribute
     ->prepend('<i class="fas fa-hand-pointer"></i>')
     ->append('<i class="fas fa-hand-pointer"></i>')
     ->label('Email')
