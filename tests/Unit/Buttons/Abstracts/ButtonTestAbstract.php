@@ -44,7 +44,7 @@ abstract class ButtonTestAbstract extends SubmitTestAbstract
         self::assertStringContainsString('href="' . route($customRoute) . '"', $html);
     }
 
-    public function testSetCustomLabel(): void
+    public function testDefaultLabel(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),

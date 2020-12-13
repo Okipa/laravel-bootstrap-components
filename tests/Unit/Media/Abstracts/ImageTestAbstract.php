@@ -116,7 +116,7 @@ abstract class ImageTestAbstract extends MediaTestAbstract
         self::assertStringContainsString('<img id="' . $customComponentId . '"', $html);
     }
 
-    public function testSetCustomLinkClasses(): void
+    public function testDefaultLinkClasses(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -146,7 +146,7 @@ abstract class ImageTestAbstract extends MediaTestAbstract
         self::assertStringContainsString('class="component-link replaces default"', $html);
     }
 
-    public function testSetCustomLinkHtmlAttributes(): void
+    public function testDefaultLinkHtmlAttributes(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),

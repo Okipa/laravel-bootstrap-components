@@ -157,7 +157,7 @@ abstract class InputFileTestAbstract extends InputTestAbstract
             . '-name">' . __('No file selected.') . '</label>', $html);
     }
 
-    public function testSetCustomComponentClasses(): void
+    public function testDefaultComponentClasses(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -256,7 +256,7 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetCustomRemoveCheckboxLabel(): void
+    public function testSetRemoveCheckboxLabel(): void
     {
         $html = $this->getComponent()->name('name')->uploadedFile(function () {
             return 'html';

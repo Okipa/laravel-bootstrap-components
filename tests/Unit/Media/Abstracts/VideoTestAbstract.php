@@ -4,7 +4,7 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Media\Abstracts;
 
 abstract class VideoTestAbstract extends MediaTestAbstract
 {
-    public function testSetCustomPoster(): void
+    public function testDefaultPoster(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),

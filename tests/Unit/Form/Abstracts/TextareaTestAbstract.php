@@ -74,7 +74,7 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
         self::assertStringNotContainsString('custom-value</textarea>', $html);
     }
 
-    public function testSetCustomLabelPositionedAbove(): void
+    public function testDefaultLabelPositionedAbove(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),

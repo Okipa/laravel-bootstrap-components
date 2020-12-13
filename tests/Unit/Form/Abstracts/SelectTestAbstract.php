@@ -554,7 +554,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testSetCustomLabelPositionedAbove(): void
+    public function testDefaultLabelPositionedAbove(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -678,7 +678,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         self::assertStringContainsString('<select id="' . $customComponentId . '"', $html);
     }
 
-    public function testSetCustomComponentClasses(): void
+    public function testDefaultComponentClasses(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),

@@ -24,7 +24,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         self::assertStringContainsString(' checked="checked"', $html);
     }
 
-    public function testSetCustomPrepend(): void
+    public function testDefaultPrepend(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -59,7 +59,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         self::assertStringNotContainsString('<div class="label-prepend">', $html);
     }
 
-    public function testSetCustomAppend(): void
+    public function testDefaultAppend(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -217,7 +217,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
             . 'validation.attributes.active</label>', $html);
     }
 
-    public function testSetCustomLabelPositionedAbove(): void
+    public function testDefaultLabelPositionedAbove(): void
     {
         self::markTestSkipped();
     }
@@ -267,7 +267,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         self::markTestSkipped();
     }
 
-    public function testSetCustomContainerClasses(): void
+    public function testDefaultContainerClasses(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -308,7 +308,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetCustomComponentClasses(): void
+    public function testDefaultComponentClasses(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),

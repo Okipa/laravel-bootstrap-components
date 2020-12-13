@@ -48,7 +48,7 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
         self::assertStringNotContainsString('<source src="', $html);
     }
 
-    public function testSetCustomCaption(): void
+    public function testDefaultCaption(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -125,7 +125,7 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('<audio id="custom-component-id"', $html);
     }
 
-    public function testSetCustomContainerClasses(): void
+    public function testDefaultContainerClasses(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -155,7 +155,7 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('class="component-container replaces default"', $html);
     }
 
-    public function testSetCustomComponentClasses(): void
+    public function testDefaultComponentClasses(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -185,7 +185,7 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('class="component replaces default"', $html);
     }
 
-    public function testSetCustomContainerHtmlAttributes(): void
+    public function testDefaultContainerHtmlAttributes(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -219,7 +219,7 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('replaces="default">', $html);
     }
 
-    public function testSetCustomComponentHtmlAttributes(): void
+    public function testDefaultComponentHtmlAttributes(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
