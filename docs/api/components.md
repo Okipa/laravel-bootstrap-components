@@ -35,7 +35,7 @@
 
 ## Input text
 
-**Type :** [FormAbstract](./types.md#formabstract)
+**Type :** [InputAbstract](./types.md#inputabstract)
 
 **Helper :** `inputText()`
 
@@ -51,7 +51,7 @@
 
 ## Input email
 
-**Type :** [FormAbstract](./types.md#formabstract)
+**Type :** [InputAbstract](./types.md#inputabstract)
 
 **Helper :** `inputEmail()`
 
@@ -68,7 +68,7 @@
 
 ## Input password
 
-**Type :** [FormAbstract](./types.md#formabstract)
+**Type :** [InputAbstract](./types.md#inputabstract)
 
 **Helper :** `inputPassword()`
 
@@ -85,7 +85,7 @@
 
 ## Input URL
 
-**Type :** [FormAbstract](./types.md#formabstract)
+**Type :** [InputAbstract](./types.md#inputabstract)
 
 **Helper :** `inputUrl()`
 
@@ -101,7 +101,7 @@
 
 ## Input tel
 
-**Type :** [FormAbstract](./types.md#formabstract)
+**Type :** [InputAbstract](./types.md#inputabstract)
 
 **Helper :** `inputTel()`
 
@@ -118,7 +118,7 @@
 
 ## Input number
 
-**Type :** [FormAbstract](./types.md#formabstract)
+**Type :** [InputAbstract](./types.md#inputabstract)
 
 **Helper :** `inputNumber()`
 
@@ -134,7 +134,7 @@
 
 ## Input color
 
-**Type :** [FormAbstract](./types.md#formabstract)
+**Type :** [InputAbstract](./types.md#inputabstract)
 
 **Helper :** `inputColor()`
 

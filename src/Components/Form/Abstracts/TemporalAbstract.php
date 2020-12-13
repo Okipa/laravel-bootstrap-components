@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use DateTime;
 use Okipa\LaravelBootstrapComponents\Components\Form\Traits\TemporalValidityChecks;
 
-abstract class TemporalAbstract extends FormAbstract
+abstract class TemporalAbstract extends InputAbstract
 {
     use TemporalValidityChecks;
 

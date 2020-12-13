@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Support\Arr;
 use Okipa\LaravelBootstrapComponents\Components\Form\Traits\SelectValidityChecks;
 
-abstract class SelectableAbstract extends FormAbstract
+abstract class SelectableAbstract extends InputAbstract
 {
     use SelectValidityChecks;
 

@@ -2,7 +2,7 @@
 
 use Okipa\LaravelBootstrapComponents\Components\Component;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\CheckableAbstract;
-use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract;
+use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\InputAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\MultilingualAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\RadioAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\SelectableAbstract;
@@ -17,42 +17,42 @@ if (! function_exists('inputText')) {
 }
 
 if (! function_exists('inputEmail')) {
-    function inputEmail(): FormAbstract
+    function inputEmail(): InputAbstract
     {
         return (new Component())->inputEmail();
     }
 }
 
 if (! function_exists('inputPassword')) {
-    function inputPassword(): FormAbstract
+    function inputPassword(): InputAbstract
     {
         return (new Component())->inputPassword();
     }
 }
 
 if (! function_exists('inputUrl')) {
-    function inputUrl(): FormAbstract
+    function inputUrl(): InputAbstract
     {
         return (new Component())->inputUrl();
     }
 }
 
 if (! function_exists('inputTel')) {
-    function inputTel(): FormAbstract
+    function inputTel(): InputAbstract
     {
         return (new Component())->inputTel();
     }
 }
 
 if (! function_exists('inputNumber')) {
-    function inputNumber(): FormAbstract
+    function inputNumber(): InputAbstract
     {
         return (new Component())->inputNumber();
     }
 }
 
 if (! function_exists('inputColor')) {
-    function inputColor(): FormAbstract
+    function inputColor(): InputAbstract
     {
         return (new Component())->inputColor();
     }

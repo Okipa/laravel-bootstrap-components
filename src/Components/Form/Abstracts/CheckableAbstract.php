@@ -2,7 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Components\Form\Abstracts;
 
-abstract class CheckableAbstract extends FormAbstract
+abstract class CheckableAbstract extends InputAbstract
 {
     protected bool $checked;
 

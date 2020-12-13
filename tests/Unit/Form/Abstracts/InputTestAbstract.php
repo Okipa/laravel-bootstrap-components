@@ -5,7 +5,7 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\ViewErrorBag;
 use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
-use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract;
+use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\InputAbstract;
 use Okipa\LaravelBootstrapComponents\Tests\BootstrapComponentsTestCase;
 use Okipa\LaravelBootstrapComponents\Tests\Fakers\UsersFaker;
 use RuntimeException;
@@ -32,7 +32,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
 
     public function testInstance(): void
     {
-        self::assertInstanceOf(FormAbstract::class, $this->getComponent());
+        self::assertInstanceOf(InputAbstract::class, $this->getComponent());
     }
 
     public function testSetName(): void
@@ -351,6 +351,46 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
     {
         $html = $this->getComponent()->name('name')->placeholder(false)->toHtml();
         self::assertStringNotContainsString(' placeholder="', $html);
+    }
+
+    public function testSetWireWithoutOptionWithoutModel(): void
+    {
+        $html = $this->getComponent()->name('name')->wire()->toHtml();
+        self::assertStringContainsString(' wire:model="name"', $html);
+    }
+
+    public function testSetWireWithoutOptionWithModelBinding(): void
+    {
+        $user = $this->createUniqueUser();
+        $html = $this->getComponent()->name('name')->model($user)->wire()->toHtml();
+        self::assertStringContainsString(' wire:model="user.name"', $html);
+    }
+
+    public function testSetWireWithoutOptionWithCustomModel(): void
+    {
+        $user = $this->createUniqueUser();
+        $html = $this->getComponent()->name('name')->model($user)->wire(null, 'test')->toHtml();
+        self::assertStringContainsString(' wire:model="test.name"', $html);
+    }
+
+    public function testSetWireWithOptionWithoutModel(): void
+    {
+        $html = $this->getComponent()->name('name')->wire('defer')->toHtml();
+        self::assertStringContainsString(' wire:model.defer="name"', $html);
+    }
+
+    public function testSetWireWithOptionWithModelBinding(): void
+    {
+        $user = $this->createUniqueUser();
+        $html = $this->getComponent()->name('name')->model($user)->wire('defer')->toHtml();
+        self::assertStringContainsString(' wire:model.defer="user.name"', $html);
+    }
+
+    public function testSetWireWithOptionWithCustomModel(): void
+    {
+        $user = $this->createUniqueUser();
+        $html = $this->getComponent()->name('name')->model($user)->wire('defer', 'test')->toHtml();
+        self::assertStringContainsString(' wire:model.defer="test.name"', $html);
     }
 
     public function testDefaultDisplaySuccess(): void

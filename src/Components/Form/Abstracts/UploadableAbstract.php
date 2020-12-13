@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Support\HtmlString;
 use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
 
-abstract class UploadableAbstract extends FormAbstract
+abstract class UploadableAbstract extends InputAbstract
 {
     protected ?Closure $uploadedFile = null;
 
