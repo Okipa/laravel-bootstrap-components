@@ -145,7 +145,10 @@ You can easily bind you inputs with a Livewire component.
 
 ```blade
 {{-- Will bind this input with: wire:model.lazy="user.email" --}}
-{{ inputEmail()->name('email')->model(App\Models\User::first())->wire('lazy') }}
+{{ inputEmail()->name('email')
+    ->model(App\Models\User::first()) // Will pass the `:user=$user`
+    ->value($email) // Send back the `$email` value from Livewire to the input component to benefit from real-time validation.
+    ->wire('lazy') }}
 ```
 
 ## Table of Contents

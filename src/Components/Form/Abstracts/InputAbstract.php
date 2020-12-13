@@ -223,6 +223,35 @@ abstract class InputAbstract extends ComponentAbstract
 
     abstract protected function setDisplayFailure(): bool;
 
+    protected function getWire(): ?array
+    {
+        if (! isset($this->wireOption)) {
+            return null;
+        }
+        $wireOption = $this->wireOption ? '.' . $this->wireOption : '';
+        if ($this->wireModel) {
+            return ['wire:model' . $wireOption => $this->wireModel . '.' . $this->getName()];
+        }
+
+        return [
+            'wire:model' . $wireOption => $this->getModel()
+                ? Str::lower(Str::afterLast($this->getModel()->getMorphClass(), '\\')) . '.' . $this->getName()
+                : $this->getName(),
+        ];
+    }
+
+    protected function getModel(): ?Model
+    {
+        return $this->model;
+    }
+
+    protected function getDisplaySuccess(): bool
+    {
+        return $this->displaySuccess;
+    }
+
+    abstract protected function setDisplaySuccess(): bool;
+
     /** @return mixed */
     protected function getValue()
     {
@@ -240,13 +269,6 @@ abstract class InputAbstract extends ComponentAbstract
 
         return optional($this->model)->{$this->convertArrayNameInNotation()};
     }
-
-    protected function getDisplaySuccess(): bool
-    {
-        return $this->displaySuccess;
-    }
-
-    abstract protected function setDisplaySuccess(): bool;
 
     protected function getErrorMessage(?ViewErrorBag $errors): ?string
     {
@@ -295,28 +317,6 @@ abstract class InputAbstract extends ComponentAbstract
         }
 
         return (string) __('validation.attributes.' . $this->removeArrayCharactersFromName());
-    }
-
-    protected function getWire(): ?array
-    {
-        if (! isset($this->wireOption)) {
-            return null;
-        }
-        $wireOption = $this->wireOption ? '.' . $this->wireOption : '';
-        if ($this->wireModel) {
-            return ['wire:model' . $wireOption => $this->wireModel . '.' . $this->getName()];
-        }
-
-        return [
-            'wire:model' . $wireOption => $this->getModel()
-                ? Str::lower(Str::afterLast($this->getModel()->getMorphClass(), '\\')) . '.' . $this->getName()
-                : $this->getName(),
-        ];
-    }
-
-    protected function getModel(): ?Model
-    {
-        return $this->model;
     }
 
     protected function getPrepend(): ?string

@@ -118,20 +118,18 @@ abstract class MultilingualAbstract extends InputAbstract
         if (! $errors) {
             return null;
         }
-        if ($this->getErrorMessageBag($errors)->isEmpty()) {
-            return null;
-        }
         if (
-            $this->getErrorMessageBag($errors)->has($this->multilingualResolver->resolveErrorMessageBagKey(
-                $this->getName(),
-                $locale
-            ))
+            $this->getErrorMessageBag($errors)
+            ->has($this->multilingualResolver->resolveErrorMessageBagKey($this->getName(), $locale))
         ) {
             return $this->getDisplayFailure() ? 'is-invalid' : null;
         }
+        // Highlight field as valid if it has a value and if no related error is found in the error bag.
+        if ($this->getValue()) {
+            return $this->getDisplaySuccess() ? 'is-valid' : null;
+        }
 
-        // Only highlight valid fields if there are invalid fields.
-        return $this->getDisplaySuccess() ? 'is-valid' : null;
+        return null;
     }
 
     protected function getLocalizedErrorMessage(?ViewErrorBag $errors, string $locale): ?string
