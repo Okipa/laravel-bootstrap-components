@@ -49,7 +49,7 @@
 | name(string $name): self | Yes | Set the input name. |
 | model(Model $model): self | No | Set the associated model. |
 | value(mixed $value): self | No | Set the input value. |
-| wire(?string $option = '', string $model = null): self | No | Bind the input to a Livewire component. It automatically generates the `wire:model.$option="$model.$name>"` HTML attribute from the input `$name` and `$model` properties and from the method attributes. |
+| wire(?string $option = '', string $model = null): self | No | Bind the input to a Livewire component. It automatically generates the `wire:model.$option="$model.$name>"` HTML attribute from the input `$name` and `$model` properties and from the method attributes. Other Livewire attribute will have to be added with the `componentHtmlAttributes` method. |
 | prepend(?string $prepend): self | No | Prepend HTML to the input group. Set `null` to hide it. |
 | append(?string $html): self | No | Append HTML to the input group. Set `null` to hide it. |
 | label(?string $label): self | No | Set the label. Default value : `__('validation.attributes.' . $name)`. Set `null` to hide it. |
@@ -106,11 +106,11 @@
 
 * You will still be able to use the `value`, `prepend` and `append` methods as for a simple `InputAbstract` component if you wish to. Closure usage is an extra behaviour, which is here to allow you to display translated content.
 * A security fallback has been implemented in order to allow you to keep the Closure behaviour for the `value`, `prepend` and `append` methods, even if your component is not multilingual anymore. The `$locale` attribute will take the value of the current locale.
-* Each multilingual form component will behave as a monolingual form component as long as the `->locales()` method is not being used or as long as only one locale is being declared.
+* Each multilingual input component will behave as a monolingual component as long as the `->locales()` method is not being used or as long as only one locale is being declared.
 * The use of the `->locales()` method will replicate the component for each locale keys you declared.
   * For example, if you declare the `fr` and `en` locale keys for a text input component with the `title` attribute, you will get two `Title (FR)` and `Title (EN)` generated text input components.
 * Each multilingual component provides an extra `data-locale="<locale>"` attribute to help with eventual javascript treatments.
-* You can use your own multilingual `Resolver` by replacing the path defined in the `config('bootstrap-components.form.multilingualResolver')`, allowing you to customize your multilingual form components localization behaviour :
+* You can use your own multilingual `Resolver` by replacing the path defined in the `config('bootstrap-components.form.multilingualResolver')`, allowing you to customize your multilingual input components localization behaviour :
   * The default locales to handle (default: `[]`).
   * The component localized `name` attribute resolution (default : `$name[$locale]`.
   * The component localized old value resolution in case of validation errors (default : `old($name)[$locale]`).

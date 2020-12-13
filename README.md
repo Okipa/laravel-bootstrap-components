@@ -47,15 +47,17 @@ Just call the components you need in your views and let this package take care o
 
 ### Standard use case
 
-Call this component in your view:
+Call this component to display it in your blade view:
 
 ```blade
 {{-- Helper style --}}
-{{ inputText()->name('name') }}
+{{ inputEmail()->name('email') }}
 
 {{-- Facade style --}}
-{{ InputText::name('name') }}
+{{ InputEmail::name('email') }}
 ```
+
+![Simple input](/docs/simple-input.png)
 
 And get this HTML generated for you:
 
@@ -82,7 +84,7 @@ And get this HTML generated for you:
 
 ### Multilingual use case
 
-Call this component in your view:
+Call this component to display it in your blade view:
 
 ```blade
 {{-- Helper style --}}
@@ -91,6 +93,8 @@ Call this component in your view:
 {{-- Facade style --}}
 {{ InputText::name('title')->localized(['fr', 'en']) }}
 ```
+
+![Simple input](/docs/localized-input.png)
 
 And get this HTML generated for you:
 
@@ -133,6 +137,16 @@ And get this HTML generated for you:
             data-locale="en">
     </div>
 </div>
+```
+
+### Use with livewire
+
+You can easily bind you inputs with a Livewire component.
+
+```blade
+{{-- Will bind your input with `wire:model.lazy="user.email"`. --}}
+@php($user = User::first())
+{{ inputEmail()->name('email')->model($user)->wire('lazy') }}
 ```
 
 ## Table of Contents

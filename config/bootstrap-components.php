@@ -48,13 +48,13 @@ return [
         'multilingualResolver' => Okipa\LaravelBootstrapComponents\Components\Form\Multilingual\Resolver::class,
 
         /**
-         * Whether the form component label is positioned above the component itself.
+         * Whether the input component label is positioned above the component itself.
          * If not positioned above, the label will be positioned under the input
          * (may be useful for bootstrap 4 floating labels).
          */
         'labelPositionedAbove' => true,
 
-        /** Whether the form component should display its success or failure status. */
+        /** Whether the input component should display its success or failure status. */
         'formValidation' => [
             'displaySuccess' => true,
             'displayFailure' => true,

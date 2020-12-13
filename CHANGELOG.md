@@ -1,13 +1,14 @@
 # Changelog
 
-## [5.0.2](https://github.com/Okipa/laravel-bootstrap-components/compare/5.0.1...5.0.2)
+## [5.1.0](https://github.com/Okipa/laravel-bootstrap-components/compare/5.0.1...5.1.0)
 
 2020-12-13
 
 * Fixed the `is-valid` class displaying conditions: this class now **only** appears if the field has a filled value (will not appear otherwise)
-  * This change allows form components to be highlighted as valid when they are being filled or after the were filled with real-time validation and re-rendering (improves Livewire use)
+  * This change allows input components to be highlighted as valid when they are being filled or after the were filled with real-time validation and re-rendering (improves Livewire use)
   * It does not change the behaviour for a form post-submission page reloading standard use-case
-* Added a `wire` method for form components which simplifies Livewire handling.
+* Added a [wire](/docs/api/types.md#inputabstract) method for input components which simplifies Livewire handling
+* Updated doc with Livewire support
 
 ## [5.0.1](https://github.com/Okipa/laravel-bootstrap-components/compare/5.0.0...5.0.1)
 
@@ -75,8 +76,8 @@
 
 2020-07-16
 
-* Fixed form components label hiding when setting `null` or `false`
-* Fixed form components `prepend` and `append` methods in order to let them accept `false` to hide them
+* Fixed input components label hiding when setting `null` or `false`
+* Fixed input components `prepend` and `append` methods in order to let them accept `false` to hide them
 
 ## [2.2.2](https://github.com/Okipa/laravel-bootstrap-components/compare/2.2.1...2.2.2)
 ## [2.2.1](https://github.com/Okipa/laravel-bootstrap-components/compare/2.2.0...2.2.1)
@@ -108,8 +109,8 @@
 
 2020-06-08
 
-* Rules have been softened for the form component name attribute definition : the name attribute is not automatically kebab cased anymore in order to give more usage flexibility
-  * Please note that the default id of the form components, which is automatically generated from the name attribute, is still formatted in kebab case
+* Rules have been softened for the input component name attribute definition : the name attribute is not automatically kebab cased anymore in order to give more usage flexibility
+  * Please note that the default id of the input components, which is automatically generated from the name attribute, is still formatted in kebab case
 
 ## [2.1.9](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.8...2.1.9)
 
@@ -130,15 +131,15 @@
 
 2020-04-02
 
-* Fixed the form components pre-filling when defining an array name (eg. `name[0]`)
+* Fixed the input components pre-filling when defining an array name (eg. `name[0]`)
 * Fixed the placeholder generation when defining an array name (eg. `name[0]`)
 
 ## [2.1.6](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.5...2.1.6)
 
 2020-04-02
 
-* Fixed a bug preventing the form components to display errors on input with array name (eg. `name[0]`)
-* Fixed a wrong default id generation for the for the form components on inputs with array name (`text-name0` will now be correctly displayed `text-name-0`)
+* Fixed a bug preventing the input components to display errors on input with array name (eg. `name[0]`)
+* Fixed a wrong default id generation for the input components with array name (`text-name0` will now be correctly displayed `text-name-0`)
 
 ## [2.1.5](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.4...2.1.5)
 
@@ -156,7 +157,7 @@
 
 2020-03-19
 
-* Fixed a form components behavior issue when some zero, null or empty strings values were provided
+* Fixed input components behavior issue when some zero, null or empty strings values were provided
 
 ## [2.1.2](https://github.com/Okipa/laravel-bootstrap-components/compare/2.1.1...2.1.2)
 
@@ -197,8 +198,8 @@
 
 2019-11-26
 
-* Changed signature of `->displaySuccess()` form components to `public function displaySuccess(?bool $displaySuccess = true): self`
-* Changed signature of `->displayFailure()` form components to `public function displayFailure(?bool $displayFailure = true): self`
+* Changed signature of `->displaySuccess()` input components to `public function displaySuccess(?bool $displaySuccess = true): self`
+* Changed signature of `->displayFailure()` input components to `public function displayFailure(?bool $displayFailure = true): self`
 * Calling `->displaySuccess()` does not have an incidence on the `is-valid` class application : if set to false, the `is-valid` class will not be added even if the form is in success
 * Calling `->displayFailure()` does not have an incidence on the `is-invalid` class application : if set to false, the `is-invalid` class will not be added even if the form is in failure
 

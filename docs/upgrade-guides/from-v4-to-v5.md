@@ -4,7 +4,7 @@ Follow the steps below to upgrade the package.
 
 ## Livewire support
 
-There was an issue preventing the error message and the validation class to be displayed on form components when they were used into a livewire component.
+There was an issue preventing the error message and the validation class to be displayed on input components when they were used into a livewire component.
 
 This was related to the fact the session was used to detect errors, which can't work with livewire as the `$errors` variable is passed in the blade view on re-rendering.
 
@@ -18,7 +18,7 @@ If you have published the views in order to make some customizations, you will h
 
 ## Named validation bag support
 
-All form components can now correctly display validation class and error message when using a named validation bag.
+All input components can now correctly display validation class and error message when using a named validation bag.
 
 If you validate an email this way:
 
