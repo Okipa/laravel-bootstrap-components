@@ -176,15 +176,16 @@ abstract class FormAbstract extends ComponentAbstract
         if (! $errors) {
             return null;
         }
-        if ($this->getErrorMessageBag($errors)->isEmpty()) {
-            return null;
-        }
+        // Highlight field as invalid if related errors are found in the error bag.
         if ($this->getErrorMessageBag($errors)->has($this->convertArrayNameInNotation())) {
             return $this->getDisplayFailure() ? 'is-invalid' : null;
         }
+        // Highlight field as valid if it has a value and if no related error is found in the error bag.
+        if ($this->getValue()) {
+            return $this->getDisplaySuccess() ? 'is-valid' : null;
+        }
 
-        // Only highlight valid fields if there are invalid fields.
-        return $this->getDisplaySuccess() ? 'is-valid' : null;
+        return null;
     }
 
     protected function getErrorMessageBag(ViewErrorBag $errors): MessageBag
@@ -208,6 +209,24 @@ abstract class FormAbstract extends ComponentAbstract
     }
 
     abstract protected function setDisplayFailure(): bool;
+
+    /** @return mixed */
+    protected function getValue()
+    {
+        $oldValue = old($this->convertArrayNameInNotation());
+        if ($oldValue) {
+            return $oldValue;
+        }
+        // Fallback for usage of closure with multilingual disabled.
+        if ($this->value instanceof Closure) {
+            return ($this->value)(app()->getLocale());
+        }
+        if (isset($this->value)) {
+            return $this->value;
+        }
+
+        return optional($this->model)->{$this->convertArrayNameInNotation()};
+    }
 
     protected function getDisplaySuccess(): bool
     {
@@ -250,24 +269,6 @@ abstract class FormAbstract extends ComponentAbstract
     protected function removeArrayCharactersFromName(): string
     {
         return strstr($this->getName(), '[', true) ?: $this->getName();
-    }
-
-    /** @return mixed */
-    protected function getValue()
-    {
-        $oldValue = old($this->convertArrayNameInNotation());
-        if ($oldValue) {
-            return $oldValue;
-        }
-        // Fallback for usage of closure with multilingual disabled.
-        if ($this->value instanceof Closure) {
-            return ($this->value)(app()->getLocale());
-        }
-        if (isset($this->value)) {
-            return $this->value;
-        }
-
-        return optional($this->model)->{$this->convertArrayNameInNotation()};
     }
 
     protected function getPlaceholder(): ?string

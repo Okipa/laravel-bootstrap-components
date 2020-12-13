@@ -2,6 +2,8 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
+use Illuminate\Support\MessageBag;
+use Illuminate\Support\ViewErrorBag;
 use InvalidArgumentException;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\RadioAbstract;
 
@@ -25,7 +27,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         self::assertStringContainsString('checked="checked"', $html);
     }
 
-    public function testSetCustomPrepend(): void
+    public function testDefaultPrepend(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -60,7 +62,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         self::assertStringNotContainsString('<div class="label-prepend">', $html);
     }
 
-    public function testSetCustomAppend(): void
+    public function testDefaultAppend(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -193,7 +195,19 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetCustomLabelPositionedAbove(): void
+    public function testDoesNotDisplaySuccessWithNoValue(): void
+    {
+        config()->set(
+            'bootstrap-components.components.' . $this->getComponentKey(),
+            get_class($this->getCustomComponent())
+        );
+        $messageBag = app(MessageBag::class)->add('other_name', 'Dummy error message.');
+        $errors = app(ViewErrorBag::class)->put('default', $messageBag);
+        $html = $this->getComponent()->name('name')->value(null)->render(compact('errors'));
+        self::assertStringNotContainsString('is-valid', $html);
+    }
+
+    public function testDefaultLabelPositionedAbove(): void
     {
         self::markTestSkipped();
     }
@@ -264,7 +278,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         self::assertStringContainsString('<input id="' . $this->getComponentType() . '-camel-case-name-value"', $html);
     }
 
-    public function testSetCustomContainerClasses(): void
+    public function testDefaultContainerClasses(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -300,7 +314,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         self::assertStringContainsString('class="component-container custom-control custom-checkbox replaced"', $html);
     }
 
-    public function testSetCustomComponentClasses(): void
+    public function testDefaultComponentClasses(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),

@@ -68,7 +68,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString(' value="' . $user->name . '"', $html);
     }
 
-    public function testSetCustomPrepend(): void
+    public function testDefaultPrepend(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -116,7 +116,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringNotContainsString('<div class="input-group-prepend">', $html);
     }
 
-    public function testSetCustomAppend(): void
+    public function testDefaultAppend(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -163,7 +163,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringNotContainsString('<div class="input-group">', $html);
     }
 
-    public function testSetCustomCaption(): void
+    public function testDefaultCaption(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -281,7 +281,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         );
     }
 
-    public function testSetCustomLabelPositionedAbove(): void
+    public function testDefaultLabelPositionedAbove(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -353,7 +353,19 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringNotContainsString(' placeholder="', $html);
     }
 
-    public function testSetCustomDisplaySuccess(): void
+    public function testDefaultDisplaySuccess(): void
+    {
+        config()->set(
+            'bootstrap-components.components.' . $this->getComponentKey(),
+            get_class($this->getCustomComponent())
+        );
+        $messageBag = app(MessageBag::class)->add('other_name', 'Dummy error message.');
+        $errors = app(ViewErrorBag::class)->put('default', $messageBag);
+        $html = $this->getComponent()->name('name')->value('test')->render(compact('errors'));
+        self::assertStringContainsString('is-valid', $html);
+    }
+
+    public function testDoesNotDisplaySuccessWithNoValue(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -362,7 +374,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $messageBag = app(MessageBag::class)->add('other_name', 'Dummy error message.');
         $errors = app(ViewErrorBag::class)->put('default', $messageBag);
         $html = $this->getComponent()->name('name')->render(compact('errors'));
-        self::assertStringContainsString('is-valid', $html);
+        self::assertStringNotContainsString('is-valid', $html);
     }
 
     public function testSetDisplaySuccessOverridesDefault(): void
@@ -373,11 +385,11 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         );
         $messageBag = app(MessageBag::class)->add('other_name', 'Dummy error message.');
         $errors = app(ViewErrorBag::class)->put('default', $messageBag);
-        $html = $this->getComponent()->name('name')->displaySuccess(false)->render(compact('errors'));
+        $html = $this->getComponent()->name('name')->value('test')->displaySuccess(false)->render(compact('errors'));
         self::assertStringNotContainsString('is-valid', $html);
     }
 
-    public function testSetCustomDisplayFailure(): void
+    public function testDefaultDisplayFailure(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -471,7 +483,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('<input id="' . $customComponentId . '"', $html);
     }
 
-    public function testSetCustomContainerClasses(): void
+    public function testDefaultContainerClasses(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -501,7 +513,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('class="component-container replaced"', $html);
     }
 
-    public function testSetCustomComponentClasses(): void
+    public function testDefaultComponentClasses(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -531,7 +543,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('class="component form-control replaced"', $html);
     }
 
-    public function testSetCustomContainerHtmlAttributes(): void
+    public function testDefaultContainerHtmlAttributes(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -561,7 +573,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('replaces="default">', $html);
     }
 
-    public function testSetCustomComponentHtmlAttributes(): void
+    public function testDefaultComponentHtmlAttributes(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
