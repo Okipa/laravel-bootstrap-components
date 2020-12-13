@@ -91,6 +91,7 @@ abstract class MultilingualAbstract extends InputAbstract
             'name' => $this->getLocalizedName($locale),
             'value' => $this->getLocalizedValue($locale),
             'placeholder' => $this->getLocalizedPlaceholder($locale),
+            'wire' => $this->getWire(),
             'prepend' => $this->getLocalizedPrepend($locale),
             'append' => $this->getLocalizedAppend($locale),
             'caption' => $this->getCaption(),

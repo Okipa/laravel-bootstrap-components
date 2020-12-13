@@ -7,6 +7,7 @@
 * Fixed the `is-valid` class displaying conditions: this class now **only** appears if the field has a filled value (will not appear otherwise)
   * This change allows form components to be highlighted as valid when they are being filled or after the were filled with real-time validation and re-rendering (improves Livewire use)
   * It does not change the behaviour for a form post-submission page reloading standard use-case
+* Added a `wire` method for form components which simplifies Livewire handling.
 
 ## [5.0.1](https://github.com/Okipa/laravel-bootstrap-components/compare/5.0.0...5.0.1)
 
