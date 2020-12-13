@@ -144,9 +144,8 @@ And get this HTML generated for you:
 You can easily bind you inputs with a Livewire component.
 
 ```blade
-{{-- Will bind your input with `wire:model.lazy="user.email"`. --}}
-@php($user = User::first())
-{{ inputEmail()->name('email')->model($user)->wire('lazy') }}
+{{-- Will bind this input with: wire:model.lazy="user.email" --}}
+{{ inputEmail()->name('email')->model(App\Models\User::first())->wire('lazy') }}
 ```
 
 ## Table of Contents
