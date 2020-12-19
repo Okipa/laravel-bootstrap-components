@@ -393,7 +393,31 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString(' wire:model.defer="test.name"', $html);
     }
 
-    public function testDefaultDisplaySuccess(): void
+    public function testDefaultDisplaySuccessWithNoError(): void
+    {
+        config()->set(
+            'bootstrap-components.components.' . $this->getComponentKey(),
+            get_class($this->getCustomComponent())
+        );
+        $messageBag = app(MessageBag::class)->add('other_name', 'Dummy error message.');
+        $errors = app(ViewErrorBag::class)->put('default', $messageBag);
+        $html = $this->getComponent()->name('name')->render(compact('errors'));
+        self::assertStringContainsString('is-valid', $html);
+    }
+
+    public function testDefaultDoesNotDisplaySuccessWithError(): void
+    {
+        config()->set(
+            'bootstrap-components.components.' . $this->getComponentKey(),
+            get_class($this->getCustomComponent())
+        );
+        $messageBag = app(MessageBag::class)->add('name', 'Dummy error message.');
+        $errors = app(ViewErrorBag::class)->put('default', $messageBag);
+        $html = $this->getComponent()->name('name')->render(compact('errors'));
+        self::assertStringNotContainsString('is-valid', $html);
+    }
+
+    public function testWiredDisplaySuccessWithNoErrorWithValue(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -405,7 +429,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('is-valid', $html);
     }
 
-    public function testDoesNotDisplaySuccessWithNoValue(): void
+    public function testWiredDoesNotDisplaySuccessWithNoErrorNoValue(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -413,7 +437,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         );
         $messageBag = app(MessageBag::class)->add('other_name', 'Dummy error message.');
         $errors = app(ViewErrorBag::class)->put('default', $messageBag);
-        $html = $this->getComponent()->name('name')->render(compact('errors'));
+        $html = $this->getComponent()->name('name')->wire()->value(null)->render(compact('errors'));
         self::assertStringNotContainsString('is-valid', $html);
     }
 
@@ -425,11 +449,11 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         );
         $messageBag = app(MessageBag::class)->add('other_name', 'Dummy error message.');
         $errors = app(ViewErrorBag::class)->put('default', $messageBag);
-        $html = $this->getComponent()->name('name')->value('test')->displaySuccess(false)->render(compact('errors'));
+        $html = $this->getComponent()->name('name')->displaySuccess(false)->render(compact('errors'));
         self::assertStringNotContainsString('is-valid', $html);
     }
 
-    public function testDefaultDisplayFailure(): void
+    public function testDefaultDisplayFailureWithError(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -440,7 +464,21 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $html = $this->getComponent()->name('name')->render(compact('errors'));
         self::assertStringContainsString('is-invalid', $html);
         self::assertStringContainsString('<div class="invalid-feedback d-block">', $html);
-        self::assertStringContainsString($errors->first('name'), $html);
+        self::assertStringContainsString('Dummy error message.', $html);
+    }
+
+    public function testDefaultDoesNotDisplayFailureWithNoError(): void
+    {
+        config()->set(
+            'bootstrap-components.components.' . $this->getComponentKey(),
+            get_class($this->getCustomComponent())
+        );
+        $messageBag = app(MessageBag::class)->add('other_name', 'Dummy error message.');
+        $errors = app(ViewErrorBag::class)->put('default', $messageBag);
+        $html = $this->getComponent()->name('name')->render(compact('errors'));
+        self::assertStringNotContainsString('is-invalid', $html);
+        self::assertStringNotContainsString('<div class="invalid-feedback d-block">', $html);
+        self::assertStringNotContainsString('Dummy error message.', $html);
     }
 
     public function testDisplayFailureWithSpecificErrorBag(): void
@@ -454,7 +492,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $html = $this->getComponent()->name('name')->displayFailure(true)->errorBag('test')->render(compact('errors'));
         self::assertStringContainsString('is-invalid', $html);
         self::assertStringContainsString('<div class="invalid-feedback d-block">', $html);
-        self::assertStringContainsString($errors->test->first('name'), $html);
+        self::assertStringContainsString('Dummy error message.', $html);
     }
 
     public function testSetDisplayFailureReplacesDefault(): void
@@ -468,7 +506,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $html = $this->getComponent()->name('name')->displayFailure(false)->render(compact('errors'));
         self::assertStringNotContainsString('is-invalid', $html);
         self::assertStringNotContainsString('<div class="invalid-feedback d-block">', $html);
-        self::assertStringNotContainsString($errors->first('name'), $html);
+        self::assertStringNotContainsString('Dummy error message.', $html);
     }
 
     public function testDisplayFailureWithArrayName(): void
@@ -478,7 +516,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $html = $this->getComponent()->name('name[0]')->render(compact('errors'));
         self::assertStringContainsString('is-invalid', $html);
         self::assertStringContainsString('<div class="invalid-feedback d-block">', $html);
-        self::assertStringContainsString($errors->first('name'), $html);
+        self::assertStringContainsString('Dummy error message.', $html);
     }
 
     public function testSetNoContainerId(): void

@@ -73,7 +73,7 @@ abstract class TemporalTestAbstract extends InputTestAbstract
         self::assertStringContainsString(' wire:model.defer="test.published_at"', $html);
     }
 
-    public function testDefaultDisplaySuccess(): void
+    public function testWiredDisplaySuccessWithNoErrorWithValue(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -83,22 +83,6 @@ abstract class TemporalTestAbstract extends InputTestAbstract
         $errors = app(ViewErrorBag::class)->put('default', $messageBag);
         $html = $this->getComponent()->name('name')->value($this->faker->dateTime)->render(compact('errors'));
         self::assertStringContainsString('is-valid', $html);
-    }
-
-    public function testSetDisplaySuccessOverridesDefault(): void
-    {
-        config()->set(
-            'bootstrap-components.components.' . $this->getComponentKey(),
-            get_class($this->getCustomComponent())
-        );
-        $messageBag = app(MessageBag::class)->add('other_name', 'Dummy error message.');
-        $errors = app(ViewErrorBag::class)->put('default', $messageBag);
-        $html = $this->getComponent()
-            ->name('name')
-            ->value($this->faker->dateTime)
-            ->displaySuccess(false)
-            ->render(compact('errors'));
-        self::assertStringNotContainsString('is-valid', $html);
     }
 
     public function testDefaultFormat(): void

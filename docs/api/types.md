@@ -49,14 +49,14 @@
 | name(string $name): self | Yes | Set the input name. |
 | model(Model $model): self | No | Set the associated model. |
 | value(mixed $value): self | No | Set the input value. |
-| wire(?string $option = '', string $model = null): self | No | Bind the input to a Livewire component. It automatically generates the `wire:model.$option="$model.$name>"` HTML attribute from the input `$name` and `$model` properties and from the method attributes. Other Livewire attribute will have to be added with the `componentHtmlAttributes` method. |
+| wire(?string $option = '', string $model = null): self | No | Bind the input to a Livewire component. It automatically generates the `wire:model.$option="$model.$name>"` HTML attribute from the input `$name` and `$model` properties and from the method attributes. If you wish to add additional Livewire attributes, you'll can do it the `componentHtmlAttributes` method. |
 | prepend(?string $prepend): self | No | Prepend HTML to the input group. Set `null` to hide it. |
 | append(?string $html): self | No | Append HTML to the input group. Set `null` to hide it. |
 | label(?string $label): self | No | Set the label. Default value : `__('validation.attributes.' . $name)`. Set `null` to hide it. |
 | labelPositionedAbove(bool $positionedAbove = true): self | No | Set the label above-positioning status. If not positioned above, the label will be positioned under the input (may be useful for bootstrap 4 floating labels). |
 | placeholder(?string $placeholder): self | No | Set the input placeholder. Default value : `$label`. |
 | caption(?string $caption): self | No | Set the input caption. |
-| displaySuccess(?bool $displaySuccess = true): self | No | Override the input default input validation success display status. Valid fields will only be highlighted as valid if other are in error. |
+| displaySuccess(?bool $displaySuccess = true): self | No | Override the input default input validation success display status. With standard page-refreshing behaviour, valid fields will only be highlighted as valid if other are in error. With wired mode, fields will only be considered as valid when they are filled and have no related errors. |
 | displayFailure(?bool $displayFailure = true): self | No | Override the input default input validation failure display status. Invalid fields will only be highlighted if the `$errors` blade variable contains an error related to the input name. |
 | errorBag(string $errorBag): self | No | Define the name of the error bag that will contain the error related to this input. By default, the Laravel error bag is `default`. |
 

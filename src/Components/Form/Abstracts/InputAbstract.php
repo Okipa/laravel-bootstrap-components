@@ -189,12 +189,17 @@ abstract class InputAbstract extends ComponentAbstract
         if (! $errors) {
             return null;
         }
-        // Highlight field as invalid if related errors are found in the error bag.
-        if ($this->getErrorMessageBag($errors)->has($this->convertArrayNameInNotation())) {
+        $errorBag = $this->getErrorMessageBag($errors);
+        // Highlight field as invalid if it has errors.
+        if ($errorBag->has($this->convertArrayNameInNotation())) {
             return $this->getDisplayFailure() ? 'is-invalid' : null;
         }
-        // Highlight field as valid if it has a value and if no related error is found in the error bag.
-        if ($this->getValue()) {
+        // With standard page refreshing behaviour, only highlight field as valid when form has other errors.
+        if (! $this->getWire() && $errorBag->isNotEmpty()) {
+            return $this->getDisplaySuccess() ? 'is-valid' : null;
+        }
+        // With wired behaviour, only highlight field as valid if it has a value and has no error.
+        if ($this->getWire() && $this->getValue()) {
             return $this->getDisplaySuccess() ? 'is-valid' : null;
         }
 

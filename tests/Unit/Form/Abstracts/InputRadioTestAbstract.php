@@ -195,18 +195,6 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testDoesNotDisplaySuccessWithNoValue(): void
-    {
-        config()->set(
-            'bootstrap-components.components.' . $this->getComponentKey(),
-            get_class($this->getCustomComponent())
-        );
-        $messageBag = app(MessageBag::class)->add('other_name', 'Dummy error message.');
-        $errors = app(ViewErrorBag::class)->put('default', $messageBag);
-        $html = $this->getComponent()->name('name')->value(null)->render(compact('errors'));
-        self::assertStringNotContainsString('is-valid', $html);
-    }
-
     public function testDefaultLabelPositionedAbove(): void
     {
         self::markTestSkipped();

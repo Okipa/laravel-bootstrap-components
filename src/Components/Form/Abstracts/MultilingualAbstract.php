@@ -118,14 +118,17 @@ abstract class MultilingualAbstract extends InputAbstract
         if (! $errors) {
             return null;
         }
-        if (
-            $this->getErrorMessageBag($errors)
-            ->has($this->multilingualResolver->resolveErrorMessageBagKey($this->getName(), $locale))
-        ) {
+        $errorBag = $this->getErrorMessageBag($errors);
+        // Highlight field as invalid if it has errors.
+        if ($errorBag->has($this->multilingualResolver->resolveErrorMessageBagKey($this->getName(), $locale))) {
             return $this->getDisplayFailure() ? 'is-invalid' : null;
         }
-        // Highlight field as valid if it has a value and if no related error is found in the error bag.
-        if ($this->getValue()) {
+        // With standard page refreshing behaviour, only highlight field as valid when form has other errors.
+        if (! $this->getWire() && $errorBag->isNotEmpty()) {
+            return $this->getDisplaySuccess() ? 'is-valid' : null;
+        }
+        // With wired behaviour, only highlight field as valid if it has a value and has no error.
+        if ($this->getWire() && $this->getValue()) {
             return $this->getDisplaySuccess() ? 'is-valid' : null;
         }
 

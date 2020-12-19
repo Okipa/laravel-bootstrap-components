@@ -4,11 +4,11 @@
 
 2020-12-13
 
-* Fixed the `is-valid` class displaying conditions: this class now **only** appears if the field has a filled value (will not appear otherwise)
-  * This change allows input components to be highlighted as valid when they are being filled or after the were filled with real-time validation and re-rendering (improves Livewire use)
-  * It does not change the behaviour for a form post-submission page reloading standard use-case
 * Added a [wire](/docs/api/types.md#inputabstract) method for input components which simplifies Livewire handling
 * Updated doc with Livewire support
+* Fixed the `is-valid` class displaying conditions:
+  * For standard page-refreshing behaviour, there is no change: valid fields will be highlighted as valid only when other are in error in the form
+  * For Livewire use (wired fields), inputs will only be displayed as valid if a value is detected and if no related errors are detected
 
 ## [5.0.1](https://github.com/Okipa/laravel-bootstrap-components/compare/5.0.0...5.0.1)
 
