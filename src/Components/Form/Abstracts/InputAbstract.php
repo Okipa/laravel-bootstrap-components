@@ -240,7 +240,7 @@ abstract class InputAbstract extends ComponentAbstract
 
         return [
             'wire:model' . $wireOption => $this->getModel()
-                ? Str::lower(Str::afterLast($this->getModel()->getMorphClass(), '\\')) . '.' . $this->getName()
+                ? Str::camel(Str::afterLast($this->getModel()->getMorphClass(), '\\')) . '.' . $this->getName()
                 : $this->getName(),
         ];
     }
