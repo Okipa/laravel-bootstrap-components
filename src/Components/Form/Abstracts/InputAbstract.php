@@ -183,11 +183,11 @@ abstract class InputAbstract extends ComponentAbstract
             return $this->getDisplayFailure() ? 'is-invalid' : null;
         }
         // With standard page refreshing behaviour, only highlight field as valid when form has other errors.
-        if (! $this->isWired() && $errorBag->isNotEmpty()) {
+        if (! $this->usesLivewire() && $errorBag->isNotEmpty()) {
             return $this->getDisplaySuccess() ? 'is-valid' : null;
         }
-        // With wired behaviour, only highlight field as valid if it has a value and has no error.
-        if ($this->isWired() && $this->getValue()) {
+        // With Livewire use, only highlight field as valid if it has a value and has no error.
+        if ($this->usesLivewire() && $this->getValue()) {
             return $this->getDisplaySuccess() ? 'is-valid' : null;
         }
 
@@ -216,7 +216,7 @@ abstract class InputAbstract extends ComponentAbstract
 
     abstract protected function setDisplayFailure(): bool;
 
-    protected function isWired(): bool
+    protected function usesLivewire(): bool
     {
         if (! $this->getComponentHtmlAttributes()) {
             return false;
