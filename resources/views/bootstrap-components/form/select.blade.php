@@ -6,7 +6,7 @@
         <div class="input-group">
     @endif
         @include('bootstrap-components::bootstrap-components.partials.prepend')
-        <select id="{{ $componentId }}"{{ html_classes('component', 'custom-select', $componentClasses, $validationClass($errors ?? null)) }} name="{{ $name . ($multiple ? '[]' : '') }}"{{ html_attributes($multiple ? 'multiple' : null, $componentHtmlAttributes, $wire) }}>
+        <select id="{{ $componentId }}"{{ html_classes('component', 'custom-select', $componentClasses, $validationClass($errors ?? null)) }} name="{{ $name . ($multiple ? '[]' : '') }}"{{ html_attributes($multiple ? 'multiple' : null, $componentHtmlAttributes) }}>
             @if($placeholder)
                 <option value=""{{ html_attributes(count(array_filter(Arr::pluck($options, 'selected'))) ? null : ['selected' => 'selected']) }}>{{ $placeholder }}</option>
             @endif

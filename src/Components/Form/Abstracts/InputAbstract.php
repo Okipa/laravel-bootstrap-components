@@ -4,6 +4,7 @@ namespace Okipa\LaravelBootstrapComponents\Components\Form\Abstracts;
 
 use Closure;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
 use Illuminate\Support\ViewErrorBag;
@@ -42,10 +43,6 @@ abstract class InputAbstract extends ComponentAbstract
     protected bool $displayFailure;
 
     protected string $errorBag = 'default';
-
-    protected ?string $wireOption;
-
-    protected ?string $wireModel;
 
     public function __construct()
     {
@@ -158,14 +155,6 @@ abstract class InputAbstract extends ComponentAbstract
         return $this;
     }
 
-    public function wire(?string $wireOption = '', string $wireModel = null): self
-    {
-        $this->wireOption = ! $wireOption && $wireModel ? '' : $wireOption;
-        $this->wireModel = $wireModel;
-
-        return $this;
-    }
-
     protected function getViewParams(): array
     {
         return array_merge(parent::getViewParams(), [
@@ -177,7 +166,6 @@ abstract class InputAbstract extends ComponentAbstract
             'name' => $this->getName(),
             'value' => $this->getValue(),
             'placeholder' => $this->getPlaceholder(),
-            'wire' => $this->getWire(),
             'prepend' => $this->getPrepend(),
             'append' => $this->getAppend(),
             'caption' => $this->getCaption(),
@@ -195,11 +183,11 @@ abstract class InputAbstract extends ComponentAbstract
             return $this->getDisplayFailure() ? 'is-invalid' : null;
         }
         // With standard page refreshing behaviour, only highlight field as valid when form has other errors.
-        if (! $this->getWire() && $errorBag->isNotEmpty()) {
+        if (! $this->isWired() && $errorBag->isNotEmpty()) {
             return $this->getDisplaySuccess() ? 'is-valid' : null;
         }
         // With wired behaviour, only highlight field as valid if it has a value and has no error.
-        if ($this->getWire() && $this->getValue()) {
+        if ($this->isWired() && $this->getValue()) {
             return $this->getDisplaySuccess() ? 'is-valid' : null;
         }
 
@@ -228,26 +216,17 @@ abstract class InputAbstract extends ComponentAbstract
 
     abstract protected function setDisplayFailure(): bool;
 
-    protected function getWire(): ?array
+    protected function isWired(): bool
     {
-        if (! isset($this->wireOption)) {
-            return null;
+        if (! $this->getComponentHtmlAttributes()) {
+            return false;
         }
-        $wireOption = $this->wireOption ? '.' . $this->wireOption : '';
-        if ($this->wireModel) {
-            return ['wire:model' . $wireOption => $this->wireModel . '.' . $this->getName()];
-        }
+        $wireAttributes = Arr::where(
+            array_keys($this->getComponentHtmlAttributes()),
+            fn(string $attribute) => Str::contains($attribute, 'wire')
+        );
 
-        return [
-            'wire:model' . $wireOption => $this->getModel()
-                ? Str::lower(Str::afterLast($this->getModel()->getMorphClass(), '\\')) . '.' . $this->getName()
-                : $this->getName(),
-        ];
-    }
-
-    protected function getModel(): ?Model
-    {
-        return $this->model;
+        return ! empty($wireAttributes);
     }
 
     protected function getDisplaySuccess(): bool
@@ -354,6 +333,11 @@ abstract class InputAbstract extends ComponentAbstract
     }
 
     abstract protected function setCaption(): ?string;
+
+    protected function getModel(): ?Model
+    {
+        return $this->model;
+    }
 
     protected function getComponentId(): string
     {

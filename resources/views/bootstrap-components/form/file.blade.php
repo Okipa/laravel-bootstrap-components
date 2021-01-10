@@ -13,7 +13,7 @@
     @endif
         @include('bootstrap-components::bootstrap-components.partials.prepend')
         <div class="custom-file">
-            <input id="{{ $componentId }}"{{ html_classes('component', 'form-control', 'custom-file-input', $componentClasses, $validationClass($errors ?? null)) }} type="{{ $type }}" name="{{ $name }}"{{ html_attributes($componentHtmlAttributes, $wire) }}>
+            <input id="{{ $componentId }}"{{ html_classes('component', 'form-control', 'custom-file-input', $componentClasses, $validationClass($errors ?? null)) }} type="{{ $type }}" name="{{ $name }}"{{ html_attributes($componentHtmlAttributes) }}>
             @if($placeholder || ($value = old($name, $value)))
                 <label class="custom-file-label" for="{{ $componentId }}">@if(isset($value) && $value !== ''){{ $value }}@else{{ $placeholder }}@endempty</label>
             @endif

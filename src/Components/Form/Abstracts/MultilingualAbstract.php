@@ -91,7 +91,6 @@ abstract class MultilingualAbstract extends InputAbstract
             'name' => $this->getLocalizedName($locale),
             'value' => $this->getLocalizedValue($locale),
             'placeholder' => $this->getLocalizedPlaceholder($locale),
-            'wire' => $this->getWire(),
             'prepend' => $this->getLocalizedPrepend($locale),
             'append' => $this->getLocalizedAppend($locale),
             'caption' => $this->getCaption(),
@@ -124,11 +123,11 @@ abstract class MultilingualAbstract extends InputAbstract
             return $this->getDisplayFailure() ? 'is-invalid' : null;
         }
         // With standard page refreshing behaviour, only highlight field as valid when form has other errors.
-        if (! $this->getWire() && $errorBag->isNotEmpty()) {
+        if (! $this->isWired() && $errorBag->isNotEmpty()) {
             return $this->getDisplaySuccess() ? 'is-valid' : null;
         }
         // With wired behaviour, only highlight field as valid if it has a value and has no error.
-        if ($this->getWire() && $this->getValue()) {
+        if ($this->isWired() && $this->getValue()) {
             return $this->getDisplaySuccess() ? 'is-valid' : null;
         }
 

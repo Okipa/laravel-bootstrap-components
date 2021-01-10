@@ -41,39 +41,7 @@ abstract class TemporalTestAbstract extends InputTestAbstract
         $this->getComponent()->model($user)->name('name')->toHtml();
     }
 
-    public function testSetWireWithoutOptionWithModelBinding(): void
-    {
-        $user = $this->createUniqueUser();
-        $user->published_at = $this->faker->dateTime;
-        $html = $this->getComponent()->name('published_at')->model($user)->wire()->toHtml();
-        self::assertStringContainsString(' wire:model="user.published_at"', $html);
-    }
-
-    public function testSetWireWithoutOptionWithCustomModel(): void
-    {
-        $user = $this->createUniqueUser();
-        $user->published_at = $this->faker->dateTime;
-        $html = $this->getComponent()->name('published_at')->model($user)->wire(null, 'test')->toHtml();
-        self::assertStringContainsString(' wire:model="test.published_at"', $html);
-    }
-
-    public function testSetWireWithOptionWithModelBinding(): void
-    {
-        $user = $this->createUniqueUser();
-        $user->published_at = $this->faker->dateTime;
-        $html = $this->getComponent()->name('published_at')->model($user)->wire('defer')->toHtml();
-        self::assertStringContainsString(' wire:model.defer="user.published_at"', $html);
-    }
-
-    public function testSetWireWithOptionWithCustomModel(): void
-    {
-        $user = $this->createUniqueUser();
-        $user->published_at = $this->faker->dateTime;
-        $html = $this->getComponent()->name('published_at')->model($user)->wire('defer', 'test')->toHtml();
-        self::assertStringContainsString(' wire:model.defer="test.published_at"', $html);
-    }
-
-    public function testWiredDisplaySuccessWithNoErrorWithValue(): void
+    public function testWiredDisplaysSuccessWithNoErrorWithValue(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -81,7 +49,11 @@ abstract class TemporalTestAbstract extends InputTestAbstract
         );
         $messageBag = app(MessageBag::class)->add('other_name', 'Dummy error message.');
         $errors = app(ViewErrorBag::class)->put('default', $messageBag);
-        $html = $this->getComponent()->name('name')->value($this->faker->dateTime)->render(compact('errors'));
+        $html = $this->getComponent()
+            ->name('name')
+            ->value($this->faker->dateTime)
+            ->componentHtmlAttributes(['wire:model' => 'name'])
+            ->render(compact('errors'));
         self::assertStringContainsString('is-valid', $html);
     }
 

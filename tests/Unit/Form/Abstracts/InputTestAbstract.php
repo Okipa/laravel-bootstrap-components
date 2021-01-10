@@ -353,47 +353,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringNotContainsString(' placeholder="', $html);
     }
 
-    public function testSetWireWithoutOptionWithoutModel(): void
-    {
-        $html = $this->getComponent()->name('name')->wire()->toHtml();
-        self::assertStringContainsString(' wire:model="name"', $html);
-    }
-
-    public function testSetWireWithoutOptionWithModelBinding(): void
-    {
-        $user = $this->createUniqueUser();
-        $html = $this->getComponent()->name('name')->model($user)->wire()->toHtml();
-        self::assertStringContainsString(' wire:model="user.name"', $html);
-    }
-
-    public function testSetWireWithoutOptionWithCustomModel(): void
-    {
-        $user = $this->createUniqueUser();
-        $html = $this->getComponent()->name('name')->model($user)->wire(null, 'test')->toHtml();
-        self::assertStringContainsString(' wire:model="test.name"', $html);
-    }
-
-    public function testSetWireWithOptionWithoutModel(): void
-    {
-        $html = $this->getComponent()->name('name')->wire('defer')->toHtml();
-        self::assertStringContainsString(' wire:model.defer="name"', $html);
-    }
-
-    public function testSetWireWithOptionWithModelBinding(): void
-    {
-        $user = $this->createUniqueUser();
-        $html = $this->getComponent()->name('name')->model($user)->wire('defer')->toHtml();
-        self::assertStringContainsString(' wire:model.defer="user.name"', $html);
-    }
-
-    public function testSetWireWithOptionWithCustomModel(): void
-    {
-        $user = $this->createUniqueUser();
-        $html = $this->getComponent()->name('name')->model($user)->wire('defer', 'test')->toHtml();
-        self::assertStringContainsString(' wire:model.defer="test.name"', $html);
-    }
-
-    public function testDefaultDisplaySuccessWithNoError(): void
+    public function testDefaultDisplaysSuccessWithNoError(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -417,7 +377,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringNotContainsString('is-valid', $html);
     }
 
-    public function testWiredDisplaySuccessWithNoErrorWithValue(): void
+    public function testWiredDisplaysSuccessWithNoErrorWithValue(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -425,7 +385,11 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         );
         $messageBag = app(MessageBag::class)->add('other_name', 'Dummy error message.');
         $errors = app(ViewErrorBag::class)->put('default', $messageBag);
-        $html = $this->getComponent()->name('name')->value('test')->render(compact('errors'));
+        $html = $this->getComponent()
+            ->name('name')
+            ->value('test')
+            ->componentHtmlAttributes(['wire:model' => 'name'])
+            ->render(compact('errors'));
         self::assertStringContainsString('is-valid', $html);
     }
 
@@ -437,7 +401,11 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         );
         $messageBag = app(MessageBag::class)->add('other_name', 'Dummy error message.');
         $errors = app(ViewErrorBag::class)->put('default', $messageBag);
-        $html = $this->getComponent()->name('name')->wire()->value(null)->render(compact('errors'));
+        $html = $this->getComponent()
+            ->name('name')
+            ->value(null)
+            ->componentHtmlAttributes(['wire:model' => 'name'])
+            ->render(compact('errors'));
         self::assertStringNotContainsString('is-valid', $html);
     }
 
