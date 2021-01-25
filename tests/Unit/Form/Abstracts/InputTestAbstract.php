@@ -64,7 +64,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
     public function testModelValue(): void
     {
         $user = $this->createUniqueUser();
-        $html = $this->getComponent()->model($user)->name('name')->toHtml();
+        $html = $this->getComponent()->name('name')->model($user)->toHtml();
         self::assertStringContainsString(' value="' . $user->name . '"', $html);
     }
 
@@ -230,6 +230,17 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $this->call('GET', 'test');
         $html = $this->getComponent()->name('name')->value('custom-value')->toHtml();
         self::assertStringContainsString(' value="old-value"', $html);
+        self::assertStringNotContainsString(' value="custom-value"', $html);
+    }
+
+    public function testOldNullValue(): void
+    {
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => null])->flash(),
+        ]);
+        $this->call('GET', 'test');
+        $html = $this->getComponent()->name('name')->value('custom-value')->toHtml();
+        self::assertStringContainsString(' value=""', $html);
         self::assertStringNotContainsString(' value="custom-value"', $html);
     }
 

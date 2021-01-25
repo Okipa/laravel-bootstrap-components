@@ -2,6 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
+use Illuminate\Support\Str;
 use Okipa\LaravelBootstrapComponents\Tests\Dummy\Resolver;
 use Okipa\LaravelBootstrapComponents\Tests\Models\User;
 
@@ -60,6 +61,17 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
         $this->call('GET', 'test');
         $html = $this->getComponent()->name('name')->value('custom-value')->toHtml();
         self::assertStringContainsString('old-value</textarea>', $html);
+        self::assertStringNotContainsString('custom-value</textarea>', $html);
+    }
+
+    public function testOldNullValue(): void
+    {
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => null])->flash(),
+        ]);
+        $this->call('GET', 'test');
+        $html = $this->getComponent()->name('name')->value('custom-value')->toHtml();
+        self::assertStringContainsString('></textarea>', $html);
         self::assertStringNotContainsString('custom-value</textarea>', $html);
     }
 
@@ -137,8 +149,49 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
         $user = new User(['name' => $name]);
         $html = $this->getComponent()->model($user)->name('name')->locales($locales)->toHtml();
         foreach ($locales as $locale) {
-            self::assertStringContainsString($user->name[$locale] . '</textarea>', $html);
+            self::assertStringContainsString('>' . $user->name[$locale] . '</textarea>', $html);
         }
+    }
+
+    public function testLocalizedOldValues(): void
+    {
+        $locales = ['fr', 'en'];
+        $oldValues = [];
+        $values = [];
+        foreach ($locales as $locale) {
+            $oldValues[$locale] = 'old-value-' . $locale;
+            $values[$locale] = 'custom-value-' . $locale;
+        }
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => $oldValues])->flash(),
+        ]);
+        $this->call('GET', 'test');
+        $html = $this->getComponent()->name('name')->locales($locales)->value(function ($locale) use ($values) {
+            return $values . '-' . $locale;
+        })->toHtml();
+        foreach ($locales as $locale) {
+            self::assertStringContainsString('>' . $oldValues[$locale] . '</textarea>', $html);
+            self::assertStringNotContainsString('>' . $values[$locale] . '</textarea>', $html);
+        }
+    }
+
+    public function testLocalizedOldNullValues(): void
+    {
+        $locales = ['fr', 'en'];
+        $oldValues = [];
+        $values = [];
+        foreach ($locales as $locale) {
+            $oldValues[$locale] = null;
+            $values[$locale] = 'custom-value-' . $locale;
+        }
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => $oldValues])->flash(),
+        ]);
+        $this->call('GET', 'test');
+        $html = $this->getComponent()->name('name')->locales($locales)->value(function ($locale) use ($values) {
+            return $values . '-' . $locale;
+        })->toHtml();
+        self::assertEquals(2, Str::substrCount($html, '></textarea>'));
     }
 
     public function testLocalizedModelValueFromCustomMultilingualResolver(): void
@@ -167,7 +220,7 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
             })
             ->toHtml();
         foreach ($locales as $locale) {
-            self::assertStringContainsString($values[$locale] . '</textarea>', $html);
+            self::assertStringContainsString('>' . $values[$locale] . '</textarea>', $html);
         }
     }
 
@@ -190,8 +243,8 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
             ->value(fn($locale) => $values . '-' . $locale)
             ->toHtml();
         foreach ($locales as $locale) {
-            self::assertStringContainsString($oldValues[$locale] . '</textarea>', $html);
-            self::assertStringNotContainsString($values[$locale] . '</textarea>', $html);
+            self::assertStringContainsString('>' . $oldValues[$locale] . '</textarea>', $html);
+            self::assertStringNotContainsString('>' . $values[$locale] . '</textarea>', $html);
         }
     }
 
@@ -214,10 +267,10 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
         $this->call('GET', 'test');
         $html = $this->getComponent()->name('name')->value(fn($locale) => $values[$locale])->toHtml();
         foreach ($resolverLocales as $resolverLocale) {
-            self::assertStringContainsString($oldValues['name_' . $resolverLocale] . '</textarea>', $html);
+            self::assertStringContainsString('>' . $oldValues['name_' . $resolverLocale] . '</textarea>', $html);
         }
         foreach ($locales as $locale) {
-            self::assertStringNotContainsString($values[$locale] . '</textarea>', $html);
+            self::assertStringNotContainsString('>' . $values[$locale] . '</textarea>', $html);
         }
     }
 

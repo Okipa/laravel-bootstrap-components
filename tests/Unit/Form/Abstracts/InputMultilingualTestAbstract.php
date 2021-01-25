@@ -111,7 +111,7 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testLocalizedOldValue(): void
+    public function testLocalizedOldValues(): void
     {
         $locales = ['fr', 'en'];
         $oldValues = [];
@@ -127,6 +127,30 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         $html = $this->getComponent()->name('name')->locales($locales)->value(function ($locale) use ($values) {
             return $values . '-' . $locale;
         })->toHtml();
+        foreach ($locales as $locale) {
+            self::assertStringContainsString(' value="' . $oldValues[$locale] . '"', $html);
+            self::assertStringNotContainsString(' value="' . $values[$locale] . '"', $html);
+        }
+    }
+
+    public function testOldNullValue(): void
+    {
+        $locales = ['fr', 'en'];
+        $oldValues = [];
+        $values = [];
+        foreach ($locales as $locale) {
+            $oldValues[$locale] = null;
+            $values[$locale] = 'custom-value-' . $locale;
+        }
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => $oldValues])->flash(),
+        ]);
+        $this->call('GET', 'test');
+        $html = $this->getComponent()
+            ->name('name')
+            ->locales($locales)
+            ->value(fn($locale) => $values[$locale])
+            ->toHtml();
         foreach ($locales as $locale) {
             self::assertStringContainsString(' value="' . $oldValues[$locale] . '"', $html);
             self::assertStringNotContainsString(' value="' . $values[$locale] . '"', $html);

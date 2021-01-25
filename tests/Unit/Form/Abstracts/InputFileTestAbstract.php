@@ -80,8 +80,17 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         $html = $this->getComponent()->name('name')->value('custom-value')->toHtml();
         self::assertStringContainsString('<label class="custom-file-label" for="' . $this->getComponentType()
             . '-name">old-value</label>', $html);
-        self::assertStringNotContainsString('<label class="custom-file-label" for="' . $this->getComponentType()
-            . '-name">custom-value</label>', $html);
+    }
+
+    public function testOldNullValue(): void
+    {
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => null])->flash(),
+        ]);
+        $this->call('GET', 'test');
+        $html = $this->getComponent()->name('name')->value('custom-value')->toHtml();
+        self::assertStringContainsString('<label class="custom-file-label" for="' . $this->getComponentType()
+            . '-name">' . __('No file selected.') . '</label>', $html);
     }
 
     public function testOldArrayValue(): void
@@ -93,8 +102,6 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         $html = $this->getComponent()->name('name[0]')->value('custom-value')->toHtml();
         self::assertStringContainsString('<label class="custom-file-label" for="' . $this->getComponentType()
             . '-name-0">old-value</label>', $html);
-        self::assertStringNotContainsString('<label class="custom-file-label" for="' . $this->getComponentType()
-            . '-name-0">custom-value</label>', $html);
     }
 
     public function testDefaultPlaceholder(): void

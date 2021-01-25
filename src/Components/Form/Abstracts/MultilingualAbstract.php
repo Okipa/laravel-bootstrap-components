@@ -161,10 +161,15 @@ abstract class MultilingualAbstract extends FormAbstract
         return $this->multilingualResolver->resolveLocalizedName($this->getName(), $locale);
     }
 
+    /**
+     * @param string $locale
+     *
+     * @return mixed
+     */
     protected function getLocalizedValue(string $locale)
     {
         $oldLocalizedValue = $this->multilingualResolver->resolveLocalizedOldValue($this->getName(), $locale);
-        if ($oldLocalizedValue) {
+        if (isset($oldLocalizedValue)) {
             return $oldLocalizedValue;
         }
         if ($this->value instanceof Closure) {
