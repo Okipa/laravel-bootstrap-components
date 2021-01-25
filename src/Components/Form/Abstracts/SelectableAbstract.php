@@ -4,6 +4,7 @@ namespace Okipa\LaravelBootstrapComponents\Components\Form\Abstracts;
 
 use Closure;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Okipa\LaravelBootstrapComponents\Components\Form\Traits\SelectValidityChecks;
 
 abstract class SelectableAbstract extends FormAbstract
@@ -111,7 +112,7 @@ abstract class SelectableAbstract extends FormAbstract
     protected function getMultipleSelectedOptions(): array
     {
         $oldValueMultipleSelectedOptions = $this->searchMultipleSelectedOptionFromOldValue();
-        if ($oldValueMultipleSelectedOptions) {
+        if (isset($oldValueMultipleSelectedOptions)) {
             return $oldValueMultipleSelectedOptions;
         }
         $manuallyMultipleSelectedOptions = $this->searchMultipleSelectedOptionsFromSelectedMethod();
@@ -128,9 +129,13 @@ abstract class SelectableAbstract extends FormAbstract
 
     protected function searchMultipleSelectedOptionFromOldValue(): ?array
     {
-        $oldValue = old($this->convertArrayNameInNotation());
-        if (! $oldValue) {
+        if (! old()) {
             return null;
+        }
+        $name = $this->convertArrayNameInNotation();
+        $oldValue = data_get(old(), $name);
+        if (! $oldValue) {
+            return array_key_exists(Str::before($name, '.'), old()) ? [] : null;
         }
         $selectedMultipleOptions = Arr::where($this->options, function ($option) use ($oldValue) {
             return in_array((string) $option[$this->optionValueField], $oldValue, true);
@@ -172,7 +177,7 @@ abstract class SelectableAbstract extends FormAbstract
     protected function getSelectedOption(): array
     {
         $oldValueSelectedOption = $this->searchSelectedOptionFromOldValue();
-        if ($oldValueSelectedOption) {
+        if (isset($oldValueSelectedOption)) {
             return $oldValueSelectedOption;
         }
         $manuallySelectedOption = $this->searchSelectedOptionFromSelectedMethod();
@@ -189,14 +194,19 @@ abstract class SelectableAbstract extends FormAbstract
 
     protected function searchSelectedOptionFromOldValue(): ?array
     {
-        $oldValue = old($this->convertArrayNameInNotation());
-        if ($oldValue) {
-            $selectedOption = Arr::where($this->options, function ($option) use ($oldValue) {
-                return (string) $option[$this->optionValueField] === $oldValue;
-            });
-            if (! empty($selectedOption)) {
-                return $selectedOption;
-            }
+        if (! old()) {
+            return null;
+        }
+        $name = $this->convertArrayNameInNotation();
+        $oldValue = data_get(old(), $name);
+        if (! $oldValue) {
+            return array_key_exists(Str::before($name, '.'), old()) ? [] : null;
+        }
+        $selectedOption = Arr::where($this->options, function ($option) use ($oldValue) {
+            return (string) $option[$this->optionValueField] === $oldValue;
+        });
+        if (! empty($selectedOption)) {
+            return $selectedOption;
         }
 
         return null;

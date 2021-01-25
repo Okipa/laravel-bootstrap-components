@@ -21,7 +21,15 @@ class Resolver
 
     public function resolveLocalizedOldValue(string $name, string $locale): ?string
     {
-        return data_get(old($name), $locale);
+        if (! old($name)) {
+            return null;
+        }
+        $oldLocalizedValue = data_get(old($name), $locale);
+        if ($oldLocalizedValue) {
+            return $oldLocalizedValue;
+        }
+
+        return array_key_exists($locale, old($name)) ? '' : null;
     }
 
     public function resolveLocalizedModelValue(string $name, string $locale, ?Model $model): ?string

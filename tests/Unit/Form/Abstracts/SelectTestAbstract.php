@@ -258,6 +258,35 @@ abstract class SelectTestAbstract extends InputTestAbstract
         );
     }
 
+    public function testOldNullValue(): void
+    {
+        $users = $this->createMultipleUsers(3);
+        $custom = $users->get(0);
+        $model = $users->get(1);
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => null])->flash(),
+        ]);
+        $this->call('GET', 'test');
+        $html = $this->getComponent()
+            ->model($model)
+            ->name('name')
+            ->selected('id', $custom->id)
+            ->options($users, 'id', 'name')
+            ->toHtml();
+        self::assertStringContainsString(
+            '<option value="" selected="selected">validation.attributes.name</option>',
+            $html
+        );
+        self::assertStringContainsString(
+            '<option value="' . $custom->id . '">' . $custom->name . '</option>',
+            $html
+        );
+        self::assertStringContainsString(
+            '<option value="' . $model->id . '">' . $model->name . '</option>',
+            $html
+        );
+    }
+
     public function testOldArrayValue(): void
     {
         $users = $this->createMultipleUsers(3);
@@ -516,6 +545,35 @@ abstract class SelectTestAbstract extends InputTestAbstract
                 . (in_array((string) $company->id, $oldCompanies, true) ? ' selected="selected"' : '') . '>'
                 . $company->name
                 . '</option>',
+                $html
+            );
+        }
+    }
+
+    public function testOldMultipleNullValue(): void
+    {
+        $user = $this->createUniqueUser();
+        $companies = $this->createMultipleCompanies(6);
+        $chunk = $companies->pluck('id')->chunk(2)->toArray();
+        $user->companies = $chunk[0];
+        $selectedCompanies = $chunk[1];
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['companies' => null])->flash(),
+        ]);
+        $this->call('GET', 'test');
+        $html = $this->getComponent()->name('companies')
+            ->model($user)
+            ->options($companies, 'id', 'name')
+            ->multiple()
+            ->selected('id', $selectedCompanies)
+            ->toHtml();
+        self::assertStringContainsString(
+            '<option value="" selected="selected">validation.attributes.companies</option>',
+            $html
+        );
+        foreach ($companies as $company) {
+            self::assertStringContainsString(
+                '<option value="' . $company->id . '"' . '>' . $company->name . '</option>',
                 $html
             );
         }

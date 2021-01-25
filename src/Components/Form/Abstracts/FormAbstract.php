@@ -213,8 +213,8 @@ abstract class FormAbstract extends ComponentAbstract
     /** @return mixed */
     protected function getValue()
     {
-        $oldValue = old($this->convertArrayNameInNotation());
-        if ($oldValue) {
+        $oldValue = $this->getOldValue();
+        if (isset($oldValue)) {
             return $oldValue;
         }
         // Fallback for usage of closure with multilingual disabled.
@@ -226,6 +226,21 @@ abstract class FormAbstract extends ComponentAbstract
         }
 
         return optional($this->model)->{$this->convertArrayNameInNotation()};
+    }
+
+    /** @return mixed */
+    protected function getOldValue()
+    {
+        if (! old()) {
+            return null;
+        }
+        $name = $this->convertArrayNameInNotation();
+        $oldValue = data_get(old(), $name);
+        if ($oldValue) {
+            return $oldValue;
+        }
+
+        return array_key_exists(Str::before($name, '.'), old()) ? '' : null;
     }
 
     protected function getDisplaySuccess(): bool

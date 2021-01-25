@@ -174,6 +174,16 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         self::assertStringContainsString('checked="checked', $html);
     }
 
+    public function testOldNullValue(): void
+    {
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['active' => null])->flash(),
+        ]);
+        $this->call('GET', 'test');
+        $html = $this->getComponent()->name('active')->checked(false)->toHtml();
+        self::assertStringNotContainsString('checked="checked', $html);
+    }
+
     public function testOldArrayValue(): void
     {
         $this->app['router']->get('test', [

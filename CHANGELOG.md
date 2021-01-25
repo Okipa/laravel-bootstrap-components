@@ -1,5 +1,11 @@
 # Changelog
 
+## [5.0.3](https://github.com/Okipa/laravel-bootstrap-components/compare/5.0.2...5.0.3)
+
+2021-01-25
+
+* Fixed wrong behaviour when component had `null` as old value.
+
 ## [5.0.2](https://github.com/Okipa/laravel-bootstrap-components/compare/5.0.1...5.0.2)
 
 2020-12-13

@@ -150,7 +150,18 @@ abstract class TemporalTestAbstract extends InputTestAbstract
         $this->call('GET', 'test');
         $html = $this->getComponent()->name('name')->value($value)->toHtml();
         self::assertStringContainsString(' value="' . $oldValue . '"', $html);
-        self::assertStringNotContainsString(' value="' . $value . '"', $html);
+    }
+
+    public function testOldNullValue(): void
+    {
+        $oldValue = null;
+        $value = $this->faker->dateTime->format($this->getFormat());
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => $oldValue])->flash(),
+        ]);
+        $this->call('GET', 'test');
+        $html = $this->getComponent()->name('name')->value($value)->toHtml();
+        self::assertStringContainsString(' value=""', $html);
     }
 
     public function testOldArrayValue(): void
@@ -163,6 +174,5 @@ abstract class TemporalTestAbstract extends InputTestAbstract
         $this->call('GET', 'test');
         $html = $this->getComponent()->name('name[0]')->value($value)->toHtml();
         self::assertStringContainsString(' value="' . $oldValue . '"', $html);
-        self::assertStringNotContainsString(' value="' . $value . '"', $html);
     }
 }

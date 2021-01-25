@@ -27,6 +27,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         self::assertStringContainsString('checked="checked"', $html);
     }
 
+
     public function testDefaultPrepend(): void
     {
         config()->set(
@@ -128,13 +129,6 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         self::assertStringNotContainsString('checked="checked"', $html);
     }
 
-    public function testModelValueChecked(): void
-    {
-        $user = $this->createUniqueUser();
-        $html = $this->getComponent()->name('name')->model($user)->value($user->name)->toHtml();
-        self::assertStringContainsString('checked="checked"', $html);
-    }
-
     public function testOldValue(): void
     {
         $this->app['router']->get('test', [
@@ -143,6 +137,11 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         $this->call('GET', 'test');
         $html = $this->getComponent()->name('name')->value('old-value')->checked(false)->toHtml();
         self::assertStringContainsString('checked="checked', $html);
+    }
+
+    public function testOldNullValue(): void
+    {
+        self::markTestSkipped();
     }
 
     public function testOldZeroValue(): void
