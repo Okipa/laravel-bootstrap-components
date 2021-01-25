@@ -2,6 +2,8 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
+use Illuminate\Support\MessageBag;
+use Illuminate\Support\ViewErrorBag;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\CheckableAbstract;
 
 abstract class InputCheckableTestAbstract extends InputTestAbstract
@@ -275,6 +277,23 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
     public function testHidePlaceholder(): void
     {
         self::markTestSkipped();
+    }
+
+    public function testDoesNotDisplaySuccessWithNoValue(): void
+    {
+        self::markTestSkipped();
+    }
+
+    public function testDoesDisplaySuccessWithNoValue(): void
+    {
+        config()->set(
+            'bootstrap-components.components.' . $this->getComponentKey(),
+            get_class($this->getCustomComponent())
+        );
+        $messageBag = app(MessageBag::class)->add('other_name', 'Dummy error message.');
+        $errors = app(ViewErrorBag::class)->put('default', $messageBag);
+        $html = $this->getComponent()->name('name')->render(compact('errors'));
+        self::assertStringContainsString('is-valid', $html);
     }
 
     public function testDefaultContainerClasses(): void
