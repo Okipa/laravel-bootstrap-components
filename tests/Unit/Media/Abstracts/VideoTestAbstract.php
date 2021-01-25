@@ -31,13 +31,13 @@ abstract class VideoTestAbstract extends MediaTestAbstract
         self::assertStringNotContainsString('poster="', $html);
     }
 
-    public function testDefaultComponentId(): void
+    public function it_has_no_component_id_by_default(): void
     {
         $html = $this->getComponent()->toHtml();
         self::assertStringNotContainsString('<video id="', $html);
     }
 
-    public function testSetComponentId(): void
+    public function it_can_set_component_id(): void
     {
         $html = $this->getComponent()->componentId('custom-component-id')->toHtml();
         self::assertStringContainsString('<video id="custom-component-id"', $html);

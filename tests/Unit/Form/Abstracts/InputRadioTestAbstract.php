@@ -9,7 +9,7 @@ use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\RadioAbstract;
 
 abstract class InputRadioTestAbstract extends InputTestAbstract
 {
-    public function testInstance(): void
+    public function it_can_return_instance_from_extended_testing_class(): void
     {
         self::assertInstanceOf(RadioAbstract::class, $this->getComponent());
     }
@@ -20,7 +20,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         $this->getComponent()->name('name')->value(null)->toHtml();
     }
 
-    public function testModelValue(): void
+    public function it_can_get_value_from_model(): void
     {
         $user = $this->createUniqueUser();
         $html = $this->getComponent()->name('name')->model($user)->value($user->name)->toHtml();
@@ -28,7 +28,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
     }
 
 
-    public function testItCanSetPrependFromComponentConfig(): void
+    public function it_can_set_prepend_from_component_config(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -38,7 +38,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         self::assertStringContainsString('<span class="label-prepend">default-prepend</span>', $html);
     }
 
-    public function testSetPrependReplacesDefault(): void
+    public function it_can_replace_default_prepend(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -49,7 +49,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         self::assertStringNotContainsString('<span class="label-prepend">default-prepend</span>', $html);
     }
 
-    public function testSetPrependFromClosureWithDisabledMultilingual(): void
+    public function it_can_replace_default_prepend_from_closure_with_disabled_multilingual(): void
     {
         $html = $this->getComponent()->name('name')->prepend(function ($locale) {
             return 'prepend-' . $locale;
@@ -57,13 +57,13 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         self::assertStringContainsString('<span class="label-prepend">prepend-en</span>', $html);
     }
 
-    public function testHidePrepend(): void
+    public function it_can_hide_prepend(): void
     {
         $html = $this->getComponent()->name('name')->prepend(null)->toHtml();
         self::assertStringNotContainsString('<div class="label-prepend">', $html);
     }
 
-    public function testItCanSetAppendFromComponentConfig(): void
+    public function it_can_set_default_append_from_component_config(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -73,7 +73,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         self::assertStringContainsString('<span class="label-append">default-append</span>', $html);
     }
 
-    public function testSetAppendReplacesDefault(): void
+    public function it_can_replace_default_append(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -84,7 +84,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         self::assertStringNotContainsString('<span class="label-append">default-append</span>', $html);
     }
 
-    public function testSetAppendFromClosureWithDisabledMultilingual(): void
+    public function it_can_replace_default_append_from_closure_with_disabled_multilingual(): void
     {
         $html = $this->getComponent()->name('name')->append(function ($locale) {
             return 'append-' . $locale;
@@ -92,32 +92,32 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         self::assertStringContainsString('<span class="label-append">append-en</span>', $html);
     }
 
-    public function testHideAppend(): void
+    public function it_can_hide_append(): void
     {
         $html = $this->getComponent()->name('name')->append(null)->toHtml();
         self::assertStringNotContainsString('<div class="label-append">', $html);
     }
 
-    public function testHidePrependHideAppend(): void
+    public function it_can_hide_preprend_and_append(): void
     {
         $html = $this->getComponent()->name('name')->prepend(null)->append(null)->toHtml();
         self::assertStringNotContainsString('<div class="label-prepend">', $html);
         self::assertStringNotContainsString('<div class="label-append">', $html);
     }
 
-    public function testSetNullValue(): void
+    public function it_can_set_null_value(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        parent::testSetNullValue();
+        parent::it_can_set_null_value();
     }
 
-    public function testSetEmptyStringValue(): void
+    public function it_can_set_empty_string_value(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->getComponent()->name('name')->value('')->toHtml();
     }
 
-    public function testSetChecked(): void
+    public function it_can_set_checked(): void
     {
         $html = $this->getComponent()->name('name')->checked()->toHtml();
         self::assertStringContainsString('checked="checked"', $html);
@@ -129,7 +129,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         self::assertStringNotContainsString('checked="checked"', $html);
     }
 
-    public function testOldValue(): void
+    public function it_can_take_old_value_from_string(): void
     {
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => 'old-value'])->flash(),
@@ -139,7 +139,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         self::assertStringContainsString('checked="checked', $html);
     }
 
-    public function testOldNullValue(): void
+    public function it_can_take_old_value_from_null(): void
     {
         self::markTestSkipped();
     }
@@ -154,7 +154,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         self::assertStringContainsString('checked="checked', $html);
     }
 
-    public function testOldValueNotChecked(): void
+    public function it_can_set_not_checked_from_old_value(): void
     {
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => 'old-value'])->flash(),
@@ -164,7 +164,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         self::assertStringNotContainsString('checked="checked', $html);
     }
 
-    public function testSetLabel(): void
+    public function it_can_replace_default_label(): void
     {
         $html = $this->getComponent()->name('name')->label('custom-label')->toHtml();
         self::assertStringContainsString(
@@ -174,7 +174,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testNoLabel(): void
+    public function it_can_generate_default_label(): void
     {
         $html = $this->getComponent()->name('name')->toHtml();
         self::assertStringContainsString(
@@ -184,7 +184,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testHideLabel(): void
+    public function it_can_hide_label(): void
     {
         $html = $this->getComponent()->name('name')->label(null)->toHtml();
         self::assertStringNotContainsString(
@@ -194,27 +194,27 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testItCanSetLabelPositionedAboveFromComponentConfig(): void
+    public function it_can_set_default_label_positioned_above_from_component_config(): void
     {
         self::markTestSkipped();
     }
 
-    public function testSetLabelPositionedAboveReplacesDefault(): void
+    public function it_can_replace_label_positioned_above(): void
     {
         self::markTestSkipped();
     }
 
-    public function itCanSetDefaultPlaceholder(): void
+    public function it_can_generate_default_placeholder_from_string_name(): void
     {
         self::markTestSkipped();
     }
 
-    public function testItCanSetDefaultPlaceholderWithArrayName(): void
+    public function it_can_generate_default_placeholder_from_array_name(): void
     {
         self::markTestSkipped();
     }
 
-    public function testSetPlaceholder(): void
+    public function it_can_replace_default_placeholder(): void
     {
         self::markTestSkipped();
     }
@@ -224,48 +224,48 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         self::markTestSkipped();
     }
 
-    public function testSetPlaceholderWithLabel(): void
+    public function it_can_replace_default_placeholder_with_specific_label(): void
     {
         self::markTestSkipped();
     }
 
-    public function testNoPlaceholderWithLabel(): void
+    public function it_can_generate_default_placeholder_with_specific_label(): void
     {
         self::markTestSkipped();
     }
 
-    public function testNoPlaceholderWithNoLabel(): void
+    public function it_can_generate_default_placehoder_with_hidden_label(): void
     {
         self::markTestSkipped();
     }
 
-    public function testHidePlaceholder(): void
+    public function it_can_hide_placeholder(): void
     {
         self::markTestSkipped();
     }
 
-    public function testItCanSetDefaultComponentId(): void
+    public function it_can_generate_default_component_id(): void
     {
         $html = $this->getComponent()->name('name')->toHtml();
         self::assertStringContainsString(' for="' . $this->getComponentType() . '-name-value"', $html);
         self::assertStringContainsString('<input id="' . $this->getComponentType() . '-name-value"', $html);
     }
 
-    public function testItCanSetDefaultComponentIdWithArrayName(): void
+    public function it_can_generate_default_component_id_from_array_name(): void
     {
         $html = $this->getComponent()->name('name[0]')->toHtml();
         self::assertStringContainsString(' for="' . $this->getComponentType() . '-name-0-value"', $html);
         self::assertStringContainsString('<input id="' . $this->getComponentType() . '-name-0-value"', $html);
     }
 
-    public function testItCanFixComponentIdWrongFormat(): void
+    public function it_can_generate_default_component_id_from_string_name_with_specific_format(): void
     {
         $html = $this->getComponent()->name('camelCaseName')->toHtml();
         self::assertStringContainsString(' for="' . $this->getComponentType() . '-camel-case-name-value"', $html);
         self::assertStringContainsString('<input id="' . $this->getComponentType() . '-camel-case-name-value"', $html);
     }
 
-    public function testItCanSetDefaultContainerClassesFromComponentConfig(): void
+    public function it_can_set_default_container_classes_from_component_config(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -278,7 +278,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testItCanMergeContainerClassesToDefault(): void
+    public function it_can_merge_container_classes_to_default(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -291,7 +291,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testItCanReplaceDefaultContainerClasses(): void
+    public function it_can_replace_default_container_classes(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -301,7 +301,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         self::assertStringContainsString('class="component-container custom-control custom-checkbox replaced"', $html);
     }
 
-    public function testItCanSetDefaultComponentClassesFromComponentConfig(): void
+    public function it_can_set_default_component_classes_from_component_config(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -311,7 +311,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         self::assertStringContainsString('class="component custom-control-input default component classes"', $html);
     }
 
-    public function testItCanMergeComponentClassesToDefault(): void
+    public function it_can_merge_component_classes_to_default(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -324,7 +324,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testItCanReplaceDefaultComponentClasses(): void
+    public function it_can_replace_default_component_classes(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),

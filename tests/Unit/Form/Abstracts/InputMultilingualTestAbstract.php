@@ -10,12 +10,14 @@ use Okipa\LaravelBootstrapComponents\Tests\Models\User;
 
 abstract class InputMultilingualTestAbstract extends InputTestAbstract
 {
-    public function testMultilingualInstance(): void
+    /** @test */
+    public function it_can_return_multilingual_instance_from_extended_testing_class(): void
     {
         self::assertInstanceOf(MultilingualAbstract::class, $this->getComponent());
     }
 
-    public function testSetDefaultLocalesFromCustomMultilingualResolver(): void
+    /** @test */
+    public function it_can_set_default_locales_from_custom_multilingual_resolver(): void
     {
         config()->set('bootstrap-components.form.multilingualResolver', Resolver::class);
         $resolverLocales = (new Resolver())->getDefaultLocales();
@@ -25,7 +27,8 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testSetLocales(): void
+    /** @test */
+    public function it_can_replace_default_locales(): void
     {
         config()->set('bootstrap-components.form.multilingualResolver', Resolver::class);
         $resolverLocales = (new Resolver())->getDefaultLocales();
@@ -40,7 +43,8 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testSetSingleLocale(): void
+    /** @test */
+    public function it_can_set_single_locale(): void
     {
         $locales = ['fr'];
         config()->set('bootstrap-components.form.text.locales', ['fr']);
@@ -50,7 +54,8 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testLocalizedName(): void
+    /** @test */
+    public function it_can_set_localized_name(): void
     {
         $locales = ['fr', 'en'];
         $html = $this->getComponent()->name('name')->locales($locales)->toHtml();
@@ -59,7 +64,8 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testLocalizedNameFromCustomMultilingualResolver(): void
+    /** @test */
+    public function it_can_set_localized_name_from_custom_multilingual_resolver(): void
     {
         config()->set('bootstrap-components.form.multilingualResolver', Resolver::class);
         $resolverLocales = (new Resolver())->getDefaultLocales();
@@ -69,7 +75,8 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testLocalizedModelValue(): void
+    /** @test */
+    public function it_can_take_localized_model_value(): void
     {
         $locales = ['fr', 'en'];
         $name = [];
@@ -83,7 +90,8 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testLocalizedModelValueFromCustomMultilingualResolver(): void
+    /** @test */
+    public function it_can_take_localized_model_value_from_custom_multilingual_resolver(): void
     {
         $user = new User(['name_fr' => $this->faker->word, 'name_en' => $this->faker->word]);
         config()->set('bootstrap-components.form.multilingualResolver', Resolver::class);
@@ -94,7 +102,8 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testSetLocalizedValue(): void
+    /** @test */
+    public function it_can_set_localized_value(): void
     {
         $locales = ['fr', 'en'];
         $values = [];
@@ -111,7 +120,8 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testLocalizedOldValues(): void
+    /** @test */
+    public function it_can_take_localized_old_value(): void
     {
         $locales = ['fr', 'en'];
         $oldValues = [];
@@ -133,7 +143,8 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testOldNullValue(): void
+    /** @test */
+    public function it_can_take_old_value_from_null(): void
     {
         $locales = ['fr', 'en'];
         $oldValues = [];
@@ -157,7 +168,8 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testLocalizedOldValueFromCustomMultilingualResolver(): void
+    /** @test */
+    public function it_can_take_localized_old_value_from_custom_multilingual_resolver(): void
     {
         config()->set('bootstrap-components.form.multilingualResolver', Resolver::class);
         $resolverLocales = (new Resolver())->getDefaultLocales();
@@ -183,7 +195,8 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testSetLocalizedPrepend(): void
+    /** @test */
+    public function it_can_set_localized_prepend(): void
     {
         $locales = ['fr', 'en'];
         $html = $this->getComponent()
@@ -196,7 +209,8 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testSetLocalizedAppend(): void
+    /** @test */
+    public function it_can_set_localized_append(): void
     {
         $locales = ['fr', 'en'];
         $html = $this->getComponent()
@@ -211,7 +225,8 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testSetLocalizedLabel(): void
+    /** @test */
+    public function it_can_set_localized_label(): void
     {
         $locales = ['fr', 'en'];
         $label = 'custom-label';
@@ -226,7 +241,8 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testSetLocalizedPlaceholder(): void
+    /** @test */
+    public function it_can_set_localized_placeholder(): void
     {
         $locales = ['fr', 'en'];
         $placeholder = 'custom-placeholder';
@@ -239,7 +255,8 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testSetLocalizedComponentId(): void
+    /** @test */
+    public function it_can_set_localized_component_id(): void
     {
         $locales = ['fr', 'en'];
         $customComponentId = 'custom-component-id';
@@ -250,7 +267,8 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testSetLocalizedContainerId(): void
+    /** @test */
+    public function it_can_set_localized_container_id(): void
     {
         $locales = ['fr', 'en'];
         $customContainerId = 'custom-container-id';
@@ -260,7 +278,8 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testLocalizedErrorMessage(): void
+    /** @test */
+    public function it_can_set_localized_error_message(): void
     {
         $locales = ['fr', 'en'];
         $messageBag = app(MessageBag::class)->add('name.fr', 'Dummy name.fr error message.');
@@ -281,7 +300,8 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testLocalizedErrorMessageWithSeveralWords(): void
+    /** @test */
+    public function it_can_set_localized_error_message_with_several_words(): void
     {
         $locales = ['fr', 'en'];
         $messageBag = app(MessageBag::class)->add('last_name.fr', 'Dummy last name.fr error message.');
@@ -309,7 +329,8 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testLocalizedErrorMessageWithSeveralWordsAndCustomMultilingualResolver(): void
+    /** @test */
+    public function it_can_set_localized_error_message_with_several_words_and_custom_multilingual_resolver(): void
     {
         config()->set('bootstrap-components.form.multilingualResolver', Resolver::class);
         $locales = ['fr', 'en'];
@@ -338,7 +359,8 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testLocalizedErrorMessageFromCustomMultilingualResolver(): void
+    /** @test */
+    public function it_can_set_localized_error_message_from_custom_multilingual_resolver(): void
     {
         config()->set('bootstrap-components.form.multilingualResolver', Resolver::class);
         $messageBag = app(MessageBag::class)->add('name_en', 'Dummy name_en error message.');

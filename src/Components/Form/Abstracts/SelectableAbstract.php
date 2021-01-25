@@ -135,7 +135,8 @@ abstract class SelectableAbstract extends FormAbstract
         $name = $this->convertArrayNameInNotation();
         $oldValue = data_get(old(), $name);
         if (! $oldValue) {
-            return array_key_exists(Str::before($name, '.'), old()) ? [] : null;
+            //return array_key_exists(Str::before($name, '.'), old()) ? [] : null;
+            return array_key_exists($this->removeArrayCharactersFromName(), old()) ? [] : null;
         }
         $selectedMultipleOptions = Arr::where($this->options, function ($option) use ($oldValue) {
             return in_array((string) $option[$this->optionValueField], $oldValue, true);
@@ -200,7 +201,8 @@ abstract class SelectableAbstract extends FormAbstract
         $name = $this->convertArrayNameInNotation();
         $oldValue = data_get(old(), $name);
         if (! $oldValue) {
-            return array_key_exists(Str::before($name, '.'), old()) ? [] : null;
+            //return array_key_exists(Str::before($name, '.'), old()) ? [] : null;
+            return array_key_exists($this->removeArrayCharactersFromName(), old()) ? [] : null;
         }
         $selectedOption = Arr::where($this->options, function ($option) use ($oldValue) {
             return (string) $option[$this->optionValueField] === $oldValue;

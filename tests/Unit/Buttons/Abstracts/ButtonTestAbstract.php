@@ -8,13 +8,15 @@ abstract class ButtonTestAbstract extends SubmitTestAbstract
 {
     use RoutesFaker;
 
-    public function testType(): void
+    /** @test */
+    public function it_has_correct_type(): void
     {
         $html = $this->getComponent()->toHtml();
         self::assertStringContainsString('<a', $html);
     }
 
-    public function setCustomUrl(): void
+    /** @test */
+    public function it_can_set_default_url_from_component_config(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -24,7 +26,8 @@ abstract class ButtonTestAbstract extends SubmitTestAbstract
         self::assertStringContainsString('href="default-url"', $html);
     }
 
-    public function testSetUrlReplacesDefault(): void
+    /** @test */
+    public function it_can_replace_default_url(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -36,7 +39,8 @@ abstract class ButtonTestAbstract extends SubmitTestAbstract
         self::assertStringNotContainsString('href="default-url"', $html);
     }
 
-    public function testSetRoute(): void
+    /** @test */
+    public function it_can_replace_default_url_from_route(): void
     {
         $this->setRoutes();
         $customRoute = 'users.index';
@@ -44,7 +48,8 @@ abstract class ButtonTestAbstract extends SubmitTestAbstract
         self::assertStringContainsString('href="' . route($customRoute) . '"', $html);
     }
 
-    public function testDefaultLabel(): void
+    /** @test */
+    public function it_can_set_default_label_from_component_config(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -55,7 +60,8 @@ abstract class ButtonTestAbstract extends SubmitTestAbstract
         self::assertStringContainsString('<span class="label">default-label</span>', $html);
     }
 
-    public function testSetLabelReplacesDefault(): void
+    /** @test */
+    public function it_can_replace_default_label(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -69,14 +75,16 @@ abstract class ButtonTestAbstract extends SubmitTestAbstract
         self::assertStringNotContainsString('<span class="label">default-label</span>', $html);
     }
 
-    public function testNoLabel(): void
+    /** @test */
+    public function it_can_generate_default_label(): void
     {
         $html = $this->getComponent()->label(null)->toHtml();
         self::assertStringNotContainsString('title="', $html);
         self::assertStringNotContainsString('<span class="label">', $html);
     }
 
-    public function testHideLabel(): void
+    /** @test */
+    public function it_can_hide_label(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -87,13 +95,15 @@ abstract class ButtonTestAbstract extends SubmitTestAbstract
         self::assertStringNotContainsString('<span class="label">default-label</span>', $html);
     }
 
-    public function testDefaultComponentId(): void
+    /** @test */
+    public function it_has_no_component_id_by_default(): void
     {
         $html = $this->getComponent()->toHtml();
         self::assertStringNotContainsString('<a id="', $html);
     }
 
-    public function testSetComponentId(): void
+    /** @test */
+    public function it_can_set_component_id(): void
     {
         $customComponentId = 'custom-component-id';
         $html = $this->getComponent()->componentId($customComponentId)->toHtml();

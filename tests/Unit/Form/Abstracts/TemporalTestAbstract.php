@@ -10,19 +10,23 @@ use RuntimeException;
 
 abstract class TemporalTestAbstract extends InputTestAbstract
 {
-    public function testInstance(): void
+    abstract protected function getFormat(): string;
+
+    /** @test */
+    public function it_can_return_instance_from_extended_testing_class(): void
     {
         self::assertInstanceOf(TemporalAbstract::class, $this->getComponent());
     }
 
-    public function testModelValue(): void
+    /** @test */
+    public function it_can_get_value_from_model(): void
     {
         $user = $this->createUniqueUser();
-        // datetime object
+        // Datetime object
         $user->published_at = $this->faker->dateTime;
         $html = $this->getComponent()->model($user)->name('published_at')->toHtml();
         self::assertStringContainsString(' value="' . $user->published_at->format($this->getFormat()) . '"', $html);
-        // datetime string
+        // Datetime string
         $user->published_at = $this->faker->dateTime->format($this->getFormat());
         $html = $this->getComponent()->model($user)->name('published_at')->toHtml();
         self::assertStringContainsString(
@@ -31,17 +35,8 @@ abstract class TemporalTestAbstract extends InputTestAbstract
         );
     }
 
-    abstract protected function getFormat(): string;
-
-    public function testWrongModelValue(): void
-    {
-        $user = $this->createUniqueUser();
-        $user->name = 'custom-name';
-        $this->expectException(RuntimeException::class);
-        $this->getComponent()->model($user)->name('name')->toHtml();
-    }
-
-    public function testItCanSetFormatFromComponentConfig(): void
+    /** @test */
+    public function it_can_set_default_format_from_component_config(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -53,7 +48,8 @@ abstract class TemporalTestAbstract extends InputTestAbstract
         self::assertStringContainsString($user->published_at->format('d/m/Y H-i-s'), $html);
     }
 
-    public function testSetFormatReplacesDefault(): void
+    /** @test */
+    public function it_can_replace_default_format(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -66,44 +62,60 @@ abstract class TemporalTestAbstract extends InputTestAbstract
         self::assertStringNotContainsString($user->published_at->format('d/m/Y H-i-s'), $html);
     }
 
-    public function testSetNoFormat(): void
+    /** @test */
+    public function it_cant_set_wrong_model_value(): void
+    {
+        $user = $this->createUniqueUser();
+        $user->name = 'custom-name';
+        $this->expectException(RuntimeException::class);
+        $this->getComponent()->model($user)->name('name')->toHtml();
+    }
+
+    /** @test */
+    public function it_cant_set_no_format(): void
     {
         $this->expectException(RuntimeException::class);
         $this->getComponent()->name('published_at')->format('')->toHtml();
     }
 
-    public function testSetWrongValue(): void
+    /** @test */
+    public function it_cant_set_wrong_value(): void
     {
         $this->expectException(RuntimeException::class);
         $this->getComponent()->name('name')->value('custom-value')->toHtml();
     }
 
-    public function testSetValue(): void
+    /** @test */
+    public function it_can_set_value(): void
     {
         $value = $this->faker->dateTime;
         $html = $this->getComponent()->name('name')->value($value)->toHtml();
         self::assertStringContainsString(' value="' . $value->format($this->getFormat()) . '"', $html);
     }
 
-    public function testSetZeroValue(): void
+    /** @test */
+    public function it_can_set_zero_value(): void
     {
         $html = $this->getComponent()->name('name')->value(0)->toHtml();
         self::assertStringContainsString(' value=""', $html);
     }
 
-    public function testSetEmptyStringValue(): void
+    /** @test */
+    public function it_can_set_empty_string_value(): void
     {
         $html = $this->getComponent()->name('name')->value('')->toHtml();
         self::assertStringContainsString(' value=""', $html);
     }
 
-    public function testSetNullValue(): void
+    /** @test */
+    public function it_can_set_null_value(): void
     {
         $html = $this->getComponent()->name('name')->value(null)->toHtml();
         self::assertStringContainsString(' value=""', $html);
     }
 
-    public function testSetValueFromClosureWithDisabledMultilingual(): void
+    /** @test */
+    public function it_can_set_value_from_closure_with_disabled_multilingual(): void
     {
         $value = $this->faker->dateTime;
         $html = $this->getComponent()->name('name')->value(function () use ($value) {
@@ -112,7 +124,8 @@ abstract class TemporalTestAbstract extends InputTestAbstract
         self::assertStringContainsString(' value="' . $value->format($this->getFormat()) . '"', $html);
     }
 
-    public function testOldValue(): void
+    /** @test */
+    public function it_can_take_old_value_from_string(): void
     {
         $oldValue = $this->faker->dateTime->format($this->getFormat());
         $value = $this->faker->dateTime->format($this->getFormat());
@@ -124,7 +137,8 @@ abstract class TemporalTestAbstract extends InputTestAbstract
         self::assertStringContainsString(' value="' . $oldValue . '"', $html);
     }
 
-    public function testOldNullValue(): void
+    /** @test */
+    public function it_can_take_old_value_from_null(): void
     {
         $oldValue = null;
         $value = $this->faker->dateTime->format($this->getFormat());
@@ -136,7 +150,8 @@ abstract class TemporalTestAbstract extends InputTestAbstract
         self::assertStringContainsString(' value=""', $html);
     }
 
-    public function testOldArrayValue(): void
+    /** @test */
+    public function it_can_take_old_value_from_array(): void
     {
         $oldValue = $this->faker->dateTime->format($this->getFormat());
         $value = $this->faker->dateTime->format($this->getFormat());
