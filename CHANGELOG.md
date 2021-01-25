@@ -4,7 +4,7 @@
 
 2021-01-25
 
-* Fixed `is-valid` class displaying condition for checkable components (`inputSwitch`, `inputCheckbox` and `inputRadio`). This class is now displayed for without any value check (partial revert of `5.0.2`).
+* Fixed `is-valid` class displaying condition for checkable components (`inputSwitch`, `inputCheckbox` and `inputRadio`). This class is now displayed without any value check for these components (partial revert of `5.0.2`).
 * Fixed wrong behaviour when component get `null` as old value.
 
 ## [5.0.2](https://github.com/Okipa/laravel-bootstrap-components/compare/5.0.1...5.0.2)
