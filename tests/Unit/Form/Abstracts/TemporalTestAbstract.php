@@ -41,7 +41,7 @@ abstract class TemporalTestAbstract extends InputTestAbstract
         $this->getComponent()->model($user)->name('name')->toHtml();
     }
 
-    public function testDefaultFormat(): void
+    public function testItCanSetFormatFromComponentConfig(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),

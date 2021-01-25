@@ -4,9 +4,6 @@
 
 2021-01-25
 
-* Fixed `is-valid` class displaying conditions:
-  * Checkable components (`inputSwitch`, `inputCheckbox` and `inputRadio`) will now only display the `is_valid` class if errors are detected in the validation bag
-  * Other form components will now only display the `is_valid` class if errors are detected in the validation bag **and** if they have a filled value
 * Fixed wrong behaviour when component get `null` as old value.
 
 ## [5.0.1](https://github.com/Okipa/laravel-bootstrap-components/compare/5.0.0...5.0.1)

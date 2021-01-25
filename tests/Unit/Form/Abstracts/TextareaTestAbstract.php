@@ -86,7 +86,7 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
         self::assertStringNotContainsString('custom-value</textarea>', $html);
     }
 
-    public function testDefaultLabelPositionedAbove(): void
+    public function testItCanSetLabelPositionedAboveFromComponentConfig(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -110,21 +110,21 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
         self::assertLessThan($inputPosition, $labelPosition);
     }
 
-    public function testDefaultComponentId(): void
+    public function testItCanSetDefaultComponentId(): void
     {
         $html = $this->getComponent()->name('name')->toHtml();
         self::assertStringContainsString(' for="' . $this->getComponentType() . '-name"', $html);
         self::assertStringContainsString('<textarea id="' . $this->getComponentType() . '-name"', $html);
     }
 
-    public function testDefaultComponentIdWithArrayName(): void
+    public function testItCanSetDefaultComponentIdWithArrayName(): void
     {
         $html = $this->getComponent()->name('name[0]')->toHtml();
         self::assertStringContainsString(' for="' . $this->getComponentType() . '-name-0"', $html);
         self::assertStringContainsString('<textarea id="' . $this->getComponentType() . '-name-0"', $html);
     }
 
-    public function testDefaultComponentIdFormatting(): void
+    public function testItCanFixComponentIdWrongFormat(): void
     {
         $html = $this->getComponent()->name('camelCaseName')->toHtml();
         self::assertStringContainsString(' for="' . $this->getComponentType() . '-camel-case-name"', $html);

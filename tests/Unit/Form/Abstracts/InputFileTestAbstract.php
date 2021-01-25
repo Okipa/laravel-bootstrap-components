@@ -104,7 +104,7 @@ abstract class InputFileTestAbstract extends InputTestAbstract
             . '-name-0">old-value</label>', $html);
     }
 
-    public function testDefaultPlaceholder(): void
+    public function itCanSetDefaultPlaceholder(): void
     {
         $html = $this->getComponent()->name('name')->toHtml();
         self::assertStringContainsString('custom-file-label', $html);
@@ -112,7 +112,7 @@ abstract class InputFileTestAbstract extends InputTestAbstract
             . '-name">' . __('No file selected.') . '</label>', $html);
     }
 
-    public function testDefaultPlaceholderWithArrayName(): void
+    public function testItCanSetDefaultPlaceholderWithArrayName(): void
     {
         $html = $this->getComponent()->name('name[0]')->toHtml();
         self::assertStringContainsString('custom-file-label', $html);
@@ -164,7 +164,7 @@ abstract class InputFileTestAbstract extends InputTestAbstract
             . '-name">' . __('No file selected.') . '</label>', $html);
     }
 
-    public function testDefaultComponentClasses(): void
+    public function testItCanSetDefaultComponentClassesFromComponentConfig(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -177,7 +177,7 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetComponentClassesMergedToDefault(): void
+    public function testItCanMergeComponentClassesToDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -190,7 +190,7 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetComponentClassesReplacesDefault(): void
+    public function testItCanReplaceDefaultComponentClasses(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),

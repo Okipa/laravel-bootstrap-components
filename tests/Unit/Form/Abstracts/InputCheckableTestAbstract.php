@@ -26,7 +26,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         self::assertStringContainsString(' checked="checked"', $html);
     }
 
-    public function testDefaultPrepend(): void
+    public function testItCanSetPrependFromComponentConfig(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -61,7 +61,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         self::assertStringNotContainsString('<div class="label-prepend">', $html);
     }
 
-    public function testDefaultAppend(): void
+    public function testItCanSetAppendFromComponentConfig(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -117,7 +117,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         self::assertStringNotContainsString('checked="checked"', $html);
     }
 
-    public function testDefaultCheckStatus(): void
+    public function testComponentIsNotCheckedByDefault(): void
     {
         $html = $this->getComponent()->name('active')->toHtml();
         self::assertStringNotContainsString('checked="checked', $html);
@@ -229,7 +229,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
             . 'validation.attributes.active</label>', $html);
     }
 
-    public function testDefaultLabelPositionedAbove(): void
+    public function testItCanSetLabelPositionedAboveFromComponentConfig(): void
     {
         self::markTestSkipped();
     }
@@ -239,12 +239,12 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         self::markTestSkipped();
     }
 
-    public function testDefaultPlaceholder(): void
+    public function itCanSetDefaultPlaceholder(): void
     {
         self::markTestSkipped();
     }
 
-    public function testDefaultPlaceholderWithArrayName(): void
+    public function testItCanSetDefaultPlaceholderWithArrayName(): void
     {
         self::markTestSkipped();
     }
@@ -279,7 +279,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         self::markTestSkipped();
     }
 
-    public function testDefaultContainerClasses(): void
+    public function testItCanSetDefaultContainerClassesFromComponentConfig(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -293,7 +293,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetContainerClassesMergedToDefault(): void
+    public function testItCanMergeContainerClassesToDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -307,7 +307,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetContainerClassesReplacesDefault(): void
+    public function testItCanReplaceDefaultContainerClasses(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -320,7 +320,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testDefaultComponentClasses(): void
+    public function testItCanSetDefaultComponentClassesFromComponentConfig(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -330,7 +330,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         self::assertStringContainsString('class="component custom-control-input default component classes"', $html);
     }
 
-    public function testSetComponentClassesMergedToDefault(): void
+    public function testItCanMergeComponentClassesToDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -343,7 +343,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetComponentClassesReplacesDefault(): void
+    public function testItCanReplaceDefaultComponentClasses(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),

@@ -612,7 +612,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testDefaultLabelPositionedAbove(): void
+    public function testItCanSetLabelPositionedAboveFromComponentConfig(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -636,7 +636,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         self::assertLessThan($inputPosition, $labelPosition);
     }
 
-    public function testDefaultPlaceholder(): void
+    public function itCanSetDefaultPlaceholder(): void
     {
         $html = $this->getComponent()->name('name')->toHtml();
         self::assertStringContainsString(
@@ -645,7 +645,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testDefaultPlaceholderWithArrayName(): void
+    public function testItCanSetDefaultPlaceholderWithArrayName(): void
     {
         $html = $this->getComponent()->name('name[0]')->toHtml();
         self::assertStringContainsString(
@@ -707,21 +707,21 @@ abstract class SelectTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testDefaultComponentId(): void
+    public function testItCanSetDefaultComponentId(): void
     {
         $html = $this->getComponent()->name('name')->toHtml();
         self::assertStringContainsString(' for="' . $this->getComponentType() . '-name"', $html);
         self::assertStringContainsString('<select id="' . $this->getComponentType() . '-name"', $html);
     }
 
-    public function testDefaultComponentIdWithArrayName(): void
+    public function testItCanSetDefaultComponentIdWithArrayName(): void
     {
         $html = $this->getComponent()->name('name[0]')->toHtml();
         self::assertStringContainsString(' for="' . $this->getComponentType() . '-name-0"', $html);
         self::assertStringContainsString('<select id="' . $this->getComponentType() . '-name-0"', $html);
     }
 
-    public function testDefaultComponentIdFormatting(): void
+    public function testItCanFixComponentIdWrongFormat(): void
     {
         $html = $this->getComponent()->name('camelCaseName')->toHtml();
         self::assertStringContainsString(' for="' . $this->getComponentType() . '-camel-case-name"', $html);
@@ -736,7 +736,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         self::assertStringContainsString('<select id="' . $customComponentId . '"', $html);
     }
 
-    public function testDefaultComponentClasses(): void
+    public function testItCanSetDefaultComponentClassesFromComponentConfig(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -746,7 +746,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         self::assertStringContainsString('class="component custom-select default component classes"', $html);
     }
 
-    public function testSetComponentClassesMergedToDefault(): void
+    public function testItCanMergeComponentClassesToDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -756,7 +756,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         self::assertStringContainsString('class="component custom-select default component classes merged"', $html);
     }
 
-    public function testSetComponentClassesReplacesDefault(): void
+    public function testItCanReplaceDefaultComponentClasses(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),

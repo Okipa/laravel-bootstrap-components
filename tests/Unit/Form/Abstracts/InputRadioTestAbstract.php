@@ -28,7 +28,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
     }
 
 
-    public function testDefaultPrepend(): void
+    public function testItCanSetPrependFromComponentConfig(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -63,7 +63,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         self::assertStringNotContainsString('<div class="label-prepend">', $html);
     }
 
-    public function testDefaultAppend(): void
+    public function testItCanSetAppendFromComponentConfig(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -194,7 +194,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testDefaultLabelPositionedAbove(): void
+    public function testItCanSetLabelPositionedAboveFromComponentConfig(): void
     {
         self::markTestSkipped();
     }
@@ -204,12 +204,12 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         self::markTestSkipped();
     }
 
-    public function testDefaultPlaceholder(): void
+    public function itCanSetDefaultPlaceholder(): void
     {
         self::markTestSkipped();
     }
 
-    public function testDefaultPlaceholderWithArrayName(): void
+    public function testItCanSetDefaultPlaceholderWithArrayName(): void
     {
         self::markTestSkipped();
     }
@@ -244,28 +244,28 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         self::markTestSkipped();
     }
 
-    public function testDefaultComponentId(): void
+    public function testItCanSetDefaultComponentId(): void
     {
         $html = $this->getComponent()->name('name')->toHtml();
         self::assertStringContainsString(' for="' . $this->getComponentType() . '-name-value"', $html);
         self::assertStringContainsString('<input id="' . $this->getComponentType() . '-name-value"', $html);
     }
 
-    public function testDefaultComponentIdWithArrayName(): void
+    public function testItCanSetDefaultComponentIdWithArrayName(): void
     {
         $html = $this->getComponent()->name('name[0]')->toHtml();
         self::assertStringContainsString(' for="' . $this->getComponentType() . '-name-0-value"', $html);
         self::assertStringContainsString('<input id="' . $this->getComponentType() . '-name-0-value"', $html);
     }
 
-    public function testDefaultComponentIdFormatting(): void
+    public function testItCanFixComponentIdWrongFormat(): void
     {
         $html = $this->getComponent()->name('camelCaseName')->toHtml();
         self::assertStringContainsString(' for="' . $this->getComponentType() . '-camel-case-name-value"', $html);
         self::assertStringContainsString('<input id="' . $this->getComponentType() . '-camel-case-name-value"', $html);
     }
 
-    public function testDefaultContainerClasses(): void
+    public function testItCanSetDefaultContainerClassesFromComponentConfig(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -278,7 +278,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetContainerClassesMergedToDefault(): void
+    public function testItCanMergeContainerClassesToDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -291,7 +291,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetContainerClassesReplacesDefault(): void
+    public function testItCanReplaceDefaultContainerClasses(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -301,7 +301,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         self::assertStringContainsString('class="component-container custom-control custom-checkbox replaced"', $html);
     }
 
-    public function testDefaultComponentClasses(): void
+    public function testItCanSetDefaultComponentClassesFromComponentConfig(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -311,7 +311,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         self::assertStringContainsString('class="component custom-control-input default component classes"', $html);
     }
 
-    public function testSetComponentClassesMergedToDefault(): void
+    public function testItCanMergeComponentClassesToDefault(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -324,7 +324,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetComponentClassesReplacesDefault(): void
+    public function testItCanReplaceDefaultComponentClasses(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
