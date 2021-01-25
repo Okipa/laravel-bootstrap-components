@@ -26,19 +26,6 @@ abstract class CheckableAbstract extends FormAbstract
         return array_merge($this->componentHtmlAttributes, $this->getChecked() ? ['checked' => 'checked'] : []);
     }
 
-    protected function getValidationClass(?ViewErrorBag $errors): ?string
-    {
-        if (! $errors) {
-            return null;
-        }
-        // Highlight field as invalid if related errors are found in the error bag.
-        if ($this->getErrorMessageBag($errors)->has($this->convertArrayNameInNotation())) {
-            return $this->getDisplayFailure() ? 'is-invalid' : null;
-        }
-
-        return $this->getDisplaySuccess() ? 'is-valid' : null;
-    }
-
     protected function getChecked(): bool
     {
         $oldChecked = old($this->convertArrayNameInNotation());

@@ -1,19 +1,13 @@
 # Changelog
 
-## [5.0.3](https://github.com/Okipa/laravel-bootstrap-components/compare/5.0.2...5.0.3)
+## [5.0.2](https://github.com/Okipa/laravel-bootstrap-components/compare/5.0.1...5.0.2)
 
 2021-01-25
 
-* Fixed `is-valid` class displaying condition for checkable components (`inputSwitch`, `inputCheckbox` and `inputRadio`). This class is now displayed without any value check for these components (partial revert of `5.0.2`).
+* Fixed `is-valid` class displaying conditions:
+  * Checkable components (`inputSwitch`, `inputCheckbox` and `inputRadio`) will now only display the `is_valid` class if errors are detected in the validation bag
+  * Other form components will now only display the `is_valid` class if errors are detected in the validation bag **and** if they have a filled value
 * Fixed wrong behaviour when component get `null` as old value.
-
-## [5.0.2](https://github.com/Okipa/laravel-bootstrap-components/compare/5.0.1...5.0.2)
-
-2020-12-13
-
-* Fixed the `is-valid` class displaying conditions: this class now **only** appears if the field has a filled value (will not appear otherwise)
-  * This change allows form components to be highlighted as valid when they are being filled or after the were filled with real-time validation and re-rendering (improves Livewire use)
-  * It does not change the behaviour for a form post-submission page reloading standard use-case
 
 ## [5.0.1](https://github.com/Okipa/laravel-bootstrap-components/compare/5.0.0...5.0.1)
 

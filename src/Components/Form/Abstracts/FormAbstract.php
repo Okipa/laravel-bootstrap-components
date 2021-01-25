@@ -173,19 +173,20 @@ abstract class FormAbstract extends ComponentAbstract
 
     protected function getValidationClass(?ViewErrorBag $errors): ?string
     {
+        // Do not highlight field if no errors are found.
         if (! $errors) {
             return null;
         }
-        // Highlight field as invalid if related errors are found in the error bag.
+        if ($this->getErrorMessageBag($errors)->isEmpty()) {
+            return null;
+        }
+        // Highlight field with `is-invalid` class when it has an error.
         if ($this->getErrorMessageBag($errors)->has($this->convertArrayNameInNotation())) {
             return $this->getDisplayFailure() ? 'is-invalid' : null;
         }
-        // Highlight field as valid if it has a value and if no related error is found in the error bag.
-        if ($this->getValue()) {
-            return $this->getDisplaySuccess() ? 'is-valid' : null;
-        }
 
-        return null;
+        // Highlight field with `is-valid` class when other errors are detected but not for this field.
+        return $this->getDisplaySuccess() ? 'is-valid' : null;
     }
 
     protected function getErrorMessageBag(ViewErrorBag $errors): MessageBag

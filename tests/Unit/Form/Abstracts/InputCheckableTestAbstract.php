@@ -279,23 +279,6 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
         self::markTestSkipped();
     }
 
-    public function testDoesNotDisplaySuccessWithNoValue(): void
-    {
-        self::markTestSkipped();
-    }
-
-    public function testDoesDisplaySuccessWithNoValue(): void
-    {
-        config()->set(
-            'bootstrap-components.components.' . $this->getComponentKey(),
-            get_class($this->getCustomComponent())
-        );
-        $messageBag = app(MessageBag::class)->add('other_name', 'Dummy error message.');
-        $errors = app(ViewErrorBag::class)->put('default', $messageBag);
-        $html = $this->getComponent()->name('name')->render(compact('errors'));
-        self::assertStringContainsString('is-valid', $html);
-    }
-
     public function testDefaultContainerClasses(): void
     {
         config()->set(

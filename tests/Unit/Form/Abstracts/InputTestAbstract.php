@@ -364,19 +364,17 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringNotContainsString(' placeholder="', $html);
     }
 
-    public function testDefaultDisplaySuccess(): void
+    public function testItCantDisplaySuccessWithoutOtherErrors(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
             get_class($this->getCustomComponent())
         );
-        $messageBag = app(MessageBag::class)->add('other_name', 'Dummy error message.');
-        $errors = app(ViewErrorBag::class)->put('default', $messageBag);
-        $html = $this->getComponent()->name('name')->value('test')->render(compact('errors'));
-        self::assertStringContainsString('is-valid', $html);
+        $html = $this->getComponent()->name('name')->toHtml();
+        self::assertStringNotContainsString('is-valid', $html);
     }
 
-    public function testDoesNotDisplaySuccessWithNoValue(): void
+    public function testItCanDisplaySuccessWithOtherErrors(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -385,7 +383,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         $messageBag = app(MessageBag::class)->add('other_name', 'Dummy error message.');
         $errors = app(ViewErrorBag::class)->put('default', $messageBag);
         $html = $this->getComponent()->name('name')->render(compact('errors'));
-        self::assertStringNotContainsString('is-valid', $html);
+        self::assertStringContainsString('is-valid', $html);
     }
 
     public function testSetDisplaySuccessOverridesDefault(): void
@@ -396,7 +394,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         );
         $messageBag = app(MessageBag::class)->add('other_name', 'Dummy error message.');
         $errors = app(ViewErrorBag::class)->put('default', $messageBag);
-        $html = $this->getComponent()->name('name')->value('test')->displaySuccess(false)->render(compact('errors'));
+        $html = $this->getComponent()->name('name')->displaySuccess(false)->render(compact('errors'));
         self::assertStringNotContainsString('is-valid', $html);
     }
 

@@ -41,34 +41,6 @@ abstract class TemporalTestAbstract extends InputTestAbstract
         $this->getComponent()->model($user)->name('name')->toHtml();
     }
 
-    public function testDefaultDisplaySuccess(): void
-    {
-        config()->set(
-            'bootstrap-components.components.' . $this->getComponentKey(),
-            get_class($this->getCustomComponent())
-        );
-        $messageBag = app(MessageBag::class)->add('other_name', 'Dummy error message.');
-        $errors = app(ViewErrorBag::class)->put('default', $messageBag);
-        $html = $this->getComponent()->name('name')->value($this->faker->dateTime)->render(compact('errors'));
-        self::assertStringContainsString('is-valid', $html);
-    }
-
-    public function testSetDisplaySuccessOverridesDefault(): void
-    {
-        config()->set(
-            'bootstrap-components.components.' . $this->getComponentKey(),
-            get_class($this->getCustomComponent())
-        );
-        $messageBag = app(MessageBag::class)->add('other_name', 'Dummy error message.');
-        $errors = app(ViewErrorBag::class)->put('default', $messageBag);
-        $html = $this->getComponent()
-            ->name('name')
-            ->value($this->faker->dateTime)
-            ->displaySuccess(false)
-            ->render(compact('errors'));
-        self::assertStringNotContainsString('is-valid', $html);
-    }
-
     public function testDefaultFormat(): void
     {
         config()->set(
