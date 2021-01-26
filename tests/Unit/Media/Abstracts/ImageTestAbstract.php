@@ -2,8 +2,25 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Media\Abstracts;
 
+use Okipa\LaravelBootstrapComponents\Components\Media\Abstracts\ImageAbstract;
+
 abstract class ImageTestAbstract extends MediaTestAbstract
 {
+    public function it_can_return_instance_from_helper(): void
+    {
+        self::assertInstanceOf(ImageAbstract::class, $this->getHelper());
+    }
+
+    public function it_can_return_instance_from_facade(): void
+    {
+        self::assertInstanceOf(ImageAbstract::class, $this->getFacade());
+    }
+
+    public function it_can_return_instance_from_extended_testing_class(): void
+    {
+        self::assertInstanceOf(ImageAbstract::class, $this->getComponent());
+    }
+
     /** @test */
     public function it_can_set_link_url(): void
     {

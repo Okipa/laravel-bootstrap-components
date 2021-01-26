@@ -7,6 +7,18 @@ use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\CheckableAbstract
 abstract class InputCheckableTestAbstract extends InputTestAbstract
 {
     /** @test */
+    public function it_can_return_instance_from_helper(): void
+    {
+        self::assertInstanceOf(CheckableAbstract::class, $this->getHelper());
+    }
+
+    /** @test */
+    public function it_can_return_instance_from_facade(): void
+    {
+        self::assertInstanceOf(CheckableAbstract::class, $this->getFacade());
+    }
+
+    /** @test */
     public function it_can_return_instance_from_extended_testing_class(): void
     {
         self::assertInstanceOf(CheckableAbstract::class, $this->getComponent());

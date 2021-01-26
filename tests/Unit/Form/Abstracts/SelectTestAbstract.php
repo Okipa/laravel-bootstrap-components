@@ -3,11 +3,30 @@
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
 use InvalidArgumentException;
+use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\SelectableAbstract;
 use Okipa\LaravelBootstrapComponents\Tests\Fakers\CompaniesFaker;
 
 abstract class SelectTestAbstract extends InputTestAbstract
 {
     use CompaniesFaker;
+
+    /** @test */
+    public function it_can_return_instance_from_helper(): void
+    {
+        self::assertInstanceOf(SelectableAbstract::class, $this->getHelper());
+    }
+
+    /** @test */
+    public function it_can_return_instance_from_facade(): void
+    {
+        self::assertInstanceOf(SelectableAbstract::class, $this->getFacade());
+    }
+
+    /** @test */
+    public function it_can_return_instance_from_extended_testing_class(): void
+    {
+        self::assertInstanceOf(SelectableAbstract::class, $this->getComponent());
+    }
 
     /** @test */
     public function it_has_correct_type(): void

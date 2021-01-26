@@ -23,12 +23,12 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
 
     public function it_can_return_instance_from_helper(): void
     {
-        self::assertInstanceOf(get_class($this->getComponent()), $this->getHelper());
+        self::assertInstanceOf(MediaAbstract::class, $this->getHelper());
     }
 
     public function it_can_return_instance_from_facade(): void
     {
-        self::assertInstanceOf(get_class($this->getComponent()), $this->getFacade());
+        self::assertInstanceOf(MediaAbstract::class, $this->getFacade());
     }
 
     public function it_can_return_instance_from_extended_testing_class(): void

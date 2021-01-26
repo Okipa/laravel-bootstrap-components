@@ -2,8 +2,25 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Media\Abstracts;
 
+use Okipa\LaravelBootstrapComponents\Components\Media\Abstracts\VideoAbstract;
+
 abstract class VideoTestAbstract extends MediaTestAbstract
 {
+    public function it_can_return_instance_from_helper(): void
+    {
+        self::assertInstanceOf(VideoAbstract::class, $this->getHelper());
+    }
+
+    public function it_can_return_instance_from_facade(): void
+    {
+        self::assertInstanceOf(VideoAbstract::class, $this->getFacade());
+    }
+
+    public function it_can_return_instance_from_extended_testing_class(): void
+    {
+        self::assertInstanceOf(VideoAbstract::class, $this->getComponent());
+    }
+
     public function testDefaultPoster(): void
     {
         config()->set(

@@ -11,6 +11,18 @@ use Okipa\LaravelBootstrapComponents\Tests\Models\User;
 abstract class InputMultilingualTestAbstract extends InputTestAbstract
 {
     /** @test */
+    public function it_can_return_instance_from_helper(): void
+    {
+        self::assertInstanceOf(MultilingualAbstract::class, $this->getHelper());
+    }
+
+    /** @test */
+    public function it_can_return_instance_from_facade(): void
+    {
+        self::assertInstanceOf(MultilingualAbstract::class, $this->getFacade());
+    }
+
+    /** @test */
     public function it_can_return_multilingual_instance_from_extended_testing_class(): void
     {
         self::assertInstanceOf(MultilingualAbstract::class, $this->getComponent());

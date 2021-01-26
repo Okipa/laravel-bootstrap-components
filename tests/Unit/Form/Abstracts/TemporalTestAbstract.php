@@ -11,6 +11,18 @@ abstract class TemporalTestAbstract extends InputTestAbstract
     abstract protected function getFormat(): string;
 
     /** @test */
+    public function it_can_return_instance_from_helper(): void
+    {
+        self::assertInstanceOf(TemporalAbstract::class, $this->getHelper());
+    }
+
+    /** @test */
+    public function it_can_return_instance_from_facade(): void
+    {
+        self::assertInstanceOf(TemporalAbstract::class, $this->getFacade());
+    }
+
+    /** @test */
     public function it_can_return_instance_from_extended_testing_class(): void
     {
         self::assertInstanceOf(TemporalAbstract::class, $this->getComponent());

@@ -2,11 +2,30 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Buttons\Abstracts;
 
+use Okipa\LaravelBootstrapComponents\Components\Buttons\Abstracts\ButtonAbstract;
 use Okipa\LaravelBootstrapComponents\Tests\Fakers\RoutesFaker;
 
 abstract class ButtonTestAbstract extends SubmitTestAbstract
 {
     use RoutesFaker;
+
+    /** @test */
+    public function it_can_return_instance_from_helper(): void
+    {
+        self::assertInstanceOf(ButtonAbstract::class, $this->getHelper());
+    }
+
+    /** @test */
+    public function it_can_return_instance_from_facade(): void
+    {
+        self::assertInstanceOf(ButtonAbstract::class, $this->getFacade());
+    }
+
+    /** @test */
+    public function it_can_return_instance_from_extended_testing_class(): void
+    {
+        self::assertInstanceOf(ButtonAbstract::class, $this->getComponent());
+    }
 
     /** @test */
     public function it_has_correct_type(): void

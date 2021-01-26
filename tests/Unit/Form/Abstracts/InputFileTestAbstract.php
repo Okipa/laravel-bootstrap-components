@@ -7,6 +7,18 @@ use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\UploadableAbstrac
 abstract class InputFileTestAbstract extends InputTestAbstract
 {
     /** @test */
+    public function it_can_return_instance_from_helper(): void
+    {
+        self::assertInstanceOf(UploadableAbstract::class, $this->getHelper());
+    }
+
+    /** @test */
+    public function it_can_return_instance_from_facade(): void
+    {
+        self::assertInstanceOf(UploadableAbstract::class, $this->getFacade());
+    }
+
+    /** @test */
     public function it_can_return_instance_from_extended_testing_class(): void
     {
         self::assertInstanceOf(UploadableAbstract::class, $this->getComponent());
