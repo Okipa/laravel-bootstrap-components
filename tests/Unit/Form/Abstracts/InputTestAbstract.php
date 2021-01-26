@@ -153,7 +153,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
     }
 
     /** @test */
-    public function it_can_set_append_from_closure_with_disabled_multilingual(): void
+    public function it_can_replace_default_append_from_closure_with_disabled_multilingual(): void
     {
         $html = $this->getComponent()->name('name')->append(function ($locale) {
             return 'append-' . $locale;
@@ -176,7 +176,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
     }
 
     /** @test */
-    public function it_can_hide_preprend_and_append(): void
+    public function it_can_hide_prepend_and_append(): void
     {
         $html = $this->getComponent()->name('name')->prepend(null)->append(null)->toHtml();
         self::assertStringNotContainsString('<div class="input-group">', $html);
@@ -340,7 +340,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
     }
 
     /** @test */
-    public function it_can_replace_label_positioned_above(): void
+    public function it_can_replace_default_label_positioned_above(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -375,7 +375,7 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
     }
 
     /** @test */
-    public function it_can_generate_default_placehoder_with_hidden_label(): void
+    public function it_can_generate_default_placeholder_with_hidden_label(): void
     {
         $html = $this->getComponent()->name('name')->label(null)->toHtml();
         self::assertStringContainsString(' placeholder="validation.attributes.name"', $html);

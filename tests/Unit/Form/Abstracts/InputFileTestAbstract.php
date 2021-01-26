@@ -164,7 +164,7 @@ abstract class InputFileTestAbstract extends InputTestAbstract
     }
 
     /** @test */
-    public function it_can_generate_default_placehoder_with_hidden_label(): void
+    public function it_can_generate_default_placeholder_with_hidden_label(): void
     {
         $html = $this->getComponent()->name('name')->label(null)->toHtml();
         self::assertStringContainsString('custom-file-label', $html);

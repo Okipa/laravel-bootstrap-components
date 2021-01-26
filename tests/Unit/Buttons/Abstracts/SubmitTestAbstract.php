@@ -109,7 +109,7 @@ abstract class SubmitTestAbstract extends BootstrapComponentsTestCase
     }
 
     /** @test */
-    public function it_can_hide_preprend_and_append(): void
+    public function it_can_hide_prepend_and_append(): void
     {
         $html = $this->getComponent()->prepend(null)->append(null)->toHtml();
         self::assertStringNotContainsString('<span class="label-prepend">', $html);

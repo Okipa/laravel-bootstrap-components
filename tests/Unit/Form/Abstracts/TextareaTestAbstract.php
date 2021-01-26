@@ -110,7 +110,7 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
     }
 
     /** @test */
-    public function it_can_replace_label_positioned_above(): void
+    public function it_can_replace_default_label_positioned_above(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),

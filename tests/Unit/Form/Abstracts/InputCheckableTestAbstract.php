@@ -2,8 +2,6 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
-use Illuminate\Support\MessageBag;
-use Illuminate\Support\ViewErrorBag;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\CheckableAbstract;
 
 abstract class InputCheckableTestAbstract extends InputTestAbstract
@@ -30,7 +28,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
     }
 
     /** @test */
-    public function it_can_set_prepend_from_component_config(): void
+    public function it_can_set_default_prepend_from_component_config(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -108,7 +106,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
     }
 
     /** @test */
-    public function it_can_hide_preprend_and_append(): void
+    public function it_can_hide_prepend_and_append(): void
     {
         $html = $this->getComponent()->name('name')->prepend(null)->append(null)->toHtml();
         self::assertStringNotContainsString('<div class="label-prepend">', $html);
@@ -131,6 +129,13 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
     }
 
     /** @test */
+    public function it_can_set_not_checked(): void
+    {
+        $html = $this->getComponent()->name('name')->checked(false)->toHtml();
+        self::assertStringNotContainsString('checked="checked"', $html);
+    }
+
+    /** @test */
     public function it_can_set_checked_and_override_model_value(): void
     {
         $user = $this->createUniqueUser();
@@ -140,6 +145,12 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
 
     /** @test */
     public function it_can_set_value(): void
+    {
+        self::markTestSkipped();
+    }
+
+    /** @test */
+    public function it_can_set_checked_from_value(): void
     {
         $html = $this->getComponent()->name('active')->value(true)->toHtml();
         self::assertStringContainsString('checked="checked', $html);
@@ -265,7 +276,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
     }
 
     /** @test */
-    public function it_can_replace_label_positioned_above(): void
+    public function it_can_replace_default_label_positioned_above(): void
     {
         self::markTestSkipped();
     }
@@ -301,7 +312,7 @@ abstract class InputCheckableTestAbstract extends InputTestAbstract
     }
 
     /** @test */
-    public function it_can_generate_default_placehoder_with_hidden_label(): void
+    public function it_can_generate_default_placeholder_with_hidden_label(): void
     {
         self::markTestSkipped();
     }

@@ -661,7 +661,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
     }
 
     /** @test */
-    public function it_can_replace_label_positioned_above(): void
+    public function it_can_replace_default_label_positioned_above(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -732,7 +732,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
     }
 
     /** @test */
-    public function it_can_generate_default_placehoder_with_hidden_label(): void
+    public function it_can_generate_default_placeholder_with_hidden_label(): void
     {
         $html = $this->getComponent()->name('name')->label(null)->toHtml();
         self::assertStringContainsString(
