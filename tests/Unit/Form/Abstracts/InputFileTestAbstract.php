@@ -6,12 +6,26 @@ use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\UploadableAbstrac
 
 abstract class InputFileTestAbstract extends InputTestAbstract
 {
-    public function testInstance(): void
+    /** @test */
+    public function it_can_return_instance_from_helper(): void
+    {
+        self::assertInstanceOf(UploadableAbstract::class, $this->getHelper());
+    }
+
+    /** @test */
+    public function it_can_return_instance_from_facade(): void
+    {
+        self::assertInstanceOf(UploadableAbstract::class, $this->getFacade());
+    }
+
+    /** @test */
+    public function it_can_return_instance_from_extended_testing_class(): void
     {
         self::assertInstanceOf(UploadableAbstract::class, $this->getComponent());
     }
 
-    public function testModelValue(): void
+    /** @test */
+    public function it_can_get_value_from_model(): void
     {
         $user = $this->createUniqueUser();
         $html = $this->getComponent()->model($user)->name('name')->toHtml();
@@ -21,7 +35,8 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetValue(): void
+    /** @test */
+    public function it_can_set_value(): void
     {
         $html = $this->getComponent()->name('name')->value('custom-value')->toHtml();
         self::assertStringContainsString(
@@ -30,7 +45,8 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetZeroValue(): void
+    /** @test */
+    public function it_can_set_zero_value(): void
     {
         $html = $this->getComponent()->name('name')->value(0)->toHtml();
         self::assertStringContainsString(
@@ -39,7 +55,8 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetEmptyStringValue(): void
+    /** @test */
+    public function it_can_set_empty_string_value(): void
     {
         $html = $this->getComponent()->name('name')->value('')->toHtml();
         self::assertStringContainsString(
@@ -49,7 +66,8 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetNullValue(): void
+    /** @test */
+    public function it_can_set_null_value(): void
     {
         $html = $this->getComponent()->name('name')->value(null)->toHtml();
         self::assertStringContainsString(
@@ -59,7 +77,8 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetValueFromClosureWithDisabledMultilingual(): void
+    /** @test */
+    public function it_can_set_value_from_closure_with_disabled_multilingual(): void
     {
         $html = $this->getComponent()->name('name')->value(function ($locale) {
             return 'closure-value-' . $locale;
@@ -71,7 +90,8 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testOldValue(): void
+    /** @test */
+    public function it_can_take_old_value_from_string(): void
     {
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => 'old-value'])->flash(),
@@ -82,7 +102,8 @@ abstract class InputFileTestAbstract extends InputTestAbstract
             . '-name">old-value</label>', $html);
     }
 
-    public function testOldNullValue(): void
+    /** @test */
+    public function it_can_take_old_value_from_null(): void
     {
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => null])->flash(),
@@ -93,7 +114,8 @@ abstract class InputFileTestAbstract extends InputTestAbstract
             . '-name">' . __('No file selected.') . '</label>', $html);
     }
 
-    public function testOldArrayValue(): void
+    /** @test */
+    public function it_can_take_old_value_from_array(): void
     {
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => [0 => 'old-value']])->flash(),
@@ -104,7 +126,8 @@ abstract class InputFileTestAbstract extends InputTestAbstract
             . '-name-0">old-value</label>', $html);
     }
 
-    public function testDefaultPlaceholder(): void
+    /** @test */
+    public function it_can_generate_default_placeholder_from_string_name(): void
     {
         $html = $this->getComponent()->name('name')->toHtml();
         self::assertStringContainsString('custom-file-label', $html);
@@ -112,7 +135,8 @@ abstract class InputFileTestAbstract extends InputTestAbstract
             . '-name">' . __('No file selected.') . '</label>', $html);
     }
 
-    public function testDefaultPlaceholderWithArrayName(): void
+    /** @test */
+    public function it_can_generate_default_placeholder_from_array_name(): void
     {
         $html = $this->getComponent()->name('name[0]')->toHtml();
         self::assertStringContainsString('custom-file-label', $html);
@@ -120,7 +144,8 @@ abstract class InputFileTestAbstract extends InputTestAbstract
             . '-name-0">' . __('No file selected.') . '</label>', $html);
     }
 
-    public function testSetPlaceholder(): void
+    /** @test */
+    public function it_can_replace_default_placeholder(): void
     {
         $placeholder = 'custom-placeholder';
         $html = $this->getComponent()->name('name')->placeholder($placeholder)->toHtml();
@@ -129,7 +154,8 @@ abstract class InputFileTestAbstract extends InputTestAbstract
             . '-name">' . $placeholder . '</label>', $html);
     }
 
-    public function testSetPlaceholderWithLabel(): void
+    /** @test */
+    public function it_can_replace_default_placeholder_with_specific_label(): void
     {
         $label = 'custom-label';
         $placeholder = 'custom-placeholder';
@@ -138,7 +164,8 @@ abstract class InputFileTestAbstract extends InputTestAbstract
             . '-name">' . $placeholder . '</label>', $html);
     }
 
-    public function testNoPlaceholderWithLabel(): void
+    /** @test */
+    public function it_can_generate_default_placeholder_with_specific_label(): void
     {
         $label = 'custom-label';
         $html = $this->getComponent()->name('name')->label($label)->toHtml();
@@ -148,7 +175,8 @@ abstract class InputFileTestAbstract extends InputTestAbstract
             . '-name">' . $label . '</label>', $html);
     }
 
-    public function testNoPlaceholderWithNoLabel(): void
+    /** @test */
+    public function it_can_generate_default_placeholder_with_hidden_label(): void
     {
         $html = $this->getComponent()->name('name')->label(null)->toHtml();
         self::assertStringContainsString('custom-file-label', $html);
@@ -156,7 +184,8 @@ abstract class InputFileTestAbstract extends InputTestAbstract
             . '-name">' . __('No file selected.') . '</label>', $html);
     }
 
-    public function testHidePlaceholder(): void
+    /** @test */
+    public function it_can_hide_placeholder(): void
     {
         $html = $this->getComponent()->name('name')->placeholder(false)->toHtml();
         self::assertStringNotContainsString('ustom-file-label', $html);
@@ -164,7 +193,8 @@ abstract class InputFileTestAbstract extends InputTestAbstract
             . '-name">' . __('No file selected.') . '</label>', $html);
     }
 
-    public function testDefaultComponentClasses(): void
+    /** @test */
+    public function it_can_set_default_component_classes_from_component_config(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -177,7 +207,8 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetComponentClassesMergedToDefault(): void
+    /** @test */
+    public function it_can_merge_component_classes_to_default(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -190,7 +221,8 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetComponentClassesReplacesDefault(): void
+    /** @test */
+    public function it_can_replace_default_component_classes(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -200,7 +232,8 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         self::assertStringContainsString('class="component form-control custom-file-input replaced"', $html);
     }
 
-    public function testSetUploadedFile(): void
+    /** @test */
+    public function it_can_set_uploaded_file(): void
     {
         $html = $this->getComponent()->name('name')->uploadedFile(function () {
             return 'Uploaded file !';
@@ -209,7 +242,8 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         self::assertStringContainsString('Uploaded file !', $html);
     }
 
-    public function testSetNoUploadedFile(): void
+    /** @test */
+    public function it_can_set_no_uploaded_file(): void
     {
         $html = $this->getComponent()->name('name')->uploadedFile(function () {
             return null;
@@ -217,7 +251,8 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         self::assertStringNotContainsString('id="uploaded-file-name"', $html);
     }
 
-    public function testCustomShowRemoveCheckbox(): void
+    /** @test */
+    public function it_can_set_default_show_remove_checkbox_from_component_config(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -230,7 +265,8 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         self::assertStringContainsString(' name="remove_name"', $html);
     }
 
-    public function testSetShowRemoveCheckboxReplacesDefault(): void
+    /** @test */
+    public function it_can_replace_default_show_remove_checkbox(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -243,7 +279,8 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         self::assertStringNotContainsString(' name="remove_name"', $html);
     }
 
-    public function testSetShowRemoveCheckboxWithoutUploadedFile(): void
+    /** @test */
+    public function it_cant_display_show_remove_checkbox_without_uploaded_file(): void
     {
         $html = $this->getComponent()->name('name')->uploadedFile(function () {
             return null;
@@ -252,7 +289,8 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         self::assertStringNotContainsString(' name="remove_name"', $html);
     }
 
-    public function testDefaultRemoveCheckboxLabel(): void
+    /** @test */
+    public function it_can_set_default_remove_checkbox_label_from_component_config(): void
     {
         $html = $this->getComponent()->name('name')->uploadedFile(function () {
             return 'html';
@@ -263,7 +301,8 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetRemoveCheckboxLabel(): void
+    /** @test */
+    public function it_can_replace_default_show_remove_checkbox_label(): void
     {
         $html = $this->getComponent()->name('name')->uploadedFile(function () {
             return 'html';
@@ -271,7 +310,8 @@ abstract class InputFileTestAbstract extends InputTestAbstract
         self::assertStringContainsString(' for="checkbox-remove-name">Test', $html);
     }
 
-    public function testUploadedZoneNotDisplayedWithEmptyView(): void
+    /** @test */
+    public function it_cant_display_uploaded_file_element_with_empty_view(): void
     {
         view()->addNamespace('laravel-bootstrap-components', 'tests/views');
         $html = $this->getComponent()->name('name')->uploadedFile(function () {

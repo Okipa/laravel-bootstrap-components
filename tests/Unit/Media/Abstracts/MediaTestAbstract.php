@@ -21,17 +21,17 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
 
     abstract protected function getCustomComponent(): ComponentAbstract;
 
-    public function testHelper(): void
+    public function it_can_return_instance_from_helper(): void
     {
-        self::assertInstanceOf(get_class($this->getComponent()), $this->getHelper());
+        self::assertInstanceOf(MediaAbstract::class, $this->getHelper());
     }
 
-    public function testFacade(): void
+    public function it_can_return_instance_from_facade(): void
     {
-        self::assertInstanceOf(get_class($this->getComponent()), $this->getFacade());
+        self::assertInstanceOf(MediaAbstract::class, $this->getFacade());
     }
 
-    public function testInstance(): void
+    public function it_can_return_instance_from_extended_testing_class(): void
     {
         self::assertInstanceOf(MediaAbstract::class, $this->getComponent());
     }
@@ -63,7 +63,7 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
         return $this->getComponentType();
     }
 
-    public function testSetCaptionReplacesDefault(): void
+    public function it_can_replace_default_caption(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -74,25 +74,25 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
         self::assertStringNotContainsString('class="caption form-text text-muted">default-caption', $html);
     }
 
-    public function testHideCaption(): void
+    public function it_can_hide_caption(): void
     {
         $html = $this->getComponent()->caption(null)->toHtml();
         self::assertStringNotContainsString('class="caption form-text text-muted"', $html);
     }
 
-    public function testSetLabel(): void
+    public function it_can_replace_default_label(): void
     {
         $html = $this->getComponent()->label('custom-label')->toHtml();
         self::assertStringContainsString('<label class="d-block">custom-label</label>', $html);
     }
 
-    public function testNoLabel(): void
+    public function it_can_generate_default_label(): void
     {
         $html = $this->getComponent()->toHtml();
         self::assertStringNotContainsString('<label', $html);
     }
 
-    public function testHideLabel(): void
+    public function it_can_hide_label(): void
     {
         $html = $this->getComponent()->label(null)->toHtml();
         self::assertStringNotContainsString(
@@ -101,31 +101,31 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
         );
     }
 
-    public function testSetNoContainerId(): void
+    public function it_has_no_container_id_by_default(): void
     {
         $html = $this->getComponent()->toHtml();
         self::assertStringNotContainsString('<div id="', $html);
     }
 
-    public function testSetContainerId(): void
+    public function it_can_set_container_id(): void
     {
         $html = $this->getComponent()->containerId('custom-container-id')->toHtml();
         self::assertStringContainsString('<div id="custom-container-id"', $html);
     }
 
-    public function testDefaultComponentId(): void
+    public function it_has_no_component_id_by_default(): void
     {
         $html = $this->getComponent()->toHtml();
         self::assertStringNotContainsString('<audio id="', $html);
     }
 
-    public function testSetComponentId(): void
+    public function it_can_set_component_id(): void
     {
         $html = $this->getComponent()->componentId('custom-component-id')->toHtml();
         self::assertStringContainsString('<audio id="custom-component-id"', $html);
     }
 
-    public function testDefaultContainerClasses(): void
+    public function it_can_set_default_container_classes_from_component_config(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -135,7 +135,7 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('class="component-container default container classes"', $html);
     }
 
-    public function testSetContainerClassesMergedToDefault(): void
+    public function it_can_merge_container_classes_to_default(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -145,7 +145,7 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('class="component-container default container classes with merged"', $html);
     }
 
-    public function testSetContainerClassesReplacesDefault(): void
+    public function it_can_replace_default_container_classes(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -155,7 +155,7 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('class="component-container replaces default"', $html);
     }
 
-    public function testDefaultComponentClasses(): void
+    public function it_can_set_default_component_classes_from_component_config(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -165,7 +165,7 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('class="component default component classes"', $html);
     }
 
-    public function testSetComponentClassesMergedToDefault(): void
+    public function it_can_merge_component_classes_to_default(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -175,7 +175,7 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('class="component default component classes with merged"', $html);
     }
 
-    public function testSetComponentClassesReplacesDefault(): void
+    public function it_can_replace_default_component_classes(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -185,7 +185,7 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('class="component replaces default"', $html);
     }
 
-    public function testDefaultContainerHtmlAttributes(): void
+    public function it_can_set_default_container_html_attributes_from_component_config(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -195,7 +195,7 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('default="container" html="attributes">', $html);
     }
 
-    public function testSetContainerHtmlAttributesMergedToDefault(): void
+    public function it_can_merge_container_html_attributes_to_default(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -207,7 +207,7 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('default="container" html="attributes" with="merged">', $html);
     }
 
-    public function testSetContainerHtmlAttributesReplacesDefault(): void
+    public function it_can_replace_default_container_html_attributes(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -219,7 +219,7 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('replaces="default">', $html);
     }
 
-    public function testDefaultComponentHtmlAttributes(): void
+    public function it_can_set_default_component_html_attributes_from_component_config(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -229,7 +229,7 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('default="component" html="attributes">', $html);
     }
 
-    public function testSetComponentHtmlAttributesMergedToDefault(): void
+    public function it_can_merge_component_html_attributes_to_default(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -241,7 +241,7 @@ abstract class MediaTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('default="component" html="attributes" with="merged">', $html);
     }
 
-    public function testSetComponentHtmlAttributesReplacesDefault(): void
+    public function it_can_replace_default_component_html_attributes(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),

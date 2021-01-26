@@ -3,19 +3,40 @@
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
 use InvalidArgumentException;
+use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\SelectableAbstract;
 use Okipa\LaravelBootstrapComponents\Tests\Fakers\CompaniesFaker;
 
 abstract class SelectTestAbstract extends InputTestAbstract
 {
     use CompaniesFaker;
 
-    public function testType(): void
+    /** @test */
+    public function it_can_return_instance_from_helper(): void
+    {
+        self::assertInstanceOf(SelectableAbstract::class, $this->getHelper());
+    }
+
+    /** @test */
+    public function it_can_return_instance_from_facade(): void
+    {
+        self::assertInstanceOf(SelectableAbstract::class, $this->getFacade());
+    }
+
+    /** @test */
+    public function it_can_return_instance_from_extended_testing_class(): void
+    {
+        self::assertInstanceOf(SelectableAbstract::class, $this->getComponent());
+    }
+
+    /** @test */
+    public function it_has_correct_type(): void
     {
         $html = $this->getComponent()->name('id')->toHtml();
         self::assertStringContainsString('<select', $html);
     }
 
-    public function testSetNoOptions(): void
+    /** @test */
+    public function it_can_set_no_option(): void
     {
         $html = $this->getComponent()->name('id')->toHtml();
         self::assertStringContainsString(
@@ -24,7 +45,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetOptionsFromArray(): void
+    /** @test */
+    public function it_can_set_options_from_array(): void
     {
         $optionsList = [
             ['id' => 1, 'name' => $this->faker->word],
@@ -45,7 +67,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetOptionsFromArrayWithWrongOptionValueField(): void
+    /** @test */
+    public function it_cant_set_options_from_array_with_wrong_option_value_field(): void
     {
         $optionsList = [
             ['id' => 1, 'name' => $this->faker->word],
@@ -55,7 +78,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $this->getComponent()->name('id')->options($optionsList, 'wrong', 'name')->toHtml();
     }
 
-    public function testSetOptionsFromArrayWithWrongOptionLabelField(): void
+    /** @test */
+    public function it_cant_set_options_from_array_with_wrong_option_label_field(): void
     {
         $optionsList = [
             ['id' => 1, 'name' => $this->faker->word],
@@ -65,7 +89,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $this->getComponent()->name('id')->options($optionsList, 'id', 'wrong')->toHtml();
     }
 
-    public function testSetOptionsFromModelsCollection(): void
+    /** @test */
+    public function it_can_set_options_from_models_collection(): void
     {
         $users = $this->createMultipleUsers(2);
         $html = $this->getComponent()->name('id')->options($users, 'id', 'name')->toHtml();
@@ -84,21 +109,24 @@ abstract class SelectTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetOptionsFromModelsCollectionWithWrongOptionValueField(): void
+    /** @test */
+    public function it_can_set_options_from_models_collection_with_wrong_option_value_field(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $users = $this->createMultipleUsers(2);
         $this->getComponent()->name('id')->options($users, 'wrong', 'name')->toHtml();
     }
 
-    public function testSetOptionsFromModelsCollectionWithWrongOptionLabelField(): void
+    /** @test */
+    public function it_can_set_options_from_models_collection_with_wrong_option_label_field(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $users = $this->createMultipleUsers(2);
         $this->getComponent()->name('name')->options($users, 'id', 'wrong')->toHtml();
     }
 
-    public function testModelValue(): void
+    /** @test */
+    public function it_can_get_value_from_model(): void
     {
         $users = $this->createMultipleUsers(2);
         $user = $users->first();
@@ -118,38 +146,45 @@ abstract class SelectTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetValue(): void
+    /** @test */
+    public function it_can_set_value(): void
     {
         self::markTestSkipped();
     }
 
-    public function testSetZeroValue(): void
+    /** @test */
+    public function it_can_set_zero_value(): void
     {
         self::markTestSkipped();
     }
 
-    public function testSetEmptyStringValue(): void
+    /** @test */
+    public function it_can_set_empty_string_value(): void
     {
         self::markTestSkipped();
     }
 
-    public function testSetNullValue(): void
+    /** @test */
+    public function it_can_set_null_value(): void
     {
         self::markTestSkipped();
     }
 
-    public function testSetValueFromClosureWithDisabledMultilingual(): void
+    /** @test */
+    public function it_can_set_value_from_closure_with_disabled_multilingual(): void
     {
         self::markTestSkipped();
     }
 
-    public function testSetSelectedOptionWithoutDeclaredOptions(): void
+    /** @test */
+    public function it_can_set_selected_option_with_no_option(): void
     {
         $html = $this->getComponent()->name('id')->selected('id', 1)->toHtml();
         self::assertStringContainsString('<select', $html);
     }
 
-    public function testSetSelectedOptionFromWrongTypeValue(): void
+    /** @test */
+    public function it_cant_set_selected_option_from_wrong_type_value(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $users = $this->createMultipleUsers(2);
@@ -159,7 +194,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
             ->toHtml();
     }
 
-    public function testSetSelectedOptionFromValue(): void
+    /** @test */
+    public function it_can_set_selected_options_from_value(): void
     {
         $users = $this->createMultipleUsers(2);
         $user = null;
@@ -183,7 +219,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetSelectedOptionFromLabel(): void
+    /** @test */
+    public function it_can_set_selected_options_from_label(): void
     {
         $users = $this->createMultipleUsers(2);
         $user = null;
@@ -207,7 +244,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testNotSelected(): void
+    /** @test */
+    public function it_can_set_no_selected_option(): void
     {
         $users = $this->createMultipleUsers(2);
         $html = $this->getComponent()
@@ -228,7 +266,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testOldValue(): void
+    /** @test */
+    public function it_can_take_old_value_from_string(): void
     {
         $users = $this->createMultipleUsers(3);
         $custom = $users->get(0);
@@ -258,7 +297,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testOldNullValue(): void
+    /** @test */
+    public function it_can_take_old_value_from_null(): void
     {
         $users = $this->createMultipleUsers(3);
         $custom = $users->get(0);
@@ -287,7 +327,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testOldArrayValue(): void
+    /** @test */
+    public function it_can_take_old_value_from_array(): void
     {
         $users = $this->createMultipleUsers(3);
         $custom = $users->get(0);
@@ -317,7 +358,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetDisabledOptions(): void
+    /** @test */
+    public function it_can_disable_options(): void
     {
         $users = $this->createMultipleUsers(3);
         $users->first()->update(['active' => false]);
@@ -343,7 +385,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testSetMultiple(): void
+    /** @test */
+    public function it_can_set_multiple_mode(): void
     {
         $companies = $this->createMultipleCompanies(5);
         $html = $this->getComponent()->name('companies')->options($companies, 'id', 'name')->multiple()->toHtml();
@@ -351,7 +394,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         self::assertStringContainsString('multiple>', $html);
     }
 
-    public function testSelectMultipleWithModelAndNonExistentAttribute(): void
+    /** @test */
+    public function it_can_select_multiple_options_with_model_and_non_existent_attribute(): void
     {
         $user = $this->createUniqueUser();
         $companies = $this->createMultipleCompanies(5);
@@ -373,7 +417,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testSelectMultipleWithModelAndWrongAttributeType(): void
+    /** @test */
+    public function it_cant_select_multiple_options_with_model_and_wrong_attribute_type(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $user = $this->createUniqueUser();
@@ -382,7 +427,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $this->getComponent()->name('companies')->model($user)->options($companies, 'id', 'name')->multiple()->toHtml();
     }
 
-    public function testSelectedMultipleFromModelEmptyValue(): void
+    /** @test */
+    public function it_can_select_multiple_options_from_model_empty_value(): void
     {
         $user = $this->createUniqueUser();
         $companies = $this->createMultipleCompanies(5);
@@ -405,7 +451,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testSelectedMultipleFromModelValue(): void
+    /** @test */
+    public function it_can_select_multiple_options_from_model_value(): void
     {
         $user = $this->createUniqueUser();
         $companies = $this->createMultipleCompanies(5);
@@ -431,7 +478,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testSetSelectedMultipleOptionsFromEmptyValue(): void
+    /** @test */
+    public function it_can_set_selected_multiple_options_from_empty_value(): void
     {
         $companies = $this->createMultipleCompanies(5);
         $html = $this->getComponent()
@@ -452,7 +500,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testSetSelectedMultipleOptionsFromWrongTypeValue(): void
+    /** @test */
+    public function it_cant_set_selected_multiple_options_from_wrong_type_value(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $companies = $this->createMultipleCompanies(5);
@@ -463,7 +512,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
             ->toHtml();
     }
 
-    public function testSetSelectedMultipleOptionsFromValue(): void
+    /** @test */
+    public function it_cant_set_selected_multiple_options_from_value(): void
     {
         $user = $this->createUniqueUser();
         $companies = $this->createMultipleCompanies(5);
@@ -490,7 +540,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testSetSelectedMultipleOptionsFromLabel(): void
+    /** @test */
+    public function it_cant_set_selected_multiple_options_from_label(): void
     {
         $user = $this->createUniqueUser();
         $companies = $this->createMultipleCompanies(5);
@@ -517,7 +568,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testOldMultipleValue(): void
+    /** @test */
+    public function it_can_take_old_multiple_values(): void
     {
         $user = $this->createUniqueUser();
         $companies = $this->createMultipleCompanies(6);
@@ -550,7 +602,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testOldMultipleNullValue(): void
+    /** @test */
+    public function it_can_take_old_multiple_null_values(): void
     {
         $user = $this->createUniqueUser();
         $companies = $this->createMultipleCompanies(6);
@@ -579,7 +632,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testOldMultipleArrayValue(): void
+    /** @test */
+    public function it_can_take_old_multiple_array_values(): void
     {
         $user = $this->createUniqueUser();
         $companies = $this->createMultipleCompanies(6);
@@ -612,7 +666,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         }
     }
 
-    public function testDefaultLabelPositionedAbove(): void
+    /** @test */
+    public function it_can_set_default_label_positioned_above_from_component_config(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -624,7 +679,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         self::assertLessThan($labelPosition, $inputPosition);
     }
 
-    public function testSetLabelPositionedAboveReplacesDefault(): void
+    /** @test */
+    public function it_can_replace_default_label_positioned_above(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -636,7 +692,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         self::assertLessThan($inputPosition, $labelPosition);
     }
 
-    public function testDefaultPlaceholder(): void
+    /** @test */
+    public function it_can_generate_default_placeholder_from_string_name(): void
     {
         $html = $this->getComponent()->name('name')->toHtml();
         self::assertStringContainsString(
@@ -645,7 +702,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testDefaultPlaceholderWithArrayName(): void
+    /** @test */
+    public function it_can_generate_default_placeholder_from_array_name(): void
     {
         $html = $this->getComponent()->name('name[0]')->toHtml();
         self::assertStringContainsString(
@@ -654,7 +712,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetPlaceholder(): void
+    /** @test */
+    public function it_can_replace_default_placeholder(): void
     {
         $placeholder = 'custom-placeholder';
         $html = $this->getComponent()->name('name')->placeholder($placeholder)->toHtml();
@@ -664,7 +723,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testSetPlaceholderWithLabel(): void
+    /** @test */
+    public function it_can_replace_default_placeholder_with_specific_label(): void
     {
         $label = 'custom-label';
         $placeholder = 'test-custom-placeholder';
@@ -675,7 +735,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testNoPlaceholderWithLabel(): void
+    /** @test */
+    public function it_can_generate_default_placeholder_with_specific_label(): void
     {
         $label = 'custom-label';
         $html = $this->getComponent()->name('name')->label($label)->toHtml();
@@ -689,7 +750,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testNoPlaceholderWithNoLabel(): void
+    /** @test */
+    public function it_can_generate_default_placeholder_with_hidden_label(): void
     {
         $html = $this->getComponent()->name('name')->label(null)->toHtml();
         self::assertStringContainsString(
@@ -698,7 +760,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testHidePlaceholder(): void
+    /** @test */
+    public function it_can_hide_placeholder(): void
     {
         $html = $this->getComponent()->name('name')->placeholder(false)->toHtml();
         self::assertStringNotContainsString(
@@ -707,28 +770,32 @@ abstract class SelectTestAbstract extends InputTestAbstract
         );
     }
 
-    public function testDefaultComponentId(): void
+    /** @test */
+    public function it_can_generate_default_component_id(): void
     {
         $html = $this->getComponent()->name('name')->toHtml();
         self::assertStringContainsString(' for="' . $this->getComponentType() . '-name"', $html);
         self::assertStringContainsString('<select id="' . $this->getComponentType() . '-name"', $html);
     }
 
-    public function testDefaultComponentIdWithArrayName(): void
+    /** @test */
+    public function it_can_generate_default_component_id_from_array_name(): void
     {
         $html = $this->getComponent()->name('name[0]')->toHtml();
         self::assertStringContainsString(' for="' . $this->getComponentType() . '-name-0"', $html);
         self::assertStringContainsString('<select id="' . $this->getComponentType() . '-name-0"', $html);
     }
 
-    public function testDefaultComponentIdFormatting(): void
+    /** @test */
+    public function it_can_generate_default_component_id_from_string_name_with_specific_format(): void
     {
         $html = $this->getComponent()->name('camelCaseName')->toHtml();
         self::assertStringContainsString(' for="' . $this->getComponentType() . '-camel-case-name"', $html);
         self::assertStringContainsString('<select id="' . $this->getComponentType() . '-camel-case-name"', $html);
     }
 
-    public function testSetComponentId(): void
+    /** @test */
+    public function it_can_set_component_id(): void
     {
         $customComponentId = 'test-custom-component-id';
         $html = $this->getComponent()->name('name')->componentId($customComponentId)->toHtml();
@@ -736,7 +803,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         self::assertStringContainsString('<select id="' . $customComponentId . '"', $html);
     }
 
-    public function testDefaultComponentClasses(): void
+    /** @test */
+    public function it_can_set_default_component_classes_from_component_config(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -746,7 +814,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         self::assertStringContainsString('class="component custom-select default component classes"', $html);
     }
 
-    public function testSetComponentClassesMergedToDefault(): void
+    /** @test */
+    public function it_can_merge_component_classes_to_default(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -756,7 +825,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         self::assertStringContainsString('class="component custom-select default component classes merged"', $html);
     }
 
-    public function testSetComponentClassesReplacesDefault(): void
+    /** @test */
+    public function it_can_replace_default_component_classes(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),

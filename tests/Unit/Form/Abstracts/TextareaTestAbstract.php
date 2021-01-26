@@ -8,52 +8,60 @@ use Okipa\LaravelBootstrapComponents\Tests\Models\User;
 
 abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
 {
-    public function testType(): void
+    /** @test */
+    public function it_has_correct_type(): void
     {
         $html = $this->getComponent()->name('name')->toHtml();
         self::assertStringContainsString('<textarea', $html);
     }
 
-    public function testModelValue(): void
+    /** @test */
+    public function it_can_get_value_from_model(): void
     {
         $user = $this->createUniqueUser();
         $html = $this->getComponent()->model($user)->name('name')->toHtml();
         self::assertStringContainsString($user->name . '</textarea>', $html);
     }
 
-    public function testSetValue(): void
+    /** @test */
+    public function it_can_set_value(): void
     {
         $html = $this->getComponent()->name('name')->value('custom-value')->toHtml();
         self::assertStringContainsString('>custom-value</textarea>', $html);
     }
 
-    public function testSetZeroValue(): void
+    /** @test */
+    public function it_can_set_zero_value(): void
     {
         $html = $this->getComponent()->name('name')->value(0)->toHtml();
         self::assertStringContainsString('>0</textarea>', $html);
     }
 
-    public function testSetEmptyStringValue(): void
+    /** @test */
+    public function it_can_set_empty_string_value(): void
     {
         $html = $this->getComponent()->name('name')->value('')->toHtml();
         self::assertStringContainsString('></textarea>', $html);
     }
 
-    public function testSetNullValue(): void
+    /** @test */
+    public function it_can_set_null_value(): void
     {
         $html = $this->getComponent()->name('name')->value(null)->toHtml();
         self::assertStringContainsString('></textarea>', $html);
     }
 
-    public function testSetValueFromClosureWithDisabledMultilingual(): void
+    /** @test */
+    public function it_can_set_value_from_closure_with_disabled_multilingual(): void
     {
         $html = $this->getComponent()->name('name')->value(function ($locale) {
             return 'closure-value-' . $locale;
         })->toHtml();
-        self::assertStringContainsString('closure-value-' . app()->getLocale() . '</textarea>', $html);
+        self::assertStringContainsString('>closure-value-' . app()->getLocale() . '</textarea>', $html);
     }
 
-    public function testOldValue(): void
+    /** @test */
+    public function it_can_take_old_value_from_string(): void
     {
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => 'old-value'])->flash(),
@@ -64,7 +72,8 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
         self::assertStringNotContainsString('custom-value</textarea>', $html);
     }
 
-    public function testOldNullValue(): void
+    /** @test */
+    public function it_can_take_old_value_from_null(): void
     {
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => null])->flash(),
@@ -75,7 +84,8 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
         self::assertStringNotContainsString('custom-value</textarea>', $html);
     }
 
-    public function testOldArrayValue(): void
+    /** @test */
+    public function it_can_take_old_value_from_array(): void
     {
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => ['old-value']])->flash(),
@@ -86,7 +96,8 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
         self::assertStringNotContainsString('custom-value</textarea>', $html);
     }
 
-    public function testDefaultLabelPositionedAbove(): void
+    /** @test */
+    public function it_can_set_default_label_positioned_above_from_component_config(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -98,7 +109,8 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
         self::assertLessThan($labelPosition, $inputPosition);
     }
 
-    public function testSetLabelPositionedAboveReplacesDefault(): void
+    /** @test */
+    public function it_can_replace_default_label_positioned_above(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -110,28 +122,32 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
         self::assertLessThan($inputPosition, $labelPosition);
     }
 
-    public function testDefaultComponentId(): void
+    /** @test */
+    public function it_can_generate_default_component_id(): void
     {
         $html = $this->getComponent()->name('name')->toHtml();
         self::assertStringContainsString(' for="' . $this->getComponentType() . '-name"', $html);
         self::assertStringContainsString('<textarea id="' . $this->getComponentType() . '-name"', $html);
     }
 
-    public function testDefaultComponentIdWithArrayName(): void
+    /** @test */
+    public function it_can_generate_default_component_id_from_array_name(): void
     {
         $html = $this->getComponent()->name('name[0]')->toHtml();
         self::assertStringContainsString(' for="' . $this->getComponentType() . '-name-0"', $html);
         self::assertStringContainsString('<textarea id="' . $this->getComponentType() . '-name-0"', $html);
     }
 
-    public function testDefaultComponentIdFormatting(): void
+    /** @test */
+    public function it_can_generate_default_component_id_from_string_name_with_specific_format(): void
     {
         $html = $this->getComponent()->name('camelCaseName')->toHtml();
         self::assertStringContainsString(' for="' . $this->getComponentType() . '-camel-case-name"', $html);
         self::assertStringContainsString('<textarea id="' . $this->getComponentType() . '-camel-case-name"', $html);
     }
 
-    public function testSetComponentId(): void
+    /** @test */
+    public function it_can_set_component_id(): void
     {
         $customComponentId = 'custom-component-id';
         $html = $this->getComponent()->name('name')->componentId($customComponentId)->toHtml();
@@ -139,7 +155,8 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
         self::assertStringContainsString('<textarea id="' . $customComponentId . '"', $html);
     }
 
-    public function testLocalizedModelValue(): void
+    /** @test */
+    public function it_can_take_localized_model_value(): void
     {
         $locales = ['fr', 'en'];
         $name = [];
@@ -153,78 +170,8 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
         }
     }
 
-    public function testLocalizedOldValues(): void
-    {
-        $locales = ['fr', 'en'];
-        $oldValues = [];
-        $values = [];
-        foreach ($locales as $locale) {
-            $oldValues[$locale] = 'old-value-' . $locale;
-            $values[$locale] = 'custom-value-' . $locale;
-        }
-        $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => $oldValues])->flash(),
-        ]);
-        $this->call('GET', 'test');
-        $html = $this->getComponent()->name('name')->locales($locales)->value(function ($locale) use ($values) {
-            return $values . '-' . $locale;
-        })->toHtml();
-        foreach ($locales as $locale) {
-            self::assertStringContainsString('>' . $oldValues[$locale] . '</textarea>', $html);
-            self::assertStringNotContainsString('>' . $values[$locale] . '</textarea>', $html);
-        }
-    }
-
-    public function testLocalizedOldNullValues(): void
-    {
-        $locales = ['fr', 'en'];
-        $oldValues = [];
-        $values = [];
-        foreach ($locales as $locale) {
-            $oldValues[$locale] = null;
-            $values[$locale] = 'custom-value-' . $locale;
-        }
-        $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => $oldValues])->flash(),
-        ]);
-        $this->call('GET', 'test');
-        $html = $this->getComponent()->name('name')->locales($locales)->value(function ($locale) use ($values) {
-            return $values . '-' . $locale;
-        })->toHtml();
-        self::assertEquals(2, Str::substrCount($html, '></textarea>'));
-    }
-
-    public function testLocalizedModelValueFromCustomMultilingualResolver(): void
-    {
-        $user = new User(['name_fr' => $this->faker->word, 'name_en' => $this->faker->word]);
-        config()->set('bootstrap-components.form.multilingualResolver', Resolver::class);
-        $resolverLocales = (new Resolver())->getDefaultLocales();
-        $html = $this->getComponent()->model($user)->name('name')->toHtml();
-        foreach ($resolverLocales as $resolverLocale) {
-            self::assertStringContainsString($user->{'name_' . $resolverLocale} . '</textarea>', $html);
-        }
-    }
-
-    public function testSetLocalizedValue(): void
-    {
-        $locales = ['fr', 'en'];
-        $values = [];
-        foreach ($locales as $locale) {
-            $values[$locale] = 'custom-value-' . $locale;
-        }
-        $html = $this->getComponent()
-            ->name('name')
-            ->locales($locales)
-            ->value(function ($locale) use ($values) {
-                return $values[$locale];
-            })
-            ->toHtml();
-        foreach ($locales as $locale) {
-            self::assertStringContainsString('>' . $values[$locale] . '</textarea>', $html);
-        }
-    }
-
-    public function testLocalizedOldValue(): void
+    /** @test */
+    public function it_can_take_localized_old_value(): void
     {
         $locales = ['fr', 'en'];
         $oldValues = [];
@@ -248,7 +195,60 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
         }
     }
 
-    public function testLocalizedOldValueFromCustomMultilingualResolver(): void
+    /** @test */
+    public function it_can_take_localized_old_null_value(): void
+    {
+        $locales = ['fr', 'en'];
+        $oldValues = [];
+        $values = [];
+        foreach ($locales as $locale) {
+            $oldValues[$locale] = null;
+            $values[$locale] = 'custom-value-' . $locale;
+        }
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => $oldValues])->flash(),
+        ]);
+        $this->call('GET', 'test');
+        $html = $this->getComponent()->name('name')->locales($locales)->value(function ($locale) use ($values) {
+            return $values . '-' . $locale;
+        })->toHtml();
+        self::assertEquals(2, Str::substrCount($html, '></textarea>'));
+    }
+
+    /** @test */
+    public function it_can_take_localized_model_value_from_custom_multilingual_resolver(): void
+    {
+        $user = new User(['name_fr' => $this->faker->word, 'name_en' => $this->faker->word]);
+        config()->set('bootstrap-components.form.multilingualResolver', Resolver::class);
+        $resolverLocales = (new Resolver())->getDefaultLocales();
+        $html = $this->getComponent()->model($user)->name('name')->toHtml();
+        foreach ($resolverLocales as $resolverLocale) {
+            self::assertStringContainsString($user->{'name_' . $resolverLocale} . '</textarea>', $html);
+        }
+    }
+
+    /** @test */
+    public function it_can_set_localized_value(): void
+    {
+        $locales = ['fr', 'en'];
+        $values = [];
+        foreach ($locales as $locale) {
+            $values[$locale] = 'custom-value-' . $locale;
+        }
+        $html = $this->getComponent()
+            ->name('name')
+            ->locales($locales)
+            ->value(function ($locale) use ($values) {
+                return $values[$locale];
+            })
+            ->toHtml();
+        foreach ($locales as $locale) {
+            self::assertStringContainsString('>' . $values[$locale] . '</textarea>', $html);
+        }
+    }
+
+    /** @test */
+    public function it_can_take_localized_old_value_from_custom_multilingual_resolver(): void
     {
         config()->set('bootstrap-components.form.multilingualResolver', Resolver::class);
         $resolverLocales = (new Resolver())->getDefaultLocales();
@@ -274,7 +274,8 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
         }
     }
 
-    public function testSetLocalizedComponentId(): void
+    /** @test */
+    public function it_can_set_localized_component_id(): void
     {
         $locales = ['fr', 'en'];
         $customComponentId = 'test-custom-component-id';

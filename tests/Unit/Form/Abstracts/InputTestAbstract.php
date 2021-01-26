@@ -14,61 +14,77 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
 {
     use UsersFaker;
 
-    public function testHelper(): void
-    {
-        self::assertInstanceOf(get_class($this->getComponent()), $this->getHelper());
-    }
-
     abstract protected function getComponent(): ComponentAbstract;
 
     abstract protected function getHelper(): ComponentAbstract;
 
-    public function testFacade(): void
-    {
-        self::assertInstanceOf(get_class($this->getComponent()), $this->getFacade());
-    }
-
     abstract protected function getFacade(): ComponentAbstract;
 
-    public function testInstance(): void
+    abstract protected function getComponentType(): string;
+
+    abstract protected function getCustomComponent(): ComponentAbstract;
+
+    protected function getComponentKey(): string
+    {
+        return $this->getComponentType();
+    }
+
+    /** @test */
+    public function it_can_return_instance_from_helper(): void
+    {
+        self::assertInstanceOf(FormAbstract::class, $this->getHelper());
+    }
+
+    /** @test */
+    public function it_can_return_instance_from_facade(): void
+    {
+        self::assertInstanceOf(FormAbstract::class, $this->getFacade());
+    }
+
+    /** @test */
+    public function it_can_return_instance_from_extended_testing_class(): void
     {
         self::assertInstanceOf(FormAbstract::class, $this->getComponent());
     }
 
-    public function testSetName(): void
+    /** @test */
+    public function it_can_set_name(): void
     {
         $html = $this->getComponent()->name('name')->toHtml();
         self::assertStringContainsString(' name="name"', $html);
     }
 
-    public function testSetCamelCaseName(): void
+    /** @test */
+    public function it_can_set_name_with_specific_format(): void
     {
         $html = $this->getComponent()->name('camelCaseName')->toHtml();
         self::assertStringContainsString(' name="camelCaseName"', $html);
     }
 
-    public function testType(): void
+    /** @test */
+    public function it_has_correct_type(): void
     {
         $html = $this->getComponent()->name('name')->toHtml();
         self::assertStringContainsString(' type="' . $this->getComponentType() . '"', $html);
     }
 
-    abstract protected function getComponentType(): string;
-
-    public function testInputWithoutName(): void
+    /** @test */
+    public function it_cant_set_component_without_name(): void
     {
         $this->expectException(RuntimeException::class);
         $this->getComponent()->toHtml();
     }
 
-    public function testModelValue(): void
+    /** @test */
+    public function it_can_get_value_from_model(): void
     {
         $user = $this->createUniqueUser();
         $html = $this->getComponent()->name('name')->model($user)->toHtml();
         self::assertStringContainsString(' value="' . $user->name . '"', $html);
     }
 
-    public function testDefaultPrepend(): void
+    /** @test */
+    public function it_can_set_default_prepend_from_component_config(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -78,14 +94,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('<span class="input-group-text">default-prepend</span>', $html);
     }
 
-    protected function getComponentKey(): string
-    {
-        return $this->getComponentType();
-    }
-
-    abstract protected function getCustomComponent(): ComponentAbstract;
-
-    public function testSetPrependReplacesDefault(): void
+    /** @test */
+    public function it_can_replace_default_prepend(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -96,7 +106,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringNotContainsString('<span class="input-group-text">default-prepend</span>', $html);
     }
 
-    public function testSetPrependFromClosureWithDisabledMultilingual(): void
+    /** @test */
+    public function it_can_replace_default_prepend_from_closure_with_disabled_multilingual(): void
     {
         $html = $this->getComponent()->name('name')->prepend(function ($locale) {
             return 'prepend-' . $locale;
@@ -104,19 +115,22 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('<span class="input-group-text">prepend-en</span>', $html);
     }
 
-    public function testHidePrepend(): void
+    /** @test */
+    public function it_can_hide_prepend(): void
     {
         $html = $this->getComponent()->name('name')->prepend(null)->toHtml();
         self::assertStringNotContainsString('<div class="input-group-prepend">', $html);
     }
 
-    public function testHidePrependFallbackWithFalse(): void
+    /** @test */
+    public function it_can_hide_prepend_with_false(): void
     {
         $html = $this->getComponent()->name('name')->prepend(false)->toHtml();
         self::assertStringNotContainsString('<div class="input-group-prepend">', $html);
     }
 
-    public function testDefaultAppend(): void
+    /** @test */
+    public function it_can_set_default_append_from_component_config(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -126,7 +140,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('<span class="input-group-text">default-append</span>', $html);
     }
 
-    public function testSetAppendReplacesDefault(): void
+    /** @test */
+    public function it_can_replace_default_append(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -137,7 +152,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringNotContainsString('<span class="input-group-text">default-append</span>', $html);
     }
 
-    public function testSetAppendFromClosureWithDisabledMultilingual(): void
+    /** @test */
+    public function it_can_replace_default_append_from_closure_with_disabled_multilingual(): void
     {
         $html = $this->getComponent()->name('name')->append(function ($locale) {
             return 'append-' . $locale;
@@ -145,25 +161,29 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('<span class="input-group-text">append-en</span>', $html);
     }
 
-    public function testHideAppend(): void
+    /** @test */
+    public function it_can_hide_append(): void
     {
         $html = $this->getComponent()->name('name')->append(null)->toHtml();
         self::assertStringNotContainsString('<div class="input-group-append">', $html);
     }
 
-    public function testHideAppendFallbackWithFalse(): void
+    /** @test */
+    public function it_can_hide_append_with_false(): void
     {
         $html = $this->getComponent()->name('name')->append(false)->toHtml();
         self::assertStringNotContainsString('<div class="input-group-append">', $html);
     }
 
-    public function testHidePrependHideAppend(): void
+    /** @test */
+    public function it_can_hide_prepend_and_append(): void
     {
         $html = $this->getComponent()->name('name')->prepend(null)->append(null)->toHtml();
         self::assertStringNotContainsString('<div class="input-group">', $html);
     }
 
-    public function testDefaultCaption(): void
+    /** @test */
+    public function it_can_set_default_caption_from_component_config(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -173,7 +193,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('class="caption form-text text-muted">default-caption', $html);
     }
 
-    public function testSetCaptionReplacesDefault(): void
+    /** @test */
+    public function it_can_replace_default_caption(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -184,37 +205,43 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringNotContainsString('class="caption form-text text-muted">default-caption', $html);
     }
 
-    public function testHideCaption(): void
+    /** @test */
+    public function it_can_hide_caption(): void
     {
         $html = $this->getComponent()->name('name')->caption(null)->toHtml();
         self::assertStringNotContainsString('class="caption form-text text-muted"', $html);
     }
 
-    public function testSetValue(): void
+    /** @test */
+    public function it_can_set_value(): void
     {
         $html = $this->getComponent()->name('name')->value('custom-value')->toHtml();
         self::assertStringContainsString(' value="custom-value"', $html);
     }
 
-    public function testSetZeroValue(): void
+    /** @test */
+    public function it_can_set_zero_value(): void
     {
         $html = $this->getComponent()->name('name')->value(0)->toHtml();
         self::assertStringContainsString(' value="0"', $html);
     }
 
-    public function testSetEmptyStringValue(): void
+    /** @test */
+    public function it_can_set_empty_string_value(): void
     {
         $html = $this->getComponent()->name('name')->value('')->toHtml();
         self::assertStringContainsString(' value=""', $html);
     }
 
-    public function testSetNullValue(): void
+    /** @test */
+    public function it_can_set_null_value(): void
     {
         $html = $this->getComponent()->name('name')->value(null)->toHtml();
         self::assertStringContainsString(' value=""', $html);
     }
 
-    public function testSetValueFromClosureWithDisabledMultilingual(): void
+    /** @test */
+    public function it_can_set_value_from_closure_with_disabled_multilingual(): void
     {
         $html = $this->getComponent()->name('name')->value(function ($locale) {
             return 'closure-value-' . $locale;
@@ -222,7 +249,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString(' value="closure-value-' . app()->getLocale() . '"', $html);
     }
 
-    public function testOldValue(): void
+    /** @test */
+    public function it_can_take_old_value_from_string(): void
     {
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => 'old-value'])->flash(),
@@ -233,7 +261,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringNotContainsString(' value="custom-value"', $html);
     }
 
-    public function testOldNullValue(): void
+    /** @test */
+    public function it_can_take_old_value_from_null(): void
     {
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => null])->flash(),
@@ -244,7 +273,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringNotContainsString(' value="custom-value"', $html);
     }
 
-    public function testOldArrayValue(): void
+    /** @test */
+    public function it_can_take_old_value_from_array(): void
     {
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => ['old-value']])->flash(),
@@ -255,7 +285,18 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringNotContainsString(' value="custom-value"', $html);
     }
 
-    public function testSetLabel(): void
+    /** @test */
+    public function it_can_generate_default_label(): void
+    {
+        $html = $this->getComponent()->name('name')->toHtml();
+        self::assertStringContainsString(
+            '<label for="' . $this->getComponentType() . '-name">validation.attributes.name</label>',
+            $html
+        );
+    }
+
+    /** @test */
+    public function it_can_replace_default_label(): void
     {
         $label = 'custom-label';
         $html = $this->getComponent()->name('name')->label($label)->toHtml();
@@ -265,16 +306,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         );
     }
 
-    public function testNoLabel(): void
-    {
-        $html = $this->getComponent()->name('name')->toHtml();
-        self::assertStringContainsString(
-            '<label for="' . $this->getComponentType() . '-name">validation.attributes.name</label>',
-            $html
-        );
-    }
-
-    public function testHideLabel(): void
+    /** @test */
+    public function it_can_hide_label(): void
     {
         $html = $this->getComponent()->name('name')->label(null)->toHtml();
         self::assertStringNotContainsString(
@@ -283,7 +316,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         );
     }
 
-    public function testHideLabelFallbackWithFalse(): void
+    /** @test */
+    public function it_can_hide_label_with_false(): void
     {
         $html = $this->getComponent()->name('name')->label(false)->toHtml();
         self::assertStringNotContainsString(
@@ -292,7 +326,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         );
     }
 
-    public function testDefaultLabelPositionedAbove(): void
+    /** @test */
+    public function it_can_set_default_label_positioned_above_from_component_config(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -304,7 +339,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertLessThan($labelPosition, $inputPosition);
     }
 
-    public function testSetLabelPositionedAboveReplacesDefault(): void
+    /** @test */
+    public function it_can_replace_default_label_positioned_above(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -316,26 +352,45 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertLessThan($inputPosition, $labelPosition);
     }
 
-    public function testDefaultPlaceholder(): void
+    /** @test */
+    public function it_can_generate_default_placeholder_from_string_name(): void
     {
         $html = $this->getComponent()->name('name')->toHtml();
         self::assertStringContainsString(' placeholder="validation.attributes.name"', $html);
     }
 
-    public function testDefaultPlaceholderWithArrayName(): void
+    /** @test */
+    public function it_can_generate_default_placeholder_from_array_name(): void
     {
         $html = $this->getComponent()->name('name[0]')->toHtml();
         self::assertStringContainsString(' placeholder="validation.attributes.name"', $html);
     }
 
-    public function testSetPlaceholder(): void
+    /** @test */
+    public function it_can_generate_default_placeholder_with_specific_label(): void
+    {
+        $label = 'custom-label';
+        $html = $this->getComponent()->name('name')->label($label)->toHtml();
+        self::assertStringContainsString(' placeholder="' . $label . '"', $html);
+    }
+
+    /** @test */
+    public function it_can_generate_default_placeholder_with_hidden_label(): void
+    {
+        $html = $this->getComponent()->name('name')->label(null)->toHtml();
+        self::assertStringContainsString(' placeholder="validation.attributes.name"', $html);
+    }
+
+    /** @test */
+    public function it_can_replace_default_placeholder(): void
     {
         $placeholder = 'custom-placeholder';
         $html = $this->getComponent()->name('name')->placeholder($placeholder)->toHtml();
         self::assertStringContainsString(' placeholder="' . $placeholder . '"', $html);
     }
 
-    public function testSetPlaceholderWithLabel(): void
+    /** @test */
+    public function it_can_replace_default_placeholder_with_specific_label(): void
     {
         $label = 'custom-label';
         $placeholder = 'custom-placeholder';
@@ -344,37 +399,15 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringNotContainsString(' placeholder="' . $label . '"', $html);
     }
 
-    public function testNoPlaceholderWithLabel(): void
-    {
-        $label = 'custom-label';
-        $html = $this->getComponent()->name('name')->label($label)->toHtml();
-        self::assertStringContainsString(' placeholder="' . $label . '"', $html);
-        self::assertStringNotContainsString(' placeholder="validation.attributes.name"', $html);
-    }
-
-    public function testNoPlaceholderWithNoLabel(): void
-    {
-        $html = $this->getComponent()->name('name')->label(null)->toHtml();
-        self::assertStringContainsString(' placeholder="validation.attributes.name"', $html);
-    }
-
-    public function testHidePlaceholder(): void
+    /** @test */
+    public function it_can_hide_placeholder(): void
     {
         $html = $this->getComponent()->name('name')->placeholder(false)->toHtml();
         self::assertStringNotContainsString(' placeholder="', $html);
     }
 
-    public function testItCantDisplaySuccessWithoutOtherErrors(): void
-    {
-        config()->set(
-            'bootstrap-components.components.' . $this->getComponentKey(),
-            get_class($this->getCustomComponent())
-        );
-        $html = $this->getComponent()->name('name')->toHtml();
-        self::assertStringNotContainsString('is-valid', $html);
-    }
-
-    public function testItCanDisplaySuccessWithOtherErrors(): void
+    /** @test */
+    public function it_can_set_default_display_success_from_component_config(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -386,7 +419,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('is-valid', $html);
     }
 
-    public function testSetDisplaySuccessOverridesDefault(): void
+    /** @test */
+    public function it_can_replace_default_display_success(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -398,7 +432,19 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringNotContainsString('is-valid', $html);
     }
 
-    public function testDefaultDisplayFailure(): void
+    /** @test */
+    public function it_cant_display_success_without_other_errors(): void
+    {
+        config()->set(
+            'bootstrap-components.components.' . $this->getComponentKey(),
+            get_class($this->getCustomComponent())
+        );
+        $html = $this->getComponent()->name('name')->toHtml();
+        self::assertStringNotContainsString('is-valid', $html);
+    }
+
+    /** @test */
+    public function it_can_set_default_display_failure_from_component_config(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -412,21 +458,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString($errors->first('name'), $html);
     }
 
-    public function testDisplayFailureWithSpecificErrorBag(): void
-    {
-        config()->set(
-            'bootstrap-components.components.' . $this->getComponentKey(),
-            get_class($this->getCustomComponent())
-        );
-        $messageBag = app(MessageBag::class)->add('name', 'Dummy error message.');
-        $errors = app(ViewErrorBag::class)->put('test', $messageBag);
-        $html = $this->getComponent()->name('name')->displayFailure(true)->errorBag('test')->render(compact('errors'));
-        self::assertStringContainsString('is-invalid', $html);
-        self::assertStringContainsString('<div class="invalid-feedback d-block">', $html);
-        self::assertStringContainsString($errors->test->first('name'), $html);
-    }
-
-    public function testSetDisplayFailureReplacesDefault(): void
+    /** @test */
+    public function it_can_replace_default_display_failure(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -440,7 +473,23 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringNotContainsString($errors->first('name'), $html);
     }
 
-    public function testDisplayFailureWithArrayName(): void
+    /** @test */
+    public function it_can_display_failure_with_specific_error_bag(): void
+    {
+        config()->set(
+            'bootstrap-components.components.' . $this->getComponentKey(),
+            get_class($this->getCustomComponent())
+        );
+        $messageBag = app(MessageBag::class)->add('name', 'Dummy error message.');
+        $errors = app(ViewErrorBag::class)->put('test', $messageBag);
+        $html = $this->getComponent()->name('name')->displayFailure(true)->errorBag('test')->render(compact('errors'));
+        self::assertStringContainsString('is-invalid', $html);
+        self::assertStringContainsString('<div class="invalid-feedback d-block">', $html);
+        self::assertStringContainsString($errors->test->first('name'), $html);
+    }
+
+    /** @test */
+    public function it_can_display_failure_from_array_name(): void
     {
         $messageBag = app(MessageBag::class)->add('name.0', 'Dummy error message.');
         $errors = app(ViewErrorBag::class)->put('default', $messageBag);
@@ -450,41 +499,47 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString($errors->first('name'), $html);
     }
 
-    public function testSetNoContainerId(): void
+    /** @test */
+    public function it_has_no_container_id_by_default(): void
     {
         $html = $this->getComponent()->name('name')->toHtml();
         self::assertStringNotContainsString('<div id="', $html);
     }
 
-    public function testSetContainerId(): void
+    /** @test */
+    public function it_can_set_container_id(): void
     {
         $customContainerId = 'custom-container-id';
         $html = $this->getComponent()->name('name')->containerId($customContainerId)->toHtml();
         self::assertStringContainsString('<div id="' . $customContainerId . '"', $html);
     }
 
-    public function testDefaultComponentId(): void
+    /** @test */
+    public function it_can_generate_default_component_id(): void
     {
         $html = $this->getComponent()->name('name')->toHtml();
         self::assertStringContainsString(' for="' . $this->getComponentType() . '-name"', $html);
         self::assertStringContainsString('<input id="' . $this->getComponentType() . '-name"', $html);
     }
 
-    public function testDefaultComponentIdWithArrayName(): void
+    /** @test */
+    public function it_can_generate_default_component_id_from_array_name(): void
     {
         $html = $this->getComponent()->name('name[0]')->toHtml();
         self::assertStringContainsString(' for="' . $this->getComponentType() . '-name-0"', $html);
         self::assertStringContainsString('<input id="' . $this->getComponentType() . '-name-0"', $html);
     }
 
-    public function testDefaultComponentIdFormatting(): void
+    /** @test */
+    public function it_can_generate_default_component_id_from_string_name_with_specific_format(): void
     {
         $html = $this->getComponent()->name('camelCaseName')->toHtml();
         self::assertStringContainsString(' for="' . $this->getComponentType() . '-camel-case-name"', $html);
         self::assertStringContainsString('<input id="' . $this->getComponentType() . '-camel-case-name"', $html);
     }
 
-    public function testSetComponentId(): void
+    /** @test */
+    public function it_can_set_component_id(): void
     {
         $customComponentId = 'custom-component-id';
         $html = $this->getComponent()->name('name')->componentId($customComponentId)->toHtml();
@@ -492,7 +547,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('<input id="' . $customComponentId . '"', $html);
     }
 
-    public function testDefaultContainerClasses(): void
+    /** @test */
+    public function it_can_set_default_container_classes_from_component_config(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -502,7 +558,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('class="component-container default container classes"', $html);
     }
 
-    public function testSetContainerClassesMergedToDefault(): void
+    /** @test */
+    public function it_can_merge_container_classes_to_default(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -512,7 +569,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('class="component-container default container classes merged"', $html);
     }
 
-    public function testSetContainerClassesReplacesDefault(): void
+    /** @test */
+    public function it_can_replace_default_container_classes(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -522,7 +580,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('class="component-container replaced"', $html);
     }
 
-    public function testDefaultComponentClasses(): void
+    /** @test */
+    public function it_can_set_default_component_classes_from_component_config(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -532,7 +591,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('class="component form-control default component classes"', $html);
     }
 
-    public function testSetComponentClassesMergedToDefault(): void
+    /** @test */
+    public function it_can_merge_component_classes_to_default(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -542,7 +602,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('class="component form-control default component classes merged"', $html);
     }
 
-    public function testSetComponentClassesReplacesDefault(): void
+    /** @test */
+    public function it_can_replace_default_component_classes(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -552,7 +613,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('class="component form-control replaced"', $html);
     }
 
-    public function testDefaultContainerHtmlAttributes(): void
+    /** @test */
+    public function it_can_set_default_container_html_attributes_from_component_config(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -562,7 +624,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('default="container" html="attributes">', $html);
     }
 
-    public function testSetContainerHtmlAttributesMergedToDefault(): void
+    /** @test */
+    public function it_can_merge_container_html_attributes_to_default(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -572,7 +635,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('default="container" html="attributes" with="merged">', $html);
     }
 
-    public function testSetContainerHtmlAttributesReplacesDefault(): void
+    /** @test */
+    public function it_can_replace_default_container_html_attributes(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -582,7 +646,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('replaces="default">', $html);
     }
 
-    public function testDefaultComponentHtmlAttributes(): void
+    /** @test */
+    public function it_can_set_default_component_html_attributes_from_component_config(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -592,7 +657,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('default="component" html="attributes">', $html);
     }
 
-    public function testSetComponentHtmlAttributesMergedToDefault(): void
+    /** @test */
+    public function it_can_merge_component_html_attributes_to_default(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
@@ -606,7 +672,8 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
         self::assertStringContainsString('default="component" html="attributes" with="merged">', $html);
     }
 
-    public function testSetComponentHtmlAttributesReplacesDefault(): void
+    /** @test */
+    public function it_can_replace_default_component_html_attributes(): void
     {
         config()->set(
             'bootstrap-components.components.' . $this->getComponentKey(),
