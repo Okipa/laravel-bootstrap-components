@@ -4,7 +4,7 @@
 
 2021-01-25
 
-* Fixed wrong behaviour when component get `null` as old value
+* Fixed wrong behavior when component get `null` as old value
 * Fixed tests formatting
 
 ## [5.0.1](https://github.com/Okipa/laravel-bootstrap-components/compare/5.0.0...5.0.1)
