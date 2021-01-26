@@ -241,7 +241,6 @@ abstract class FormAbstract extends ComponentAbstract
             return $oldValue;
         }
 
-        //return array_key_exists(Str::before($name, '.'), old()) ? '' : null;
         return array_key_exists($this->removeArrayCharactersFromName(), old()) ? '' : null;
     }
 
