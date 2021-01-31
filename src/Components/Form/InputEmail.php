@@ -2,9 +2,9 @@
 
 namespace Okipa\LaravelBootstrapComponents\Components\Form;
 
-use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract;
+use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\InputAbstract;
 
-class InputEmail extends FormAbstract
+class InputEmail extends InputAbstract
 {
     protected function setType(): string
     {

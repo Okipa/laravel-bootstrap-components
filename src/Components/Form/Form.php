@@ -2,38 +2,18 @@
 
 namespace Okipa\LaravelBootstrapComponents\Components\Form;
 
-use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\InputAbstract;
+use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract;
 
-class InputTel extends InputAbstract
+class Form extends FormAbstract
 {
-    protected function setType(): string
-    {
-        return 'tel';
-    }
-
     protected function setView(): string
     {
-        return 'bootstrap-components.form.input';
-    }
-
-    protected function setPrepend(): ?string
-    {
-        return '<i class="fas fa-phone"></i>';
-    }
-
-    protected function setAppend(): ?string
-    {
-        return null;
+        return 'bootstrap-components.form.form';
     }
 
     protected function setLabelPositionedAbove(): bool
     {
         return config('bootstrap-components.form.labelPositionedAbove');
-    }
-
-    protected function setCaption(): ?string
-    {
-        return null;
     }
 
     protected function setComponentClasses(): array
@@ -43,12 +23,12 @@ class InputTel extends InputAbstract
 
     protected function setContainerClasses(): array
     {
-        return ['form-group'];
+        return [];
     }
 
     protected function setComponentHtmlAttributes(): array
     {
-        return ['autocomplete' => 'on'];
+        return ['novalidate'];
     }
 
     protected function setContainerHtmlAttributes(): array

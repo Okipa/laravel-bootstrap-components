@@ -4,7 +4,7 @@ namespace Okipa\LaravelBootstrapComponents\Components\Form\Abstracts;
 
 use Illuminate\Support\ViewErrorBag;
 
-abstract class CheckableAbstract extends FormAbstract
+abstract class CheckableAbstract extends InputAbstract
 {
     protected bool $checked;
 

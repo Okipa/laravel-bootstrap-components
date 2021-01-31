@@ -4,6 +4,7 @@ namespace Okipa\LaravelBootstrapComponents\Components\Traits;
 
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\CheckableAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract;
+use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\InputAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\MultilingualAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\RadioAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\SelectableAbstract;
@@ -12,6 +13,14 @@ use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\UploadableAbstrac
 
 trait FormComponentsTrait
 {
+    public function form(): FormAbstract
+    {
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract $form */
+        $form = app(config('bootstrap-components.components.form'));
+
+        return $form;
+    }
+
     public function inputText(): MultilingualAbstract
     {
         /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\MultilingualAbstract $inputText */
@@ -20,49 +29,49 @@ trait FormComponentsTrait
         return $inputText;
     }
 
-    public function inputEmail(): FormAbstract
+    public function inputEmail(): InputAbstract
     {
-        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract $inputEmail */
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\InputAbstract $inputEmail */
         $inputEmail = app(config('bootstrap-components.components.email'));
 
         return $inputEmail;
     }
 
-    public function inputPassword(): FormAbstract
+    public function inputPassword(): InputAbstract
     {
-        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract $inputPassword */
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\InputAbstract $inputPassword */
         $inputPassword = app(config('bootstrap-components.components.password'));
 
         return $inputPassword;
     }
 
-    public function inputUrl(): FormAbstract
+    public function inputUrl(): InputAbstract
     {
-        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract $inputUrl */
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\InputAbstract $inputUrl */
         $inputUrl = app(config('bootstrap-components.components.url'));
 
         return $inputUrl;
     }
 
-    public function inputTel(): FormAbstract
+    public function inputTel(): InputAbstract
     {
-        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract $inputUrl */
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\InputAbstract $inputUrl */
         $inputUrl = app(config('bootstrap-components.components.tel'));
 
         return $inputUrl;
     }
 
-    public function inputNumber(): FormAbstract
+    public function inputNumber(): InputAbstract
     {
-        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract $inputNumber */
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\InputAbstract $inputNumber */
         $inputNumber = app(config('bootstrap-components.components.number'));
 
         return $inputNumber;
     }
 
-    public function inputColor(): FormAbstract
+    public function inputColor(): InputAbstract
     {
-        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract $inputColor */
+        /** @var \Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\InputAbstract $inputColor */
         $inputColor = app(config('bootstrap-components.components.color'));
 
         return $inputColor;

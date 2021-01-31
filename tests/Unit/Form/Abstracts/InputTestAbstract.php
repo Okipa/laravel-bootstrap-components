@@ -5,7 +5,7 @@ namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\ViewErrorBag;
 use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
-use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\FormAbstract;
+use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\InputAbstract;
 use Okipa\LaravelBootstrapComponents\Tests\BootstrapComponentsTestCase;
 use Okipa\LaravelBootstrapComponents\Tests\Fakers\UsersFaker;
 use RuntimeException;
@@ -32,19 +32,19 @@ abstract class InputTestAbstract extends BootstrapComponentsTestCase
     /** @test */
     public function it_can_return_instance_from_helper(): void
     {
-        self::assertInstanceOf(FormAbstract::class, $this->getHelper());
+        self::assertInstanceOf(InputAbstract::class, $this->getHelper());
     }
 
     /** @test */
     public function it_can_return_instance_from_facade(): void
     {
-        self::assertInstanceOf(FormAbstract::class, $this->getFacade());
+        self::assertInstanceOf(InputAbstract::class, $this->getFacade());
     }
 
     /** @test */
     public function it_can_return_instance_from_extended_testing_class(): void
     {
-        self::assertInstanceOf(FormAbstract::class, $this->getComponent());
+        self::assertInstanceOf(InputAbstract::class, $this->getComponent());
     }
 
     /** @test */

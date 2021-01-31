@@ -1,7 +1,7 @@
 # Component types
 
 * [ComponentAbstract](#componentabstract)
-  * [FormAbstract](#formabstract)
+  * [InputAbstract](#InputAbstract)
     * [MultilingualAbstract](#multilingualabstract)
     * [TemporalAbstract](#temporalabstract)
     * [UploadableAbstract](#uploadableabstract)
@@ -38,7 +38,7 @@
     ->componentHtmlAttributes(['component', 'html', 'attributes']);
 ```
 
-## FormAbstract
+## InputAbstract
 
 **Inheritance :** [ComponentAbstract](#componentabstract)
 
@@ -62,7 +62,7 @@
 **Usage**
 
 ```php
-<FormAbstract>
+<InputAbstract>
     // inherits ComponentAbstract methods
     ->name('email')
     ->model($user)
@@ -89,7 +89,7 @@
 
 ## MultilingualAbstract
 
-**Inheritance :** [FormAbstract](#formabstract)
+**Inheritance :** [InputAbstract](#InputAbstract)
 
 **Methods**
 
@@ -102,7 +102,7 @@
 
 **Notes**
 
-* You will still be able to use the `value`, `prepend` and `append` methods as for a simple `FormAbstract` component if you wish to. Closure usage is an extra behaviour, which is here to allow you to display translated content.
+* You will still be able to use the `value`, `prepend` and `append` methods as for a simple `InputAbstract` component if you wish to. Closure usage is an extra behaviour, which is here to allow you to display translated content.
 * A security fallback has been implemented in order to allow you to keep the Closure behaviour for the `value`, `prepend` and `append` methods, even if your component is not multilingual anymore. The `$locale` attribute will take the value of the current locale.
 * Each multilingual form component will behave as a monolingual form component as long as the `->locales()` method is not being used or as long as only one locale is being declared.
 * The use of the `->locales()` method will replicate the component for each locale keys you declared.
@@ -120,7 +120,7 @@
 
 ```php
 <MultilingualAbstract>
-    // inherits FormAbstract methods
+    // inherits InputAbstract methods
     ->locales(['fr', 'en'])
     ->value(fn(string $locale) => $name[$locale]);
     ->prepend(fn(string $locale) => 'prepend-' . $locale)
@@ -134,7 +134,7 @@
 
 ## TemporalAbstract
 
-**Inheritance :** [FormAbstract](#formabstract)
+**Inheritance :** [InputAbstract](#InputAbstract)
 
 **Methods**
 
@@ -146,7 +146,7 @@
 
 ```php
 <TemporalAbstract>
-    // inherits FormAbstract methods
+    // inherits InputAbstract methods
     ->format('Y-m-d H:i');
 ```
 
@@ -158,7 +158,7 @@
 
 ## UploadableAbstract
 
-**Inheritance :** [FormAbstract](#formabstract)
+**Inheritance :** [InputAbstract](#InputAbstract)
 
 **Methods**
 
@@ -171,7 +171,7 @@
 
 ```php
 <UploadableAbstract>
-    // inherits FormAbstract methods
+    // inherits InputAbstract methods
     ->uploadedFile(fn() => '<div>Some HTML</div>')
     ->showRemoveCheckbox(true, 'Remove this file');
 ```
@@ -182,7 +182,7 @@
 
 ## CheckableAbstract
 
-**Inheritance :** [FormAbstract](#formabstract)
+**Inheritance :** [InputAbstract](#InputAbstract)
 
 **Methods**
 
@@ -192,13 +192,13 @@
 
 **Notes**
 
-* the inherited FormAbstract `->labelPositionedAbove()` method has no effect with this component type.
+* the inherited InputAbstract `->labelPositionedAbove()` method has no effect with this component type.
 
 **Usage**
 
 ```php
 <CheckableAbstract>
-    // inherits FormAbstract methods
+    // inherits InputAbstract methods
     ->checked();
 ```
 
@@ -210,7 +210,7 @@
 
 ## SelectableAbstract
 
-**Inheritance :** [FormAbstract](#formabstract)
+**Inheritance :** [InputAbstract](#InputAbstract)
 
 **Methods**
 
@@ -229,7 +229,7 @@
 
 ```php
 <SelectableAbstract>
-    // inherits FormAbstract methods
+    // inherits InputAbstract methods
     ->options(collect([
         ['id' => 1, 'title' => 'Item 1', 'active' => true],
         ['id' => 2, 'title' => 'Item 2', 'active' => false],

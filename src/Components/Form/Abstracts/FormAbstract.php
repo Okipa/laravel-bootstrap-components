@@ -2,61 +2,60 @@
 
 namespace Okipa\LaravelBootstrapComponents\Components\Form\Abstracts;
 
-use Closure;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\MessageBag;
-use Illuminate\Support\Str;
-use Illuminate\Support\ViewErrorBag;
 use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
-use Okipa\LaravelBootstrapComponents\Components\Form\Traits\FormValidityChecks;
 
 abstract class FormAbstract extends ComponentAbstract
 {
-    use FormValidityChecks;
+    protected ?string $method = null;
 
-    /** @property mixed $value */
-    protected $value;
+    protected ?string $action = null;
+
+    protected ?string $enctype = null;
 
     protected ?Model $model = null;
 
-    protected string $name;
-
-    /** @property string|Closure|null $prepend */
-    protected $prepend;
-
-    /** @property string|Closure|null $append */
-    protected $append;
-
-    protected ?string $label = null;
-
-    protected ?string $caption;
-
-    protected bool $hideLabel = false;
-
     protected bool $labelPositionedAbove;
-
-    protected ?string $placeholder = null;
 
     protected bool $displaySuccess;
 
     protected bool $displayFailure;
 
-    protected string $errorBag = 'default';
-
     public function __construct()
     {
         parent::__construct();
-        $this->prepend = $this->setPrepend();
-        $this->append = $this->setAppend();
         $this->labelPositionedAbove = $this->setLabelPositionedAbove();
-        $this->caption = $this->setCaption();
         $this->displaySuccess = $this->setDisplaySuccess();
         $this->displayFailure = $this->setDisplayFailure();
     }
 
-    public function name(string $name): self
+    protected function checkValuesValidity(): void
     {
-        $this->name = $name;
+        //
+    }
+
+    public function setType(): string
+    {
+        return 'form';
+    }
+
+    public function method(string $method): self
+    {
+        $this->method = $method;
+
+        return $this;
+    }
+
+    public function action(string $action): self
+    {
+        $this->action = $action;
+
+        return $this;
+    }
+
+    public function enctype(string $enctype): self
+    {
+        $this->enctype = $enctype;
 
         return $this;
     }
@@ -64,64 +63,6 @@ abstract class FormAbstract extends ComponentAbstract
     public function model(?Model $model): self
     {
         $this->model = $model;
-
-        return $this;
-    }
-
-    /**
-     * @param string|Closure|null $prepend
-     *
-     * @return $this
-     */
-    public function prepend($prepend): self
-    {
-        $this->prepend = $prepend;
-
-        return $this;
-    }
-
-    /**
-     * @param string|Closure|null $append
-     *
-     * @return $this
-     */
-    public function append($append): self
-    {
-        $this->append = $append;
-
-        return $this;
-    }
-
-    public function caption(?string $caption): self
-    {
-        $this->caption = $caption;
-
-        return $this;
-    }
-
-    public function placeholder(?string $placeholder): self
-    {
-        $this->placeholder = $placeholder;
-
-        return $this;
-    }
-
-    /**
-     * @param mixed $value
-     *
-     * @return $this
-     */
-    public function value($value): self
-    {
-        $this->value = $value;
-
-        return $this;
-    }
-
-    public function label(?string $label): self
-    {
-        $this->hideLabel = ! $label;
-        $this->label = $label;
 
         return $this;
     }
@@ -147,120 +88,37 @@ abstract class FormAbstract extends ComponentAbstract
         return $this;
     }
 
-    public function errorBag(string $errorBag): self
-    {
-        $this->errorBag = $errorBag;
-
-        return $this;
-    }
-
     protected function getViewParams(): array
     {
         return array_merge(parent::getViewParams(), [
-            'validationClass' => fn(?ViewErrorBag $errors) => $this->getValidationClass($errors),
-            'errorMessage' => fn(?ViewErrorBag $errors) => $this->getErrorMessage($errors),
+            'method' => $this->getMethod(),
+            'action' => $this->getAction(),
+            'enctype' => $this->getEnctype(),
+            'model' => $this->getModel(),
             'labelPositionedAbove' => $this->getLabelPositionedAbove(),
-            'label' => $this->getLabel(),
-            'type' => $this->getType(),
-            'name' => $this->getName(),
-            'value' => $this->getValue(),
-            'placeholder' => $this->getPlaceholder(),
-            'prepend' => $this->getPrepend(),
-            'append' => $this->getAppend(),
-            'caption' => $this->getCaption(),
+            'displaySuccess' => $this->getDisplaySuccess(),
+            'displayFailure' => $this->getDisplayFailure(),
         ]);
     }
 
-    protected function getValidationClass(?ViewErrorBag $errors): ?string
+    protected function getMethod(): ?string
     {
-        // Do not highlight field if no errors are found.
-        if (! $errors) {
-            return null;
-        }
-        if ($this->getErrorMessageBag($errors)->isEmpty()) {
-            return null;
-        }
-        // Highlight field with `is-invalid` class when it has an error.
-        if ($this->getErrorMessageBag($errors)->has($this->convertArrayNameInNotation())) {
-            return $this->getDisplayFailure() ? 'is-invalid' : null;
-        }
-
-        // Highlight field with `is-valid` class when other errors are detected but not for this field.
-        return $this->getDisplaySuccess() ? 'is-valid' : null;
+        return $this->method;
     }
 
-    protected function getErrorMessageBag(ViewErrorBag $errors): MessageBag
+    protected function getAction(): ?string
     {
-        return $errors->{$this->errorBag};
+        return $this->action;
     }
 
-    protected function convertArrayNameInNotation(string $notation = '.'): string
+    protected function getEnctype(): ?string
     {
-        return str_replace(['[', ']'], [$notation, ''], $this->getName());
+        return $this->enctype;
     }
 
-    protected function getName(): string
+    protected function getModel(): ?Model
     {
-        return $this->name ?? '';
-    }
-
-    protected function getDisplayFailure(): bool
-    {
-        return $this->displayFailure;
-    }
-
-    abstract protected function setDisplayFailure(): bool;
-
-    /** @return mixed */
-    protected function getValue()
-    {
-        $oldValue = $this->getOldValue();
-        if (isset($oldValue)) {
-            return $oldValue;
-        }
-        // Fallback for usage of closure with multilingual disabled.
-        if ($this->value instanceof Closure) {
-            return ($this->value)(app()->getLocale());
-        }
-        if (isset($this->value)) {
-            return $this->value;
-        }
-
-        return optional($this->model)->{$this->convertArrayNameInNotation()};
-    }
-
-    /** @return mixed */
-    protected function getOldValue()
-    {
-        if (! old()) {
-            return null;
-        }
-        $name = $this->convertArrayNameInNotation();
-        $oldValue = data_get(old(), $name);
-        if ($oldValue) {
-            return $oldValue;
-        }
-
-        return array_key_exists($this->removeArrayCharactersFromName(), old()) ? '' : null;
-    }
-
-    protected function getDisplaySuccess(): bool
-    {
-        return $this->displaySuccess;
-    }
-
-    abstract protected function setDisplaySuccess(): bool;
-
-    protected function getErrorMessage(?ViewErrorBag $errors): ?string
-    {
-        if (! $errors) {
-            return null;
-        }
-        if (! $this->getDisplayFailure()) {
-            return null;
-        }
-
-        return $this->getErrorMessageBag($errors)->first($this->convertArrayNameInNotation());
+        return $this->model;
     }
 
     protected function getLabelPositionedAbove(): bool
@@ -268,80 +126,13 @@ abstract class FormAbstract extends ComponentAbstract
         return $this->labelPositionedAbove;
     }
 
-    abstract protected function setLabelPositionedAbove(): bool;
-
-    protected function getLabel(): ?string
+    protected function getDisplaySuccess(): bool
     {
-        if ($this->hideLabel) {
-            return null;
-        }
-        if ($this->label) {
-            return $this->label;
-        }
-
-        return (string) __('validation.attributes.' . $this->removeArrayCharactersFromName());
+        return $this->displaySuccess;
     }
 
-    protected function removeArrayCharactersFromName(): string
+    protected function getDisplayFailure(): bool
     {
-        return strstr($this->getName(), '[', true) ?: $this->getName();
-    }
-
-    protected function getPlaceholder(): ?string
-    {
-        if (isset($this->placeholder)) {
-            return $this->placeholder;
-        }
-        $label = $this->getLabel();
-        if ($label) {
-            return $label;
-        }
-
-        return (string) __('validation.attributes.' . $this->removeArrayCharactersFromName());
-    }
-
-    protected function getPrepend(): ?string
-    {
-        // Fallback for usage of closure with multilingual disabled.
-        if ($this->prepend instanceof Closure) {
-            return ($this->prepend)(app()->getLocale());
-        }
-
-        return $this->prepend;
-    }
-
-    abstract protected function setPrepend(): ?string;
-
-    protected function getAppend(): ?string
-    {
-        // Fallback for usage of closure with multilingual disabled.
-        if ($this->append instanceof Closure) {
-            return ($this->append)(app()->getLocale());
-        }
-
-        return $this->append;
-    }
-
-    abstract protected function setAppend(): ?string;
-
-    protected function getCaption(): ?string
-    {
-        return $this->caption;
-    }
-
-    abstract protected function setCaption(): ?string;
-
-    protected function getComponentId(): string
-    {
-        if ($this->componentId) {
-            return $this->componentId;
-        }
-
-        return $this->getType() . '-' . Str::slug(Str::snake($this->convertArrayNameInNotation('-'), '-'));
-    }
-
-    protected function getModel(): ?Model
-    {
-        return $this->model;
+        return $this->displayFailure;
     }
 }

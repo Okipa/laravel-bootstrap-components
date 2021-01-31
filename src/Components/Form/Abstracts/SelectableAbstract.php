@@ -7,7 +7,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Okipa\LaravelBootstrapComponents\Components\Form\Traits\SelectValidityChecks;
 
-abstract class SelectableAbstract extends FormAbstract
+abstract class SelectableAbstract extends InputAbstract
 {
     use SelectValidityChecks;
 
@@ -162,7 +162,7 @@ abstract class SelectableAbstract extends FormAbstract
 
     protected function searchMultipleSelectedOptionsFromModel(): ?array
     {
-        if ($this->model && $this->model->{$this->getName()}) {
+        if ($this->getM && $this->model->{$this->getName()}) {
             $multipleSelectedOptions = Arr::where($this->options, function ($option) {
                 return in_array($option[$this->optionValueField], $this->model->{$this->getName()}, true);
             });

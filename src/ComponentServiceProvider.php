@@ -33,6 +33,9 @@ class ComponentServiceProvider extends ServiceProvider
 
     protected function registerFormComponentsFacades(): void
     {
+        $this->app->bind('Form', function () {
+            return (new Component())->form();
+        });
         $this->app->bind('InputText', function () {
             return (new Component())->inputText();
         });

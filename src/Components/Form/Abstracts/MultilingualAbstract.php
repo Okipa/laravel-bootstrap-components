@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Support\ViewErrorBag;
 use Okipa\LaravelBootstrapComponents\Components\Form\Multilingual\Resolver;
 
-abstract class MultilingualAbstract extends FormAbstract
+abstract class MultilingualAbstract extends InputAbstract
 {
     protected Resolver $multilingualResolver;
 

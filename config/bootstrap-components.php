@@ -8,6 +8,7 @@ return [
      */
     'components' => [
         // Form components
+        'form' => Okipa\LaravelBootstrapComponents\Components\Form\Form::class,
         'text' => Okipa\LaravelBootstrapComponents\Components\Form\InputText::class,
         'email' => Okipa\LaravelBootstrapComponents\Components\Form\InputEmail::class,
         'password' => Okipa\LaravelBootstrapComponents\Components\Form\InputPassword::class,
