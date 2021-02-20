@@ -11,7 +11,7 @@ parameters:
     level: 5
 
     ignoreErrors:
-        #- '#Example of error to ignore#'
+        - '#Method Okipa\\LaravelBootstrapComponents\\Components\\Form\\Abstracts\\SelectableAbstract::disabled\(\) should return \$this\(Okipa\\LaravelBootstrapComponents\\Components\\Form\\Abstracts\\SelectableAbstract\) but returns Okipa\\LaravelBootstrapComponents\\Components\\Form\\Abstracts\\SelectableAbstract#'
 
     excludePaths:
         - ./*/*/FileToBeExcluded.php

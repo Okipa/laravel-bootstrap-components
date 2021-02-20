@@ -240,18 +240,13 @@
 
 **Facade :** `InputSwitch`
 
-**Notes**
-
-* This component is an extra component not included in bootstrap and using it demands to [load the package styles](#styles).
-* The following classes can be applied in the `containerClasses()` method in order to manage the input toggle size : `toggle-sm` , `toggle-lg`.
-
 **Pre-configuration**
 
 * Container classes : : `form-group`
 * Display success : `config('bootstrap-components.form.formValidation.displaySuccess')`
 * Display failure : `config('bootstrap-components.form.formValidation.displayFailure')`
 
-## input radio
+## Input radio
 
 **Type :** [CheckableAbstract](./types.md#checkableabstract)
 
@@ -292,10 +287,6 @@
 **Helper :** `select()`
 
 **Facade :** `Select`
-
-**Notes**
-* in `single` mode, the selected() method second attribute only accept a string or an integer.
-* in `multiple` mode, the selected() method second attribute only accept an array.
 
 **Pre-configuration**
 

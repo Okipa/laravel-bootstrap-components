@@ -177,20 +177,20 @@ abstract class SelectTestAbstract extends InputTestAbstract
     }
 
     /** @test */
-    public function it_can_set_selected_option_with_no_option(): void
+    public function it_can_set_selected_options_with_no_option(): void
     {
-        $html = $this->getComponent()->name('id')->selected('id', 1)->toHtml();
+        $html = $this->getComponent()->name('id')->selectOptions('id', 1)->toHtml();
         self::assertStringContainsString('<select', $html);
     }
 
     /** @test */
-    public function it_cant_set_selected_option_from_wrong_type_value(): void
+    public function it_cant_set_selected_options_from_wrong_type_value(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $users = $this->createMultipleUsers(2);
         $this->getComponent()->name('id')
             ->options($users, 'id', 'name')
-            ->selected('id', ['test'])
+            ->selectOptions('id', ['test'])
             ->toHtml();
     }
 
@@ -203,7 +203,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
             ->model($user)
             ->name('id')
             ->options($users, 'id', 'name')
-            ->selected('id', $users->get(1)->id)
+            ->selectOptions('id', $users->get(1)->id)
             ->toHtml();
         self::assertStringContainsString(
             '<option value="">validation.attributes.id</option>',
@@ -228,7 +228,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
             ->model($user)
             ->name('name')
             ->options($users, 'name', 'name')
-            ->selected('name', $users->get(1)->name)
+            ->selectOptions('name', $users->get(1)->name)
             ->toHtml();
         self::assertStringContainsString(
             '<option value="">validation.attributes.name</option>',
@@ -280,7 +280,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $html = $this->getComponent()
             ->model($model)
             ->name('name')
-            ->selected('id', $custom->id)
+            ->selectOptions('id', $custom->id)
             ->options($users, 'id', 'name')
             ->toHtml();
         self::assertStringContainsString(
@@ -310,7 +310,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $html = $this->getComponent()
             ->model($model)
             ->name('name')
-            ->selected('id', $custom->id)
+            ->selectOptions('id', $custom->id)
             ->options($users, 'id', 'name')
             ->toHtml();
         self::assertStringContainsString(
@@ -341,7 +341,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $html = $this->getComponent()
             ->model($model)
             ->name('name[0]')
-            ->selected('id', $custom->id)
+            ->selectOptions('id', $custom->id)
             ->options($users, 'id', 'name')
             ->toHtml();
         self::assertStringContainsString(
@@ -366,7 +366,7 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $html = $this->getComponent()
             ->name('name')
             ->options($users, 'id', 'name')
-            ->disabled(function (array $option) {
+            ->disableOptions(function (array $option) {
                 return ! $option['active'];
             })
             ->toHtml();
@@ -402,8 +402,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $user->companies = $companies->take(2)->pluck('id')->toArray();
         $html = $this->getComponent()->name('wrong')
             ->model($user)
-            ->options($companies, 'id', 'name')
             ->multiple()
+            ->options($companies, 'id', 'name')
             ->toHtml();
         self::assertStringContainsString(
             '<option value="" selected="selected">validation.attributes.wrong</option>',
@@ -436,8 +436,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $html = $this->getComponent()
             ->model($user)
             ->name('companies')
-            ->options($companies, 'id', 'name')
             ->multiple()
+            ->options($companies, 'id', 'name')
             ->toHtml();
         self::assertStringContainsString(
             '<option value="" selected="selected">validation.attributes.companies</option>',
@@ -460,8 +460,8 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $html = $this->getComponent()
             ->model($user)
             ->name('companies')
-            ->options($companies, 'id', 'name')
             ->multiple()
+            ->options($companies, 'id', 'name')
             ->toHtml();
         self::assertStringContainsString(
             '<option value="">validation.attributes.companies</option>',
@@ -484,9 +484,9 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $companies = $this->createMultipleCompanies(5);
         $html = $this->getComponent()
             ->name('companies')
-            ->options($companies, 'id', 'name')
             ->multiple()
-            ->selected('id', [])
+            ->options($companies, 'id', 'name')
+            ->selectOptions('id', [])
             ->toHtml();
         self::assertStringContainsString(
             '<option value="" selected="selected">validation.attributes.companies</option>',
@@ -506,9 +506,9 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $this->expectException(InvalidArgumentException::class);
         $companies = $this->createMultipleCompanies(5);
         $this->getComponent()->name('companies')
-            ->options($companies, 'id', 'name')
             ->multiple()
-            ->selected('id', 'test')
+            ->options($companies, 'id', 'name')
+            ->selectOptions('id', 'test')
             ->toHtml();
     }
 
@@ -521,9 +521,9 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $selectedCompanies = $companies->sortByDesc('id')->take(2)->pluck('id')->toArray();
         $html = $this->getComponent()->name('companies')
             ->model($user)
-            ->options($companies, 'id', 'name')
             ->multiple()
-            ->selected('id', $selectedCompanies)
+            ->options($companies, 'id', 'name')
+            ->selectOptions('id', $selectedCompanies)
             ->toHtml();
         self::assertStringContainsString(
             '<option value="">validation.attributes.companies</option>',
@@ -549,9 +549,9 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $selectedCompanies = $companies->sortByDesc('id')->take(2)->pluck('name')->toArray();
         $html = $this->getComponent()->name('companies')
             ->model($user)
-            ->options($companies, 'id', 'name')
             ->multiple()
-            ->selected('name', $selectedCompanies)
+            ->options($companies, 'id', 'name')
+            ->selectOptions('name', $selectedCompanies)
             ->toHtml();
         self::assertStringContainsString(
             '<option value="">validation.attributes.companies</option>',
@@ -583,9 +583,9 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $this->call('GET', 'test');
         $html = $this->getComponent()->name('companies')
             ->model($user)
-            ->options($companies, 'id', 'name')
             ->multiple()
-            ->selected('id', $selectedCompanies)
+            ->options($companies, 'id', 'name')
+            ->selectOptions('id', $selectedCompanies)
             ->toHtml();
         self::assertStringContainsString(
             '<option value="">validation.attributes.companies</option>',
@@ -616,9 +616,9 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $this->call('GET', 'test');
         $html = $this->getComponent()->name('companies')
             ->model($user)
-            ->options($companies, 'id', 'name')
             ->multiple()
-            ->selected('id', $selectedCompanies)
+            ->options($companies, 'id', 'name')
+            ->selectOptions('id', $selectedCompanies)
             ->toHtml();
         self::assertStringContainsString(
             '<option value="" selected="selected">validation.attributes.companies</option>',
@@ -647,9 +647,9 @@ abstract class SelectTestAbstract extends InputTestAbstract
         $this->call('GET', 'test');
         $html = $this->getComponent()->name('companies[0]')
             ->model($user)
-            ->options($companies, 'id', 'name')
             ->multiple()
-            ->selected('id', $selectedCompanies)
+            ->options($companies, 'id', 'name')
+            ->selectOptions('id', $selectedCompanies)
             ->toHtml();
         self::assertStringContainsString(
             '<option value="">validation.attributes.companies</option>',
@@ -769,6 +769,16 @@ abstract class SelectTestAbstract extends InputTestAbstract
             $html
         );
     }
+
+    public function it_can_disable_placeholder_option(): void
+    {
+        $html = $this->getComponent()->name('name')->disablePlaceholder()->toHtml();
+        self::assertStringNotContainsString(
+            '<option value="" selected="selected" disabled>',
+            $html
+        );
+    }
+
 
     /** @test */
     public function it_can_generate_default_component_id(): void

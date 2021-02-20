@@ -63,7 +63,7 @@
 
 ```php
 <FormAbstract>
-    // inherits ComponentAbstract methods
+    // Inherits ComponentAbstract methods
     ->name('email')
     ->model($user)
     ->value('john.doe@domain.com')
@@ -120,7 +120,7 @@
 
 ```php
 <MultilingualAbstract>
-    // inherits FormAbstract methods
+    // Inherits FormAbstract methods
     ->locales(['fr', 'en'])
     ->value(fn(string $locale) => $name[$locale]);
     ->prepend(fn(string $locale) => 'prepend-' . $locale)
@@ -146,7 +146,7 @@
 
 ```php
 <TemporalAbstract>
-    // inherits FormAbstract methods
+    // Inherits FormAbstract methods
     ->format('Y-m-d H:i');
 ```
 
@@ -171,7 +171,7 @@
 
 ```php
 <UploadableAbstract>
-    // inherits FormAbstract methods
+    // Inherits FormAbstract methods
     ->uploadedFile(fn() => '<div>Some HTML</div>')
     ->showRemoveCheckbox(true, 'Remove this file');
 ```
@@ -198,7 +198,7 @@
 
 ```php
 <CheckableAbstract>
-    // inherits FormAbstract methods
+    // Inherits FormAbstract methods
     ->checked();
 ```
 
@@ -216,27 +216,29 @@
 
 | Signature | Required | Description |
 |---|---|---|
-| options(iterable $optionsList, string $optionValueField, string $optionLabelField): self | No | Set the options list (array or models collection) and declare which fields should be used for the options values and labels. |
-| selected(string $fieldToCompare, $valueToCompare): self | No | Choose which option should be selected, declaring the field and the value to compare with the declared options list. |
-| disabled(Closure $disabledOptions): self | No | Choose which option should be disabled by returning a boolean value from this closure result : `->disabled(function(array $option){})`. |
-| multiple(bool $multiple = true): self | No | Set the select multiple mode. |
+| disablePlaceholder(): self | No | Disable the select placeholder option. |
+| multiple(bool $multiple = true): self | No | Define whether the select is in multiple mode or not. |
+| options(iterable $optionsList, string $optionValueField, string $optionLabelField): self | No | Set the options list (array or collection) and declare which fields should be used for options values and labels. |
+| disableOptions(Closure $disabledOptions): self | No | Choose which options should be disabled by returning a boolean value from this closure result : `->disableOptions(function(array $option){})`. |
+| selectOptions(string $fieldToCompare, $valueToCompare): self | No | Choose which option should be selected, declaring the field and the value to compare against the declared options list. |
 
 **Notes**
-* in `single` mode, the selected() method second attribute only accept a string or an integer.
-* in `multiple` mode, the selected() method second attribute only accept an array.
+* in `single` mode, the `selectOptions()` method second attribute only accept a string or an integer.
+* in `multiple` mode, the `selectOptions()` method second attribute only accept an array.
 
 **Usage**
 
 ```php
 <SelectableAbstract>
-    // inherits FormAbstract methods
+    // Inherits FormAbstract methods
+    ->disablePlaceholder()
     ->options(collect([
         ['id' => 1, 'title' => 'Item 1', 'active' => true],
         ['id' => 2, 'title' => 'Item 2', 'active' => false],
     ]), 'id', 'title')
-    ->selected('id', 1)
-    // or ->selected('id', [1]) in multiple mode
-    ->disabled(fn(array $option) => ! $option['active'])
+    ->selectOptions('id', 1)
+    // or ->selectOptions('id', [1]) in multiple mode
+    ->disableOptions(fn(array $option) => ! $option['active'])
     ->multiple();
 ```
 
@@ -260,7 +262,7 @@
 
 ```php
 <SubmitAbstract>
-    // inherits ComponentAbstract methods
+    // Inherits ComponentAbstract methods
     ->label('Back to the users list')
     ->prepend('<i class="fas fa-hand-pointer"></i>')
     ->append('<i class="fas fa-hand-pointer"></i>');
@@ -288,7 +290,7 @@
 
 ```php
 <link>
-    // inherits SubmitAbstract methods
+    // Inherits SubmitAbstract methods
     ->url('https://website.com/admin/users')
     ->route('users.index');
 ```
@@ -315,7 +317,7 @@
 
 ```php
 <MediaAbstract>
-    // inherits ComponentAbstract methods
+    // Inherits ComponentAbstract methods
     ->src('https://yourapp.fr/public/media/audio.mp3');
 ```
 
@@ -344,7 +346,7 @@
 
 ```php
 <ImageAbstract>
-    // inherits MediaAbstract methods
+    // Inherits MediaAbstract methods
     ->alt('Image alt attribute')
     ->width(250)
     ->height(150)

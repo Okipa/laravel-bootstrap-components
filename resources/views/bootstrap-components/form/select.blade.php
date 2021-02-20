@@ -8,7 +8,7 @@
         @include('bootstrap-components::bootstrap-components.partials.prepend')
         <select id="{{ $componentId }}"{{ html_classes('component', 'custom-select', $componentClasses, $validationClass($errors ?? null)) }} name="{{ $name . ($multiple ? '[]' : '') }}"{{ html_attributes($multiple ? 'multiple' : null, $componentHtmlAttributes) }}>
             @if($placeholder)
-                <option value=""{{ html_attributes(count(array_filter(Arr::pluck($options, 'selected'))) ? null : ['selected' => 'selected']) }}>{{ $placeholder }}</option>
+                <option value=""{{ html_attributes(count(array_filter(Arr::pluck($options, 'selected'))) ? null : ['selected' => 'selected']) }}{{ html_attributes($disablePlaceholder ? ['disabled'] : null) }}>{{ $placeholder }}</option>
             @endif
             @foreach($options as $option)
                 <option value="{{ $option[$optionValueField] }}"{{ html_attributes(data_get($option, 'selected') ? ['selected' => 'selected'] : null, data_get($option, 'disabled') ? ['disabled'] : null) }}>{{ $option[$optionLabelField] }}</option>
