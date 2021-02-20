@@ -4,12 +4,15 @@ namespace Okipa\LaravelBootstrapComponents\Components\Form\Abstracts;
 
 use Closure;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 use Okipa\LaravelBootstrapComponents\Components\Form\Traits\SelectValidityChecks;
 
 abstract class SelectableAbstract extends FormAbstract
 {
     use SelectValidityChecks;
+
+    protected bool $disablePlaceholder = false;
+
+    protected bool $multiple = false;
 
     protected array $options = [];
 
@@ -24,7 +27,19 @@ abstract class SelectableAbstract extends FormAbstract
 
     protected ?Closure $disabledOptionsClosure = null;
 
-    protected bool $multiple = false;
+    public function disablePlaceholder(): self
+    {
+        $this->disablePlaceholder = true;
+
+        return $this;
+    }
+
+    public function multiple(bool $multiple = true): self
+    {
+        $this->multiple = $multiple;
+
+        return $this;
+    }
 
     /**
      * @param iterable $optionsList
@@ -44,12 +59,42 @@ abstract class SelectableAbstract extends FormAbstract
     }
 
     /**
+     * @param \Closure $disabledOptions
+     *
+     * @return $this
+     * @deprecated Use `disableOptions` method instead. This method will be removed in the next major version.
+     */
+    public function disabled(Closure $disabledOptions): self
+    {
+        return $this->disableOptions($disabledOptions);
+    }
+
+    public function disableOptions(Closure $disabledOptions): self
+    {
+        $this->disabledOptionsClosure = $disabledOptions;
+
+        return $this;
+    }
+
+    /**
+     * @param string $fieldToCompare
+     * @param int|string|array $valueToCompare
+     *
+     * @return $this
+     * @deprecated Use `selectOptions` method instead. This method will be removed in the next major version.
+     */
+    public function selected(string $fieldToCompare, $valueToCompare): self
+    {
+        return $this->selectOptions($fieldToCompare, $valueToCompare);
+    }
+
+    /**
      * @param string $fieldToCompare
      * @param int|string|array $valueToCompare
      *
      * @return $this
      */
-    public function selected(string $fieldToCompare, $valueToCompare): self
+    public function selectOptions(string $fieldToCompare, $valueToCompare): self
     {
         $this->selectedFieldToCompare = $fieldToCompare;
         $this->selectedValueToCompare = $valueToCompare;
@@ -57,28 +102,25 @@ abstract class SelectableAbstract extends FormAbstract
         return $this;
     }
 
-    public function disabled(Closure $disabledOptions): self
-    {
-        $this->disabledOptionsClosure = $disabledOptions;
-
-        return $this;
-    }
-
-    public function multiple(bool $multiple = true): self
-    {
-        $this->multiple = $multiple;
-
-        return $this;
-    }
-
     protected function getViewParams(): array
     {
         return array_merge(parent::getViewParams(), [
+            'disablePlaceholder' => $this->getDisablePlaceholder(),
+            'multiple' => $this->getMultiple(),
             'options' => $this->getOptions(),
             'optionValueField' => $this->getOptionValueField(),
             'optionLabelField' => $this->getOptionLabelField(),
-            'multiple' => $this->getMultiple(),
         ]);
+    }
+
+    protected function getDisablePlaceholder(): bool
+    {
+        return $this->disablePlaceholder;
+    }
+
+    protected function getMultiple(): bool
+    {
+        return $this->multiple;
     }
 
     protected function getOptions(): array
@@ -260,10 +302,5 @@ abstract class SelectableAbstract extends FormAbstract
     protected function getOptionLabelField(): ?string
     {
         return $this->optionLabelField;
-    }
-
-    protected function getMultiple(): bool
-    {
-        return $this->multiple;
     }
 }

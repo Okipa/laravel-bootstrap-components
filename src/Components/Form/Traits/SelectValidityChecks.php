@@ -48,7 +48,7 @@ trait SelectValidityChecks
     {
         if ($this->selectedFieldToCompare && empty($option[$this->selectedFieldToCompare])) {
             throw new InvalidArgumentException(
-                get_class($this) . ' : Invalid selected() first $fieldToCompare argument. « '
+                get_class($this) . ' : Invalid selectOptions() first $fieldToCompare argument. « '
                 . $this->selectedFieldToCompare . ' »  does not exist the given first options() '
                 . '$optionsList argument.'
             );
@@ -75,7 +75,7 @@ trait SelectValidityChecks
     {
         if ($this->selectedValueToCompare && ! is_array($this->selectedValueToCompare)) {
             throw new InvalidArgumentException(
-                get_class($this) . ' : Invalid selected() second $valueToCompare argument. '
+                get_class($this) . ' : Invalid selectOptions() second $valueToCompare argument. '
                 . 'This argument has to be an array when the select() component is in multiple mode : « '
                 . gettype($this->selectedValueToCompare) . ' » type given.'
             );
@@ -90,7 +90,7 @@ trait SelectValidityChecks
             && ! is_int($this->selectedValueToCompare)
         ) {
             throw new InvalidArgumentException(
-                get_class($this) . ' : Invalid selected() second $valueToCompare argument. '
+                get_class($this) . ' : Invalid selectOptions() second $valueToCompare argument. '
                 . 'This argument has to be a string or an integer when the select() component is not '
                 . 'in multiple mode : « ' . gettype($this->selectedValueToCompare) . ' » type given.'
             );

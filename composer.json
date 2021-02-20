@@ -52,8 +52,8 @@
             "vendor/bin/phpcbf",
             "vendor/bin/phpcs",
             "vendor/bin/phpmd config,src text phpmd.xml",
-            "vendor/bin/phpstan analyse --memory-limit=-1 --error-format=table",
-            "vendor/bin/phpunit -d memory_limit=-1 --testdox --coverage-text"
+            "vendor/bin/phpstan analyse --memory-limit=2G",
+            "vendor/bin/phpunit -d memory_limit=-1"
         ]
     },
     "extra": {

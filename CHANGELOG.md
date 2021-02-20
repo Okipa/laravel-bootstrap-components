@@ -1,5 +1,16 @@
 # Changelog
 
+## [5.1.0](https://github.com/Okipa/laravel-bootstrap-components/compare/5.0.2...5.1.0)
+
+2021-02-20
+
+* Added the ability to disable the select component placeholder option with the new `->disablePlaceholder()` method
+* Deprecations :
+  * The select component `->disabled()` method usages should be replaced by `->disableOptions()`
+  * The select component `->selected()` method usages should be replaced by `->selectOptions()`
+  * These deprecated methods will be removed in the next major version
+  * These renaming are improving understanding about what these methods are actually doing
+
 ## [5.0.2](https://github.com/Okipa/laravel-bootstrap-components/compare/5.0.1...5.0.2)
 
 2021-01-25
