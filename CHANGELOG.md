@@ -1,5 +1,11 @@
 # Changelog
 
+## [5.1.1](https://github.com/Okipa/laravel-bootstrap-components/compare/5.1.0...5.1.1)
+
+2021-05-04
+
+* Allow multilingual components to have `null` value without being pulled from default locale fallback
+
 ## [5.1.0](https://github.com/Okipa/laravel-bootstrap-components/compare/5.0.2...5.1.0)
 
 2021-02-20

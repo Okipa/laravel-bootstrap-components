@@ -121,10 +121,10 @@ abstract class MultilingualAbstract extends FormAbstract
             return null;
         }
         if (
-            $this->getErrorMessageBag($errors)->has($this->multilingualResolver->resolveErrorMessageBagKey(
-                $this->getName(),
-                $locale
-            ))
+        $this->getErrorMessageBag($errors)->has($this->multilingualResolver->resolveErrorMessageBagKey(
+            $this->getName(),
+            $locale
+        ))
         ) {
             return $this->getDisplayFailure() ? 'is-invalid' : null;
         }
@@ -175,16 +175,12 @@ abstract class MultilingualAbstract extends FormAbstract
         if ($this->value instanceof Closure) {
             return ($this->value)($locale);
         }
-        $localizedValue = $this->multilingualResolver->resolveLocalizedModelValue(
+
+        return $this->multilingualResolver->resolveLocalizedModelValue(
             $this->getName(),
             $locale,
             $this->getModel()
         );
-        if ($localizedValue) {
-            return $localizedValue;
-        }
-
-        return $this->getValue();
     }
 
     protected function getLocalizedPlaceholder(string $locale): ?string

@@ -2,6 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Okipa\LaravelBootstrapComponents\Tests\Dummy\Resolver;
 use Okipa\LaravelBootstrapComponents\Tests\Models\User;
@@ -168,6 +169,16 @@ abstract class TextareaTestAbstract extends InputMultilingualTestAbstract
         foreach ($locales as $locale) {
             self::assertStringContainsString('>' . $user->name[$locale] . '</textarea>', $html);
         }
+    }
+
+    /** @test */
+    public function it_can_keep_null_localized_value(): void
+    {
+        $name = ['fr' => 'Test FR'];
+        $user = new User(compact('name'));
+        $html = $this->getComponent()->model($user)->name('name')->locales(['fr', 'en'])->toHtml();
+        self::assertStringContainsString('data-locale="fr">Test FR</textarea>', $html);
+        self::assertStringContainsString('data-locale="en"></textarea>', $html);
     }
 
     /** @test */

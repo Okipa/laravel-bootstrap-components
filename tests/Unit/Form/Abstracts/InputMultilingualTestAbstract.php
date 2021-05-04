@@ -2,6 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Tests\Unit\Form\Abstracts;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\ViewErrorBag;
 use Okipa\LaravelBootstrapComponents\Components\Form\Abstracts\MultilingualAbstract;
@@ -100,6 +101,16 @@ abstract class InputMultilingualTestAbstract extends InputTestAbstract
         foreach ($locales as $locale) {
             self::assertStringContainsString('value="' . $user->name[$locale] . '"', $html);
         }
+    }
+
+    /** @test */
+    public function it_can_keep_null_localized_value(): void
+    {
+        $name = ['fr' => 'Test FR'];
+        $user = new User(compact('name'));
+        $html = $this->getComponent()->model($user)->name('name')->locales(['fr', 'en'])->toHtml();
+        self::assertStringContainsString('name="name[fr]" value="Test FR"', $html);
+        self::assertStringContainsString('name="name[en]" value=""', $html);
     }
 
     /** @test */
