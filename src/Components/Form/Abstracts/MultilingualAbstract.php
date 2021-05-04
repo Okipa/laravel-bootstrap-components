@@ -121,10 +121,10 @@ abstract class MultilingualAbstract extends FormAbstract
             return null;
         }
         if (
-        $this->getErrorMessageBag($errors)->has($this->multilingualResolver->resolveErrorMessageBagKey(
-            $this->getName(),
-            $locale
-        ))
+            $this->getErrorMessageBag($errors)->has($this->multilingualResolver->resolveErrorMessageBagKey(
+                $this->getName(),
+                $locale
+            ))
         ) {
             return $this->getDisplayFailure() ? 'is-invalid' : null;
         }
