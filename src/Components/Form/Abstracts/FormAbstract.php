@@ -10,6 +10,7 @@ use Illuminate\Support\ViewErrorBag;
 use Okipa\LaravelBootstrapComponents\Components\ComponentAbstract;
 use Okipa\LaravelBootstrapComponents\Components\Form\Traits\FormValidityChecks;
 
+/** @SuppressWarnings(PHPMD.ExcessiveClassComplexity) */
 abstract class FormAbstract extends ComponentAbstract
 {
     use FormValidityChecks;

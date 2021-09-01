@@ -31,4 +31,10 @@ abstract class RadioAbstract extends CheckableAbstract
 
         return optional($this->model)->{$this->getName()} === $this->value;
     }
+
+    /** @return mixed */
+    protected function getValue()
+    {
+        return $this->value;
+    }
 }

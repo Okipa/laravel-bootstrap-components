@@ -35,8 +35,24 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
     /** @test */
     public function it_can_get_value_from_model(): void
     {
+        $this->markTestSkipped();
+    }
+
+    /** @test */
+    public function it_cant_get_value_from_model(): void
+    {
         $user = $this->createUniqueUser();
-        $html = $this->getComponent()->name('name')->model($user)->value($user->name)->toHtml();
+        $user->update(['name' => 'Name test']);
+        $html = $this->getComponent()->name('name')->model($user)->value('Radio value')->toHtml();
+        self::assertStringContainsString('value="Radio value"', $html);
+    }
+
+    /** @test */
+    public function it_can_get_checked_from_model_value(): void
+    {
+        $user = $this->createUniqueUser();
+        $user->update(['name' => 'Name test']);
+        $html = $this->getComponent()->name('name')->model($user)->value('Name test')->toHtml();
         self::assertStringContainsString('checked="checked"', $html);
     }
 
@@ -133,6 +149,12 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
     }
 
     /** @test */
+    public function it_can_set_value_from_closure_with_disabled_multilingual(): void
+    {
+        self::markTestSkipped();
+    }
+
+    /** @test */
     public function it_cant_set_null_value(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -176,12 +198,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
     /** @test */
     public function it_can_take_old_value_from_string(): void
     {
-        $this->app['router']->get('test', [
-            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => 'old-value'])->flash(),
-        ]);
-        $this->call('GET', 'test');
-        $html = $this->getComponent()->name('name')->value('old-value')->checked(false)->toHtml();
-        self::assertStringContainsString('checked="checked', $html);
+        $this->markTestSkipped();
     }
 
     /** @test */
@@ -191,7 +208,34 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
     }
 
     /** @test */
-    public function it_can_take_old_zero_value(): void
+    public function it_can_take_old_value_from_array(): void
+    {
+        self::markTestSkipped();
+    }
+
+    public function it_cant_take_old_value(): void
+    {
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => 'old-value'])->flash(),
+        ]);
+        $this->call('GET', 'test');
+        $html = $this->getComponent()->name('name')->value('custom-value')->toHtml();
+        self::assertStringContainsString(' value="custom-value"', $html);
+    }
+
+    /** @test */
+    public function it_can_get_checked_from_old_string_value(): void
+    {
+        $this->app['router']->get('test', [
+            'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => 'old-value'])->flash(),
+        ]);
+        $this->call('GET', 'test');
+        $html = $this->getComponent()->name('name')->value('old-value')->checked(false)->toHtml();
+        self::assertStringContainsString('checked="checked', $html);
+    }
+
+    /** @test */
+    public function it_can_get_checked_from_old_zero_value(): void
     {
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => '0'])->flash(),
@@ -202,7 +246,7 @@ abstract class InputRadioTestAbstract extends InputTestAbstract
     }
 
     /** @test */
-    public function it_can_set_not_checked_from_old_value(): void
+    public function it_can_get_unchecked_from_old_string_value(): void
     {
         $this->app['router']->get('test', [
             'middleware' => 'web', 'uses' => fn() => request()->merge(['name' => 'old-value'])->flash(),

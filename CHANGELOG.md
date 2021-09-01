@@ -1,5 +1,11 @@
 # Changelog
 
+## [5.1.2](https://github.com/Okipa/laravel-bootstrap-components/compare/5.1.1...5.1.2)
+
+2021-09-01
+
+* Fixed radio component value issue
+
 ## [5.1.1](https://github.com/Okipa/laravel-bootstrap-components/compare/5.1.0...5.1.1)
 
 2021-05-04

@@ -8,16 +8,9 @@ use Orchestra\Testbench\TestCase;
 
 abstract class BootstrapComponentsTestCase extends TestCase
 {
-    protected $faker;
+    protected \Faker\Generator $faker;
 
-    /**
-     * Define environment setup.
-     *
-     * @param \Illuminate\Foundation\Application $app
-     *
-     * @return void
-     */
-    protected function getEnvironmentSetUp($app)
+    protected function getEnvironmentSetUp($app): void
     {
         // Setup default database to use sqlite :memory:
         $app['config']->set('database.default', 'testing');
@@ -28,23 +21,12 @@ abstract class BootstrapComponentsTestCase extends TestCase
         ]);
     }
 
-    /**
-     * Get package providers.
-     *
-     * @param \Illuminate\Foundation\Application $app
-     *
-     * @return array
-     */
-    protected function getPackageProviders($app)
+    /** @SuppressWarnings(PHPMD.UnusedFormalParameter) */
+    protected function getPackageProviders($app): array
     {
         return [ComponentServiceProvider::class];
     }
 
-    /**
-     * Setup the test environment.
-     *
-     * @return void
-     */
     protected function setUp(): void
     {
         parent::setUp();
