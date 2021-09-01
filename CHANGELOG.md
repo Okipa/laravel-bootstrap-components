@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.1.2](https://github.com/Okipa/laravel-bootstrap-components/compare/5.1.1...5.1.2)
+
+2021-09-01
+
+* Fixed a radio component value wrong behavior which implied that it could be changed from an old or model value
+* Improved PHPMD check
+
 ## [5.1.1](https://github.com/Okipa/laravel-bootstrap-components/compare/5.1.0...5.1.1)
 
 2021-05-04

@@ -2,8 +2,7 @@
 
 namespace Okipa\LaravelBootstrapComponents\Components\Form\Abstracts;
 
-use Illuminate\Support\ViewErrorBag;
-
+/** @SuppressWarnings(PHPMD.ExcessiveClassComplexity) */
 abstract class CheckableAbstract extends FormAbstract
 {
     protected bool $checked;

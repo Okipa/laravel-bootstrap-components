@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Support\Arr;
 use Okipa\LaravelBootstrapComponents\Components\Form\Traits\SelectValidityChecks;
 
+/** @SuppressWarnings(PHPMD.ExcessiveClassComplexity) */
 abstract class SelectableAbstract extends FormAbstract
 {
     use SelectValidityChecks;
