@@ -4,7 +4,7 @@
 
 2021-09-01
 
-* Fixed radio component value issue
+* Fixed a radio component value wrong behavior which implied that it could be changed from an old or model value.
 
 ## [5.1.1](https://github.com/Okipa/laravel-bootstrap-components/compare/5.1.0...5.1.1)
 
