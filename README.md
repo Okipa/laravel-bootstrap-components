@@ -17,6 +17,9 @@
     </a>
 </p>
 
+⚠️ **THIS PACKAGE HAS BEEN ABANDONED IN FAVOR OF https://github.com/Okipa/laravel-form-components.** ⚠️
+⚠️ **Only bug fixes will be merged. Please consider moving to the new package.** ⚠️
+
 Save time and take advantage of a set of dynamical, ready-to-use and fully customizable bootstrap form components.
 
 Found this package helpful? Please consider supporting my work!
